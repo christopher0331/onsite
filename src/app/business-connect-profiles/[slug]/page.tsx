@@ -61,7 +61,7 @@ function SocialIcon({ type }: { type: string }) {
       </svg>
     ),
   };
-  return <>{icons[type]}</> ?? null;
+  return icons[type] ? <>{icons[type]}</> : null;
 }
 
 export default async function MemberProfilePage({

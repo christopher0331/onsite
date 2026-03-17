@@ -386,11 +386,11 @@ export default function ListingDetailPage() {
                 )}
 
                 {/* Nearby amenities */}
-                {listing.nearby?.amenities?.length > 0 && (
+                {(listing.nearby?.amenities?.length ?? 0) > 0 && (
                   <div className="mt-12">
                     <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-mid-gray">Nearby & Community</p>
                     <div className="flex flex-wrap gap-2">
-                      {listing.nearby.amenities.map((a, i) => (
+                      {listing.nearby?.amenities.map((a, i) => (
                         <span key={i} className="rounded-full border border-charcoal/12 px-4 py-2 text-[12px] text-charcoal/60">
                           {a}
                         </span>
