@@ -1,0 +1,3500 @@
+WEBVTT
+
+00:00:26.000 --> 00:00:29.000
+Chris: Let me see, can you guys hear me?
+
+00:00:31.000 --> 00:00:34.000
+Chris: Okay, I got you. I can hear you now. Cool.
+
+00:00:36.000 --> 00:00:38.000
+Chris: Let me…
+
+00:00:38.000 --> 00:00:42.000
+Cindie: Alright, can you talk a second again? I have to figure out which speaker works best.
+
+00:00:42.000 --> 00:00:45.000
+Chris: Yep, testing, testing, testing…
+
+00:00:45.000 --> 00:00:47.000
+Chris: Oh, no.
+
+00:00:47.000 --> 00:00:50.000
+Cindie: Sorry, my bad. Try again, try again.
+
+00:00:48.000 --> 00:00:49.000
+Chris: So, good.
+
+00:00:50.000 --> 00:00:52.000
+Chris: Testing, testing, testing.
+
+00:00:53.000 --> 00:00:56.000
+Chris: Test, test, test. Can you hear me?
+
+00:00:56.000 --> 00:00:59.000
+Chris: Now? You're muted now.
+
+00:01:00.000 --> 00:01:04.000
+Chris: I think I can unmute you. No, I can't.
+
+00:01:04.000 --> 00:01:08.000
+Cindie: No, we gotcha. It was, like, connecting to some Bluetooth thing.
+
+00:01:05.000 --> 00:01:07.000
+Chris: Awesome.
+
+00:01:08.000 --> 00:01:13.000
+Chris: I hate when that happens. That happens to me all the time on the phone, because I'm usually on my headphones on.
+
+00:01:08.000 --> 00:01:10.000
+Cindie: Got it.
+
+00:01:13.000 --> 00:01:15.000
+Cindie: Uh-huh.
+
+00:01:13.000 --> 00:01:19.000
+Chris: Somebody will call, and I'll be, like, walking around my basement talking to them, and then all of a sudden, like.
+
+00:01:20.000 --> 00:01:25.000
+Chris: you know, I get ghosted, and it's just because they're on my headphones, and then I'm like, you know, it's pain, yeah.
+
+00:01:23.000 --> 00:01:25.000
+Cindie: Yep. Yep.
+
+00:01:27.000 --> 00:01:29.000
+Chris: Okay, um…
+
+00:01:29.000 --> 00:01:41.000
+Chris: So I did, uh, built the homepage of your website to just get the aesthetic down, so we can look at that, um, so that you guys can, you know, kind of guide me in the direction that you want to go with that.
+
+00:01:41.000 --> 00:01:49.000
+Chris: And the app, uh, Wireframe is in a rough state. I mean, it's, you know, we're gonna figure out what to do with it, but…
+
+00:01:50.000 --> 00:01:54.000
+Chris: Um, it's functional, I think I got everything from our conversation.
+
+00:01:56.000 --> 00:01:59.000
+Chris: into it, from what I could tell.
+
+00:02:00.000 --> 00:02:03.000
+Chris: So, let me see here… where are you guys at?
+
+00:02:04.000 --> 00:02:06.000
+Chris: Okay.
+
+00:02:04.000 --> 00:02:07.000
+Cindie: It's gonna save me.
+
+00:02:09.000 --> 00:02:11.000
+Chris: Okay.
+
+00:02:13.000 --> 00:02:15.000
+Chris: So, um…
+
+00:02:15.000 --> 00:02:27.000
+Chris: this is the homepage. I don't know exactly what you guys want the… again, I was trying to figure out how to put all this together without looking at what you already have. Maybe that might have been a good way to go about it, but…
+
+00:02:25.000 --> 00:02:27.000
+Cindie: Hmm.
+
+00:02:27.000 --> 00:02:37.000
+Chris: Just based off of the transcript of the conversation we had. So if somebody comes here and they're looking for a home, they can type in their address here. We've got some, like, you know, boilerplate.
+
+00:02:38.000 --> 00:02:40.000
+Chris: Statistics here for users.
+
+00:02:41.000 --> 00:02:48.000
+Chris: Featured homes with openings, you know, just really filler, kind of, for the, uh, for the homepage.
+
+00:02:46.000 --> 00:02:48.000
+Cindie: Mm-hmm.
+
+00:02:48.000 --> 00:02:53.000
+Chris: There's two… there's two portals. There's the…
+
+00:02:53.000 --> 00:03:02.000
+Chris: user's portal, so the map with all of the locations. This is not going to be the map that we're using, this is just, um…
+
+00:03:02.000 --> 00:03:08.000
+Chris: uh, you know, just a placeholder, basically, for Google Maps. We'll use Google Maps.
+
+00:03:09.000 --> 00:03:13.000
+Chris: And I was trying to get the ghost… you know, I was trying to recall…
+
+00:03:13.000 --> 00:03:19.000
+Chris: And… query AI for, like, exactly what the, uh…
+
+00:03:19.000 --> 00:03:24.000
+Chris: What the strategy was with the ghost and the live version of…
+
+00:03:24.000 --> 00:03:26.000
+Chris: The homes?
+
+00:03:25.000 --> 00:03:27.000
+Cindie: Mm-hmm.
+
+00:03:27.000 --> 00:03:33.000
+Chris: So this is what I came up with. I don't know if this is what you had in mind, but obviously, um, we'll get it fixed to whatever…
+
+00:03:33.000 --> 00:03:35.000
+Cindie: Yeah.
+
+00:03:33.000 --> 00:03:35.000
+Chris: What do you have in mind?
+
+00:03:35.000 --> 00:03:39.000
+Chris: Um, there's filters here, these filters aren't…
+
+00:03:40.000 --> 00:03:45.000
+Chris: you know, it looks like it functions pretty well, but it's pretty buggy. Um, but this is just, again, as an example.
+
+00:03:45.000 --> 00:03:53.000
+Chris: Of what people can click on to figure out, you know, to figure out exactly where the closest, uh…
+
+00:03:53.000 --> 00:03:57.000
+Chris: Home is for their price range and, you know, whatever.
+
+00:03:58.000 --> 00:04:03.000
+Chris: So, this is the filtering aspect, and then, um…
+
+00:04:03.000 --> 00:04:08.000
+Chris: And then the, you know, the homes are over here on the left side. For the providers.
+
+00:04:08.000 --> 00:04:16.000
+Chris: So they'd go through an authentication process. I think you wanted the users to have an authentication process as well, for them to, like, have a profile?
+
+00:04:16.000 --> 00:04:23.000
+Cindie: Only if they want to start receiving notification. We want it to be open to where people can look at the homes.
+
+00:04:23.000 --> 00:04:32.000
+Cindie: and not have to be a signed-up user. Yeah, but then if they were like, okay, I want to receive information on this Auburn home, then they have to.
+
+00:04:26.000 --> 00:04:28.000
+Chris: Got you, yeah.
+
+00:04:32.000 --> 00:04:34.000
+Cindie: Create an account.
+
+00:04:34.000 --> 00:04:42.000
+Chris: So, yeah, lowest barrier to entry for users. Okay. Um, I think I did… yeah, I did create profiles for them.
+
+00:04:36.000 --> 00:04:38.000
+Cindie: Mm-hmm. Mm-hmm.
+
+00:04:42.000 --> 00:04:47.000
+Chris: Uh, they have an inbox up here that they can get there. This is…
+
+00:04:42.000 --> 00:04:44.000
+Cindie: Hmm.
+
+00:04:47.000 --> 00:04:56.000
+Chris: we're gonna… as we continue and I get done with this little tutorial, um, we're gonna have a conversation, we'll get all this fleshed out, um, again, we're recording it, so…
+
+00:04:57.000 --> 00:05:01.000
+Chris: I don't like that UI, you know, having this up here, I think if they have a profile.
+
+00:05:03.000 --> 00:05:07.000
+Chris: Uh, they should probably have a portal of some sort, um…
+
+00:05:08.000 --> 00:05:11.000
+Chris: So then let's go over to the provider side.
+
+00:05:12.000 --> 00:05:16.000
+Chris: So these are all, you know, obviously dummy data of just simulated profiles.
+
+00:05:16.000 --> 00:05:18.000
+Cindie: Mm-hmm.
+
+00:05:17.000 --> 00:05:24.000
+Chris: So they could see how many views. These are metrics that I assumed would be good for them to know.
+
+00:05:25.000 --> 00:05:32.000
+Chris: Um, and some of these, not all metrics are created equal, some of these things are kind of hard to do from a technical perspective.
+
+00:05:25.000 --> 00:05:27.000
+Cindie: Hmm.
+
+00:05:32.000 --> 00:05:37.000
+Chris: So, like, judging views for their…
+
+00:05:37.000 --> 00:05:39.000
+Chris: for the profile.
+
+00:05:39.000 --> 00:05:48.000
+Chris: Um, you know, there's gonna be a filtering process, because not all… not all views are the same either. Some of them are just bots, people scrape, and bots come through, so…
+
+00:05:49.000 --> 00:06:00.000
+Chris: Something to figure out, but I thought that that would be a good thing for them to see, just to keep them coming back, like, oh, hey, you know, this… there's interest in my thing, but people aren't, you know, clicking on it, so do we need better pictures, or whatever.
+
+00:06:00.000 --> 00:06:09.000
+Chris: profile optimization. But the key feature was, from what I could tell, was the messaging and the, we are full and I have an opening. Did I get that right?
+
+00:06:09.000 --> 00:06:14.000
+Cindie: That's cool. This didn't exist where we have it before, but this is so much nicer, yes.
+
+00:06:14.000 --> 00:06:17.000
+Chris: Yeah, thank you. Yeah, uh…
+
+00:06:17.000 --> 00:06:22.000
+Chris: the first implementation was kind of rough, and I was like, dude, this is kind of… because it was confusing.
+
+00:06:22.000 --> 00:06:24.000
+Cindie: Mm-hmm.
+
+00:06:23.000 --> 00:06:29.000
+Chris: It was just like an on and off switch, but you couldn't really tell if it was definitely on or definitely off, but this is…
+
+00:06:29.000 --> 00:06:32.000
+Chris: This is good UI. Um…
+
+00:06:32.000 --> 00:06:40.000
+Chris: So they have their weekly subscription, and then, um, you know, simulated text messages, so they'll get, like, wink-wink alerts. We can rename everything again.
+
+00:06:39.000 --> 00:06:42.000
+Cindie: Yeah, yeah, yeah, yeah, good.
+
+00:06:41.000 --> 00:06:50.000
+Chris: Um, but they have a subscription, it'll be active, and they'll get an SMS, you know, a text message through Twilio saying, like, hey, your thing's gonna expire, would you like to renew it?
+
+00:06:51.000 --> 00:06:55.000
+Chris: That'll come through there… that'll come through there, um…
+
+00:06:56.000 --> 00:07:02.000
+Chris: Through their messaging, you know, they'll have the messages in here, but they'll also have, you know, this is a simulated phone.
+
+00:07:02.000 --> 00:07:07.000
+Chris: So this is what a text message would look like, and if they want to renew, all they'd have to do is press Y.
+
+00:07:07.000 --> 00:07:09.000
+Cindie: Mm-hmm.
+
+00:07:08.000 --> 00:07:14.000
+Chris: and then they, you know, then it would process their payment for 29, and we could get it to go live. There's obviously a lot of…
+
+00:07:14.000 --> 00:07:17.000
+Chris: Stuff to do in between that.
+
+00:07:18.000 --> 00:07:27.000
+Chris: Um, because you don't want to get them to go… you don't want anybody to game the system, so you want to make sure that that payment goes through before… so it's not going to go as fast as this, we want to be…
+
+00:07:27.000 --> 00:07:33.000
+Chris: you know, we want to be sure that in Stripe, the funds are there, and you're certain you're going to get them.
+
+00:07:34.000 --> 00:07:41.000
+Chris: And then, uh, yeah, wink wink lead. So this is somebody who said they're interested from the…
+
+00:07:41.000 --> 00:07:46.000
+Chris: Care side, and they're… when they're… and then they… they ping them, so they give them the name and the number.
+
+00:07:42.000 --> 00:07:44.000
+Cindie: Yeah, yeah.
+
+00:07:46.000 --> 00:07:50.000
+Chris: And then they ping them, and then on this side.
+
+00:07:51.000 --> 00:07:55.000
+Chris: They'll get the… they'll see their pings, and then also…
+
+00:07:56.000 --> 00:08:04.000
+Chris: Um, over here, this is where a ping would show up. So, this is the weekly renewal, and then this is like, hey, somebody's looking, but you're not open, would you like to be open, pay 29 bucks.
+
+00:08:05.000 --> 00:08:06.000
+Cindie: Mm-hmm.
+
+00:08:06.000 --> 00:08:10.000
+Chris: Uh, yep, billing, this is sort of…
+
+00:08:10.000 --> 00:08:12.000
+Chris: irrelevant.
+
+00:08:12.000 --> 00:08:19.000
+Cindie: I know, I can't fucking believe, like, what you've done. Yeah, this is hella dope, dude, it's like…
+
+00:08:13.000 --> 00:08:15.000
+Chris: Um, and then they have a place to set up reports.
+
+00:08:18.000 --> 00:08:24.000
+Chris: Oh, really? I can't see your faces, so I had no idea how this was going. That's good.
+
+00:08:22.000 --> 00:08:29.000
+Cindie: Like… Yeah, yeah, no, this is dumb as like, I'm like… Everything in my mind, even just how sick, like.
+
+00:08:30.000 --> 00:08:34.000
+Cindie: Like, okay, like, it's like… This makes me mad, and not at you.
+
+00:08:34.000 --> 00:08:40.000
+Chris: No, I get it. Yeah, it happens. I live in a world of charlatans, and uh, you know, it's… I get it all the time.
+
+00:08:35.000 --> 00:08:37.000
+Cindie: Hi.
+
+00:08:38.000 --> 00:08:40.000
+Cindie: Yeah.
+
+00:08:40.000 --> 00:08:48.000
+Chris: It sucks cold calling, because when you're cold calling, it's like, you're just, like, the 10th guy of the day, and the 5th one that's burnt them, and they're 10 grand in, and…
+
+00:08:43.000 --> 00:08:45.000
+Cindie: I don't see it.
+
+00:08:48.000 --> 00:08:50.000
+Cindie: Yep.
+
+00:08:49.000 --> 00:08:56.000
+Chris: it's a tough sell. I mean, it's… it was a much tougher sell when I couldn't do things this fast, but now that I can do stuff this fast, it's like…
+
+00:08:56.000 --> 00:09:02.000
+Chris: I can give them their website for free as an example, like, hey, this is what it would look like.
+
+00:09:02.000 --> 00:09:10.000
+Chris: And then that's a hook, before I had to convince somebody that I even could build a good website, and then it would be built in, like, a month or two instead of…
+
+00:09:10.000 --> 00:09:12.000
+Chris: You know, a few hours, so…
+
+00:09:11.000 --> 00:09:18.000
+Cindie: Yeah. Okay, yep. But yeah, that's pretty much exactly what we're looking for. Yeah, yeah.
+
+00:09:14.000 --> 00:09:16.000
+Chris: Okay.
+
+00:09:17.000 --> 00:09:22.000
+Chris: Really? Yes!
+
+00:09:19.000 --> 00:09:21.000
+Cindie: No.
+
+00:09:21.000 --> 00:09:26.000
+Cindie: The only thing that I think we were, like, talking about is with the ghost listings.
+
+00:09:25.000 --> 00:09:29.000
+Chris: Yeah, yeah, yeah, I need some more information on that.
+
+00:09:26.000 --> 00:09:28.000
+Cindie: Um… Yeah.
+
+00:09:28.000 --> 00:09:40.000
+Cindie: Yeah, so the ghost listing is just having their picture there, so that they could still see the picture, but not having the… Yeah, so the Auburn Home, Kent Home… Yeah, like, having, like, Auburn Home, Kent Home, you know, that's, like, great, but having, like, a picture of it, so people could be like, oh, okay, that's…
+
+00:09:41.000 --> 00:09:46.000
+Cindie: looks like something I'd be interested in, you know? And if you go to Sunrise, does it show their actual address? Sorry.
+
+00:09:43.000 --> 00:09:46.000
+Chris: What is the… what is the…
+
+00:09:46.000 --> 00:09:48.000
+Chris: Say again? Sorry.
+
+00:09:47.000 --> 00:09:51.000
+Cindie: If you go to one that's active, does it show their address in the listing somewhere?
+
+00:09:52.000 --> 00:09:54.000
+Chris: Uh, let me see…
+
+00:09:55.000 --> 00:09:57.000
+Chris: I don't think it does, no.
+
+00:09:56.000 --> 00:10:00.000
+Cindie: Okay. Yeah, yeah, yeah.
+
+00:09:57.000 --> 00:10:03.000
+Chris: I can… but we can, you know, obviously we can add that in pretty quick. So, for these, you want the address.
+
+00:10:03.000 --> 00:10:10.000
+Chris: It doesn't show it on any of these. So we want the address as part of their… oh, it's right here, okay, for…
+
+00:10:10.000 --> 00:10:22.000
+Chris: for non-ghosted, but for ghosted, no address. Okay, so let's add… so can… let's, uh, let's have a conversation real quick about… so I want to, like, intuitively grasp what this concept is with the ghosting.
+
+00:10:11.000 --> 00:10:12.000
+Cindie: Oh, I see.
+
+00:10:13.000 --> 00:10:15.000
+Cindie: No address. Yep.
+
+00:10:21.000 --> 00:10:23.000
+Cindie: Cool.
+
+00:10:23.000 --> 00:10:25.000
+Cindie: Okay.
+
+00:10:23.000 --> 00:10:26.000
+Chris: Um, so over here…
+
+00:10:27.000 --> 00:10:30.000
+Chris: Uh, you know, find care.
+
+00:10:30.000 --> 00:10:38.000
+Chris: What is the difference between a live… except… besides the payment, what is the difference between the live and the ghost?
+
+00:10:38.000 --> 00:10:40.000
+Chris: profile.
+
+00:10:39.000 --> 00:10:41.000
+Cindie: The payment.
+
+00:10:41.000 --> 00:10:48.000
+Chris: But there's… so there's no difference on the front end, though, for the user, like, they don't…
+
+00:10:48.000 --> 00:10:51.000
+Chris: they don't know that it's a ghosted profile.
+
+00:10:50.000 --> 00:10:56.000
+Cindie: it just, yeah, it shows that they're not available, so that, like, instead of it saying live, I would say, like, that would say available.
+
+00:10:56.000 --> 00:10:59.000
+Chris: Okay, I think… yeah, I think…
+
+00:10:56.000 --> 00:11:01.000
+Cindie: And then… and then where it says ghost, it would say unavailable. Um…
+
+00:11:00.000 --> 00:11:08.000
+Chris: Okay, I think I overcomplicated this, then. Um, so Ghost is just an unavailable home, full, or… or just…
+
+00:11:06.000 --> 00:11:10.000
+Cindie: Correct. Correct. No, because they're not paying, but they may have an availability.
+
+00:11:10.000 --> 00:11:13.000
+Chris: Oh, okay, so that's the distinction.
+
+00:11:12.000 --> 00:11:15.000
+Cindie: That's my way to get them to pay.
+
+00:11:13.000 --> 00:11:21.000
+Chris: They… they have an opening, they have an opening, but they just haven't paid over here with SMS yet. Okay.
+
+00:11:17.000 --> 00:11:19.000
+Cindie: Maybe…
+
+00:11:20.000 --> 00:11:22.000
+Cindie: Right, right.
+
+00:11:23.000 --> 00:11:30.000
+Cindie: And maybe they say they're full, because they don't want to pay, so that's the only thing I want them to know, is we are full, means I'm not paying.
+
+00:11:30.000 --> 00:11:35.000
+Cindie: I have an opening, I'm paying. And so, if they don't have an opening, and they say, we are full.
+
+00:11:35.000 --> 00:11:41.000
+Cindie: and they're not paying, but they really do have an opening, then when somebody says I'm interested, then they're like, oh yeah, I do have an opening, and now they pay.
+
+00:11:41.000 --> 00:11:48.000
+Chris: just from a technical perspective, would it be okay to have an inactive profile? Uh…
+
+00:11:48.000 --> 00:11:51.000
+Chris: Inactive, full, and opening.
+
+00:11:52.000 --> 00:12:00.000
+Cindie: I see what you're saying. He's saying that if they could technically have an opening, leave it as an opening, but then it just turns off if they don't pay, right?
+
+00:11:59.000 --> 00:12:02.000
+Chris: It's inactive because they haven't paid.
+
+00:12:01.000 --> 00:12:08.000
+Cindie: But then, what if somebody says, oh, I have an opening? Why… why aren't people seeing my information? Because they're… remember, they don't speak English, most of these… a lot of people do not.
+
+00:12:07.000 --> 00:12:10.000
+Chris: Oh, I… I could… yeah.
+
+00:12:08.000 --> 00:12:11.000
+Cindie: So then they're like, I… Go ahead.
+
+00:12:11.000 --> 00:12:20.000
+Chris: I could make… that would be… I could… I could add an indicator in here, like, you know, just throw up a flag, like, hey, you have an opening, you're saying you have an opening.
+
+00:12:16.000 --> 00:12:18.000
+Cindie: They're not gonna…
+
+00:12:20.000 --> 00:12:25.000
+Chris: You're not getting hits because you need to just click this button and go pay.
+
+00:12:26.000 --> 00:12:31.000
+Cindie: I don't want… I want them to only think of, always when I have an opening, always say yes, always pay.
+
+00:12:31.000 --> 00:12:35.000
+Cindie: I don't want them to say, oh, I have an opening, but I don't want to pay.
+
+00:12:38.000 --> 00:12:40.000
+Chris: Okay, let me…
+
+00:12:38.000 --> 00:12:45.000
+Cindie: It's a bit confusing for them. I see what she said. She's basically thinking about it from the provider standpoint, because.
+
+00:12:45.000 --> 00:12:53.000
+Cindie: They're still confused. They… yeah, like, a lot of them are pretty simple, you know, over… not, like, in an offensive way, but just, like.
+
+00:12:52.000 --> 00:12:54.000
+Chris: No, I got you, yeah.
+
+00:12:53.000 --> 00:12:58.000
+Cindie: Like, yeah, they're just like, they just click, I have an opening, and they're automatically gonna think.
+
+00:12:58.000 --> 00:13:00.000
+Cindie: That's all I have to do.
+
+00:13:00.000 --> 00:13:08.000
+Chris: Okay, so you're trying to prevent the case, the edge case, where they click, I have an opening, and they think that they're live, but they're not, because they're not very…
+
+00:13:08.000 --> 00:13:12.000
+Chris: Like, technically sound like they get, they'll get confused.
+
+00:13:11.000 --> 00:13:13.000
+Cindie: Yep, I don't want that to happen.
+
+00:13:13.000 --> 00:13:15.000
+Chris: Okay.
+
+00:13:14.000 --> 00:13:22.000
+Cindie: So it's, like, almost like saying, I have an opening, charge $29.99, or whatever it is, like, literally, I have an opening, charge me. We are full, do not charge.
+
+00:13:22.000 --> 00:13:30.000
+Cindie: like, just on the button itself. Well, I'm curious, though, Chris, what's your… tell me your take on what we're saying. We want to hear, yeah, like, if… is that…
+
+00:13:24.000 --> 00:13:26.000
+Chris: Okay.
+
+00:13:31.000 --> 00:13:33.000
+Cindie: Oh, uh…
+
+00:13:31.000 --> 00:13:35.000
+Chris: I was just… I was sitting here trying to think of, like, how to…
+
+00:13:35.000 --> 00:13:38.000
+Chris: How to implement that in a…
+
+00:13:38.000 --> 00:13:43.000
+Chris: You know, in an easy way, I don't think it would be that difficult on my end.
+
+00:13:45.000 --> 00:13:50.000
+Chris: Um, to figure out, but I was just, you know, from my perspective, um…
+
+00:13:51.000 --> 00:13:53.000
+Cindie: Yeah, I see what you're saying.
+
+00:13:51.000 --> 00:13:57.000
+Chris: There's, like, a… we're full… there's 3 states, right, for us, for the app.
+
+00:13:57.000 --> 00:14:05.000
+Chris: there's 3 states a provider can be in. They can be paid and have an… I mean, there's more, but these are the big ones. They can be paid and have an opening.
+
+00:14:05.000 --> 00:14:16.000
+Chris: They could not be paid and have an opening, and so that would be, like, an inactive profile, but we don't want them to say they have an… I can just make I have an opening not an option for them if they haven't paid.
+
+00:14:17.000 --> 00:14:20.000
+Chris: They can't even click the button, the button won't even exist.
+
+00:14:21.000 --> 00:14:27.000
+Cindie: I'm wondering… And how do they say they have… Well, hold on. So, the question then, I guess, would be…
+
+00:14:28.000 --> 00:14:30.000
+Cindie: I kind of like your idea with…
+
+00:14:31.000 --> 00:14:38.000
+Cindie: they click on it, they click on, I have an opening, and then they… there's, like, a thing that pops up, like, hey, you're not getting views, because you have…
+
+00:14:37.000 --> 00:14:43.000
+Chris: I could even make… I could even make the border of this box, or something similar to what I'm saying, maybe, you know, I'm just…
+
+00:14:43.000 --> 00:14:49.000
+Chris: speaking directionally here, I could just make the border of this box red, and then have a little…
+
+00:14:45.000 --> 00:14:47.000
+Cindie: Sure.
+
+00:14:50.000 --> 00:14:56.000
+Chris: Little flag or something in here saying, like, hey, you need to pay in order for people to contact you, though.
+
+00:14:56.000 --> 00:15:01.000
+Cindie: Yeah, I think that would be… because you can do, uh… yeah.
+
+00:15:01.000 --> 00:15:03.000
+Chris: Okay.
+
+00:15:01.000 --> 00:15:11.000
+Cindie: That makes more sense. To me, it makes more sense, but I… it's… Cindie, like, what's your take on it? Like, I understand what you're saying, and, like, that's what… that's how most things work right now.
+
+00:15:06.000 --> 00:15:08.000
+Chris: Yeah.
+
+00:15:11.000 --> 00:15:21.000
+Cindie: Or, like, if I'm on any system, and I click on it, it'll be like, your profile's active, but you're not getting any views because blah blah blah, you know, because you have to pay…
+
+00:15:21.000 --> 00:15:26.000
+Cindie: Think about that lady that just sitting in her office the other day, and how special she is, and not understanding. Um…
+
+00:15:25.000 --> 00:15:28.000
+Chris: Yeah. I work with… go ahead.
+
+00:15:26.000 --> 00:15:41.000
+Cindie: So, um, I was thinking, most of the time they're not going to be on this, because they're going to be saying yes or no in text message. If they say no, and then my thought is, is that we will send them reminders maybe every few weeks or once a month, like.
+
+00:15:35.000 --> 00:15:37.000
+Chris: Right.
+
+00:15:41.000 --> 00:15:44.000
+Cindie: Hey, do you have an opening?
+
+00:15:42.000 --> 00:15:43.000
+Chris: Yeah.
+
+00:15:44.000 --> 00:15:50.000
+Cindie: Click yes, remember. So my, my thought is that it's less, um, controlled by this.
+
+00:15:44.000 --> 00:15:46.000
+Chris: Yep.
+
+00:15:51.000 --> 00:15:54.000
+Cindie: Although, some people will come on here, but… I don't know.
+
+00:15:53.000 --> 00:16:00.000
+Chris: Okay, so we would have… the text message would be, I mean, people can come here, and they're gonna have to to build their profile.
+
+00:16:00.000 --> 00:16:02.000
+Chris: But, for them to…
+
+00:16:03.000 --> 00:16:08.000
+Chris: For them to communicate and manipulate their profile, there it's really gonna be.
+
+00:16:08.000 --> 00:16:12.000
+Chris: Like, basically binary, yes or no, through text messages.
+
+00:16:12.000 --> 00:16:24.000
+Cindie: that's what I would like, if it needs to be… yeah, that's… that's my goal, is just quick yes and no's. Um, but on here, again, I think if it… I don't know if it can say it, if it just says, like, I have an opening paid.
+
+00:16:13.000 --> 00:16:15.000
+Chris: Okay, we could do it.
+
+00:16:16.000 --> 00:16:18.000
+Chris: Yeah.
+
+00:16:24.000 --> 00:16:27.000
+Cindie: Or, we are full, not paid. I don't know.
+
+00:16:27.000 --> 00:16:29.000
+Chris: Yeah, we could do that.
+
+00:16:27.000 --> 00:16:30.000
+Cindie: So simple. Just so, so simple.
+
+00:16:30.000 --> 00:16:32.000
+Chris: Yeah. Okay.
+
+00:16:32.000 --> 00:16:39.000
+Cindie: And… and yeah, if they don't… if they don't pay, then it's gonna say we're full, and if they're like, we're not full, then they click, I have no…
+
+00:16:38.000 --> 00:16:46.000
+Chris: Oh, you want the… the we are full is, like, a flag for them to be… because in their head, they're like, I'm not full… I'm not full.
+
+00:16:39.000 --> 00:16:41.000
+Cindie: Um, and then…
+
+00:16:43.000 --> 00:16:45.000
+Cindie: Hey.
+
+00:16:45.000 --> 00:16:48.000
+Cindie: Right, right.
+
+00:16:47.000 --> 00:16:49.000
+Chris: Okay.
+
+00:16:48.000 --> 00:16:51.000
+Cindie: And then, I have an opening? Oh, now I have to pay.
+
+00:16:50.000 --> 00:16:54.000
+Chris: And the text message I could come to them is, like, um…
+
+00:16:55.000 --> 00:17:03.000
+Chris: your profile, uh, your profile status is full, because you haven't paid yet. Press Y to pay, and you'll be… you'll…
+
+00:17:00.000 --> 00:17:02.000
+Cindie: Hmm.
+
+00:17:04.000 --> 00:17:08.000
+Chris: your status will change to no… obviously, better wording here, but nothing like that.
+
+00:17:06.000 --> 00:17:08.000
+Cindie: Yeah, yeah, yeah, yeah, yeah.
+
+00:17:08.000 --> 00:17:10.000
+Cindie: Yep. I see that.
+
+00:17:08.000 --> 00:17:12.000
+Chris: Okay. Okay, that's simple enough, yeah, that's pretty simple.
+
+00:17:11.000 --> 00:17:13.000
+Cindie: Okay.
+
+00:17:13.000 --> 00:17:15.000
+Chris: Okay, um…
+
+00:17:17.000 --> 00:17:25.000
+Chris: And then there's the weekly renewal, that they'll get a text message every time they're… and do you want to give them the option to, like.
+
+00:17:25.000 --> 00:17:30.000
+Chris: Um, do more than weekly, or is that just, like, industry…
+
+00:17:30.000 --> 00:17:34.000
+Cindie: Nope, because I want to be able to market it, and then not be…
+
+00:17:30.000 --> 00:17:32.000
+Chris: Okay, so just keep…
+
+00:17:34.000 --> 00:17:36.000
+Cindie: I just want to market it one week at a time.
+
+00:17:36.000 --> 00:17:39.000
+Chris: Okay, yep, yep, alright.
+
+00:17:38.000 --> 00:17:39.000
+Cindie: Yep.
+
+00:17:39.000 --> 00:17:42.000
+Chris: Cool, um, so we'll use…
+
+00:17:41.000 --> 00:17:45.000
+Cindie: And then back… back to the ghost profile. We're still gonna have their photos.
+
+00:17:45.000 --> 00:17:47.000
+Chris: Yeah, yeah.
+
+00:17:46.000 --> 00:17:56.000
+Cindie: And then we're gonna have, like, the city that they're registered in, and then it's just gonna say area home. Auburn, area home. Seattle, area home. And there could be 5 Auburn area homes.
+
+00:17:49.000 --> 00:17:51.000
+Chris: Mm-hmm.
+
+00:17:56.000 --> 00:18:03.000
+Cindie: Uh, because when people are still searching, they're gonna be looking by that city, and so there could be 5 Auburn area homes.
+
+00:18:03.000 --> 00:18:08.000
+Cindie: all named the same Auburn area home, because they're… they're… they're blank.
+
+00:18:05.000 --> 00:18:07.000
+Chris: Oh, no.
+
+00:18:08.000 --> 00:18:11.000
+Cindie: Okay. Because…
+
+00:18:09.000 --> 00:18:12.000
+Chris: I'm not… help me help, uh…
+
+00:18:12.000 --> 00:18:21.000
+Cindie: Okay, because I don't want… I don't want the actual adult family home's name on the website if they're not paid, because then the person could just…
+
+00:18:13.000 --> 00:18:15.000
+Chris: Yeah.
+
+00:18:20.000 --> 00:18:24.000
+Chris: Oh! Tracking. Yeah, I got you.
+
+00:18:21.000 --> 00:18:27.000
+Cindie: Okay, then the person could just look at the photos and go Google and circumvent me.
+
+00:18:25.000 --> 00:18:29.000
+Chris: That makes total sense, yeah. Yep.
+
+00:18:27.000 --> 00:18:32.000
+Cindie: Okay. So then… but I always want the… the boiler to be the city.
+
+00:18:32.000 --> 00:18:34.000
+Chris: Yeah.
+
+00:18:33.000 --> 00:18:39.000
+Cindie: Area home, and so that's… But if… so even if… but if we put a, like, let their first photo on there, then…
+
+00:18:39.000 --> 00:18:46.000
+Cindie: They could technically… I wanna see rooms, I wanna see… Well, they could technically take a picture and then, like, put it into Google that way, right? A lot of people, I don't think, are doing that much, but…
+
+00:18:46.000 --> 00:19:00.000
+Cindie: Well, no, because people aren't posting on Google. Most adult family homes do not have a Google profile, and so that's going to be hard to find, because they're going to be taking those pictures to upload directly to our website. I'm just thinking about, like, future casting, where people are using stuff more often, like, you could…
+
+00:19:00.000 --> 00:19:09.000
+Cindie: like, I could hold the button on my iPhone, or on my Android, and I could just be like, oh, find this on Google, and then I go, it'll, like, find that home. Yeah.
+
+00:19:10.000 --> 00:19:18.000
+Chris: I will say, yeah, the people looking are gonna be younger, um, for somebody in their family, maybe more technically proficient.
+
+00:19:10.000 --> 00:19:12.000
+Cindie: And then they're comfortable.
+
+00:19:20.000 --> 00:19:35.000
+Chris: Also, I mean, this is one of the things about app development, is sometimes you just gotta build it, and then get it out there, and then see how people use it, and then start closing doors as they go down the hallway of things that, you know… when you see people start starting to game the system.
+
+00:19:30.000 --> 00:19:32.000
+Cindie: Yeah.
+
+00:19:35.000 --> 00:19:43.000
+Chris: Um, I have a screen recorder that records everybody's mouse that goes over the website. Most of the stuff will be done through yes and no's.
+
+00:19:43.000 --> 00:19:45.000
+Cindie: Yes.
+
+00:19:43.000 --> 00:19:51.000
+Chris: Um, through the text message, but for the people that are on the website, looking around, especially for the people, uh, the users.
+
+00:19:51.000 --> 00:19:58.000
+Chris: we could track their… I mean, honestly, we're not worried about them at all, because they're not paying… we're not after them for everything, so they could…
+
+00:19:56.000 --> 00:19:58.000
+Cindie: Right.
+
+00:19:58.000 --> 00:20:01.000
+Chris: We're just trying to give them as much information as possible.
+
+00:20:00.000 --> 00:20:02.000
+Cindie: Yeah, that would be a problem, I guess.
+
+00:20:03.000 --> 00:20:07.000
+Chris: Okay, and then… and then most of the providers are gonna be…
+
+00:20:07.000 --> 00:20:10.000
+Chris: Communicating through text messages, hopefully.
+
+00:20:10.000 --> 00:20:13.000
+Cindie: Mm-hmm. Yeah.
+
+00:20:11.000 --> 00:20:13.000
+Chris: Okay.
+
+00:20:14.000 --> 00:20:16.000
+Chris: Alright, what's…
+
+00:20:14.000 --> 00:20:20.000
+Cindie: So, something… can I ask you a question about Twilio? I've always been really curious about on Twilio.
+
+00:20:16.000 --> 00:20:18.000
+Chris: Go ahead. Yeah. Yeah.
+
+00:20:21.000 --> 00:20:31.000
+Cindie: And so, tell me if it's okay, but, um, the number that is going to be showing on their profile will not be the number that they register that we're texting to.
+
+00:20:31.000 --> 00:20:42.000
+Cindie: the number on their profile that the users will be seeing will be a Twilio-given number, and that number gets automatically assigned and populated on their profile only when they're paid.
+
+00:20:42.000 --> 00:20:48.000
+Cindie: When they don't pay, that number goes away, and then that number could then later be used at a different adult family home.
+
+00:20:49.000 --> 00:20:56.000
+Cindie: Uh, that's how we had it, or should be having it, on Clover, the other one, uh, the other provider for web developer.
+
+00:20:54.000 --> 00:21:01.000
+Chris: Yeah, we… we could… yeah, we could do that. What's the purpose of giving them a phone number, though?
+
+00:20:56.000 --> 00:20:58.000
+Cindie: Is that…
+
+00:21:01.000 --> 00:21:07.000
+Cindie: So, I can verify or validate that our website's bringing people to them.
+
+00:21:07.000 --> 00:21:10.000
+Chris: Oh, yeah, yeah, yeah, dude.
+
+00:21:08.000 --> 00:21:20.000
+Cindie: Unless you have another way, um, because I've gone back and forth, that Twilio's always been my… even 10 years ago, when I had the first, first, you know, web developer, that was my thing, is I don't want an adult family home saying, nobody ever called me, and I could be like.
+
+00:21:10.000 --> 00:21:12.000
+Chris: Yeah.
+
+00:21:20.000 --> 00:21:23.000
+Cindie: 5 people called you. Like, what number?
+
+00:21:22.000 --> 00:21:28.000
+Chris: Hey, you're preaching to the choir, somebody who does SEO, trying to, uh, validate, trying to…
+
+00:21:27.000 --> 00:21:29.000
+Cindie: Yeah, yeah.
+
+00:21:28.000 --> 00:21:39.000
+Chris: show value, like, you know, where is it coming from? It's not that big of a deal with, um, with SEO. I mean, sometimes it is, but it's really when it comes to Google Ads and Facebook ads, you really need a…
+
+00:21:31.000 --> 00:21:32.000
+Cindie: Right.
+
+00:21:39.000 --> 00:21:46.000
+Chris: A number so that you can validate if those ads are actually working, or if somebody's just typing in the number from…
+
+00:21:46.000 --> 00:21:52.000
+Chris: From an ad. Because not all people click the call button, they're just like, oh, okay, cool, screenshot, and then type in the number, yeah.
+
+00:21:47.000 --> 00:21:49.000
+Cindie: Correct.
+
+00:21:51.000 --> 00:22:02.000
+Cindie: Yeah, call it later, yeah. So, um, and then it directs to whatever number they put in, which, you know, would be their cell phone number, because we want to go right to the owner of the adult family home. So, then the Twilio number.
+
+00:21:53.000 --> 00:21:55.000
+Chris: Yep.
+
+00:22:02.000 --> 00:22:08.000
+Cindie: just directs right to them. When they go unpaid, that Twilio number pulls off, and it could be assigned to another home.
+
+00:22:07.000 --> 00:22:09.000
+Chris: Mm-hmm.
+
+00:22:10.000 --> 00:22:12.000
+Chris: Yeah, we'll probably use…
+
+00:22:12.000 --> 00:22:19.000
+Chris: Probably, I mean, did you… do you have, um, a preference towards Twilio, or would a different service be… okay.
+
+00:22:17.000 --> 00:22:23.000
+Cindie: No. No? We're open to anything. We're open to anything. Whatever you think is easier that could work, I don't care.
+
+00:22:20.000 --> 00:22:22.000
+Chris: Okay.
+
+00:22:23.000 --> 00:22:28.000
+Chris: CallRail, only because I've used it a bunch, um, so the… the…
+
+00:22:23.000 --> 00:22:25.000
+Cindie: I just…
+
+00:22:26.000 --> 00:22:28.000
+Cindie: Yes.
+
+00:22:29.000 --> 00:22:37.000
+Chris: Um, you know, the learning curve is non-existent, so CallRail is what I've used, um, yeah. And it records the conversations also, so you can…
+
+00:22:33.000 --> 00:22:35.000
+Cindie: Okay.
+
+00:22:37.000 --> 00:22:39.000
+Cindie: Perfect.
+
+00:22:37.000 --> 00:22:48.000
+Chris: get transcriptions of the conversation, and you can… I could shove all those in a database, and then have AI go through them, and then give you, like, a recap of the week or something, you know, it's not…
+
+00:22:47.000 --> 00:22:52.000
+Cindie: Yeah, perfect. Yeah, whatever you want to use, I'm not married to Twilio.
+
+00:22:48.000 --> 00:22:50.000
+Chris: Uh, so…
+
+00:22:51.000 --> 00:22:59.000
+Chris: Cool. We would… yeah, we would use Twilio for text messages, though, so that's interesting. Um…
+
+00:22:52.000 --> 00:22:54.000
+Cindie: Whatever it is.
+
+00:23:02.000 --> 00:23:09.000
+Chris: Actually, we can… I'll figure it out. I'll figure out the technical implementation, but there will be a number that we will…
+
+00:23:10.000 --> 00:23:15.000
+Chris: Record and use to validate, uh, traffic and, uh, and leads.
+
+00:23:15.000 --> 00:23:17.000
+Chris: For sure.
+
+00:23:16.000 --> 00:23:17.000
+Cindie: Okay.
+
+00:23:18.000 --> 00:23:24.000
+Chris: Okay, what is, uh, not on here that you would like on here, and…
+
+00:23:24.000 --> 00:23:29.000
+Chris: The… obviously, you guys can find a logo for you, or come up with a logo.
+
+00:23:28.000 --> 00:23:30.000
+Cindie: We have one.
+
+00:23:30.000 --> 00:23:35.000
+Chris: Cool. Send me the logo… I don't know if you sent it to me already, I'm sorry, I haven't, uh…
+
+00:23:35.000 --> 00:23:38.000
+Chris: I've seen it. Um…
+
+00:23:38.000 --> 00:23:49.000
+Chris: And what do you think about the aesthetic? I mean, I know the providers aren't going to be using it that much, but we should, um… the map is going to be like a traditional Google, you know, Google Maps map, but is this…
+
+00:23:46.000 --> 00:23:49.000
+Cindie: Hmm.
+
+00:23:49.000 --> 00:23:52.000
+Chris: This interface, is this… how does this look to you guys?
+
+00:23:51.000 --> 00:23:55.000
+Cindie: Mm-hmm. Yeah, and then when somebody… when you click on a profile that's, like, live?
+
+00:23:57.000 --> 00:24:02.000
+Cindie: Um, now, we don't have all the information and stuff, but then there's slide photo, like, okay, perfect, slide photos.
+
+00:24:02.000 --> 00:24:09.000
+Chris: Yeah, I'll make this a little more obvious. These buttons typically, you know, depending on the picture, can blend in too well, yeah.
+
+00:24:05.000 --> 00:24:07.000
+Cindie: Yeah.
+
+00:24:07.000 --> 00:24:09.000
+Cindie: Yes.
+
+00:24:10.000 --> 00:24:12.000
+Cindie: And this is gonna be, like, mobile friendly too, right?
+
+00:24:12.000 --> 00:24:17.000
+Chris: 100%, yeah, I think it already is, I think I did that, uh, yesterday. Let me see here…
+
+00:24:22.000 --> 00:24:27.000
+Chris: Oh, this is… hold on, I don't think I pushed the changes up yet. Oh, this is your…
+
+00:24:27.000 --> 00:24:29.000
+Chris: Your website, website.
+
+00:24:27.000 --> 00:24:29.000
+Cindie: I'll check.
+
+00:24:31.000 --> 00:24:33.000
+Chris: Give me one second…
+
+00:24:34.000 --> 00:24:38.000
+Cindie: I cannot believe how much disorder this over.
+
+00:24:35.000 --> 00:24:38.000
+Chris: Where is my terminal?
+
+00:24:38.000 --> 00:24:40.000
+Cindie: Wait for it.
+
+00:24:46.000 --> 00:24:51.000
+Chris: Where are you guys? You guys are Clover, right?
+
+00:24:50.000 --> 00:24:52.000
+Cindie: Hey, you'd be watching The Office, too.
+
+00:24:52.000 --> 00:24:54.000
+Chris: Huh?
+
+00:24:52.000 --> 00:24:55.000
+Cindie: You watch The Office?
+
+00:24:54.000 --> 00:24:57.000
+Chris: Yeah, I just… yeah, yeah.
+
+00:24:56.000 --> 00:25:00.000
+Cindie: You saw that reel, too, where he's like, what did you look like in the 90s? And then he, like…
+
+00:24:59.000 --> 00:25:08.000
+Chris: Dude, that's so funny that you said that, bro! I just saw that, I sent it to my wife, I was like, it's so good.
+
+00:25:06.000 --> 00:25:10.000
+Cindie: Yeah, well, I can see your text messages, that's why I saw it, I was like, oh, I know that, really.
+
+00:25:09.000 --> 00:25:22.000
+Chris: Oh! Yeah, I usually, you know, it's always a dubious, you know, it's always risky when you just blast open all of your, uh, screens, but…
+
+00:25:21.000 --> 00:25:25.000
+Cindie: We trust you more now, actually, so…
+
+00:25:23.000 --> 00:25:29.000
+Chris: Yeah, exactly. It's like, alright, he's… yeah, exactly.
+
+00:25:27.000 --> 00:25:29.000
+Cindie: Legit.
+
+00:25:29.000 --> 00:25:36.000
+Chris: Um, let me… I just want to see if this is actually… yeah, I've made it mobile-friendly. This is horribly mobile-friendly, uh…
+
+00:25:37.000 --> 00:25:39.000
+Chris: But I gave it a, uh…
+
+00:25:41.000 --> 00:25:48.000
+Chris: Let's see… yeah, I'm not in love with this right here, so I'll fix all this, this is not good, but, um…
+
+00:25:41.000 --> 00:25:43.000
+Cindie: Cool.
+
+00:25:49.000 --> 00:25:54.000
+Chris: I did this, yeah, and the purpose of this conversation was just… just to make sure that the features.
+
+00:25:53.000 --> 00:25:55.000
+Cindie: Oh, okay.
+
+00:25:54.000 --> 00:26:03.000
+Chris: were right, so I had all the features, and then the aesthetics, uh, were all inevitably gonna change. This is a, you know, a first.
+
+00:26:03.000 --> 00:26:07.000
+Chris: A rough draft, so to speak, in terms of, um… yeah.
+
+00:26:05.000 --> 00:26:12.000
+Cindie: Question, uh, before I forget. Um, when you go back to that view that you just had, you know how, like, the ghosts are intermixed?
+
+00:26:12.000 --> 00:26:17.000
+Cindie: Can we make it so the ghosts drop down, and only the live ones are at the top of the feed?
+
+00:26:17.000 --> 00:26:19.000
+Chris: Oh, yeah, yeah, absolutely.
+
+00:26:18.000 --> 00:26:28.000
+Cindie: Because I want people to go through, and instead of… because for right now, it's going to be probably a lot less live, and a lot more, no, you know, whatever, uh, when we go paying, and then…
+
+00:26:25.000 --> 00:26:27.000
+Chris: Yeah.
+
+00:26:28.000 --> 00:26:31.000
+Cindie: It'll pick up and stuff, so yeah, cool.
+
+00:26:32.000 --> 00:26:36.000
+Chris: Yeah, yeah, that's no problem. Yeah, that, that, that, uh…
+
+00:26:37.000 --> 00:26:39.000
+Cindie: He just had no problem.
+
+00:26:38.000 --> 00:26:42.000
+Chris: pretty basic algorithm to get that done. Um…
+
+00:26:41.000 --> 00:26:44.000
+Cindie: discussions I had with Oliver about that, dropping them down.
+
+00:26:44.000 --> 00:26:47.000
+Chris: What was I thinking of this now? I had a question.
+
+00:26:46.000 --> 00:26:51.000
+Cindie: Um, and then the other… there's… there are, like, some other filter items, too. Yeah.
+
+00:26:51.000 --> 00:26:55.000
+Cindie: I'm assuming those are easy, all the filter items, adding those are all just…
+
+00:26:55.000 --> 00:27:01.000
+Chris: I'm glad that you brought that up. I forgot what the different… you said there are 3 facility types. Is this…
+
+00:26:55.000 --> 00:26:57.000
+Cindie: Add on…
+
+00:27:01.000 --> 00:27:04.000
+Chris: This is obviously not it. What are the facility types?
+
+00:27:05.000 --> 00:27:10.000
+Cindie: Uh, there's adult family home, assisted living, and memory care. Independent living. Memory care.
+
+00:27:05.000 --> 00:27:07.000
+Chris: You too.
+
+00:27:09.000 --> 00:27:13.000
+Chris: Okay. Those are, like, categories of…
+
+00:27:10.000 --> 00:27:12.000
+Cindie: Yeah, there's a few.
+
+00:27:13.000 --> 00:27:15.000
+Chris: Adult family homes, right?
+
+00:27:14.000 --> 00:27:24.000
+Cindie: Uh, no. An adult family home is, like, uh, 6 or less residents living in a residential home. Like, your neighbor has a house, and there's 6 old people living there, and they're getting paid to take care of them.
+
+00:27:24.000 --> 00:27:34.000
+Cindie: a community, which we don't really call them a community, I mean, we kind of do, but assisted living or independent living is like a large apartment building with, like, a dining room, an exercise, a swimming pool.
+
+00:27:34.000 --> 00:27:40.000
+Cindie: Da-da-da-da, where 120, 200 people are all living in apartments in a dwelling together.
+
+00:27:40.000 --> 00:27:42.000
+Cindie: Um, so that's the difference.
+
+00:27:40.000 --> 00:27:45.000
+Chris: Okay. And then what's the third… what's the third? Is there a third one?
+
+00:27:44.000 --> 00:27:50.000
+Cindie: Well, the Medicaid thing isn't good. Um, community is not good, because people might not understand that, so it's going to be, like, adult family home.
+
+00:27:51.000 --> 00:27:53.000
+Cindie: Independent living.
+
+00:27:53.000 --> 00:28:06.000
+Cindie: assisted living, memory care. Those are, like, the main things that people are looking for. Like, oh, my mom only needs assisted living, or my mom only needs memory care, or my mom only needs adult family home. That's what they're gonna be thinking. That's the lingo.
+
+00:28:05.000 --> 00:28:15.000
+Chris: Okay. Okay, we're gonna… we'll polish that filtering thing up for sure. I'll get… I'll get that implemented, what you just said.
+
+00:28:10.000 --> 00:28:11.000
+Cindie: Yeah.
+
+00:28:15.000 --> 00:28:19.000
+Cindie: Okay. And then each of those, so, like, an independent community?
+
+00:28:16.000 --> 00:28:18.000
+Chris: Um…
+
+00:28:18.000 --> 00:28:20.000
+Chris: Mm-hmm.
+
+00:28:19.000 --> 00:28:29.000
+Cindie: if I own an independent retirement community, which is, like, 55 and older people just, like, wanting to live in an apartment building, and they get, like, one meal a day, but they're pretty much independent, like.
+
+00:28:29.000 --> 00:28:36.000
+Cindie: they're not gonna have all the care stuff. So, when somebody clicks independent living, those filters should filter out.
+
+00:28:36.000 --> 00:28:46.000
+Cindie: based on that selection. But an adult family home, and that's where we have this distinguished, too, where, like, an adult family home, they don't have apartments, they have rooms.
+
+00:28:46.000 --> 00:28:56.000
+Cindie: So when somebody clicks Adult Family Home, we want to make sure it's not like, do you want a one-bedroom, a studio? Like, those don't apply to adult family home, but it does to assisted living and memory care. So there's different things that.
+
+00:28:55.000 --> 00:28:57.000
+Chris: Hmm…
+
+00:28:56.000 --> 00:29:02.000
+Cindie: Would… would, uh, attach to different facilities.
+
+00:29:02.000 --> 00:29:11.000
+Chris: Right. Um, this does beg the question, should we do something for people who are new to this.
+
+00:29:11.000 --> 00:29:16.000
+Chris: Should we do something in terms of, like, information boxes to explain some of this stuff to them?
+
+00:29:16.000 --> 00:29:21.000
+Chris: on the UI, or should that just be a blog and then let them educate themselves via blogs?
+
+00:29:21.000 --> 00:29:27.000
+Cindie: I think that information piece would be probably pretty helpful. And then I think they would want to also be able to select two.
+
+00:29:28.000 --> 00:29:41.000
+Cindie: Or three options, so it's not a one only. That could be hard, because some people are looking at adult family homes and memory care, or some people are looking for their mom and their dad, and they need independent… Well, it goes from… it goes from wide to narrow, right? Yeah.
+
+00:29:29.000 --> 00:29:31.000
+Chris: Yeah. Yeah.
+
+00:29:42.000 --> 00:29:51.000
+Cindie: You would… you could select Adult Family Home, and community, and then based on the filters that you select inside of those, then it would just pare down to what's.
+
+00:29:51.000 --> 00:29:55.000
+Cindie: what is or is not available. I don't think you can do it any other way than that.
+
+00:29:55.000 --> 00:29:58.000
+Chris: Okay. Um…
+
+00:30:00.000 --> 00:30:02.000
+Chris: Damn, uh…
+
+00:30:00.000 --> 00:30:08.000
+Cindie: And if we need to do another call or more on that, but yeah, whatever. I've got that all in mind, because it's very, very specific. Well, we have it on the other website, though, too, so it's like…
+
+00:30:03.000 --> 00:30:05.000
+Chris: Yeah, we'll… we'll…
+
+00:30:08.000 --> 00:30:14.000
+Cindie: Because it'll have, like, you know, this, you know, adult family homes, they have this type of care.
+
+00:30:14.000 --> 00:30:17.000
+Cindie: Or whatever. There's, like, certain types of care that each community will have.
+
+00:30:17.000 --> 00:30:20.000
+Cindie: Based on what type of community it is.
+
+00:30:20.000 --> 00:30:27.000
+Cindie: Like, in assisted living, like, some of them have washers and dryers, but, like, an adult family home wouldn't say that they have a washer and dryer, because it's all included.
+
+00:30:28.000 --> 00:30:31.000
+Cindie: Because it's like a… it's like for people at end of life in wheelchairs, and they can't do anything.
+
+00:30:31.000 --> 00:30:34.000
+Chris: You know, one thing we could do is just…
+
+00:30:35.000 --> 00:30:45.000
+Chris: slap on an AI… an AI box onto these things, and then let them chat with it, and say, like, hey, you know, what am I looking for? This is what I need.
+
+00:30:46.000 --> 00:30:47.000
+Cindie: Hmm.
+
+00:30:46.000 --> 00:30:53.000
+Chris: you know, what filters should I be using, stuff like that. You just… everything that you guys just said, we could put that into the…
+
+00:30:52.000 --> 00:30:57.000
+Cindie: 100%, yes. Yeah, that's super dope, I like that. That's exactly what we want, actually.
+
+00:30:53.000 --> 00:30:55.000
+Chris: Yeah.
+
+00:30:56.000 --> 00:31:02.000
+Chris: Yeah. Yeah, that way… and… yeah, they're not… I mean, then we could just have the AI.
+
+00:31:02.000 --> 00:31:12.000
+Chris: filter for them, like, hey, these are the… here's the list of things that you actually need to be looking for. You guys would have to do some user testing so we can get it right, but that's…
+
+00:31:10.000 --> 00:31:12.000
+Cindie: Sure.
+
+00:31:12.000 --> 00:31:15.000
+Chris: Technically speaking, it's a perfectly…
+
+00:31:15.000 --> 00:31:17.000
+Chris: Um, achievable task.
+
+00:31:17.000 --> 00:31:18.000
+Cindie: Okay.
+
+00:31:19.000 --> 00:31:28.000
+Chris: Cool. Um, and then the aesthetic is okay, I mean, I don't know if you guys want to lean into the clover with the green, or do you guys… did you guys have something else in mind?
+
+00:31:28.000 --> 00:31:33.000
+Cindie: Um, we have, like, a green and gold kind of color, um, and I can get you that.
+
+00:31:31.000 --> 00:31:36.000
+Chris: Okay, yeah, the same theme as the other website?
+
+00:31:33.000 --> 00:31:35.000
+Cindie: Clover.
+
+00:31:35.000 --> 00:31:37.000
+Cindie: Yeah, yeah.
+
+00:31:36.000 --> 00:31:40.000
+Chris: Okay, yeah. I'll, uh… yeah, as soon as I go look at that, I can…
+
+00:31:40.000 --> 00:31:47.000
+Chris: you know, blend a lot of what's going on over there to this as well, see where the gaps are at, and add the theme.
+
+00:31:44.000 --> 00:31:46.000
+Cindie: Yes.
+
+00:31:47.000 --> 00:31:54.000
+Chris: Uh, okay. Is there anything over here that you want to talk about before we go to your, uh, homepage?
+
+00:31:56.000 --> 00:32:02.000
+Cindie: Um… I think the only thing that I'll mention now, just so you have it in the notes, is the…
+
+00:32:03.000 --> 00:32:08.000
+Cindie: Just a future cast of what this… what we sort of see this becoming.
+
+00:32:08.000 --> 00:32:11.000
+Cindie: To where we want to, uh, be able…
+
+00:32:12.000 --> 00:32:20.000
+Cindie: to promote other businesses in some cases on here, like, if an adult family home wants to take pictures, professional pictures of their home.
+
+00:32:20.000 --> 00:32:25.000
+Cindie: Then we can have, like, certain providers that pay us to advertise their picture, like, hey, we do pictures for…
+
+00:32:25.000 --> 00:32:27.000
+Chris: Oh, yeah. Yep.
+
+00:32:26.000 --> 00:32:36.000
+Cindie: So then, we'll put those in there. Or like, my mom needs hospice care now, what do I do? Well, here's these providers in your area that provide hospice care, and those people could advertise, you know, um…
+
+00:32:35.000 --> 00:32:37.000
+Chris: Mm-hmm.
+
+00:32:36.000 --> 00:32:38.000
+Cindie: their services.
+
+00:32:37.000 --> 00:32:43.000
+Chris: Yeah, like a lead machine, basically, for other services that are tangential to this.
+
+00:32:40.000 --> 00:32:42.000
+Cindie: Yep.
+
+00:32:44.000 --> 00:32:53.000
+Chris: To this business, yeah, absolutely. Um, that's not… I mean, I don't think… that doesn't… that's not going to be too complicated, it would just be, you know.
+
+00:32:53.000 --> 00:32:59.000
+Chris: I mean, honestly, we'd have to figure out where we want to insert that information, so…
+
+00:32:59.000 --> 00:33:00.000
+Cindie: Yeah.
+
+00:32:59.000 --> 00:33:06.000
+Chris: what is the user action that would trigger something like, hey, you should try calling so-and-so? I mean, for the…
+
+00:33:05.000 --> 00:33:13.000
+Cindie: I think 3 ads or something, where every 4 ads, like, they're scrolling, looking at house, and then there's, like, a little tiny banner, like, do you need hospice care? Or…
+
+00:33:12.000 --> 00:33:14.000
+Chris: Oh, yeah, yeah, yeah.
+
+00:33:13.000 --> 00:33:19.000
+Cindie: Something like this, or hey, so then the provider, but I don't know how it would be on the provider side to get them connected.
+
+00:33:14.000 --> 00:33:16.000
+Chris: Yep.
+
+00:33:19.000 --> 00:33:28.000
+Cindie: Um, and maybe then that's, like, um, another page. Well, I think the provider side comes with the profile, right? When you click on their profile and they start to upload photos, then they can be a…
+
+00:33:28.000 --> 00:33:30.000
+Cindie: You know, maybe…
+
+00:33:28.000 --> 00:33:39.000
+Chris: Yeah, this would be a good spot to put, like, uh… photographers. Do you need a photographer here? We can… here's some of their work. They… the photographer can have a profile.
+
+00:33:31.000 --> 00:33:33.000
+Cindie: Do you need photos? Yeah.
+
+00:33:39.000 --> 00:33:41.000
+Chris: um…
+
+00:33:41.000 --> 00:33:46.000
+Chris: And then we could… we could track those… we could track those leads as well to make sure that, uh…
+
+00:33:41.000 --> 00:33:43.000
+Cindie: Oh.
+
+00:33:45.000 --> 00:33:47.000
+Cindie: Yeah.
+
+00:33:46.000 --> 00:33:48.000
+Chris: Yeah.
+
+00:33:47.000 --> 00:33:51.000
+Cindie: Yeah. You like when you buy something at the end, they're like.
+
+00:33:51.000 --> 00:33:59.000
+Cindie: wait, 30 seconds, if you order one more, we'll give you $20,000 back, or whatever. You're like, no, and then the next page pops up, and I'm like, but wait, there's more! And you're like.
+
+00:33:54.000 --> 00:33:56.000
+Chris: Okay.
+
+00:33:59.000 --> 00:34:04.000
+Chris: Oh yeah, every time I check out of Amazon Fresh.
+
+00:34:00.000 --> 00:34:05.000
+Cindie: I hate those, but what if it's something like that, too?
+
+00:34:05.000 --> 00:34:07.000
+Cindie: As much as I can.
+
+00:34:05.000 --> 00:34:10.000
+Chris: Dude, they get me! I always end up adding stuff to my fresh cart.
+
+00:34:09.000 --> 00:34:14.000
+Cindie: Like, hey, hey, do you want another pizza for 5 bucks? Yeah! Throw it in right now.
+
+00:34:12.000 --> 00:34:22.000
+Chris: it's only annoying if they get it wrong. If they get it right, you're like, oh, dude, I did forget string cheese, like, thank you for doing that. Yeah, so you just gotta get it right so you don't piss people off.
+
+00:34:17.000 --> 00:34:20.000
+Cindie: Yes, yes, thank you for that.
+
+00:34:22.000 --> 00:34:31.000
+Cindie: Exactly, it can't be something totally off-topic, so… maybe something like that, too, where it's like, hey, you know… That would be… I think that would be later, because then we'd have to know how to, like.
+
+00:34:24.000 --> 00:34:26.000
+Chris: Yeah, exactly.
+
+00:34:31.000 --> 00:34:46.000
+Cindie: interconnect… maybe they, like, it sends, uh, times that they're available, and it just books those people automatically, if they're like, yeah, I need photos, and they just want to do it. But, like, I think those are ancillary at some point. Just right now, we want to get this to market with, with the…
+
+00:34:46.000 --> 00:34:53.000
+Cindie: You know, adult family home piece, and be like, alright, this is what we have, how many people can we get to sign up? Can we get it to start producing some cash?
+
+00:34:48.000 --> 00:34:50.000
+Chris: Mm-hmm.
+
+00:34:51.000 --> 00:34:53.000
+Chris: Yeah.
+
+00:34:53.000 --> 00:34:58.000
+Cindie: Uh, and then we can start reinvesting into it to do those other pieces.
+
+00:34:59.000 --> 00:35:06.000
+Chris: Yeah, yeah, and getting an MVP out, and uh… and then letting the users use it, and then figuring out where the…
+
+00:35:06.000 --> 00:35:11.000
+Chris: Wrinkles are at and for me, where the bugs are, and then, um, and then.
+
+00:35:11.000 --> 00:35:15.000
+Chris: letting them kind of… often, I mean, at least from my experience.
+
+00:35:16.000 --> 00:35:22.000
+Chris: You find out that there's things that the user wants that you didn't think of, and you're like, oh, dude, that's brilliant, of course you need that.
+
+00:35:21.000 --> 00:35:23.000
+Cindie: Right, right.
+
+00:35:23.000 --> 00:35:28.000
+Chris: So, getting feedback from your users is gonna be, um, key.
+
+00:35:29.000 --> 00:35:31.000
+Chris: For sure.
+
+00:35:29.000 --> 00:35:36.000
+Cindie: Um, speaking of users, I do have a question about the users. Um, you said something, and then I just let you go for a minute, and then it…
+
+00:35:33.000 --> 00:35:34.000
+Chris: Mm-hmm.
+
+00:35:36.000 --> 00:35:39.000
+Cindie: Uh, so, when…
+
+00:35:39.000 --> 00:35:42.000
+Cindie: Um, a user goes to an adult family home.
+
+00:35:42.000 --> 00:35:50.000
+Cindie: And then you said that they say they are interested, and then a text message comes to the adult family home and says, hey, somebody liked you.
+
+00:35:50.000 --> 00:35:52.000
+Cindie: Pay now…
+
+00:35:52.000 --> 00:35:55.000
+Cindie: and get their info, but I can't…
+
+00:35:53.000 --> 00:35:56.000
+Chris: That's… yeah.
+
+00:35:55.000 --> 00:35:57.000
+Cindie: do that.
+
+00:35:57.000 --> 00:35:59.000
+Chris: You can't do that?
+
+00:35:57.000 --> 00:36:03.000
+Cindie: I can't… well, yeah, but I… yeah, but I can't give… I can't give the provider.
+
+00:36:04.000 --> 00:36:07.000
+Cindie: Contact information of a person.
+
+00:36:07.000 --> 00:36:13.000
+Cindie: now I'm a placement agency. So I ha… it has to be that it's a ping pong.
+
+00:36:13.000 --> 00:36:18.000
+Cindie: It's the user says, I'm interested, the adult family home gets notified and says.
+
+00:36:18.000 --> 00:36:25.000
+Cindie: We will send a message to the family letting them know you have an opening, then the family gets a message.
+
+00:36:25.000 --> 00:36:29.000
+Cindie: Hey, that home that you liked in Auburn!
+
+00:36:29.000 --> 00:36:33.000
+Cindie: Home Sweet Home, they've paid, now, you know, they're not gonna say, you know, we're not gonna tell them.
+
+00:36:32.000 --> 00:36:35.000
+Chris: I see, yeah, yeah.
+
+00:36:33.000 --> 00:36:45.000
+Cindie: Now here's their info, which is the Twilio number, and whatever. And so then they can go on and do that, because I need to be able to still backtrack, and I can't give the number of the family to the provider, otherwise it changes my.
+
+00:36:45.000 --> 00:36:48.000
+Chris: I see. No, that makes perfect sense. Yeah, it's a…
+
+00:36:47.000 --> 00:36:50.000
+Cindie: It has to be a total 3 pass volley thing.
+
+00:36:50.000 --> 00:36:57.000
+Chris: catching… yeah, it's a very significant leak for you if we go the other direction. So…
+
+00:36:54.000 --> 00:36:56.000
+Cindie: Yeah. Yep.
+
+00:36:56.000 --> 00:36:58.000
+Cindie: Yep.
+
+00:36:57.000 --> 00:37:09.000
+Chris: They get notified. Someone's interested, bring your account up to date so it's active. They do, they pay, they're active, and then it's like, okay, hey, we'll let them know.
+
+00:37:09.000 --> 00:37:11.000
+Cindie: Yep.
+
+00:37:09.000 --> 00:37:17.000
+Chris: And then send it over to them. Yeah, there's gonna… I mean, just from that perspective, if the person loses interest or they find somebody else.
+
+00:37:17.000 --> 00:37:19.000
+Cindie: Yeah, it's just…
+
+00:37:18.000 --> 00:37:30.000
+Chris: Uh, it's… yeah, it's gonna be… you gotta let them know, it's gonna… it's kind of a crapshoot, you know, and it's only 29 bucks, but, you know, how much money are you gonna make if you do get the lead. They're gonna have some, you know, whatever the percentage is, they're gonna have some sort of success rate.
+
+00:37:23.000 --> 00:37:25.000
+Cindie: Yeah.
+
+00:37:31.000 --> 00:37:32.000
+Cindie: Right.
+
+00:37:31.000 --> 00:37:42.000
+Chris: Uh, and after a long enough period of time, we can give that information to them, like, hey, these wink wink leads, you know, in your area have, like, a 60% conversion or a 30% conversion, so…
+
+00:37:41.000 --> 00:37:43.000
+Cindie: Yeah.
+
+00:37:42.000 --> 00:37:52.000
+Chris: If you do this… if you get 10 of them throughout the week, you might close 3 of them, or 6 of them, and then that way, they're… you're just managing expectations at that point.
+
+00:37:48.000 --> 00:37:50.000
+Cindie: Right.
+
+00:37:52.000 --> 00:37:56.000
+Cindie: Yeah, yeah. Should there be, like, a way to connect with providers through.
+
+00:37:57.000 --> 00:38:00.000
+Cindie: A messaging system on the… on the…
+
+00:38:00.000 --> 00:38:04.000
+Chris: Yeah, yeah, you… we could… yeah, we could build out an interface. I mean, that's…
+
+00:38:00.000 --> 00:38:02.000
+Cindie: Replaceable.
+
+00:38:05.000 --> 00:38:11.000
+Chris: It's kind of, yeah, it's, um, certainly a technical challenge, but, um…
+
+00:38:11.000 --> 00:38:16.000
+Cindie: We don't have to do that, I'm just, like, wondering, just notifications, I think, at this point, we just want to be the middle.
+
+00:38:17.000 --> 00:38:19.000
+Chris: Yeah. Yeah.
+
+00:38:17.000 --> 00:38:21.000
+Cindie: Person, instead of trying to, like, coordinate all that for now.
+
+00:38:20.000 --> 00:38:24.000
+Chris: Yeah, yeah, I mean, yeah, exactly. We could, we could, uh…
+
+00:38:24.000 --> 00:38:31.000
+Chris: We could, uh, add features every month, ad infinitum, just, you know, one idea after the next, yeah.
+
+00:38:28.000 --> 00:38:30.000
+Cindie: Yeah.
+
+00:38:32.000 --> 00:38:44.000
+Cindie: And then when, um, when a user registers, like, they're like, yeah, this is great, I want to see, you know, other homes. So then they register, and they give, you know, I give my name, right, my email, right, my phone number.
+
+00:38:44.000 --> 00:38:54.000
+Cindie: pretty basic. Do they fill out a profile? We never did that with the other thing, um, of what they're looking for, or will it automatically… like, when something new comes… let's say, like, on Zillow.
+
+00:38:54.000 --> 00:39:02.000
+Cindie: you put in, and it says, oh, there's a new house that just came available in your area, like, can they have it where it's maybe not a house that they've liked.
+
+00:39:02.000 --> 00:39:07.000
+Cindie: but it's a house that fits their area, that… so, you know what I mean? Like…
+
+00:39:07.000 --> 00:39:09.000
+Cindie: Because that'd be really cool.
+
+00:39:07.000 --> 00:39:12.000
+Chris: I see… that's a suggest… yeah, like a suggestion… a suggestion algorithm.
+
+00:39:12.000 --> 00:39:20.000
+Chris: for people based off of their location, and if we… if they fill out a profile, if they sign up and they say, hey, I'm looking for housing.
+
+00:39:16.000 --> 00:39:18.000
+Cindie: Yeah.
+
+00:39:18.000 --> 00:39:20.000
+Cindie: Go in your profile.
+
+00:39:20.000 --> 00:39:25.000
+Chris: They could add, like… we could have them add, like, a tag, basically, like…
+
+00:39:20.000 --> 00:39:22.000
+Cindie: Yeah.
+
+00:39:25.000 --> 00:39:27.000
+Cindie: Yeah.
+
+00:39:26.000 --> 00:39:34.000
+Chris: I'm looking for, you know, this, that, the other, and then based off of that information, and we'll let them know, like, hey, fill this out, and we can offer better suggestions to you.
+
+00:39:34.000 --> 00:39:37.000
+Cindie: Yeah. We can let you know when new homes become available in your area.
+
+00:39:37.000 --> 00:39:42.000
+Chris: Yeah, that's a simple… that's a simple fix, yeah. That's a simple addition. That's not a…
+
+00:39:39.000 --> 00:39:41.000
+Cindie: Okay.
+
+00:39:42.000 --> 00:39:48.000
+Cindie: Okay, cool. Yeah, that'd be super cool, because then they could be getting new stuff, you know, alert… like, little alerts, like when people are looking for a house to buy.
+
+00:39:42.000 --> 00:39:45.000
+Chris: Not a whole lot.
+
+00:39:49.000 --> 00:39:51.000
+Cindie: A new house, two new houses posted, so…
+
+00:39:51.000 --> 00:39:58.000
+Chris: Yeah, ultimately, you want the users to find what they're looking for with your app, because that makes the providers on your app happy and.
+
+00:39:58.000 --> 00:40:00.000
+Cindie: Right, right, right.
+
+00:39:59.000 --> 00:40:02.000
+Chris: Making them want to continue to pay you, yeah.
+
+00:40:01.000 --> 00:40:03.000
+Cindie: Exactly.
+
+00:40:03.000 --> 00:40:08.000
+Chris: Cool. Okay, yeah, I can add that, no problem. Let's, um…
+
+00:40:08.000 --> 00:40:11.000
+Chris: Okay, so are we good on this for now?
+
+00:40:10.000 --> 00:40:13.000
+Cindie: Yeah, I feel really freaking solid, yeah.
+
+00:40:13.000 --> 00:40:16.000
+Chris: Sweet. Alright, let's look at your…
+
+00:40:17.000 --> 00:40:19.000
+Chris: Where are we at? Oh, yeah.
+
+00:40:18.000 --> 00:40:20.000
+Cindie: Oh, I'm sorry. Oh, I'm sorry.
+
+00:40:20.000 --> 00:40:29.000
+Chris: Okay, I do want to say, uh, I was going off of your… the Kimberly… I forgot her name, whoever, Tiffany, whatever her name is.
+
+00:40:27.000 --> 00:40:29.000
+Cindie: Yes.
+
+00:40:29.000 --> 00:40:33.000
+Cindie: Yep. That's okay, don't worry about it, she is. Kimberly, yep. You don't need to…
+
+00:40:31.000 --> 00:40:35.000
+Chris: Okay, data dump. Um…
+
+00:40:35.000 --> 00:40:41.000
+Chris: So this is the… this is your on-site website. Uh, there's no…
+
+00:40:41.000 --> 00:40:47.000
+Chris: None of this works. This is just your homepage, just to figure out the theme and the aesthetic that you guys are going for.
+
+00:40:47.000 --> 00:40:49.000
+Cindie: Mm-hmm.
+
+00:40:47.000 --> 00:40:54.000
+Chris: So that I can then go in and then, you know, handle all your pages. You guys have a lot of pages, uh…
+
+00:40:55.000 --> 00:40:58.000
+Chris: It is surprising that it's not doing, um…
+
+00:40:58.000 --> 00:41:00.000
+Cindie: Anything?
+
+00:40:59.000 --> 00:41:04.000
+Chris: Yeah, it's surprising that your traffic is, like, virtually zero. Um…
+
+00:41:05.000 --> 00:41:11.000
+Chris: Then you guys have, like, 100. And you guys did have, like, some keywords, I mean, 5 traffic is horrible.
+
+00:41:11.000 --> 00:41:15.000
+Chris: 5 users today is horrible, but you guys were, at some point.
+
+00:41:15.000 --> 00:41:24.000
+Chris: somebody was doing something, and then something stopped working all of a sudden. So, I don't know what that is, you know, we can do…
+
+00:41:24.000 --> 00:41:27.000
+Chris: A diagnosis using the, uh…
+
+00:41:27.000 --> 00:41:30.000
+Chris: you know, the Time Machine website to go back and look at it, but…
+
+00:41:31.000 --> 00:41:42.000
+Chris: Ultimately, whatever happened in June to June, from 2024 to 2025, um, killed your traffic, you know, the traffic that you did have.
+
+00:41:40.000 --> 00:41:43.000
+Cindie: Any website? When you come up to that website?
+
+00:41:43.000 --> 00:41:50.000
+Cindie: Oh, yeah. Like it was. That's when we switched the website over. Yeah, my website previously was a different one that I had.
+
+00:41:51.000 --> 00:42:01.000
+Cindie: Not different names, same name. Same name, but different, uh… I went from some box website to Webflow, and then I wasn't… it wasn't automatically sending out.
+
+00:42:02.000 --> 00:42:12.000
+Cindie: houses to people, so that's the difference, is there's, like, an… there's one of those box CRMs that you have, and then it would… it's tied with an IDX, and so then people.
+
+00:42:04.000 --> 00:42:06.000
+Chris: Okay.
+
+00:42:08.000 --> 00:42:10.000
+Chris: Mm-hmm.
+
+00:42:12.000 --> 00:42:17.000
+Cindie: get to the IDX, and then they're shopping on your website, essentially, and that's where all the traffic's coming from.
+
+00:42:13.000 --> 00:42:15.000
+Chris: Mm.
+
+00:42:17.000 --> 00:42:19.000
+Chris: Gotcha.
+
+00:42:17.000 --> 00:42:21.000
+Cindie: But this new one doesn't do that. The new one doesn't do that, that's why there's no traffic.
+
+00:42:23.000 --> 00:42:33.000
+Chris: Cool. I was wondering, uh, usually it is a website, you know, somebody gets a new web developer, and they tell you… or an SEO, and they tell you, you have to get a new website, and um…
+
+00:42:33.000 --> 00:42:37.000
+Chris: You know, so they can get some extra money, and then they don't…
+
+00:42:37.000 --> 00:42:46.000
+Chris: They don't track all of your pages, and they don't do proper reroutes, and then they kill your traffic, and then a lot of times when that happens to, like, a contractor, or you see it in dental offices all the time.
+
+00:42:37.000 --> 00:42:39.000
+Cindie: Exactly.
+
+00:42:47.000 --> 00:42:54.000
+Chris: Um, their… their sales will, you know, coming from the website be pretty high, and then they get a new web developer, because, you know.
+
+00:42:54.000 --> 00:43:02.000
+Chris: whatever, they have a problem with them, and then the other person convinces them to build a new website, tanks their SEO, and then people end up getting fired, and…
+
+00:43:02.000 --> 00:43:08.000
+Chris: You could see some hor… you can read some horrible stories on, uh, you know, subreddits for SEO.
+
+00:43:09.000 --> 00:43:14.000
+Chris: And it was my biggest fear when I started doing SEO, was doing that to somebody. I was like, please.
+
+00:43:14.000 --> 00:43:23.000
+Chris: Please don't let me end up getting somebody fired or somebody, like, saying, like, dude, I gotta sell my house, this is all your fault. I mean, it's just a nightmare.
+
+00:43:23.000 --> 00:43:24.000
+Cindie: One…
+
+00:43:23.000 --> 00:43:34.000
+Chris: scenario, I can't imagine. Luckily, it's never happened, it never will happen, um, knock on wood, but, uh, there's a right way to do it so it doesn't happen. There's some… there is, with really…
+
+00:43:34.000 --> 00:43:48.000
+Chris: With websites that are extremely large, there's always a little bit of turbulence after switching over to a completely new codebase, but it comes back pretty quickly, especially if the website you built is significantly faster, more performant.
+
+00:43:48.000 --> 00:43:51.000
+Chris: Uh, and it converts better, so…
+
+00:43:51.000 --> 00:43:55.000
+Chris: So far, what's your first reaction to this?
+
+00:43:55.000 --> 00:43:59.000
+Cindie: That's okay, I mean, it's similar to the last one I had.
+
+00:43:59.000 --> 00:44:02.000
+Chris: I was… I, uh, what's her… yeah, is this her?
+
+00:43:59.000 --> 00:44:01.000
+Cindie: Top 8.
+
+00:44:03.000 --> 00:44:06.000
+Chris: No. What's her name? Uh…
+
+00:44:06.000 --> 00:44:11.000
+Cindie: Kimber Lee with an LEE. So Kimber is her first name, Lee is her last name. Kimber.
+
+00:44:11.000 --> 00:44:13.000
+Chris: Lee.
+
+00:44:12.000 --> 00:44:14.000
+Cindie: I don't know her website, but…
+
+00:44:16.000 --> 00:44:18.000
+Chris: Yeah, this is her.
+
+00:44:18.000 --> 00:44:24.000
+Chris: Yeah, it was going… it's a… it's obviously two on the nose. Is this her?
+
+00:44:24.000 --> 00:44:26.000
+Chris: This isn't her.
+
+00:44:25.000 --> 00:44:27.000
+Cindie: Yeah, I think so.
+
+00:44:26.000 --> 00:44:39.000
+Chris: Oh, it is her, yeah, okay, I remember. It looks different. I thought the, uh, the hero image video here was a little too big, or was bigger. Okay, so what do you like about this?
+
+00:44:27.000 --> 00:44:29.000
+Cindie: Let's…
+
+00:44:39.000 --> 00:44:44.000
+Chris: Um, over here that you want to bring over to your website.
+
+00:44:45.000 --> 00:44:55.000
+Cindie: I like how, uh, local it looks, like, there's pictures. Like, if you go back to our actual website that we have right now, it's so stocky, it's so fucking stocky.
+
+00:44:55.000 --> 00:45:04.000
+Cindie: Like, that's not anything… like, that's okay, but that's not Mount Rainier, there's no lake taps, there's nothing. That could be Indiana, I don't even know where that's at.
+
+00:45:03.000 --> 00:45:05.000
+Chris: I see. Okay, I'm tracking.
+
+00:45:04.000 --> 00:45:11.000
+Cindie: There's nothing about it that shows home. There's a picture, that's Lake Taps. Boom. I just saw Lake Taps. I know that area, I know those features.
+
+00:45:10.000 --> 00:45:12.000
+Chris: Yeah.
+
+00:45:11.000 --> 00:45:21.000
+Cindie: That's actual, real stuff. There's nothing real on our… Well, those are houses. She has… the thing is, she has an IDX feed to her website, so that's probably part of the difference, though, too.
+
+00:45:21.000 --> 00:45:24.000
+Chris: She has an ID X.
+
+00:45:22.000 --> 00:45:29.000
+Cindie: IDX, yeah. Like, you can click on houses, and, like, you can't search houses on my website, that's the problem.
+
+00:45:24.000 --> 00:45:26.000
+Chris: You're gonna…
+
+00:45:29.000 --> 00:45:33.000
+Chris: Okay, we'll… and this IDX thing, so this…
+
+00:45:33.000 --> 00:45:39.000
+Chris: connects, or this search bar connects to IDX. This is one thing that I really want to PIN down during this conversation.
+
+00:45:38.000 --> 00:45:42.000
+Cindie: And the IDX is what MLS allows.
+
+00:45:42.000 --> 00:45:51.000
+Cindie: uh… websites to pull MLS data from. So, like, Redfin has an IDX attached to MLS.
+
+00:45:51.000 --> 00:45:56.000
+Cindie: Zillow has an IDX attached. Yeah, so when somebody looks for a house, then they can, like.
+
+00:45:56.000 --> 00:46:05.000
+Cindie: type in, you know, Auburn, Washington, it'll show them all the houses in Auburn, Washington that are on the MLS. So we have an IDX portal, or we can get one.
+
+00:45:57.000 --> 00:45:59.000
+Chris: I see.
+
+00:46:06.000 --> 00:46:11.000
+Cindie: But the one that we had, like, it just wasn't working right, or he didn't connect it all the way?
+
+00:46:10.000 --> 00:46:12.000
+Chris: Mm-hmm.
+
+00:46:11.000 --> 00:46:15.000
+Cindie: And so, people couldn't actually do it. But our… yeah.
+
+00:46:15.000 --> 00:46:22.000
+Cindie: We should just have an IDX attached to our website, so it just links directly to the MLS, so people can see the actual stuff that's for sale right now.
+
+00:46:23.000 --> 00:46:28.000
+Cindie: Because Zillow doesn't have the houses. There's only one way for houses to go on…
+
+00:46:28.000 --> 00:46:35.000
+Cindie: on the internet is through the MLS, and then the MLS sprays it out to every IDX that's attached to it.
+
+00:46:35.000 --> 00:46:42.000
+Cindie: And we need to get an IDX attached to our website from the MLS, we just need the portal. There's not a ton of them out there, though. No.
+
+00:46:43.000 --> 00:46:50.000
+Cindie: And a lot of them want you to, like, redirect to their website, and we don't want to redirect to their website, we just want a…
+
+00:46:47.000 --> 00:46:49.000
+Chris: Yeah, they want the traffic.
+
+00:46:50.000 --> 00:46:52.000
+Cindie: Freakin' IDX.
+
+00:46:52.000 --> 00:46:54.000
+Chris: Okay.
+
+00:46:54.000 --> 00:46:56.000
+Cindie: Does that make sense?
+
+00:46:55.000 --> 00:47:03.000
+Chris: Oh yeah, I'm tracking… I'm just trying to, uh… I'm trying to see what the, uh… what the technical implementation would be on…
+
+00:47:04.000 --> 00:47:10.000
+Chris: On my end. Is this… this is… so this is something… this is kind of what you're talking about?
+
+00:47:10.000 --> 00:47:13.000
+Cindie: Yeah. Yeah, yeah.
+
+00:47:10.000 --> 00:47:12.000
+Chris: This real estate data…
+
+00:47:12.000 --> 00:47:20.000
+Chris: Okay, and so then I would get, like, I'm not sure if API key is familiar to you, but I would just get an API key and connect to their database.
+
+00:47:20.000 --> 00:47:22.000
+Cindie: Yes.
+
+00:47:21.000 --> 00:47:23.000
+Chris: Okay. Alright.
+
+00:47:22.000 --> 00:47:31.000
+Cindie: And then, I don't know what it looks like on the back end with searching and all that stuff. Yeah, is it connected to their database that then they have to start over with theirs, and it looks purple and ours is green? Like, that's the thing.
+
+00:47:30.000 --> 00:47:35.000
+Chris: No, no, no. I would pull… you pull the data in, it's basically… you're…
+
+00:47:37.000 --> 00:47:42.000
+Chris: you use the API to request information, and then you can populate it on your website, however you want to do it.
+
+00:47:42.000 --> 00:47:45.000
+Cindie: And I know there's a delay, because.
+
+00:47:45.000 --> 00:47:50.000
+Cindie: you know, it's not like we get it instantly. It's, like, it takes a minute to, like, go through all that.
+
+00:47:48.000 --> 00:47:56.000
+Chris: You could get… you can get pretty clever with it. Um, I typically, for things like that, I load it while they get to… once they get to the home screen.
+
+00:47:56.000 --> 00:48:03.000
+Chris: I start loading things like that on the back end, so by the time they get down there, or they click on the button, it's populated already.
+
+00:48:03.000 --> 00:48:09.000
+Chris: For this, it's just a search bar already, so, you know, you can only start once they hit the search.
+
+00:48:09.000 --> 00:48:13.000
+Chris: Button, but for things that you want pre-populated, like maybe…
+
+00:48:13.000 --> 00:48:18.000
+Chris: Like, houses near them, or in a specific area, especially if you, like, if you have a service area page.
+
+00:48:18.000 --> 00:48:23.000
+Chris: You could, like, if you have a service area page for Plyallop, you could say.
+
+00:48:23.000 --> 00:48:29.000
+Chris: As soon as they get to the home page, you're like, hey, populate some available homes and pull you out on the pull-out page.
+
+00:48:29.000 --> 00:48:31.000
+Chris: Before they ever get over there.
+
+00:48:32.000 --> 00:48:36.000
+Cindie: Yeah. By the way, it's Pew Olive.
+
+00:48:35.000 --> 00:48:44.000
+Chris: Pew Olip. I've been… my wife gave up trying to fix it. I…
+
+00:48:36.000 --> 00:48:39.000
+Cindie: There you go. Okay.
+
+00:48:42.000 --> 00:48:52.000
+Cindie: Like a church pew all up. Oh, no, I think a pew is pew. Yeah, pew all up. That's… yeah, don't worry, that's how you know you're not from the area, though, if you do that, you're like…
+
+00:48:46.000 --> 00:48:48.000
+Chris: You allap.
+
+00:48:53.000 --> 00:48:58.000
+Chris: Yeah, yeah, yeah, next question, where are you from?
+
+00:48:53.000 --> 00:48:54.000
+Cindie: QEO.
+
+00:48:57.000 --> 00:49:13.000
+Cindie: Sorry, I gotta tell my story. I was, uh, shocked by a secret shopper on a phone call for assisted living a long time ago, and the person was, you know, looking for their grandma, this and that, and I was in Kent, and they were like, yeah, I'm like, where do you, you know, what's your location? He was like, I live in Pileup.
+
+00:49:13.000 --> 00:49:22.000
+Cindie: And I was like, oh, pile up? I was like, where's that? He's like, oh, it's east of you. And I was like, okay, so I started taking his address, he starts spelling it PUY, and I was like, oh, you live in Puyallup?
+
+00:49:15.000 --> 00:49:16.000
+Chris: No, no.
+
+00:49:22.000 --> 00:49:29.000
+Cindie: do you actually live in Puyallup? And he was like, I got all mad, so I called my corporate office, like, don't have people call me and use Puyallup as the.
+
+00:49:29.000 --> 00:49:35.000
+Chris: Yeah, do some… do some research first, I'm… I'm offended.
+
+00:49:29.000 --> 00:49:32.000
+Cindie: We can't, at least can't.
+
+00:49:33.000 --> 00:49:35.000
+Cindie: Yes!
+
+00:49:35.000 --> 00:49:41.000
+Cindie: He just hung that guy up to dry, and I just stabbed him while he was hanging, so… man, didn't do that to me. Anyways.
+
+00:49:37.000 --> 00:49:39.000
+Chris: Yeah.
+
+00:49:39.000 --> 00:49:41.000
+Chris: Yeah.
+
+00:49:41.000 --> 00:49:43.000
+Chris: Yes.
+
+00:49:41.000 --> 00:49:46.000
+Cindie: So, over… overall, I mean, I like it. I, yeah, just, uh, I think more…
+
+00:49:47.000 --> 00:49:50.000
+Cindie: Like, like, homey feeling, or more…
+
+00:49:49.000 --> 00:49:55.000
+Chris: make it more regional, for sure. You guys, last time you said that you liked, um…
+
+00:49:51.000 --> 00:49:53.000
+Cindie: Yeah.
+
+00:49:55.000 --> 00:49:59.000
+Chris: How personal, or like, the selling point was her.
+
+00:49:56.000 --> 00:49:58.000
+Cindie: Yeah, yeah.
+
+00:49:59.000 --> 00:50:01.000
+Cindie: Yeah.
+
+00:49:59.000 --> 00:50:06.000
+Chris: So I did something like that with you guys. Obviously, give me a new picture. If you guys want a new picture, I just pulled one from your website, I think.
+
+00:50:05.000 --> 00:50:07.000
+Cindie: I like that.
+
+00:50:06.000 --> 00:50:08.000
+Chris: Um, this…
+
+00:50:07.000 --> 00:50:11.000
+Cindie: Like, those photos, like, that's nothing, like, we don't sell those houses.
+
+00:50:11.000 --> 00:50:19.000
+Chris: Yeah, yeah. I, uh… I also… I don't know how you guys feel, but the boxiness, I don't… you know, a lot of my websites…
+
+00:50:12.000 --> 00:50:14.000
+Cindie: You know what I mean? Not realistic.
+
+00:50:20.000 --> 00:50:23.000
+Chris: I tried to get rid of the box. Uh-huh.
+
+00:50:20.000 --> 00:50:22.000
+Cindie: I like the…
+
+00:50:22.000 --> 00:50:29.000
+Cindie: I… I think… sorry, I didn't mean to cut you off, I like the softer feel, like, I don't like it as boxy, like, like you're saying, I like the round…
+
+00:50:24.000 --> 00:50:26.000
+Chris: Yep.
+
+00:50:27.000 --> 00:50:29.000
+Chris: Yeah.
+
+00:50:29.000 --> 00:50:35.000
+Cindie: curve, uh, like, like the last website, the Clover website, I like that. Yeah, the little boxes, you know, not too big.
+
+00:50:34.000 --> 00:50:36.000
+Chris: Yep.
+
+00:50:35.000 --> 00:50:38.000
+Cindie: That's… yeah, I like the small.
+
+00:50:36.000 --> 00:50:40.000
+Chris: Yeah. Yeah, all of my websites, uh…
+
+00:50:41.000 --> 00:50:43.000
+Chris: I try to stick away from…
+
+00:50:43.000 --> 00:50:47.000
+Chris: You know, from… you know, everything's kind of rounded off, and…
+
+00:50:47.000 --> 00:50:51.000
+Cindie: Yep. Have shadow boxes to, um, separate.
+
+00:50:47.000 --> 00:50:50.000
+Chris: Um, he wanted…
+
+00:50:50.000 --> 00:50:52.000
+Chris: Yeah, there's… there's… there's depth.
+
+00:50:52.000 --> 00:50:54.000
+Cindie: Yeah.
+
+00:50:53.000 --> 00:50:58.000
+Chris: And, uh, you know, rounded edges, and they kind of float on the screen. I just…
+
+00:50:58.000 --> 00:51:04.000
+Chris: When they're just, like, when they look like somebody stuck a Lego into the website, it just looks annoying to me, but it's just because I worked.
+
+00:51:05.000 --> 00:51:10.000
+Chris: I did WordPress for so long and I just hate it, like, that was just, in every WordPress website I see, I'm like, oh my god.
+
+00:51:09.000 --> 00:51:11.000
+Cindie: Oh, okay, yep.
+
+00:51:12.000 --> 00:51:14.000
+Cindie: Ugh.
+
+00:51:12.000 --> 00:51:18.000
+Chris: Um, okay, so we… so safe… safe to get rid of the boxiness of these things.
+
+00:51:17.000 --> 00:51:20.000
+Cindie: Yeah, dude, to get rid of all the boxiness.
+
+00:51:19.000 --> 00:51:22.000
+Chris: Okay, yeah, this is… and then…
+
+00:51:22.000 --> 00:51:24.000
+Chris: In terms of the content.
+
+00:51:25.000 --> 00:51:32.000
+Chris: I'm gonna obviously screw up almost all of it, so then you guys can, you know, I'm gonna… I'm gonna put what you guys have on there.
+
+00:51:32.000 --> 00:51:34.000
+Cindie: Yeah.
+
+00:51:33.000 --> 00:51:43.000
+Chris: there's obviously going to be… every single client is like, hey, you know, that's a 3-inch pipe, not a 2.5, like, you know, can you please change that, or whatever, because I'm not an expert, and…
+
+00:51:40.000 --> 00:51:42.000
+Cindie: Okay.
+
+00:51:44.000 --> 00:52:00.000
+Chris: you know, in all these fields, so when I do have something wrong, you guys can just send me a screenshot, um, or just try to, you know, just in writing, like, hey, you know, on this. The problem is always just, like, getting me on target, like, what page, and then what part of the page, and then what's wrong with the…
+
+00:51:59.000 --> 00:52:01.000
+Cindie: Right.
+
+00:52:00.000 --> 00:52:02.000
+Chris: Content, and then…
+
+00:52:01.000 --> 00:52:09.000
+Cindie: What if we just sent you, like, the guide that… we have, like, a guide that has, you know, probably 10, 15 pages of information in there.
+
+00:52:09.000 --> 00:52:12.000
+Cindie: With different pieces, would that be helpful?
+
+00:52:11.000 --> 00:52:18.000
+Chris: Yeah, I would just put it into your codebase over here as a file, and have it check that file every time it wrote something.
+
+00:52:18.000 --> 00:52:20.000
+Cindie: Yeah. Perfect.
+
+00:52:19.000 --> 00:52:21.000
+Chris: Perfect. Yep.
+
+00:52:21.000 --> 00:52:37.000
+Cindie: That's… I mean, nothing in real estate's ever, like, exact, right? And so, that's the… Yeah, those are… those are from our website, obviously. We sold those. Um, but we put… we put those in our website ourselves, so we have, like… another problem was, like, our back… we're populating things manually on the back end, which I hate.
+
+00:52:37.000 --> 00:52:47.000
+Cindie: And so when you have an IDX, the real estate data, they also have information for each real estate agent based on numbers that we have.
+
+00:52:47.000 --> 00:53:00.000
+Cindie: So if I have… my number's 109253, and so I can put that in, and that's how these websites will pull my listings, because my number's attached to my listings, if I sold it, or if I helped list it.
+
+00:53:00.000 --> 00:53:05.000
+Cindie: and then I can put, like, populate what I have sold specifically on the website through my number.
+
+00:53:05.000 --> 00:53:11.000
+Cindie: Or my, my, uh, office itself has its own number on there.
+
+00:53:10.000 --> 00:53:18.000
+Chris: That's so interesting. Yeah, I'm learning so much right now. I didn't realize it was all like that. I didn't realize they had it, uh…
+
+00:53:12.000 --> 00:53:16.000
+Cindie: Yeah. So…
+
+00:53:18.000 --> 00:53:24.000
+Chris: I didn't think, I didn't realize they had it so documented right down to basically serial codes for.
+
+00:53:24.000 --> 00:53:30.000
+Cindie: Yeah. Yeah. Yeah, so it's all… then that's… that's what the IDX feed is. It's all that information that you can pull.
+
+00:53:24.000 --> 00:53:26.000
+Chris: people.
+
+00:53:26.000 --> 00:53:28.000
+Chris: Click on.
+
+00:53:30.000 --> 00:53:35.000
+Cindie: Giving you access to that through the multiple listing database.
+
+00:53:32.000 --> 00:53:34.000
+Chris: Is…
+
+00:53:34.000 --> 00:53:44.000
+Chris: Is there anything interesting that would be useful for visitors that would keep them on the page a little bit longer that we could pull from them and display automatically on the website?
+
+00:53:44.000 --> 00:53:49.000
+Cindie: Yes. Oh yeah, dude, there's, uh… Video, like, so this is the thing, is everything's always pictures.
+
+00:53:49.000 --> 00:53:56.000
+Cindie: But, um, there's a lot of, uh, brokers out there, real estate agents, that have, like, they'll do, like, a custom page.
+
+00:53:56.000 --> 00:54:17.000
+Cindie: for their listing, okay? So I'm doing that on our current page, but it's… it's hack job central, I'm telling you, it's… it's terrible. But I've got it, so there's a whole site on my website, or his website, our website, where I have to go in and, like, load things, and… and I can't organize the photos, but if we could have something like that, where even, like, where it shows, like, our current.
+
+00:53:58.000 --> 00:54:00.000
+Chris: Mm-hmm.
+
+00:54:04.000 --> 00:54:06.000
+Chris: Oh.
+
+00:54:17.000 --> 00:54:20.000
+Cindie: If you got it, you go ahead, go ahead.
+
+00:54:18.000 --> 00:54:30.000
+Chris: I'm gonna blow your guys' mind with what I… yeah, I'm gonna… we'll just… I'll… I could create, like, an inter… like, yeah, I can create an interface for people to look at, you know, whatever, with some filtering mechanisms.
+
+00:54:30.000 --> 00:54:42.000
+Chris: And then each page, like, you could just give me, like, an identifier. Each listing, I can automatically generate a house to just be a template, but it would look good, and it'd pull the information in, and each page could have a house.
+
+00:54:42.000 --> 00:54:45.000
+Chris: then we can index those houses with Google.
+
+00:54:45.000 --> 00:54:50.000
+Chris: Over here, which really help your, um… if you keep indexing them.
+
+00:54:48.000 --> 00:54:50.000
+Cindie: Yeah.
+
+00:54:50.000 --> 00:54:52.000
+Cindie: Sorry.
+
+00:54:52.000 --> 00:54:54.000
+Chris: So…
+
+00:54:52.000 --> 00:55:07.000
+Cindie: Because we, um, yeah, because we will post, like, on community pages and stuff, like, new listing, Bonnie Lake, and the first thing is, is I want a video. Because we pay a lot of money for our videos, and if I'm not using our video, because that's what captures people now, stagnant pictures are fine, but having a video where things are, like, going quickly.
+
+00:55:04.000 --> 00:55:05.000
+Chris: Yeah.
+
+00:55:07.000 --> 00:55:09.000
+Chris: Yeah.
+
+00:55:08.000 --> 00:55:19.000
+Cindie: Um, is… is key, and so… but I want to be able to… and we have that on our current website, but we have to YouTube backlink it. So is that beneficial? Do we want to drive? Because then people have to click and then click again, so they go to our website.
+
+00:55:19.000 --> 00:55:24.000
+Cindie: for the custom house listing, and then to see the video, they gotta click to get to our YouTube page.
+
+00:55:19.000 --> 00:55:22.000
+Chris: Mm-hmm.
+
+00:55:24.000 --> 00:55:29.000
+Chris: Is the YouTube URL inside the API data for IDX?
+
+00:55:29.000 --> 00:55:34.000
+Cindie: Uh, it can be. So the IDX has… they give you 3 different places to put in.
+
+00:55:34.000 --> 00:55:39.000
+Cindie: videos, so you can have a 3D walkthrough tour that has its own.
+
+00:55:40.000 --> 00:55:49.000
+Cindie: Um… hyperlink. Everything's throughout… so in those specific instances where you have virtual tour or video, those are hyperlinks that you put in.
+
+00:55:49.000 --> 00:55:55.000
+Cindie: to the MLS, which you could access through that API key, or through the API integration.
+
+00:55:55.000 --> 00:56:08.000
+Cindie: So, and… and… but each house has a… not… not every house does it. Some houses do it, some houses don't do it, some houses put two or three on there. And the first… the first marker, I might do the YouTube video, or the first marker, I might do a 3D Zillow.
+
+00:56:08.000 --> 00:56:15.000
+Cindie: So it's not the first one's always going to be a video, or a 3D walkthrough, or a personal website.
+
+00:56:14.000 --> 00:56:19.000
+Chris: When you say… when you say the first one, do you mean, like, the first video in the…
+
+00:56:19.000 --> 00:56:21.000
+Chris: IDX.
+
+00:56:20.000 --> 00:56:31.000
+Cindie: No, when we're on the MLS, it's all a template. So there's this whole big template, and we have to put in, like, how many bedrooms do they have? Do they have a washer, a dryer? Actually, real quick. Yeah. It might be helpful if you saw what it looked like, or…
+
+00:56:31.000 --> 00:56:34.000
+Chris: Yeah, oh yeah, yeah, absolutely.
+
+00:56:33.000 --> 00:56:36.000
+Cindie: We'll log into the MLS, then you can see what it looks like.
+
+00:56:37.000 --> 00:56:39.000
+Cindie: Um…
+
+00:56:37.000 --> 00:56:45.000
+Chris: I'm just thinking about, because to do all that page stuff, it would, um, it would certainly to create us from having, um.
+
+00:56:45.000 --> 00:56:47.000
+Cindie: Do manual work.
+
+00:56:45.000 --> 00:56:51.000
+Chris: increase our workload, yeah. It'd have to be done programmatically. If it's a YouTube video.
+
+00:56:47.000 --> 00:56:49.000
+Cindie: Yeah, I don't want…
+
+00:56:49.000 --> 00:56:51.000
+Cindie: Yeah.
+
+00:56:52.000 --> 00:57:00.000
+Chris: But… I mean, AI really changed the game because it has some sort of intelligence, where you could be like, is this video matchup with this IDX information?
+
+00:57:00.000 --> 00:57:11.000
+Chris: or MLS, you know, whatever, this data, use this video for here, but if… it would be better if it was just part of the data that came through the API request, so that you could just.
+
+00:57:10.000 --> 00:57:13.000
+Cindie: Yeah, I don't have to do it again, and again.
+
+00:57:11.000 --> 00:57:24.000
+Chris: Yeah, and it doesn't matter, like, its placement or anything, I could figure out whether it was a video based off of its file type, and then just say, hey, use anything that's, like.mov or .mp4.
+
+00:57:24.000 --> 00:57:31.000
+Chris: put that on this part of the page, put all of the .jpgs, PNGs, W… in fact, I would…
+
+00:57:31.000 --> 00:57:35.000
+Chris: convert all of those images to WebP files and then display them.
+
+00:57:35.000 --> 00:57:38.000
+Cindie: Do you want to let me share my screen here real quick, and I can…
+
+00:57:36.000 --> 00:57:38.000
+Chris: Oh, sorry. Yep.
+
+00:57:38.000 --> 00:57:42.000
+Chris: Uh… host tools for sure.
+
+00:57:48.000 --> 00:57:51.000
+Chris: Okay, you should be… you should be good now.
+
+00:57:51.000 --> 00:57:54.000
+Cindie: gosh, if I don't have to re-key all this in and load photos…
+
+00:57:56.000 --> 00:57:59.000
+Cindie: Never thought about that. Can you see that, or did it… hold on, here we go, sure.
+
+00:57:58.000 --> 00:58:00.000
+Chris: Not yet, yeah, there we go.
+
+00:58:01.000 --> 00:58:06.000
+Cindie: Alright, so, like, here's a house that we have right here on our back end.
+
+00:58:07.000 --> 00:58:11.000
+Cindie: So this… They have a video out there, or they have a 3D, yeah, click on it. I'm pretty sure they do.
+
+00:58:12.000 --> 00:58:18.000
+Cindie: So here's… this is what it looks like. This is, like, the… all the information that's populated. So the MLS number, this is what…
+
+00:58:18.000 --> 00:58:21.000
+Cindie: Each house has attached to it.
+
+00:58:21.000 --> 00:58:27.000
+Cindie: And then every… everything, uh, has, like, the broker who's listing it, their number.
+
+00:58:23.000 --> 00:58:25.000
+Chris: Jesus.
+
+00:58:27.000 --> 00:58:34.000
+Cindie: the office. And then, you know, the broker itself, I have, like, an office ID number. This is the number of my office, and here's my ID number.
+
+00:58:35.000 --> 00:58:42.000
+Cindie: and then my email, website, broker license number, office number, blah blah blah. Um, so if I go into the back end, though.
+
+00:58:42.000 --> 00:58:46.000
+Cindie: this is where we fill out everything. It's just… it's a… it's a digital form.
+
+00:58:49.000 --> 00:58:51.000
+Cindie: Oops, there you go.
+
+00:58:51.000 --> 00:58:56.000
+Cindie: So, you go through this digital form, it'll have all… this is all the information that we just saw.
+
+00:58:56.000 --> 00:59:04.000
+Cindie: I have to hand-key all that in right now. Yeah, right now we're… We're gonna have to go hand-key back into the custom website, too. And so then they have these things, they call them virtual tours?
+
+00:59:04.000 --> 00:59:05.000
+Chris: Mm-hmm.
+
+00:59:04.000 --> 00:59:08.000
+Cindie: But they're actually, like, this one right here, this is a Zillow 3D tour.
+
+00:59:09.000 --> 00:59:11.000
+Chris: Oh, yeah, yeah.
+
+00:59:09.000 --> 00:59:17.000
+Cindie: YouTube video, and then if I wanted to put a third video tour in here… Custom website. Custom website or something, I can put that in here, too, so 1, 2, 3.
+
+00:59:18.000 --> 00:59:25.000
+Cindie: And then Zillow shows those on Zillow, like, do you want to see the 3D tour? Do you want to see the video? Yeah, each one of these has its own, uh…
+
+00:59:25.000 --> 00:59:30.000
+Cindie: Oops. So here, broker information, put the broker information in here.
+
+00:59:31.000 --> 00:59:40.000
+Cindie: the site listing info, so all the information. If there's HOA dues, if there's… All this will be on the… be in the IDX feed, though.
+
+00:59:39.000 --> 00:59:41.000
+Chris: Dude, this is crazy.
+
+00:59:40.000 --> 00:59:45.000
+Cindie: If it's… There's so much work to list a house, people have no idea, they think they stick a frickin'…
+
+00:59:45.000 --> 00:59:53.000
+Cindie: post in the front. There's… these are all, like, requirements. Like, if I click one thing wrong, oh my gosh. This is the problem, though, is, like.
+
+00:59:46.000 --> 00:59:48.000
+Chris: No, yeah, that's what it's…
+
+00:59:51.000 --> 00:59:59.000
+Chris: Dude, guilty is charged. This is crazy. I did not expect… I did not expect this to be this crazy.
+
+00:59:57.000 --> 01:00:07.000
+Cindie: So all of the room types, what type of room it is, where it's at, you can put dimensions in here, descriptions of each room if you wanted to. People don't really do this, because there's not really any place that they have it.
+
+01:00:07.000 --> 01:00:09.000
+Chris: Yeah.
+
+01:00:07.000 --> 01:00:13.000
+Cindie: That shows up on… I don't know why they have this in here, because you can't really see it anywhere, except for right here.
+
+01:00:13.000 --> 01:00:18.000
+Chris: Somebody wanted to just add it, so… Dude, if you just…
+
+01:00:13.000 --> 01:00:15.000
+Cindie: Uh…
+
+01:00:16.000 --> 01:00:23.000
+Cindie: there's, like, the remarks, like, what you see, like, about the house, like, we have to write that up ourselves and put it in, and… Yeah, so then here's all the remarks. So this is all the stuff that shows up on that.
+
+01:00:24.000 --> 01:00:30.000
+Cindie: On that general, uh, feed, and then once you put it all in there, then it populates all this stuff, so then we have.
+
+01:00:30.000 --> 01:00:38.000
+Cindie: And that's how you can filter on… So, if there's open houses, you'll have that in there. The history of the listing, you know, what's left. And this stuff, you can pull all this stuff, too.
+
+01:00:38.000 --> 01:00:46.000
+Cindie: this will all come through the IDX, if you allow it to, whether it's active, was it canceled at one point? Did it sell? When did it sell?
+
+01:00:47.000 --> 01:00:52.000
+Cindie: You know, owner names and numbers and history and all that stuff.
+
+01:00:52.000 --> 01:00:54.000
+Cindie: Um…
+
+01:00:54.000 --> 01:01:00.000
+Cindie: property map, flood map, so… this is where Zillow gets all their information, though, so they're, like, you know.
+
+01:01:00.000 --> 01:01:05.000
+Cindie: when you're clicking on that stuff, they're pulling it all from here. And from… and from, uh…
+
+01:01:06.000 --> 01:01:08.000
+Cindie: County records, too, is another…
+
+01:01:08.000 --> 01:01:13.000
+Chris: Who's NWMLS? Northwest MLS? Is that just a website that's…
+
+01:01:11.000 --> 01:01:13.000
+Cindie: Yes.
+
+01:01:14.000 --> 01:01:16.000
+Chris: that's…
+
+01:01:14.000 --> 01:01:25.000
+Cindie: That's… that's the… that's the, uh, the organization that collects all of it. So all of Pierce County, or I'm sorry, all of, uh, Puget Sound, basically from.
+
+01:01:25.000 --> 01:01:28.000
+Cindie: Um, Bellingham to about…
+
+01:01:28.000 --> 01:01:40.000
+Cindie: just past Chehalis, that's all one organization that lists all the houses there. But you have to be a registered… It's like a school district, basically, right? So then you… if you're a licensed agent.
+
+01:01:30.000 --> 01:01:32.000
+Chris: Mm-hmm.
+
+01:01:40.000 --> 01:01:45.000
+Cindie: Once you're licensed, then you give them your license, and you have access to this, and it tells you all the information.
+
+01:01:46.000 --> 01:01:51.000
+Chris: But everybody's siphoned into this thing, there's no, like, competitor or anything.
+
+01:01:46.000 --> 01:01:48.000
+Cindie: So if I go…
+
+01:01:48.000 --> 01:02:01.000
+Cindie: This is the marketplace for this is. Everybody gets info. So, across the… across the United States, there are… Different MLS. There's different MLSs, so if you, like.
+
+01:02:01.000 --> 01:02:08.000
+Cindie: So you can… sorry, you can see, like, there's 800 new houses here. These are all the newest listings, but if I go east.
+
+01:02:08.000 --> 01:02:14.000
+Cindie: some of these people over here in the east of the mountains, they can still list in our MLS. Our MLS area is…
+
+01:02:14.000 --> 01:02:28.000
+Cindie: is basically, like, this area right in here, right? Just along the piece of town, all the way over here. And then there's another MLS over here, and then there's another one, like, down here, and so there are, like, all these big districts of MLSs, and some of them overlap a little bit.
+
+01:02:18.000 --> 01:02:20.000
+Chris: Mm-hmm.
+
+01:02:28.000 --> 01:02:34.000
+Cindie: But each one is either owned… like, 80% of them are owned by realtors with Realtor, which is, like.
+
+01:02:34.000 --> 01:02:43.000
+Cindie: the National Association of Realtors, which is the organization of… of… basically, like, I don't even know what you call it, it's just an organization that real estate agents can be a part of or not.
+
+01:02:44.000 --> 01:02:49.000
+Cindie: But this… but this here, this is agent-owned, ours is in Northwest.
+
+01:02:49.000 --> 01:03:01.000
+Cindie: Uh, in the Northwest, so it's a non-profit organization that controls it. That's about 20% of the organizations. So we have to pay to be a part of them in order to list our listings. Yeah, so we pay to be a member.
+
+01:03:02.000 --> 01:03:04.000
+Cindie: Of this, and then we get to list it in here.
+
+01:03:04.000 --> 01:03:14.000
+Cindie: It's actually a big dispute, because, uh, is it one of the big real estate agencies, like Compass, they want to get away from that, because why does MLS get a say.
+
+01:03:14.000 --> 01:03:19.000
+Chris: Yeah, that's what I was thinking, I was like, there's no competitors, like, everybody's just forced into this.
+
+01:03:16.000 --> 01:03:28.000
+Cindie: can't get our information out unless we pay them, and then they take our information. Well, they just made it state law recently. Yeah. Legislators just said that you literally have to list it on the MLS if you're gonna be a real estate agent.
+
+01:03:29.000 --> 01:03:31.000
+Chris: Somebody's got a friend.
+
+01:03:29.000 --> 01:03:35.000
+Cindie: Yeah, dude, it's, it's… yeah, it's stupid. Anyways, that's what it is.
+
+01:03:36.000 --> 01:03:41.000
+Cindie: Um, and you can see, like, how much information's actually in there, and so this is…
+
+01:03:41.000 --> 01:03:52.000
+Cindie: People plug into this, and then, you know, then you have, like, how many days a house has been listed. But people don't have access to this. Only agents do. Yeah, but a lot of it's online. If you go to Zillow, you can get a lot of this information.
+
+01:03:48.000 --> 01:03:50.000
+Chris: Right.
+
+01:03:52.000 --> 01:03:54.000
+Cindie: Can we…
+
+01:03:52.000 --> 01:04:04.000
+Chris: Just to be clear, nobody has access to this, but you guys, but you guys can get an API to pull that information into your website, and then let people see that information through your website.
+
+01:04:04.000 --> 01:04:10.000
+Cindie: Correct. Yeah, but I mean, well, if you go to Zillow, for instance, right, then Zillow, this is…
+
+01:04:05.000 --> 01:04:07.000
+Chris: Okay, cool.
+
+01:04:08.000 --> 01:04:10.000
+Chris: Yeah.
+
+01:04:10.000 --> 01:04:17.000
+Cindie: this was on the MLS, so they just… they pulled all this information from the MLS, primarily. They used the photos from the MLS, they got the…
+
+01:04:17.000 --> 01:04:23.000
+Cindie: You know, and then… but they add their own stuff in here, so they get his estimate, you can edit your home fax, you know, like, this is what makes…
+
+01:04:23.000 --> 01:04:30.000
+Cindie: They are marketing… so Zillow, what they do, and this is, I guess, just sort of education for you, is they…
+
+01:04:30.000 --> 01:04:37.000
+Cindie: These guys here, like Cameron and Kayla, they pay $1,000 to $2,000 a month to have their names put here.
+
+01:04:37.000 --> 01:04:45.000
+Cindie: So that when people are coming to look for houses, they're just like, oh, I'm gonna go, I'm gonna contact this agent. They think that's the agent for that house. Yeah, so they contact…
+
+01:04:43.000 --> 01:04:49.000
+Chris: You guys are… I mean, you guys are kind of gonna try to do this with your providers. This is, like, a…
+
+01:04:49.000 --> 01:04:51.000
+Cindie: Yeah. It's just…
+
+01:04:49.000 --> 01:04:53.000
+Chris: So, this is a little bit of what you want to do, maybe not a thousand dollars.
+
+01:04:52.000 --> 01:04:59.000
+Cindie: This is literally what I want to see happen, yes. Exactly. I'm trying to be Zillow, Chris, that's what I… I want to be Zillow.
+
+01:04:57.000 --> 01:05:02.000
+Chris: Yes! What a horrible outcome. Oh, no!
+
+01:05:00.000 --> 01:05:14.000
+Cindie: So this… but this… all this information in here, a lot of it is pulled from the MLS, you know, so… and you want to be as transparent as possible. So, yeah, I don't know how much of that is possible within our.
+
+01:05:14.000 --> 01:05:16.000
+Cindie: Um…
+
+01:05:15.000 --> 01:05:21.000
+Chris: It shouldn't be that hard, honestly. If it's just an API call and all the data's there, um…
+
+01:05:22.000 --> 01:05:29.000
+Cindie: But, so I think that to tie back where we started was, right now, to do a custom website for our person.
+
+01:05:22.000 --> 01:05:24.000
+Chris: The…
+
+01:05:29.000 --> 01:05:34.000
+Cindie: because when I put it on a community page, I don't want to take Zillows.
+
+01:05:34.000 --> 01:05:38.000
+Cindie: Link to the… because there's no other way for…
+
+01:05:38.000 --> 01:05:45.000
+Cindie: if I go post on the buy-sell Trade Bonnie Lake, and I say, hey, we have a house for sale, click to see the pictures and the photos.
+
+01:05:45.000 --> 01:05:48.000
+Cindie: I gotta give them a link, and if our website doesn't have it.
+
+01:05:48.000 --> 01:06:00.000
+Cindie: Then I gotta go use Zillow, and I don't… We're just trying to drive traffic to our website, pretty much, is what we're doing, you know, and we want people to contact us about the house, like, that's the… Right, so I want us to have it automatically pull.
+
+01:06:00.000 --> 01:06:09.000
+Cindie: our listings, so all I have to do is go in and click the listing and say, here's the link, and do it, instead of it being where I have to go recreate it on our website right now.
+
+01:06:09.000 --> 01:06:11.000
+Chris: Mm-hmm.
+
+01:06:09.000 --> 01:06:19.000
+Cindie: when I put all that information on the MLS like you just saw, then I gotta go into a back admin page on our website, and then go now, put all the photos in, go say the name, the phone number, or not the, uh, the bedrooms, the…
+
+01:06:20.000 --> 01:06:24.000
+Cindie: So we're putting all that information in here. Can I see it again!
+
+01:06:22.000 --> 01:06:29.000
+Chris: No, I can put… if you put it in MLS and there's an API, I can auto… that'll be… the only question I have for you guys is…
+
+01:06:30.000 --> 01:06:33.000
+Chris: Do you want me to automatically…
+
+01:06:33.000 --> 01:06:44.000
+Chris: update the website with all of the newest stuff automatically without you guys doing anything? Or do you guys want to have a portal where you just type in the listing number, and then I go pull the information?
+
+01:06:39.000 --> 01:06:41.000
+Cindie: Yes.
+
+01:06:44.000 --> 01:06:48.000
+Cindie: Oh. No, I want it to… I want it to automatically update as quickly as possible.
+
+01:06:47.000 --> 01:06:51.000
+Chris: Cool, no problem. Because then I'll just… I'll just run an API call, like, every…
+
+01:06:52.000 --> 01:06:57.000
+Chris: 6 hours, basically, and say, is there something new that I don't have? If there is, please create page.
+
+01:06:57.000 --> 01:06:59.000
+Cindie: Yeah.
+
+01:06:58.000 --> 01:07:01.000
+Chris: Yeah. I do that for, uh…
+
+01:07:01.000 --> 01:07:05.000
+Chris: Andrew's websites with blogs. I have an auto-blog poster.
+
+01:07:03.000 --> 01:07:13.000
+Cindie: So, question. So, when… I'm just admin here, uh, thinking this through. So, when I put somebody live on the MLS, and I click live.
+
+01:07:06.000 --> 01:07:08.000
+Chris: Mm-hmm.
+
+01:07:13.000 --> 01:07:16.000
+Cindie: I can't wait 6 hours to get a link.
+
+01:07:16.000 --> 01:07:19.000
+Cindie: Because I need to put it on community…
+
+01:07:18.000 --> 01:07:30.000
+Chris: I could… I mean, I could… the… the time is arbitrary. I could do every 30 seconds, or every… I mean, they'll… they'll throttle us, they're not gonna let me do it every 30 seconds, but I could do, like, every 30 minutes, say.
+
+01:07:24.000 --> 01:07:26.000
+Cindie: Oh.
+
+01:07:29.000 --> 01:07:37.000
+Cindie: I can wait 30 minutes, but I could not wait 6 hours, because I gotta, like, create marketing, and I start going with it, and I need to think.
+
+01:07:36.000 --> 01:07:45.000
+Chris: Besides… besides instantaneously, when is… when do you start getting a downside, uh, at what, like, minute mark?
+
+01:07:37.000 --> 01:07:39.000
+Cindie: But that'll be a lot faster.
+
+01:07:46.000 --> 01:07:48.000
+Cindie: Would you say that one more time? I don't understand that.
+
+01:07:48.000 --> 01:07:58.000
+Chris: After, uh, besides, like, instant… like, besides pinging them, like, every 10 seconds or every second, when is… when does the… the beginning of…
+
+01:07:59.000 --> 01:08:09.000
+Chris: It taking too long to where you're, you have some sort of downside. Like, is 30 minutes still a little too long or is it like, no, there's no difference between 30 minutes and every second?
+
+01:08:10.000 --> 01:08:24.000
+Cindie: Oh yeah, but there is, definitely. People want, like, they want to see things as quickly as possible. Most, like, again, I'm just using Redfin, it's the gold standard, and they're… they're, like, basically every 5 minutes. Same with Zillow.
+
+01:08:23.000 --> 01:08:26.000
+Chris: So, that was… I was gonna suggest 5 minutes, then, yeah.
+
+01:08:25.000 --> 01:08:36.000
+Cindie: Yeah. And because also, our goal is to then… remember how he was saying earlier how we used to send people listing alerts on our old website? Like, hey, this new house just listed, and then they would click on that house.
+
+01:08:31.000 --> 01:08:33.000
+Chris: Mm-hmm.
+
+01:08:36.000 --> 01:08:43.000
+Cindie: Because we would, like, literally text message or email them, and now our website doesn't do that, but that's the other part. As soon as a new house.
+
+01:08:43.000 --> 01:08:50.000
+Cindie: Hits our website that meets their search criteria, we want to send them an automatic message.
+
+01:08:50.000 --> 01:08:58.000
+Cindie: Can you show him what that looks like? Like, I don't know, one of those auto ones? It's just, yeah, you just send them an email, basically, and you say, hey, new, new…
+
+01:08:59.000 --> 01:09:06.000
+Cindie: and there's, like, a thumbnail of it, and then… So, here, hold on, this is… we're kind of getting into area of starting to build out a CRM now, so, like, that's the…
+
+01:09:05.000 --> 01:09:15.000
+Chris: Yeah, that's always… yes, well, I mean, it's just funny, because I have accidentally done that with one of my old businesses a few years ago.
+
+01:09:15.000 --> 01:09:27.000
+Chris: Where it was just, I kept adding little things, automate this, automate that, and then before I knew it, I'd built my own CRM, and then somebody was like… I was talking to a developer, and uh, he made a joke, I didn't realize it was a running theme.
+
+01:09:27.000 --> 01:09:32.000
+Chris: uh, like, a common thing that ends up happening. I just fell into it on accident.
+
+01:09:27.000 --> 01:09:29.000
+Cindie: Okay.
+
+01:09:31.000 --> 01:09:37.000
+Cindie: Yeah, that's my thing, is because we have a whole free CRM that we can use now called Boltrail.
+
+01:09:37.000 --> 01:09:50.000
+Cindie: that has an IDX feed, it has an automatic email, it has… go to our website? It has all that stuff, yeah, but you can't get it to, like, redirect to our website, is the problem. So they're, like, making us use their ecosystem, so that's, like…
+
+01:09:49.000 --> 01:09:51.000
+Chris: Who's the… who's the CRM?
+
+01:09:51.000 --> 01:09:55.000
+Cindie: it's called… well, it was called KV Core, now it's called Bolt Trail.
+
+01:09:55.000 --> 01:10:00.000
+Cindie: Uh, or what's it? Insight real estate is another one. Inside real estate. Inside real estate.
+
+01:10:01.000 --> 01:10:12.000
+Chris: Well, uh, just in terms of just circling back to the listing thing, um, I, you know, I run a cron job, like, every minute, um, so we… I could just, every 2 minutes.
+
+01:10:12.000 --> 01:10:25.000
+Chris: It really depends on what, uh, MLS or IDX or whatever it is, depends on where they'll throttle us at, where they're like, hey, you've made too many requests today. That happens sometimes, but we'll just max that out, um, and if it's still too long, then…
+
+01:10:20.000 --> 01:10:22.000
+Cindie: Yeah.
+
+01:10:26.000 --> 01:10:28.000
+Chris: Um…
+
+01:10:28.000 --> 01:10:30.000
+Cindie: We'll pull back, whatever.
+
+01:10:28.000 --> 01:10:35.000
+Chris: I don't know how to… I don't know how… I can't think of a solution right now, but hopefully that just doesn't happen, we don't have to cross that bridge later.
+
+01:10:35.000 --> 01:10:44.000
+Cindie: Yeah. Yeah, I mean, if there's a way to, like, to automatically send emails to connect with Gmail, and it sends, like, emails of new listings, then that's, like, a whole thing.
+
+01:10:45.000 --> 01:10:47.000
+Chris: You could…
+
+01:10:45.000 --> 01:10:48.000
+Cindie: Does HubSpot integrate with that at all?
+
+01:10:47.000 --> 01:10:49.000
+Chris: Huh?
+
+01:10:48.000 --> 01:10:58.000
+Cindie: Does HubSpot integrate with that? Well, I think we already kind of talked about, like, talking with you about a new CRM anyways, because we're spending 1400 bucks a month on HubSpot.
+
+01:10:57.000 --> 01:11:03.000
+Chris: Oh, yeah, we did talk about… yeah, I used HubSpot, too, for a little while, it was stupid expensive. Um…
+
+01:11:02.000 --> 01:11:04.000
+Cindie: It is so expensive.
+
+01:11:04.000 --> 01:11:11.000
+Chris: But now with AI, I mean, one of the things that I do market, I just… I've talked to some guys about building it for them, but they're contractors, and they're just not…
+
+01:11:13.000 --> 01:11:18.000
+Chris: They just don't care enough to get a better CRM. They're just, like, you know, finishing the next job.
+
+01:11:19.000 --> 01:11:24.000
+Chris: Um, but it's building… I've built many of my own CRMs now, but it's because that…
+
+01:11:24.000 --> 01:11:29.000
+Chris: It's just not that hard anymore, it's pretty simple. Uh, and you could…
+
+01:11:27.000 --> 01:11:29.000
+Cindie: Oh, good, I'm glad you said that.
+
+01:11:29.000 --> 01:11:31.000
+Chris: Yeah, you could buy…
+
+01:11:29.000 --> 01:11:34.000
+Cindie: You're gonna go as a CRM. It's not that hard, simple.
+
+01:11:31.000 --> 01:11:40.000
+Chris: Say, it's not… it's not… yeah, I've built… I've built several… I'm building… I'm actually building… it's not a CRM necessarily, but you guys will get a link.
+
+01:11:41.000 --> 01:11:49.000
+Chris: in a few days, maybe… I mean, maybe a week or two, um, but I'm creating a portal for everybody so they can see their websites, their statistics.
+
+01:11:49.000 --> 01:11:51.000
+Cindie: Oh, cool.
+
+01:11:49.000 --> 01:11:55.000
+Chris: invoicing, all that stuff, um, and I started building that, uh, last week. I think I've spent, like.
+
+01:11:55.000 --> 01:11:58.000
+Chris: 10 hours on it, but, um…
+
+01:11:58.000 --> 01:12:01.000
+Chris: Yeah, you can get a… you can probably get a CRM built in.
+
+01:12:02.000 --> 01:12:04.000
+Chris: 20, 30 hours, like a decent one.
+
+01:12:04.000 --> 01:12:09.000
+Cindie: Yeah, that's… I don't know how complicated ours would be to build.
+
+01:12:09.000 --> 01:12:11.000
+Cindie: But that would then…
+
+01:12:11.000 --> 01:12:19.000
+Cindie: bridge that gap of what we're talking about, where, like, our CRM could talk to and pull the data, you know, our CRM has got the… so when somebody.
+
+01:12:19.000 --> 01:12:33.000
+Cindie: we're talking to a new buyer, and they're like, yeah, I'm looking for a 3-bedroom, 2-bath house in… in Bonne Lake for this price range. We could put them into our database, CRM, like, okay, this is there, and we already have their name, phone number, email address, whatever, and then as soon as something.
+
+01:12:33.000 --> 01:12:41.000
+Cindie: you know, it mirrors our website, and it says, oh, this is a new one, and it filters out, you know, the name, or I keep saying name, sorry, but city.
+
+01:12:41.000 --> 01:12:47.000
+Cindie: state. What if I just have you build a CRM, and then we just start selling it to real estate agents? Real estate agents.
+
+01:12:47.000 --> 01:12:50.000
+Chris: I didn't sell in the CRM yet.
+
+01:12:47.000 --> 01:12:53.000
+Cindie: Did you do the exact same thing that people are doing to me? That's a huge thing. Like, why not?
+
+01:12:52.000 --> 01:12:59.000
+Chris: The prop… it's easy… so the reason why HubSpots and pretty much a lot of these, like, um…
+
+01:13:00.000 --> 01:13:06.000
+Chris: Enterprise-level software for people is tanking is because it is so easy to just build your own stuff now.
+
+01:13:06.000 --> 01:13:12.000
+Chris: It is more complicated, though, when you start getting outside of personal use and you need users, um…
+
+01:13:12.000 --> 01:13:18.000
+Chris: So then, you gotta worry about authentication and permissions, and that gets, for people who are non-technical.
+
+01:13:18.000 --> 01:13:25.000
+Chris: You could probably… yeah, that gets real wiry, because then scaling your database and scaling your services, I mean.
+
+01:13:25.000 --> 01:13:32.000
+Chris: But just building a CRM that you guys are gonna use every day, um, that's, you know, that's a one-time charge.
+
+01:13:32.000 --> 01:13:36.000
+Chris: And then, boom, you have it, and then all you gotta do is pay for space wherever it lives.
+
+01:13:36.000 --> 01:13:41.000
+Cindie: Cool. Yeah, I'd be… we're, like, super interested in talking about what that looks like. Yeah.
+
+01:13:37.000 --> 01:13:39.000
+Chris: Yeah.
+
+01:13:42.000 --> 01:13:50.000
+Chris: Cool, well, we got, uh, two apps to build with some integrations, and then we can move on to CRM down the road.
+
+01:13:49.000 --> 01:13:55.000
+Cindie: Yeah. Alright, do you feel like you have somewhat of an idea of what I'm looking for on the website at this point?
+
+01:13:50.000 --> 01:13:52.000
+Chris: Yeah.
+
+01:13:55.000 --> 01:14:00.000
+Chris: Uh, yeah, let's… let's go back. Yeah, less boxy, more regional…
+
+01:14:00.000 --> 01:14:06.000
+Chris: Um… how do you feel about this… this video up here? Do you want to replace it with something?
+
+01:14:01.000 --> 01:14:03.000
+Cindie: More lively.
+
+01:14:06.000 --> 01:14:14.000
+Chris: Do you want… is there, like, a… the hero section is really the thing, I mean, a lot of people either start scrolling, but it is, like, your best foot forward.
+
+01:14:08.000 --> 01:14:10.000
+Cindie: From our website?
+
+01:14:13.000 --> 01:14:20.000
+Cindie: I think it's so big, just, uh, it takes up too much space where I'm like, I don't… sometimes I don't think about scrolling, because I'm like, what is this?
+
+01:14:19.000 --> 01:14:21.000
+Chris: That's true, yeah.
+
+01:14:20.000 --> 01:14:29.000
+Cindie: and then I start clicking, where I think if it's more of a banner, smaller on the top, and then I can see some content, it would, uh… Dude, my only thing is, I just want to convert.
+
+01:14:21.000 --> 01:14:23.000
+Chris: Okay.
+
+01:14:26.000 --> 01:14:28.000
+Chris: Yeah.
+
+01:14:29.000 --> 01:14:35.000
+Cindie: Yeah, that's true. Convert, convert, convert, that's it. That's my number one goal for my website. If it ain't converting, then it's not working, so…
+
+01:14:36.000 --> 01:14:38.000
+Cindie: That's, uh…
+
+01:14:38.000 --> 01:14:41.000
+Cindie: Whatever needs to happen to do that. Yeah, just keep it out there.
+
+01:14:41.000 --> 01:14:46.000
+Chris: Gotcha, yeah. Um, well, to that end, um…
+
+01:14:46.000 --> 01:14:48.000
+Chris: I typically…
+
+01:14:48.000 --> 01:15:01.000
+Chris: don't… never recommend to have a video in your hero section appear. That is purely based off of performance. It's… it makes your website… you're… you're indexing, so, like, where you get placed in Google.
+
+01:15:01.000 --> 01:15:03.000
+Cindie: Yeah.
+
+01:15:01.000 --> 01:15:06.000
+Chris: Is largely dependent on how much of the.
+
+01:15:06.000 --> 01:15:15.000
+Chris: you know, above the fold renders in less than 3 seconds, and it's really just compared to your competitors, and it's…
+
+01:15:15.000 --> 01:15:22.000
+Chris: And it's really… and it's mobile-first indexing, so it's like, how fast does this… how fast does the mobile version.
+
+01:15:23.000 --> 01:15:25.000
+Chris: of your website.
+
+01:15:25.000 --> 01:15:33.000
+Chris: Load, and if you have a video there, it's hard. Andrew's the only person where I did not, like, vehemently disagree with.
+
+01:15:26.000 --> 01:15:28.000
+Cindie: Yeah.
+
+01:15:33.000 --> 01:15:40.000
+Chris: And that's because he just has a genuinely unique process that people need to.
+
+01:15:39.000 --> 01:15:41.000
+Cindie: Correct.
+
+01:15:40.000 --> 01:15:47.000
+Chris: see. So I was like, okay, this is actually… this is educating your customers on exactly how their fence is going to get built.
+
+01:15:43.000 --> 01:15:45.000
+Cindie: Oh.
+
+01:15:47.000 --> 01:15:54.000
+Chris: That is different from all other fencers, like, almost nobody does this. So, he was the only person, everybody else, um…
+
+01:15:48.000 --> 01:15:50.000
+Cindie: Right.
+
+01:15:54.000 --> 01:15:58.000
+Chris: You know, have a nice picture, and…
+
+01:15:55.000 --> 01:16:02.000
+Cindie: Yeah, dude. Yeah, dump it, I don't… Yeah, I would say get rid of it, and then whatever makes it, like.
+
+01:15:58.000 --> 01:16:00.000
+Chris: Cool.
+
+01:16:02.000 --> 01:16:07.000
+Cindie: Just needs to rank, and then, um, we do want it to have a network.
+
+01:16:07.000 --> 01:16:19.000
+Cindie: like, with our networking group, we need to have some sort of plug-in with that, because my idea is to have… I think I can get everybody in our network to, like, backlink and link to the website.
+
+01:16:19.000 --> 01:16:27.000
+Cindie: if it's easy enough for them to do that for their websites. And so, I want them… I want their websites to be able to connect with my website, so that.
+
+01:16:28.000 --> 01:16:38.000
+Cindie: they can automatically, like, people can search our trusted professionals, and then, um, whenever I'm posting those or handing those out, that those will be on there as well.
+
+01:16:32.000 --> 01:16:34.000
+Chris: Mm-hmm.
+
+01:16:38.000 --> 01:16:43.000
+Cindie: Does it… I think that'll help with SEO, I'm not exactly sure, but that's…
+
+01:16:41.000 --> 01:16:44.000
+Chris: A ton. A ton, yeah. Immensely.
+
+01:16:43.000 --> 01:16:55.000
+Cindie: Yeah, ours right now is, like, such a template that if you can't search anything, it's so boxy, it's so… But I could get everybody in our group to, to, um, give me their websites, and then potentially put my website on there.
+
+01:16:56.000 --> 01:16:58.000
+Cindie: Website, too.
+
+01:16:56.000 --> 01:17:03.000
+Chris: Yeah, if they link to your website, um, those backlinks are, you know, extremely valuable if they're organic.
+
+01:17:04.000 --> 01:17:08.000
+Cindie: Yeah, I just gotta figure out how to get people to do that, so… but we'll do it.
+
+01:17:05.000 --> 01:17:06.000
+Chris: So it's great.
+
+01:17:08.000 --> 01:17:16.000
+Chris: Cool. Um, alright, well, this, this whole, you know, this website is taking care of the, you know, the fees. You guys already paid that for the month.
+
+01:17:16.000 --> 01:17:20.000
+Chris: Um, so I'll just keep working on this. I think…
+
+01:17:20.000 --> 01:17:25.000
+Chris: based off of this conversation that we just had, I can get all the way to the…
+
+01:17:25.000 --> 01:17:34.000
+Chris: Um, pulling the information in from the API, uh, probably in, like, 2 weeks, maybe a week and a half, even. Um…
+
+01:17:34.000 --> 01:17:40.000
+Chris: it just really depends. Sometimes I'll just stay down, like I did for these two, because I wanted to get this done as quickly as possible.
+
+01:17:40.000 --> 01:17:45.000
+Chris: Um, I just stayed down here till 2am a few times, and then I was like, alright, we're good, I can show them something.
+
+01:17:45.000 --> 01:17:51.000
+Chris: Um, and yeah, sometimes just get a flow, and then I just, you know, happily, you know, work my…
+
+01:17:51.000 --> 01:17:53.000
+Chris: way into…
+
+01:17:53.000 --> 01:18:00.000
+Chris: Finishing an application. Uh, for the other one, for the… for the, uh, Clover application.
+
+01:18:01.000 --> 01:18:06.000
+Chris: Are we good with this wire? Do you want me to adjust this wireframe at all?
+
+01:18:06.000 --> 01:18:11.000
+Chris: Um, outside of the stuff that we talked about, or do you want me to start? Because the next step…
+
+01:18:07.000 --> 01:18:09.000
+Cindie: No, I think we're…
+
+01:18:12.000 --> 01:18:17.000
+Chris: Is setting up the database and connecting everything and getting the full stack, and then…
+
+01:18:17.000 --> 01:18:26.000
+Chris: You know, these pages have to live on different domains, and doing the… building the actual application so we can get into the application building part of the contract.
+
+01:18:21.000 --> 01:18:23.000
+Cindie: Mm-hmm.
+
+01:18:26.000 --> 01:18:34.000
+Cindie: Yes, we would like to do that. Yeah, there was nothing I saw that was like, this guy, he doesn't know what I was talking about. It's more than anybody else.
+
+01:18:30.000 --> 01:18:32.000
+Chris: Okay.
+
+01:18:34.000 --> 01:18:36.000
+Cindie: No, it's great, thank you.
+
+01:18:35.000 --> 01:18:40.000
+Chris: Awesome. So, to that end, um…
+
+01:18:40.000 --> 01:18:48.000
+Chris: I think my quote when we first started was, you know, pretty accurate in terms of the $4,000 to $5,000 range.
+
+01:18:48.000 --> 01:18:50.000
+Chris: So, uh…
+
+01:18:50.000 --> 01:18:56.000
+Chris: For that, we'll do 4,500 if you guys are cool with that price, and then we'll split it up into 2 payments.
+
+01:18:56.000 --> 01:19:01.000
+Chris: Should be 2 grand up front, and then $2,500 when we're done, which would be…
+
+01:18:56.000 --> 01:18:58.000
+Cindie: Okay.
+
+01:19:01.000 --> 01:19:04.000
+Chris: Three-ish weeks.
+
+01:19:04.000 --> 01:19:07.000
+Cindie: Yeah, this guy's trying to charge us for his work. What are you…
+
+01:19:06.000 --> 01:19:11.000
+Chris: I got kids to feed, man!
+
+01:19:08.000 --> 01:19:10.000
+Cindie: Yeah, here. Good, Leslie.
+
+01:19:10.000 --> 01:19:14.000
+Cindie: Alright, alright, alright.
+
+01:19:13.000 --> 01:19:15.000
+Chris: Yeah, exactly.
+
+01:19:14.000 --> 01:19:20.000
+Cindie: I saw your AI daughter on there, and he's like, oh, it's my daughter. You know, like, what the…
+
+01:19:17.000 --> 01:19:19.000
+Chris: Yeah, that's fake.
+
+01:19:20.000 --> 01:19:28.000
+Chris: Oh yeah, oh yeah, she came down, I forgot about that. They do that sometimes, dude, and now they sneak up on me because I moved my desk towards the wall.
+
+01:19:23.000 --> 01:19:25.000
+Cindie: Yeah, send that.
+
+01:19:28.000 --> 01:19:36.000
+Chris: And I'm done with this setup, because now they sneak up behind me when I have my headphones on. It scares the out of me. It's so terrifying every time now.
+
+01:19:32.000 --> 01:19:34.000
+Cindie: Will they scare you?
+
+01:19:36.000 --> 01:19:46.000
+Cindie: That's my favorite thing, is scaring Andre. I love creeping in the dark. I do scare each other a lot. You don't scare me half the time. No, I jump out and scare him all the favorite thing. He's a liar.
+
+01:19:45.000 --> 01:19:50.000
+Chris: No, she's like, don't listen to her, she's crazy.
+
+01:19:47.000 --> 01:19:53.000
+Cindie: He screams, I love it. Oh my gosh, dude, she's so dramatic.
+
+01:19:53.000 --> 01:19:59.000
+Cindie: How do we pay you, dude? Let's wrap this up. I wish I got to pay you to not ever repeat that.
+
+01:19:59.000 --> 01:20:03.000
+Cindie: As soon as AI, it's in there. Oh yeah, it's in the notes now, we're done.
+
+01:20:02.000 --> 01:20:06.000
+Chris: Yeah, yeah, it's logged. It's logged forever, yep.
+
+01:20:06.000 --> 01:20:15.000
+Cindie: That'll pop up later somewhere, on a website. Yeah, send us the invoice, and then we'll get it paid, and yes, we wanna… we would love to get this to market as soon as possible, like, we're, like.
+
+01:20:07.000 --> 01:20:09.000
+Chris: Yep.
+
+01:20:15.000 --> 01:20:19.000
+Cindie: Oh, payment for not us, but for the people.
+
+01:20:19.000 --> 01:20:28.000
+Cindie: Um, so we'll use Stripe, right? And then, can I ask, is there a way to do, like, a coupon code, or… I'm just going back from the first version.
+
+01:20:20.000 --> 01:20:23.000
+Chris: Mm-hmm. Right, yep.
+
+01:20:27.000 --> 01:20:29.000
+Chris: Oh, yeah.
+
+01:20:28.000 --> 01:20:33.000
+Cindie: We talked about freemium, and then… No, no, no, I need to get people on for free.
+
+01:20:34.000 --> 01:20:37.000
+Cindie: for right now. I just need to get everybody on, no cost.
+
+01:20:36.000 --> 01:20:39.000
+Chris: You do… exactly, yeah.
+
+01:20:38.000 --> 01:20:51.000
+Cindie: And then, so whatever that code is, or then, like… like, because then moving forward, when I get new people on, I might say, like, try it free for 3 weeks, or 2 weeks, or whatever. Like, put this coupon code in, you know, free 26, and they can put that in.
+
+01:20:46.000 --> 01:20:48.000
+Chris: Yep. Mm-hmm.
+
+01:20:50.000 --> 01:20:55.000
+Chris: You just want them to start making money so they start spending some of that money back on you, yeah.
+
+01:20:54.000 --> 01:21:01.000
+Cindie: Yes, yes, yes, yes. So I need that functionality, or something, whatever your idea is for that, but I need that.
+
+01:20:55.000 --> 01:20:57.000
+Chris: Yeah. No.
+
+01:21:01.000 --> 01:21:04.000
+Chris: Okay, that's a…
+
+01:21:02.000 --> 01:21:04.000
+Cindie: That was something the other guy couldn't do.
+
+01:21:04.000 --> 01:21:06.000
+Chris: No, it's super simple implementation. There's…
+
+01:21:05.000 --> 01:21:09.000
+Cindie: He was like, we're just gonna shut it off, and then we'll have to turn it on all at once, and I'm like…
+
+01:21:08.000 --> 01:21:11.000
+Chris: No, it's just a…
+
+01:21:09.000 --> 01:21:13.000
+Cindie: Everything will void at the same time. I'm like, what?
+
+01:21:11.000 --> 01:21:18.000
+Chris: It's a field… it's a field and a column that you can check for, and if that, you know, if true.
+
+01:21:15.000 --> 01:21:17.000
+Cindie: Okay. Yeah.
+
+01:21:18.000 --> 01:21:22.000
+Chris: Keep them here for 3 weeks, I mean, it's just not… it's not that.
+
+01:21:20.000 --> 01:21:22.000
+Cindie: Yeah, perfect.
+
+01:21:22.000 --> 01:21:27.000
+Cindie: Yeah. Cool. Alright, yeah, send us the invoice and we'll get it paid, and then we'll get this started. Cool, cool.
+
+01:21:22.000 --> 01:21:24.000
+Chris: Trivial matter.
+
+01:21:27.000 --> 01:21:37.000
+Chris: Sweet, dude. I will, um… you guys, feel free, as I'm developing these, to check in any time to look at the work, um, so if you guys… listen, I'm not gonna be…
+
+01:21:34.000 --> 01:21:36.000
+Cindie: Good.
+
+01:21:37.000 --> 01:21:44.000
+Chris: feel like you guys are bothering me at all, you guys are paying for it. So if you guys wanna, like, hey, how's it looking? Can I look at it? You know, is there anything added?
+
+01:21:45.000 --> 01:21:58.000
+Chris: just let me know, and then if you guys even want to watch some of the work happen, like, especially during certain points that you genuinely care about, like, you want to make sure you get it right, you guys are, you know, I have no problem jumping on a Zoom. You will get bored watching me, because I…
+
+01:21:58.000 --> 01:22:01.000
+Chris: Doing multiple things at once, but, um…
+
+01:22:00.000 --> 01:22:08.000
+Cindie: Know that if we don't talk to you at all in the next 3 weeks, not because we don't care, it's we have so much other and I hope you're just doing what you're supposed to do. There's not a lot that I…
+
+01:22:07.000 --> 01:22:15.000
+Chris: I'll send you… I'll send you weekly updates, uh, at the very least, you'll get a weekly update, and I will post it to this, um…
+
+01:22:16.000 --> 01:22:22.000
+Chris: Sometimes it's gonna look like nothing happened, because I'm literally wiring up the back end, and getting a database set up, and getting permissions, and…
+
+01:22:19.000 --> 01:22:21.000
+Cindie: Yeah. Yep.
+
+01:22:21.000 --> 01:22:23.000
+Cindie: Nope.
+
+01:22:22.000 --> 01:22:30.000
+Chris: all of the monotonous, really dumb stuff that I don't like doing. Um, but you will be able to see, like, the front end of it.
+
+01:22:30.000 --> 01:22:33.000
+Chris: Over here for a while, I'll send you this link right now.
+
+01:22:33.000 --> 01:22:35.000
+Cindie: Good.
+
+01:22:34.000 --> 01:22:39.000
+Chris: So that you guys can, you know, take screenshots or whatever and tell me, uh… here you guys go.
+
+01:22:41.000 --> 01:22:45.000
+Cindie: Are you on a… do you be using a Mac? Is that your thing? Yeah.
+
+01:22:45.000 --> 01:22:53.000
+Chris: Yeah, I… dude, I have a ThinkPad right next to me, and I'm… oh my god, I'm surprised it's still sitting here and not in the trash, uh…
+
+01:22:54.000 --> 01:22:57.000
+Chris: But, I, uh…
+
+01:22:57.000 --> 01:23:05.000
+Chris: I want to hire my first AI employee, and I need, like, a $5,000 machine, and it's just gonna be so much better to do.
+
+01:23:05.000 --> 01:23:10.000
+Chris: on, uh, something that's not macOS, just using Linux.
+
+01:23:05.000 --> 01:23:07.000
+Cindie: Hmm.
+
+01:23:11.000 --> 01:23:16.000
+Chris: So, I mean, they're basically, they're, you know, they're… they're like sisters. Um…
+
+01:23:16.000 --> 01:23:24.000
+Chris: But, you have, like, almost no control over what's inside the Mac when you buy it. It's just, like, that's what you have forever.
+
+01:23:24.000 --> 01:23:27.000
+Chris: Whereas, as if I buy, like, a nice machine.
+
+01:23:27.000 --> 01:23:33.000
+Chris: And I can get some really good, and I can run a local model and not spend 45 bucks a day coding.
+
+01:23:33.000 --> 01:23:40.000
+Chris: Um, sometimes 100 bucks a day if I… you know, if it gets crazy. Um…
+
+01:23:40.000 --> 01:23:49.000
+Chris: I could run a local model, and it's free, but you need, like, a really expensive machine to do that. So that's my next goal, is, like, maybe in the next month or two.
+
+01:23:50.000 --> 01:23:56.000
+Chris: get a… but it's, you know, it's not gonna be Mac, unfortunately, so I'm gonna have to go back to that horrible Windows interface that I fucking hate, so…
+
+01:23:55.000 --> 01:24:03.000
+Cindie: Be careful. I love Windows. I've never used a Mac in my life, so I have nothing to say.
+
+01:24:02.000 --> 01:24:09.000
+Chris: That's the problem… yeah, it's the problem for both of us, is I've never not had a Mac, and so it's… you're just… you love what you're familiar with.
+
+01:24:09.000 --> 01:24:14.000
+Chris: Um, and at first it was, the learning curve was a little difficult, but after a while.
+
+01:24:14.000 --> 01:24:16.000
+Cindie: Yeah.
+
+01:24:14.000 --> 01:24:23.000
+Chris: I was flowing through it, you know, there was no, like, hey, where is the terminal at, or how do I search? You know, all that went away, and it wasn't that bad.
+
+01:24:23.000 --> 01:24:25.000
+Chris: So, um…
+
+01:24:24.000 --> 01:24:26.000
+Cindie: I went to an iPhone for 30 days.
+
+01:24:27.000 --> 01:24:30.000
+Cindie: And that's the only time I've ever had anything close to…
+
+01:24:29.000 --> 01:24:41.000
+Chris: dude, because of Google, I'm thinking about getting… the whole AI thing is shifting me out of Apple. Apple just, like, they decided to, like, raise the white flag with AI for some reason.
+
+01:24:30.000 --> 01:24:32.000
+Cindie: Anything.
+
+01:24:37.000 --> 01:24:39.000
+Cindie: No, yeah?
+
+01:24:41.000 --> 01:24:43.000
+Cindie: Uh…
+
+01:24:41.000 --> 01:24:46.000
+Chris: Uh, I have no, they're eventually, they have so much money, they're eventually gonna figure it out.
+
+01:24:46.000 --> 01:24:54.000
+Chris: But all of the infrastructure is on the Android, uh, HP, Dell side of things. I mean, the…
+
+01:24:50.000 --> 01:24:52.000
+Cindie: Um…
+
+01:24:54.000 --> 01:25:06.000
+Chris: all of the, uh… all of the NVIDIA chips are in those. Apple has… Apple's got really good… but it's only for Apple Intelligence, and Apple Intelligence sucks, so I don't understand why it really matters all that much.
+
+01:25:06.000 --> 01:25:08.000
+Cindie: Yeah.
+
+01:25:07.000 --> 01:25:18.000
+Chris: Um, anyways, I'm… I only bring that because I'm on the fence right now of, like, do I need to get over to the pixels? Like, just get out of this walled garden and move into a new one and just figure out how to live there?
+
+01:25:11.000 --> 01:25:13.000
+Cindie: Yeah.
+
+01:25:14.000 --> 01:25:16.000
+Cindie: Let's go.
+
+01:25:19.000 --> 01:25:21.000
+Cindie: Yeah.
+
+01:25:19.000 --> 01:25:22.000
+Chris: Yeah, I'm on the… I'm on the edge, so…
+
+01:25:22.000 --> 01:25:25.000
+Cindie: Alright, Chris, thanks. Yeah, thank you so much.
+
+01:25:23.000 --> 01:25:27.000
+Chris: Cool, thanks for… yep, of course, and uh…
+
+01:25:28.000 --> 01:25:33.000
+Chris: Yeah, we'll… we'll stay in touch and, uh, go back and forth, and I sent you the link so you guys can look at it.
+
+01:25:33.000 --> 01:25:39.000
+Cindie: Sounds good. I might have some other projects in mind at some point, too, so I might be reaching out to you about those as well.
+
+01:25:39.000 --> 01:25:42.000
+Chris: For sure. Oh, thanks for introducing me to that, uh…
+
+01:25:43.000 --> 01:25:47.000
+Chris: Lane? Lane guy, yeah. Cool. Uh…
+
+01:25:44.000 --> 01:25:46.000
+Cindie: Yeah, yeah.
+
+01:25:46.000 --> 01:25:48.000
+Cindie: Yeah, man, let me know how it goes, too.
+
+01:25:48.000 --> 01:25:52.000
+Chris: Yeah, I'll let… yeah, he… I think I'm talking to him Monday, so that'll be awesome.
+
+01:25:52.000 --> 01:25:54.000
+Cindie: Cool.
+
+01:25:53.000 --> 01:25:57.000
+Chris: Awesome. Alright guys, have a good rest of your evening, yep.
+
+01:25:54.000 --> 01:25:56.000
+Cindie: Thanks for having me.
+
+01:25:56.000 --> 01:25:58.000
+Cindie: Appreciate it. Sounds good. You too.
+
+01:25:58.000 --> 01:26:00.000
+Chris: Bye.
+

@@ -1,0 +1,18 @@
+{
+  "start_url": "https://www.onsiteregroup.com/",
+  "domain": "onsiteregroup.com",
+  "max_pages": 900,
+  "max_depth": 2,
+  "timeout": 8,
+  "retries": 1,
+  "insecure_ssl": true,
+  "visited_count": 84,
+  "page_count": 84,
+  "all_urls_count": 216,
+  "errors": {},
+  "files": {
+    "urls": "onsiteregroup_output/urls.txt",
+    "structure": "onsiteregroup_output/structure.json",
+    "pages": "onsiteregroup_output/pages.json"
+  }
+}
