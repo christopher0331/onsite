@@ -44,7 +44,8 @@ function getEmbedUrl(raw: string): string | null {
 
     // Vimeo player (already embed-ready)
     if (url.hostname === "player.vimeo.com") {
-      return raw;
+      const sep = raw.includes("?") ? "&" : "?";
+      return `${raw}${sep}autoplay=0`;
     }
 
     // Vimeo standard
@@ -52,8 +53,8 @@ function getEmbedUrl(raw: string): string | null {
       const id = url.pathname.replace("/", "").split("/")[0];
       const h = url.pathname.split("/")[2] || "";
       return h
-        ? `https://player.vimeo.com/video/${id}?h=${h}`
-        : `https://player.vimeo.com/video/${id}`;
+        ? `https://player.vimeo.com/video/${id}?h=${h}&autoplay=0`
+        : `https://player.vimeo.com/video/${id}?autoplay=0`;
     }
 
     // Matterport
@@ -98,7 +99,7 @@ async function fetchVideoListings(): Promise<Listing[]> {
         if (!url) return false;
         return getEmbedUrl(url) !== null;
       })
-      .slice(0, 10);
+      .slice(0, 6);
   } catch {
     return [];
   }
@@ -132,7 +133,7 @@ export default async function PropertyVideos() {
         </div>
 
         {/* Video grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {listings.map((listing) => {
             const rawUrl =
               listing.details.virtualTourUrl ||
@@ -145,47 +146,48 @@ export default async function PropertyVideos() {
             return (
               <div
                 key={listing.mlsNumber}
-                className="group overflow-hidden rounded-3xl bg-white/5 ring-1 ring-white/10 transition-all duration-500 hover:bg-white/8 hover:ring-white/20"
+                className="group relative aspect-video overflow-hidden rounded-2xl bg-black"
               >
-                {/* Iframe */}
-                <div className="relative aspect-video w-full overflow-hidden bg-black">
-                  <iframe
-                    src={embedUrl}
-                    title={street}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 h-full w-full"
-                    loading="lazy"
-                  />
-                </div>
+                {/* Iframe — always visible */}
+                <iframe
+                  src={embedUrl}
+                  title={street}
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full"
+                  loading="lazy"
+                />
 
-                {/* Info */}
-                <div className="flex items-start justify-between gap-4 p-5">
-                  <div className="min-w-0">
-                    <p className="truncate font-serif text-[1rem] font-light leading-snug text-white">
-                      {street}
-                    </p>
-                    <p className="mt-0.5 text-[12px] text-white/45">
-                      {listing.address.city}, {listing.address.state}
-                    </p>
-                    {(det.numBedrooms || det.numBathrooms || det.sqft) && (
-                      <div className="mt-2 flex gap-3 text-[11px] text-white/35">
-                        {det.numBedrooms && <span>{det.numBedrooms} bd</span>}
-                        {det.numBathrooms && <span>{det.numBathrooms} ba</span>}
-                        {det.sqft && <span>{Number(det.sqft).toLocaleString()} sqft</span>}
-                      </div>
-                    )}
-                  </div>
-                  <div className="shrink-0 text-right">
-                    <p className="font-serif text-[1.1rem] font-light text-white">
-                      ${listing.listPrice.toLocaleString()}
-                    </p>
-                    <Link
-                      href={`/listings/${listing.mlsNumber}`}
-                      className="mt-1 inline-block text-[10px] uppercase tracking-[0.2em] text-white/35 transition-colors duration-300 group-hover:text-white/60"
-                    >
-                      Details →
-                    </Link>
+                {/* Info overlay — hidden until hover */}
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-5 pb-5 pt-12 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                  <div className="pointer-events-auto flex items-end justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="truncate font-serif text-[0.95rem] font-light leading-snug text-white">
+                        {street}
+                      </p>
+                      <p className="text-[11px] text-white/55">
+                        {listing.address.city}, {listing.address.state}
+                        {(det.numBedrooms || det.numBathrooms) && (
+                          <span className="ml-2 text-white/35">
+                            {[
+                              det.numBedrooms && `${det.numBedrooms} bd`,
+                              det.numBathrooms && `${det.numBathrooms} ba`,
+                            ].filter(Boolean).join(" · ")}
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                    <div className="flex shrink-0 flex-col items-end gap-1">
+                      <p className="font-serif text-[1rem] font-light text-white">
+                        ${listing.listPrice.toLocaleString()}
+                      </p>
+                      <Link
+                        href={`/listings/${listing.mlsNumber}`}
+                        className="rounded-full border border-white/30 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-white/70 transition-colors hover:border-white hover:text-white"
+                      >
+                        View →
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
