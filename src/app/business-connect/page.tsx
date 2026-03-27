@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 };
 
 const quickLinks = [
-  { label: "Member Application", href: "/contact-us" },
-  { label: "MTG Attendance Check-In", href: "/contact-us" },
-  { label: "RSVP for Next Event", href: "/contact-us" },
-  { label: "Group Structure & Guidelines", href: "/contact-us" },
+  { label: "Member Application", href: "/business-connect/apply" },
+  { label: "MTG Attendance Check-In", href: "https://share-na2.hsforms.com/2n3GfbQmvScGO5M9fakRKnQ415kr0", external: true },
+  { label: "RSVP for Next Event", href: "/business-connect/rsvp" },
+  { label: "Group Structure & Guidelines", href: "/business-connect/about" },
 ];
 
 export default function BusinessConnectPage() {
@@ -53,6 +53,7 @@ export default function BusinessConnectPage() {
                   <Link
                     key={l.label}
                     href={l.href}
+                    {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className="flex items-center justify-between rounded-full border border-white/20 px-6 py-3.5 text-[12px] uppercase tracking-[0.2em] text-white/70 transition-all duration-300 hover:bg-white/10 hover:border-white/40 hover:text-white"
                   >
                     {l.label}
@@ -96,9 +97,9 @@ export default function BusinessConnectPage() {
                 },
               ].map((t, i) => (
                 <div key={t.label} className="rounded-3xl border border-charcoal/8 p-8 shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
-                  <p className="mb-4 font-serif text-[3rem] font-light leading-none text-charcoal/10">0{i + 1}</p>
-                  <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-charcoal/40">{t.label}</p>
-                  <p className="text-[15px] leading-7 text-charcoal/65">{t.description}</p>
+                  <p className="mb-4 font-serif text-[3rem] font-light leading-none text-charcoal/30">0{i + 1}</p>
+                  <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-charcoal/60">{t.label}</p>
+                  <p className="text-[15px] leading-7 text-charcoal/70">{t.description}</p>
                 </div>
               ))}
             </div>
