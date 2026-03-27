@@ -6,6 +6,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
+import MLSCardAttribution from "@/components/MLSCardAttribution";
 
 const CDN = "https://cdn.repliers.io/";
 
@@ -297,6 +298,7 @@ export default function ListingsPage() {
                             View →
                           </span>
                         </div>
+                        <MLSCardAttribution />
                       </div>
                     </Link>
                   );

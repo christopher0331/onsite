@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MLSGridTimestamp from "@/components/MLSGridTimestamp";
+import MLSCardAttribution from "@/components/MLSCardAttribution";
 
 const NWMLS_LOGO = "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png";
 
@@ -353,6 +354,7 @@ export default async function FeaturedHomeDetailPage({
                         <p className="font-serif text-[1.35rem] font-light text-charcoal">{p.price}</p>
                         <p className="text-[11px] text-charcoal/40">{p.beds} bd · {p.baths} ba · {p.sqft} sqft</p>
                       </div>
+                      <MLSCardAttribution />
                     </div>
                   </Link>
                 ))}

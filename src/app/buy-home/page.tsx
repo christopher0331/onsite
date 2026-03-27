@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
+import MLSCardAttribution from "@/components/MLSCardAttribution";
 
 export const metadata: Metadata = {
   title: "Find Your Perfect Home | Onsite Real Estate",
@@ -236,22 +237,27 @@ export default function BuyHomePage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {featuredListings.map((listing) => (
-                <Link key={listing.title} href={listing.href} className="group block">
-                  <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-[0_22px_70px_rgba(0,0,0,0.14)]">
-                    <Image
-                      src={listing.image}
-                      alt={listing.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-5 left-5 right-5">
-                      <p className="font-serif text-lg font-light text-white leading-snug mb-1">{listing.title}</p>
-                      <p className="text-[13px] text-white/70 font-medium">{listing.price}</p>
+                <div key={listing.title} className="group flex flex-col overflow-hidden rounded-3xl shadow-[0_22px_70px_rgba(0,0,0,0.14)]">
+                  <Link href={listing.href} className="block">
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <Image
+                        src={listing.image}
+                        alt={listing.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute bottom-5 left-5 right-5">
+                        <p className="font-serif text-lg font-light text-white leading-snug mb-1">{listing.title}</p>
+                        <p className="text-[13px] text-white/70 font-medium">{listing.price}</p>
+                      </div>
                     </div>
+                  </Link>
+                  <div className="bg-white px-5 pb-3">
+                    <MLSCardAttribution />
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>

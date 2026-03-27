@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
+import MLSCardAttribution from "@/components/MLSCardAttribution";
 
 export const metadata: Metadata = {
   title: "Recently Sold Homes | OnSite Real Estate Group",
@@ -213,6 +214,7 @@ export default function SoldHomesPage() {
                     ))}
                   </ul>
 
+                  <MLSCardAttribution />
                   <div className="flex items-center gap-2 text-[12px] uppercase tracking-[0.25em] text-white/50 transition-colors duration-300 group-hover:text-white">
                     View Property
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1">
@@ -272,6 +274,7 @@ export default function SoldHomesPage() {
                         </svg>
                       </div>
                     </div>
+                    <MLSCardAttribution />
                   </div>
                 </Link>
               ))}

@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MLSGridTimestamp from "@/components/MLSGridTimestamp";
+import MLSCardAttribution from "@/components/MLSCardAttribution";
 
 const CDN2 = "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0";
 
@@ -476,6 +477,7 @@ export default async function SoldHomeDetailPage({
                       <p className="font-serif text-[1.3rem] font-light text-charcoal">{p.price}</p>
                       <p className="text-[11px] text-charcoal/40">{p.daysListed} days</p>
                     </div>
+                    <MLSCardAttribution />
                   </div>
                 </Link>
               ))}
