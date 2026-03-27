@@ -109,12 +109,13 @@ export default function ListingDetailPage() {
   const [loading, setLoading] = useState(true);
   const [activeImg, setActiveImg] = useState(0);
   const [showAllPhotos, setShowAllPhotos] = useState(false);
+  const [dataRefreshedAt, setDataRefreshedAt] = useState<Date | null>(null);
 
   useEffect(() => {
     if (!mlsNumber) return;
     fetch(`/api/listings/${mlsNumber}`)
       .then((r) => r.json())
-      .then((data) => { setListing(data); setLoading(false); })
+      .then((data) => { setListing(data); setDataRefreshedAt(new Date()); setLoading(false); })
       .catch(() => setLoading(false));
   }, [mlsNumber]);
 
@@ -521,6 +522,39 @@ export default function ListingDetailPage() {
                     ← All Listings
                   </Link>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* MLS Grid / NWMLS compliance */}
+        <section className="bg-white border-t border-charcoal/8 py-10">
+          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-10">
+              <Image
+                src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png"
+                alt="NWMLS Three Trees Logo"
+                width={48}
+                height={48}
+                className="h-10 w-auto shrink-0 opacity-50"
+              />
+              <div className="space-y-2">
+                <p className="text-[12px] text-charcoal/50 font-medium">
+                  Listing data provided by NWMLS as distributed by MLS Grid.
+                  {dataRefreshedAt && (
+                    <> Data last refreshed: {dataRefreshedAt.toLocaleString("en-US", {
+                      month: "short", day: "numeric", year: "numeric",
+                      hour: "numeric", minute: "2-digit", timeZoneName: "short",
+                    })}.</>
+                  )}
+                </p>
+                <p className="text-[11px] leading-[1.8] text-charcoal/35 max-w-4xl">
+                  IDX information is provided exclusively for consumers&apos; personal noncommercial use, that it may not be
+                  used for any purpose other than to identify prospective properties consumers may be interested in
+                  purchasing, that the data is deemed reliable but is not guaranteed by MLS GRID, and that the use of
+                  the MLS GRID Data may be subject to an end user license agreement prescribed by the Member
+                  Participant&apos;s applicable MLS if any and as amended from time to time.
+                </p>
               </div>
             </div>
           </div>

@@ -10,6 +10,7 @@ const companyLinks = [
   { label: "Contact", href: "/contact-us" },
   { label: "Insights", href: "/trends-insights" },
   { label: "Home Evaluation", href: "/free-home-evaluation" },
+  { label: "Terms of Service", href: "/terms-of-service" },
   { label: "DMCA Notice", href: "/dmca-notice" },
 ];
 
@@ -168,27 +169,39 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 pt-10 border-t border-white/[0.06]">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-            <div className="flex items-center gap-6">
-              <Image
-                src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png"
-                alt="Three Trees Icon"
-                width={48}
-                height={48}
-                className="h-10 w-auto opacity-40"
-              />
-              <Image
-                src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bd6eeff6f396fc12e48_Equal-Housing-Realtor_gray50.png"
-                alt="Equal Housing Realtor"
-                width={80}
-                height={40}
-                className="h-10 w-auto opacity-40"
-              />
-              <p className="text-[12px] text-white/25 leading-relaxed max-w-md hidden lg:block">
-                All information deemed reliable but not guaranteed and should be
-                independently reviewed and verified.
-              </p>
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+              <div className="flex items-center gap-6">
+                <Image
+                  src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png"
+                  alt="NWMLS Three Trees Logo"
+                  width={48}
+                  height={48}
+                  className="h-10 w-auto opacity-60"
+                />
+                <Image
+                  src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bd6eeff6f396fc12e48_Equal-Housing-Realtor_gray50.png"
+                  alt="Equal Housing Realtor"
+                  width={80}
+                  height={40}
+                  className="h-10 w-auto opacity-40"
+                />
+                <p className="text-[12px] text-white/40 leading-relaxed">
+                  Listing data provided by NWMLS as distributed by MLS Grid.
+                </p>
+              </div>
             </div>
+
+            <p className="text-[11px] text-white/20 leading-[1.8] max-w-4xl">
+              IDX information is provided exclusively for consumers&apos; personal
+              noncommercial use, that it may not be used for any purpose other
+              than to identify prospective properties consumers may be interested
+              in purchasing, that the data is deemed reliable but is not
+              guaranteed by MLS GRID, and that the use of the MLS GRID Data may
+              be subject to an end user license agreement prescribed by the
+              Member Participant&apos;s applicable MLS if any and as amended from
+              time to time.
+            </p>
           </div>
         </div>
       </div>
@@ -201,6 +214,13 @@ export default function Footer() {
               Rights Reserved
             </p>
             <div className="flex items-center gap-6">
+              <Link
+                href="/terms-of-service"
+                className="text-[12px] text-white/25 hover:text-white/50 transition-colors"
+              >
+                Terms of Service
+              </Link>
+              <span className="text-white/10">|</span>
               <Link
                 href="/dmca-notice"
                 className="text-[12px] text-white/25 hover:text-white/50 transition-colors"
