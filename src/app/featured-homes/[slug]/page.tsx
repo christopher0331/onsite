@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
+import MLSGridTimestamp from "@/components/MLSGridTimestamp";
 
 const NWMLS_LOGO = "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png";
 
@@ -407,6 +408,7 @@ export default async function FeaturedHomeDetailPage({
               <div className="space-y-2">
                 <p className="text-[12px] text-charcoal/50 font-medium">
                   Listing data provided by NWMLS as distributed by MLS Grid.
+                  <MLSGridTimestamp />
                 </p>
                 <p className="text-[11px] leading-[1.8] text-charcoal/35 max-w-4xl">
                   IDX information is provided exclusively for consumers&apos; personal noncommercial use, that it may not be

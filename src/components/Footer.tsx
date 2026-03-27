@@ -186,13 +186,13 @@ export default function Footer() {
                   height={40}
                   className="h-10 w-auto opacity-40"
                 />
-                <p className="text-[12px] text-white/40 leading-relaxed">
+                <p className="text-[12px] text-white/70 leading-relaxed">
                   Listing data provided by NWMLS as distributed by MLS Grid.
                 </p>
               </div>
             </div>
 
-            <p className="text-[11px] text-white/20 leading-[1.8] max-w-4xl">
+            <p className="text-[11px] text-white/60 leading-[1.8] max-w-4xl">
               IDX information is provided exclusively for consumers&apos; personal
               noncommercial use, that it may not be used for any purpose other
               than to identify prospective properties consumers may be interested
