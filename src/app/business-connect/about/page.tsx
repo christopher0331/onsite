@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -224,23 +223,11 @@ export default function BusinessConnectAboutPage() {
 
               {/* Photos — right */}
               <div className="lg:col-span-5 flex flex-col gap-4">
-                <div className="relative aspect-square overflow-hidden rounded-3xl">
-                  <Image
-                    src="https://www.go.onsiteregroup.com/hubfs/20251112_081512.jpg"
-                    alt="TBC Meeting"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                  />
+                <div className="aspect-square overflow-hidden rounded-3xl bg-[#e8e0d5] flex items-center justify-center">
+                  <span className="text-[11px] uppercase tracking-[0.3em] text-charcoal/30">Monthly Meeting</span>
                 </div>
-                <div className="relative aspect-[4/1] overflow-hidden rounded-2xl">
-                  <Image
-                    src="https://www.go.onsiteregroup.com/hs-fs/hubfs/Tapps%20Business%20Connect/TBC%20CAC/20251023_160646.jpeg"
-                    alt="Connections After Close"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                  />
+                <div className="aspect-[4/1] overflow-hidden rounded-2xl bg-[#ddd5c8] flex items-center justify-center">
+                  <span className="text-[11px] uppercase tracking-[0.3em] text-charcoal/30">Connections After Close</span>
                 </div>
               </div>
 
@@ -252,20 +239,10 @@ export default function BusinessConnectAboutPage() {
         <section className="bg-[#1a1a18] py-20 sm:py-28">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
 
-            {/* Wide event photo */}
-            <div className="mb-16 relative aspect-[4/1] min-h-[180px] overflow-hidden rounded-3xl">
-              <Image
-                src="https://www.go.onsiteregroup.com/hs-fs/hubfs/Tapps%20Business%20Connect/TBC%20CAC/20251023_160943.jpeg"
-                alt="TBC Event"
-                fill
-                className="object-cover"
-                sizes="100vw"
-              />
-              <div className="absolute inset-0 bg-black/30" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-                <p className="text-[11px] uppercase tracking-[0.35em] text-white/60 mb-4">Tapps Business Connect</p>
-                <h2 className="font-serif text-[clamp(1.8rem,4vw,3rem)] font-light text-white">Stronger Business. Trusted Referrals.</h2>
-              </div>
+            {/* Wide event banner */}
+            <div className="mb-16 aspect-[4/1] min-h-[180px] overflow-hidden rounded-3xl bg-[#242420] flex flex-col items-center justify-center text-center px-6">
+              <p className="text-[11px] uppercase tracking-[0.35em] text-white/40 mb-4">Tapps Business Connect</p>
+              <h2 className="font-serif text-[clamp(1.8rem,4vw,3rem)] font-light text-white">Stronger Business. Trusted Referrals.</h2>
             </div>
 
             {/* Photos + feature list */}
@@ -273,32 +250,14 @@ export default function BusinessConnectAboutPage() {
 
               {/* Photo collage */}
               <div className="lg:col-span-5 grid grid-cols-2 gap-3">
-                <div className="relative col-span-2 aspect-video overflow-hidden rounded-2xl">
-                  <Image
-                    src="https://www.go.onsiteregroup.com/hs-fs/hubfs/Tapps%20Business%20Connect/20251008_091224.jpg"
-                    alt="TBC members"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                  />
+                <div className="col-span-2 aspect-video overflow-hidden rounded-2xl bg-[#2a2a27] flex items-center justify-center">
+                  <span className="text-[11px] uppercase tracking-[0.3em] text-white/20">TBC Members</span>
                 </div>
-                <div className="relative aspect-square overflow-hidden rounded-2xl">
-                  <Image
-                    src="https://www.go.onsiteregroup.com/hubfs/20250925_170825.jpg"
-                    alt="TBC networking"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 50vw, 20vw"
-                  />
+                <div className="aspect-square overflow-hidden rounded-2xl bg-[#242420] flex items-center justify-center">
+                  <span className="text-[11px] uppercase tracking-[0.3em] text-white/20">Networking</span>
                 </div>
-                <div className="relative aspect-square overflow-hidden rounded-2xl">
-                  <Image
-                    src="https://www.go.onsiteregroup.com/hs-fs/hubfs/20250925_155538.jpg"
-                    alt="TBC after close"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 50vw, 20vw"
-                  />
+                <div className="aspect-square overflow-hidden rounded-2xl bg-[#2e2e2a] flex items-center justify-center">
+                  <span className="text-[11px] uppercase tracking-[0.3em] text-white/20">After Close</span>
                 </div>
               </div>
 
