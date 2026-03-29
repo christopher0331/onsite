@@ -21,14 +21,13 @@ function MemberCard({ member }: { member: Member }) {
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
-        {/* Category badge */}
-        <span className="absolute left-4 top-4 rounded-full bg-white/15 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-white backdrop-blur-sm border border-white/20">
-          {member.category}
-        </span>
       </div>
       {/* Info */}
       <div className="flex flex-1 flex-col justify-between bg-white p-6">
         <div>
+          <span className="mb-2 inline-block rounded-full border border-charcoal/12 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-charcoal/40">
+            {member.category}
+          </span>
           <h3 className="font-serif text-[1.15rem] font-light leading-snug text-charcoal">{member.name}</h3>
           <p className="mt-1 text-[12px] uppercase tracking-[0.15em] text-charcoal/45">{member.company}</p>
         </div>

@@ -152,27 +152,6 @@ export const allMembers: Member[] = [
     bio: "I'm Lesa Say, Sales Director at Rain City, bringing nearly two decades of experience in real estate as a lender, realtor, and investor. As Rain City's top producer, I've built my career around strong client advocacy and a deep commitment to helping borrowers succeed. Clients know me for being responsive, solution-oriented, and relentless in finding the best path forward — especially when a deal requires creativity or fast problem-solving. I believe in showing up, communicating clearly, and going the extra mile to deliver results that truly make a difference.",
   },
   {
-    slug: "casey-langford-caseys-professional-cleaning",
-    name: "Casey Langford",
-    company: "Casey's Professional Cleaning",
-    categorySlug: "home-services",
-    category: "Home Services",
-    specialty: "Professional Cleaning Services",
-    photo: `${CDN2}/695d3e069dc5df8f8aaba660_7f4aa78e-f7a3-42df-9e5b-a471dc9c038e-2-174887254tbc_formal_headshot-IMG_2134-fd99a9.jpeg`,
-    photos: [
-      `${CDN2}/695d3e069dc5df8f8aaba660_7f4aa78e-f7a3-42df-9e5b-a471dc9c038e-2-174887254tbc_formal_headshot-IMG_2134-fd99a9.jpeg`,
-      `${CDN2}/695d3e2b742925db3dc1bae4_7f4aa78e-f7a3-42df-9e5b-a471dc9c038e-2-174887254business_logo-IMG_4648-457f70.jpeg`,
-      `${CDN2}/695d3e771364631086eac5ec_7f4aa78e-f7a3-42df-9e5b-a471dc9c038e-2-174887254marketing_photo_1-IMG_4973-388e22.jpeg`,
-    ],
-    phone: "253-285-5664",
-    website: "",
-    facebook: "https://www.facebook.com/share/1Ccc16tox9/?mibextid=wwXIfr",
-    instagram: "",
-    linkedin: "",
-    tiktok: "",
-    bio: "Here at Casey's Professional Cleaning services we pride ourselves on being consistent, having great communication, and accountability with providing top notch service. We offer regular maintenance cleanings, move in/out, prep to sell, construction and one time detail cleans. We also offer light organizing and laundry pick up/drop off services. We're also able to pick up/drop off dry cleaning. We service a wide area from South Olympia to West Seattle bridges, Port Orchard or Ravensdale.",
-  },
-  {
     slug: "eva-armas-ecohaul-solutions",
     name: "Eva Armas",
     company: "EcoHaul Solutions",
@@ -491,28 +470,6 @@ export const allMembers: Member[] = [
     bio: "Eikon Homes is the South Sound's premier full-service design & build contractor. We're not just builders — we're craftsmen, creators, and partners in bringing your vision to life. Every project is designed with precision, built with integrity, and managed with care from start to finish. Our clients choose Eikon Homes because we deliver a luxury-level remodeling experience — combining transparent communication, meticulous cleanliness practices, and flawless attention to detail.",
   },
 
-  // ── LIFESTYLE & PERSONAL SERVICES ─────────────────────────────────────────
-  {
-    slug: "luke-moyer-moyer-production-co",
-    name: "Luke Moyer",
-    company: "Moyer Production Co",
-    categorySlug: "lifestyle-personal-services",
-    category: "Lifestyle & Personal Services",
-    specialty: "Business Photography, Video and Media Production",
-    photo: `${CDN2}/6913b0152c37b3c159af8257_moyer.jpg`,
-    photos: [
-      `${CDN2}/6913b0152c37b3c159af8257_moyer.jpg`,
-      `${CDN2}/6913b062a216276cb342d236_78fd9fa0-29f2-4ea7-84c8-be3929f95d32-2-174887254business_logo-Big%20guy%20new-01.png`,
-      `${CDN2}/6913b103a216276cb342ea8d_m1.jpg`,
-    ],
-    phone: "702-882-4874",
-    website: "https://moyerproduction.com",
-    facebook: "https://www.facebook.com/MoyerEventProductionCo",
-    instagram: "https://www.instagram.com/moyerproductionco/",
-    linkedin: "https://www.linkedin.com/in/moyerproduction",
-    tiktok: "https://www.tiktok.com/@moyerproduction",
-    bio: "We're Luke and Bianca Moyer, the husband and wife team behind Moyer Production Co., serving small businesses across Washington State, with a main focus on Pierce County. We help local businesses stand out with professional photography, videography, and social media management that actually drive results. Luke handles all things photo and video, bringing years of experience and a Navy media background, while Bianca focuses on social media strategy and management — helping clients stay active and consistent online.",
-  },
 ];
 
 // Helpers
