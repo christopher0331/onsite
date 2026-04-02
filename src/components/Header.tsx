@@ -76,6 +76,16 @@ export default function Header() {
                   {item.label}
                 </Link>
               ))}
+              <Link
+                href="/business-connect"
+                className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-300 hover:opacity-80 ${
+                  scrolled
+                    ? "border-charcoal/30 text-charcoal hover:bg-charcoal hover:text-white hover:border-charcoal"
+                    : "border-white/40 text-white hover:bg-white/10"
+                }`}
+              >
+                TBC
+              </Link>
               <a
                 href="tel:253-441-9764"
                 className={`text-[13px] font-medium tracking-[0.1em] transition-colors duration-300 hover:opacity-60 ${
@@ -144,6 +154,13 @@ export default function Header() {
                   {item.label}
                 </Link>
               ))}
+              <Link
+                href="/business-connect"
+                onClick={() => setMobileOpen(false)}
+                className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-2.5 text-[12px] uppercase tracking-[0.2em] text-white/80 hover:text-white hover:border-white/70 transition-colors"
+              >
+                Tapps Business Connect
+              </Link>
               <div className="w-12 h-px bg-white/20 my-2" />
               {sellingProcessLinks.slice(0, 4).map((item) => (
                 <Link

@@ -24,16 +24,45 @@ const contactMethods = [
   },
 ];
 
-type FormState = "idle" | "success" | "error";
+type FormState = "idle" | "loading" | "success" | "error";
 
 export default function ContactUsPage() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [topic, setTopic] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Placeholder — wire to real endpoint when ready
-    setFormState("success");
+    setFormState("loading");
+    setErrorMsg("");
+
+    const form = e.currentTarget;
+    const data = {
+      firstName: (form.elements.namedItem("firstName") as HTMLInputElement).value,
+      lastName: (form.elements.namedItem("lastName") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+      topic,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        setFormState("success");
+      } else {
+        const json = await res.json().catch(() => ({}));
+        setErrorMsg(json.error ?? "Something went wrong. Please try again.");
+        setFormState("error");
+      }
+    } catch {
+      setErrorMsg("Network error. Please check your connection and try again.");
+      setFormState("error");
+    }
   }
 
   return (
@@ -153,6 +182,7 @@ export default function ContactUsPage() {
                         <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/50">First Name</label>
                         <input
                           type="text"
+                          name="firstName"
                           required
                           className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                           placeholder="First"
@@ -162,6 +192,7 @@ export default function ContactUsPage() {
                         <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/50">Last Name</label>
                         <input
                           type="text"
+                          name="lastName"
                           required
                           className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                           placeholder="Last"
@@ -173,6 +204,7 @@ export default function ContactUsPage() {
                       <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/50">Email</label>
                       <input
                         type="email"
+                        name="email"
                         required
                         className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                         placeholder="you@email.com"
@@ -183,6 +215,7 @@ export default function ContactUsPage() {
                       <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/50">Phone</label>
                       <input
                         type="tel"
+                        name="phone"
                         className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                         placeholder="(253) 000-0000"
                       />
@@ -212,6 +245,7 @@ export default function ContactUsPage() {
                     <div className="flex flex-col gap-2">
                       <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/50">Message</label>
                       <textarea
+                        name="message"
                         rows={4}
                         className="bg-white border border-charcoal/[0.12] rounded-2xl px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors resize-none"
                         placeholder="Tell us a little about what you're looking for..."
@@ -219,14 +253,15 @@ export default function ContactUsPage() {
                     </div>
 
                     {formState === "error" && (
-                      <p className="text-[13px] text-red-500">Something went wrong. Please try again.</p>
+                      <p className="text-[13px] text-red-500">{errorMsg}</p>
                     )}
 
                     <button
                       type="submit"
-                      className="w-full bg-charcoal text-white py-4 rounded-full text-[12px] uppercase tracking-[0.25em] hover:bg-charcoal/80 transition-all duration-500"
+                      disabled={formState === "loading"}
+                      className="w-full bg-charcoal text-white py-4 rounded-full text-[12px] uppercase tracking-[0.25em] hover:bg-charcoal/80 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Send Message
+                      {formState === "loading" ? "Sending..." : "Send Message"}
                     </button>
                   </form>
                 )}

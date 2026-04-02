@@ -184,21 +184,10 @@ export default async function MemberProfilePage({
                 </div>
               </div>
 
-              {/* Gallery + details */}
-              <div className="lg:col-span-5 space-y-5">
-                {galleryPhotos.map((img, i) => (
-                  <div key={img} className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-                    <Image
-                      src={img}
-                      alt={`${m.company} — photo ${i + 2}`}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 40vw"
-                    />
-                  </div>
-                ))}
+              {/* Details + gallery */}
+              <div className="lg:col-span-5 lg:sticky lg:top-28 lg:self-start space-y-5">
 
-                {/* Details card */}
+                {/* Details card — always at top */}
                 <div className="rounded-3xl bg-[#f2ede6] p-7">
                   <p className="mb-5 text-[11px] uppercase tracking-[0.3em] text-charcoal/50">Contact</p>
                   <dl className="space-y-4">
@@ -209,8 +198,8 @@ export default async function MemberProfilePage({
                       ...(m.phone ? [{ label: "Phone", value: m.phone }] : []),
                     ].map(({ label, value }) => (
                       <div key={label} className="flex items-baseline justify-between border-b border-charcoal/8 pb-4 last:border-0 last:pb-0">
-                        <dt className="text-[11px] uppercase tracking-[0.2em] text-charcoal/45">{label}</dt>
-                        <dd className="font-serif text-[0.95rem] font-light text-charcoal text-right max-w-[60%]">{value}</dd>
+                        <dt className="text-[12px] font-medium text-charcoal/60">{label}</dt>
+                        <dd className="text-[14px] text-charcoal text-right max-w-[60%]">{value}</dd>
                       </div>
                     ))}
                   </dl>
@@ -228,6 +217,19 @@ export default async function MemberProfilePage({
                     </a>
                   )}
                 </div>
+
+                {/* Gallery photos below details */}
+                {galleryPhotos.map((img, i) => (
+                  <div key={img} className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+                    <Image
+                      src={img}
+                      alt={`${m.company} — photo ${i + 2}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>

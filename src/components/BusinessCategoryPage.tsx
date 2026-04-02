@@ -88,7 +88,7 @@ export default function BusinessCategoryPage({ categorySlug, title, description,
                     </h2>
                   </div>
                   <Link
-                    href="/contact-us"
+                    href="/business-connect/apply"
                     className="hidden sm:inline-flex items-center gap-2 rounded-full border border-charcoal/20 px-6 py-3 text-[12px] uppercase tracking-[0.2em] text-charcoal transition-all duration-300 hover:bg-charcoal hover:text-white"
                   >
                     Apply to Join

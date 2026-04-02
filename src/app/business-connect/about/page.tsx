@@ -89,7 +89,7 @@ const accordions = [
         <p className="mt-4">Membership is earned — and for the right businesses, it becomes a powerful community of support, referrals, and shared growth.</p>
         <div className="mt-6">
           <Link
-            href="/contact-us"
+            href="/business-connect/apply"
             className="inline-flex items-center rounded-full bg-charcoal px-7 py-3.5 text-[12px] uppercase tracking-[0.25em] text-white transition-all duration-300 hover:bg-charcoal/85"
           >
             Start Your Application

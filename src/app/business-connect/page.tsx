@@ -106,6 +106,90 @@ export default function BusinessConnectPage() {
           </div>
         </section>
 
+        {/* Our Events — linen */}
+        <section className="bg-[#f2ede6] py-20 sm:py-28">
+          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+            <div className="mb-14 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-end">
+              <div>
+                <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-mid-gray">How We Meet</p>
+                <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light leading-[1.08] text-charcoal">
+                  Two Ways to Connect.
+                </h2>
+              </div>
+              <div className="flex flex-col gap-4 lg:items-end">
+                <p className="text-[15px] leading-7 text-charcoal/60 lg:text-right">
+                  Both events require an RSVP — seating is limited by design.
+                </p>
+                <Link
+                  href="/business-connect/rsvp"
+                  className="inline-flex items-center gap-3 rounded-full bg-charcoal px-8 py-4 text-[12px] uppercase tracking-[0.25em] text-white transition-all duration-500 hover:bg-charcoal/85"
+                >
+                  RSVP Required — Reserve Your Spot
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5">
+                    <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {/* Monthly Morning Members Meeting */}
+              <div className="rounded-3xl bg-white p-10 shadow-[0_8px_32px_rgba(0,0,0,0.06)]">
+                <p className="mb-4 font-serif text-[3rem] font-light leading-none text-charcoal/10">01</p>
+                <h3 className="mb-3 font-serif text-[1.5rem] font-light leading-snug text-charcoal">Monthly Morning<br />Members Meeting (M4)</h3>
+                <p className="mb-6 text-[14px] leading-7 text-charcoal/60">
+                  Once per month. Designed for Members and Guests in open industry seats. Includes structured networking, educational segments, referral sharing, and accountability updates. Seating intentionally limited.
+                </p>
+                <div className="flex items-center gap-3 rounded-2xl border border-charcoal/10 bg-[#f2ede6] px-5 py-3">
+                  <span className="h-2 w-2 rounded-full bg-charcoal/30 shrink-0" />
+                  <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-charcoal/60">RSVP Required</p>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href="/business-connect/rsvp"
+                    className="inline-flex items-center gap-2 rounded-full bg-charcoal px-6 py-3 text-[12px] uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-charcoal/85"
+                  >
+                    RSVP as Guest
+                  </Link>
+                  <Link
+                    href="/business-connect/rsvp"
+                    className="inline-flex items-center gap-2 rounded-full border border-charcoal/20 px-6 py-3 text-[12px] uppercase tracking-[0.2em] text-charcoal transition-all duration-300 hover:bg-charcoal hover:text-white"
+                  >
+                    RSVP as Member
+                  </Link>
+                </div>
+              </div>
+
+              {/* Connections After Close */}
+              <div className="rounded-3xl bg-[#1a1a18] p-10">
+                <p className="mb-4 font-serif text-[3rem] font-light leading-none text-white/10">02</p>
+                <h3 className="mb-3 font-serif text-[1.5rem] font-light leading-snug text-white">Connections<br />After Close (CAC)</h3>
+                <p className="mb-6 text-[14px] leading-7 text-white/55">
+                  Once per month, hosted by a TBC Member. Open to Members, Guests, and Affiliates. No industry seat restrictions — focused on building relationships in a relaxed, after-hours setting.
+                </p>
+                <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-3">
+                  <span className="h-2 w-2 rounded-full bg-white/30 shrink-0" />
+                  <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-white/60">RSVP Required</p>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href="/business-connect/rsvp"
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[12px] uppercase tracking-[0.2em] text-charcoal transition-all duration-300 hover:bg-white/90"
+                  >
+                    RSVP as Member / Affiliate
+                  </Link>
+                  <Link
+                    href="/business-connect/rsvp"
+                    className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-[12px] uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-white/10"
+                  >
+                    RSVP as Guest
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Categories — linen */}
         <section className="bg-[#f2ede6] py-20 sm:py-28">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
