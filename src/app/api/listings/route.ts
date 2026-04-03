@@ -22,6 +22,11 @@ export async function GET(req: NextRequest) {
     state: "WA",
   });
 
+  // When fetching sold listings, filter to actual sales only
+  if (status === "U") {
+    params.set("lastStatus", "Sld");
+  }
+
   if (agentOnly) {
     params.set("agentLicense", AGENT_LICENSE);
   } else {

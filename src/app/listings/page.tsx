@@ -214,15 +214,20 @@ export default function ListingsPage() {
       if (maxPrice) params.set("maxPrice", maxPrice);
 
       const marketFetch = fetch(`/api/listings?${params}`).then((r) => r.json());
-      const pinnedFetches = PINNED_UNDISCLOSED.map((mls) =>
-        fetch(`/api/listings/${mls}`).then((r) => r.json()).catch(() => null)
-      );
+
+      // Only inject pinned undisclosed listings when viewing Active
+      const pinnedFetches = status === "A"
+        ? PINNED_UNDISCLOSED.map((mls) =>
+            fetch(`/api/listings/${mls}`).then((r) => r.json()).catch(() => null)
+          )
+        : [];
 
       Promise.all([marketFetch, ...pinnedFetches])
         .then(([data, ...pinnedResults]) => {
           const market: Listing[] = (data as ApiResponse).listings || [];
           const pinned: Listing[] = pinnedResults
             .filter((p): p is Listing => p !== null && !p.error)
+            .filter((p) => p.status === status)
             .filter((p) => !market.find((m) => m.mlsNumber === p.mlsNumber));
           setListings([...pinned, ...market]);
           setCount((data as ApiResponse).count || 0);
