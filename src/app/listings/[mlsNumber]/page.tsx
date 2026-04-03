@@ -58,6 +58,7 @@ type Listing = {
   soldPrice: number | null;
   originalPrice: number | null;
   listDate: string;
+  soldDate: string | null;
   daysOnMarket: number;
   simpleDaysOnMarket: number;
   address: {
@@ -289,12 +290,34 @@ export default function ListingDetailPage() {
               </div>
 
               <div className="shrink-0 text-right">
-                <p className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-none text-white">
-                  {formatPrice(listing.listPrice)}
-                </p>
-                {listing.soldPrice && (
-                  <p className="mt-1 text-[13px] text-white/50">
-                    Sold: {formatPrice(listing.soldPrice)}
+                {listing.soldPrice ? (
+                  <>
+                    <p className="text-[12px] uppercase tracking-[0.2em] text-white/50 mb-1">Sold</p>
+                    <p className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-none text-white">
+                      {formatPrice(listing.soldPrice)}
+                    </p>
+                    <p className="mt-2 text-[14px] text-white/70">
+                      Listed: {formatPrice(listing.listPrice)}
+                    </p>
+                    {(() => {
+                      const diff = listing.soldPrice! - listing.listPrice;
+                      const absDiff = Math.abs(diff);
+                      if (absDiff < 100) return null;
+                      return (
+                        <p className={`mt-1 text-[13px] font-medium ${diff > 0 ? "text-green-400" : "text-red-400"}`}>
+                          {diff > 0 ? "▲" : "▼"} {formatPrice(absDiff)} {diff > 0 ? "above" : "below"} asking
+                        </p>
+                      );
+                    })()}
+                    {listing.soldDate && (
+                      <p className="mt-2 text-[13px] text-white/60">
+                        Sale date: {new Date(listing.soldDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <p className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-none text-white">
+                    {formatPrice(listing.listPrice)}
                   </p>
                 )}
                 <p className="mt-2 text-[11px] uppercase tracking-[0.25em] text-white/35">
@@ -338,6 +361,12 @@ export default function ListingDetailPage() {
                   <div>
                     <p className="font-serif text-[1.8rem] font-light text-white">{formatPrice(Math.round(listing.estimate.value))}</p>
                     <p className="text-[11px] uppercase tracking-[0.25em] text-white/40">Est. Value</p>
+                  </div>
+                )}
+                {listing.soldPrice && listing.daysOnMarket > 0 && (
+                  <div>
+                    <p className="font-serif text-[1.8rem] font-light text-white">{listing.daysOnMarket}</p>
+                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/40">Days on Market</p>
                   </div>
                 )}
               </div>

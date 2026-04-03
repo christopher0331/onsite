@@ -13,6 +13,7 @@ const CDN = "https://cdn.repliers.io/";
 type Listing = {
   mlsNumber: string;
   listPrice: number;
+  soldPrice: number | null;
   status: string;
   lastStatus: string;
   listDate: string;
@@ -153,9 +154,19 @@ function ListingCard({ listing }: { listing: Listing }) {
           </span>
         </div>
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-5 pb-4 pt-10">
-          <p className="font-serif text-[1.6rem] font-light leading-none text-white">
-            {formatPrice(listing.listPrice)}
-          </p>
+          {listing.soldPrice ? (
+            <>
+              <p className="text-[10px] uppercase tracking-[0.15em] text-white/60 mb-0.5">Sold</p>
+              <p className="font-serif text-[1.6rem] font-light leading-none text-white">
+                {formatPrice(listing.soldPrice)}
+              </p>
+              <p className="mt-1 text-[12px] text-white/60">Listed: {formatPrice(listing.listPrice)}</p>
+            </>
+          ) : (
+            <p className="font-serif text-[1.6rem] font-light leading-none text-white">
+              {formatPrice(listing.listPrice)}
+            </p>
+          )}
         </div>
       </div>
       <div className="flex flex-1 flex-col p-6">
