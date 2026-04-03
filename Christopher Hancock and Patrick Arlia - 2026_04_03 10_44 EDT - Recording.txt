@@ -1,0 +1,33 @@
+(Transcribed by UniScribe (https://www.uniscribe.co). Upgrade to remove this message.)
+
+Okay, so I am recording. So it'll automatically transcribe if I'm recording as well, right? I believe so. If it doesn't, then I have an app that'll transcribe it. Oh, yeah. It says also stop transcribing, which I haven't done. So I think we're okay. Okay. So that link that I sent you, do you have it? Yeah, I'm looking at it. Okay. I only see the on-site. Oh, I'm not sure. Yeah, let me stop presenting.
+
+This is this right here. This is right. Yeah. This is what you're talking about. Yeah. Okay. So you see, you see, so the first thing is you see undisclosed, right? Yeah. So we have, um, we have something in our API that is called permissions display public, uh, not this permissions, permissions display address on internet. Okay. So if that's false,
+
+we do not show the street address. We say undisclosed. Okay? - Perfect. - Then if you see where it says for sale, the for sale filter? - Yep. - If you click on sold and click on one of those listings. Now these are active, these are live listings, right? They're not in staging. Okay, well, that's a bad example. Here it just says bought with, but it doesn't say who the list agent is.
+
+the uh amble and billy that's the cell that's the buyer side uh oh that's okay close that go to uh yeah click that first one there okay so see here it's we have listed by and we have bought with oh yeah why do these only have one image is that on purpose i i believe there may be
+
+Just carousel some of those? Yeah, no, I don't think it's... I think they just... Somebody might be redacting images after... Okay. So it has bought with and listed by. Both of them need to be there. Yep. And then you see the source NWMLS as distributed by MLS Grid. Where's that? Oh, down here underneath...
+
+the address of the map, street view, and virtual tour. Now keep scrolling down. Let's see what else we find. You see where it says listing updated? Yeah. Then urban living last checked eight minutes ago. Oh, no. Okay. There's a requirement that the listing data has to be refreshed once every 24 hours. Oh, yeah. I refresh it
+
+Well, it depends on how expensive it may be, but every time somebody goes to the website, it'll refresh. Right. But they expect you to post when you last refreshed. So I'll leave that to you. Okay. As long as it says that you've checked within the last 24 hours. Do we pay you guys, uh, replyers for each query or where it's just monthly? No, we give you a million requests in the, in the subscription. So you're, you guys will be good.
+
+Yeah, I'll just do it every okay cool, okay And then you see listing provided courtesy of NWM a less information like any anything that you see that looks Just like right underneath that that paragraph. Yeah. Oh, yeah. Yeah, how many times do they want? Jesus Christ, it's crazy. Okay, so Scoring down keep scrolling down keep going. Okay here so
+
+If you are displaying derivative data, like statistics that are not provided from the MLS, you have to make that claim. You have to say where you're getting them from. Okay? Yeah, this is so...
+
+Even if it's from you guys. Even if it's from us, the idea there is that they don't want liability. So if somebody makes a decision based on these stats, they don't want to get sued because they didn't provide these stats. That's basically why they want you to be very clear about where the information came from. Okay? Okay. And that goes for this as well. Is this by you guys too, the sold price? Yeah. Okay, cool.
+
+Now, if you scroll down there again, you'll see we're repeating a few things just to be safe. But you see the part about the open house information? Like if you do a control F on this page and you search for open house. Yeah, I don't think this has to appear on the page twice, but...
+
+That open house terminology has to be in there as well. Like basically what you see there has to be has to be on the page at least once. Yeah, I don't think it's necessary to repeat this, but I think we were just being overly cautious here. Yeah. And yeah, that should be that should be OK. I usually get another one to get a good idea. So the first compass. OK.
+
+And if you want, I'll give it a quick scan. You should make that product, that template the same as like, whether you're displaying one of their listings or an on-market listing or a sold listing, like that presentation should be consistent. - I think, yeah, I think I'm gonna make it fairly identical. They're just gonna be on separate tabs. So that way they're just isolated from each other. Yeah.
+
+but okay make two i'm not gonna make two templates i don't think send it over when you're ready and i'll give it another scan um it's like what time is it there it's 11 11 11 and you leave it like probably like four or something three or four or yeah like i'm i'm uh i have some it's it's actually a holiday here where i am um uh i'm in toronto good friday's uh stat holiday so i have some uh
+
+i have some family plans later big fish dinner but um like i'm around i'm around for at least like four or five hours okay cool i'll definitely have it done before then okay thanks man thanks for finding me and jumping back on and then doing all this with me and then checking this later i appreciate it of course thanks chris yeah bye
+
+(Transcribed by UniScribe (https://www.uniscribe.co). Upgrade to remove this message.)

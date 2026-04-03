@@ -135,10 +135,8 @@ export default function FeaturedListings() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mt-14 text-center"
         >
-          <a
-            href="https://www.onsiteregroup.net/search"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/listings"
             className="group inline-flex items-center gap-3 border border-charcoal/20 text-charcoal px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] hover:bg-charcoal hover:text-white transition-all duration-500"
           >
             Search All Properties
@@ -155,7 +153,7 @@ export default function FeaturedListings() {
                 d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
               />
             </svg>
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

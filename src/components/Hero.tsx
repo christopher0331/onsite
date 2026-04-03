@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 
 const VIDEO_MP4 =
   "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67b64a09871910cd858654e8_Onsite%20Regroup%20Video-transcode.mp4";
@@ -80,10 +81,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 1.1 }}
           className="mt-12"
         >
-          <a
-            href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/listings"
             className="group inline-flex items-center gap-3 border border-white/50 text-white px-10 py-4 text-[13px] uppercase tracking-[0.25em] hover:bg-white hover:text-charcoal transition-all duration-500"
           >
             Search Homes
@@ -100,7 +99,7 @@ export default function Hero() {
                 d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
               />
             </svg>
-          </a>
+          </Link>
         </motion.div>
 
         <motion.div

@@ -11,15 +11,22 @@ export async function GET(req: NextRequest) {
   const minPrice = searchParams.get("minPrice");
   const maxPrice = searchParams.get("maxPrice");
   const minBeds = searchParams.get("minBeds");
-  const type = searchParams.get("type"); // sale | lease
+  const type = searchParams.get("type");
+  const county = searchParams.get("county") || "Pierce";
+  const agentOnly = searchParams.get("agentOnly") === "true";
 
   const params = new URLSearchParams({
     status,
     pageSize,
     page,
-    area: "Pierce",
     state: "WA",
   });
+
+  if (agentOnly) {
+    params.set("agentLicense", AGENT_LICENSE);
+  } else {
+    params.set("area", county);
+  }
 
   if (minPrice) params.set("minPrice", minPrice);
   if (maxPrice) params.set("maxPrice", maxPrice);
@@ -32,7 +39,7 @@ export async function GET(req: NextRequest) {
         "repliers-api-key": process.env.REPLIERS_API_KEY || "",
         "Content-Type": "application/json",
       },
-      next: { revalidate: 300 }, // cache 5 min
+      next: { revalidate: 300 },
     });
 
     if (!res.ok) {

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import MLSCardAttribution from "@/components/MLSCardAttribution";
 
 const properties = [
   {
@@ -78,31 +79,36 @@ export default function SoldProperties() {
               transition={{ duration: 0.8, delay: i * 0.12 }}
               className={i === 1 ? "md:-mt-8" : ""}
             >
-              <Link href={property.href} className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-[0_22px_70px_rgba(0,0,0,0.18)]">
-                  <Image
-                    src={property.image}
-                    alt={property.title}
-                    fill
-                    className="object-cover transform group-hover:scale-105 transition-transform duration-700"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute top-4 right-4 z-20">
-                    <span className="bg-charcoal/90 backdrop-blur-sm text-white text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 font-medium rounded-full">
-                      Sold
-                    </span>
+              <div className="overflow-hidden rounded-3xl shadow-[0_22px_70px_rgba(0,0,0,0.18)]">
+                <Link href={property.href} className="group block">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={property.image}
+                      alt={property.title}
+                      fill
+                      className="object-cover transform group-hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="absolute top-4 right-4 z-20">
+                      <span className="bg-charcoal/90 backdrop-blur-sm text-white text-[10px] uppercase tracking-[0.2em] px-4 py-1.5 font-medium rounded-full">
+                        Sold
+                      </span>
+                    </div>
                   </div>
+                  <div className="mt-5 px-1">
+                    <h3 className="font-serif text-xl lg:text-[1.35rem] text-charcoal font-normal leading-snug group-hover:translate-x-1 transition-transform duration-300">
+                      {property.title}
+                    </h3>
+                    <p className="mt-2 text-[13px] uppercase tracking-[0.15em] text-mid-gray font-medium">
+                      {property.price}
+                    </p>
+                  </div>
+                </Link>
+                <div className="px-1 pb-2 pt-3">
+                  <MLSCardAttribution />
                 </div>
-                <div className="mt-5">
-                  <h3 className="font-serif text-xl lg:text-[1.35rem] text-charcoal font-normal leading-snug group-hover:translate-x-1 transition-transform duration-300">
-                    {property.title}
-                  </h3>
-                  <p className="mt-2 text-[13px] uppercase tracking-[0.15em] text-mid-gray font-medium">
-                    {property.price}
-                  </p>
-                </div>
-              </Link>
+              </div>
             </motion.div>
           ))}
         </div>
