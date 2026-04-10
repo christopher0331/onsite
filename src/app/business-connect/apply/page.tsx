@@ -158,7 +158,7 @@ export default function MemberApplicationPage() {
               </div>
               <div className="flex flex-col gap-4 lg:items-end">
                 <a
-                  href="https://www.go.onsiteregroup.com/business-connect-about"
+                  href="https://415kr0.share-na2.hsforms.com/2skIuf8o5Q3qUKGNleZ6XTg"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 rounded-full bg-white px-10 py-5 text-[12px] uppercase tracking-[0.25em] text-charcoal transition-all duration-500 hover:bg-white/90"
