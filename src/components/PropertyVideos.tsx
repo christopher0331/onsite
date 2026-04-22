@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const CDN = "https://cdn.repliers.io/";
@@ -24,6 +25,7 @@ type Listing = {
     propertyType: string | null;
   };
   images: string[];
+  office?: { brokerageName?: string } | null;
 };
 
 function getEmbedUrl(raw: string): string | null {
@@ -78,8 +80,11 @@ function formatAddress(a: Listing["address"]) {
 
 async function fetchVideoListings(): Promise<Listing[]> {
   try {
+    // Objective criteria: active NWMLS listings in Pierce County, WA, ordered
+    // by most recently updated, filtered client-side for ones that expose a
+    // public video tour URL.
     const res = await fetch(
-      "https://api.repliers.io/listings?area=Pierce&state=WA&pageSize=50&status=A",
+      "https://api.repliers.io/listings?area=Pierce&state=WA&pageSize=50&status=A&sortBy=updatedOnDesc",
       {
         headers: {
           "repliers-api-key": process.env.REPLIERS_API_KEY || "",
@@ -92,7 +97,6 @@ async function fetchVideoListings(): Promise<Listing[]> {
     const data = await res.json();
     const listings: Listing[] = data.listings || [];
 
-    // Keep only listings that have a parseable video URL
     return listings
       .filter((l) => {
         const url = l.details?.virtualTourUrl || l.details?.alternateURLVideoLink;
@@ -115,10 +119,10 @@ export default async function PropertyVideos() {
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
 
         {/* Header */}
-        <div className="mb-14 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-white/50">
-              Video Tours
+              Pierce County, WA · Video Tours · Preset Search
             </p>
             <h2 className="font-serif text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1.05] text-white">
               Tour Homes Online.
@@ -128,9 +132,17 @@ export default async function PropertyVideos() {
             href="/listings"
             className="shrink-0 self-start rounded-full border border-white/25 px-7 py-3 text-[11px] uppercase tracking-[0.25em] text-white/60 transition-all duration-300 hover:border-white/50 hover:text-white sm:self-auto"
           >
-            View All Listings →
+            Search All Listings →
           </Link>
         </div>
+
+        {/* Preset-search disclosure */}
+        <p className="mb-10 max-w-3xl text-[13px] leading-relaxed text-white/55">
+          The six homes below are a preset objective search: the most recently-updated active NWMLS
+          listings in Pierce County, WA that include a public video tour. Listings may be represented
+          by brokerages other than OnSite Real Estate Group — attribution is shown on each tile and
+          on the full listing page.
+        </p>
 
         {/* Video grid */}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
@@ -159,7 +171,7 @@ export default async function PropertyVideos() {
                 />
 
                 {/* Info overlay — hidden until hover */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-5 pb-5 pt-12 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-2 bg-gradient-to-t from-black/85 via-black/45 to-transparent px-5 pb-5 pt-12 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                   <div className="pointer-events-auto flex items-end justify-between gap-3">
                     <div className="min-w-0">
                       <p className="truncate font-serif text-[0.95rem] font-light leading-snug text-white">
@@ -176,6 +188,11 @@ export default async function PropertyVideos() {
                           </span>
                         )}
                       </p>
+                      {listing.office?.brokerageName && (
+                        <p className="mt-1 truncate text-[10px] text-white/40">
+                          Listed by {listing.office.brokerageName}
+                        </p>
+                      )}
                     </div>
                     <div className="flex shrink-0 flex-col items-end gap-1">
                       <p className="font-serif text-[1rem] font-light text-white">
@@ -193,6 +210,22 @@ export default async function PropertyVideos() {
               </div>
             );
           })}
+        </div>
+
+        {/* NWMLS attribution */}
+        <div className="mt-14 flex items-start gap-4 border-t border-white/10 pt-8">
+          <Image
+            src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png"
+            alt="NWMLS Three Trees Logo"
+            width={36}
+            height={36}
+            className="h-8 w-auto shrink-0 opacity-60 brightness-0 invert"
+          />
+          <p className="max-w-3xl text-[11px] leading-[1.8] text-white/45">
+            Listing data provided by NWMLS as distributed by MLS Grid. Listings may be represented by
+            brokerages other than OnSite Real Estate Group; see each listing page for the listing
+            brokerage and agent. Data is deemed reliable but is not guaranteed by MLS GRID.
+          </p>
         </div>
       </div>
     </section>

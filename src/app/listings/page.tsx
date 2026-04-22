@@ -42,6 +42,7 @@ type Listing = {
   images: string[];
   map: { latitude: number; longitude: number };
   permissions?: { displayAddressOnInternet?: string };
+  office?: { brokerageName?: string } | null;
 };
 
 type ApiResponse = {
@@ -51,8 +52,6 @@ type ApiResponse = {
   listings: Listing[];
   statistics?: { listPrice: { min: number; max: number } };
 };
-
-type Tab = "market" | "ours";
 
 function formatPrice(n: number) {
   return "$" + n.toLocaleString("en-US");
@@ -82,39 +81,6 @@ const COUNTY_OPTIONS = [
   { label: "Pierce County", value: "Pierce" },
   { label: "King County", value: "King" },
 ];
-
-const PINNED_UNDISCLOSED = ["NWM2448909", "NWM2237560", "NWM2291535"];
-
-type MarketStats = {
-  county: string;
-  active: {
-    available: { mth: Record<string, number> };
-    new: { count: number; mth: Record<string, { count: number }> };
-  } | null;
-  sold: {
-    soldPrice: { med: number; sum: number; mth: Record<string, { med: number; sum: number; count: number }> };
-    daysOnMarket: { avg: number; mth: Record<string, { avg: number; count: number }> };
-    closed: { count: number; mth: Record<string, { count: number }> };
-  } | null;
-};
-
-function fmtCompact(n: number) {
-  if (n >= 1_000_000_000) return `$${(n / 1_000_000_000).toFixed(1)}B`;
-  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(0)}M`;
-  if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`;
-  return `$${n.toLocaleString()}`;
-}
-
-function recentMonths(mth: Record<string, unknown> | undefined, count: number): string[] {
-  if (!mth) return [];
-  return Object.keys(mth).sort().slice(-count);
-}
-
-function monthLabel(key: string) {
-  const [y, m] = key.split("-");
-  const d = new Date(Number(y), Number(m) - 1);
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
-}
 
 function ListingCard({ listing }: { listing: Listing }) {
   const img = getImageUrl(listing.images);
@@ -182,6 +148,11 @@ function ListingCard({ listing }: { listing: Listing }) {
         {det.propertyType && (
           <p className="mb-3 text-[11px] uppercase tracking-[0.2em] text-charcoal/80">{det.propertyType}</p>
         )}
+        {listing.office?.brokerageName && (
+          <p className="mb-3 text-[11px] text-charcoal/60 italic not-italic">
+            Listed by {listing.office.brokerageName}
+          </p>
+        )}
         <div className="mt-auto flex items-center justify-between border-t border-charcoal/10 pt-4">
           <span className="text-[11px] text-charcoal/80">MLS# {listing.mlsNumber}</span>
           <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal/80 transition-colors duration-300 group-hover:text-charcoal">View →</span>
@@ -193,9 +164,10 @@ function ListingCard({ listing }: { listing: Listing }) {
 }
 
 export default function ListingsPage() {
-  const [tab, setTab] = useState<Tab>("market");
   const [listings, setListings] = useState<Listing[]>([]);
   const [count, setCount] = useState(0);
+  const [numPages, setNumPages] = useState(1);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("A");
   const [county, setCounty] = useState("Pierce");
@@ -203,66 +175,43 @@ export default function ListingsPage() {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [dataRefreshedAt, setDataRefreshedAt] = useState<Date | null>(null);
-  const [stats, setStats] = useState<MarketStats | null>(null);
-  const [statsLoading, setStatsLoading] = useState(false);
 
-  useEffect(() => {
-    if (tab !== "market") { setStats(null); return; }
-    setStatsLoading(true);
-    fetch(`/api/statistics?county=${county}`)
-      .then((r) => r.json())
-      .then((data: MarketStats) => { setStats(data); setStatsLoading(false); })
-      .catch(() => setStatsLoading(false));
-  }, [tab, county]);
+  // Reset to page 1 whenever any criteria changes
+  useEffect(() => { setPage(1); }, [status, county, minBeds, minPrice, maxPrice]);
 
   useEffect(() => {
     setLoading(true);
-    const params = new URLSearchParams({ status, pageSize: "12" });
-    if (tab === "market") {
-      params.set("county", county);
-      if (minBeds) params.set("minBeds", minBeds);
-      if (minPrice) params.set("minPrice", minPrice);
-      if (maxPrice) params.set("maxPrice", maxPrice);
+    const params = new URLSearchParams({
+      status,
+      pageSize: "24",
+      page: String(page),
+      county,
+    });
+    if (minBeds) params.set("minBeds", minBeds);
+    if (minPrice) params.set("minPrice", minPrice);
+    if (maxPrice) params.set("maxPrice", maxPrice);
 
-      const marketFetch = fetch(`/api/listings?${params}`).then((r) => r.json());
+    fetch(`/api/listings?${params}`)
+      .then((r) => r.json())
+      .then((data: ApiResponse) => {
+        setListings(data.listings || []);
+        setCount(data.count || 0);
+        setNumPages(data.numPages || 1);
+        setDataRefreshedAt(new Date());
+        setLoading(false);
+        if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
+      })
+      .catch(() => setLoading(false));
+  }, [status, county, minBeds, minPrice, maxPrice, page]);
 
-      // Only inject pinned undisclosed listings when viewing Active
-      const pinnedFetches = status === "A"
-        ? PINNED_UNDISCLOSED.map((mls) =>
-            fetch(`/api/listings/${mls}`).then((r) => r.json()).catch(() => null)
-          )
-        : [];
+  const countyLabel = COUNTY_OPTIONS.find((c) => c.value === county)?.label ?? county;
+  const statusLabel = status === "A" ? "Active" : "Sold";
 
-      Promise.all([marketFetch, ...pinnedFetches])
-        .then(([data, ...pinnedResults]) => {
-          const market: Listing[] = (data as ApiResponse).listings || [];
-          const pinned: Listing[] = pinnedResults
-            .filter((p): p is Listing => p !== null && !p.error)
-            .filter((p) => p.status === status)
-            .filter((p) => !market.find((m) => m.mlsNumber === p.mlsNumber));
-          setListings([...pinned, ...market]);
-          setCount((data as ApiResponse).count || 0);
-          setDataRefreshedAt(new Date());
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    } else {
-      params.set("agentOnly", "true");
-      if (minBeds) params.set("minBeds", minBeds);
-      if (minPrice) params.set("minPrice", minPrice);
-      if (maxPrice) params.set("maxPrice", maxPrice);
-
-      fetch(`/api/listings?${params}`)
-        .then((r) => r.json())
-        .then((data: ApiResponse) => {
-          setListings(data.listings || []);
-          setCount(data.count || 0);
-          setDataRefreshedAt(new Date());
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
-    }
-  }, [tab, status, county, minBeds, minPrice, maxPrice]);
+  // Build a plain-English disclosure of the objective criteria currently applied
+  const criteriaParts: string[] = [`${countyLabel}, WA`, `${statusLabel} status`];
+  if (minBeds) criteriaParts.push(`${minBeds}+ bedrooms`);
+  if (minPrice) criteriaParts.push(`priced from $${Number(minPrice).toLocaleString()}`);
+  if (maxPrice) criteriaParts.push(`up to $${Number(maxPrice).toLocaleString()}`);
 
   return (
     <>
@@ -273,60 +222,43 @@ export default function ListingsPage() {
         <section className="bg-[#1a1a18] pt-40 pb-24 sm:pt-52 sm:pb-32">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
 
-            {/* Title row */}
             <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between mb-12">
               <div>
                 <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/60">
-                  {tab === "market"
-                    ? `${county} County, WA`
-                    : "OnSite Real Estate Group"}
+                  {countyLabel}, WA — Preset Search
                 </p>
                 <h1 className="mb-6 font-serif text-[clamp(2.8rem,7vw,5.8rem)] font-light leading-[1.0] text-white">
-                  {tab === "market" ? "Market Search." : "Our Listings."}
+                  Search Homes.
                 </h1>
                 <p className="max-w-xl text-[16px] leading-8 text-white/70">
-                  {tab === "market"
-                    ? "Browse current properties across Pierce & King County markets."
-                    : "Properties listed by André Bohall & the OnSite Real Estate Group team."}
+                  Browse every currently {statusLabel.toLowerCase()} NWMLS listing in {countyLabel}, Washington.
+                  Results are returned objectively from the MLS feed and include listings from all participating brokerages.
                 </p>
               </div>
               <div className="shrink-0 text-right">
                 {!loading && (
                   <p className="text-[13px] text-white/50">
                     <span className="text-white text-2xl font-serif font-light">{count.toLocaleString()}</span>
-                    <br />properties found
+                    <br />listings match
                   </p>
                 )}
               </div>
             </div>
 
-            {/* Tab switcher */}
-            <div className="flex gap-2 mb-10 border-b border-white/10 pb-0">
-              <button
-                onClick={() => { setTab("market"); setMinBeds(""); setMinPrice(""); setMaxPrice(""); }}
-                className={`pb-4 px-1 text-[12px] uppercase tracking-[0.25em] border-b-2 transition-all duration-300 -mb-px ${
-                  tab === "market"
-                    ? "border-white text-white"
-                    : "border-transparent text-white/40 hover:text-white/70"
-                }`}
-              >
-                Market Search
-              </button>
-              <button
-                onClick={() => { setTab("ours"); setMinBeds(""); setMinPrice(""); setMaxPrice(""); }}
-                className={`pb-4 px-1 ml-8 text-[12px] uppercase tracking-[0.25em] border-b-2 transition-all duration-300 -mb-px ${
-                  tab === "ours"
-                    ? "border-white text-white"
-                    : "border-transparent text-white/40 hover:text-white/70"
-                }`}
-              >
-                Our Listings
-              </button>
+            {/* Objective-criteria disclosure banner */}
+            <div className="mb-10 rounded-2xl border border-white/15 bg-white/5 p-5 sm:p-6">
+              <p className="mb-1 text-[10px] uppercase tracking-[0.3em] text-white/50">
+                Preset Search Criteria
+              </p>
+              <p className="text-[14px] leading-relaxed text-white/85">
+                {criteriaParts.join(" · ")}. All applicable NWMLS listings that meet these criteria
+                are displayed below in the order returned by MLS Grid. Adjust the controls to change
+                the search.
+              </p>
             </div>
 
             {/* Filters */}
             <div className="flex flex-wrap items-end gap-4">
-              {/* Status */}
               <div className="flex gap-2">
                 {STATUS_FILTERS.map((f) => (
                   <button
@@ -343,60 +275,55 @@ export default function ListingsPage() {
                 ))}
               </div>
 
-              {/* County — only shown on market tab */}
-              {tab === "market" && (
-                <div className="flex gap-2">
-                  {COUNTY_OPTIONS.map((c) => (
-                    <button
-                      key={c.value}
-                      onClick={() => setCounty(c.value)}
-                      className={`rounded-full border px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 ${
-                        county === c.value
-                          ? "border-white bg-white text-charcoal"
-                          : "border-white/20 text-white/60 hover:border-white/40 hover:text-white"
-                      }`}
-                    >
-                      {c.label}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div className="flex gap-2">
+                {COUNTY_OPTIONS.map((c) => (
+                  <button
+                    key={c.value}
+                    onClick={() => setCounty(c.value)}
+                    className={`rounded-full border px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 ${
+                      county === c.value
+                        ? "border-white bg-white text-charcoal"
+                        : "border-white/20 text-white/60 hover:border-white/40 hover:text-white"
+                    }`}
+                  >
+                    {c.label}
+                  </button>
+                ))}
+              </div>
 
-              {/* Min beds */}
               <select
                 value={minBeds}
                 onChange={(e) => setMinBeds(e.target.value)}
                 className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/60 focus:border-white/40 focus:outline-none"
               >
-                <option value="">Any Beds</option>
-                <option value="1">1+ Beds</option>
-                <option value="2">2+ Beds</option>
-                <option value="3">3+ Beds</option>
-                <option value="4">4+ Beds</option>
+                <option value="" className="bg-charcoal text-white">Any Beds</option>
+                <option value="1" className="bg-charcoal text-white">1+ Beds</option>
+                <option value="2" className="bg-charcoal text-white">2+ Beds</option>
+                <option value="3" className="bg-charcoal text-white">3+ Beds</option>
+                <option value="4" className="bg-charcoal text-white">4+ Beds</option>
               </select>
 
-              {/* Price */}
               <select
                 value={minPrice}
                 onChange={(e) => setMinPrice(e.target.value)}
                 className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/60 focus:border-white/40 focus:outline-none"
               >
-                <option value="">Min Price</option>
-                <option value="300000">$300k+</option>
-                <option value="500000">$500k+</option>
-                <option value="750000">$750k+</option>
-                <option value="1000000">$1M+</option>
+                <option value="" className="bg-charcoal text-white">Min Price</option>
+                <option value="300000" className="bg-charcoal text-white">$300k+</option>
+                <option value="500000" className="bg-charcoal text-white">$500k+</option>
+                <option value="750000" className="bg-charcoal text-white">$750k+</option>
+                <option value="1000000" className="bg-charcoal text-white">$1M+</option>
               </select>
               <select
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(e.target.value)}
                 className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/60 focus:border-white/40 focus:outline-none"
               >
-                <option value="">Max Price</option>
-                <option value="500000">Up to $500k</option>
-                <option value="750000">Up to $750k</option>
-                <option value="1000000">Up to $1M</option>
-                <option value="1500000">Up to $1.5M</option>
+                <option value="" className="bg-charcoal text-white">Max Price</option>
+                <option value="500000" className="bg-charcoal text-white">Up to $500k</option>
+                <option value="750000" className="bg-charcoal text-white">Up to $750k</option>
+                <option value="1000000" className="bg-charcoal text-white">Up to $1M</option>
+                <option value="1500000" className="bg-charcoal text-white">Up to $1.5M</option>
               </select>
             </div>
           </div>
@@ -417,128 +344,48 @@ export default function ListingsPage() {
                 <p className="mt-3 text-[14px] text-charcoal/60">Try adjusting your filters.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {listings.map((listing) => (
-                  <ListingCard key={listing.mlsNumber} listing={listing} />
-                ))}
-              </div>
+              <>
+                <div className="mb-8 flex items-center justify-between text-[13px] text-charcoal/70">
+                  <span>
+                    Showing <strong className="text-charcoal">{listings.length}</strong> of{" "}
+                    <strong className="text-charcoal">{count.toLocaleString()}</strong> matching listings
+                    {numPages > 1 && (
+                      <> · Page <strong className="text-charcoal">{page}</strong> of {numPages}</>
+                    )}
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {listings.map((listing) => (
+                    <ListingCard key={listing.mlsNumber} listing={listing} />
+                  ))}
+                </div>
+
+                {/* Pagination */}
+                {numPages > 1 && (
+                  <div className="mt-14 flex items-center justify-center gap-3">
+                    <button
+                      disabled={page <= 1}
+                      onClick={() => setPage((p) => Math.max(1, p - 1))}
+                      className="rounded-full border border-charcoal/20 px-6 py-2.5 text-[11px] uppercase tracking-[0.2em] text-charcoal transition hover:border-charcoal/50 disabled:opacity-30 disabled:cursor-not-allowed"
+                    >
+                      ← Previous
+                    </button>
+                    <span className="text-[12px] text-charcoal/60 px-4">
+                      {page} / {numPages}
+                    </span>
+                    <button
+                      disabled={page >= numPages}
+                      onClick={() => setPage((p) => Math.min(numPages, p + 1))}
+                      className="rounded-full border border-charcoal/20 px-6 py-2.5 text-[11px] uppercase tracking-[0.2em] text-charcoal transition hover:border-charcoal/50 disabled:opacity-30 disabled:cursor-not-allowed"
+                    >
+                      Next →
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </section>
-
-        {/* Market Insights — below listing cards */}
-        {tab === "market" && (
-          <section className="bg-white py-16 sm:py-20 border-b border-charcoal/8">
-            <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
-                <h2 className="font-serif text-[clamp(1.6rem,3vw,2.4rem)] font-light text-charcoal">
-                  {county} County Residential Insights
-                </h2>
-                <p className="text-[13px] leading-relaxed text-charcoal bg-[#f0ede8] rounded-xl px-5 py-3 max-w-md sm:text-right">
-                  Market statistics and visualizations are provided by{" "}
-                  <a href="https://repliers.com" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-charcoal/70">Repliers.com</a>{" "}
-                  and are based on NWMLS data as Distributed by MLS Grid.
-                </p>
-              </div>
-
-              {statsLoading ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {Array.from({ length: 6 }).map((_, i) => (
-                    <div key={i} className="h-[130px] animate-pulse rounded-2xl bg-charcoal/5" />
-                  ))}
-                </div>
-              ) : stats?.active || stats?.sold ? (() => {
-                const soldMths = recentMonths(stats.sold?.soldPrice?.mth, 3);
-                const newMths = recentMonths(stats.active?.new?.mth, 3);
-                const closedMths = recentMonths(stats.sold?.closed?.mth, 3);
-                const domMths = recentMonths(stats.sold?.daysOnMarket?.mth, 3);
-                const availMths = recentMonths(stats.active?.available?.mth, 1);
-                const latestAvail = availMths[availMths.length - 1];
-
-                return (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div className="rounded-2xl border border-charcoal/10 p-6">
-                      <p className="text-[12px] text-charcoal/80 mb-1">Active Listings</p>
-                      <p className="text-[2rem] font-serif font-light text-charcoal">
-                        {latestAvail ? stats.active?.available?.mth?.[latestAvail] ?? "—" : "—"}
-                        <span className="text-[13px] font-sans text-charcoal/70 ml-1">active listings</span>
-                      </p>
-                      {latestAvail && (
-                        <p className="mt-1 text-[11px] text-charcoal/70">For {monthLabel(latestAvail)}</p>
-                      )}
-                    </div>
-
-                    <div className="rounded-2xl border border-charcoal/10 p-6">
-                      <p className="text-[12px] text-charcoal/80 mb-1">Median Sold Price</p>
-                      <p className="text-[2rem] font-serif font-light text-charcoal">
-                        {stats.sold?.soldPrice?.med ? formatPrice(stats.sold.soldPrice.med) : "—"}
-                      </p>
-                      {soldMths.length > 0 && (
-                        <p className="mt-1 text-[11px] text-charcoal/70">For {monthLabel(soldMths[soldMths.length - 1])}</p>
-                      )}
-                    </div>
-
-                    <div className="rounded-2xl border border-charcoal/10 p-6">
-                      <p className="text-[12px] text-charcoal/80 mb-3">Sales Volume</p>
-                      <div className="flex gap-6">
-                        {soldMths.map((m) => (
-                          <div key={m}>
-                            <p className="text-[1.2rem] font-serif font-light text-charcoal">
-                              {fmtCompact(stats.sold!.soldPrice.mth[m]?.sum ?? 0)}
-                            </p>
-                            <p className="text-[10px] text-charcoal/70">{monthLabel(m)}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="rounded-2xl border border-charcoal/10 p-6">
-                      <p className="text-[12px] text-charcoal/80 mb-3">New Listings</p>
-                      <div className="flex gap-6">
-                        {newMths.map((m) => (
-                          <div key={m}>
-                            <p className="text-[1.5rem] font-serif font-light text-charcoal">
-                              {stats.active!.new.mth[m]?.count ?? 0}
-                            </p>
-                            <p className="text-[10px] text-charcoal/70">{monthLabel(m)}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="rounded-2xl border border-charcoal/10 p-6">
-                      <p className="text-[12px] text-charcoal/80 mb-3">Residential Sold</p>
-                      <div className="flex gap-6">
-                        {closedMths.map((m) => (
-                          <div key={m}>
-                            <p className="text-[1.5rem] font-serif font-light text-charcoal">
-                              {stats.sold!.closed.mth[m]?.count ?? 0}
-                            </p>
-                            <p className="text-[10px] text-charcoal/70">{monthLabel(m)}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="rounded-2xl border border-charcoal/10 p-6">
-                      <p className="text-[12px] text-charcoal/80 mb-3">Days on Market</p>
-                      <div className="flex gap-6">
-                        {domMths.map((m) => (
-                          <div key={m}>
-                            <p className="text-[1.5rem] font-serif font-light text-charcoal">
-                              {stats.sold!.daysOnMarket.mth[m]?.avg ?? 0}
-                            </p>
-                            <p className="text-[10px] text-charcoal/70">{monthLabel(m)}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })() : null}
-            </div>
-          </section>
-        )}
 
         {/* CTA */}
         <section className="bg-[#1a1a18] py-20 sm:py-28">
@@ -593,6 +440,12 @@ export default function ListingsPage() {
                         hour: "numeric", minute: "2-digit", timeZoneName: "short",
                       })}.`
                     : null}
+                </p>
+                <p className="text-[11px] leading-[1.8] text-charcoal/70 max-w-4xl">
+                  The results above are a preset search based solely on the objective criteria disclosed
+                  at the top of this page ({criteriaParts.join("; ")}). Listings are provided courtesy of
+                  the Northwest Multiple Listing Service and may be listed by brokerages other than OnSite
+                  Real Estate Group — attribution is shown on each listing card.
                 </p>
                 <p className="text-[11px] leading-[1.8] text-charcoal/70 max-w-4xl">
                   IDX information is provided exclusively for consumers&apos; personal noncommercial use, that it may not be

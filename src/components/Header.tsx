@@ -4,6 +4,15 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+// Routes that display NWMLS / IDX listing data — header must stay solid so
+// the brokerage logo remains visible over white listing cards & photos.
+const SOLID_HEADER_ROUTES = [
+  "/listings",
+  "/featured-homes",
+  "/sold-homes",
+];
 
 const mainNav = [
   { label: "Sell Home", href: "/sell-your-home" },
@@ -27,6 +36,10 @@ const sellingProcessLinks = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  const forceSolid = SOLID_HEADER_ROUTES.some((p) => pathname?.startsWith(p));
+  const solid = forceSolid || scrolled;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -45,7 +58,7 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+          solid
             ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.06)]"
             : "bg-transparent"
         }`}
@@ -59,7 +72,7 @@ export default function Header() {
                 width={320}
                 height={80}
                 className={`h-24 lg:h-28 w-auto transition-all duration-500 ${
-                  scrolled ? "" : "brightness-0 invert"
+                  solid ? "" : "brightness-0 invert"
                 }`}
               />
             </Link>
@@ -70,7 +83,7 @@ export default function Header() {
                   key={item.href}
                   href={item.href}
                   className={`text-[13px] font-medium uppercase tracking-[0.15em] transition-colors duration-300 hover:opacity-60 ${
-                    scrolled ? "text-charcoal" : "text-white"
+                    solid ? "text-charcoal" : "text-white"
                   }`}
                 >
                   {item.label}
@@ -79,7 +92,7 @@ export default function Header() {
               <Link
                 href="/business-connect"
                 className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-300 hover:opacity-80 ${
-                  scrolled
+                  solid
                     ? "border-charcoal/30 text-charcoal hover:bg-charcoal hover:text-white hover:border-charcoal"
                     : "border-white/40 text-white hover:bg-white/10"
                 }`}
@@ -89,7 +102,7 @@ export default function Header() {
               <a
                 href="tel:253-441-9764"
                 className={`text-[13px] font-medium tracking-[0.1em] transition-colors duration-300 hover:opacity-60 ${
-                  scrolled ? "text-charcoal" : "text-white"
+                  solid ? "text-charcoal" : "text-white"
                 }`}
               >
                 (253) 441-9764
@@ -101,7 +114,7 @@ export default function Header() {
               className={`lg:hidden relative z-10 w-10 h-10 flex flex-col items-center justify-center gap-1.5 transition-colors ${
                 mobileOpen
                   ? "text-white"
-                  : scrolled
+                  : solid
                     ? "text-charcoal"
                     : "text-white"
               }`}

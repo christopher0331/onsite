@@ -1,36 +1,42 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const REPLIERS_API = "https://api.repliers.io/listings";
-const AGENT_LICENSE = "25031564";
+
+// When a brokerage name is provided, we restrict results to that brokerage
+// only — used for the "Homes by OnSite Real Estate Group" preset search so we
+// never surface other brokerages' listings in that view.
+const ONSITE_BROKERAGE_NAME = process.env.ONSITE_BROKERAGE_NAME || "";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const status = searchParams.get("status") || "A";
-  const pageSize = searchParams.get("pageSize") || "12";
+  const pageSize = searchParams.get("pageSize") || "24";
   const page = searchParams.get("page") || "1";
   const minPrice = searchParams.get("minPrice");
   const maxPrice = searchParams.get("maxPrice");
   const minBeds = searchParams.get("minBeds");
   const type = searchParams.get("type");
   const county = searchParams.get("county") || "Pierce";
-  const agentOnly = searchParams.get("agentOnly") === "true";
+  const brokerageOnly = searchParams.get("brokerageOnly") === "true";
 
   const params = new URLSearchParams({
     status,
     pageSize,
     page,
     state: "WA",
+    area: county,
   });
 
-  // When fetching sold listings, filter to actual sales only
+  // When fetching sold listings, filter to actual closed sales only
   if (status === "U") {
     params.set("lastStatus", "Sld");
   }
 
-  if (agentOnly) {
-    params.set("agentLicense", AGENT_LICENSE);
-  } else {
-    params.set("area", county);
+  // Optional brokerage-only preset. Uses the exact filter Repliers supports
+  // (office.brokerageName). Left empty in demo mode so we default to a fully
+  // disclosed preset area search rather than showing no results.
+  if (brokerageOnly && ONSITE_BROKERAGE_NAME) {
+    params.set("office.brokerageName", ONSITE_BROKERAGE_NAME);
   }
 
   if (minPrice) params.set("minPrice", minPrice);
