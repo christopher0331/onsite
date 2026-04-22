@@ -76,8 +76,11 @@ type Listing = {
   map: { latitude: number; longitude: number };
   details: {
     numBedrooms: number | null;
+    numBedroomsPlus: number | null;
     numBathrooms: number | null;
     numBathroomsHalf: number | null;
+    numFireplaces: string | null;
+    numParkingSpaces: number | null;
     sqft: number | null;
     propertyType: string | null;
     description: string | null;
@@ -100,12 +103,21 @@ type Listing = {
     swimmingPool: string | null;
     extras: string | null;
     landscapeFeatures: string | null;
+    basement1: string | null;
+    basement2: string | null;
+    furnished: string | null;
+    elevator: string | null;
+    energuideRating: string | null;
+    livingAreaMeasurement: string | null;
   };
   lot: {
     acres: number | null;
     squareFeet: number | null;
     features: string | null;
     size: string | null;
+    dimensions: string | null;
+    source: string | null;
+    measurement: string | null;
   } | null;
   taxes: { annualAmount: number | null; assessmentYear: string | null } | null;
   nearby: { amenities: string[] } | null;
@@ -125,12 +137,49 @@ type Listing = {
   updatedOn: string | null;
   timestamps: {
     listingUpdated: string | null;
+    idxUpdated: string | null;
+    photosUpdated: string | null;
     repliersUpdatedOn: string | null;
   } | null;
-  estimate: { value: number; low: number; high: number; confidence: number } | null;
+  estimate: {
+    value: number;
+    low: number;
+    high: number;
+    confidence: number;
+    date: string | null;
+    history?: { mth: Record<string, { value: number }> } | null;
+  } | null;
+  comparables: ComparableListing[] | null;
   images: string[];
   photoCount: number;
   condominium: { fees: { maintenance: number | null } } | null;
+};
+
+type ComparableListing = {
+  mlsNumber: string;
+  listPrice: number;
+  soldPrice: number | null;
+  soldDate: string | null;
+  lastStatus: string | null;
+  distance: number | null;
+  address: {
+    streetNumber?: string;
+    streetName?: string;
+    streetSuffix?: string;
+    streetDirection?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+    neighborhood?: string;
+  };
+  details: {
+    numBedrooms: number | null;
+    numBathrooms: number | null;
+    sqft: string | number | null;
+    yearBuilt: string | null;
+    style: string | null;
+  };
+  images?: string[];
 };
 
 function formatPrice(n: number) {
@@ -221,12 +270,36 @@ export default function ListingDetailPage() {
   if (det.propertyType) detailRows.push({ label: "Property Type", value: det.propertyType });
   if (det.style) detailRows.push({ label: "Style", value: det.style });
   if (det.yearBuilt) detailRows.push({ label: "Year Built", value: det.yearBuilt });
-  if (det.sqft) detailRows.push({ label: "Living Area", value: `${Number(det.sqft).toLocaleString()} sqft` });
+  if (det.sqft) detailRows.push({ label: "Living Area", value: `${Number(det.sqft).toLocaleString()} ${det.livingAreaMeasurement === "Square Feet" || !det.livingAreaMeasurement ? "sqft" : det.livingAreaMeasurement.toLowerCase()}` });
   if (listing.lot?.squareFeet) detailRows.push({ label: "Lot Size", value: `${Number(listing.lot.squareFeet).toLocaleString()} sqft` });
   if (listing.lot?.acres) detailRows.push({ label: "Lot Acres", value: `${listing.lot.acres} ac` });
+  if (listing.lot?.dimensions) detailRows.push({ label: "Lot Dimensions", value: listing.lot.dimensions });
+  if (det.numBedrooms) {
+    const bedVal = det.numBedroomsPlus
+      ? `${det.numBedrooms} + ${det.numBedroomsPlus}`
+      : det.numBedrooms;
+    detailRows.push({ label: "Bedrooms", value: bedVal });
+  }
+  if (det.numBathrooms) {
+    const bathVal = det.numBathroomsHalf
+      ? `${det.numBathrooms} full · ${det.numBathroomsHalf} half`
+      : det.numBathrooms;
+    detailRows.push({ label: "Bathrooms", value: bathVal });
+  }
+  if (det.numFireplaces) detailRows.push({ label: "Fireplaces", value: det.numFireplaces });
   if (det.numGarageSpaces) detailRows.push({ label: "Garage Spaces", value: det.numGarageSpaces });
+  if (det.numParkingSpaces && det.numParkingSpaces !== det.numGarageSpaces) {
+    detailRows.push({ label: "Total Parking", value: det.numParkingSpaces });
+  }
+  if (det.basement1) {
+    const basementVal = det.basement2 ? `${det.basement1} · ${det.basement2}` : det.basement1;
+    detailRows.push({ label: "Basement", value: basementVal });
+  }
+  if (det.furnished) detailRows.push({ label: "Furnished", value: det.furnished });
+  if (det.elevator === "Y") detailRows.push({ label: "Elevator", value: "Yes" });
   if (det.heating) detailRows.push({ label: "Heating", value: det.heating });
   if (det.airConditioning) detailRows.push({ label: "Cooling", value: det.airConditioning });
+  if (det.energuideRating) detailRows.push({ label: "Energy Rating", value: det.energuideRating });
   if (det.sewer) detailRows.push({ label: "Sewer", value: det.sewer });
   if (det.waterSource) detailRows.push({ label: "Water", value: det.waterSource });
   if (det.flooringType) detailRows.push({ label: "Flooring", value: det.flooringType });
@@ -240,9 +313,10 @@ export default function ListingDetailPage() {
   if (listing.condominium?.fees?.maintenance) detailRows.push({ label: "Maintenance", value: `$${listing.condominium.fees.maintenance}/mo` });
   if (listing.taxes?.annualAmount) detailRows.push({ label: "Annual Taxes", value: `$${listing.taxes.annualAmount.toLocaleString()} (${listing.taxes.assessmentYear})` });
   if (listing.lot?.features) detailRows.push({ label: "Lot Features", value: listing.lot.features });
+  if (listing.lot?.source) detailRows.push({ label: "Lot Source", value: listing.lot.source });
   if (det.landscapeFeatures) detailRows.push({ label: "Landscaping", value: det.landscapeFeatures });
   if (det.extras) detailRows.push({ label: "Extras", value: det.extras });
-  detailRows.push({ label: "Days on Market", value: listing.simpleDaysOnMarket });
+  detailRows.push({ label: "Days on Market", value: listing.simpleDaysOnMarket ?? listing.daysOnMarket });
   if (listing.listDate) detailRows.push({ label: "Listed", value: formatDate(listing.listDate) });
   if (listing.originalPrice && listing.originalPrice !== listing.listPrice) {
     detailRows.push({ label: "Original Price", value: formatPrice(listing.originalPrice) });
@@ -363,10 +437,14 @@ export default function ListingDetailPage() {
                     <p className="text-[11px] uppercase tracking-[0.25em] text-white/40">Est. Value</p>
                   </div>
                 )}
-                {listing.soldPrice && listing.daysOnMarket > 0 && (
+                {(listing.simpleDaysOnMarket ?? listing.daysOnMarket) > 0 && (
                   <div>
-                    <p className="font-serif text-[1.8rem] font-light text-white">{listing.daysOnMarket}</p>
-                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/40">Days on Market</p>
+                    <p className="font-serif text-[1.8rem] font-light text-white">
+                      {listing.simpleDaysOnMarket ?? listing.daysOnMarket}
+                    </p>
+                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/40">
+                      {listing.soldPrice ? "Days on Market" : "Days Listed"}
+                    </p>
                   </div>
                 )}
               </div>
@@ -511,6 +589,23 @@ export default function ListingDetailPage() {
                       })}
                     </p>
                   )}
+                  {listing.timestamps?.idxUpdated && listing.timestamps.idxUpdated !== listing.timestamps.listingUpdated && (
+                    <p className="text-[13px] text-charcoal">
+                      <span className="font-medium text-charcoal/80">IDX Feed Updated:</span>{" "}
+                      {new Date(listing.timestamps.idxUpdated).toLocaleString("en-US", {
+                        month: "short", day: "numeric", year: "numeric",
+                        hour: "numeric", minute: "2-digit", timeZoneName: "short",
+                      })}
+                    </p>
+                  )}
+                  {listing.timestamps?.photosUpdated && (
+                    <p className="text-[13px] text-charcoal">
+                      <span className="font-medium text-charcoal/80">Photos Updated:</span>{" "}
+                      {new Date(listing.timestamps.photosUpdated).toLocaleString("en-US", {
+                        month: "short", day: "numeric", year: "numeric",
+                      })}
+                    </p>
+                  )}
                   <p className="text-[13px] text-charcoal">
                     <span className="font-medium text-charcoal/80">OnSite last checked:</span>{" "}
                     {dataRefreshedAt
@@ -597,6 +692,65 @@ export default function ListingDetailPage() {
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
                       Virtual Tour
                     </a>
+                  </div>
+                )}
+
+                {/* Comparable Sales */}
+                {listing.comparables && listing.comparables.length > 0 && (
+                  <div className="mt-14">
+                    <div className="mb-6 flex items-end justify-between">
+                      <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray">Comparable Sales</p>
+                      <p className="text-[11px] text-charcoal/60">
+                        {listing.comparables.length} similar nearby {listing.comparables.length === 1 ? "property" : "properties"}
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      {listing.comparables.slice(0, 6).map((c) => {
+                        const cStreet = [c.address?.streetNumber, c.address?.streetDirection, c.address?.streetName, c.address?.streetSuffix]
+                          .filter(Boolean).join(" ");
+                        const cPhoto = c.images?.[0]
+                          ? (c.images[0].startsWith("http") ? c.images[0] : CDN + c.images[0])
+                          : null;
+                        return (
+                          <Link
+                            key={c.mlsNumber}
+                            href={`/listings/${c.mlsNumber}`}
+                            className="group flex gap-4 rounded-2xl border border-charcoal/10 bg-white p-3 transition hover:border-charcoal/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
+                          >
+                            <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-xl bg-charcoal/5">
+                              {cPhoto ? (
+                                <Image src={cPhoto} alt={cStreet || c.mlsNumber} fill sizes="100px" className="object-cover" unoptimized />
+                              ) : null}
+                            </div>
+                            <div className="flex flex-1 flex-col justify-between py-0.5">
+                              <div>
+                                <p className="font-serif text-[0.95rem] font-light leading-tight text-charcoal">
+                                  {cStreet || `MLS# ${c.mlsNumber}`}
+                                </p>
+                                <p className="text-[11px] text-charcoal/60">
+                                  {c.address?.city}, {c.address?.state}
+                                  {c.distance ? ` · ${c.distance.toFixed(1)} mi` : ""}
+                                </p>
+                              </div>
+                              <div className="flex items-center justify-between text-[12px]">
+                                <span className="text-charcoal/80">
+                                  {c.details?.numBedrooms ? `${c.details.numBedrooms}bd` : ""}
+                                  {c.details?.numBathrooms ? ` · ${c.details.numBathrooms}ba` : ""}
+                                  {c.details?.sqft ? ` · ${Number(c.details.sqft).toLocaleString()} sf` : ""}
+                                </span>
+                                <span className="font-serif font-light text-charcoal">
+                                  {c.soldPrice ? formatPrice(c.soldPrice) : formatPrice(c.listPrice)}
+                                  {c.lastStatus === "Sld" && <span className="ml-1 text-[10px] uppercase tracking-[0.15em] text-charcoal/50">sold</span>}
+                                </span>
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                    <p className="mt-4 text-[11px] text-charcoal/60 italic not-italic">
+                      Comparable sales are selected by Repliers.io based on proximity, size, and type — they are not part of the NWMLS listing data for this property.
+                    </p>
                   </div>
                 )}
               </div>
@@ -727,6 +881,55 @@ export default function ListingDetailPage() {
                       <p className="mt-1 text-[12px] text-charcoal/80">
                         Range: {formatPrice(Math.round(listing.estimate.low))} – {formatPrice(Math.round(listing.estimate.high))}
                       </p>
+
+                      {/* 12-month history sparkline */}
+                      {listing.estimate.history?.mth && Object.keys(listing.estimate.history.mth).length > 1 && (() => {
+                        const entries = Object.entries(listing.estimate.history.mth)
+                          .sort(([a], [b]) => a.localeCompare(b))
+                          .slice(-12);
+                        const values = entries.map(([, v]) => v.value);
+                        const min = Math.min(...values);
+                        const max = Math.max(...values);
+                        const range = max - min || 1;
+                        const W = 260, H = 44, pad = 2;
+                        const points = entries.map(([, v], i) => {
+                          const x = pad + (i * (W - 2 * pad)) / Math.max(1, entries.length - 1);
+                          const y = pad + (H - 2 * pad) * (1 - (v.value - min) / range);
+                          return `${x.toFixed(1)},${y.toFixed(1)}`;
+                        }).join(" ");
+                        const first = entries[0][1].value;
+                        const last = entries[entries.length - 1][1].value;
+                        const change = ((last - first) / first) * 100;
+                        return (
+                          <div className="mt-4 border-t border-charcoal/8 pt-4">
+                            <div className="mb-2 flex items-baseline justify-between">
+                              <p className="text-[11px] uppercase tracking-[0.2em] text-charcoal/60">12-Month Trend</p>
+                              <p className={`text-[12px] font-medium ${change >= 0 ? "text-green-700" : "text-red-700"}`}>
+                                {change >= 0 ? "▲" : "▼"} {Math.abs(change).toFixed(1)}%
+                              </p>
+                            </div>
+                            <svg viewBox={`0 0 ${W} ${H}`} className="h-11 w-full">
+                              <polyline
+                                fill="none"
+                                stroke="#1a1a18"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                points={points}
+                              />
+                            </svg>
+                          </div>
+                        );
+                      })()}
+
+                      {listing.estimate.confidence !== null && listing.estimate.confidence !== undefined && (
+                        <p className="mt-3 text-[11px] text-charcoal/70">
+                          Confidence: {(listing.estimate.confidence * 100).toFixed(1)}%
+                          {listing.estimate.date && (
+                            <> · As of {new Date(listing.estimate.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</>
+                          )}
+                        </p>
+                      )}
                       <p className="mt-3 text-[11px] text-charcoal/80 border-t border-charcoal/8 pt-3">
                         Estimated value provided by Repliers.io — not sourced from NWMLS or MLS Grid.
                       </p>
