@@ -72,7 +72,7 @@ export default function Header() {
                 width={320}
                 height={80}
                 className={`h-24 lg:h-28 w-auto transition-all duration-500 ${
-                  solid ? "" : "brightness-0 invert"
+                  solid ? "brightness-0" : "brightness-0 invert"
                 }`}
               />
             </Link>
