@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { BC_LOGO, categories } from "@/lib/business-connect-data";
+
+const TBC_URL = "https://tappsbusinessconnect.com";
 
 export default function BusinessConnect() {
   return (
@@ -44,15 +45,15 @@ export default function BusinessConnect() {
             <p className="text-[16px] leading-8 text-white/60 lg:text-right">
               Tapps Business Connect is a high-standard professional networking group serving East Pierce County — trusted referrals, no fees, no fluff.
             </p>
-            <Link
-              href="/business-connect"
+            <a
+              href={TBC_URL}
               className="inline-flex items-center gap-3 rounded-full border border-white/30 px-8 py-4 text-[12px] uppercase tracking-[0.25em] text-white transition-all duration-500 hover:bg-white/10 hover:border-white/50"
             >
               Learn More
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5">
                 <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </Link>
+            </a>
           </motion.div>
         </div>
 
@@ -66,8 +67,8 @@ export default function BusinessConnect() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.07 }}
             >
-              <Link
-                href={`/${cat.slug}`}
+              <a
+                href={TBC_URL}
                 className="group flex flex-col justify-between rounded-3xl border border-white/10 bg-white/5 p-8 transition-all duration-500 hover:bg-white/10 hover:border-white/25 hover:-translate-y-1"
               >
                 <div>
@@ -83,7 +84,7 @@ export default function BusinessConnect() {
                     <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-              </Link>
+              </a>
             </motion.div>
           ))}
         </div>

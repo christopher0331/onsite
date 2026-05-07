@@ -22,6 +22,8 @@ const mainNav = [
   { label: "Contact", href: "/contact-us" },
 ];
 
+const TBC_URL = "https://tappsbusinessconnect.com";
+
 const sellingProcessLinks = [
   { label: "Our Selling Process", href: "/selling-process" },
   { label: "Preparation & Staging", href: "/preparation-and-staging" },
@@ -30,7 +32,7 @@ const sellingProcessLinks = [
   { label: "Trends & Insights", href: "/trends-insights" },
   { label: "Success Stories", href: "/success-stories" },
   { label: "Sellers Guide", href: "/sellers-guide" },
-  { label: "Business Connect", href: "/business-connect" },
+  { label: "Business Connect", href: TBC_URL },
 ];
 
 export default function Header() {
@@ -89,8 +91,8 @@ export default function Header() {
                   {item.label}
                 </Link>
               ))}
-              <Link
-                href="/business-connect"
+              <a
+                href={TBC_URL}
                 className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-300 hover:opacity-80 ${
                   solid
                     ? "border-charcoal/30 text-charcoal hover:bg-charcoal hover:text-white hover:border-charcoal"
@@ -98,7 +100,7 @@ export default function Header() {
                 }`}
               >
                 TBC
-              </Link>
+              </a>
               <a
                 href="tel:253-441-9764"
                 className={`text-[13px] font-medium tracking-[0.1em] transition-colors duration-300 hover:opacity-60 ${
@@ -167,13 +169,13 @@ export default function Header() {
                   {item.label}
                 </Link>
               ))}
-              <Link
-                href="/business-connect"
+              <a
+                href={TBC_URL}
                 onClick={() => setMobileOpen(false)}
                 className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-2.5 text-[12px] uppercase tracking-[0.2em] text-white/80 hover:text-white hover:border-white/70 transition-colors"
               >
                 Tapps Business Connect
-              </Link>
+              </a>
               <div className="w-12 h-px bg-white/20 my-2" />
               {sellingProcessLinks.slice(0, 4).map((item) => (
                 <Link

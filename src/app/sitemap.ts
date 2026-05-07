@@ -1,5 +1,4 @@
 import type { MetadataRoute } from "next";
-import { allMembers } from "@/lib/business-connect-data";
 import blogData from "@/lib/blog-data.json";
 import { isMainWebsiteHost } from "@/lib/site-visibility";
 
@@ -69,34 +68,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/blog`, priority: 0.7, changeFrequency: "weekly" },
   ];
 
-  // ─── BUSINESS CONNECT PAGES ──────────────────────────────────────────────
-  const tbcPages: MetadataRoute.Sitemap = [
-    { url: `${BASE_URL}/business-connect`, priority: 0.9, changeFrequency: "weekly" },
-    { url: `${BASE_URL}/business-connect/about`, priority: 0.7, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/business-connect/apply`, priority: 0.8, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/business-connect/rsvp`, priority: 0.8, changeFrequency: "weekly" },
-  ];
-
-  // ─── TBC CATEGORY PAGES ──────────────────────────────────────────────────
-  const tbcCategoryPages: MetadataRoute.Sitemap = [
-    "home-services",
-    "finance-professional",
-    "health-wellness",
-    "lifestyle-personal-services",
-    "food-hospitality",
-    "trades-specialty",
-  ].map((slug) => ({
-    url: `${BASE_URL}/${slug}`,
-    priority: 0.7,
-    changeFrequency: "weekly" as const,
-  }));
-
-  // ─── TBC MEMBER PROFILES — auto-synced from business-connect-data.ts ─────
-  const memberProfiles: MetadataRoute.Sitemap = allMembers.map((m) => ({
-    url: `${BASE_URL}/business-connect-profiles/${m.slug}`,
-    priority: 0.6,
-    changeFrequency: "monthly" as const,
-  }));
+  // ─── TAPPS BUSINESS CONNECT ──────────────────────────────────────────────
+  // TBC moved to tappsbusinessconnect.com. The proxy 308-redirects all
+  // /business-connect*, /business-connect-profiles/*, and TBC category routes
+  // to the new domain, so we deliberately omit them from the sitemap.
 
   // ─── BLOG POSTS — auto-synced from blog-data.json ────────────────────────
   const blogPosts: MetadataRoute.Sitemap = Object.values(
@@ -125,9 +100,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticPages,
     ...sellingPages,
     ...insightsPages,
-    ...tbcPages,
-    ...tbcCategoryPages,
-    ...memberProfiles,
     ...blogPosts,
     ...(showIdxContent ? featuredHomes : []),
     ...(showIdxContent ? soldHomes : []),
