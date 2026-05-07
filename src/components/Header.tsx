@@ -93,6 +93,8 @@ export default function Header() {
               ))}
               <a
                 href={TBC_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-300 hover:opacity-80 ${
                   solid
                     ? "border-charcoal/30 text-charcoal hover:bg-charcoal hover:text-white hover:border-charcoal"
@@ -171,6 +173,8 @@ export default function Header() {
               ))}
               <a
                 href={TBC_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
                 className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-2.5 text-[12px] uppercase tracking-[0.2em] text-white/80 hover:text-white hover:border-white/70 transition-colors"
               >

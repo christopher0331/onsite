@@ -47,6 +47,8 @@ export default function BusinessConnect() {
             </p>
             <a
               href={TBC_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-3 rounded-full border border-white/30 px-8 py-4 text-[12px] uppercase tracking-[0.25em] text-white transition-all duration-500 hover:bg-white/10 hover:border-white/50"
             >
               Learn More
@@ -69,6 +71,8 @@ export default function BusinessConnect() {
             >
               <a
                 href={TBC_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex flex-col justify-between rounded-3xl border border-white/10 bg-white/5 p-8 transition-all duration-500 hover:bg-white/10 hover:border-white/25 hover:-translate-y-1"
               >
                 <div>
