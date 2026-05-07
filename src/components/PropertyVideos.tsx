@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const CDN = "https://cdn.repliers.io/";
-
 type Listing = {
   mlsNumber: string;
   listPrice: number;
@@ -80,11 +78,8 @@ function formatAddress(a: Listing["address"]) {
 
 async function fetchVideoListings(): Promise<Listing[]> {
   try {
-    // Objective criteria: active NWMLS listings in Pierce County, WA, ordered
-    // by most recently updated, filtered client-side for ones that expose a
-    // public video tour URL.
     const res = await fetch(
-      "https://api.repliers.io/listings?area=Pierce&state=WA&pageSize=50&status=A&sortBy=updatedOnDesc",
+      "https://api.repliers.io/listings?pageSize=50&status=A&sortBy=updatedOnDesc",
       {
         headers: {
           "repliers-api-key": process.env.REPLIERS_API_KEY || "",
@@ -122,7 +117,7 @@ export default async function PropertyVideos() {
         <div className="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-white/50">
-              Pierce County, WA · Video Tours · Preset Search
+              Video Tours · Recently Updated
             </p>
             <h2 className="font-serif text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1.05] text-white">
               Tour Homes Online.
@@ -136,12 +131,10 @@ export default async function PropertyVideos() {
           </Link>
         </div>
 
-        {/* Preset-search disclosure */}
         <p className="mb-10 max-w-3xl text-[13px] leading-relaxed text-white/55">
-          The six homes below are a preset objective search: the most recently-updated active NWMLS
-          listings in Pierce County, WA that include a public video tour. Listings may be represented
-          by brokerages other than OnSite Real Estate Group — attribution is shown on each tile and
-          on the full listing page.
+          The homes below are the most recently-updated active NWMLS listings that include a public
+          video tour. Listings may be represented by brokerages other than OnSite Real Estate
+          Group — attribution is shown on each tile and on the full listing page.
         </p>
 
         {/* Video grid */}

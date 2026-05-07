@@ -26,6 +26,7 @@ function buildScope(req: NextRequest): Record<string, string> {
 
 export async function GET(req: NextRequest) {
   const scope = buildScope(req);
+
   const includeChart = req.nextUrl.searchParams.get("chart") === "true";
 
   const now = new Date();

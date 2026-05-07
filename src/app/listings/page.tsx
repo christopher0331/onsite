@@ -73,13 +73,19 @@ function getImageUrl(images: string[]) {
 }
 
 const STATUS_FILTERS = [
+  { label: "All", value: "All" },
   { label: "Active", value: "A" },
+  { label: "Pending", value: "P" },
   { label: "Sold", value: "U" },
 ];
 
-const COUNTY_OPTIONS = [
-  { label: "Pierce County", value: "Pierce" },
-  { label: "King County", value: "King" },
+const PROPERTY_TYPE_OPTIONS = [
+  { label: "Any Type", value: "" },
+  { label: "Residential", value: "Residential" },
+  { label: "Condominium", value: "Condominium" },
+  { label: "Manufactured", value: "Manufactured" },
+  { label: "Land", value: "Land" },
+  { label: "Multi-Family", value: "Multi-Family" },
 ];
 
 function ListingCard({ listing }: { listing: Listing }) {
@@ -170,14 +176,18 @@ export default function ListingsPage() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("A");
-  const [county, setCounty] = useState("Pierce");
+  const [city, setCity] = useState("");
+  const [propertyType, setPropertyType] = useState("");
   const [minBeds, setMinBeds] = useState("");
+  const [minBaths, setMinBaths] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [dataRefreshedAt, setDataRefreshedAt] = useState<Date | null>(null);
 
   // Reset to page 1 whenever any criteria changes
-  useEffect(() => { setPage(1); }, [status, county, minBeds, minPrice, maxPrice]);
+  useEffect(() => {
+    setPage(1);
+  }, [status, city, propertyType, minBeds, minBaths, minPrice, maxPrice]);
 
   useEffect(() => {
     setLoading(true);
@@ -185,8 +195,9 @@ export default function ListingsPage() {
       status,
       pageSize: "24",
       page: String(page),
-      county,
     });
+    if (city) params.set("city", city);
+    if (propertyType) params.set("type", propertyType);
     if (minBeds) params.set("minBeds", minBeds);
     if (minPrice) params.set("minPrice", minPrice);
     if (maxPrice) params.set("maxPrice", maxPrice);
@@ -194,7 +205,16 @@ export default function ListingsPage() {
     fetch(`/api/listings?${params}`)
       .then((r) => r.json())
       .then((data: ApiResponse) => {
-        setListings(data.listings || []);
+        let results = data.listings || [];
+        // Min-baths filter is applied client-side because the upstream API
+        // doesn't expose it directly.
+        if (minBaths) {
+          const min = Number(minBaths);
+          results = results.filter(
+            (l) => (l.details.numBathrooms ?? 0) >= min
+          );
+        }
+        setListings(results);
         setCount(data.count || 0);
         setNumPages(data.numPages || 1);
         setDataRefreshedAt(new Date());
@@ -202,16 +222,7 @@ export default function ListingsPage() {
         if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
       })
       .catch(() => setLoading(false));
-  }, [status, county, minBeds, minPrice, maxPrice, page]);
-
-  const countyLabel = COUNTY_OPTIONS.find((c) => c.value === county)?.label ?? county;
-  const statusLabel = status === "A" ? "Active" : "Sold";
-
-  // Build a plain-English disclosure of the objective criteria currently applied
-  const criteriaParts: string[] = [`${countyLabel}, WA`, `${statusLabel} status`];
-  if (minBeds) criteriaParts.push(`${minBeds}+ bedrooms`);
-  if (minPrice) criteriaParts.push(`priced from $${Number(minPrice).toLocaleString()}`);
-  if (maxPrice) criteriaParts.push(`up to $${Number(maxPrice).toLocaleString()}`);
+  }, [status, city, propertyType, minBeds, minBaths, minPrice, maxPrice, page]);
 
   return (
     <>
@@ -222,17 +233,16 @@ export default function ListingsPage() {
         <section className="bg-[#1a1a18] pt-40 pb-24 sm:pt-52 sm:pb-32">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
 
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between mb-12">
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between mb-10">
               <div>
                 <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/60">
-                  {countyLabel}, WA — Preset Search
+                  Property Search
                 </p>
                 <h1 className="mb-6 font-serif text-[clamp(2.8rem,7vw,5.8rem)] font-light leading-[1.0] text-white">
                   Search Homes.
                 </h1>
                 <p className="max-w-xl text-[16px] leading-8 text-white/70">
-                  Browse every currently {statusLabel.toLowerCase()} NWMLS listing in {countyLabel}, Washington.
-                  Results are returned objectively from the MLS feed and include listings from all participating brokerages.
+                  Use the filters below to find homes that match what you&apos;re looking for.
                 </p>
               </div>
               <div className="shrink-0 text-right">
@@ -245,21 +255,9 @@ export default function ListingsPage() {
               </div>
             </div>
 
-            {/* Objective-criteria disclosure banner */}
-            <div className="mb-10 rounded-2xl border border-white/15 bg-white/5 p-5 sm:p-6">
-              <p className="mb-1 text-[10px] uppercase tracking-[0.3em] text-white/50">
-                Preset Search Criteria
-              </p>
-              <p className="text-[14px] leading-relaxed text-white/85">
-                {criteriaParts.join(" · ")}. All applicable NWMLS listings that meet these criteria
-                are displayed below in the order returned by MLS Grid. Adjust the controls to change
-                the search.
-              </p>
-            </div>
-
             {/* Filters */}
-            <div className="flex flex-wrap items-end gap-4">
-              <div className="flex gap-2">
+            <div className="flex flex-wrap items-end gap-3">
+              <div className="flex flex-wrap gap-2">
                 {STATUS_FILTERS.map((f) => (
                   <button
                     key={f.value}
@@ -275,21 +273,29 @@ export default function ListingsPage() {
                 ))}
               </div>
 
-              <div className="flex gap-2">
-                {COUNTY_OPTIONS.map((c) => (
-                  <button
-                    key={c.value}
-                    onClick={() => setCounty(c.value)}
-                    className={`rounded-full border px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 ${
-                      county === c.value
-                        ? "border-white bg-white text-charcoal"
-                        : "border-white/20 text-white/60 hover:border-white/40 hover:text-white"
-                    }`}
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="City"
+                className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[12px] tracking-wide text-white placeholder:text-white/40 focus:border-white/50 focus:outline-none"
+              />
+
+              <select
+                value={propertyType}
+                onChange={(e) => setPropertyType(e.target.value)}
+                className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/60 focus:border-white/40 focus:outline-none"
+              >
+                {PROPERTY_TYPE_OPTIONS.map((opt) => (
+                  <option
+                    key={opt.value}
+                    value={opt.value}
+                    className="bg-charcoal text-white"
                   >
-                    {c.label}
-                  </button>
+                    {opt.label}
+                  </option>
                 ))}
-              </div>
+              </select>
 
               <select
                 value={minBeds}
@@ -301,6 +307,19 @@ export default function ListingsPage() {
                 <option value="2" className="bg-charcoal text-white">2+ Beds</option>
                 <option value="3" className="bg-charcoal text-white">3+ Beds</option>
                 <option value="4" className="bg-charcoal text-white">4+ Beds</option>
+                <option value="5" className="bg-charcoal text-white">5+ Beds</option>
+              </select>
+
+              <select
+                value={minBaths}
+                onChange={(e) => setMinBaths(e.target.value)}
+                className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/60 focus:border-white/40 focus:outline-none"
+              >
+                <option value="" className="bg-charcoal text-white">Any Baths</option>
+                <option value="1" className="bg-charcoal text-white">1+ Baths</option>
+                <option value="2" className="bg-charcoal text-white">2+ Baths</option>
+                <option value="3" className="bg-charcoal text-white">3+ Baths</option>
+                <option value="4" className="bg-charcoal text-white">4+ Baths</option>
               </select>
 
               <select
@@ -313,6 +332,7 @@ export default function ListingsPage() {
                 <option value="500000" className="bg-charcoal text-white">$500k+</option>
                 <option value="750000" className="bg-charcoal text-white">$750k+</option>
                 <option value="1000000" className="bg-charcoal text-white">$1M+</option>
+                <option value="1500000" className="bg-charcoal text-white">$1.5M+</option>
               </select>
               <select
                 value={maxPrice}
@@ -324,7 +344,29 @@ export default function ListingsPage() {
                 <option value="750000" className="bg-charcoal text-white">Up to $750k</option>
                 <option value="1000000" className="bg-charcoal text-white">Up to $1M</option>
                 <option value="1500000" className="bg-charcoal text-white">Up to $1.5M</option>
+                <option value="2500000" className="bg-charcoal text-white">Up to $2.5M</option>
               </select>
+
+              {(city ||
+                propertyType ||
+                minBeds ||
+                minBaths ||
+                minPrice ||
+                maxPrice) && (
+                <button
+                  onClick={() => {
+                    setCity("");
+                    setPropertyType("");
+                    setMinBeds("");
+                    setMinBaths("");
+                    setMinPrice("");
+                    setMaxPrice("");
+                  }}
+                  className="rounded-full border border-white/20 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/50 transition hover:border-white/40 hover:text-white"
+                >
+                  Reset
+                </button>
+              )}
             </div>
           </div>
         </section>
@@ -399,7 +441,7 @@ export default function ListingsPage() {
               </div>
               <div className="flex flex-col gap-6 lg:items-end">
                 <p className="text-[16px] leading-8 text-white/70 lg:text-right">
-                  André Bohall — WA Managing Broker Lic. #25031564 — and the OnSite team are ready to help you buy, sell, or invest in Pierce County.
+                  André Bohall — WA Managing Broker Lic. #25031564 — and the OnSite team are ready to help you buy, sell, or invest across Washington.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
@@ -442,10 +484,9 @@ export default function ListingsPage() {
                     : null}
                 </p>
                 <p className="text-[11px] leading-[1.8] text-charcoal/70 max-w-4xl">
-                  The results above are a preset search based solely on the objective criteria disclosed
-                  at the top of this page ({criteriaParts.join("; ")}). Listings are provided courtesy of
-                  the Northwest Multiple Listing Service and may be listed by brokerages other than OnSite
-                  Real Estate Group — attribution is shown on each listing card.
+                  Listings are provided courtesy of the Northwest Multiple Listing Service and may
+                  be listed by brokerages other than OnSite Real Estate Group — attribution is
+                  shown on each listing card.
                 </p>
                 <p className="text-[11px] leading-[1.8] text-charcoal/70 max-w-4xl">
                   IDX information is provided exclusively for consumers&apos; personal noncommercial use, that it may not be

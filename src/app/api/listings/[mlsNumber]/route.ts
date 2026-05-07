@@ -16,7 +16,10 @@ export async function GET(
     });
 
     if (!res.ok) {
-      return NextResponse.json({ error: "Listing not found" }, { status: res.status });
+      return NextResponse.json(
+        { error: "Listing not found" },
+        { status: res.status }
+      );
     }
 
     const data = await res.json();
