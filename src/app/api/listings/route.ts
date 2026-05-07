@@ -17,15 +17,20 @@ export async function GET(req: NextRequest) {
   const county = searchParams.get("county");
   const brokerageOnly = searchParams.get("brokerageOnly") === "true";
 
-  const params = new URLSearchParams({
-    status,
-    pageSize,
-    page,
-  });
+  const params = new URLSearchParams({ pageSize, page });
+
+  // Repliers only knows status=A (Active / On-Market) and status=U (Unavailable
+  // / Off-Market). Multi-status is expressed by appending the param twice.
+  if (status === "All") {
+    params.append("status", "A");
+    params.append("status", "U");
+  } else {
+    params.set("status", status);
+    if (status === "U") params.set("lastStatus", "Sld");
+  }
 
   if (city) params.set("city", city);
   if (county) params.set("area", county);
-  if (status === "U") params.set("lastStatus", "Sld");
   if (brokerageOnly && ONSITE_BROKERAGE_NAME) {
     params.set("office.brokerageName", ONSITE_BROKERAGE_NAME);
   }
