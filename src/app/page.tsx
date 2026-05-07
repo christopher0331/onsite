@@ -11,7 +11,6 @@ import PropertyVideos from "@/components/PropertyVideos";
 import Testimonials from "@/components/Testimonials";
 import CTA from "@/components/CTA";
 import Insights from "@/components/Insights";
-import BusinessConnect from "@/components/BusinessConnect";
 import Marquee from "@/components/Marquee";
 import Footer from "@/components/Footer";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
@@ -39,7 +38,6 @@ export default async function Home() {
         <Testimonials />
         <CTA />
         <Insights />
-        <BusinessConnect />
         <Marquee />
       </main>
       <Footer />
