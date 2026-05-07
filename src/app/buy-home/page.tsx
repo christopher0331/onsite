@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
+import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 
 export const metadata: Metadata = {
   title: "Find Your Perfect Home | Onsite Real Estate",
@@ -58,7 +59,9 @@ const featuredListings = [
   },
 ];
 
-export default function BuyHomePage() {
+export default async function BuyHomePage() {
+  const showIdxContent = await getShowIdxContentForRequest();
+
   return (
     <>
       <Header />
@@ -84,14 +87,16 @@ export default function BuyHomePage() {
               We give you the guidance, market insight, and negotiation power every step of the way.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a
-                href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center bg-white text-charcoal px-8 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/90 transition-all duration-500"
-              >
-                Search All Properties
-              </a>
+              {showIdxContent && (
+                <a
+                  href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center bg-white text-charcoal px-8 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/90 transition-all duration-500"
+                >
+                  Search All Properties
+                </a>
+              )}
               <Link
                 href="/contact-us"
                 className="inline-flex items-center border border-white/35 text-white px-8 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/10 transition-all duration-500"
@@ -115,14 +120,16 @@ export default function BuyHomePage() {
               <p>
                 Your dream home is closer than you think. With our expert guidance and in-depth knowledge of the local market, we&apos;ll help you navigate the process and find the home that perfectly suits your needs.
               </p>
-              <a
-                href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 mt-2 border border-charcoal/20 text-charcoal px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-charcoal hover:text-white transition-all duration-500"
-              >
-                Search All Properties
-              </a>
+              {showIdxContent && (
+                <a
+                  href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 mt-2 border border-charcoal/20 text-charcoal px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-charcoal hover:text-white transition-all duration-500"
+                >
+                  Search All Properties
+                </a>
+              )}
             </div>
           </div>
         </section>
@@ -197,7 +204,7 @@ export default function BuyHomePage() {
                 </div>
                 <div className="pt-2">
                   <p className="font-serif text-[1.4rem] font-light text-white/85 leading-snug mb-2">Savings</p>
-                  <p className="text-[14px] leading-7 text-white/45">Buyers save an average of 1–5% through skilled agent negotiations — that's tens of thousands on a typical purchase.</p>
+                  <p className="text-[14px] leading-7 text-white/45">Buyers save an average of 1–5% through skilled agent negotiations — that&apos;s tens of thousands on a typical purchase.</p>
                 </div>
               </div>
 
@@ -208,7 +215,7 @@ export default function BuyHomePage() {
                 </div>
                 <div className="pt-2">
                   <p className="font-serif text-[1.4rem] font-light text-white/85 leading-snug mb-2">Exclusivity</p>
-                  <p className="text-[14px] leading-7 text-white/45">30% more opportunities through exclusive off-market listings you won't find scrolling on your own.</p>
+                  <p className="text-[14px] leading-7 text-white/45">30% more opportunities through exclusive off-market listings you won&apos;t find scrolling on your own.</p>
                 </div>
               </div>
 
@@ -216,52 +223,53 @@ export default function BuyHomePage() {
           </div>
         </section>
 
-        {/* Featured Listings */}
-        <section className="py-20 sm:py-28 bg-white">
-          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-            <div className="flex items-end justify-between mb-12">
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-4">Featured Listings</p>
-                <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
-                  Featured Home <span className="italic">Listings.</span>
-                </h2>
+        {showIdxContent && (
+          <section className="py-20 sm:py-28 bg-white">
+            <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+              <div className="flex items-end justify-between mb-12">
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-4">Featured Listings</p>
+                  <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
+                    Featured Home <span className="italic">Listings.</span>
+                  </h2>
+                </div>
+                <a
+                  href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:inline-flex items-center gap-3 border border-charcoal/20 text-charcoal px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-charcoal hover:text-white transition-all duration-500"
+                >
+                  Search All
+                </a>
               </div>
-              <a
-                href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center gap-3 border border-charcoal/20 text-charcoal px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-charcoal hover:text-white transition-all duration-500"
-              >
-                Search All
-              </a>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {featuredListings.map((listing) => (
-                <div key={listing.title} className="group flex flex-col overflow-hidden rounded-3xl shadow-[0_22px_70px_rgba(0,0,0,0.14)]">
-                  <Link href={listing.href} className="block">
-                    <div className="relative aspect-[4/3] overflow-hidden">
-                      <Image
-                        src={listing.image}
-                        alt={listing.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                      <div className="absolute bottom-5 left-5 right-5">
-                        <p className="font-serif text-lg font-light text-white leading-snug mb-1">{listing.title}</p>
-                        <p className="text-[13px] text-white/70 font-medium">{listing.price}</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {featuredListings.map((listing) => (
+                  <div key={listing.title} className="group flex flex-col overflow-hidden rounded-3xl shadow-[0_22px_70px_rgba(0,0,0,0.14)]">
+                    <Link href={listing.href} className="block">
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <Image
+                          src={listing.image}
+                          alt={listing.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                        <div className="absolute bottom-5 left-5 right-5">
+                          <p className="font-serif text-lg font-light text-white leading-snug mb-1">{listing.title}</p>
+                          <p className="text-[13px] text-white/70 font-medium">{listing.price}</p>
+                        </div>
                       </div>
+                    </Link>
+                    <div className="bg-white px-5 pb-3">
+                      <MLSCardAttribution />
                     </div>
-                  </Link>
-                  <div className="bg-white px-5 pb-3">
-                    <MLSCardAttribution />
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <TestimonialsScroll />
 
@@ -283,14 +291,16 @@ export default function BuyHomePage() {
                   Find Your <span className="italic">Perfect Home Today</span>
                 </h2>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                  <a
-                    href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center bg-white text-charcoal px-10 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/90 transition-all duration-500"
-                  >
-                    Search Properties
-                  </a>
+                  {showIdxContent && (
+                    <a
+                      href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center bg-white text-charcoal px-10 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/90 transition-all duration-500"
+                    >
+                      Search Properties
+                    </a>
+                  )}
                   <Link
                     href="/contact-us"
                     className="inline-flex items-center justify-center border border-white/35 text-white px-10 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/10 transition-all duration-500"

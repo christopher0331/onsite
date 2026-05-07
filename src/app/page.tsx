@@ -14,21 +14,28 @@ import Insights from "@/components/Insights";
 import BusinessConnect from "@/components/BusinessConnect";
 import Marquee from "@/components/Marquee";
 import Footer from "@/components/Footer";
+import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 
-export default function Home() {
+export default async function Home() {
+  const showIdxContent = await getShowIdxContentForRequest();
+
   return (
     <>
       <Header />
       <main>
-        <Hero />
+        <Hero showIdxLink={showIdxContent} />
         <Stats />
         <TestimonialsScroll />
         <About />
         <Solutions />
         <Process />
-        <SoldProperties />
-        <FeaturedListings />
-        <PropertyVideos />
+        {showIdxContent && (
+          <>
+            <SoldProperties />
+            <FeaturedListings />
+            <PropertyVideos />
+          </>
+        )}
         <Testimonials />
         <CTA />
         <Insights />

@@ -1,8 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import {
+  isMainWebsiteHost,
+  showIdxContent as defaultShowIdxContent,
+} from "@/lib/site-visibility";
 
 const companyLinks = [
   { label: "Home", href: "/" },
@@ -12,16 +17,6 @@ const companyLinks = [
   { label: "Home Evaluation", href: "/free-home-evaluation" },
   { label: "Terms of Service", href: "/terms-of-service" },
   { label: "DMCA Notice", href: "/dmca-notice" },
-];
-
-const solutionLinks = [
-  { label: "Sell Home", href: "/sell-your-home" },
-  { label: "Selling Process", href: "/selling-process" },
-  { label: "Preparation & Staging", href: "/preparation-and-staging" },
-  { label: "Marketing Strategy", href: "/real-estate-marketing" },
-  { label: "Negotiation & Closing", href: "/negotiation-closing" },
-  { label: "Buy Home", href: "/buy-home" },
-  { label: "Search Homes", href: "https://www.onsiteregroup.net/search" },
 ];
 
 const socialLinks = [
@@ -64,6 +59,23 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const [showIdxContent] = useState(() => {
+    if (typeof window === "undefined") return defaultShowIdxContent;
+    return !isMainWebsiteHost(window.location.hostname);
+  });
+
+  const solutionLinks = [
+    { label: "Sell Home", href: "/sell-your-home" },
+    { label: "Selling Process", href: "/selling-process" },
+    { label: "Preparation & Staging", href: "/preparation-and-staging" },
+    { label: "Marketing Strategy", href: "/real-estate-marketing" },
+    { label: "Negotiation & Closing", href: "/negotiation-closing" },
+    { label: "Buy Home", href: "/buy-home" },
+    ...(showIdxContent
+      ? [{ label: "Search Homes", href: "https://www.onsiteregroup.net/search" }]
+      : []),
+  ];
+
   return (
     <footer className="bg-charcoal text-white">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12 pt-20 pb-16">
@@ -168,42 +180,44 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        <div className="mt-16 pt-10 border-t border-white/[0.06]">
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-              <div className="flex items-center gap-6">
-                <Image
-                  src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png"
-                  alt="NWMLS Three Trees Logo"
-                  width={48}
-                  height={48}
-                  className="h-10 w-auto opacity-60"
-                />
-                <Image
-                  src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bd6eeff6f396fc12e48_Equal-Housing-Realtor_gray50.png"
-                  alt="Equal Housing Realtor"
-                  width={80}
-                  height={40}
-                  className="h-10 w-auto opacity-40"
-                />
-                <p className="text-[12px] text-white/70 leading-relaxed">
-                  Listing data provided by NWMLS as distributed by MLS Grid.
-                </p>
+        {showIdxContent && (
+          <div className="mt-16 pt-10 border-t border-white/[0.06]">
+            <div className="flex flex-col gap-8">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+                <div className="flex items-center gap-6">
+                  <Image
+                    src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png"
+                    alt="NWMLS Three Trees Logo"
+                    width={48}
+                    height={48}
+                    className="h-10 w-auto opacity-60"
+                  />
+                  <Image
+                    src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bd6eeff6f396fc12e48_Equal-Housing-Realtor_gray50.png"
+                    alt="Equal Housing Realtor"
+                    width={80}
+                    height={40}
+                    className="h-10 w-auto opacity-40"
+                  />
+                  <p className="text-[12px] text-white/70 leading-relaxed">
+                    Listing data provided by NWMLS as distributed by MLS Grid.
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <p className="text-[11px] text-white/60 leading-[1.8] max-w-4xl">
-              IDX information is provided exclusively for consumers&apos; personal
-              noncommercial use, that it may not be used for any purpose other
-              than to identify prospective properties consumers may be interested
-              in purchasing, that the data is deemed reliable but is not
-              guaranteed by MLS GRID, and that the use of the MLS GRID Data may
-              be subject to an end user license agreement prescribed by the
-              Member Participant&apos;s applicable MLS if any and as amended from
-              time to time.
-            </p>
+              <p className="text-[11px] text-white/60 leading-[1.8] max-w-4xl">
+                IDX information is provided exclusively for consumers&apos; personal
+                noncommercial use, that it may not be used for any purpose other
+                than to identify prospective properties consumers may be interested
+                in purchasing, that the data is deemed reliable but is not
+                guaranteed by MLS GRID, and that the use of the MLS GRID Data may
+                be subject to an end user license agreement prescribed by the
+                Member Participant&apos;s applicable MLS if any and as amended from
+                time to time.
+              </p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="border-t border-white/[0.06]">

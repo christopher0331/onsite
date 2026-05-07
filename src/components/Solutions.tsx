@@ -1,8 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  isMainWebsiteHost,
+  showIdxContent as defaultShowIdxContent,
+} from "@/lib/site-visibility";
 
 const solutions = [
   {
@@ -29,11 +34,26 @@ const solutions = [
 ];
 
 export default function Solutions() {
+  const [showIdxContent] = useState(() => {
+    if (typeof window === "undefined") return defaultShowIdxContent;
+    return !isMainWebsiteHost(window.location.hostname);
+  });
+
+  const visibleSolutions = showIdxContent
+    ? solutions
+    : solutions.filter((item) => !item.external);
+
   return (
     <section className="relative py-8 sm:py-10 bg-white">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {solutions.map((item, i) => (
+        <div
+          className={
+            showIdxContent
+              ? "grid grid-cols-1 md:grid-cols-3 gap-4"
+              : "grid grid-cols-1 gap-4 md:grid-cols-2"
+          }
+        >
+        {visibleSolutions.map((item, i) => (
           <motion.div
             key={item.title}
             initial={{ opacity: 0, y: 30 }}

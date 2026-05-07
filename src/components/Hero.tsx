@@ -11,7 +11,7 @@ const VIDEO_WEBM =
 const POSTER =
   "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67b64a09871910cd858654e8_Onsite%20Regroup%20Video-poster-00001.jpg";
 
-export default function Hero() {
+export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -75,32 +75,34 @@ export default function Hero() {
           Lake Tapps, Bonney Lake, Sumner, Buckley, Graham, Puyallup & Beyond.
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          className="mt-12"
-        >
-          <Link
-            href="/listings"
-            className="group inline-flex items-center gap-3 border border-white/50 text-white px-10 py-4 text-[13px] uppercase tracking-[0.25em] hover:bg-white hover:text-charcoal transition-all duration-500"
+        {showIdxLink && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="mt-12"
           >
-            Search Homes
-            <svg
-              className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={1.5}
+            <Link
+              href="/listings"
+              className="group inline-flex items-center gap-3 border border-white/50 text-white px-10 py-4 text-[13px] uppercase tracking-[0.25em] hover:bg-white hover:text-charcoal transition-all duration-500"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
-            </svg>
-          </Link>
-        </motion.div>
+              Search Homes
+              <svg
+                className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={1.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                />
+              </svg>
+            </Link>
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0 }}

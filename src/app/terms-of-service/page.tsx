@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
+import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 
 export const metadata: Metadata = {
   title: "Terms of Service | OnSite Real Estate Group",
@@ -57,7 +58,12 @@ const sections = [
   },
 ];
 
-export default function TermsOfServicePage() {
+export default async function TermsOfServicePage() {
+  const showIdxContent = await getShowIdxContentForRequest();
+  const visibleSections = showIdxContent
+    ? sections
+    : sections.filter((section) => section.title !== "IDX Listing Data");
+
   return (
     <>
       <Header />
@@ -85,7 +91,7 @@ export default function TermsOfServicePage() {
             </p>
 
             <div className="space-y-12">
-              {sections.map((section, i) => (
+              {visibleSections.map((section, i) => (
                 <div key={section.title} className="border-b border-charcoal/8 pb-12 last:border-0">
                   <div className="flex items-start gap-6">
                     <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1a1a18] font-serif text-[0.75rem] font-light text-white">

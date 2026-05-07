@@ -1,9 +1,11 @@
 import type { MetadataRoute } from "next";
 import { allMembers } from "@/lib/business-connect-data";
 import blogData from "@/lib/blog-data.json";
+import { isMainWebsiteHost } from "@/lib/site-visibility";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://onsiteregroup.com";
+const showIdxContent = !isMainWebsiteHost(new URL(BASE_URL).hostname);
 
 // ─── FEATURED HOMES ──────────────────────────────────────────────────────────
 // When you add or remove a listing in featured-homes/[slug]/page.tsx,
@@ -36,8 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/buy-home`, priority: 0.9, changeFrequency: "weekly" },
     { url: `${BASE_URL}/sell-your-home`, priority: 0.9, changeFrequency: "weekly" },
     { url: `${BASE_URL}/free-home-evaluation`, priority: 0.8, changeFrequency: "monthly" },
-    { url: `${BASE_URL}/listings`, priority: 0.9, changeFrequency: "daily" },
-    { url: `${BASE_URL}/sold-homes`, priority: 0.7, changeFrequency: "weekly" },
+    ...(showIdxContent
+      ? [
+          { url: `${BASE_URL}/listings`, priority: 0.9, changeFrequency: "daily" as const },
+          { url: `${BASE_URL}/sold-homes`, priority: 0.7, changeFrequency: "weekly" as const },
+        ]
+      : []),
     { url: `${BASE_URL}/frequently-asked-questions`, priority: 0.6, changeFrequency: "monthly" },
     { url: `${BASE_URL}/terms-of-service`, priority: 0.3, changeFrequency: "yearly" },
     { url: `${BASE_URL}/dmca-notice`, priority: 0.3, changeFrequency: "yearly" },
@@ -123,7 +129,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...tbcCategoryPages,
     ...memberProfiles,
     ...blogPosts,
-    ...featuredHomes,
-    ...soldHomes,
+    ...(showIdxContent ? featuredHomes : []),
+    ...(showIdxContent ? soldHomes : []),
   ].map((entry) => ({ ...entry, lastModified: now }));
 }

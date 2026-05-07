@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
+import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 
 export const metadata: Metadata = {
   title: "Sell Your Home in East Pierce County | Free Home Valuation & Expert Realtors",
@@ -78,7 +79,9 @@ const soldProperties = [
 ];
 
 
-export default function SellYourHomePage() {
+export default async function SellYourHomePage() {
+  const showIdxContent = await getShowIdxContentForRequest();
+
   return (
     <>
       <Header />
@@ -275,57 +278,58 @@ export default function SellYourHomePage() {
           </div>
         </section>
 
-        {/* Sold Properties */}
-        <section className="py-20 sm:py-28 bg-[#f2ede6]">
-          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-            <div className="flex items-end justify-between mb-12">
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-4">Sold Properties</p>
-                <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
-                  Over 300+ <span className="italic">Sold Properties.</span>
-                </h2>
-              </div>
-              <Link
-                href="/sold-homes"
-                className="hidden sm:inline-flex items-center gap-3 border border-charcoal/20 text-charcoal px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-charcoal hover:text-white transition-all duration-500"
-              >
-                View All
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {soldProperties.map((prop) => (
-                <Link key={prop.title} href={prop.href} className="group block">
-                  <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-[0_22px_70px_rgba(0,0,0,0.14)]">
-                    <Image
-                      src={prop.image}
-                      alt={prop.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                    <span className="absolute top-4 left-4 bg-charcoal/90 backdrop-blur-sm text-white text-[10px] uppercase tracking-[0.25em] px-4 py-1.5 rounded-full">
-                      {prop.badge}
-                    </span>
-                    <p className="absolute bottom-5 left-5 right-5 font-serif text-lg font-light text-white leading-snug">
-                      {prop.title}
-                    </p>
-                  </div>
+        {showIdxContent && (
+          <section className="py-20 sm:py-28 bg-[#f2ede6]">
+            <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+              <div className="flex items-end justify-between mb-12">
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-4">Sold Properties</p>
+                  <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
+                    Over 300+ <span className="italic">Sold Properties.</span>
+                  </h2>
+                </div>
+                <Link
+                  href="/sold-homes"
+                  className="hidden sm:inline-flex items-center gap-3 border border-charcoal/20 text-charcoal px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-charcoal hover:text-white transition-all duration-500"
+                >
+                  View All
                 </Link>
-              ))}
-            </div>
+              </div>
 
-            <div className="mt-8 sm:hidden">
-              <Link
-                href="/sold-homes"
-                className="inline-flex items-center gap-3 border border-charcoal/20 text-charcoal px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-charcoal hover:text-white transition-all duration-500"
-              >
-                View All
-              </Link>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {soldProperties.map((prop) => (
+                  <Link key={prop.title} href={prop.href} className="group block">
+                    <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-[0_22px_70px_rgba(0,0,0,0.14)]">
+                      <Image
+                        src={prop.image}
+                        alt={prop.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      <span className="absolute top-4 left-4 bg-charcoal/90 backdrop-blur-sm text-white text-[10px] uppercase tracking-[0.25em] px-4 py-1.5 rounded-full">
+                        {prop.badge}
+                      </span>
+                      <p className="absolute bottom-5 left-5 right-5 font-serif text-lg font-light text-white leading-snug">
+                        {prop.title}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              <div className="mt-8 sm:hidden">
+                <Link
+                  href="/sold-homes"
+                  className="inline-flex items-center gap-3 border border-charcoal/20 text-charcoal px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-charcoal hover:text-white transition-all duration-500"
+                >
+                  View All
+                </Link>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <TestimonialsScroll />
 
