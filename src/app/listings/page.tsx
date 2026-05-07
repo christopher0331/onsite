@@ -3,10 +3,21 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
+
+const ListingsMap = dynamic(() => import("@/components/ListingsMap"), {
+  ssr: false,
+  loading: () => (
+    <div className="grid h-[640px] place-items-center rounded-3xl bg-charcoal/5">
+      <p className="text-[12px] uppercase tracking-[0.25em] text-charcoal/50">Loading map…</p>
+    </div>
+  ),
+});
 
 const CDN = "https://cdn.repliers.io/";
 
@@ -16,6 +27,7 @@ type Listing = {
   soldPrice: number | null;
   status: string;
   lastStatus: string;
+  standardStatus?: string | null;
   listDate: string;
   address: {
     streetNumber: string;
@@ -72,6 +84,41 @@ function getImageUrl(images: string[]) {
   return CDN + path;
 }
 
+// NWMLS pending / contingent codes returned in `lastStatus` on `status=A`
+// records. Anything in this set is on-market but has an offer — auditor
+// requires we label it distinctly from straight Active.
+const PENDING_LAST_STATUSES = new Set([
+  "Pen",  // Pending
+  "Pi",   // Pending Inspection
+  "Ps",   // Pending Short Sale
+  "Pf",   // Pending Feasibility
+  "Pba",  // Pending BU/Acceptance
+  "Sc",   // Sold Conditional / Active Under Contract
+]);
+
+type StatusBadge = { label: string; tone: "active" | "pending" | "sold" };
+
+function getStatusBadge(l: Pick<Listing, "status" | "lastStatus" | "standardStatus">): StatusBadge {
+  const standard = (l.standardStatus || "").trim();
+  const last = (l.lastStatus || "").trim();
+
+  // Off-market record — Sold / Expired / Withdrawn etc.
+  if (l.status === "U") {
+    if (standard) return { label: standard, tone: last === "Sld" ? "sold" : "pending" };
+    if (last === "Sld") return { label: "Sold", tone: "sold" };
+    return { label: last || "Off-Market", tone: "sold" };
+  }
+
+  // On-market: distinguish straight Active from Pending / Active Under Contract.
+  if (PENDING_LAST_STATUSES.has(last)) {
+    return { label: standard || "Pending", tone: "pending" };
+  }
+  if (standard && standard.toLowerCase() !== "active") {
+    return { label: standard, tone: "pending" };
+  }
+  return { label: standard || "Active", tone: "active" };
+}
+
 const STATUS_FILTERS = [
   { label: "All", value: "All" },
   { label: "Active", value: "A" },
@@ -86,6 +133,13 @@ const PROPERTY_TYPE_OPTIONS = [
   { label: "Manufactured", value: "Manufactured" },
   { label: "Land", value: "Land" },
   { label: "Multi-Family", value: "Multi-Family" },
+];
+
+const SORT_OPTIONS = [
+  { label: "Newest First", value: "createdOnDesc" },
+  { label: "Recently Updated", value: "updatedOnDesc" },
+  { label: "Price: High to Low", value: "listPriceDesc" },
+  { label: "Price: Low to High", value: "listPriceAsc" },
 ];
 
 function ListingCard({ listing }: { listing: Listing }) {
@@ -119,11 +173,22 @@ function ListingCard({ listing }: { listing: Listing }) {
           </div>
         )}
         <div className="absolute left-4 top-4">
-          <span className={`rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium ${
-            listing.status === "A" ? "bg-white/90 text-charcoal" : "bg-charcoal/80 text-white"
-          }`}>
-            {listing.status === "A" ? "Active" : listing.lastStatus || "Sold"}
-          </span>
+          {(() => {
+            const badge = getStatusBadge(listing);
+            const tone =
+              badge.tone === "active"
+                ? "bg-white/90 text-charcoal"
+                : badge.tone === "pending"
+                  ? "bg-amber-400/95 text-charcoal"
+                  : "bg-charcoal/80 text-white";
+            return (
+              <span
+                className={`rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium ${tone}`}
+              >
+                {badge.label}
+              </span>
+            );
+          })()}
         </div>
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-5 pb-4 pt-10">
           {listing.soldPrice ? (
@@ -170,6 +235,7 @@ function ListingCard({ listing }: { listing: Listing }) {
 }
 
 export default function ListingsPage() {
+  const router = useRouter();
   const [listings, setListings] = useState<Listing[]>([]);
   const [count, setCount] = useState(0);
   const [numPages, setNumPages] = useState(1);
@@ -182,19 +248,29 @@ export default function ListingsPage() {
   const [minBaths, setMinBaths] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const [sortBy, setSortBy] = useState("createdOnDesc");
+  const [viewMode, setViewMode] = useState<"list" | "map">("list");
+  const [mlsLookup, setMlsLookup] = useState("");
   const [dataRefreshedAt, setDataRefreshedAt] = useState<Date | null>(null);
 
-  // Reset to page 1 whenever any criteria changes
+  function handleMlsLookup(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmed = mlsLookup.trim();
+    if (!trimmed) return;
+    router.push(`/listings/${encodeURIComponent(trimmed)}`);
+  }
+
   useEffect(() => {
     setPage(1);
-  }, [status, city, propertyType, minBeds, minBaths, minPrice, maxPrice]);
+  }, [status, city, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy]);
 
   useEffect(() => {
     setLoading(true);
     const params = new URLSearchParams({
       status,
-      pageSize: "24",
+      pageSize: viewMode === "map" ? "100" : "24",
       page: String(page),
+      sortBy,
     });
     if (city) params.set("city", city);
     if (propertyType) params.set("type", propertyType);
@@ -206,8 +282,6 @@ export default function ListingsPage() {
       .then((r) => r.json())
       .then((data: ApiResponse) => {
         let results = data.listings || [];
-        // Min-baths filter is applied client-side because the upstream API
-        // doesn't expose it directly.
         if (minBaths) {
           const min = Number(minBaths);
           results = results.filter(
@@ -222,7 +296,7 @@ export default function ListingsPage() {
         if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
       })
       .catch(() => setLoading(false));
-  }, [status, city, propertyType, minBeds, minBaths, minPrice, maxPrice, page]);
+  }, [status, city, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy, page, viewMode]);
 
   return (
     <>
@@ -280,6 +354,24 @@ export default function ListingsPage() {
                 placeholder="City"
                 className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[12px] tracking-wide text-white placeholder:text-white/40 focus:border-white/50 focus:outline-none"
               />
+
+              <form onSubmit={handleMlsLookup} className="flex items-center gap-2">
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  value={mlsLookup}
+                  onChange={(e) => setMlsLookup(e.target.value)}
+                  placeholder="MLS #"
+                  className="w-28 rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[12px] tracking-wide text-white placeholder:text-white/40 focus:border-white/50 focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={!mlsLookup.trim()}
+                  className="rounded-full border border-white/20 px-4 py-2.5 text-[10px] uppercase tracking-[0.2em] text-white/70 transition hover:border-white/50 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Go
+                </button>
+              </form>
 
               <select
                 value={propertyType}
@@ -347,12 +439,29 @@ export default function ListingsPage() {
                 <option value="2500000" className="bg-charcoal text-white">Up to $2.5M</option>
               </select>
 
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/60 focus:border-white/40 focus:outline-none"
+              >
+                {SORT_OPTIONS.map((opt) => (
+                  <option
+                    key={opt.value}
+                    value={opt.value}
+                    className="bg-charcoal text-white"
+                  >
+                    Sort: {opt.label}
+                  </option>
+                ))}
+              </select>
+
               {(city ||
                 propertyType ||
                 minBeds ||
                 minBaths ||
                 minPrice ||
-                maxPrice) && (
+                maxPrice ||
+                sortBy !== "createdOnDesc") && (
                 <button
                   onClick={() => {
                     setCity("");
@@ -361,12 +470,40 @@ export default function ListingsPage() {
                     setMinBaths("");
                     setMinPrice("");
                     setMaxPrice("");
+                    setSortBy("createdOnDesc");
                   }}
                   className="rounded-full border border-white/20 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/50 transition hover:border-white/40 hover:text-white"
                 >
                   Reset
                 </button>
               )}
+            </div>
+
+            {/* View-mode toggle */}
+            <div className="mt-8 flex items-center gap-3">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-white/40">View</span>
+              <div className="inline-flex rounded-full border border-white/15 p-1">
+                <button
+                  onClick={() => setViewMode("list")}
+                  className={`rounded-full px-5 py-1.5 text-[11px] uppercase tracking-[0.2em] transition ${
+                    viewMode === "list"
+                      ? "bg-white text-charcoal"
+                      : "text-white/60 hover:text-white"
+                  }`}
+                >
+                  List
+                </button>
+                <button
+                  onClick={() => setViewMode("map")}
+                  className={`rounded-full px-5 py-1.5 text-[11px] uppercase tracking-[0.2em] transition ${
+                    viewMode === "map"
+                      ? "bg-white text-charcoal"
+                      : "text-white/60 hover:text-white"
+                  }`}
+                >
+                  Map
+                </button>
+              </div>
             </div>
           </div>
         </section>
@@ -391,19 +528,24 @@ export default function ListingsPage() {
                   <span>
                     Showing <strong className="text-charcoal">{listings.length}</strong> of{" "}
                     <strong className="text-charcoal">{count.toLocaleString()}</strong> matching listings
-                    {numPages > 1 && (
+                    {viewMode === "list" && numPages > 1 && (
                       <> · Page <strong className="text-charcoal">{page}</strong> of {numPages}</>
                     )}
                   </span>
                 </div>
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {listings.map((listing) => (
-                    <ListingCard key={listing.mlsNumber} listing={listing} />
-                  ))}
-                </div>
 
-                {/* Pagination */}
-                {numPages > 1 && (
+                {viewMode === "map" ? (
+                  <ListingsMap listings={listings} />
+                ) : (
+                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    {listings.map((listing) => (
+                      <ListingCard key={listing.mlsNumber} listing={listing} />
+                    ))}
+                  </div>
+                )}
+
+                {/* Pagination — list view only; map view loads up to 100 pins */}
+                {viewMode === "list" && numPages > 1 && (
                   <div className="mt-14 flex items-center justify-center gap-3">
                     <button
                       disabled={page <= 1}

@@ -461,13 +461,14 @@ export default function ListingDetailPage() {
         {images.length > 0 && (
           <section className="bg-white py-10">
             <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-              {/* Main image */}
-              <div className="relative aspect-[16/8] overflow-hidden rounded-3xl bg-charcoal/5 shadow-[0_14px_50px_rgba(0,0,0,0.12)]">
+              {/* Main image — object-contain so the NWMLS watermark, which is
+                  baked into a corner of the original photo, is never cropped. */}
+              <div className="relative aspect-[16/8] overflow-hidden rounded-3xl bg-charcoal shadow-[0_14px_50px_rgba(0,0,0,0.12)]">
                 <Image
                   src={imgUrl(images[activeImg]) || ""}
                   alt={street}
                   fill
-                  className="object-cover transition-opacity duration-300"
+                  className="object-contain transition-opacity duration-300"
                   sizes="100vw"
                   priority
                   unoptimized
@@ -525,44 +526,61 @@ export default function ListingDetailPage() {
                 ))}
               </div>
 
-              {/* Listed By + Bought With attribution */}
-              {(listing.agents?.length > 0 || listing.buyerAgents?.length) && (
-                <div className="mt-5 flex flex-wrap gap-x-12 gap-y-3 border-t border-charcoal/8 pt-5">
-                  {listing.agents?.length > 0 && (
-                    <div className="flex items-start gap-4">
-                      <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Listed By:</span>
-                      <div className="flex flex-col gap-0.5">
-                        {listing.agents.map((agent, i) => (
-                          <span key={i} className="text-[13px]">
-                            <span className="font-medium text-charcoal">{agent.name}</span>
-                            {agent.brokerage?.name && (
-                              <span className="text-charcoal/80">,&nbsp;{agent.brokerage.name}</span>
-                            )}
-                          </span>
-                        ))}
+              {/* Listed By + Bought With attribution. On sold listings the
+                  Bought With row always renders so the buyer brokerage is
+                  visible alongside the listing brokerage (NWMLS requirement).
+                  When Repliers does not return a buyer agent we still show
+                  the row with a clear "Not provided" placeholder. */}
+              {(() => {
+                const isSold = listing.lastStatus === "Sld";
+                const hasListing = (listing.agents?.length ?? 0) > 0;
+                const hasBuyer = (listing.buyerAgents?.length ?? 0) > 0;
+                if (!hasListing && !hasBuyer && !isSold) return null;
+
+                return (
+                  <div className="mt-5 flex flex-wrap gap-x-12 gap-y-3 border-t border-charcoal/8 pt-5">
+                    {hasListing && (
+                      <div className="flex items-start gap-4">
+                        <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Listed By:</span>
+                        <div className="flex flex-col gap-0.5">
+                          {listing.agents.map((agent, i) => (
+                            <span key={i} className="text-[13px]">
+                              <span className="font-medium text-charcoal">{agent.name}</span>
+                              {agent.brokerage?.name && (
+                                <span className="text-charcoal/80">,&nbsp;{agent.brokerage.name}</span>
+                              )}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  {listing.buyerAgents && listing.buyerAgents.length > 0 && (
-                    <div className="flex items-start gap-4">
-                      <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Bought With:</span>
-                      <div className="flex flex-col gap-0.5">
-                        {listing.buyerAgents.map((agent, i) => (
-                          <span key={i} className="text-[13px]">
-                            <span className="font-medium text-charcoal">{agent.name}</span>
-                            {agent.brokerage?.name && (
-                              <span className="text-charcoal/80">,&nbsp;{agent.brokerage.name}</span>
-                            )}
-                          </span>
-                        ))}
+                    )}
+                    {(hasBuyer || isSold) && (
+                      <div className="flex items-start gap-4">
+                        <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Bought With:</span>
+                        <div className="flex flex-col gap-0.5">
+                          {hasBuyer ? (
+                            listing.buyerAgents!.map((agent, i) => (
+                              <span key={i} className="text-[13px]">
+                                <span className="font-medium text-charcoal">{agent.name}</span>
+                                {agent.brokerage?.name && (
+                                  <span className="text-charcoal/80">,&nbsp;{agent.brokerage.name}</span>
+                                )}
+                              </span>
+                            ))
+                          ) : (
+                            <span className="text-[13px] italic text-charcoal/60">
+                              Buyer brokerage not provided
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  {listing.office?.brokerageName && !listing.agents?.some(a => a.brokerage?.name) && (
-                    <span className="text-[13px] text-charcoal/80">{listing.office.brokerageName}</span>
-                  )}
-                </div>
-              )}
+                    )}
+                    {listing.office?.brokerageName && !listing.agents?.some(a => a.brokerage?.name) && (
+                      <span className="text-[13px] text-charcoal/80">{listing.office.brokerageName}</span>
+                    )}
+                  </div>
+                );
+              })()}
             </div>
           </section>
         )}
@@ -796,61 +814,76 @@ export default function ListingDetailPage() {
                     </div>
                   </div>
 
-                  {/* Agent card — listing agent(s) + buyer agent(s) */}
-                  {(listing.agents?.length > 0 || listing.buyerAgents?.length) && (
-                    <div className="rounded-3xl border border-charcoal/10 bg-[#f9f7f4] p-7 space-y-5">
-                      {listing.agents?.length > 0 && (
-                        <div>
-                          <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Listed By</p>
-                          <div className="space-y-3">
-                            {listing.agents.map((agent, i) => (
-                              <div key={i} className="flex items-center gap-4">
-                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-charcoal/10 text-charcoal text-[12px] font-serif font-light">
-                                  {agent.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                  {/* Agent card — listing agent(s) + buyer agent(s).
+                      For sold listings the Bought With section always shows
+                      so the buyer brokerage is visible per NWMLS rules. */}
+                  {(() => {
+                    const isSold = listing.lastStatus === "Sld";
+                    const hasListing = (listing.agents?.length ?? 0) > 0;
+                    const hasBuyer = (listing.buyerAgents?.length ?? 0) > 0;
+                    if (!hasListing && !hasBuyer && !isSold) return null;
+
+                    return (
+                      <div className="rounded-3xl border border-charcoal/10 bg-[#f9f7f4] p-7 space-y-5">
+                        {hasListing && (
+                          <div>
+                            <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Listed By</p>
+                            <div className="space-y-3">
+                              {listing.agents.map((agent, i) => (
+                                <div key={i} className="flex items-center gap-4">
+                                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-charcoal/10 text-charcoal text-[12px] font-serif font-light">
+                                    {agent.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                                  </div>
+                                  <div>
+                                    <p className="font-serif text-[1rem] font-light text-charcoal">{agent.name}</p>
+                                    {agent.brokerage?.name && (
+                                      <p className="text-[12px] text-charcoal/80">{agent.brokerage.name}</p>
+                                    )}
+                                    {agent.phones?.[0] && (
+                                      <a href={`tel:${agent.phones[0].replace(/\D/g, "")}`} className="text-[12px] text-charcoal/80 hover:text-charcoal transition-colors">
+                                        {agent.phones[0]}
+                                      </a>
+                                    )}
+                                  </div>
                                 </div>
-                                <div>
-                                  <p className="font-serif text-[1rem] font-light text-charcoal">{agent.name}</p>
-                                  {agent.brokerage?.name && (
-                                    <p className="text-[12px] text-charcoal/80">{agent.brokerage.name}</p>
-                                  )}
-                                  {agent.phones?.[0] && (
-                                    <a href={`tel:${agent.phones[0].replace(/\D/g, "")}`} className="text-[12px] text-charcoal/80 hover:text-charcoal transition-colors">
-                                      {agent.phones[0]}
-                                    </a>
-                                  )}
-                                </div>
-                              </div>
-                            ))}
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      )}
-                      {listing.buyerAgents && listing.buyerAgents.length > 0 && (
-                        <div className="border-t border-charcoal/8 pt-5">
-                          <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Bought With</p>
-                          <div className="space-y-3">
-                            {listing.buyerAgents.map((agent, i) => (
-                              <div key={i} className="flex items-center gap-4">
-                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-charcoal/10 text-charcoal text-[12px] font-serif font-light">
-                                  {agent.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
-                                </div>
-                                <div>
-                                  <p className="font-serif text-[1rem] font-light text-charcoal">{agent.name}</p>
-                                  {agent.brokerage?.name && (
-                                    <p className="text-[12px] text-charcoal/80">{agent.brokerage.name}</p>
-                                  )}
-                                </div>
+                        )}
+                        {(hasBuyer || isSold) && (
+                          <div className={hasListing ? "border-t border-charcoal/8 pt-5" : ""}>
+                            <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Bought With</p>
+                            {hasBuyer ? (
+                              <div className="space-y-3">
+                                {listing.buyerAgents!.map((agent, i) => (
+                                  <div key={i} className="flex items-center gap-4">
+                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-charcoal/10 text-charcoal text-[12px] font-serif font-light">
+                                      {agent.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                                    </div>
+                                    <div>
+                                      <p className="font-serif text-[1rem] font-light text-charcoal">{agent.name}</p>
+                                      {agent.brokerage?.name && (
+                                        <p className="text-[12px] text-charcoal/80">{agent.brokerage.name}</p>
+                                      )}
+                                    </div>
+                                  </div>
+                                ))}
                               </div>
-                            ))}
+                            ) : (
+                              <p className="text-[12px] italic text-charcoal/60">
+                                Buyer brokerage information was not provided in the MLS feed for this sold listing.
+                              </p>
+                            )}
                           </div>
-                        </div>
-                      )}
-                      {listing.office?.brokerageName && (
-                        <p className="text-[11px] text-charcoal/80 border-t border-charcoal/8 pt-4">
-                          {listing.office.brokerageName}
-                        </p>
-                      )}
-                    </div>
-                  )}
+                        )}
+                        {listing.office?.brokerageName && (
+                          <p className="text-[11px] text-charcoal/80 border-t border-charcoal/8 pt-4">
+                            {listing.office.brokerageName}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  })()}
 
                   {/* OnSite contact card */}
                   <div className="rounded-3xl border border-charcoal/10 bg-[#f9f7f4] p-7">
