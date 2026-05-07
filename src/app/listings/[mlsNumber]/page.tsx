@@ -222,11 +222,16 @@ export default function ListingDetailPage() {
 
   useEffect(() => {
     if (!listing?.address?.city) return;
-    fetch(`/api/statistics?city=${encodeURIComponent(listing.address.city)}&chart=true`)
+    const params = new URLSearchParams({
+      city: listing.address.city,
+      chart: "true",
+    });
+    if (listing.address.state) params.set("state", listing.address.state);
+    fetch(`/api/statistics?${params.toString()}`)
       .then((r) => r.json())
       .then((data) => setCityStats(data))
       .catch(() => {});
-  }, [listing?.address?.city]);
+  }, [listing?.address?.city, listing?.address?.state]);
 
   if (loading) {
     return (

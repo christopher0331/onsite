@@ -14,10 +14,12 @@ async function repliersGet(params: Record<string, string>) {
 }
 
 function buildScope(req: NextRequest): Record<string, string> {
-  const scope: Record<string, string> = { state: "WA" };
+  const scope: Record<string, string> = {};
+  const state = req.nextUrl.searchParams.get("state");
   const city = req.nextUrl.searchParams.get("city");
   const county = req.nextUrl.searchParams.get("county");
   const neighborhood = req.nextUrl.searchParams.get("neighborhood");
+  if (state) scope.state = state;
   if (city) scope.city = city;
   else if (county) scope.area = county;
   if (neighborhood) scope.neighborhood = neighborhood;
