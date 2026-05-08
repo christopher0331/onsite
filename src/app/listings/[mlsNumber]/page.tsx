@@ -461,14 +461,16 @@ export default function ListingDetailPage() {
         {images.length > 0 && (
           <section className="bg-white py-10">
             <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-              {/* Main image — render the full source image with its natural
-                  proportions. No fixed aspect ratio, no cover, no crop. */}
-              <div className="relative mx-auto w-fit max-w-full overflow-hidden rounded-3xl shadow-[0_14px_50px_rgba(0,0,0,0.12)]">
+              {/* Main image — fill the hero with only the property photo.
+                  Some Repliers demo photos include black side padding in the
+                  delivered image; oversizing the image inside an overflow-hidden
+                  frame pushes that padding out of view. */}
+              <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-white shadow-[0_14px_50px_rgba(0,0,0,0.12)]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={imgUrl(images[activeImg]) || ""}
                   alt={street}
-                  className="block h-auto max-w-full"
+                  className="absolute inset-0 h-full w-full scale-[1.22] object-cover object-center"
                 />
                 {images.length > 1 && (
                   <>
