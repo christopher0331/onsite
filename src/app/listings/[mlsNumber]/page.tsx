@@ -461,13 +461,19 @@ export default function ListingDetailPage() {
         {images.length > 0 && (
           <section className="bg-white py-10">
             <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-              {/* Main image — fill the hero with the property photo. */}
+              {/* Main image — fill the hero with the property photo.
+                  Repliers demo photos can include black gutters baked into
+                  the source image, so we oversize the background to crop
+                  those gutters out of the visible frame. */}
               <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-white shadow-[0_14px_50px_rgba(0,0,0,0.12)]">
                 <div
                   role="img"
                   aria-label={street}
-                  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: `url("${imgUrl(images[activeImg]) || ""}")` }}
+                  className="absolute inset-0 bg-center bg-no-repeat"
+                  style={{
+                    backgroundImage: `url("${imgUrl(images[activeImg]) || ""}")`,
+                    backgroundSize: "135%",
+                  }}
                 />
                 {images.length > 1 && (
                   <>
