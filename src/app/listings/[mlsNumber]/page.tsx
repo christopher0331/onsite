@@ -461,14 +461,14 @@ export default function ListingDetailPage() {
         {images.length > 0 && (
           <section className="bg-white py-10">
             <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-              {/* Main image — object-contain so the NWMLS watermark, which is
-                  baked into a corner of the original photo, is never cropped. */}
-              <div className="relative aspect-[16/8] overflow-hidden rounded-3xl bg-charcoal shadow-[0_14px_50px_rgba(0,0,0,0.12)]">
+              {/* Main image — fill the hero while anchoring the crop to the
+                  bottom-right corner where NWMLS places its watermark. */}
+              <div className="relative aspect-[16/8] overflow-hidden rounded-3xl bg-charcoal/5 shadow-[0_14px_50px_rgba(0,0,0,0.12)]">
                 <Image
                   src={imgUrl(images[activeImg]) || ""}
                   alt={street}
                   fill
-                  className="object-contain transition-opacity duration-300"
+                  className="object-cover object-right-bottom transition-opacity duration-300"
                   sizes="100vw"
                   priority
                   unoptimized
