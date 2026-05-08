@@ -461,14 +461,14 @@ export default function ListingDetailPage() {
         {images.length > 0 && (
           <section className="bg-white py-10">
             <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-              {/* Main image — fill the frame while anchoring the crop to the
-                  bottom-right corner where NWMLS places its watermark. */}
-              <div className="relative aspect-video overflow-hidden rounded-3xl bg-charcoal/5 shadow-[0_14px_50px_rgba(0,0,0,0.12)]">
-                <div
-                  role="img"
-                  aria-label={street}
-                  className="absolute inset-0 bg-cover bg-right-bottom bg-no-repeat transition-opacity duration-300"
-                  style={{ backgroundImage: `url("${imgUrl(images[activeImg]) || ""}")` }}
+              {/* Main image — render the full source image with its natural
+                  proportions. No fixed aspect ratio, no cover, no crop. */}
+              <div className="relative mx-auto w-fit max-w-full overflow-hidden rounded-3xl shadow-[0_14px_50px_rgba(0,0,0,0.12)]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={imgUrl(images[activeImg]) || ""}
+                  alt={street}
+                  className="block h-auto max-w-full"
                 />
                 {images.length > 1 && (
                   <>
