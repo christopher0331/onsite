@@ -84,39 +84,32 @@ function getImageUrl(images: string[]) {
   return CDN + path;
 }
 
-// NWMLS pending / contingent codes returned in `lastStatus` on `status=A`
-// records. Anything in this set is on-market but has an offer — auditor
-// requires we label it distinctly from straight Active.
-const PENDING_LAST_STATUSES = new Set([
-  "Pen",  // Pending
-  "Pi",   // Pending Inspection
-  "Ps",   // Pending Short Sale
-  "Pf",   // Pending Feasibility
-  "Pba",  // Pending BU/Acceptance
-  "Sc",   // Sold Conditional / Active Under Contract
-]);
-
 type StatusBadge = { label: string; tone: "active" | "pending" | "sold" };
 
+// Reads RESO standardStatus directly (per Repliers' recommendation) and
+// falls back to the binary status / lastStatus fields if standardStatus
+// is missing for any reason.
 function getStatusBadge(l: Pick<Listing, "status" | "lastStatus" | "standardStatus">): StatusBadge {
   const standard = (l.standardStatus || "").trim();
   const last = (l.lastStatus || "").trim();
 
-  // Off-market record — Sold / Expired / Withdrawn etc.
+  if (standard) {
+    const lc = standard.toLowerCase();
+    if (lc === "active") return { label: "Active", tone: "active" };
+    if (lc === "closed") return { label: "Sold", tone: "sold" };
+    if (lc === "pending" || lc === "active under contract") {
+      return { label: standard, tone: "pending" };
+    }
+    // Canceled / Expired / Hold / Withdrawn / Coming Soon
+    return { label: standard, tone: "sold" };
+  }
+
+  // Fallback (older / partial Repliers payloads).
   if (l.status === "U") {
-    if (standard) return { label: standard, tone: last === "Sld" ? "sold" : "pending" };
     if (last === "Sld") return { label: "Sold", tone: "sold" };
     return { label: last || "Off-Market", tone: "sold" };
   }
-
-  // On-market: distinguish straight Active from Pending / Active Under Contract.
-  if (PENDING_LAST_STATUSES.has(last)) {
-    return { label: standard || "Pending", tone: "pending" };
-  }
-  if (standard && standard.toLowerCase() !== "active") {
-    return { label: standard, tone: "pending" };
-  }
-  return { label: standard || "Active", tone: "active" };
+  return { label: "Active", tone: "active" };
 }
 
 const STATUS_FILTERS = [
