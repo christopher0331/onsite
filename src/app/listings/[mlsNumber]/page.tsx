@@ -464,15 +464,11 @@ export default function ListingDetailPage() {
               {/* Main image — fill the frame while anchoring the crop to the
                   bottom-right corner where NWMLS places its watermark. */}
               <div className="relative aspect-video overflow-hidden rounded-3xl bg-charcoal/5 shadow-[0_14px_50px_rgba(0,0,0,0.12)]">
-                <Image
-                  src={imgUrl(images[activeImg]) || ""}
-                  alt={street}
-                  fill
-                  className="object-cover object-right-bottom transition-opacity duration-300"
-                  style={{ objectFit: "cover", objectPosition: "right bottom" }}
-                  sizes="100vw"
-                  priority
-                  unoptimized
+                <div
+                  role="img"
+                  aria-label={street}
+                  className="absolute inset-0 bg-cover bg-right-bottom bg-no-repeat transition-opacity duration-300"
+                  style={{ backgroundImage: `url("${imgUrl(images[activeImg]) || ""}")` }}
                 />
                 {images.length > 1 && (
                   <>
