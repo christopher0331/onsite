@@ -466,6 +466,7 @@ export default function ListingDetailPage() {
                   so production builds cannot rewrite the behavior. */}
               <div
                 className="relative aspect-video w-full overflow-hidden rounded-3xl bg-white shadow-[0_14px_50px_rgba(0,0,0,0.12)]"
+                data-gallery-build="inline-img-scale-135-2026-05-08"
                 style={{ isolation: "isolate" }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
