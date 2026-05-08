@@ -461,20 +461,26 @@ export default function ListingDetailPage() {
         {images.length > 0 && (
           <section className="bg-white py-10">
             <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-              {/* Main image — fill the hero with the property photo.
-                  Repliers demo photos can include black gutters baked into
-                  the source image, so we oversize the background to crop
-                  those gutters out of the visible frame. */}
-              <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-white shadow-[0_14px_50px_rgba(0,0,0,0.12)]">
-                <div
-                  role="img"
-                  aria-label={street}
-                  className="absolute inset-0"
+              {/* Main image viewer. This is intentionally a plain <img> with
+                  inline fit/crop styles, not Next/Image or Tailwind bg-* utils,
+                  so production builds cannot rewrite the behavior. */}
+              <div
+                className="relative aspect-video w-full overflow-hidden rounded-3xl bg-white shadow-[0_14px_50px_rgba(0,0,0,0.12)]"
+                style={{ isolation: "isolate" }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  key={images[activeImg]}
+                  src={imgUrl(images[activeImg]) || ""}
+                  alt={street}
+                  className="absolute inset-0 block"
                   style={{
-                    backgroundImage: `url("${imgUrl(images[activeImg]) || ""}")`,
-                    backgroundSize: "135%",
-                    backgroundPosition: "center center",
-                    backgroundRepeat: "no-repeat",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "right bottom",
+                    transform: "scale(1.35)",
+                    transformOrigin: "right bottom",
                   }}
                 />
                 {images.length > 1 && (
