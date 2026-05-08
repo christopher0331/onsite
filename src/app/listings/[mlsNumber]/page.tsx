@@ -469,10 +469,12 @@ export default function ListingDetailPage() {
                 <div
                   role="img"
                   aria-label={street}
-                  className="absolute inset-0 bg-center bg-no-repeat"
+                  className="absolute inset-0"
                   style={{
                     backgroundImage: `url("${imgUrl(images[activeImg]) || ""}")`,
                     backgroundSize: "135%",
+                    backgroundPosition: "center center",
+                    backgroundRepeat: "no-repeat",
                   }}
                 />
                 {images.length > 1 && (
