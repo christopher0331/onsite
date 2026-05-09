@@ -27,9 +27,8 @@ export default function HomeEvaluationToolPage() {
               Home Evaluation Tool.
             </h1>
             <p className="mt-8 max-w-2xl text-[16px] leading-8 text-white/65">
-              Start your home valuation below. The tool opens directly inside
-              this page while keeping the valuation app and website codebases
-              separate.
+              Answer a few quick questions and get a clear starting point for
+              your home&apos;s current market value.
             </p>
           </div>
         </section>
