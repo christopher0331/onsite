@@ -3,7 +3,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 
-const toolUrl = process.env.NEXT_PUBLIC_HOME_EVALUATION_TOOL_URL;
+const toolUrl =
+  process.env.NEXT_PUBLIC_HOME_EVALUATION_TOOL_URL ||
+  "https://lead-valuator.replit.app";
 
 export const metadata: Metadata = {
   title: "Home Evaluation Tool | OnSite Real Estate Group",
