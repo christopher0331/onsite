@@ -96,14 +96,12 @@ export default function FreeHomeEvaluationPage() {
               >
                 Get Free Evaluation
               </a>
-              <a
-                href="https://www.onsiteregroup.net/home_value"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/home-evaluation-tool"
                 className="inline-flex items-center border border-white/35 text-white px-8 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/10 transition-all duration-500"
               >
                 Check Home Value Online
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -174,12 +172,12 @@ export default function FreeHomeEvaluationPage() {
               <p className="text-[16px] leading-8 text-white/55 mb-8">
                 With our in-depth market analysis and expert insights, we provide an accurate home valuation tailored to your property. Know your home&apos;s worth before you sell or refinance for a competitive edge.
               </p>
-              <a
-                href="#evaluation-form"
+              <Link
+                href="/home-evaluation-tool"
                 className="inline-flex items-center gap-3 border border-white/20 text-white px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white hover:text-charcoal transition-all duration-500"
               >
                 Check Your Home Value
-              </a>
+              </Link>
             </div>
             <div className="lg:col-span-7 flex flex-col divide-y divide-white/[0.07]">
               {pricingSteps.map((step) => (
