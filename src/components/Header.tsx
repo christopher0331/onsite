@@ -153,14 +153,14 @@ export default function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-40 bg-charcoal"
+            className="fixed inset-x-0 bottom-0 top-20 z-40 bg-charcoal"
           >
             <motion.nav
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="flex flex-col items-center justify-center h-full gap-6"
+              className="flex h-full flex-col items-center justify-center gap-6 overflow-y-auto px-6 py-10"
             >
               {mainNav.map((item) => (
                 <Link
