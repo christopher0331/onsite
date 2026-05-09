@@ -37,6 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/buy-home`, priority: 0.9, changeFrequency: "weekly" },
     { url: `${BASE_URL}/sell-your-home`, priority: 0.9, changeFrequency: "weekly" },
     { url: `${BASE_URL}/free-home-evaluation`, priority: 0.8, changeFrequency: "monthly" },
+    { url: `${BASE_URL}/home-evaluation-tool`, priority: 0.8, changeFrequency: "monthly" },
     ...(showIdxContent
       ? [
           { url: `${BASE_URL}/listings`, priority: 0.9, changeFrequency: "daily" as const },

@@ -18,6 +18,7 @@ const mainNav = [
   { label: "Sell Home", href: "/sell-your-home" },
   { label: "Buy Home", href: "/buy-home" },
   { label: "Home Evaluation", href: "/free-home-evaluation" },
+  { label: "Evaluation Tool", href: "/home-evaluation-tool" },
   { label: "About", href: "/about-us" },
   { label: "Contact", href: "/contact-us" },
 ];
