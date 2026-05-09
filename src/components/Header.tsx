@@ -160,7 +160,7 @@ export default function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.4, delay: 0.1 }}
-              className="flex h-full flex-col items-center justify-center gap-6 overflow-y-auto px-6 py-10"
+              className="flex h-full flex-col items-center justify-start gap-6 overflow-y-auto px-6 pb-10 pt-8"
             >
               {mainNav.map((item) => (
                 <Link
