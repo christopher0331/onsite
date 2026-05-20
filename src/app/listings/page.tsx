@@ -274,7 +274,9 @@ export default function ListingsPage() {
   useEffect(() => {
     setLoading(true);
     const params = new URLSearchParams({
-      status,
+      // When searching by MLS#, override status to All so sold/pending
+      // listings are included regardless of the status tab selection.
+      status: mlsSearch ? "All" : status,
       pageSize: viewMode === "map" ? "100" : "24",
       page: String(page),
       sortBy,
