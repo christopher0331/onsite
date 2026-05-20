@@ -642,7 +642,9 @@ export default function ListingDetailPage() {
                       : "just now"}
                     <span className="mx-3 text-charcoal/65">|</span>
                     <span className="font-medium text-charcoal/80">Source:</span>{" "}
-                    NWMLS as Distributed by MLS Grid #{listing.mlsNumber}
+                    {listing.address.state === "WA"
+                      ? `NWMLS as Distributed by MLS Grid #${listing.mlsNumber}`
+                      : `MLS Grid #${listing.mlsNumber}`}
                   </p>
                   <p className="text-[12px] leading-[1.7] text-charcoal/80">
                     Listing provided courtesy of Northwest MLS. Information contained herein is derived from different sources but has not been independently verified by OnSite Real Estate Group, MLS Grid, or the MLS, and should be verified by the buyer. Open house information is subject to change without notice. All information should be independently reviewed and verified for accuracy. Properties may or may not be listed by the office or agent presenting the information.
@@ -1101,16 +1103,20 @@ export default function ListingDetailPage() {
         <section className="bg-white border-t border-charcoal/8 py-10">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
             <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-10">
-              <Image
-                src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png"
-                alt="NWMLS Three Trees Logo"
-                width={48}
-                height={48}
-                className="h-10 w-auto shrink-0 opacity-50"
-              />
+              {listing.address.state === "WA" && (
+                <Image
+                  src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png"
+                  alt="NWMLS Three Trees Logo"
+                  width={48}
+                  height={48}
+                  className="h-10 w-auto shrink-0 opacity-50"
+                />
+              )}
               <div className="space-y-2">
                 <p className="text-[12px] text-charcoal font-medium">
-                  Listing data provided by NWMLS as distributed by MLS Grid.
+                  {listing.address.state === "WA"
+                    ? "Listing data provided by NWMLS as distributed by MLS Grid."
+                    : "Listing data provided by MLS Grid."}
                   {dataRefreshedAt && (
                     <> Data last refreshed: {dataRefreshedAt.toLocaleString("en-US", {
                       month: "short", day: "numeric", year: "numeric",

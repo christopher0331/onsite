@@ -221,7 +221,7 @@ function ListingCard({ listing }: { listing: Listing }) {
           <span className="text-[11px] text-charcoal/80">MLS# {listing.mlsNumber}</span>
           <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal/80 transition-colors duration-300 group-hover:text-charcoal">View →</span>
         </div>
-        <MLSCardAttribution />
+        <MLSCardAttribution state={listing.address.state} />
       </div>
     </Link>
   );
@@ -633,16 +633,20 @@ export default function ListingsPage() {
         <section className="bg-white border-t border-charcoal/8 py-10">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
             <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-10">
-              <Image
-                src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png"
-                alt="NWMLS Three Trees Logo"
-                width={48}
-                height={48}
-                className="h-10 w-auto shrink-0 opacity-50"
-              />
+              {stateFilter === "WA" && (
+                <Image
+                  src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png"
+                  alt="NWMLS Three Trees Logo"
+                  width={48}
+                  height={48}
+                  className="h-10 w-auto shrink-0 opacity-50"
+                />
+              )}
               <div className="space-y-2">
                 <p className="text-[12px] text-charcoal font-medium">
-                  Listing data provided by NWMLS as distributed by MLS Grid.{" "}
+                  {stateFilter === "WA"
+                    ? "Listing data provided by NWMLS as distributed by MLS Grid."
+                    : "Listing data provided by MLS Grid."}{" "}
                   {dataRefreshedAt
                     ? `Data last refreshed: ${dataRefreshedAt.toLocaleString("en-US", {
                         month: "short", day: "numeric", year: "numeric",
@@ -651,9 +655,9 @@ export default function ListingsPage() {
                     : null}
                 </p>
                 <p className="text-[11px] leading-[1.8] text-charcoal/90 max-w-4xl">
-                  Listings are provided courtesy of the Northwest Multiple Listing Service and may
-                  be listed by brokerages other than OnSite Real Estate Group — attribution is
-                  shown on each listing card.
+                  {stateFilter === "WA"
+                    ? "Listings are provided courtesy of the Northwest Multiple Listing Service and may be listed by brokerages other than OnSite Real Estate Group — attribution is shown on each listing card."
+                    : "Listings are provided via MLS Grid and may be listed by brokerages other than OnSite Real Estate Group — attribution is shown on each listing card."}
                 </p>
                 <p className="text-[11px] leading-[1.8] text-charcoal/90 max-w-4xl">
                   IDX information is provided exclusively for consumers&apos; personal noncommercial use, that it may not be
