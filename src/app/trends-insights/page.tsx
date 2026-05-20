@@ -112,7 +112,7 @@ function ArticleGrid({ posts, viewAllHref }: { posts: Post[]; viewAllHref: strin
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 1024px) 100vw, 58vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent" />
+          <div className="hero-overlay" aria-hidden />
         </div>
         <div className="absolute inset-0 flex flex-col justify-end p-8">
           {featured.isNew && (
@@ -148,7 +148,7 @@ function ArticleGrid({ posts, viewAllHref }: { posts: Post[]; viewAllHref: strin
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="(max-width: 1024px) 100vw, 40vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+            <div className="hero-overlay-side" aria-hidden />
             <div className="relative z-10 flex flex-col justify-center p-7">
               {post.isNew && (
                 <span className="mb-3 inline-block w-fit rounded-full border border-white/30 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-white/80">
@@ -158,7 +158,7 @@ function ArticleGrid({ posts, viewAllHref }: { posts: Post[]; viewAllHref: strin
               <h3 className="mb-2 font-serif text-[1.1rem] font-light leading-snug text-white">
                 {post.title}
               </h3>
-              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 group-hover:text-white">
+              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/80 transition-colors duration-300 group-hover:text-white">
                 Read
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1">
                   <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -170,7 +170,7 @@ function ArticleGrid({ posts, viewAllHref }: { posts: Post[]; viewAllHref: strin
 
         <Link
           href={viewAllHref}
-          className="flex items-center justify-center gap-2 rounded-3xl border border-dashed border-charcoal/20 py-5 text-[12px] uppercase tracking-[0.25em] text-charcoal/45 transition-all duration-300 hover:border-charcoal/40 hover:text-charcoal"
+          className="flex items-center justify-center gap-2 rounded-3xl border border-dashed border-charcoal/20 py-5 text-[12px] uppercase tracking-[0.25em] text-charcoal/70 transition-all duration-300 hover:border-charcoal/40 hover:text-charcoal"
         >
           View All
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5">
@@ -197,7 +197,7 @@ function DarkArticleGrid({ posts, viewAllHref }: { posts: Post[]; viewAllHref: s
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 1024px) 100vw, 58vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+        <div className="hero-overlay" aria-hidden />
         <div className="absolute inset-0 flex flex-col justify-end p-8">
           {featured.isNew && (
             <span className="mb-4 inline-block w-fit rounded-full border border-white/30 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-white/80">
@@ -208,7 +208,7 @@ function DarkArticleGrid({ posts, viewAllHref }: { posts: Post[]; viewAllHref: s
             {featured.title}
           </h3>
           <p className="mb-5 text-[13px] leading-6 text-white/70 not-italic line-clamp-2">{featured.excerpt}</p>
-          <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-white/50 transition-colors duration-300 group-hover:text-white">
+          <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-white/80 transition-colors duration-300 group-hover:text-white">
             Read Article
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1">
               <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -231,7 +231,7 @@ function DarkArticleGrid({ posts, viewAllHref }: { posts: Post[]; viewAllHref: s
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="(max-width: 1024px) 100vw, 40vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-transparent" />
+            <div className="hero-overlay-side" aria-hidden />
             <div className="relative z-10 flex flex-col justify-center p-7">
               {post.isNew && (
                 <span className="mb-3 inline-block w-fit rounded-full border border-white/30 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-white/80">
@@ -241,7 +241,7 @@ function DarkArticleGrid({ posts, viewAllHref }: { posts: Post[]; viewAllHref: s
               <h3 className="mb-2 font-serif text-[1.1rem] font-light leading-snug text-white">
                 {post.title}
               </h3>
-              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 group-hover:text-white">
+              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-white/80 transition-colors duration-300 group-hover:text-white">
                 Read
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1">
                   <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -253,7 +253,7 @@ function DarkArticleGrid({ posts, viewAllHref }: { posts: Post[]; viewAllHref: s
 
         <Link
           href={viewAllHref}
-          className="flex items-center justify-center gap-2 rounded-3xl border border-dashed border-white/20 py-5 text-[12px] uppercase tracking-[0.25em] text-white/40 transition-all duration-300 hover:border-white/40 hover:text-white"
+          className="flex items-center justify-center gap-2 rounded-3xl border border-dashed border-white/20 py-5 text-[12px] uppercase tracking-[0.25em] text-white/80 transition-all duration-300 hover:border-white/40 hover:text-white"
         >
           View All
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5">

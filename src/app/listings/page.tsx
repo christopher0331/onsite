@@ -14,7 +14,7 @@ const ListingsMap = dynamic(() => import("@/components/ListingsMap"), {
   ssr: false,
   loading: () => (
     <div className="grid h-[640px] place-items-center rounded-3xl bg-charcoal/5">
-      <p className="text-[12px] uppercase tracking-[0.25em] text-charcoal/50">Loading map…</p>
+      <p className="text-[12px] uppercase tracking-[0.25em] text-charcoal/75">Loading map…</p>
     </div>
   ),
 });
@@ -201,7 +201,7 @@ function ListingCard({ listing }: { listing: Listing }) {
       </div>
       <div className="flex flex-1 flex-col p-6">
         <h3 className="mb-1 font-serif text-[1.05rem] font-light leading-snug text-charcoal">{street}</h3>
-        <p className="mb-3 text-[13px] text-charcoal/70">{addr.city}, {addr.state} {addr.zip}</p>
+        <p className="mb-3 text-[13px] text-charcoal/90">{addr.city}, {addr.state} {addr.zip}</p>
         {(det.numBedrooms || det.numBathrooms || det.sqft) && (
           <div className="mb-3 flex gap-4 text-[13px] text-charcoal/75">
             {det.numBedrooms && <span><strong className="text-charcoal font-semibold">{det.numBedrooms}</strong> bd</span>}
@@ -213,7 +213,7 @@ function ListingCard({ listing }: { listing: Listing }) {
           <p className="mb-3 text-[11px] uppercase tracking-[0.2em] text-charcoal/80">{det.propertyType}</p>
         )}
         {listing.office?.brokerageName && (
-          <p className="mb-3 text-[11px] text-charcoal/60 italic not-italic">
+          <p className="mb-3 text-[11px] text-charcoal/80 italic not-italic">
             Listed by {listing.office.brokerageName}
           </p>
         )}
@@ -303,20 +303,20 @@ export default function ListingsPage() {
             <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between mb-10">
               <div>
                 <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/60">
-                  Property Search
+                  NWMLS · Washington State
                 </p>
                 <h1 className="mb-6 font-serif text-[clamp(2.8rem,7vw,5.8rem)] font-light leading-[1.0] text-white">
                   Search Homes.
                 </h1>
                 <p className="max-w-xl text-[16px] leading-8 text-white/70">
-                  Use the filters below to find homes that match what you&apos;re looking for.
+                  Browse Washington listings sourced directly from NWMLS via MLS Grid.
                 </p>
               </div>
               <div className="shrink-0 text-right">
                 {!loading && (
-                  <p className="text-[13px] text-white/50">
+                  <p className="text-[13px] text-white/80">
                     <span className="text-white text-2xl font-serif font-light">{count.toLocaleString()}</span>
-                    <br />listings match
+                    <br />Washington listings
                   </p>
                 )}
               </div>
@@ -345,7 +345,7 @@ export default function ListingsPage() {
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="City"
-                className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[12px] tracking-wide text-white placeholder:text-white/40 focus:border-white/50 focus:outline-none"
+                className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[12px] tracking-wide text-white placeholder:text-white/80 focus:border-white/50 focus:outline-none"
               />
 
               <form onSubmit={handleMlsLookup} className="flex items-center gap-2">
@@ -355,7 +355,7 @@ export default function ListingsPage() {
                   value={mlsLookup}
                   onChange={(e) => setMlsLookup(e.target.value)}
                   placeholder="MLS #"
-                  className="w-28 rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[12px] tracking-wide text-white placeholder:text-white/40 focus:border-white/50 focus:outline-none"
+                  className="w-28 rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[12px] tracking-wide text-white placeholder:text-white/80 focus:border-white/50 focus:outline-none"
                 />
                 <button
                   type="submit"
@@ -465,7 +465,7 @@ export default function ListingsPage() {
                     setMaxPrice("");
                     setSortBy("createdOnDesc");
                   }}
-                  className="rounded-full border border-white/20 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/50 transition hover:border-white/40 hover:text-white"
+                  className="rounded-full border border-white/20 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/80 transition hover:border-white/40 hover:text-white"
                 >
                   Reset
                 </button>
@@ -474,7 +474,7 @@ export default function ListingsPage() {
 
             {/* View-mode toggle */}
             <div className="mt-8 flex items-center gap-3">
-              <span className="text-[10px] uppercase tracking-[0.25em] text-white/40">View</span>
+              <span className="text-[10px] uppercase tracking-[0.25em] text-white/80">View</span>
               <div className="inline-flex rounded-full border border-white/15 p-1">
                 <button
                   onClick={() => setViewMode("list")}
@@ -512,12 +512,12 @@ export default function ListingsPage() {
               </div>
             ) : listings.length === 0 ? (
               <div className="py-24 text-center">
-                <p className="font-serif text-2xl font-light text-charcoal/70">No listings found.</p>
-                <p className="mt-3 text-[14px] text-charcoal/60">Try adjusting your filters.</p>
+                <p className="font-serif text-2xl font-light text-charcoal/90">No listings found.</p>
+                <p className="mt-3 text-[14px] text-charcoal/80">Try adjusting your filters.</p>
               </div>
             ) : (
               <>
-                <div className="mb-8 flex items-center justify-between text-[13px] text-charcoal/70">
+                <div className="mb-8 flex items-center justify-between text-[13px] text-charcoal/90">
                   <span>
                     Showing <strong className="text-charcoal">{listings.length}</strong> of{" "}
                     <strong className="text-charcoal">{count.toLocaleString()}</strong> matching listings
@@ -547,7 +547,7 @@ export default function ListingsPage() {
                     >
                       ← Previous
                     </button>
-                    <span className="text-[12px] text-charcoal/60 px-4">
+                    <span className="text-[12px] text-charcoal/80 px-4">
                       {page} / {numPages}
                     </span>
                     <button
@@ -618,12 +618,12 @@ export default function ListingsPage() {
                       })}.`
                     : null}
                 </p>
-                <p className="text-[11px] leading-[1.8] text-charcoal/70 max-w-4xl">
+                <p className="text-[11px] leading-[1.8] text-charcoal/90 max-w-4xl">
                   Listings are provided courtesy of the Northwest Multiple Listing Service and may
                   be listed by brokerages other than OnSite Real Estate Group — attribution is
                   shown on each listing card.
                 </p>
-                <p className="text-[11px] leading-[1.8] text-charcoal/70 max-w-4xl">
+                <p className="text-[11px] leading-[1.8] text-charcoal/90 max-w-4xl">
                   IDX information is provided exclusively for consumers&apos; personal noncommercial use, that it may not be
                   used for any purpose other than to identify prospective properties consumers may be interested in
                   purchasing, that the data is deemed reliable but is not guaranteed by MLS GRID, and that the use of

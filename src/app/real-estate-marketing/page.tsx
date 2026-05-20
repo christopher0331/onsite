@@ -96,7 +96,7 @@ export default function RealEstateMarketingPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" />
+          <div className="hero-overlay" aria-hidden />
           <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-end px-6 pb-20 sm:pb-28 lg:px-12">
             <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/70">Marketing Strategy</p>
             <h1 className="mb-8 max-w-4xl font-serif text-[clamp(2.6rem,7vw,5.6rem)] font-light leading-[1.0] text-white">
@@ -131,7 +131,7 @@ export default function RealEstateMarketingPage() {
                 Marketing that moves homes.
               </h2>
             </div>
-            <div className="space-y-5 text-[16px] leading-8 text-charcoal/70 lg:col-span-7">
+            <div className="space-y-5 text-[16px] leading-8 text-charcoal/90 lg:col-span-7">
               <p>
                 The right strategy gets your home seen by the right buyers. We use high-impact marketing to attract interest, drive competition, & secure the best offers.
               </p>
@@ -155,7 +155,7 @@ export default function RealEstateMarketingPage() {
                   Marketing For Maximum Impact.
                 </h2>
               </div>
-              <p className="text-[16px] leading-8 text-charcoal/65">
+              <p className="text-[16px] leading-8 text-charcoal/85">
                 Our comprehensive approach blends cutting-edge digital strategies with traditional marketing tactics to maximize exposure and drive real results. We ensure your home gets noticed by serious buyers who are ready to act.
               </p>
             </div>
@@ -164,7 +164,7 @@ export default function RealEstateMarketingPage() {
                 <article key={t.title} className="rounded-3xl bg-white p-7 shadow-[0_14px_40px_rgba(0,0,0,0.07)]">
                   <Image src={t.icon} alt="" width={44} height={44} className="mb-4 h-11 w-11 object-contain opacity-80" />
                   <h3 className="mb-3 font-serif text-2xl font-light text-charcoal">{t.title}</h3>
-                  <p className="text-[14px] leading-7 text-charcoal/65">{t.description}</p>
+                  <p className="text-[14px] leading-7 text-charcoal/85">{t.description}</p>
                 </article>
               ))}
             </div>
@@ -256,7 +256,7 @@ export default function RealEstateMarketingPage() {
                 className="object-cover object-center"
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black/55" />
+              <div className="hero-overlay" aria-hidden />
               <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
                 <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-white/75">Ready to get started?</p>
                 <h2 className="font-serif text-[clamp(2rem,5vw,4rem)] font-light leading-[1.05] text-white">

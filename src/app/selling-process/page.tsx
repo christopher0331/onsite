@@ -81,7 +81,7 @@ export default function SellingProcessPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" />
+          <div className="hero-overlay" aria-hidden />
           <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-end px-6 pb-20 sm:pb-28 lg:px-12">
             <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/70">Selling Process</p>
             <h1 className="mb-8 max-w-4xl font-serif text-[clamp(2.6rem,7vw,5.6rem)] font-light leading-[1.0] text-white">
@@ -115,7 +115,7 @@ export default function SellingProcessPage() {
                 A clear path to selling your home.
               </h2>
             </div>
-            <div className="space-y-5 text-[16px] leading-8 text-charcoal/70 lg:col-span-7">
+            <div className="space-y-5 text-[16px] leading-8 text-charcoal/90 lg:col-span-7">
               <p>
                 We know that selling a home is a big decision-we&apos;ve been there ourselves. That&apos;s why we&apos;ve created a streamlined process that simplifies every step.
               </p>
@@ -138,7 +138,7 @@ export default function SellingProcessPage() {
                   A simple guide for the best results.
                 </h2>
               </div>
-              <p className="text-[16px] leading-8 text-charcoal/65">
+              <p className="text-[16px] leading-8 text-charcoal/85">
                 Selling a home is a big decision, but with the right guidance, it doesn&apos;t have to be overwhelming. Our step-by-step guide walks you through each step ensuring a smooth & successful sale.
               </p>
             </div>
@@ -150,7 +150,7 @@ export default function SellingProcessPage() {
                 >
                   <p className="mb-4 font-serif text-4xl font-light text-charcoal/75">{step.number}</p>
                   <h3 className="mb-3 font-serif text-2xl font-light text-charcoal">{step.title}</h3>
-                  <p className="text-[14px] leading-7 text-charcoal/65">{step.description}</p>
+                  <p className="text-[14px] leading-7 text-charcoal/85">{step.description}</p>
                 </article>
               ))}
             </div>
@@ -162,7 +162,7 @@ export default function SellingProcessPage() {
 
             {/* Section header */}
             <div className="mb-14 max-w-3xl">
-              <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/40">Onsite&apos;s Expert Guidance</p>
+              <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/80">Onsite&apos;s Expert Guidance</p>
               <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light leading-[1.08] text-white">
                 We help you navigate regulations, connect you with trusted professionals & structure smart contracts — ensuring a seamless, stress-free selling experience.
               </h2>
@@ -182,7 +182,7 @@ export default function SellingProcessPage() {
                 >
                   <Image src={card.icon} alt="" width={44} height={44} className="mb-4 h-11 w-11 object-contain opacity-90" />
                   <h3 className="mb-3 font-serif text-2xl font-light text-white">{card.title}</h3>
-                  <p className="text-[14px] leading-7 text-white/65">{card.description}</p>
+                  <p className="text-[14px] leading-7 text-white/90">{card.description}</p>
                 </article>
               ))}
             </div>
@@ -211,7 +211,7 @@ export default function SellingProcessPage() {
                 className="object-cover"
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black/52" />
+              <div className="hero-overlay" aria-hidden />
               <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
                 <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-white/75">Ready to get started?</p>
                 <h2 className="font-serif text-[clamp(2rem,5vw,4rem)] font-light leading-[1.05] text-white">

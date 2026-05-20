@@ -103,15 +103,15 @@ const accordions = [
     body: (
       <>
         <p className="font-medium">Facebook</p>
-        <a href="https://www.facebook.com/groups/tappsbusinesspublic" target="_blank" rel="noopener noreferrer" className="text-charcoal/60 underline hover:text-charcoal transition-colors">
+        <a href="https://www.facebook.com/groups/tappsbusinesspublic" target="_blank" rel="noopener noreferrer" className="text-charcoal/80 underline hover:text-charcoal transition-colors">
           facebook.com/groups/tappsbusinesspublic
         </a>
         <p className="mt-4 font-medium">Instagram</p>
-        <a href="https://www.instagram.com/tappsbusinessconnect/" target="_blank" rel="noopener noreferrer" className="text-charcoal/60 underline hover:text-charcoal transition-colors">
+        <a href="https://www.instagram.com/tappsbusinessconnect/" target="_blank" rel="noopener noreferrer" className="text-charcoal/80 underline hover:text-charcoal transition-colors">
           instagram.com/tappsbusinessconnect
         </a>
         <p className="mt-4 font-medium">YouTube</p>
-        <a href="https://www.youtube.com/playlist?list=PLYHpaJehkXfudU9HV_vkDGzfJMu2F098L" target="_blank" rel="noopener noreferrer" className="text-charcoal/60 underline hover:text-charcoal transition-colors">
+        <a href="https://www.youtube.com/playlist?list=PLYHpaJehkXfudU9HV_vkDGzfJMu2F098L" target="_blank" rel="noopener noreferrer" className="text-charcoal/80 underline hover:text-charcoal transition-colors">
           TBC Meeting Recordings Playlist
         </a>
       </>
@@ -122,7 +122,7 @@ const accordions = [
     body: (
       <>
         <p className="font-medium text-charcoal">Tapps Business Connect: Social Media Posting Policies</p>
-        <p className="mt-2 text-charcoal/60 italic">A high-standard community for trusted local businesses in Lake Tapps, Bonney Lake, Sumner, Puyallup, Buckley, and surrounding areas.</p>
+        <p className="mt-2 text-charcoal/80 italic">A high-standard community for trusted local businesses in Lake Tapps, Bonney Lake, Sumner, Puyallup, Buckley, and surrounding areas.</p>
         <p className="mt-4">This public group connects residents and business owners with <strong>trusted, vetted professionals</strong> across our region. It is moderated by André Bohall (OnSite Real Estate Group) and Cindie Bohall (Senior Advisor), founders of Tapps Business Connect.</p>
 
         <h3 className="mt-6 font-medium text-charcoal">Referral Requests</h3>
@@ -171,14 +171,14 @@ function Accordion({ title, body }: { title: string; body: React.ReactNode }) {
         aria-expanded={open}
       >
         <span className="font-serif text-[1.05rem] font-light leading-snug text-charcoal pr-6">{title}</span>
-        <span className="shrink-0 flex h-7 w-7 items-center justify-center rounded-full border border-charcoal/20 text-charcoal/50 transition-transform duration-300" style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}>
+        <span className="shrink-0 flex h-7 w-7 items-center justify-center rounded-full border border-charcoal/20 text-charcoal/75 transition-transform duration-300" style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}>
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5">
             <path d="M8 3v10M3 8h10" strokeLinecap="round" />
           </svg>
         </span>
       </button>
       {open && (
-        <div className="pb-6 text-[14px] leading-7 text-charcoal/65">
+        <div className="pb-6 text-[14px] leading-7 text-charcoal/85">
           {body}
         </div>
       )}
@@ -195,7 +195,7 @@ export default function BusinessConnectAboutPage() {
         {/* Hero */}
         <section className="bg-[#1a1a18] pt-40 pb-20 sm:pt-52 sm:pb-28">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/50">
+            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/80">
               <Link href="/business-connect" className="hover:text-white/80 transition-colors">Tapps Business Connect</Link>
               <span className="mx-2 text-white/20">/</span>
               Group Structure &amp; Guidelines
@@ -241,7 +241,7 @@ export default function BusinessConnectAboutPage() {
 
             {/* Wide event banner */}
             <div className="mb-16 aspect-[4/1] min-h-[180px] overflow-hidden rounded-3xl bg-[#242420] flex flex-col items-center justify-center text-center px-6">
-              <p className="text-[11px] uppercase tracking-[0.35em] text-white/40 mb-4">Tapps Business Connect</p>
+              <p className="text-[11px] uppercase tracking-[0.35em] text-white/80 mb-4">Tapps Business Connect</p>
               <h2 className="font-serif text-[clamp(1.8rem,4vw,3rem)] font-light text-white">Stronger Business. Trusted Referrals.</h2>
             </div>
 
@@ -270,7 +270,7 @@ export default function BusinessConnectAboutPage() {
                     </span>
                     <div>
                       <h3 className="mb-2 font-serif text-[1.1rem] font-light leading-snug text-white">{f.title}</h3>
-                      <p className="text-[14px] leading-7 text-white/55">{f.body}</p>
+                      <p className="text-[14px] leading-7 text-white/85">{f.body}</p>
                     </div>
                   </div>
                 ))}

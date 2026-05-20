@@ -54,14 +54,14 @@ export default function AboutUsPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-black/52" />
+          <div className="hero-overlay" aria-hidden />
           <div className="relative z-10 mx-auto max-w-[1440px] h-full px-6 lg:px-12 flex items-end pb-16 sm:pb-20">
             <div>
               <p className="text-[11px] uppercase tracking-[0.35em] text-white/70 mb-4">About OnSite</p>
               <h1 className="font-serif text-[clamp(2.2rem,6vw,4.8rem)] leading-[1.02] text-white font-light max-w-4xl">
                 Partners in Real Estate.
                 <br />
-                <span className="italic">Delivering Tailored Solutions.</span>
+                <span>Delivering Tailored Solutions.</span>
               </h1>
             </div>
           </div>
@@ -183,7 +183,7 @@ export default function AboutUsPage() {
                 Rooted in the Northwest,
                 <br />
                 Built on Family,{" "}
-                <span className="italic">Fueled by Service.</span>
+                <span>Fueled by Service.</span>
               </h2>
               <div className="space-y-5 text-[16px] leading-8 text-charcoal/75">
                 <p>
@@ -213,11 +213,11 @@ export default function AboutUsPage() {
               <div className="lg:col-span-6">
                 <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-5">About Us</p>
                 <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] text-charcoal font-light leading-[1.08]">
-                  Experience You Can <span className="italic">Trust</span>
+                  Experience You Can <span>Trust</span>
                 </h2>
               </div>
               <div className="lg:col-span-6">
-                <p className="text-[16px] leading-8 text-charcoal/70">
+                <p className="text-[16px] leading-8 text-charcoal/90">
                   Buying or selling a home should be an exciting and rewarding experience. With our expert team, cutting-edge technology, and in-depth market knowledge, we help clients navigate the real estate journey with confidence — whether you're a first-time buyer, a seasoned investor, or looking to sell for top dollar.
                 </p>
               </div>
@@ -237,7 +237,7 @@ export default function AboutUsPage() {
                     className="w-11 h-11 object-contain mb-4 opacity-80"
                   />
                   <h3 className="font-serif text-2xl font-light text-charcoal mb-3">{value.title}</h3>
-                  <p className="text-[14px] leading-7 text-charcoal/70">{value.description}</p>
+                  <p className="text-[14px] leading-7 text-charcoal/90">{value.description}</p>
                 </div>
               ))}
             </div>
@@ -250,7 +250,7 @@ export default function AboutUsPage() {
             <div className="text-center mb-14">
               <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-4">How We Work</p>
               <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] text-charcoal font-light">
-                Mission, Approach &<span className="italic"> Commitment</span>
+                Mission, Approach &<span> Commitment</span>
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -273,10 +273,10 @@ export default function AboutUsPage() {
                   className="rounded-3xl bg-white p-7 shadow-[0_14px_40px_rgba(0,0,0,0.08)]"
                 >
                   <h3 className="font-serif text-3xl font-light text-charcoal mb-4">{item.title}</h3>
-                  <p className="text-[15px] leading-8 text-charcoal/70">{item.text}</p>
+                  <p className="text-[15px] leading-8 text-charcoal/90">{item.text}</p>
                   <Link
                     href="/contact-us"
-                    className="inline-flex items-center gap-2 mt-6 text-[12px] uppercase tracking-[0.2em] text-charcoal/50 hover:text-charcoal transition-colors"
+                    className="inline-flex items-center gap-2 mt-6 text-[12px] uppercase tracking-[0.2em] text-charcoal/75 hover:text-charcoal transition-colors"
                   >
                     Let&apos;s Talk
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -300,11 +300,11 @@ export default function AboutUsPage() {
                 className="object-cover"
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black/52" />
+              <div className="hero-overlay" aria-hidden />
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
                 <p className="text-[11px] uppercase tracking-[0.35em] text-white/75 mb-4">Ready to get started?</p>
                 <h2 className="font-serif text-[clamp(2rem,5vw,4rem)] font-light text-white leading-[1.05]">
-                  Let&apos;s Talk <span className="italic">Home Selling Solutions</span>
+                  Let&apos;s Talk <span>Home Selling Solutions</span>
                 </h2>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
                   <Link

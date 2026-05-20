@@ -13,6 +13,18 @@ const ALLOWED_SORT_BY = new Set([
   "soldDateDesc",
 ]);
 
+// NWMLS / Washington defaults — the Repliers key contains a national demo
+// feed. Without these guards every query returns listings from other states
+// (NC, FL, TX, etc.) which breaks NWMLS auditor checks and confuses buyers.
+//
+// boardId=110  → Northwest MLS board ID confirmed from live API probe
+// state=WA     → belt-and-suspenders state filter
+//
+// Both are overridable via explicit query params so the API remains flexible
+// if additional MLS boards are added later.
+const DEFAULT_STATE = "WA";
+const DEFAULT_BOARD_ID = "110";
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
 
@@ -29,8 +41,15 @@ export async function GET(req: NextRequest) {
   const brokerageOnly = searchParams.get("brokerageOnly") === "true";
   const search = searchParams.get("search");
   const searchFields = searchParams.get("searchFields");
+  // Allow explicit override; default to WA / NWMLS
+  const state = searchParams.get("state") || DEFAULT_STATE;
+  const boardId = searchParams.get("boardId") || DEFAULT_BOARD_ID;
 
   const params = new URLSearchParams({ pageSize, page });
+
+  // Lock to Washington / NWMLS by default
+  params.set("state", state);
+  params.set("boardId", boardId);
 
   // Friendly status filter → Repliers `standardStatus` (RESO compliant).
   // Per Repliers support: prefer standardStatus over lastStatus / status

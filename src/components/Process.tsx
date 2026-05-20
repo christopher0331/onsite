@@ -38,14 +38,14 @@ export default function Process() {
           transition={{ duration: 0.8 }}
           className="mb-20"
         >
-          <p className="text-[11px] uppercase tracking-[0.35em] text-white/40 mb-4">
+          <p className="text-[11px] uppercase tracking-[0.35em] text-white/80 mb-4">
             Our Process
           </p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <h2 className="font-serif text-[clamp(2rem,4vw,3.5rem)] font-light text-white leading-[1.1]">
-              Sell <span className="italic">Fast</span> &middot; Sell{" "}
-              <span className="italic">Smart</span> &middot; Sell{" "}
-              <span className="italic">Confidently</span>
+              Sell <span>Fast</span> &middot; Sell{" "}
+              <span>Smart</span> &middot; Sell{" "}
+              <span>Confidently</span>
             </h2>
             <Link
               href="/selling-process"
@@ -86,7 +86,7 @@ export default function Process() {
                   <h3 className="font-serif text-2xl lg:text-[1.75rem] text-white font-light mb-4 group-hover:translate-x-2 transition-transform duration-500">
                     {step.title}
                   </h3>
-                  <p className="text-[14px] leading-relaxed text-white/65 max-w-sm">
+                  <p className="text-[14px] leading-relaxed text-white/90 max-w-sm">
                     {step.description}
                   </p>
                   <div className="mt-6 w-0 group-hover:w-10 h-px bg-white/60 transition-all duration-500" />

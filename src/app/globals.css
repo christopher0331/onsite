@@ -2,14 +2,16 @@
 
 @theme inline {
   --color-background: #ffffff;
-  --color-foreground: #0a0a0a;
-  --color-charcoal: #1a1a1a;
+  --color-foreground: #141414;
+  --color-charcoal: #141414;
   --color-warm-gray: #f5f3f0;
-  --color-mid-gray: #8a8a8a;
+  /* Darkened for WCAG-friendly labels on white (was #8a8a8a) */
+  --color-mid-gray: #4a4a4a;
   --color-light-gray: #e8e6e3;
   --color-accent: #2c2c2c;
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-cormorant);
+  /* Headings: clean geometric sans (replaces Cormorant Garamond) */
+  --font-serif: var(--font-display);
 }
 
 html {
@@ -23,6 +25,30 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/* ─── Typography: no decorative serif / italic headlines ─────────────── */
+.font-serif {
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.font-serif.font-light,
+h1.font-serif,
+h2.font-serif,
+h3.font-serif {
+  font-weight: 600;
+}
+
+.font-serif .italic,
+h1 .italic,
+h2 .italic,
+h3 .italic,
+h4 .italic {
+  font-style: normal;
+  font-weight: 600;
 }
 
 ::selection {
@@ -70,4 +96,42 @@ body {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Dark overlay for photo/video heroes — keeps headline copy legible */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgb(0 0 0 / 0.92) 0%,
+    rgb(0 0 0 / 0.72) 42%,
+    rgb(0 0 0 / 0.52) 100%
+  );
+}
+
+.hero-overlay-video {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0.78) 0%,
+    rgb(0 0 0 / 0.58) 45%,
+    rgb(0 0 0 / 0.82) 100%
+  );
+}
+
+/* Featured cards with copy on the left over a photo */
+.hero-overlay-side {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgb(0 0 0 / 0.9) 0%,
+    rgb(0 0 0 / 0.72) 45%,
+    rgb(0 0 0 / 0.25) 100%
+  );
 }

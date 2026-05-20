@@ -79,7 +79,7 @@ function formatAddress(a: Listing["address"]) {
 async function fetchVideoListings(): Promise<Listing[]> {
   try {
     const res = await fetch(
-      "https://api.repliers.io/listings?pageSize=50&status=A&sortBy=updatedOnDesc",
+      "https://api.repliers.io/listings?pageSize=50&status=A&sortBy=updatedOnDesc&state=WA&boardId=110",
       {
         headers: {
           "repliers-api-key": process.env.REPLIERS_API_KEY || "",
@@ -116,7 +116,7 @@ export default async function PropertyVideos() {
         {/* Header */}
         <div className="mb-10 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-white/50">
+            <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-white/80">
               Video Tours · Recently Updated
             </p>
             <h2 className="font-serif text-[clamp(2rem,5vw,3.6rem)] font-light leading-[1.05] text-white">
@@ -131,7 +131,7 @@ export default async function PropertyVideos() {
           </Link>
         </div>
 
-        <p className="mb-10 max-w-3xl text-[13px] leading-relaxed text-white/55">
+        <p className="mb-10 max-w-3xl text-[13px] leading-relaxed text-white/85">
           The homes below are the most recently-updated active NWMLS listings that include a public
           video tour. Listings may be represented by brokerages other than OnSite Real Estate
           Group — attribution is shown on each tile and on the full listing page.
@@ -170,10 +170,10 @@ export default async function PropertyVideos() {
                       <p className="truncate font-serif text-[0.95rem] font-light leading-snug text-white">
                         {street}
                       </p>
-                      <p className="text-[11px] text-white/55">
+                      <p className="text-[11px] text-white/85">
                         {listing.address.city}, {listing.address.state}
                         {(det.numBedrooms || det.numBathrooms) && (
-                          <span className="ml-2 text-white/35">
+                          <span className="ml-2 text-white/75">
                             {[
                               det.numBedrooms && `${det.numBedrooms} bd`,
                               det.numBathrooms && `${det.numBathrooms} ba`,
@@ -182,7 +182,7 @@ export default async function PropertyVideos() {
                         )}
                       </p>
                       {listing.office?.brokerageName && (
-                        <p className="mt-1 truncate text-[10px] text-white/40">
+                        <p className="mt-1 truncate text-[10px] text-white/80">
                           Listed by {listing.office.brokerageName}
                         </p>
                       )}
@@ -214,7 +214,7 @@ export default async function PropertyVideos() {
             height={36}
             className="h-8 w-auto shrink-0 opacity-60 brightness-0 invert"
           />
-          <p className="max-w-3xl text-[11px] leading-[1.8] text-white/45">
+          <p className="max-w-3xl text-[11px] leading-[1.8] text-white/85">
             Listing data provided by NWMLS as distributed by MLS Grid. Listings may be represented by
             brokerages other than OnSite Real Estate Group; see each listing page for the listing
             brokerage and agent. Data is deemed reliable but is not guaranteed by MLS GRID.

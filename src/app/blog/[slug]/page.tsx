@@ -66,14 +66,14 @@ function renderBody(body: string) {
       );
     } else if (trimmed.startsWith("•") || trimmed.startsWith("-")) {
       elements.push(
-        <li key={i} className="flex items-start gap-3 text-[16px] leading-8 text-charcoal/70">
+        <li key={i} className="flex items-start gap-3 text-[16px] leading-8 text-charcoal/90">
           <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-charcoal/30" />
           <span>{trimmed.replace(/^[•\-]\s*/, "")}</span>
         </li>
       );
     } else {
       elements.push(
-        <p key={i} className="mb-6 text-[16px] leading-8 text-charcoal/70 not-italic">
+        <p key={i} className="mb-6 text-[16px] leading-8 text-charcoal/90 not-italic">
           {trimmed}
         </p>
       );
@@ -136,12 +136,12 @@ export default async function BlogPostPage({
                 sizes="100vw"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a18] via-[#1a1a18]/70 to-[#1a1a18]/30" />
+              <div className="hero-overlay" aria-hidden />
             </>
           )}
           <div className="relative z-10 mx-auto flex min-h-[60vh] max-w-[1440px] flex-col justify-end px-6 pb-20 pt-48 lg:px-12">
             {/* Breadcrumb */}
-            <div className="mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-white/40">
+            <div className="mb-6 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-white/80">
               <Link href="/trends-insights" className="hover:text-white transition-colors">Trends & Insights</Link>
               <span>/</span>
               <Link href={`/${post.catSlug}`} className="hover:text-white transition-colors">{categoryLabel}</Link>
@@ -152,7 +152,7 @@ export default async function BlogPostPage({
             <h1 className="mb-6 max-w-4xl font-serif text-[clamp(1.8rem,4.5vw,4rem)] font-light leading-[1.1] text-white">
               {post.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-5 text-[12px] text-white/50">
+            <div className="flex flex-wrap items-center gap-5 text-[12px] text-white/80">
               {post.author && <span>{post.author}</span>}
               {post.author && post.date && <span className="h-px w-4 bg-white/20" />}
               {post.date && <span>{post.date}</span>}
@@ -207,7 +207,7 @@ export default async function BlogPostPage({
                       <h3 className="font-serif text-[1.05rem] font-light leading-snug text-charcoal line-clamp-3">
                         {rel.title}
                       </h3>
-                      <div className="mt-5 flex items-center gap-2 border-t border-charcoal/8 pt-4 text-[11px] uppercase tracking-[0.2em] text-charcoal/40 transition-colors duration-300 group-hover:text-charcoal">
+                      <div className="mt-5 flex items-center gap-2 border-t border-charcoal/8 pt-4 text-[11px] uppercase tracking-[0.2em] text-charcoal/65 transition-colors duration-300 group-hover:text-charcoal">
                         Read
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1">
                           <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />

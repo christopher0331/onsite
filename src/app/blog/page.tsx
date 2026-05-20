@@ -54,7 +54,7 @@ export default function BlogIndexPage() {
                   Market trends, selling advice, and real estate insights for Pierce County homeowners — written by the OnSite team.
                 </p>
               </div>
-              <div className="flex shrink-0 flex-col gap-3 text-[13px] text-white/50">
+              <div className="flex shrink-0 flex-col gap-3 text-[13px] text-white/80">
                 <p><span className="text-white">{allPosts.length}</span> articles</p>
               </div>
             </div>
@@ -95,7 +95,7 @@ export default function BlogIndexPage() {
                   priority
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+              <div className="hero-overlay" aria-hidden />
               <div className="relative z-10 mt-auto p-10 lg:max-w-3xl">
                 <span className="mb-5 inline-block rounded-full border border-white/30 px-4 py-1.5 text-[11px] uppercase tracking-[0.3em] text-white/70">
                   {featured.category}
@@ -104,7 +104,7 @@ export default function BlogIndexPage() {
                   {featured.title}
                 </h2>
                 <p className="mb-6 text-[15px] leading-7 text-white/70 line-clamp-2">{featured.excerpt}</p>
-                <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.25em] text-white/50">
+                <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.25em] text-white/80">
                   {featured.date && <span>{featured.date}</span>}
                   <span className="h-px w-4 bg-white/20" />
                   <span className="text-white/60 transition-colors duration-300 group-hover:text-white">Read Article →</span>
@@ -138,14 +138,14 @@ export default function BlogIndexPage() {
                   )}
                   <div className="flex flex-1 flex-col justify-between bg-white p-6">
                     <div>
-                      <p className="mb-2 text-[10px] uppercase tracking-[0.25em] text-charcoal/40">{post.category}</p>
+                      <p className="mb-2 text-[10px] uppercase tracking-[0.25em] text-charcoal/65">{post.category}</p>
                       <h3 className="font-serif text-[1.05rem] font-light leading-snug text-charcoal line-clamp-3">
                         {post.title}
                       </h3>
                     </div>
                     <div className="mt-5 flex items-center justify-between border-t border-charcoal/8 pt-4">
                       <span className="text-[11px] text-charcoal/35">{post.date}</span>
-                      <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal/40 transition-colors duration-300 group-hover:text-charcoal">
+                      <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal/65 transition-colors duration-300 group-hover:text-charcoal">
                         Read →
                       </span>
                     </div>

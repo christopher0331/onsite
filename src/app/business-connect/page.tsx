@@ -77,7 +77,7 @@ export default function BusinessConnectPage() {
                   Three Ways to Connect.
                 </h2>
               </div>
-              <p className="text-[16px] leading-8 text-charcoal/70">
+              <p className="text-[16px] leading-8 text-charcoal/90">
                 We build meaningful connections through monthly breakfast meetings, educational speakers, and after-hours events — without the fees or pressure.
               </p>
             </div>
@@ -98,8 +98,8 @@ export default function BusinessConnectPage() {
               ].map((t, i) => (
                 <div key={t.label} className="rounded-3xl border border-charcoal/8 p-8 shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
                   <p className="mb-4 font-serif text-[3rem] font-light leading-none text-charcoal/30">0{i + 1}</p>
-                  <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-charcoal/60">{t.label}</p>
-                  <p className="text-[15px] leading-7 text-charcoal/70">{t.description}</p>
+                  <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-charcoal/80">{t.label}</p>
+                  <p className="text-[15px] leading-7 text-charcoal/90">{t.description}</p>
                 </div>
               ))}
             </div>
@@ -117,7 +117,7 @@ export default function BusinessConnectPage() {
                 </h2>
               </div>
               <div className="flex flex-col gap-4 lg:items-end">
-                <p className="text-[15px] leading-7 text-charcoal/60 lg:text-right">
+                <p className="text-[15px] leading-7 text-charcoal/80 lg:text-right">
                   Both events require an RSVP — seating is limited by design.
                 </p>
                 <Link
@@ -137,12 +137,12 @@ export default function BusinessConnectPage() {
               <div className="rounded-3xl bg-white p-10 shadow-[0_8px_32px_rgba(0,0,0,0.06)]">
                 <p className="mb-4 font-serif text-[3rem] font-light leading-none text-charcoal/10">01</p>
                 <h3 className="mb-3 font-serif text-[1.5rem] font-light leading-snug text-charcoal">Monthly Morning<br />Members Meeting (M4)</h3>
-                <p className="mb-6 text-[14px] leading-7 text-charcoal/60">
+                <p className="mb-6 text-[14px] leading-7 text-charcoal/80">
                   Once per month. Designed for Members and Guests in open industry seats. Includes structured networking, educational segments, referral sharing, and accountability updates. Seating intentionally limited.
                 </p>
                 <div className="flex items-center gap-3 rounded-2xl border border-charcoal/10 bg-[#f2ede6] px-5 py-3">
                   <span className="h-2 w-2 rounded-full bg-charcoal/30 shrink-0" />
-                  <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-charcoal/60">RSVP Required</p>
+                  <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-charcoal/80">RSVP Required</p>
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
@@ -164,7 +164,7 @@ export default function BusinessConnectPage() {
               <div className="rounded-3xl bg-[#1a1a18] p-10">
                 <p className="mb-4 font-serif text-[3rem] font-light leading-none text-white/10">02</p>
                 <h3 className="mb-3 font-serif text-[1.5rem] font-light leading-snug text-white">Connections<br />After Close (CAC)</h3>
-                <p className="mb-6 text-[14px] leading-7 text-white/55">
+                <p className="mb-6 text-[14px] leading-7 text-white/85">
                   Once per month, hosted by a TBC Member. Open to Members, Guests, and Affiliates. No industry seat restrictions — focused on building relationships in a relaxed, after-hours setting.
                 </p>
                 <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-3">
@@ -211,9 +211,9 @@ export default function BusinessConnectPage() {
                     <h3 className="mb-3 font-serif text-[1.35rem] font-light leading-snug text-charcoal">
                       {cat.name}
                     </h3>
-                    <p className="text-[14px] leading-7 text-charcoal/60">{cat.description}</p>
+                    <p className="text-[14px] leading-7 text-charcoal/80">{cat.description}</p>
                   </div>
-                  <div className="mt-6 flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-charcoal/40 transition-colors duration-300 group-hover:text-charcoal">
+                  <div className="mt-6 flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-charcoal/65 transition-colors duration-300 group-hover:text-charcoal">
                     Browse Members
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1">
                       <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />

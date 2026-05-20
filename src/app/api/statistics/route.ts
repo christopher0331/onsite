@@ -14,7 +14,11 @@ async function repliersGet(params: Record<string, string>) {
 }
 
 function buildScope(req: NextRequest): Record<string, string> {
-  const scope: Record<string, string> = {};
+  // Default to WA / NWMLS so market stats reflect the correct geography.
+  const scope: Record<string, string> = {
+    state: "WA",
+    boardId: "110",
+  };
   const state = req.nextUrl.searchParams.get("state");
   const city = req.nextUrl.searchParams.get("city");
   const county = req.nextUrl.searchParams.get("county");

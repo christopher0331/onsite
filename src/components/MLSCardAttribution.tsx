@@ -10,7 +10,7 @@ export default function MLSCardAttribution() {
         height={14}
         className="h-3.5 w-auto shrink-0 opacity-50"
       />
-      <p className="text-[10px] leading-tight text-charcoal/40">
+      <p className="text-[10px] leading-tight text-charcoal/65">
         Listing provided by NWMLS as distributed by MLS Grid
       </p>
     </div>

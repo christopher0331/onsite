@@ -43,14 +43,14 @@ export default function SellHomeInfoGraphic() {
           >
             <span
               className={`font-serif text-[2.2rem] font-light leading-none transition-all duration-500 ${
-                active === i ? "text-charcoal" : "text-charcoal/40"
+                active === i ? "text-charcoal" : "text-charcoal/65"
               }`}
             >
               {step.num}
             </span>
             <span
               className={`pt-2 font-serif text-[1.15rem] font-light leading-snug transition-all duration-500 ${
-                active === i ? "text-charcoal" : "text-charcoal/50"
+                active === i ? "text-charcoal" : "text-charcoal/75"
               }`}
             >
               {step.title}
@@ -91,7 +91,7 @@ export default function SellHomeInfoGraphic() {
             <h3 className="mb-5 font-serif text-[clamp(2rem,4vw,3rem)] font-light leading-[1.08] text-charcoal">
               {steps[active].title}
             </h3>
-            <p className="max-w-lg text-[16px] leading-8 text-charcoal/65 not-italic">
+            <p className="max-w-lg text-[16px] leading-8 text-charcoal/85 not-italic">
               {steps[active].summary}
             </p>
 
@@ -101,7 +101,7 @@ export default function SellHomeInfoGraphic() {
                 type="button"
                 onClick={() => setActive(Math.max(0, active - 1))}
                 disabled={active === 0}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-charcoal/15 text-charcoal/50 transition-all duration-300 hover:border-charcoal/40 hover:text-charcoal disabled:opacity-20 disabled:hover:border-charcoal/15 disabled:hover:text-charcoal/50"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-charcoal/15 text-charcoal/75 transition-all duration-300 hover:border-charcoal/40 hover:text-charcoal disabled:opacity-20 disabled:hover:border-charcoal/15 disabled:hover:text-charcoal/75"
                 aria-label="Previous step"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -112,7 +112,7 @@ export default function SellHomeInfoGraphic() {
                 type="button"
                 onClick={() => setActive(Math.min(steps.length - 1, active + 1))}
                 disabled={active === steps.length - 1}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-charcoal/15 text-charcoal/50 transition-all duration-300 hover:border-charcoal/40 hover:text-charcoal disabled:opacity-20 disabled:hover:border-charcoal/15 disabled:hover:text-charcoal/50"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-charcoal/15 text-charcoal/75 transition-all duration-300 hover:border-charcoal/40 hover:text-charcoal disabled:opacity-20 disabled:hover:border-charcoal/15 disabled:hover:text-charcoal/75"
                 aria-label="Next step"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

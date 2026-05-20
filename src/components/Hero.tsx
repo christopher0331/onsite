@@ -38,7 +38,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
           <source src={VIDEO_MP4} type="video/mp4" />
           <source src={VIDEO_WEBM} type="video/webm" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/35 to-black/65" />
+        <div className="hero-overlay-video" aria-hidden />
       </motion.div>
 
       <motion.div
@@ -58,11 +58,11 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="font-serif text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] text-white font-light max-w-5xl"
+          className="font-serif text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] text-white max-w-5xl"
         >
           Top Rated Real Estate
           <br />
-          <span className="italic font-light">Agents</span> in Pierce County
+          Agents in Pierce County
         </motion.h1>
 
         <motion.p

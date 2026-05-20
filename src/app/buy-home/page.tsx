@@ -77,11 +77,11 @@ export default async function BuyHomePage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" />
+          <div className="hero-overlay" aria-hidden />
           <div className="relative z-10 mx-auto max-w-[1440px] h-full px-6 lg:px-12 flex flex-col justify-end pb-20 sm:pb-28">
             <p className="text-[11px] uppercase tracking-[0.35em] text-white/70 mb-5">Buy a Home</p>
             <h1 className="font-serif text-[clamp(2.6rem,7vw,5.6rem)] leading-[1.0] text-white font-light max-w-4xl mb-8">
-              Buy Your Home, <span className="italic">the Right Way.</span>
+              Buy Your Home, <span>the Right Way.</span>
             </h1>
             <p className="text-[16px] text-white/70 max-w-xl leading-8 mb-10">
               We give you the guidance, market insight, and negotiation power every step of the way.
@@ -113,10 +113,10 @@ export default async function BuyHomePage() {
             <div className="lg:col-span-5">
               <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-5">Buy a Home</p>
               <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
-                We make buying homes <span className="italic">easier.</span>
+                We make buying homes <span>easier.</span>
               </h2>
             </div>
-            <div className="lg:col-span-7 space-y-5 text-[16px] leading-8 text-charcoal/70">
+            <div className="lg:col-span-7 space-y-5 text-[16px] leading-8 text-charcoal/90">
               <p>
                 Your dream home is closer than you think. With our expert guidance and in-depth knowledge of the local market, we&apos;ll help you navigate the process and find the home that perfectly suits your needs.
               </p>
@@ -141,10 +141,10 @@ export default async function BuyHomePage() {
               <div>
                 <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-5">A Clear Path to Homeownership</p>
                 <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
-                  Navigate the market with <span className="italic">confidence.</span>
+                  Navigate the market with <span>confidence.</span>
                 </h2>
               </div>
-              <p className="text-[16px] leading-8 text-charcoal/65">
+              <p className="text-[16px] leading-8 text-charcoal/85">
                 Whether you&apos;re a first-time homebuyer or a seasoned investor, we streamline the process to help you navigate the complexities of the market. With our team by your side, you&apos;ll make informed decisions, find the right home faster, and secure the best deal possible.
               </p>
             </div>
@@ -159,7 +159,7 @@ export default async function BuyHomePage() {
                     className="w-11 h-11 object-contain mb-4 opacity-80"
                   />
                   <h3 className="font-serif text-xl text-charcoal mb-2">{item.title}</h3>
-                  <p className="text-[14px] leading-7 text-charcoal/65">{item.description}</p>
+                  <p className="text-[14px] leading-7 text-charcoal/85">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -170,11 +170,11 @@ export default async function BuyHomePage() {
         <section className="py-20 sm:py-28 bg-[#1a1a18]">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             <div className="lg:col-span-5">
-              <p className="text-[11px] uppercase tracking-[0.35em] text-white/40 mb-5">Buying Journey</p>
+              <p className="text-[11px] uppercase tracking-[0.35em] text-white/80 mb-5">Buying Journey</p>
               <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-white leading-[1.08] mb-7">
-                Buying made <span className="italic">simple.</span>
+                Buying made <span>simple.</span>
               </h2>
-              <p className="text-[16px] leading-8 text-white/55 mb-8">
+              <p className="text-[16px] leading-8 text-white/85 mb-8">
                 From finding the perfect home to closing the deal, we streamline every step of the process — providing expert guidance and support to ensure your home purchase is seamless and successful.
               </p>
               <Link
@@ -188,34 +188,34 @@ export default async function BuyHomePage() {
 
               <div className="grid grid-cols-[6rem_1fr] gap-6 py-10 group">
                 <div className="flex flex-col items-start">
-                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/40 group-hover:text-white/60 transition-colors duration-500">32<span className="text-[2rem]">%</span></span>
+                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/80 group-hover:text-white/60 transition-colors duration-500">32<span className="text-[2rem]">%</span></span>
                   <span className="mt-2 text-[9px] uppercase tracking-[0.3em] text-white/25">Faster Close</span>
                 </div>
                 <div className="pt-2">
                   <p className="font-serif text-[1.4rem] font-light text-white/85 leading-snug mb-2">Efficiency</p>
-                  <p className="text-[14px] leading-7 text-white/45">Homes bought with an agent close 32% faster than those without — less time in limbo, more time in your new home.</p>
+                  <p className="text-[14px] leading-7 text-white/85">Homes bought with an agent close 32% faster than those without — less time in limbo, more time in your new home.</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-[6rem_1fr] gap-6 py-10 group">
                 <div className="flex flex-col items-start">
-                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/40 group-hover:text-white/60 transition-colors duration-500">5<span className="text-[2rem]">%</span></span>
+                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/80 group-hover:text-white/60 transition-colors duration-500">5<span className="text-[2rem]">%</span></span>
                   <span className="mt-2 text-[9px] uppercase tracking-[0.3em] text-white/25">Avg Savings</span>
                 </div>
                 <div className="pt-2">
                   <p className="font-serif text-[1.4rem] font-light text-white/85 leading-snug mb-2">Savings</p>
-                  <p className="text-[14px] leading-7 text-white/45">Buyers save an average of 1–5% through skilled agent negotiations — that&apos;s tens of thousands on a typical purchase.</p>
+                  <p className="text-[14px] leading-7 text-white/85">Buyers save an average of 1–5% through skilled agent negotiations — that&apos;s tens of thousands on a typical purchase.</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-[6rem_1fr] gap-6 py-10 group">
                 <div className="flex flex-col items-start">
-                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/40 group-hover:text-white/60 transition-colors duration-500">30<span className="text-[2rem]">%</span></span>
+                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/80 group-hover:text-white/60 transition-colors duration-500">30<span className="text-[2rem]">%</span></span>
                   <span className="mt-2 text-[9px] uppercase tracking-[0.3em] text-white/25">More Options</span>
                 </div>
                 <div className="pt-2">
                   <p className="font-serif text-[1.4rem] font-light text-white/85 leading-snug mb-2">Exclusivity</p>
-                  <p className="text-[14px] leading-7 text-white/45">30% more opportunities through exclusive off-market listings you won&apos;t find scrolling on your own.</p>
+                  <p className="text-[14px] leading-7 text-white/85">30% more opportunities through exclusive off-market listings you won&apos;t find scrolling on your own.</p>
                 </div>
               </div>
 
@@ -230,7 +230,7 @@ export default async function BuyHomePage() {
                 <div>
                   <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-4">Featured Listings</p>
                   <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
-                    Featured Home <span className="italic">Listings.</span>
+                    Featured Home <span>Listings.</span>
                   </h2>
                 </div>
                 <a
@@ -284,11 +284,11 @@ export default async function BuyHomePage() {
                 className="object-cover"
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black/52" />
+              <div className="hero-overlay" aria-hidden />
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
                 <p className="text-[11px] uppercase tracking-[0.35em] text-white/75 mb-4">Ready to get started?</p>
                 <h2 className="font-serif text-[clamp(2rem,5vw,4rem)] font-light text-white leading-[1.05]">
-                  Find Your <span className="italic">Perfect Home Today</span>
+                  Find Your <span>Perfect Home Today</span>
                 </h2>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
                   {showIdxContent && (

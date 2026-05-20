@@ -114,7 +114,7 @@ export default async function SuccessStoriesPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" />
+          <div className="hero-overlay" aria-hidden />
           <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-end px-6 pb-20 sm:pb-28 lg:px-12">
             <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/70">Success Stories</p>
             <h1 className="mb-8 max-w-4xl font-serif text-[clamp(2.6rem,7vw,5.6rem)] font-light leading-[1.0] text-white">
@@ -149,7 +149,7 @@ export default async function SuccessStoriesPage() {
                 Real Stories With Real Success.
               </h2>
             </div>
-            <div className="lg:col-span-7 text-[16px] leading-8 text-charcoal/70">
+            <div className="lg:col-span-7 text-[16px] leading-8 text-charcoal/90">
               <p>
                 Here are a few of the stories that showcase how our commitment, expertise, and passion have helped buyers and sellers achieve their goals.
               </p>
@@ -181,7 +181,7 @@ export default async function SuccessStoriesPage() {
 
                   <div className="border-t border-charcoal/8 pt-5">
                     <p className="font-serif text-[1.05rem] font-light text-charcoal">{t.name}</p>
-                    <p className="mt-0.5 text-[11px] uppercase tracking-[0.25em] text-charcoal/40">{t.location}</p>
+                    <p className="mt-0.5 text-[11px] uppercase tracking-[0.25em] text-charcoal/65">{t.location}</p>
                   </div>
                 </article>
               ))}
@@ -209,7 +209,7 @@ export default async function SuccessStoriesPage() {
                   <p className="font-serif text-[clamp(3rem,5vw,4.5rem)] font-light leading-none text-white">
                     {s.num}
                   </p>
-                  <p className="text-[11px] uppercase tracking-[0.3em] text-white/50">{s.label}</p>
+                  <p className="text-[11px] uppercase tracking-[0.3em] text-white/80">{s.label}</p>
                   <p className="text-[14px] leading-7 text-white/75 not-italic">{s.description}</p>
                 </div>
               ))}
@@ -281,7 +281,7 @@ export default async function SuccessStoriesPage() {
                 className="object-cover object-center"
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black/55" />
+              <div className="hero-overlay" aria-hidden />
               <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
                 <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-white/75">Ready to get started?</p>
                 <h2 className="font-serif text-[clamp(2rem,5vw,4rem)] font-light leading-[1.05] text-white">

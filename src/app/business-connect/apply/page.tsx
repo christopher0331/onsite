@@ -81,7 +81,7 @@ export default function MemberApplicationPage() {
         {/* Hero */}
         <section className="bg-[#1a1a18] pt-40 pb-20 sm:pt-52 sm:pb-28">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/50">
+            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/80">
               <Link href="/business-connect" className="hover:text-white/80 transition-colors">Tapps Business Connect</Link>
               <span className="mx-2 text-white/20">/</span>
               Member Application
@@ -114,7 +114,7 @@ export default function MemberApplicationPage() {
                   Membership Requirements.
                 </h2>
               </div>
-              <p className="text-[18px] leading-9 text-charcoal/70">
+              <p className="text-[18px] leading-9 text-charcoal/90">
                 Every applicant must meet and commit to these standards. Our Members review each application carefully — decisions are based on culture fit, communication style, reputation, and dependability.
               </p>
             </div>
@@ -148,7 +148,7 @@ export default function MemberApplicationPage() {
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
               <div>
-                <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/50">Ready to Apply</p>
+                <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/80">Ready to Apply</p>
                 <h2 className="mb-6 font-serif text-[clamp(2rem,4vw,3.4rem)] font-light leading-[1.08] text-white">
                   Begin Your Application.
                 </h2>
@@ -168,7 +168,7 @@ export default function MemberApplicationPage() {
                     <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </a>
-                <p className="text-[12px] text-white/35 lg:text-right">
+                <p className="text-[12px] text-white/75 lg:text-right">
                   Questions first?{" "}
                   <Link href="/contact-us" className="underline hover:text-white/60 transition-colors">
                     Contact us directly

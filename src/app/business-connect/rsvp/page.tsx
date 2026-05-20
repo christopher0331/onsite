@@ -46,7 +46,7 @@ export default function RSVPPage() {
         {/* Hero */}
         <section className="bg-[#1a1a18] pt-40 pb-20 sm:pt-52 sm:pb-28">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/50">
+            <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/80">
               <Link href="/business-connect" className="hover:text-white/80 transition-colors">
                 Tapps Business Connect
               </Link>
@@ -70,7 +70,7 @@ export default function RSVPPage() {
               <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light leading-[1.08] text-charcoal">
                 How Would You Like to Participate?
               </h2>
-              <p className="mt-6 mx-auto max-w-2xl text-[16px] leading-8 text-charcoal/60">
+              <p className="mt-6 mx-auto max-w-2xl text-[16px] leading-8 text-charcoal/80">
                 Tapps Business Connect is a high-integrity networking community for growth-minded professionals in Lake Tapps, Bonney Lake, Sumner, Puyallup, Buckley &amp; beyond.
               </p>
             </div>
@@ -89,9 +89,9 @@ export default function RSVPPage() {
                     <h3 className="mb-4 font-serif text-[1.5rem] font-light leading-snug text-charcoal">
                       {opt.label}
                     </h3>
-                    <p className="text-[14px] leading-7 text-charcoal/60">{opt.description}</p>
+                    <p className="text-[14px] leading-7 text-charcoal/80">{opt.description}</p>
                   </div>
-                  <div className="mt-8 flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-charcoal/40 transition-colors duration-300 group-hover:text-charcoal">
+                  <div className="mt-8 flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-charcoal/65 transition-colors duration-300 group-hover:text-charcoal">
                     {opt.cta}
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1">
                       <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -101,13 +101,13 @@ export default function RSVPPage() {
               ))}
             </div>
 
-            <p className="mt-10 text-center text-[12px] text-charcoal/40">
+            <p className="mt-10 text-center text-[12px] text-charcoal/65">
               Not sure which applies to you?{" "}
-              <Link href="/business-connect/about" className="underline hover:text-charcoal/70 transition-colors">
+              <Link href="/business-connect/about" className="underline hover:text-charcoal/90 transition-colors">
                 Review the group structure
               </Link>{" "}
               or{" "}
-              <Link href="/contact-us" className="underline hover:text-charcoal/70 transition-colors">
+              <Link href="/contact-us" className="underline hover:text-charcoal/90 transition-colors">
                 contact us directly
               </Link>
               .

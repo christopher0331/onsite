@@ -146,10 +146,10 @@ function ArticleCard({ post }: { post: Post }) {
       </div>
       <div className="flex flex-1 flex-col justify-between bg-white p-6">
         <div>
-          <p className="mb-2 text-[10px] uppercase tracking-[0.25em] text-charcoal/40">Insights</p>
+          <p className="mb-2 text-[10px] uppercase tracking-[0.25em] text-charcoal/65">Insights</p>
           <h3 className="font-serif text-[1.05rem] font-light leading-snug text-charcoal line-clamp-3">{post.title}</h3>
         </div>
-        <div className="mt-5 flex items-center gap-2 border-t border-charcoal/8 pt-4 text-[11px] uppercase tracking-[0.2em] text-charcoal/40 transition-colors duration-300 group-hover:text-charcoal">
+        <div className="mt-5 flex items-center gap-2 border-t border-charcoal/8 pt-4 text-[11px] uppercase tracking-[0.2em] text-charcoal/65 transition-colors duration-300 group-hover:text-charcoal">
           Read Article
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1">
             <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -183,7 +183,7 @@ export default function InsightsPage() {
                   Expert perspective for Pierce County homeowners — from understanding your home&apos;s value to staging strategy, timing, and everything in between.
                 </p>
               </div>
-              <div className="flex shrink-0 flex-col gap-3 text-[13px] text-white/50">
+              <div className="flex shrink-0 flex-col gap-3 text-[13px] text-white/80">
                 <p><span className="text-white">{posts.length}</span> articles</p>
                 <p><span className="text-white">{newPosts.length}</span> new this season</p>
               </div>
@@ -207,12 +207,12 @@ export default function InsightsPage() {
                 sizes="100vw"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+              <div className="hero-overlay" aria-hidden />
               <div className="relative z-10 mt-auto p-10 lg:max-w-3xl">
                 {featured.isNew && (
                   <span className="mb-5 inline-block rounded-full bg-white px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-charcoal">New</span>
                 )}
-                <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-white/50">Insights</p>
+                <p className="mb-3 text-[11px] uppercase tracking-[0.25em] text-white/80">Insights</p>
                 <h2 className="mb-4 font-serif text-[clamp(1.6rem,3.5vw,3rem)] font-light leading-snug text-white">
                   {featured.title}
                 </h2>

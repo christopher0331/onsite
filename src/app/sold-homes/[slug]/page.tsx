@@ -297,7 +297,7 @@ export default async function SoldHomeDetailPage({
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/20" />
+          <div className="hero-overlay" aria-hidden />
           <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-end px-6 pb-16 sm:pb-24 lg:px-12">
             <span className="mb-5 inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-1.5 text-[11px] uppercase tracking-[0.3em] text-charcoal">
               Sold · {prop.closedOn}
@@ -309,22 +309,22 @@ export default async function SoldHomeDetailPage({
             <div className="flex flex-wrap gap-8">
               <div>
                 <p className="font-serif text-[2.2rem] font-light leading-none text-white">{prop.price}</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/50">Sale Price</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/80">Sale Price</p>
               </div>
               <div className="h-10 w-px bg-white/20 hidden sm:block self-center" />
               <div>
                 <p className="font-serif text-[2.2rem] font-light leading-none text-white">{prop.daysListed}</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/50">Days Listed</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/80">Days Listed</p>
               </div>
               <div className="h-10 w-px bg-white/20 hidden sm:block self-center" />
               <div>
                 <p className="font-serif text-[2.2rem] font-light leading-none text-white">{prop.sqft}</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/50">Square Feet</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/80">Square Feet</p>
               </div>
               <div className="h-10 w-px bg-white/20 hidden sm:block self-center" />
               <div>
                 <p className="font-serif text-[2.2rem] font-light leading-none text-white">{prop.beds} / {prop.baths}</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/50">Bed / Bath</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/80">Bed / Bath</p>
               </div>
             </div>
           </div>
@@ -341,15 +341,15 @@ export default async function SoldHomeDetailPage({
                 <h2 className="mb-6 font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light leading-snug text-charcoal">
                   {prop.title}
                 </h2>
-                <p className="mb-10 text-[16px] leading-8 text-charcoal/70 not-italic">
+                <p className="mb-10 text-[16px] leading-8 text-charcoal/90 not-italic">
                   {prop.description}
                 </p>
 
                 <div className="mb-10">
-                  <p className="mb-5 text-[11px] uppercase tracking-[0.3em] text-charcoal/40">Property Highlights</p>
+                  <p className="mb-5 text-[11px] uppercase tracking-[0.3em] text-charcoal/65">Property Highlights</p>
                   <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {prop.highlights.map((h) => (
-                      <li key={h} className="flex items-start gap-3 text-[14px] leading-6 text-charcoal/70">
+                      <li key={h} className="flex items-start gap-3 text-[14px] leading-6 text-charcoal/90">
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="mt-0.5 h-4 w-4 shrink-0 text-charcoal/30">
                           <path d="M3 8.5l3 3 7-7" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
@@ -363,7 +363,7 @@ export default async function SoldHomeDetailPage({
               {/* Property details sidebar */}
               <div className="lg:col-span-5">
                 <div className="rounded-3xl bg-[#f2ede6] p-8">
-                  <p className="mb-6 text-[11px] uppercase tracking-[0.3em] text-charcoal/50">Property Details</p>
+                  <p className="mb-6 text-[11px] uppercase tracking-[0.3em] text-charcoal/75">Property Details</p>
                   <dl className="space-y-4">
                     {[
                       { label: "MLS #", value: prop.mls },
@@ -378,7 +378,7 @@ export default async function SoldHomeDetailPage({
                       { label: "Closed On", value: prop.closedOn },
                     ].map(({ label, value }) => (
                       <div key={label} className="flex items-baseline justify-between border-b border-charcoal/8 pb-4 last:border-0 last:pb-0">
-                        <dt className="text-[12px] uppercase tracking-[0.2em] text-charcoal/45">{label}</dt>
+                        <dt className="text-[12px] uppercase tracking-[0.2em] text-charcoal/70">{label}</dt>
                         <dd className="font-serif text-[1rem] font-light text-charcoal">{value}</dd>
                       </div>
                     ))}
@@ -470,12 +470,12 @@ export default async function SoldHomeDetailPage({
                   </div>
                   <div className="flex flex-1 flex-col justify-between bg-white p-6">
                     <div>
-                      <p className="mb-1 text-[11px] uppercase tracking-[0.2em] text-charcoal/40">{p.city}</p>
+                      <p className="mb-1 text-[11px] uppercase tracking-[0.2em] text-charcoal/65">{p.city}</p>
                       <h3 className="font-serif text-[1.1rem] font-light leading-snug text-charcoal">{p.title}</h3>
                     </div>
                     <div className="mt-4 flex items-center justify-between border-t border-charcoal/8 pt-4">
                       <p className="font-serif text-[1.3rem] font-light text-charcoal">{p.price}</p>
-                      <p className="text-[11px] text-charcoal/40">{p.daysListed} days</p>
+                      <p className="text-[11px] text-charcoal/65">{p.daysListed} days</p>
                     </div>
                     <MLSCardAttribution />
                   </div>
@@ -530,7 +530,7 @@ export default async function SoldHomeDetailPage({
                 className="h-10 w-auto shrink-0 opacity-50"
               />
               <div className="space-y-2">
-                <p className="text-[12px] text-charcoal/50 font-medium">
+                <p className="text-[12px] text-charcoal/75 font-medium">
                   Listing data provided by NWMLS as distributed by MLS Grid.
                   <MLSGridTimestamp />
                 </p>

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import blogData from "@/lib/blog-data.json";
 import { isMainWebsiteHost } from "@/lib/site-visibility";
+import { CITIES, NEIGHBORHOODS } from "@/lib/service-areas/data";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://onsiteregroup.com";
@@ -97,11 +98,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "yearly" as const,
   }));
 
+  // ─── SERVICE AREAS — auto-synced from the service-area data lake ─────────
+  const serviceAreaIndex: MetadataRoute.Sitemap = [
+    { url: `${BASE_URL}/service-areas`, priority: 0.8, changeFrequency: "monthly" },
+  ];
+
+  const serviceAreaCities: MetadataRoute.Sitemap = CITIES.map((city) => ({
+    url: `${BASE_URL}/service-areas/${city.slug}`,
+    priority: 0.85,
+    changeFrequency: "monthly" as const,
+  }));
+
+  const serviceAreaNeighborhoods: MetadataRoute.Sitemap = NEIGHBORHOODS.map(
+    (n) => ({
+      url: `${BASE_URL}/service-areas/${n.citySlug}/${n.slug}`,
+      priority: 0.75,
+      changeFrequency: "monthly" as const,
+    })
+  );
+
   return [
     ...staticPages,
     ...sellingPages,
     ...insightsPages,
     ...blogPosts,
+    ...serviceAreaIndex,
+    ...serviceAreaCities,
+    ...serviceAreaNeighborhoods,
     ...(showIdxContent ? featuredHomes : []),
     ...(showIdxContent ? soldHomes : []),
   ].map((entry) => ({ ...entry, lastModified: now }));

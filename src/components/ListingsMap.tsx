@@ -80,10 +80,10 @@ export default function ListingsMap({ listings }: { listings: MapListing[] }) {
     return (
       <div className="grid h-[640px] place-items-center rounded-3xl border border-charcoal/10 bg-charcoal/5 text-center">
         <div className="px-6">
-          <p className="font-serif text-2xl font-light text-charcoal/70">
+          <p className="font-serif text-2xl font-light text-charcoal/90">
             No mappable listings in this result set.
           </p>
-          <p className="mt-3 text-[13px] text-charcoal/60">
+          <p className="mt-3 text-[13px] text-charcoal/80">
             Repliers did not return coordinates for the current filters. Try widening the search.
           </p>
         </div>
@@ -119,10 +119,10 @@ export default function ListingsMap({ listings }: { listings: MapListing[] }) {
                   <p className="font-serif text-[15px] text-charcoal">
                     {compactPrice(price)} {isSold ? "· Sold" : ""}
                   </p>
-                  <p className="text-[12px] text-charcoal/70">
+                  <p className="text-[12px] text-charcoal/90">
                     {l.address.city}, {l.address.state} {l.address.zip}
                   </p>
-                  <p className="text-[11px] text-charcoal/60">MLS# {l.mlsNumber}</p>
+                  <p className="text-[11px] text-charcoal/80">MLS# {l.mlsNumber}</p>
                   <Link
                     href={`/listings/${l.mlsNumber}`}
                     className="mt-2 inline-block text-[11px] uppercase tracking-[0.2em] text-charcoal underline-offset-4 hover:underline"

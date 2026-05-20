@@ -25,7 +25,7 @@ export default function CTA() {
               className="object-cover"
               sizes="100vw"
             />
-            <div className="absolute inset-0 bg-black/52" />
+            <div className="hero-overlay" aria-hidden />
           </motion.div>
 
           <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
@@ -45,7 +45,7 @@ export default function CTA() {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="font-serif text-[clamp(2.5rem,6vw,5rem)] font-light text-white leading-[1.05]"
         >
-          Let&apos;s <span className="italic">Talk</span>
+          Let&apos;s <span>Talk</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}

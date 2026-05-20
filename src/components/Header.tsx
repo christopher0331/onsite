@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import NavDropdown from "@/components/NavDropdown";
+import ServiceAreasNav from "@/components/ServiceAreasNav";
 
 // Routes that display NWMLS / IDX listing data — header must stay solid so
 // the brokerage logo remains visible over white listing cards & photos.
@@ -17,10 +19,13 @@ const SOLID_HEADER_ROUTES = [
 const mainNav = [
   { label: "Sell Home", href: "/sell-your-home" },
   { label: "Buy Home", href: "/buy-home" },
-  { label: "Home Evaluation", href: "/free-home-evaluation" },
-  { label: "Evaluation Tool", href: "/home-evaluation-tool" },
   { label: "About", href: "/about-us" },
   { label: "Contact", href: "/contact-us" },
+];
+
+const valuationNav = [
+  { label: "Free Home Evaluation", href: "/free-home-evaluation" },
+  { label: "Online Valuation Tool", href: "/home-evaluation-tool" },
 ];
 
 const TBC_URL = "https://tappsbusinessconnect.com";
@@ -66,9 +71,9 @@ export default function Header() {
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-          <div className="flex items-center justify-between h-20 lg:h-24">
-            <Link href="/" className="relative z-10">
+        <div className="mx-auto w-full max-w-[1600px] px-6 lg:px-10 xl:px-12">
+          <div className="flex w-full items-center h-20 lg:h-24">
+            <Link href="/" className="relative z-10 shrink-0">
               <Image
                 src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/68dc8d33f60130dc306e6c8e_Timber.png"
                 alt="OnSite ReGroup"
@@ -80,12 +85,33 @@ export default function Header() {
               />
             </Link>
 
-            <nav className="hidden lg:flex items-center gap-8">
-              {mainNav.map((item) => (
+            <nav className="hidden lg:flex flex-1 flex-nowrap items-center justify-evenly ml-6">
+              {mainNav.slice(0, 2).map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`text-[13px] font-medium uppercase tracking-[0.15em] transition-colors duration-300 hover:opacity-60 ${
+                  className={`shrink-0 whitespace-nowrap text-[15px] font-medium uppercase tracking-[0.1em] transition-colors duration-300 hover:opacity-60 ${
+                    solid ? "text-charcoal" : "text-white"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <NavDropdown
+                label="Valuation"
+                items={valuationNav}
+                solid={solid}
+                isActive={(p) =>
+                  p.startsWith("/free-home-evaluation") ||
+                  p.startsWith("/home-evaluation-tool")
+                }
+              />
+              <ServiceAreasNav solid={solid} />
+              {mainNav.slice(2).map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`shrink-0 whitespace-nowrap text-[15px] font-medium uppercase tracking-[0.1em] transition-colors duration-300 hover:opacity-60 ${
                     solid ? "text-charcoal" : "text-white"
                   }`}
                 >
@@ -96,7 +122,7 @@ export default function Header() {
                 href={TBC_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] font-medium transition-all duration-300 hover:opacity-80 ${
+                className={`shrink-0 whitespace-nowrap inline-flex items-center gap-2 rounded-full border px-5 py-2 text-[13px] uppercase tracking-[0.15em] font-medium transition-all duration-300 hover:opacity-80 ${
                   solid
                     ? "border-charcoal/30 text-charcoal hover:bg-charcoal hover:text-white hover:border-charcoal"
                     : "border-white/40 text-white hover:bg-white/10"
@@ -106,7 +132,7 @@ export default function Header() {
               </a>
               <a
                 href="tel:253-441-9764"
-                className={`text-[13px] font-medium tracking-[0.1em] transition-colors duration-300 hover:opacity-60 ${
+                className={`shrink-0 whitespace-nowrap text-[15px] font-medium tracking-[0.06em] transition-colors duration-300 hover:opacity-60 ${
                   solid ? "text-charcoal" : "text-white"
                 }`}
               >
@@ -116,7 +142,7 @@ export default function Header() {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`lg:hidden relative z-10 w-10 h-10 flex flex-col items-center justify-center gap-1.5 transition-colors ${
+              className={`lg:hidden relative z-10 ml-auto w-10 h-10 flex flex-col items-center justify-center gap-1.5 transition-colors ${
                 mobileOpen
                   ? "text-white"
                   : solid
@@ -162,7 +188,33 @@ export default function Header() {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="flex h-full flex-col items-center justify-start gap-6 overflow-y-auto px-6 pb-10 pt-8"
             >
-              {mainNav.map((item) => (
+              {mainNav.slice(0, 2).map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="font-serif text-3xl text-white/90 hover:text-white transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <NavDropdown
+                label="Valuation"
+                items={valuationNav}
+                solid={solid}
+                variant="mobile"
+                isActive={(p) =>
+                  p.startsWith("/free-home-evaluation") ||
+                  p.startsWith("/home-evaluation-tool")
+                }
+                onNavigate={() => setMobileOpen(false)}
+              />
+              <ServiceAreasNav
+                solid={solid}
+                variant="mobile"
+                onNavigate={() => setMobileOpen(false)}
+              />
+              {mainNav.slice(2).map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -187,7 +239,7 @@ export default function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-sm uppercase tracking-[0.2em] text-white/50 hover:text-white/80 transition-colors"
+                  className="text-sm uppercase tracking-[0.2em] text-white/80 hover:text-white/80 transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -195,7 +247,7 @@ export default function Header() {
               <div className="mt-4">
                 <a
                   href="tel:253-441-9764"
-                  className="text-sm uppercase tracking-[0.2em] text-white/50 hover:text-white/80 transition-colors"
+                  className="text-sm uppercase tracking-[0.2em] text-white/80 hover:text-white/80 transition-colors"
                 >
                   (253) 441-9764
                 </a>
