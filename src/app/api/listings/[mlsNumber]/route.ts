@@ -33,15 +33,23 @@ export async function GET(
     }
 
     if (direct.status === 404) {
-      const searchUrl = `${REPLIERS_BASE}?searchFields=mlsNumber&search=${encodeURIComponent(mlsNumber)}&pageSize=1`;
-      const fallback = await fetch(searchUrl, FETCH_OPTS);
-      if (fallback.ok) {
-        const payload = await fallback.json();
-        const hit = Array.isArray(payload?.listings) ? payload.listings[0] : null;
-        if (hit) {
-          return NextResponse.json(hit);
+      // Try bare number search first
+      const searches = [mlsNumber];
+      // If it looks like a plain number, also try common NWMLS prefix
+      if (/^\d+$/.test(mlsNumber)) searches.push(`NWM${mlsNumber}`);
+      // If it already has a prefix, also try without it
+      else searches.push(mlsNumber.replace(/^[A-Z]+/, ""));
+
+      for (const term of searches) {
+        const searchUrl = `${REPLIERS_BASE}?searchFields=mlsNumber&search=${encodeURIComponent(term)}&pageSize=1`;
+        const fallback = await fetch(searchUrl, FETCH_OPTS);
+        if (fallback.ok) {
+          const payload = await fallback.json();
+          const hit = Array.isArray(payload?.listings) ? payload.listings[0] : null;
+          if (hit) return NextResponse.json(hit);
         }
       }
+
       return NextResponse.json({ error: "Listing not found" }, { status: 404 });
     }
 

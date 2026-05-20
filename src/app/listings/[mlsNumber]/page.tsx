@@ -215,8 +215,17 @@ export default function ListingDetailPage() {
   useEffect(() => {
     if (!mlsNumber) return;
     fetch(`/api/listings/${mlsNumber}`)
-      .then((r) => r.json())
-      .then((data) => { setListing(data); setDataRefreshedAt(new Date()); setLoading(false); })
+      .then((r) => {
+        if (!r.ok) { setLoading(false); return; }
+        return r.json();
+      })
+      .then((data) => {
+        if (!data) return;
+        if (data.error) { setLoading(false); return; }
+        setListing(data);
+        setDataRefreshedAt(new Date());
+        setLoading(false);
+      })
       .catch(() => setLoading(false));
   }, [mlsNumber]);
 
