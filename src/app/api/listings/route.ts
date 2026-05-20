@@ -32,6 +32,32 @@ export async function GET(req: NextRequest) {
   const state = searchParams.get("state");
   const boardId = searchParams.get("boardId");
 
+  // MLS# direct lookup — Repliers' searchFields param is unreliable.
+  // When the caller passes searchFields=mlsNumber we do a direct GET
+  // on the listing ID and return it as a single-item array so the grid
+  // renders exactly like a normal results page.
+  if (searchFields === "mlsNumber" && search) {
+    const bare = search.replace(/^[A-Za-z]+/, "");
+    const candidates = [`NWM${bare}`, bare, search];
+    const headers = {
+      "repliers-api-key": process.env.REPLIERS_API_KEY || "",
+      "Content-Type": "application/json",
+    };
+    for (const id of candidates) {
+      const res = await fetch(`${REPLIERS_API}/${encodeURIComponent(id)}`, {
+        headers,
+        next: { revalidate: 300 },
+      });
+      if (res.ok) {
+        const listing = await res.json();
+        if (listing?.mlsNumber) {
+          return NextResponse.json({ count: 1, numPages: 1, page: 1, listings: [listing] });
+        }
+      }
+    }
+    return NextResponse.json({ count: 0, numPages: 0, page: 1, listings: [] });
+  }
+
   const params = new URLSearchParams({ pageSize, page });
 
   if (state) params.set("state", state);
