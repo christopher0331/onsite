@@ -303,20 +303,20 @@ export default function ListingsPage() {
             <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between mb-10">
               <div>
                 <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/60">
-                  NWMLS · Washington State
+                  NWMLS · MLS Grid
                 </p>
                 <h1 className="mb-6 font-serif text-[clamp(2.8rem,7vw,5.8rem)] font-light leading-[1.0] text-white">
                   Search Homes.
                 </h1>
                 <p className="max-w-xl text-[16px] leading-8 text-white/70">
-                  Browse Washington listings sourced directly from NWMLS via MLS Grid.
+                  Browse listings sourced directly from NWMLS via MLS Grid.
                 </p>
               </div>
               <div className="shrink-0 text-right">
                 {!loading && (
                   <p className="text-[13px] text-white/80">
                     <span className="text-white text-2xl font-serif font-light">{count.toLocaleString()}</span>
-                    <br />Washington listings
+                    <br />listings
                   </p>
                 )}
               </div>
