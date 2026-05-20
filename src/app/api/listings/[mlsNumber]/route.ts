@@ -33,16 +33,33 @@ export async function GET(
     }
 
     if (direct.status === 404) {
-      // Try bare number search first
-      const searches = [mlsNumber];
-      // If it looks like a plain number, also try common NWMLS prefix
-      if (/^\d+$/.test(mlsNumber)) searches.push(`NWM${mlsNumber}`);
-      // If it already has a prefix, also try without it
-      else searches.push(mlsNumber.replace(/^[A-Z]+/, ""));
+      // Build a list of (searchTerm, boardId) pairs to try.
+      // NWMLS numbers may arrive as "2310987", "NWM2310987", or the full
+      // prefixed form. boardId=110 scopes Repliers to NWMLS specifically.
+      const isNwmls = /^(NWM)?\d+$/.test(mlsNumber);
+      const bare = mlsNumber.replace(/^[A-Z]+/, "");
+      const prefixed = `NWM${bare}`;
 
-      for (const term of searches) {
-        const searchUrl = `${REPLIERS_BASE}?searchFields=mlsNumber&search=${encodeURIComponent(term)}&pageSize=1`;
-        const fallback = await fetch(searchUrl, FETCH_OPTS);
+      const attempts: { term: string; board?: string }[] = isNwmls
+        ? [
+            { term: prefixed, board: "110" },
+            { term: bare,     board: "110" },
+            { term: prefixed },
+            { term: bare },
+          ]
+        : [
+            { term: mlsNumber },
+            { term: bare },
+          ];
+
+      for (const { term, board } of attempts) {
+        const p = new URLSearchParams({
+          searchFields: "mlsNumber",
+          search: term,
+          pageSize: "1",
+        });
+        if (board) p.set("boardId", board);
+        const fallback = await fetch(`${REPLIERS_BASE}?${p}`, FETCH_OPTS);
         if (fallback.ok) {
           const payload = await fallback.json();
           const hit = Array.isArray(payload?.listings) ? payload.listings[0] : null;
