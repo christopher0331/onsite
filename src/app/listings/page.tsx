@@ -244,6 +244,8 @@ export default function ListingsPage() {
   const [sortBy, setSortBy] = useState("createdOnDesc");
   const [viewMode, setViewMode] = useState<"list" | "map">("list");
   const [mlsLookup, setMlsLookup] = useState("");
+  const [stateFilter, setStateFilter] = useState("WA");
+  const [totalDbCount, setTotalDbCount] = useState<number | null>(null);
   const [dataRefreshedAt, setDataRefreshedAt] = useState<Date | null>(null);
 
   function handleMlsLookup(e: React.FormEvent) {
@@ -253,9 +255,17 @@ export default function ListingsPage() {
     router.push(`/listings/${encodeURIComponent(trimmed)}`);
   }
 
+  // Fetch total database count once on mount (no filters) to show in hero
+  useEffect(() => {
+    fetch("/api/listings?status=All&pageSize=1&page=1")
+      .then((r) => r.json())
+      .then((data: ApiResponse) => setTotalDbCount(data.count || null))
+      .catch(() => {});
+  }, []);
+
   useEffect(() => {
     setPage(1);
-  }, [status, city, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy]);
+  }, [status, city, stateFilter, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy]);
 
   useEffect(() => {
     setLoading(true);
@@ -266,6 +276,10 @@ export default function ListingsPage() {
       sortBy,
     });
     if (city) params.set("city", city);
+    if (stateFilter) {
+      params.set("state", stateFilter);
+      if (stateFilter === "WA") params.set("boardId", "110");
+    }
     if (propertyType) params.set("type", propertyType);
     if (minBeds) params.set("minBeds", minBeds);
     if (minPrice) params.set("minPrice", minPrice);
@@ -289,7 +303,7 @@ export default function ListingsPage() {
         if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
       })
       .catch(() => setLoading(false));
-  }, [status, city, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy, page, viewMode]);
+  }, [status, city, stateFilter, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy, page, viewMode]);
 
   return (
     <>
@@ -302,21 +316,18 @@ export default function ListingsPage() {
 
             <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between mb-10">
               <div>
-                <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/60">
-                  NWMLS · MLS Grid
-                </p>
                 <h1 className="mb-6 font-serif text-[clamp(2.8rem,7vw,5.8rem)] font-light leading-[1.0] text-white">
                   Search Homes.
                 </h1>
                 <p className="max-w-xl text-[16px] leading-8 text-white/70">
-                  Browse listings sourced directly from NWMLS via MLS Grid.
+                  Search the full MLS database. Filter by location, price, beds, and more.
                 </p>
               </div>
               <div className="shrink-0 text-right">
-                {!loading && (
-                  <p className="text-[13px] text-white/80">
-                    <span className="text-white text-2xl font-serif font-light">{count.toLocaleString()}</span>
-                    <br />listings
+                {totalDbCount !== null && (
+                  <p className="text-[13px] text-white/60">
+                    <span className="text-white text-3xl font-serif font-light">{totalDbCount.toLocaleString()}+</span>
+                    <br />listings in the database
                   </p>
                 )}
               </div>
@@ -339,6 +350,26 @@ export default function ListingsPage() {
                   </button>
                 ))}
               </div>
+
+              {stateFilter ? (
+                <button
+                  onClick={() => setStateFilter("")}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white transition hover:bg-white/20"
+                  title="Click to search all states"
+                >
+                  {stateFilter}
+                  <svg className="w-3 h-3 opacity-60" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <path d="M1 1l10 10M11 1L1 11" strokeLinecap="round"/>
+                  </svg>
+                </button>
+              ) : (
+                <button
+                  onClick={() => setStateFilter("WA")}
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/50 transition hover:border-white/40 hover:text-white/80"
+                >
+                  + State
+                </button>
+              )}
 
               <input
                 type="text"
@@ -449,6 +480,7 @@ export default function ListingsPage() {
               </select>
 
               {(city ||
+                !stateFilter ||
                 propertyType ||
                 minBeds ||
                 minBaths ||
@@ -458,6 +490,7 @@ export default function ListingsPage() {
                 <button
                   onClick={() => {
                     setCity("");
+                    setStateFilter("WA");
                     setPropertyType("");
                     setMinBeds("");
                     setMinBaths("");
@@ -517,16 +550,6 @@ export default function ListingsPage() {
               </div>
             ) : (
               <>
-                <div className="mb-8 flex items-center justify-between text-[13px] text-charcoal/90">
-                  <span>
-                    Showing <strong className="text-charcoal">{listings.length}</strong> of{" "}
-                    <strong className="text-charcoal">{count.toLocaleString()}</strong> matching listings
-                    {viewMode === "list" && numPages > 1 && (
-                      <> · Page <strong className="text-charcoal">{page}</strong> of {numPages}</>
-                    )}
-                  </span>
-                </div>
-
                 {viewMode === "map" ? (
                   <ListingsMap listings={listings} />
                 ) : (
