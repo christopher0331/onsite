@@ -351,25 +351,34 @@ export default function ListingsPage() {
                 ))}
               </div>
 
-              {stateFilter ? (
-                <button
-                  onClick={() => setStateFilter("")}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white transition hover:bg-white/20"
-                  title="Click to search all states"
+              <div className="relative inline-flex items-center">
+                <select
+                  value={stateFilter}
+                  onChange={(e) => setStateFilter(e.target.value)}
+                  className={`rounded-full border px-5 py-2.5 pr-8 text-[11px] uppercase tracking-[0.2em] bg-transparent focus:outline-none appearance-none cursor-pointer transition-all duration-300 ${
+                    stateFilter
+                      ? "border-white/40 bg-white/10 text-white"
+                      : "border-white/20 text-white/50 hover:border-white/40 hover:text-white/80"
+                  }`}
                 >
-                  {stateFilter}
-                  <svg className="w-3 h-3 opacity-60" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2}>
-                    <path d="M1 1l10 10M11 1L1 11" strokeLinecap="round"/>
-                  </svg>
-                </button>
-              ) : (
-                <button
-                  onClick={() => setStateFilter("WA")}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/50 transition hover:border-white/40 hover:text-white/80"
-                >
-                  + State
-                </button>
-              )}
+                  <option value="" className="bg-[#1a1a18] text-white">All States</option>
+                  <option value="WA" className="bg-[#1a1a18] text-white">WA</option>
+                  <option value="OR" className="bg-[#1a1a18] text-white">OR</option>
+                  <option value="CA" className="bg-[#1a1a18] text-white">CA</option>
+                  <option value="ID" className="bg-[#1a1a18] text-white">ID</option>
+                  <option value="MT" className="bg-[#1a1a18] text-white">MT</option>
+                  <option value="AZ" className="bg-[#1a1a18] text-white">AZ</option>
+                  <option value="NV" className="bg-[#1a1a18] text-white">NV</option>
+                  <option value="CO" className="bg-[#1a1a18] text-white">CO</option>
+                  <option value="TX" className="bg-[#1a1a18] text-white">TX</option>
+                  <option value="FL" className="bg-[#1a1a18] text-white">FL</option>
+                  <option value="NY" className="bg-[#1a1a18] text-white">NY</option>
+                  <option value="NC" className="bg-[#1a1a18] text-white">NC</option>
+                </select>
+                <svg className="pointer-events-none absolute right-3 w-3 h-3 text-white/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
 
               <input
                 type="text"
