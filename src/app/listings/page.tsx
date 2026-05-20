@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -228,7 +227,6 @@ function ListingCard({ listing }: { listing: Listing }) {
 }
 
 export default function ListingsPage() {
-  const router = useRouter();
   const [listings, setListings] = useState<Listing[]>([]);
   const [count, setCount] = useState(0);
   const [numPages, setNumPages] = useState(1);
@@ -243,16 +241,22 @@ export default function ListingsPage() {
   const [maxPrice, setMaxPrice] = useState("");
   const [sortBy, setSortBy] = useState("createdOnDesc");
   const [viewMode, setViewMode] = useState<"list" | "map">("list");
-  const [mlsLookup, setMlsLookup] = useState("");
+  const [mlsInput, setMlsInput] = useState("");
+  const [mlsSearch, setMlsSearch] = useState("");
   const [stateFilter, setStateFilter] = useState("WA");
   const [totalDbCount, setTotalDbCount] = useState<number | null>(null);
   const [dataRefreshedAt, setDataRefreshedAt] = useState<Date | null>(null);
 
-  function handleMlsLookup(e: React.FormEvent) {
+  function handleMlsSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const trimmed = mlsLookup.trim();
-    if (!trimmed) return;
-    router.push(`/listings/${encodeURIComponent(trimmed)}`);
+    setMlsSearch(mlsInput.trim());
+    setPage(1);
+  }
+
+  function clearMlsSearch() {
+    setMlsInput("");
+    setMlsSearch("");
+    setPage(1);
   }
 
   // Fetch total database count once on mount (no filters) to show in hero
@@ -265,7 +269,7 @@ export default function ListingsPage() {
 
   useEffect(() => {
     setPage(1);
-  }, [status, city, stateFilter, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy]);
+  }, [status, city, stateFilter, mlsSearch, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy]);
 
   useEffect(() => {
     setLoading(true);
@@ -279,6 +283,10 @@ export default function ListingsPage() {
     if (stateFilter) {
       params.set("state", stateFilter);
       if (stateFilter === "WA") params.set("boardId", "110");
+    }
+    if (mlsSearch) {
+      params.set("searchFields", "mlsNumber");
+      params.set("search", mlsSearch);
     }
     if (propertyType) params.set("type", propertyType);
     if (minBeds) params.set("minBeds", minBeds);
@@ -303,7 +311,7 @@ export default function ListingsPage() {
         if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
       })
       .catch(() => setLoading(false));
-  }, [status, city, stateFilter, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy, page, viewMode]);
+  }, [status, city, stateFilter, mlsSearch, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy, page, viewMode]);
 
   return (
     <>
@@ -388,18 +396,30 @@ export default function ListingsPage() {
                 className="rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[12px] tracking-wide text-white placeholder:text-white/80 focus:border-white/50 focus:outline-none"
               />
 
-              <form onSubmit={handleMlsLookup} className="flex items-center gap-2">
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  value={mlsLookup}
-                  onChange={(e) => setMlsLookup(e.target.value)}
-                  placeholder="MLS #"
-                  className="w-28 rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[12px] tracking-wide text-white placeholder:text-white/80 focus:border-white/50 focus:outline-none"
-                />
+              <form onSubmit={handleMlsSubmit} className="flex items-center gap-2">
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={mlsInput}
+                    onChange={(e) => setMlsInput(e.target.value)}
+                    placeholder="MLS #"
+                    className="w-32 rounded-full border border-white/20 bg-transparent px-5 py-2.5 text-[12px] tracking-wide text-white placeholder:text-white/80 focus:border-white/50 focus:outline-none"
+                  />
+                  {mlsSearch && (
+                    <button
+                      type="button"
+                      onClick={clearMlsSearch}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 hover:text-white"
+                    >
+                      <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2}>
+                        <path d="M1 1l10 10M11 1L1 11" strokeLinecap="round"/>
+                      </svg>
+                    </button>
+                  )}
+                </div>
                 <button
                   type="submit"
-                  disabled={!mlsLookup.trim()}
+                  disabled={!mlsInput.trim()}
                   className="rounded-full border border-white/20 px-4 py-2.5 text-[10px] uppercase tracking-[0.2em] text-white/70 transition hover:border-white/50 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Go
@@ -489,6 +509,7 @@ export default function ListingsPage() {
               </select>
 
               {(city ||
+                mlsSearch ||
                 !stateFilter ||
                 propertyType ||
                 minBeds ||
@@ -499,6 +520,8 @@ export default function ListingsPage() {
                 <button
                   onClick={() => {
                     setCity("");
+                    setMlsInput("");
+                    setMlsSearch("");
                     setStateFilter("WA");
                     setPropertyType("");
                     setMinBeds("");
