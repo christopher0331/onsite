@@ -4,6 +4,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
+import TeamSection from "@/components/TeamSection";
 
 export const metadata: Metadata = {
   title: "About Onsite Real Estate Agents | Local Expertise, Proven Results",
@@ -67,101 +68,7 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        {/* André Bohall */}
-        <section className="py-20 sm:py-28 bg-warm-gray">
-          <div className="mx-auto max-w-[1440px] px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            <div className="lg:col-span-5">
-              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_24px_90px_rgba(0,0,0,0.16)]">
-                <Image
-                  src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67eff6b4b276a0e00c3a04ef_thumbnail_20241213_132625.jpg"
-                  alt="André Bohall"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                />
-              </div>
-            </div>
-            <div className="lg:col-span-7 lg:pt-4">
-              <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-5">Founder</p>
-              <h2 className="font-serif text-[clamp(2rem,4.5vw,3.8rem)] font-light text-charcoal leading-[1.08] mb-7">
-                André Bohall
-              </h2>
-              <div className="space-y-5 text-[16px] leading-8 text-charcoal/75">
-                <p>
-                  With over a decade of experience and hundreds of successful home sales, André Bohall brings deep expertise, tireless dedication, and a personal touch to every real estate journey. As the founder of OnSite Real Estate Group, André leads with service and strategy — combining strong market knowledge with sharp negotiating skills and genuine care for his clients' needs.
-                </p>
-                <p>
-                  André is a natural when it comes to sales. His background includes years of high-volume outbound prospecting, phone sales, and client conversion — skills that now translate into powerful results for his buyers and sellers. He understands how to create opportunities where others see roadblocks, and his team is known for going above and beyond to generate business through grit, consistency, and intentional action.
-                </p>
-                <p>
-                  Whether guiding first-time sellers, upsizing families, or downsizing retirees, André is known for his clear communication, no-pressure guidance, and ability to simplify even the most complex transactions. His clients trust him not just for his results — but for his integrity and straight answers. Highly technical, detail-oriented, and hands-on, André thrives in high-stakes situations and always keeps the end goal in sight: a smooth transaction and a win for his client.
-                </p>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <a
-                  href="tel:253-441-9764"
-                  className="inline-flex items-center gap-2 border border-charcoal/20 text-charcoal px-6 py-3 text-[13px] rounded-full hover:bg-charcoal hover:text-white transition-all duration-400"
-                >
-                  (253) 441-9764
-                </a>
-                <a
-                  href="mailto:andre@onsiteregroup.com"
-                  className="inline-flex items-center gap-2 border border-charcoal/20 text-charcoal px-6 py-3 text-[13px] rounded-full hover:bg-charcoal hover:text-white transition-all duration-400"
-                >
-                  andre@onsiteregroup.com
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Cindie Bohall */}
-        <section className="py-20 sm:py-28 bg-white">
-          <div className="mx-auto max-w-[1440px] px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            <div className="lg:col-span-7 lg:col-start-1 lg:pt-4 order-2 lg:order-1">
-              <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-5">Agent & Advisor</p>
-              <h2 className="font-serif text-[clamp(2rem,4.5vw,3.8rem)] font-light text-charcoal leading-[1.08] mb-7">
-                Cindie Bohall
-              </h2>
-              <div className="space-y-5 text-[16px] leading-8 text-charcoal/75">
-                <p>
-                  For over 20 years, Cindie Bohall has been a trusted guide for families navigating complex decisions. As the founder of a successful senior housing referral company since 2013, she has helped hundreds of families find safe, supportive environments for their loved ones.
-                </p>
-                <p>
-                  Today, Cindie brings that same compassion, attention to detail, and advocacy to her work at OnSite Real Estate Group. Whether helping a family transition from their longtime home or supporting first-time buyers, she understands the emotional weight behind every move. Her clients love her calm, confident approach and her ability to make the complex feel manageable.
-                </p>
-                <p>
-                  Cindie's passion lies in building trust and helping people feel cared for — especially during life's major transitions. Her background in senior care gives her unique insight when working with older adults, retirees, or families coordinating multi-generational moves.
-                </p>
-              </div>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <a
-                  href="tel:253-799-0609"
-                  className="inline-flex items-center gap-2 border border-charcoal/20 text-charcoal px-6 py-3 text-[13px] rounded-full hover:bg-charcoal hover:text-white transition-all duration-400"
-                >
-                  (253) 799-0609
-                </a>
-                <a
-                  href="mailto:cindie@onsiteregroup.com"
-                  className="inline-flex items-center gap-2 border border-charcoal/20 text-charcoal px-6 py-3 text-[13px] rounded-full hover:bg-charcoal hover:text-white transition-all duration-400"
-                >
-                  cindie@onsiteregroup.com
-                </a>
-              </div>
-            </div>
-            <div className="lg:col-span-5 lg:col-start-8 order-1 lg:order-2">
-              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_24px_90px_rgba(0,0,0,0.16)]">
-                <Image
-                  src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67eff7c928cd6f5d561b2667_thumbnail_20241213_110755.jpg"
-                  alt="Cindie Bohall"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+        <TeamSection />
 
         {/* Together section */}
         <section className="py-20 sm:py-28 bg-warm-gray">
