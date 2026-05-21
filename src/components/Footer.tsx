@@ -96,7 +96,7 @@ export default function Footer() {
                 className="h-10 w-auto brightness-0 invert"
               />
             </div>
-            <p className="text-[14px] text-white/40 leading-relaxed max-w-xs mb-8">
+            <p className="text-[14px] text-white/80 leading-relaxed max-w-xs mb-8">
               Expert Negotiation. Maximize Value. Your trusted real estate team
               in Pierce County.
             </p>
@@ -112,7 +112,7 @@ export default function Footer() {
                 href="https://www.google.com/maps/dir//3920+W+Tapps+Dr+E,+Lake+Tapps,+WA+98391"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-[14px] text-white/40 hover:text-white/60 transition-colors leading-relaxed"
+                className="block text-[14px] text-white/80 hover:text-white/60 transition-colors leading-relaxed"
               >
                 3920 W Tapps Dr E
                 <br />
@@ -128,7 +128,7 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="lg:col-span-3 lg:col-start-6"
           >
-            <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/30 mb-6">
+            <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/70 mb-6">
               Company
             </h4>
             <nav className="flex flex-col gap-3">
@@ -136,7 +136,7 @@ export default function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-[14px] text-white/50 hover:text-white transition-colors duration-300"
+                  className="text-[14px] text-white/80 hover:text-white transition-colors duration-300"
                 >
                   {link.label}
                 </Link>
@@ -151,7 +151,7 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-3"
           >
-            <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/30 mb-6">
+            <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/70 mb-6">
               Solutions
             </h4>
             <nav className="flex flex-col gap-3">
@@ -162,7 +162,7 @@ export default function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[14px] text-white/50 hover:text-white transition-colors duration-300"
+                    className="text-[14px] text-white/80 hover:text-white transition-colors duration-300"
                   >
                     {link.label}
                   </a>
@@ -170,7 +170,7 @@ export default function Footer() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-[14px] text-white/50 hover:text-white transition-colors duration-300"
+                    className="text-[14px] text-white/80 hover:text-white transition-colors duration-300"
                   >
                     {link.label}
                   </Link>
@@ -230,14 +230,14 @@ export default function Footer() {
             <div className="flex items-center gap-6">
               <Link
                 href="/terms-of-service"
-                className="text-[12px] text-white/25 hover:text-white/50 transition-colors"
+                className="text-[12px] text-white/25 hover:text-white/80 transition-colors"
               >
                 Terms of Service
               </Link>
               <span className="text-white/10">|</span>
               <Link
                 href="/dmca-notice"
-                className="text-[12px] text-white/25 hover:text-white/50 transition-colors"
+                className="text-[12px] text-white/25 hover:text-white/80 transition-colors"
               >
                 DMCA Notice
               </Link>
@@ -246,7 +246,7 @@ export default function Footer() {
                 href="https://reactivlabs.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[12px] text-white/25 hover:text-white/50 transition-colors"
+                className="text-[12px] text-white/25 hover:text-white/80 transition-colors"
               >
                 Site by Reactiv Labs
               </a>
@@ -259,7 +259,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-white hover:border-white/30 transition-all duration-300"
+                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all duration-300"
                 >
                   {social.icon}
                 </a>

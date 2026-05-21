@@ -73,9 +73,9 @@ export default function Testimonials() {
               <br />
               Results for Over
               <br />
-              <span className="italic">a Decade</span>
+              <span>a Decade</span>
             </h2>
-            <p className="mt-6 text-[15px] leading-relaxed text-charcoal/60 max-w-sm">
+            <p className="mt-6 text-[15px] leading-relaxed text-charcoal/80 max-w-sm">
               Selling a home is a big decision, and choosing the right real
               estate team makes all the difference.
             </p>
@@ -113,7 +113,7 @@ export default function Testimonials() {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.6 }}
               >
-                <blockquote className="font-serif text-[clamp(1.25rem,2.5vw,1.75rem)] text-charcoal font-light leading-relaxed italic">
+                <blockquote className="font-serif text-[clamp(1.25rem,2.5vw,1.75rem)] text-charcoal leading-relaxed">
                   &ldquo;{testimonials[current].quote}&rdquo;
                 </blockquote>
                 <div className="mt-8 flex items-center gap-4">

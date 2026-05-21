@@ -45,7 +45,7 @@ export default function SoldProperties() {
               Past Transactions
             </p>
             <h2 className="font-serif text-[clamp(2rem,4vw,3.5rem)] font-light text-charcoal leading-tight">
-              Over 300+ <span className="italic">Sold</span>
+              Over 300+ <span>Sold</span>
             </h2>
           </div>
           <Link

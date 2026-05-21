@@ -33,7 +33,7 @@ export default function PrepListSellPath() {
           </span>
 
           {/* step badge */}
-          <p className="w-fit rounded-full border border-white/15 px-4 py-1 text-[10px] uppercase tracking-[0.3em] text-white/40">
+          <p className="w-fit rounded-full border border-white/15 px-4 py-1 text-[10px] uppercase tracking-[0.3em] text-white/80">
             {item.step}
           </p>
 
@@ -43,7 +43,7 @@ export default function PrepListSellPath() {
           </h3>
 
           {/* description */}
-          <p className="text-[14px] leading-7 text-white/55 not-italic">
+          <p className="text-[14px] leading-7 text-white/85 not-italic">
             {item.description}
           </p>
 

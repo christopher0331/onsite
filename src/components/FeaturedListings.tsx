@@ -44,7 +44,7 @@ export default function FeaturedListings() {
             On the Market
           </p>
           <h2 className="font-serif text-[clamp(2rem,4vw,3.5rem)] font-light text-charcoal leading-tight">
-            Featured Home <span className="italic">Listings</span>
+            Featured Home <span>Listings</span>
           </h2>
         </motion.div>
 
@@ -66,7 +66,7 @@ export default function FeaturedListings() {
                     className="object-cover transform group-hover:scale-105 transition-transform duration-700"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent z-10" />
+                  <div className="hero-overlay z-10" aria-hidden />
                   <div className="absolute bottom-0 left-0 right-0 z-20 p-8 lg:p-12">
                     <span className="text-[10px] uppercase tracking-[0.25em] text-white/80">
                       Featured
@@ -105,7 +105,7 @@ export default function FeaturedListings() {
                       className="object-cover transform group-hover:scale-105 transition-transform duration-700"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent z-10" />
+                    <div className="hero-overlay z-10" aria-hidden />
                     <div className="absolute bottom-0 left-0 right-0 z-20 p-6 lg:p-8">
                       <span className="text-[10px] uppercase tracking-[0.25em] text-white/80">
                         Featured

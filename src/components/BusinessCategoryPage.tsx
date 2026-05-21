@@ -20,18 +20,18 @@ function MemberCard({ member }: { member: Member }) {
           className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
+        <div className="hero-overlay" aria-hidden />
       </div>
       {/* Info */}
       <div className="flex flex-1 flex-col justify-between bg-white p-6">
         <div>
-          <span className="mb-2 inline-block rounded-full border border-charcoal/12 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-charcoal/40">
+          <span className="mb-2 inline-block rounded-full border border-charcoal/12 px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-charcoal/65">
             {member.category}
           </span>
           <h3 className="font-serif text-[1.15rem] font-light leading-snug text-charcoal">{member.name}</h3>
-          <p className="mt-1 text-[12px] uppercase tracking-[0.15em] text-charcoal/45">{member.company}</p>
+          <p className="mt-1 text-[12px] uppercase tracking-[0.15em] text-charcoal/70">{member.company}</p>
         </div>
-        <p className="mt-4 border-t border-charcoal/8 pt-4 text-[13px] leading-6 text-charcoal/60">
+        <p className="mt-4 border-t border-charcoal/8 pt-4 text-[13px] leading-6 text-charcoal/80">
           {member.specialty}
         </p>
       </div>
@@ -60,7 +60,7 @@ export default function BusinessCategoryPage({ categorySlug, title, description,
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
             <Link
               href="/business-connect"
-              className="mb-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-white/50 transition-colors duration-300 hover:text-white"
+              className="mb-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-white/80 transition-colors duration-300 hover:text-white"
             >
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 rotate-180">
                 <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -106,7 +106,7 @@ export default function BusinessCategoryPage({ categorySlug, title, description,
                 <h2 className="mb-4 font-serif text-[1.8rem] font-light text-charcoal">
                   No Members Listed Yet.
                 </h2>
-                <p className="mb-8 max-w-md text-[15px] leading-7 text-charcoal/55">
+                <p className="mb-8 max-w-md text-[15px] leading-7 text-charcoal/75">
                   This category is open for new members. If you operate a business in {title.toLowerCase()}, we&apos;d love to have you.
                 </p>
                 <Link
@@ -147,9 +147,9 @@ export default function BusinessCategoryPage({ categorySlug, title, description,
                   <div>
                     <p className="mb-3 text-xl">{cat.icon}</p>
                     <h3 className="mb-2 font-serif text-[1.15rem] font-light text-charcoal">{cat.name}</h3>
-                    <p className="text-[13px] leading-6 text-charcoal/55 line-clamp-2">{cat.description}</p>
+                    <p className="text-[13px] leading-6 text-charcoal/75 line-clamp-2">{cat.description}</p>
                   </div>
-                  <div className="mt-5 flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-charcoal/40 transition-colors duration-300 group-hover:text-charcoal">
+                  <div className="mt-5 flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-charcoal/65 transition-colors duration-300 group-hover:text-charcoal">
                     View Members
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1">
                       <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />

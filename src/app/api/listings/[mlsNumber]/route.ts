@@ -33,15 +33,40 @@ export async function GET(
     }
 
     if (direct.status === 404) {
-      const searchUrl = `${REPLIERS_BASE}?searchFields=mlsNumber&search=${encodeURIComponent(mlsNumber)}&pageSize=1`;
-      const fallback = await fetch(searchUrl, FETCH_OPTS);
-      if (fallback.ok) {
-        const payload = await fallback.json();
-        const hit = Array.isArray(payload?.listings) ? payload.listings[0] : null;
-        if (hit) {
-          return NextResponse.json(hit);
+      // Build a list of (searchTerm, boardId) pairs to try.
+      // NWMLS numbers may arrive as "2310987", "NWM2310987", or the full
+      // prefixed form. boardId=110 scopes Repliers to NWMLS specifically.
+      const isNwmls = /^(NWM)?\d+$/.test(mlsNumber);
+      const bare = mlsNumber.replace(/^[A-Z]+/, "");
+      const prefixed = `NWM${bare}`;
+
+      const attempts: { term: string; board?: string }[] = isNwmls
+        ? [
+            { term: prefixed, board: "110" },
+            { term: bare,     board: "110" },
+            { term: prefixed },
+            { term: bare },
+          ]
+        : [
+            { term: mlsNumber },
+            { term: bare },
+          ];
+
+      for (const { term, board } of attempts) {
+        const p = new URLSearchParams({
+          searchFields: "mlsNumber",
+          search: term,
+          pageSize: "1",
+        });
+        if (board) p.set("boardId", board);
+        const fallback = await fetch(`${REPLIERS_BASE}?${p}`, FETCH_OPTS);
+        if (fallback.ok) {
+          const payload = await fallback.json();
+          const hit = Array.isArray(payload?.listings) ? payload.listings[0] : null;
+          if (hit) return NextResponse.json(hit);
         }
       }
+
       return NextResponse.json({ error: "Listing not found" }, { status: 404 });
     }
 

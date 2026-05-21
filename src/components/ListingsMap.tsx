@@ -3,8 +3,11 @@
 import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 import L, { type LatLngTuple, type Map as LeafletMap } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "react-leaflet-cluster/dist/assets/MarkerCluster.css";
+import "react-leaflet-cluster/dist/assets/MarkerCluster.Default.css";
 
 type MapListing = {
   mlsNumber: string;
@@ -80,10 +83,10 @@ export default function ListingsMap({ listings }: { listings: MapListing[] }) {
     return (
       <div className="grid h-[640px] place-items-center rounded-3xl border border-charcoal/10 bg-charcoal/5 text-center">
         <div className="px-6">
-          <p className="font-serif text-2xl font-light text-charcoal/70">
+          <p className="font-serif text-2xl font-light text-charcoal/90">
             No mappable listings in this result set.
           </p>
-          <p className="mt-3 text-[13px] text-charcoal/60">
+          <p className="mt-3 text-[13px] text-charcoal/80">
             Repliers did not return coordinates for the current filters. Try widening the search.
           </p>
         </div>
@@ -105,35 +108,48 @@ export default function ListingsMap({ listings }: { listings: MapListing[] }) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <FitToListings points={points} />
-        {validListings.map((l) => {
-          const isSold = l.lastStatus === "Sld" || l.status === "U";
-          const price = l.soldPrice ?? l.listPrice;
-          return (
-            <Marker
-              key={l.mlsNumber}
-              position={[l.map.latitude, l.map.longitude]}
-              icon={dollarPin(compactPrice(price), isSold)}
-            >
-              <Popup>
-                <div className="min-w-[180px] space-y-1">
-                  <p className="font-serif text-[15px] text-charcoal">
-                    {compactPrice(price)} {isSold ? "· Sold" : ""}
-                  </p>
-                  <p className="text-[12px] text-charcoal/70">
-                    {l.address.city}, {l.address.state} {l.address.zip}
-                  </p>
-                  <p className="text-[11px] text-charcoal/60">MLS# {l.mlsNumber}</p>
-                  <Link
-                    href={`/listings/${l.mlsNumber}`}
-                    className="mt-2 inline-block text-[11px] uppercase tracking-[0.2em] text-charcoal underline-offset-4 hover:underline"
-                  >
-                    View Listing →
-                  </Link>
-                </div>
-              </Popup>
-            </Marker>
-          );
-        })}
+        <MarkerClusterGroup
+          chunkedLoading
+          iconCreateFunction={(cluster) => {
+            const count = cluster.getChildCount();
+            return L.divIcon({
+              className: "",
+              html: `<div style="background:#1a1a18;color:#fff;border-radius:9999px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:13px;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,0.25);border:2px solid #fff;">${count}</div>`,
+              iconSize: [44, 44],
+              iconAnchor: [22, 22],
+            });
+          }}
+        >
+          {validListings.map((l) => {
+            const isSold = l.lastStatus === "Sld" || l.status === "U";
+            const price = l.soldPrice ?? l.listPrice;
+            return (
+              <Marker
+                key={l.mlsNumber}
+                position={[l.map.latitude, l.map.longitude]}
+                icon={dollarPin(compactPrice(price), isSold)}
+              >
+                <Popup>
+                  <div className="min-w-[180px] space-y-1">
+                    <p className="font-serif text-[15px] text-charcoal">
+                      {compactPrice(price)} {isSold ? "· Sold" : ""}
+                    </p>
+                    <p className="text-[12px] text-charcoal/90">
+                      {l.address.city}, {l.address.state} {l.address.zip}
+                    </p>
+                    <p className="text-[11px] text-charcoal/80">MLS# {l.mlsNumber}</p>
+                    <Link
+                      href={`/listings/${l.mlsNumber}`}
+                      className="mt-2 inline-block text-[11px] uppercase tracking-[0.2em] text-charcoal underline-offset-4 hover:underline"
+                    >
+                      View Listing →
+                    </Link>
+                  </div>
+                </Popup>
+              </Marker>
+            );
+          })}
+        </MarkerClusterGroup>
       </MapContainer>
     </div>
   );

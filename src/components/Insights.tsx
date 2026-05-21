@@ -67,7 +67,7 @@ export default function Insights() {
               Insights
             </p>
             <h2 className="font-serif text-[clamp(2rem,4vw,3.5rem)] font-light text-charcoal leading-tight">
-              Market Trends & <span className="italic">Insights</span>
+              Market Trends & <span>Insights</span>
             </h2>
           </div>
           <Link

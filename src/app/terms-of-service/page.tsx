@@ -86,7 +86,7 @@ export default async function TermsOfServicePage() {
         <section className="bg-white py-20 sm:py-28">
           <div className="mx-auto max-w-[900px] px-6 lg:px-12">
 
-            <p className="mb-16 text-[15px] leading-8 text-charcoal/55">
+            <p className="mb-16 text-[15px] leading-8 text-charcoal/75">
               Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
             </p>
 
@@ -101,7 +101,7 @@ export default async function TermsOfServicePage() {
                       <h2 className="mb-4 font-serif text-[1.3rem] font-light text-charcoal">
                         {section.title}
                       </h2>
-                      <p className="text-[15px] leading-[1.9] text-charcoal/65">
+                      <p className="text-[15px] leading-[1.9] text-charcoal/85">
                         {section.body}
                       </p>
                     </div>
@@ -116,7 +116,7 @@ export default async function TermsOfServicePage() {
               <h2 className="mb-6 font-serif text-[1.4rem] font-light text-charcoal">
                 Questions about these terms?
               </h2>
-              <p className="mb-6 text-[15px] leading-7 text-charcoal/65">
+              <p className="mb-6 text-[15px] leading-7 text-charcoal/85">
                 If you have any questions about these Terms of Service, please contact us:
               </p>
               <dl className="space-y-3">
@@ -127,7 +127,7 @@ export default async function TermsOfServicePage() {
                   { label: "Phone", value: "253-441-9764" },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
-                    <dt className="w-24 shrink-0 text-[11px] uppercase tracking-[0.2em] text-charcoal/45">{label}</dt>
+                    <dt className="w-24 shrink-0 text-[11px] uppercase tracking-[0.2em] text-charcoal/70">{label}</dt>
                     <dd className="font-serif text-[1rem] font-light text-charcoal">{value}</dd>
                   </div>
                 ))}
@@ -142,7 +142,7 @@ export default async function TermsOfServicePage() {
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
             <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="mb-2 text-[11px] uppercase tracking-[0.3em] text-white/50">Ready to Get Started?</p>
+                <p className="mb-2 text-[11px] uppercase tracking-[0.3em] text-white/80">Ready to Get Started?</p>
                 <h2 className="font-serif text-[1.6rem] font-light text-white">Find Your Next Home.</h2>
               </div>
               <div className="flex flex-wrap gap-4">

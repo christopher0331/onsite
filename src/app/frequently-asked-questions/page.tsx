@@ -108,17 +108,17 @@ function AccordionItem({ q, a }: { q: string; a: string }) {
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between gap-6 py-5 text-left group"
       >
-        <span className="font-serif text-[1.05rem] text-charcoal leading-snug group-hover:text-charcoal/60 transition-colors">
+        <span className="font-serif text-[1.05rem] text-charcoal leading-snug group-hover:text-charcoal/80 transition-colors">
           {q}
         </span>
         <span className={`shrink-0 w-7 h-7 rounded-full border border-charcoal/15 flex items-center justify-center transition-transform duration-300 ${open ? "rotate-180" : ""}`}>
-          <svg className="w-3 h-3 text-charcoal/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-3 h-3 text-charcoal/65" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
           </svg>
         </span>
       </button>
       {open && (
-        <p className="pb-5 text-[15px] leading-8 text-charcoal/70 pr-10 font-[450]">
+        <p className="pb-5 text-[15px] leading-8 text-charcoal/90 pr-10 font-[450]">
           {a}
         </p>
       )}
@@ -144,12 +144,12 @@ export default function FAQPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-black/52" />
+          <div className="hero-overlay" aria-hidden />
           <div className="relative z-10 mx-auto max-w-[1440px] h-full px-6 lg:px-12 flex items-end pb-16 sm:pb-20">
             <div>
               <p className="text-[11px] uppercase tracking-[0.35em] text-white/70 mb-4">FAQ</p>
               <h1 className="font-serif text-[clamp(2.2rem,6vw,4.8rem)] leading-[1.02] text-white font-light max-w-3xl">
-                Frequently Asked <span className="italic">Questions.</span>
+                Frequently Asked <span>Questions.</span>
               </h1>
             </div>
           </div>
@@ -161,7 +161,7 @@ export default function FAQPage() {
 
             {/* Intro row */}
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14">
-              <p className="text-[16px] leading-8 text-charcoal/65 max-w-xl">
+              <p className="text-[16px] leading-8 text-charcoal/85 max-w-xl">
                 Buying or selling a home comes with questions — we have the answers. Explore our FAQs for expert insights and guidance on every step of the process.
               </p>
               <Link
@@ -184,7 +184,7 @@ export default function FAQPage() {
                       className={`shrink-0 text-left px-6 py-4 rounded-2xl transition-all duration-300 ${
                         activeCategory === i
                           ? "bg-charcoal text-white shadow-[0_8px_30px_rgba(0,0,0,0.18)]"
-                          : "bg-white/70 text-charcoal/50 hover:text-charcoal hover:bg-white"
+                          : "bg-white/70 text-charcoal/75 hover:text-charcoal hover:bg-white"
                       }`}
                     >
                       <span className="block font-serif text-[1.3rem] font-light normal-case tracking-normal mb-0.5 leading-none">
@@ -220,11 +220,11 @@ export default function FAQPage() {
                 className="object-cover"
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black/52" />
+              <div className="hero-overlay" aria-hidden />
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
                 <p className="text-[11px] uppercase tracking-[0.35em] text-white/75 mb-4">Ready to get started?</p>
                 <h2 className="font-serif text-[clamp(2rem,5vw,4rem)] font-light text-white leading-[1.05]">
-                  Let&apos;s Talk <span className="italic">Home Selling Solutions</span>
+                  Let&apos;s Talk <span>Home Selling Solutions</span>
                 </h2>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
                   <Link

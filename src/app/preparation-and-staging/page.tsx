@@ -81,7 +81,7 @@ export default function PreparationAndStagingPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" />
+          <div className="hero-overlay" aria-hidden />
           <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-end px-6 pb-20 sm:pb-28 lg:px-12">
             <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/70">Preparation & Staging</p>
             <h1 className="mb-8 max-w-4xl font-serif text-[clamp(2.6rem,7vw,5.6rem)] font-light leading-[1.0] text-white">
@@ -116,7 +116,7 @@ export default function PreparationAndStagingPage() {
                 Market ready homes sell faster.
               </h2>
             </div>
-            <div className="space-y-5 text-[16px] leading-8 text-charcoal/70 lg:col-span-7">
+            <div className="space-y-5 text-[16px] leading-8 text-charcoal/90 lg:col-span-7">
               <p>
                 A well-prepared home stands out, attracts buyers, and sells for a higher price. We guide you through every step to make your home market-ready.
               </p>
@@ -140,7 +140,7 @@ export default function PreparationAndStagingPage() {
                   Why Staging & Preparation Matter.
                 </h2>
               </div>
-              <p className="text-[16px] leading-8 text-charcoal/65">
+              <p className="text-[16px] leading-8 text-charcoal/85">
                 Proper preparation sets the stage for a successful sale. A well-presented home not only attracts more buyers but also creates a lasting impression that drives higher offers. Thoughtful preparation gives you a competitive edge, helping your home stand out in a crowded market and sell for its true value.
               </p>
             </div>
@@ -149,7 +149,7 @@ export default function PreparationAndStagingPage() {
                 <article key={card.title} className="rounded-3xl bg-white p-7 shadow-[0_14px_40px_rgba(0,0,0,0.07)]">
                   <Image src={card.icon} alt="" width={44} height={44} className="mb-4 h-11 w-11 object-contain opacity-80" />
                   <h3 className="mb-3 font-serif text-2xl font-light text-charcoal">{card.title}</h3>
-                  <p className="text-[14px] leading-7 text-charcoal/65">{card.description}</p>
+                  <p className="text-[14px] leading-7 text-charcoal/85">{card.description}</p>
                 </article>
               ))}
             </div>
@@ -216,7 +216,7 @@ export default function PreparationAndStagingPage() {
                 className="object-cover object-center"
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black/52" />
+              <div className="hero-overlay" aria-hidden />
               <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
                 <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-white/75">Ready to get started?</p>
                 <h2 className="font-serif text-[clamp(2rem,5vw,4rem)] font-light leading-[1.05] text-white">

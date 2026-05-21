@@ -29,8 +29,39 @@ export async function GET(req: NextRequest) {
   const brokerageOnly = searchParams.get("brokerageOnly") === "true";
   const search = searchParams.get("search");
   const searchFields = searchParams.get("searchFields");
+  const state = searchParams.get("state");
+  const boardId = searchParams.get("boardId");
+
+  // MLS# direct lookup — Repliers' searchFields param is unreliable.
+  // When the caller passes searchFields=mlsNumber we do a direct GET
+  // on the listing ID and return it as a single-item array so the grid
+  // renders exactly like a normal results page.
+  if (searchFields === "mlsNumber" && search) {
+    const bare = search.replace(/^[A-Za-z]+/, "");
+    const candidates = [`NWM${bare}`, bare, search];
+    const headers = {
+      "repliers-api-key": process.env.REPLIERS_API_KEY || "",
+      "Content-Type": "application/json",
+    };
+    for (const id of candidates) {
+      const res = await fetch(`${REPLIERS_API}/${encodeURIComponent(id)}`, {
+        headers,
+        next: { revalidate: 300 },
+      });
+      if (res.ok) {
+        const listing = await res.json();
+        if (listing?.mlsNumber) {
+          return NextResponse.json({ count: 1, numPages: 1, page: 1, listings: [listing] });
+        }
+      }
+    }
+    return NextResponse.json({ count: 0, numPages: 0, page: 1, listings: [] });
+  }
 
   const params = new URLSearchParams({ pageSize, page });
+
+  if (state) params.set("state", state);
+  if (boardId) params.set("boardId", boardId);
 
   // Friendly status filter → Repliers `standardStatus` (RESO compliant).
   // Per Repliers support: prefer standardStatus over lastStatus / status
@@ -38,7 +69,12 @@ export async function GET(req: NextRequest) {
   // array notation).
   switch (status) {
     case "All":
-      // Omit the status filter entirely so we get every record in the feed.
+      // Repliers returns 0 results when standardStatus is omitted — must
+      // enumerate all statuses explicitly to get the full feed.
+      params.append("standardStatus", "Active");
+      params.append("standardStatus", "Active Under Contract");
+      params.append("standardStatus", "Pending");
+      params.append("standardStatus", "Closed");
       break;
     case "P": // Pending — includes Active Under Contract (contingent)
       params.append("standardStatus", "Pending");
@@ -49,9 +85,10 @@ export async function GET(req: NextRequest) {
       break;
     case "A":
     default:
-      // Plain Active only — contingent (Active Under Contract) is excluded
-      // here so the auditor's "Active" tab doesn't double up with Pending.
-      params.set("standardStatus", "Active");
+      // NWMLS requires contingent (Active Under Contract) to appear
+      // alongside Active listings in search results.
+      params.append("standardStatus", "Active");
+      params.append("standardStatus", "Active Under Contract");
       break;
   }
 

@@ -88,7 +88,7 @@ function SolutionCard({ title, image }: { title: string; image: string }) {
   return (
     <div className="relative aspect-[4/3] md:aspect-[3/4] lg:aspect-[4/3] overflow-hidden cursor-pointer rounded-3xl shadow-[0_24px_80px_rgba(0,0,0,0.18)]">
       <div className="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition-all duration-700 z-10" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent z-10" />
+      <div className="hero-overlay z-10" aria-hidden />
       <Image
         src={image}
         alt={title}

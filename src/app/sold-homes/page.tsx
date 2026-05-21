@@ -145,17 +145,17 @@ export default function SoldHomesPage() {
             <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
               <div>
                 <p className="font-serif text-[2.5rem] font-light leading-none text-white">300+</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.3em] text-white/50">Homes Sold</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.3em] text-white/80">Homes Sold</p>
               </div>
               <div className="h-10 w-px bg-white/15 hidden sm:block" />
               <div>
                 <p className="font-serif text-[2.5rem] font-light leading-none text-white">$100M+</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.3em] text-white/50">in Sales</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.3em] text-white/80">in Sales</p>
               </div>
               <div className="h-10 w-px bg-white/15 hidden sm:block" />
               <div>
                 <p className="font-serif text-[2.5rem] font-light leading-none text-white">10+</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.3em] text-white/50">Years of Expertise</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.3em] text-white/80">Years of Expertise</p>
               </div>
             </div>
           </div>
@@ -188,20 +188,20 @@ export default function SoldHomesPage() {
                 </div>
                 {/* Info */}
                 <div className="flex flex-col justify-center bg-[#1a1a18] p-10 lg:p-14">
-                  <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-white/50">{featured.city}</p>
+                  <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-white/80">{featured.city}</p>
                   <h2 className="mb-2 font-serif text-[clamp(1.6rem,3vw,2.4rem)] font-light leading-snug text-white">
                     {featured.title}
                   </h2>
-                  <p className="mb-6 text-[14px] text-white/50">{featured.address}</p>
+                  <p className="mb-6 text-[14px] text-white/80">{featured.address}</p>
 
                   <div className="mb-8 flex flex-wrap gap-6">
                     <div>
                       <p className="font-serif text-[2rem] font-light leading-none text-white">{featured.price}</p>
-                      <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/45">Sale Price</p>
+                      <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/85">Sale Price</p>
                     </div>
                     <div>
                       <p className="font-serif text-[2rem] font-light leading-none text-white">{featured.daysListed}</p>
-                      <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/45">Days Listed</p>
+                      <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/85">Days Listed</p>
                     </div>
                   </div>
 
@@ -215,7 +215,7 @@ export default function SoldHomesPage() {
                   </ul>
 
                   <MLSCardAttribution />
-                  <div className="flex items-center gap-2 text-[12px] uppercase tracking-[0.25em] text-white/50 transition-colors duration-300 group-hover:text-white">
+                  <div className="flex items-center gap-2 text-[12px] uppercase tracking-[0.25em] text-white/80 transition-colors duration-300 group-hover:text-white">
                     View Property
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1">
                       <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -250,13 +250,13 @@ export default function SoldHomesPage() {
                   {/* Info */}
                   <div className="flex flex-1 flex-col justify-between bg-white p-6">
                     <div>
-                      <p className="mb-1 text-[11px] uppercase tracking-[0.25em] text-charcoal/40">{prop.city}</p>
+                      <p className="mb-1 text-[11px] uppercase tracking-[0.25em] text-charcoal/65">{prop.city}</p>
                       <h3 className="mb-4 font-serif text-[1.15rem] font-light leading-snug text-charcoal group-hover:text-charcoal/75 transition-colors duration-300">
                         {prop.title}
                       </h3>
                       <ul className="mb-5 space-y-1.5">
                         {prop.highlights.slice(0, 2).map((h) => (
-                          <li key={h} className="flex items-start gap-2 text-[12px] leading-5 text-charcoal/55">
+                          <li key={h} className="flex items-start gap-2 text-[12px] leading-5 text-charcoal/75">
                             <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-charcoal/30" />
                             {h}
                           </li>
@@ -266,9 +266,9 @@ export default function SoldHomesPage() {
                     <div className="flex items-center justify-between border-t border-charcoal/8 pt-4">
                       <div>
                         <p className="font-serif text-[1.4rem] font-light leading-none text-charcoal">{prop.price}</p>
-                        <p className="mt-0.5 text-[11px] text-charcoal/40">{prop.daysListed} days listed · Closed {prop.closedOn}</p>
+                        <p className="mt-0.5 text-[11px] text-charcoal/65">{prop.daysListed} days listed · Closed {prop.closedOn}</p>
                       </div>
-                      <div className="flex h-9 w-9 items-center justify-center rounded-full border border-charcoal/15 text-charcoal/40 transition-all duration-300 group-hover:border-charcoal group-hover:text-charcoal">
+                      <div className="flex h-9 w-9 items-center justify-center rounded-full border border-charcoal/15 text-charcoal/65 transition-all duration-300 group-hover:border-charcoal group-hover:text-charcoal">
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5">
                           <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>

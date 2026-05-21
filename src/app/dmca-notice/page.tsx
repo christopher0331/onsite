@@ -44,10 +44,10 @@ export default function DmcaNoticePage() {
 
             {/* Intro */}
             <div className="mb-16">
-              <p className="text-[16px] leading-8 text-charcoal/70 not-italic">
+              <p className="text-[16px] leading-8 text-charcoal/90 not-italic">
                 Onsite Real Estate respects the intellectual property rights of others and expects you to do the same. In accordance with the Digital Millennium Copyright Act of 1998 (&ldquo;DMCA&rdquo;), Onsite Real Estate will respond expeditiously to claims of copyright infringement committed using this website if such claims are reported to our Designated Copyright Agent.
               </p>
-              <p className="mt-5 text-[16px] leading-8 text-charcoal/70 not-italic">
+              <p className="mt-5 text-[16px] leading-8 text-charcoal/90 not-italic">
                 If you believe that your copyrighted work has been copied in a way that constitutes copyright infringement and is accessible on this site, please notify our Copyright Agent as set forth in the DMCA.
               </p>
             </div>
@@ -64,7 +64,7 @@ export default function DmcaNoticePage() {
                     <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1a1a18] font-serif text-[0.8rem] font-light text-white">
                       {i + 1}
                     </span>
-                    <p className="text-[15px] leading-7 text-charcoal/70 not-italic">{req}</p>
+                    <p className="text-[15px] leading-7 text-charcoal/90 not-italic">{req}</p>
                   </li>
                 ))}
               </ol>
@@ -85,7 +85,7 @@ export default function DmcaNoticePage() {
                     { label: "Phone", value: "253-441-9764" },
                   ].map(({ label, value }) => (
                     <div key={label} className="flex flex-col gap-1 border-b border-charcoal/8 pb-5 last:border-0 last:pb-0 sm:flex-row sm:items-baseline sm:gap-8">
-                      <dt className="w-20 shrink-0 text-[11px] uppercase tracking-[0.2em] text-charcoal/45">{label}</dt>
+                      <dt className="w-20 shrink-0 text-[11px] uppercase tracking-[0.2em] text-charcoal/70">{label}</dt>
                       <dd className="font-serif text-[1rem] font-light text-charcoal">{value}</dd>
                     </div>
                   ))}

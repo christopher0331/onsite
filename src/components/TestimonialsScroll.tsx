@@ -44,7 +44,7 @@ export default function TestimonialsScroll() {
         <div>
           <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-4">Success Stories</p>
           <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
-            What our clients <span className="italic">are saying.</span>
+            What our clients <span>are saying.</span>
           </h2>
         </div>
         <Link
@@ -70,7 +70,7 @@ export default function TestimonialsScroll() {
                   <div className="w-6 h-px bg-charcoal/25" />
                   <div>
                     <p className="text-[13px] font-semibold text-charcoal">{t.name}</p>
-                    <p className="text-[11px] text-charcoal/60 uppercase tracking-[0.2em]">{t.location}</p>
+                    <p className="text-[11px] text-charcoal/80 uppercase tracking-[0.2em]">{t.location}</p>
                   </div>
                 </div>
               </div>

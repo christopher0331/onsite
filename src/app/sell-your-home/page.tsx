@@ -97,11 +97,11 @@ export default async function SellYourHomePage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/25" />
+          <div className="hero-overlay" aria-hidden />
           <div className="relative z-10 mx-auto max-w-[1440px] h-full px-6 lg:px-12 flex flex-col justify-end pb-20 sm:pb-28">
             <p className="text-[11px] uppercase tracking-[0.35em] text-white/70 mb-5">Sell Your Home</p>
             <h1 className="font-serif text-[clamp(2.6rem,7vw,5.6rem)] leading-[1.0] text-white font-light max-w-4xl mb-8">
-              Get the Most Out of <span className="italic">Your Home.</span>
+              Get the Most Out of <span>Your Home.</span>
             </h1>
             <p className="text-[16px] text-white/70 max-w-xl leading-8 mb-10">
               Knowledgeable realtors dedicated to helping homeowners sell with confidence.
@@ -129,10 +129,10 @@ export default async function SellYourHomePage() {
             <div className="lg:col-span-5">
               <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-5">Expertise</p>
               <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
-                Sell smarter with a <span className="italic">tailored strategy.</span>
+                Sell smarter with a <span>tailored strategy.</span>
               </h2>
             </div>
-            <div className="lg:col-span-7 space-y-5 text-[16px] leading-8 text-charcoal/70">
+            <div className="lg:col-span-7 space-y-5 text-[16px] leading-8 text-charcoal/90">
               <p>
                 From the very first consultation, Onsite provides a clear, strategic plan to get your home sold. We set expectations, define goals, and create a personalized selling experience tailored to Pierce County&apos;s competitive market.
               </p>
@@ -156,9 +156,9 @@ export default async function SellYourHomePage() {
               <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-5">Experience That Gets Results</p>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
                 <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
-                  We understand what it takes to <span className="italic">get your home sold.</span>
+                  We understand what it takes to <span>get your home sold.</span>
                 </h2>
-                <p className="text-[16px] leading-8 text-charcoal/65">
+                <p className="text-[16px] leading-8 text-charcoal/85">
                   Selling your home takes more than just listing it — it requires the right strategy, market knowledge, and expert execution. With a proven track record, deep local expertise, and a customized approach, we position your home for a fast, successful sale.
                 </p>
               </div>
@@ -178,7 +178,7 @@ export default async function SellYourHomePage() {
                     className="w-11 h-11 object-contain mb-4 opacity-80"
                   />
                   <h3 className="font-serif text-xl text-charcoal mb-2">{tool.title}</h3>
-                  <p className="text-[14px] leading-7 text-charcoal/65">{tool.description}</p>
+                  <p className="text-[14px] leading-7 text-charcoal/85">{tool.description}</p>
                 </div>
               ))}
             </div>
@@ -191,11 +191,11 @@ export default async function SellYourHomePage() {
 
             {/* Left — copy */}
             <div className="lg:col-span-5">
-              <p className="text-[11px] uppercase tracking-[0.35em] text-white/40 mb-5">Marketing</p>
+              <p className="text-[11px] uppercase tracking-[0.35em] text-white/80 mb-5">Marketing</p>
               <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-white leading-[1.08] mb-7">
-                Don&apos;t just get it on the market. <span className="italic">Get it sold.</span>
+                Don&apos;t just get it on the market. <span>Get it sold.</span>
               </h2>
-              <p className="text-[16px] leading-8 text-white/55 mb-8">
+              <p className="text-[16px] leading-8 text-white/85 mb-8">
                 Attracting the right buyers and driving action is what we do. Our strategic marketing combines high-impact visuals, targeted digital campaigns, and expert local outreach to ensure your home gets maximum exposure and sells at the right price.
               </p>
               <Link
@@ -211,34 +211,34 @@ export default async function SellYourHomePage() {
 
               <div className="grid grid-cols-[6rem_1fr] gap-6 py-10 group">
                 <div className="flex flex-col items-start">
-                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/40 group-hover:text-white/60 transition-colors duration-500">300<span className="text-[2rem]">+</span></span>
+                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/80 group-hover:text-white/60 transition-colors duration-500">300<span className="text-[2rem]">+</span></span>
                   <span className="mt-2 text-[9px] uppercase tracking-[0.3em] text-white/25">Homes Sold</span>
                 </div>
                 <div className="pt-2">
                   <p className="font-serif text-[1.4rem] font-light text-white/85 leading-snug mb-2">Proven Results</p>
-                  <p className="text-[14px] leading-7 text-white/45">300+ homes sold and $100M+ in sales prove we consistently deliver success for our clients across Pierce County.</p>
+                  <p className="text-[14px] leading-7 text-white/85">300+ homes sold and $100M+ in sales prove we consistently deliver success for our clients across Pierce County.</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-[6rem_1fr] gap-6 py-10 group">
                 <div className="flex flex-col items-start">
-                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/40 group-hover:text-white/60 transition-colors duration-500">10<span className="text-[2rem]">yr</span></span>
+                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/80 group-hover:text-white/60 transition-colors duration-500">10<span className="text-[2rem]">yr</span></span>
                   <span className="mt-2 text-[9px] uppercase tracking-[0.3em] text-white/25">Experience</span>
                 </div>
                 <div className="pt-2">
                   <p className="font-serif text-[1.4rem] font-light text-white/85 leading-snug mb-2">Market Expertise</p>
-                  <p className="text-[14px] leading-7 text-white/45">A decade of deep local knowledge means your home is priced right and positioned for the best possible outcome.</p>
+                  <p className="text-[14px] leading-7 text-white/85">A decade of deep local knowledge means your home is priced right and positioned for the best possible outcome.</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-[6rem_1fr] gap-6 py-10 group">
                 <div className="flex flex-col items-start">
-                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/40 group-hover:text-white/60 transition-colors duration-500">1<span className="text-[2rem]">:1</span></span>
+                  <span className="font-serif text-[3.8rem] leading-none font-light text-white/80 group-hover:text-white/60 transition-colors duration-500">1<span className="text-[2rem]">:1</span></span>
                   <span className="mt-2 text-[9px] uppercase tracking-[0.3em] text-white/25">Personalized</span>
                 </div>
                 <div className="pt-2">
                   <p className="font-serif text-[1.4rem] font-light text-white/85 leading-snug mb-2">Tailored Strategy</p>
-                  <p className="text-[14px] leading-7 text-white/45">We design a fully custom plan for your specific home, neighborhood, and timeline — built to attract the right buyers and maximize offers.</p>
+                  <p className="text-[14px] leading-7 text-white/85">We design a fully custom plan for your specific home, neighborhood, and timeline — built to attract the right buyers and maximize offers.</p>
                 </div>
               </div>
 
@@ -253,7 +253,7 @@ export default async function SellYourHomePage() {
             <div className="mb-14">
               <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-5">Selling Process</p>
               <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
-                Selling made <span className="italic">easy.</span>
+                Selling made <span>easy.</span>
               </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -264,9 +264,9 @@ export default async function SellYourHomePage() {
                   className="group rounded-3xl border border-charcoal/[0.07] bg-warm-gray/40 p-7 shadow-[0_14px_40px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)] transition-all duration-500"
                 >
                   <span className="block font-serif text-5xl font-light text-charcoal/30 mb-5">{step.number}</span>
-                  <h3 className="font-serif text-2xl font-light text-charcoal mb-3 group-hover:text-charcoal/70 transition-colors">{step.title}</h3>
-                  <p className="text-[14.5px] leading-7 text-charcoal/60">{step.description}</p>
-                  <span className="inline-flex items-center gap-2 mt-6 text-[11px] uppercase tracking-[0.2em] text-charcoal/40 group-hover:text-charcoal transition-colors">
+                  <h3 className="font-serif text-2xl font-light text-charcoal mb-3 group-hover:text-charcoal/90 transition-colors">{step.title}</h3>
+                  <p className="text-[14.5px] leading-7 text-charcoal/80">{step.description}</p>
+                  <span className="inline-flex items-center gap-2 mt-6 text-[11px] uppercase tracking-[0.2em] text-charcoal/65 group-hover:text-charcoal transition-colors">
                     Learn More
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
@@ -285,7 +285,7 @@ export default async function SellYourHomePage() {
                 <div>
                   <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-4">Sold Properties</p>
                   <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
-                    Over 300+ <span className="italic">Sold Properties.</span>
+                    Over 300+ <span>Sold Properties.</span>
                   </h2>
                 </div>
                 <Link
@@ -344,11 +344,11 @@ export default async function SellYourHomePage() {
                 className="object-cover"
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black/52" />
+              <div className="hero-overlay" aria-hidden />
               <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
                 <p className="text-[11px] uppercase tracking-[0.35em] text-white/75 mb-4">Ready to get started?</p>
                 <h2 className="font-serif text-[clamp(2rem,5vw,4rem)] font-light text-white leading-[1.05]">
-                  Let&apos;s Talk <span className="italic">Home Selling Solutions</span>
+                  Let&apos;s Talk <span>Home Selling Solutions</span>
                 </h2>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
                   <Link

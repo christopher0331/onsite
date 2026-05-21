@@ -60,7 +60,7 @@ export default function SellersGuidePage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" />
+          <div className="hero-overlay" aria-hidden />
           <div className="relative z-10 mx-auto flex h-full max-w-[1440px] flex-col justify-end px-6 pb-20 sm:pb-28 lg:px-12">
             <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/70">Seller&apos;s Guide</p>
             <h1 className="mb-8 max-w-4xl font-serif text-[clamp(2.6rem,7vw,5.6rem)] font-light leading-[1.0] text-white">
@@ -95,7 +95,7 @@ export default function SellersGuidePage() {
                 The roadmap to selling your home.
               </h2>
             </div>
-            <div className="space-y-5 text-[16px] leading-8 text-charcoal/70 lg:col-span-7">
+            <div className="space-y-5 text-[16px] leading-8 text-charcoal/90 lg:col-span-7">
               <p>
                 We do our best to provide expert insights, market strategies, and practical steps to get you the best results in your home selling journey.
               </p>
@@ -182,7 +182,7 @@ export default function SellersGuidePage() {
                 className="object-cover object-center"
                 sizes="100vw"
               />
-              <div className="absolute inset-0 bg-black/55" />
+              <div className="hero-overlay" aria-hidden />
               <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
                 <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-white/75">Ready to get started?</p>
                 <h2 className="font-serif text-[clamp(2rem,5vw,4rem)] font-light leading-[1.05] text-white">

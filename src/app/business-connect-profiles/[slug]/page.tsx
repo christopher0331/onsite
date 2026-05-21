@@ -98,7 +98,7 @@ export default async function MemberProfilePage({
         <section className="bg-[#1a1a18] pt-40 pb-24 sm:pt-52 sm:pb-32">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
             {/* Breadcrumb */}
-            <div className="mb-8 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-white/40">
+            <div className="mb-8 flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-white/80">
               <Link href="/business-connect" className="hover:text-white transition-colors">Business Connect</Link>
               <span>/</span>
               {cat && <Link href={`/${m.categorySlug}`} className="hover:text-white transition-colors">{cat.name}</Link>}
@@ -129,8 +129,8 @@ export default async function MemberProfilePage({
                 <h1 className="mb-2 font-serif text-[clamp(2.4rem,6vw,4.8rem)] font-light leading-[1.0] text-white">
                   {m.name}.
                 </h1>
-                <p className="mb-2 font-serif text-[1.2rem] font-light text-white/50">{m.company}</p>
-                <p className="mb-10 text-[13px] uppercase tracking-[0.25em] text-white/40">{m.specialty}</p>
+                <p className="mb-2 font-serif text-[1.2rem] font-light text-white/80">{m.company}</p>
+                <p className="mb-10 text-[13px] uppercase tracking-[0.25em] text-white/80">{m.specialty}</p>
 
                 {/* Social / contact links */}
                 <div className="flex flex-wrap gap-3">
@@ -163,7 +163,7 @@ export default async function MemberProfilePage({
                 <h2 className="mb-8 font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-light leading-snug text-charcoal">
                   {m.company}.
                 </h2>
-                <p className="text-[16px] leading-8 text-charcoal/70 not-italic">
+                <p className="text-[16px] leading-8 text-charcoal/90 not-italic">
                   {m.bio}
                 </p>
 
@@ -189,7 +189,7 @@ export default async function MemberProfilePage({
 
                 {/* Details card — always at top */}
                 <div className="rounded-3xl bg-[#f2ede6] p-7">
-                  <p className="mb-5 text-[11px] uppercase tracking-[0.3em] text-charcoal/50">Contact</p>
+                  <p className="mb-5 text-[11px] uppercase tracking-[0.3em] text-charcoal/75">Contact</p>
                   <dl className="space-y-4">
                     {[
                       { label: "Company", value: m.company },
@@ -198,7 +198,7 @@ export default async function MemberProfilePage({
                       ...(m.phone ? [{ label: "Phone", value: m.phone }] : []),
                     ].map(({ label, value }) => (
                       <div key={label} className="flex items-baseline justify-between border-b border-charcoal/8 pb-4 last:border-0 last:pb-0">
-                        <dt className="text-[12px] font-medium text-charcoal/60">{label}</dt>
+                        <dt className="text-[12px] font-medium text-charcoal/80">{label}</dt>
                         <dd className="text-[14px] text-charcoal text-right max-w-[60%]">{value}</dd>
                       </div>
                     ))}
@@ -270,14 +270,14 @@ export default async function MemberProfilePage({
                         className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, 33vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                      <div className="hero-overlay" aria-hidden />
                     </div>
                     <div className="flex flex-1 flex-col justify-between bg-white p-6">
                       <div>
                         <h3 className="font-serif text-[1.1rem] font-light leading-snug text-charcoal">{rel.name}</h3>
-                        <p className="mt-1 text-[12px] uppercase tracking-[0.15em] text-charcoal/45">{rel.company}</p>
+                        <p className="mt-1 text-[12px] uppercase tracking-[0.15em] text-charcoal/70">{rel.company}</p>
                       </div>
-                      <p className="mt-4 border-t border-charcoal/8 pt-4 text-[13px] leading-6 text-charcoal/60">
+                      <p className="mt-4 border-t border-charcoal/8 pt-4 text-[13px] leading-6 text-charcoal/80">
                         {rel.specialty}
                       </p>
                     </div>

@@ -28,7 +28,7 @@ export default function StagePriceListPath() {
           className="relative flex flex-col gap-5 px-0 py-10 md:px-8 md:first:pl-0 md:last:pr-0"
         >
           {/* step pill */}
-          <p className="w-fit rounded-full border border-charcoal/20 px-4 py-1 text-[10px] uppercase tracking-[0.3em] text-charcoal/50">
+          <p className="w-fit rounded-full border border-charcoal/20 px-4 py-1 text-[10px] uppercase tracking-[0.3em] text-charcoal/75">
             {item.step}
           </p>
 
@@ -39,8 +39,8 @@ export default function StagePriceListPath() {
 
           {/* label + description */}
           <div>
-            <p className="mb-2 text-[11px] uppercase tracking-[0.25em] text-charcoal/50">{item.label}</p>
-            <p className="text-[15px] leading-7 text-charcoal/70 not-italic">{item.description}</p>
+            <p className="mb-2 text-[11px] uppercase tracking-[0.25em] text-charcoal/75">{item.label}</p>
+            <p className="text-[15px] leading-7 text-charcoal/90 not-italic">{item.description}</p>
           </div>
 
           {/* arrow connector — desktop only, between items */}

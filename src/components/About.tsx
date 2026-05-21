@@ -57,9 +57,9 @@ export default function About() {
               Rooted in the Northwest,
               <br />
               Built on Family,{" "}
-              <span className="italic">Fueled by Service.</span>
+              <span>Fueled by Service.</span>
             </h2>
-            <div className="space-y-5 text-[15px] leading-relaxed text-charcoal/70">
+            <div className="space-y-5 text-[15px] leading-relaxed text-charcoal/90">
               <p>
                 We&apos;re a husband-and-wife team with a passion for people and
                 a heart for home. Both born and raised in the Pacific Northwest,
@@ -94,7 +94,7 @@ export default function About() {
                 </p>
                 <a
                   href="tel:253-441-9764"
-                  className="text-[13px] text-charcoal/60 hover:text-charcoal transition-colors mt-1 block"
+                  className="text-[13px] text-charcoal/80 hover:text-charcoal transition-colors mt-1 block"
                 >
                   (253) 441-9764
                 </a>
@@ -105,7 +105,7 @@ export default function About() {
                 </p>
                 <a
                   href="tel:253-799-0609"
-                  className="text-[13px] text-charcoal/60 hover:text-charcoal transition-colors mt-1 block"
+                  className="text-[13px] text-charcoal/80 hover:text-charcoal transition-colors mt-1 block"
                 >
                   (253) 799-0609
                 </a>

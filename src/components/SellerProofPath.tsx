@@ -28,7 +28,7 @@ export default function SellerProofPath() {
           className="relative flex flex-col gap-5 px-0 py-10 md:px-8 md:first:pl-0 md:last:pr-0"
         >
           {/* step pill */}
-          <p className="w-fit rounded-full border border-charcoal/20 px-4 py-1 text-[10px] uppercase tracking-[0.3em] text-charcoal/50">
+          <p className="w-fit rounded-full border border-charcoal/20 px-4 py-1 text-[10px] uppercase tracking-[0.3em] text-charcoal/75">
             {item.step}
           </p>
 
@@ -38,7 +38,7 @@ export default function SellerProofPath() {
               <p className="font-serif text-[clamp(3rem,6vw,4.5rem)] font-light leading-none text-charcoal">
                 {item.stat}
               </p>
-              <p className="mb-1.5 font-serif text-[clamp(1.8rem,3vw,2.6rem)] font-light leading-none text-charcoal/50">
+              <p className="mb-1.5 font-serif text-[clamp(1.8rem,3vw,2.6rem)] font-light leading-none text-charcoal/75">
                 {item.sub}
               </p>
             </div>
@@ -49,7 +49,7 @@ export default function SellerProofPath() {
           )}
 
           {/* description */}
-          <p className="text-[15px] leading-7 text-charcoal/70 not-italic">{item.description}</p>
+          <p className="text-[15px] leading-7 text-charcoal/90 not-italic">{item.description}</p>
 
           {/* arrow connector — desktop, between items */}
           {i < items.length - 1 && (

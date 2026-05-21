@@ -80,12 +80,12 @@ export default function ContactUsPage() {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-black/52" />
+          <div className="hero-overlay" aria-hidden />
           <div className="relative z-10 mx-auto max-w-[1440px] h-full px-6 lg:px-12 flex items-end pb-16 sm:pb-20">
             <div>
               <p className="text-[11px] uppercase tracking-[0.35em] text-white/70 mb-4">Get In Touch</p>
               <h1 className="font-serif text-[clamp(2.2rem,6vw,4.8rem)] leading-[1.02] text-white font-light max-w-3xl">
-                Let&apos;s Talk <span className="italic">Solutions.</span>
+                Let&apos;s Talk <span>Solutions.</span>
               </h1>
             </div>
           </div>
@@ -101,9 +101,9 @@ export default function ContactUsPage() {
                 <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-4">Contact Us</p>
                 <h2 className="font-serif text-[clamp(1.8rem,3.5vw,3rem)] font-light text-charcoal leading-[1.08] mb-5">
                   Have questions or ready <br className="hidden sm:block" />
-                  to get <span className="italic">started?</span>
+                  to get <span>started?</span>
                 </h2>
-                <p className="text-[16px] leading-8 text-charcoal/70">
+                <p className="text-[16px] leading-8 text-charcoal/90">
                   Reach out to our team for expert guidance and personalized support — let&apos;s make your real estate goals a reality.
                 </p>
               </div>
@@ -119,7 +119,7 @@ export default function ContactUsPage() {
                     <div className="flex flex-col gap-2">
                       <a
                         href={person.phoneHref}
-                        className="flex items-center gap-3 text-[15px] text-charcoal hover:text-charcoal/60 transition-colors"
+                        className="flex items-center gap-3 text-[15px] text-charcoal hover:text-charcoal/80 transition-colors"
                       >
                         <svg className="w-4 h-4 shrink-0 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
@@ -128,7 +128,7 @@ export default function ContactUsPage() {
                       </a>
                       <a
                         href={person.emailHref}
-                        className="flex items-center gap-3 text-[15px] text-charcoal hover:text-charcoal/60 transition-colors"
+                        className="flex items-center gap-3 text-[15px] text-charcoal hover:text-charcoal/80 transition-colors"
                       >
                         <svg className="w-4 h-4 shrink-0 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
@@ -147,7 +147,7 @@ export default function ContactUsPage() {
                   href="https://www.google.com/maps/dir//3920+W+Tapps+Dr+E,+Lake+Tapps,+WA+98391"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-[15px] text-charcoal hover:text-charcoal/60 transition-colors"
+                  className="flex items-start gap-3 text-[15px] text-charcoal hover:text-charcoal/80 transition-colors"
                 >
                   <svg className="w-4 h-4 shrink-0 mt-0.5 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -169,7 +169,7 @@ export default function ContactUsPage() {
                       </svg>
                     </div>
                     <h3 className="font-serif text-2xl font-light text-charcoal">Thank You!</h3>
-                    <p className="text-[15px] text-charcoal/65 max-w-sm leading-7">
+                    <p className="text-[15px] text-charcoal/85 max-w-sm leading-7">
                       We&apos;ve received your information and will be reaching out to you shortly.
                     </p>
                   </div>
@@ -179,7 +179,7 @@ export default function ContactUsPage() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div className="flex flex-col gap-2">
-                        <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/50">First Name</label>
+                        <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">First Name</label>
                         <input
                           type="text"
                           name="firstName"
@@ -189,7 +189,7 @@ export default function ContactUsPage() {
                         />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/50">Last Name</label>
+                        <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Last Name</label>
                         <input
                           type="text"
                           name="lastName"
@@ -201,7 +201,7 @@ export default function ContactUsPage() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/50">Email</label>
+                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Email</label>
                       <input
                         type="email"
                         name="email"
@@ -212,7 +212,7 @@ export default function ContactUsPage() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/50">Phone</label>
+                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Phone</label>
                       <input
                         type="tel"
                         name="phone"
@@ -222,7 +222,7 @@ export default function ContactUsPage() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/50">I&apos;m interested in</label>
+                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">I&apos;m interested in</label>
                       <div className="relative">
                         <select
                           value={topic}
@@ -236,14 +236,14 @@ export default function ContactUsPage() {
                           <option value="evaluation">Home Evaluation</option>
                           <option value="general">General Questions</option>
                         </select>
-                        <svg className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <svg className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal/65" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                         </svg>
                       </div>
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/50">Message</label>
+                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Message</label>
                       <textarea
                         name="message"
                         rows={4}

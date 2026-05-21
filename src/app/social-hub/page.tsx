@@ -131,7 +131,7 @@ export default function SocialHubPage() {
 
             {/* YouTube videos — directly below hero */}
             <div className="mb-10 flex items-center justify-between">
-              <p className="text-[11px] uppercase tracking-[0.35em] text-white/50">Latest on YouTube</p>
+              <p className="text-[11px] uppercase tracking-[0.35em] text-white/80">Latest on YouTube</p>
               <Link
                 href="https://www.youtube.com/@OnSiteRealEstateGroup"
                 target="_blank"
@@ -165,7 +165,7 @@ export default function SocialHubPage() {
                     />
                   </div>
                   <div className="px-5 py-4">
-                    <p className="text-[13px] leading-6 text-white/65">{vid.title}</p>
+                    <p className="text-[13px] leading-6 text-white/90">{vid.title}</p>
                   </div>
                 </div>
               ))}
@@ -183,7 +183,7 @@ export default function SocialHubPage() {
                   Find Us Everywhere.
                 </h2>
               </div>
-              <p className="text-[16px] leading-8 text-charcoal/70">
+              <p className="text-[16px] leading-8 text-charcoal/90">
                 From property tours to market insights to local business networking — we show up where it matters, sharing what you need to make smarter real estate decisions.
               </p>
             </div>
@@ -204,10 +204,10 @@ export default function SocialHubPage() {
                   </div>
                   <div className="flex-1">
                     <p className="mb-1 font-serif text-xl font-light text-charcoal">{p.name}</p>
-                    <p className="mb-4 text-[12px] text-charcoal/40">{p.handle}</p>
-                    <p className="text-[14px] leading-7 text-charcoal/65">{p.description}</p>
+                    <p className="mb-4 text-[12px] text-charcoal/65">{p.handle}</p>
+                    <p className="text-[14px] leading-7 text-charcoal/85">{p.description}</p>
                   </div>
-                  <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-charcoal/40 transition-colors duration-300 group-hover:text-charcoal">
+                  <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.25em] text-charcoal/65 transition-colors duration-300 group-hover:text-charcoal">
                     Follow
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1">
                       <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -239,20 +239,20 @@ export default function SocialHubPage() {
                     </div>
                     <div>
                       <p className="text-[13px] font-medium text-charcoal">OnSite Real Estate Group</p>
-                      <p className="text-[11px] text-charcoal/45">{post.date}</p>
+                      <p className="text-[11px] text-charcoal/70">{post.date}</p>
                     </div>
                   </div>
 
                   <h3 className="mb-3 font-serif text-[1.2rem] font-light leading-snug text-charcoal">
                     {post.title}
                   </h3>
-                  <p className="mb-5 flex-1 text-[14px] leading-7 text-charcoal/65 not-italic">
+                  <p className="mb-5 flex-1 text-[14px] leading-7 text-charcoal/85 not-italic">
                     {post.body}
                   </p>
 
                   <div className="mb-6 flex flex-wrap gap-2">
                     {post.hashtags.map((tag) => (
-                      <span key={tag} className="rounded-full bg-[#f2ede6] px-3 py-1 text-[11px] text-charcoal/50">
+                      <span key={tag} className="rounded-full bg-[#f2ede6] px-3 py-1 text-[11px] text-charcoal/75">
                         {tag}
                       </span>
                     ))}
@@ -263,7 +263,7 @@ export default function SocialHubPage() {
                       href={post.videoHref}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.25em] text-charcoal/50 transition-colors duration-300 hover:text-charcoal"
+                      className="inline-flex items-center gap-2 text-[12px] uppercase tracking-[0.25em] text-charcoal/75 transition-colors duration-300 hover:text-charcoal"
                     >
                       View on Facebook
                       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5">

@@ -32,7 +32,7 @@ export default function MarketingOutcomesPath() {
           </h3>
 
           {/* description */}
-          <p className="text-[15px] leading-7 text-charcoal/70 not-italic">{item.description}</p>
+          <p className="text-[15px] leading-7 text-charcoal/90 not-italic">{item.description}</p>
 
           {/* arrow connector — desktop, between items only */}
           {i < outcomes.length - 1 && (
