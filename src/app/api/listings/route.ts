@@ -69,7 +69,12 @@ export async function GET(req: NextRequest) {
   // array notation).
   switch (status) {
     case "All":
-      // Omit the status filter entirely so we get every record in the feed.
+      // Repliers returns 0 results when standardStatus is omitted — must
+      // enumerate all statuses explicitly to get the full feed.
+      params.append("standardStatus", "Active");
+      params.append("standardStatus", "Active Under Contract");
+      params.append("standardStatus", "Pending");
+      params.append("standardStatus", "Closed");
       break;
     case "P": // Pending — includes Active Under Contract (contingent)
       params.append("standardStatus", "Pending");
