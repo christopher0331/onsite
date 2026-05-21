@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
-import type { MarkerCluster } from "leaflet.markercluster";
+import type { MarkerCluster } from "leaflet";
 import L, { type LatLngTuple, type Map as LeafletMap } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-cluster/dist/assets/MarkerCluster.css";
