@@ -6,6 +6,8 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import L, { type LatLngTuple, type Map as LeafletMap } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "react-leaflet-cluster/dist/assets/MarkerCluster.css";
+import "react-leaflet-cluster/dist/assets/MarkerCluster.Default.css";
 
 type MapListing = {
   mlsNumber: string;
@@ -106,7 +108,18 @@ export default function ListingsMap({ listings }: { listings: MapListing[] }) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <FitToListings points={points} />
-        <MarkerClusterGroup chunkedLoading>
+        <MarkerClusterGroup
+          chunkedLoading
+          iconCreateFunction={(cluster) => {
+            const count = cluster.getChildCount();
+            return L.divIcon({
+              className: "",
+              html: `<div style="background:#1a1a18;color:#fff;border-radius:9999px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:13px;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,0.25);border:2px solid #fff;">${count}</div>`,
+              iconSize: [44, 44],
+              iconAnchor: [22, 22],
+            });
+          }}
+        >
           {validListings.map((l) => {
             const isSold = l.lastStatus === "Sld" || l.status === "U";
             const price = l.soldPrice ?? l.listPrice;
