@@ -289,7 +289,7 @@ function Modal({
 
       {/* Panel */}
       <div
-        className="relative z-10 w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white shadow-[0_40px_120px_rgba(0,0,0,0.3)]"
+        className="relative z-10 w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white shadow-[0_40px_120px_rgba(0,0,0,0.3)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close */}
@@ -303,16 +303,16 @@ function Modal({
           </svg>
         </button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-[320px_1fr] gap-0">
-          {/* Photo column */}
-          <div className="relative sm:rounded-l-3xl overflow-hidden bg-warm-gray" style={{ minHeight: 260 }}>
+        <div className="grid grid-cols-1 sm:grid-cols-[2fr_3fr] gap-0">
+          {/* Photo column — full portrait aspect so the person is fully visible */}
+          <div className="relative sm:rounded-l-3xl overflow-hidden bg-warm-gray aspect-[3/4] sm:aspect-auto sm:min-h-full">
             {member.photo ? (
               <Image
                 src={member.photo}
                 alt={member.name}
                 fill
-                className={`object-cover object-top`}
-                sizes="320px"
+                className="object-cover object-top"
+                sizes="(max-width: 640px) 100vw, 480px"
               />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center bg-charcoal/5">
@@ -324,7 +324,7 @@ function Modal({
           </div>
 
           {/* Content column */}
-          <div className="p-7 sm:p-8">
+          <div className="p-7 sm:p-10">
             <p className="text-[11px] uppercase tracking-[0.3em] text-charcoal/50 mb-1">
               {member.role}
             </p>
