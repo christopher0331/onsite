@@ -93,8 +93,7 @@ const TEAM: TeamMember[] = [
   {
     name: "Deisy Duran Ruiz",
     role: "Agent",
-    // TODO: Replace with hosted headshot URL once uploaded
-    photo: "",
+    photo: "/team/deisy-headshot.jpg",
     phone: "2539871289",
     phoneDisplay: "(253) 987-1289",
     email: "deisy@onsiteregroup.com",
