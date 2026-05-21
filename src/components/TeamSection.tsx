@@ -305,7 +305,7 @@ function Modal({
 
         <div className="grid grid-cols-1 sm:grid-cols-[320px_1fr] gap-0">
           {/* Photo column */}
-          <div className="relative sm:rounded-l-3xl overflow-hidden bg-warm-gray" style={{ minHeight: 420 }}>
+          <div className="relative sm:rounded-l-3xl overflow-hidden bg-warm-gray" style={{ minHeight: 260 }}>
             {member.photo ? (
               <Image
                 src={member.photo}
