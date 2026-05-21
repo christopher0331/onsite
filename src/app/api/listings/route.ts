@@ -80,9 +80,10 @@ export async function GET(req: NextRequest) {
       break;
     case "A":
     default:
-      // Plain Active only — contingent (Active Under Contract) is excluded
-      // here so the auditor's "Active" tab doesn't double up with Pending.
-      params.set("standardStatus", "Active");
+      // NWMLS requires contingent (Active Under Contract) to appear
+      // alongside Active listings in search results.
+      params.append("standardStatus", "Active");
+      params.append("standardStatus", "Active Under Contract");
       break;
   }
 

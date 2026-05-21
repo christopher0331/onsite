@@ -96,14 +96,16 @@ function getStatusBadge(l: Pick<Listing, "status" | "lastStatus" | "standardStat
     const lc = standard.toLowerCase();
     if (lc === "active") return { label: "Active", tone: "active" };
     if (lc === "closed") return { label: "Sold", tone: "sold" };
-    if (lc === "pending" || lc === "active under contract") {
-      return { label: standard, tone: "pending" };
-    }
+    if (lc === "active under contract") return { label: "Contingent", tone: "pending" };
+    if (lc === "pending") return { label: "Pending", tone: "pending" };
     // Canceled / Expired / Hold / Withdrawn / Coming Soon
     return { label: standard, tone: "sold" };
   }
 
-  // Fallback (older / partial Repliers payloads).
+  // Fallback for older/partial Repliers payloads.
+  // Map known NWMLS lastStatus codes explicitly.
+  if (last === "Sc" || last === "Ctg") return { label: "Contingent", tone: "pending" };
+  if (last === "Pnd") return { label: "Pending", tone: "pending" };
   if (l.status === "U") {
     if (last === "Sld") return { label: "Sold", tone: "sold" };
     return { label: last || "Off-Market", tone: "sold" };
