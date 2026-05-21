@@ -303,16 +303,16 @@ function Modal({
           </svg>
         </button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-[200px_1fr] gap-0">
+        <div className="grid grid-cols-1 sm:grid-cols-[320px_1fr] gap-0">
           {/* Photo column */}
-          <div className="relative sm:rounded-l-3xl overflow-hidden bg-warm-gray" style={{ minHeight: 260 }}>
+          <div className="relative sm:rounded-l-3xl overflow-hidden bg-warm-gray" style={{ minHeight: 420 }}>
             {member.photo ? (
               <Image
                 src={member.photo}
                 alt={member.name}
                 fill
-                className={`object-cover ${member.objectPosition ?? ""}`}
-                sizes="200px"
+                className={`object-cover object-top`}
+                sizes="320px"
               />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center bg-charcoal/5">
