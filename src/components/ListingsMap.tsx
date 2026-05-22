@@ -9,6 +9,7 @@ import L, { type LatLngTuple, type Map as LeafletMap } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-cluster/dist/assets/MarkerCluster.css";
 import "react-leaflet-cluster/dist/assets/MarkerCluster.Default.css";
+import { getListingStatusBadge, type StatusTone } from "@/lib/listing-status";
 
 type MapListing = {
   mlsNumber: string;
@@ -16,6 +17,7 @@ type MapListing = {
   soldPrice: number | null;
   status: string;
   lastStatus: string;
+  standardStatus?: string | null;
   address: { city: string; state: string; zip: string };
   map?: { latitude: number | null; longitude: number | null } | null;
 };
@@ -23,12 +25,17 @@ type MapListing = {
 const FALLBACK_CENTER: LatLngTuple = [47.2529, -122.4443]; // Tacoma, WA
 const FALLBACK_ZOOM = 9;
 
-function dollarPin(label: string, isSold: boolean) {
-  const bg = isSold ? "#1a1a18" : "#ffffff";
-  const fg = isSold ? "#ffffff" : "#1a1a18";
+const PIN_PALETTE: Record<StatusTone, { bg: string; fg: string; border: string }> = {
+  active: { bg: "#ffffff", fg: "#1a1a18", border: "#1a1a18" },
+  pending: { bg: "#fbbf24", fg: "#1a1a18", border: "#1a1a18" },
+  sold:    { bg: "#1a1a18", fg: "#ffffff", border: "#1a1a18" },
+};
+
+function dollarPin(label: string, tone: StatusTone) {
+  const { bg, fg, border } = PIN_PALETTE[tone];
   return L.divIcon({
     className: "",
-    html: `<div style="background:${bg};color:${fg};border:1px solid #1a1a18;border-radius:9999px;padding:4px 10px;font-family:'Times New Roman',serif;font-size:13px;font-weight:500;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,0.18);">${label}</div>`,
+    html: `<div style="background:${bg};color:${fg};border:1px solid ${border};border-radius:9999px;padding:4px 10px;font-family:'Times New Roman',serif;font-size:13px;font-weight:500;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,0.18);">${label}</div>`,
     iconSize: [60, 24],
     iconAnchor: [30, 24],
     popupAnchor: [0, -22],
@@ -122,19 +129,32 @@ export default function ListingsMap({ listings }: { listings: MapListing[] }) {
           }}
         >
           {validListings.map((l) => {
-            const isSold = l.lastStatus === "Sld" || l.status === "U";
+            const badge = getListingStatusBadge(l);
             const price = l.soldPrice ?? l.listPrice;
+            const pillBg =
+              badge.tone === "active"
+                ? "rgba(255,255,255,0.95)"
+                : badge.tone === "pending"
+                  ? "#fbbf24"
+                  : "#1a1a18";
+            const pillFg = badge.tone === "sold" ? "#ffffff" : "#1a1a18";
             return (
               <Marker
                 key={l.mlsNumber}
                 position={[l.map.latitude, l.map.longitude]}
-                icon={dollarPin(compactPrice(price), isSold)}
+                icon={dollarPin(compactPrice(price), badge.tone)}
               >
                 <Popup>
                   <div className="min-w-[180px] space-y-1">
                     <p className="font-serif text-[15px] text-charcoal">
-                      {compactPrice(price)} {isSold ? "· Sold" : ""}
+                      {compactPrice(price)}
                     </p>
+                    <span
+                      className="inline-block rounded-full px-2.5 py-0.5 text-[10px] uppercase tracking-[0.15em] font-medium"
+                      style={{ background: pillBg, color: pillFg }}
+                    >
+                      {badge.label}
+                    </span>
                     <p className="text-[12px] text-charcoal/90">
                       {l.address.city}, {l.address.state} {l.address.zip}
                     </p>

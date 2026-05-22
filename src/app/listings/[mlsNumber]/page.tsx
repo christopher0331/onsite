@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import dynamic from "next/dynamic";
+import { getListingStatusBadge } from "@/lib/listing-status";
 
 const MarketChart = dynamic(() => import("@/components/MarketChart"), { ssr: false });
 const InventoryGauge = dynamic(() => import("@/components/InventoryGauge"), { ssr: false });
@@ -355,11 +356,22 @@ export default function ListingDetailPage() {
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div>
                 <div className="mb-4 flex flex-wrap items-center gap-3">
-                  <span className={`rounded-full px-4 py-1.5 text-[10px] uppercase tracking-[0.25em] font-medium ${
-                    isActive ? "bg-white text-charcoal" : "bg-white/20 text-white"
-                  }`}>
-                    {listing.standardStatus || (isActive ? "Active" : listing.lastStatus)}
-                  </span>
+                  {(() => {
+                    const badge = getListingStatusBadge(listing);
+                    const tone =
+                      badge.tone === "active"
+                        ? "bg-white text-charcoal"
+                        : badge.tone === "pending"
+                          ? "bg-amber-400 text-charcoal"
+                          : "bg-white/20 text-white";
+                    return (
+                      <span
+                        className={`rounded-full px-4 py-1.5 text-[10px] uppercase tracking-[0.25em] font-medium ${tone}`}
+                      >
+                        {badge.label}
+                      </span>
+                    );
+                  })()}
                   {det.propertyType && (
                     <span className="rounded-full border border-white/20 px-4 py-1.5 text-[10px] uppercase tracking-[0.25em] text-white/80">
                       {det.propertyType}
@@ -466,7 +478,10 @@ export default function ListingDetailPage() {
           </div>
         </section>
 
-        {/* Photo Gallery */}
+        {/* Photo Gallery — the inline brokerage attribution that used to
+            live inside this section is now rendered unconditionally below
+            so the Listed By / Bought With block is visible even on listings
+            with zero photos (e.g. new construction / pre-images sold). */}
         {images.length > 0 && (
           <section className="bg-white py-10">
             <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
@@ -499,7 +514,10 @@ export default function ListingDetailPage() {
                     >
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
                     </button>
-                    <div className="absolute bottom-4 right-4 rounded-full bg-black/40 px-4 py-1.5 text-[11px] text-white/80 backdrop-blur-sm">
+                    {/* Photo counter sits at top-right so it cannot overlap the
+                        NWMLS "Three Trees" watermark that the source MLS bakes
+                        into the bottom corner of every photo. */}
+                    <div className="absolute top-4 right-4 rounded-full bg-black/40 px-4 py-1.5 text-[11px] text-white/80 backdrop-blur-sm">
                       {activeImg + 1} / {images.length}
                     </div>
                   </>
@@ -538,64 +556,82 @@ export default function ListingDetailPage() {
                 ))}
               </div>
 
-              {/* Listed By + Bought With attribution. On sold listings the
-                  Bought With row always renders so the buyer brokerage is
-                  visible alongside the listing brokerage (NWMLS requirement).
-                  When Repliers does not return a buyer agent we still show
-                  the row with a clear "Not provided" placeholder. */}
-              {(() => {
-                const isSold = listing.lastStatus === "Sld";
-                const hasListing = (listing.agents?.length ?? 0) > 0;
-                const hasBuyer = (listing.buyerAgents?.length ?? 0) > 0;
-                if (!hasListing && !hasBuyer && !isSold) return null;
+            </div>
+          </section>
+        )}
 
-                return (
-                  <div className="mt-5 flex flex-wrap gap-x-12 gap-y-3 border-t border-charcoal/8 pt-5">
-                    {hasListing && (
-                      <div className="flex items-start gap-4">
-                        <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Listed By:</span>
-                        <div className="flex flex-col gap-0.5">
-                          {listing.agents.map((agent, i) => (
+        {/* Listed By + Bought With attribution. Rendered as its own section
+            (outside the photo gallery) so the brokerage line is always
+            visible — including on listings that have zero photos in the
+            Repliers feed, e.g. MLS #2310987. On sold listings the Bought
+            With row always renders so the buyer brokerage sits alongside
+            the listing brokerage per NWMLS data-display rules. When
+            Repliers does not return a buyer agent we still show the row
+            with a clear "Not provided" placeholder. */}
+        {(() => {
+          const isSold = listing.lastStatus === "Sld" || listing.status === "U";
+          const hasListing = (listing.agents?.length ?? 0) > 0;
+          const hasBuyer = (listing.buyerAgents?.length ?? 0) > 0;
+          const listingBrokerageFallback = listing.office?.brokerageName ?? "";
+          if (!hasListing && !hasBuyer && !isSold && !listingBrokerageFallback) {
+            return null;
+          }
+          return (
+            <section className="bg-white pt-2 pb-8 sm:pt-4">
+              <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+                <div className="flex flex-wrap gap-x-12 gap-y-3 border-t border-charcoal/8 pt-5">
+                  {hasListing ? (
+                    <div className="flex items-start gap-4">
+                      <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Listed By:</span>
+                      <div className="flex flex-col gap-0.5">
+                        {listing.agents.map((agent, i) => {
+                          const brokerage =
+                            agent.brokerage?.name || listingBrokerageFallback;
+                          return (
+                            <span key={i} className="text-[13px]">
+                              <span className="font-medium text-charcoal">{agent.name}</span>
+                              {brokerage && (
+                                <span className="text-charcoal/80">,&nbsp;{brokerage}</span>
+                              )}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : listingBrokerageFallback ? (
+                    <div className="flex items-start gap-4">
+                      <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Listed By:</span>
+                      <span className="text-[13px] font-medium text-charcoal">
+                        {listingBrokerageFallback}
+                      </span>
+                    </div>
+                  ) : null}
+                  {(hasBuyer || isSold) && (
+                    <div className="flex items-start gap-4">
+                      <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Bought With:</span>
+                      <div className="flex flex-col gap-0.5">
+                        {hasBuyer ? (
+                          listing.buyerAgents!.map((agent, i) => (
                             <span key={i} className="text-[13px]">
                               <span className="font-medium text-charcoal">{agent.name}</span>
                               {agent.brokerage?.name && (
                                 <span className="text-charcoal/80">,&nbsp;{agent.brokerage.name}</span>
                               )}
                             </span>
-                          ))}
-                        </div>
+                          ))
+                        ) : (
+                          <span className="text-[13px] italic text-charcoal/80">
+                            Buyer brokerage not provided
+                          </span>
+                        )}
                       </div>
-                    )}
-                    {(hasBuyer || isSold) && (
-                      <div className="flex items-start gap-4">
-                        <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Bought With:</span>
-                        <div className="flex flex-col gap-0.5">
-                          {hasBuyer ? (
-                            listing.buyerAgents!.map((agent, i) => (
-                              <span key={i} className="text-[13px]">
-                                <span className="font-medium text-charcoal">{agent.name}</span>
-                                {agent.brokerage?.name && (
-                                  <span className="text-charcoal/80">,&nbsp;{agent.brokerage.name}</span>
-                                )}
-                              </span>
-                            ))
-                          ) : (
-                            <span className="text-[13px] italic text-charcoal/80">
-                              Buyer brokerage not provided
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    )}
-                    {listing.office?.brokerageName && !listing.agents?.some(a => a.brokerage?.name) && (
-                      <span className="text-[13px] text-charcoal/80">{listing.office.brokerageName}</span>
-                    )}
-                  </div>
-                );
-              })()}
-            </div>
-          </section>
-        )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          );
+        })()}
 
         {/* Description + Details */}
         <section className="bg-white py-16 sm:py-24">
@@ -830,40 +866,57 @@ export default function ListingDetailPage() {
 
                   {/* Agent card — listing agent(s) + buyer agent(s).
                       For sold listings the Bought With section always shows
-                      so the buyer brokerage is visible per NWMLS rules. */}
+                      so the buyer brokerage is visible per NWMLS rules.
+                      When Repliers omits the agent list entirely we still
+                      surface `office.brokerageName` as the Listed By
+                      brokerage so the card never goes blank. */}
                   {(() => {
-                    const isSold = listing.lastStatus === "Sld";
+                    const isSold = listing.lastStatus === "Sld" || listing.status === "U";
                     const hasListing = (listing.agents?.length ?? 0) > 0;
                     const hasBuyer = (listing.buyerAgents?.length ?? 0) > 0;
-                    if (!hasListing && !hasBuyer && !isSold) return null;
+                    const listingBrokerageFallback = listing.office?.brokerageName ?? "";
+                    if (!hasListing && !hasBuyer && !isSold && !listingBrokerageFallback) {
+                      return null;
+                    }
 
                     return (
                       <div className="rounded-3xl border border-charcoal/10 bg-[#f9f7f4] p-7 space-y-5">
-                        {hasListing && (
+                        {hasListing ? (
                           <div>
                             <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Listed By</p>
                             <div className="space-y-3">
-                              {listing.agents.map((agent, i) => (
-                                <div key={i} className="flex items-center gap-4">
-                                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-charcoal/10 text-charcoal text-[12px] font-serif font-light">
-                                    {agent.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                              {listing.agents.map((agent, i) => {
+                                const brokerage =
+                                  agent.brokerage?.name || listingBrokerageFallback;
+                                return (
+                                  <div key={i} className="flex items-center gap-4">
+                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-charcoal/10 text-charcoal text-[12px] font-serif font-light">
+                                      {agent.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                                    </div>
+                                    <div>
+                                      <p className="font-serif text-[1rem] font-light text-charcoal">{agent.name}</p>
+                                      {brokerage && (
+                                        <p className="text-[12px] text-charcoal/80">{brokerage}</p>
+                                      )}
+                                      {agent.phones?.[0] && (
+                                        <a href={`tel:${agent.phones[0].replace(/\D/g, "")}`} className="text-[12px] text-charcoal/80 hover:text-charcoal transition-colors">
+                                          {agent.phones[0]}
+                                        </a>
+                                      )}
+                                    </div>
                                   </div>
-                                  <div>
-                                    <p className="font-serif text-[1rem] font-light text-charcoal">{agent.name}</p>
-                                    {agent.brokerage?.name && (
-                                      <p className="text-[12px] text-charcoal/80">{agent.brokerage.name}</p>
-                                    )}
-                                    {agent.phones?.[0] && (
-                                      <a href={`tel:${agent.phones[0].replace(/\D/g, "")}`} className="text-[12px] text-charcoal/80 hover:text-charcoal transition-colors">
-                                        {agent.phones[0]}
-                                      </a>
-                                    )}
-                                  </div>
-                                </div>
-                              ))}
+                                );
+                              })}
                             </div>
                           </div>
-                        )}
+                        ) : listingBrokerageFallback ? (
+                          <div>
+                            <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Listed By</p>
+                            <p className="font-serif text-[1rem] font-light text-charcoal">
+                              {listingBrokerageFallback}
+                            </p>
+                          </div>
+                        ) : null}
                         {(hasBuyer || isSold) && (
                           <div className={hasListing ? "border-t border-charcoal/8 pt-5" : ""}>
                             <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Bought With</p>
@@ -889,11 +942,6 @@ export default function ListingDetailPage() {
                               </p>
                             )}
                           </div>
-                        )}
-                        {listing.office?.brokerageName && (
-                          <p className="text-[11px] text-charcoal/80 border-t border-charcoal/8 pt-4">
-                            {listing.office.brokerageName}
-                          </p>
                         )}
                       </div>
                     );

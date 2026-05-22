@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
+import { getListingStatusBadge } from "@/lib/listing-status";
 
 const ListingsMap = dynamic(() => import("@/components/ListingsMap"), {
   ssr: false,
@@ -83,36 +84,6 @@ function getImageUrl(images: string[]) {
   return CDN + path;
 }
 
-type StatusBadge = { label: string; tone: "active" | "pending" | "sold" };
-
-// Reads RESO standardStatus directly (per Repliers' recommendation) and
-// falls back to the binary status / lastStatus fields if standardStatus
-// is missing for any reason.
-function getStatusBadge(l: Pick<Listing, "status" | "lastStatus" | "standardStatus">): StatusBadge {
-  const standard = (l.standardStatus || "").trim();
-  const last = (l.lastStatus || "").trim();
-
-  if (standard) {
-    const lc = standard.toLowerCase();
-    if (lc === "active") return { label: "Active", tone: "active" };
-    if (lc === "closed") return { label: "Sold", tone: "sold" };
-    if (lc === "active under contract") return { label: "Contingent", tone: "pending" };
-    if (lc === "pending") return { label: "Pending", tone: "pending" };
-    // Canceled / Expired / Hold / Withdrawn / Coming Soon
-    return { label: standard, tone: "sold" };
-  }
-
-  // Fallback for older/partial Repliers payloads.
-  // Map known NWMLS lastStatus codes explicitly.
-  if (last === "Sc" || last === "Ctg") return { label: "Contingent", tone: "pending" };
-  if (last === "Pnd") return { label: "Pending", tone: "pending" };
-  if (l.status === "U") {
-    if (last === "Sld") return { label: "Sold", tone: "sold" };
-    return { label: last || "Off-Market", tone: "sold" };
-  }
-  return { label: "Active", tone: "active" };
-}
-
 const STATUS_FILTERS = [
   { label: "All", value: "All" },
   { label: "Active", value: "A" },
@@ -166,9 +137,9 @@ function ListingCard({ listing }: { listing: Listing }) {
             </svg>
           </div>
         )}
-        <div className="absolute left-4 top-4">
+        <div className="absolute left-4 top-4 max-w-[calc(100%-2rem)]">
           {(() => {
-            const badge = getStatusBadge(listing);
+            const badge = getListingStatusBadge(listing);
             const tone =
               badge.tone === "active"
                 ? "bg-white/90 text-charcoal"
@@ -177,7 +148,7 @@ function ListingCard({ listing }: { listing: Listing }) {
                   : "bg-charcoal/80 text-white";
             return (
               <span
-                className={`rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium ${tone}`}
+                className={`inline-block rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium whitespace-normal text-center ${tone}`}
               >
                 {badge.label}
               </span>

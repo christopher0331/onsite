@@ -33,13 +33,28 @@ export async function GET(
     }
 
     if (direct.status === 404) {
-      // Build a list of (searchTerm, boardId) pairs to try.
-      // NWMLS numbers may arrive as "2310987", "NWM2310987", or the full
-      // prefixed form. boardId=110 scopes Repliers to NWMLS specifically.
+      // Repliers stores NWMLS listings under their prefixed id (e.g.
+      // "NWM2310987"). When the auditor types or links to the bare
+      // "2310987" form, the direct GET above 404s. Try the prefixed /
+      // de-prefixed direct GETs before falling back to the search query.
       const isNwmls = /^(NWM)?\d+$/.test(mlsNumber);
       const bare = mlsNumber.replace(/^[A-Z]+/, "");
       const prefixed = `NWM${bare}`;
 
+      const directVariants = isNwmls
+        ? Array.from(new Set([prefixed, bare].filter((v) => v && v !== mlsNumber)))
+        : [];
+      for (const variant of directVariants) {
+        const r = await fetch(`${REPLIERS_BASE}/${encodeURIComponent(variant)}`, FETCH_OPTS);
+        if (r.ok) {
+          const data = await r.json();
+          if (data?.mlsNumber) return NextResponse.json(data);
+        }
+      }
+
+      // Final fallback: searchFields=mlsNumber. Repliers' search index does
+      // not always cover legacy NWMLS ids, so this only succeeds for some
+      // boards — kept as a last resort.
       const attempts: { term: string; board?: string }[] = isNwmls
         ? [
             { term: prefixed, board: "110" },
