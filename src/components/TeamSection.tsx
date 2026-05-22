@@ -3,6 +3,16 @@
 import { useState } from "react";
 import Image from "next/image";
 
+type SocialPlatform =
+  | "facebook"
+  | "instagram"
+  | "youtube"
+  | "linkedin"
+  | "tiktok"
+  | "whatsapp";
+
+type SocialLinks = Partial<Record<SocialPlatform, string>>;
+
 type TeamMember = {
   name: string;
   role: string;
@@ -13,7 +23,103 @@ type TeamMember = {
   bioShort: string;
   bioFull: React.ReactNode;
   objectPosition?: string;
+  socials?: SocialLinks;
 };
+
+// Display order — every card uses the same left-to-right ordering even
+// when a particular agent does not have an account on a given network.
+const SOCIAL_ORDER: SocialPlatform[] = [
+  "facebook",
+  "instagram",
+  "youtube",
+  "tiktok",
+  "linkedin",
+  "whatsapp",
+];
+
+const SOCIAL_LABELS: Record<SocialPlatform, string> = {
+  facebook: "Facebook",
+  instagram: "Instagram",
+  youtube: "YouTube",
+  linkedin: "LinkedIn",
+  tiktok: "TikTok",
+  whatsapp: "WhatsApp",
+};
+
+function SocialIcon({ platform }: { platform: SocialPlatform }) {
+  switch (platform) {
+    case "facebook":
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="w-full h-full">
+          <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0 0 22 12Z" />
+        </svg>
+      );
+    case "instagram":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} aria-hidden="true" className="w-full h-full">
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+        </svg>
+      );
+    case "youtube":
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="w-full h-full">
+          <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z" />
+        </svg>
+      );
+    case "linkedin":
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="w-full h-full">
+          <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.4v1.56h.05a3.73 3.73 0 0 1 3.36-1.85c3.59 0 4.25 2.36 4.25 5.44v6.3ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.02H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z" />
+        </svg>
+      );
+    case "tiktok":
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="w-full h-full">
+          <path d="M19.6 6.7a5.4 5.4 0 0 1-3.2-1c-.9-.7-1.5-1.7-1.6-2.9V2.5h-3v12.1a2.7 2.7 0 1 1-2-2.6V8.9a5.8 5.8 0 1 0 5 5.7V8.5c1.3.9 2.9 1.4 4.5 1.4h.3V6.7h-.1Z" />
+        </svg>
+      );
+    case "whatsapp":
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="w-full h-full">
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.92.5 3.77 1.46 5.4L2 22l4.83-1.55a9.86 9.86 0 0 0 5.21 1.43c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.7 0-3.36-.46-4.8-1.32l-.35-.2-2.87.92.94-2.79-.22-.35a8.18 8.18 0 0 1-1.27-4.4c0-4.53 3.69-8.22 8.22-8.22 4.54 0 8.23 3.69 8.23 8.22 0 4.54-3.69 8.23-8.23 8.23h.35Zm4.74-6.18c-.26-.13-1.55-.76-1.79-.85-.24-.09-.41-.13-.59.13-.17.26-.68.85-.83 1.02-.15.17-.31.2-.57.06-.26-.13-1.09-.4-2.08-1.28-.77-.69-1.29-1.54-1.44-1.8-.15-.26-.02-.4.11-.53.11-.11.26-.31.39-.46.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.46-.06-.13-.59-1.42-.81-1.95-.21-.52-.43-.45-.59-.46H7.9c-.17 0-.46.06-.7.32-.24.26-.92.9-.92 2.2 0 1.3.94 2.55 1.07 2.72.13.17 1.85 2.82 4.49 3.96.63.27 1.12.43 1.5.55.63.2 1.21.17 1.66.1.51-.07 1.55-.63 1.77-1.24.22-.61.22-1.13.16-1.24-.07-.12-.24-.18-.5-.31Z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
+function SocialIconsRow({
+  socials,
+  size = "card",
+}: {
+  socials: SocialLinks | undefined;
+  size?: "card" | "modal";
+}) {
+  if (!socials) return null;
+  const platforms = SOCIAL_ORDER.filter((p) => socials[p]);
+  if (platforms.length === 0) return null;
+  const dim = size === "card" ? "h-7 w-7" : "h-8 w-8";
+  const iconPad = size === "card" ? "p-1.5" : "p-1.5";
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {platforms.map((p) => (
+        <a
+          key={p}
+          href={socials[p]}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={SOCIAL_LABELS[p]}
+          className={`${dim} ${iconPad} flex items-center justify-center rounded-full border border-charcoal/15 text-charcoal/65 transition-colors duration-300 hover:bg-charcoal hover:text-white hover:border-charcoal`}
+        >
+          <SocialIcon platform={p} />
+        </a>
+      ))}
+    </div>
+  );
+}
 
 const TEAM: TeamMember[] = [
   {
@@ -24,6 +130,13 @@ const TEAM: TeamMember[] = [
     phone: "2534419764",
     phoneDisplay: "(253) 441-9764",
     email: "andre@onsiteregroup.com",
+    socials: {
+      facebook: "https://www.facebook.com/profile.php?id=61570807923008&sk=followers",
+      instagram: "https://www.instagram.com/watchmeasirealestate/",
+      youtube: "https://www.youtube.com/@OnSiteRealEstateGroup",
+      linkedin: "https://www.linkedin.com/in/onsiteregroup",
+      tiktok: "https://www.tiktok.com/@onsiteregroup",
+    },
     bioShort:
       "With over a decade of experience and hundreds of successful home sales, André brings deep expertise, tireless dedication, and a personal touch to every real estate journey.",
     bioFull: (
@@ -63,6 +176,12 @@ const TEAM: TeamMember[] = [
     phoneDisplay: "(253) 799-0609",
     email: "cindie@onsiteregroup.com",
     objectPosition: "object-top",
+    socials: {
+      facebook: "https://www.facebook.com/profile.php?id=61570807923008&sk=followers",
+      instagram: "https://www.instagram.com/watchmeasirealestate/",
+      youtube: "https://www.youtube.com/@OnSiteRealEstateGroup",
+      tiktok: "https://www.tiktok.com/@onsiteregroup",
+    },
     bioShort:
       "For over 20 years, Cindie Bohall has been a trusted guide for families navigating complex decisions, bringing compassion and deep care to every transaction.",
     bioFull: (
@@ -97,6 +216,12 @@ const TEAM: TeamMember[] = [
     phone: "2539871289",
     phoneDisplay: "(253) 987-1289",
     email: "deisy@onsiteregroup.com",
+    socials: {
+      facebook: "https://www.facebook.com/profile.php?id=61570958523132",
+      instagram: "https://www.instagram.com/deisyrealestateagent",
+      whatsapp:
+        "https://api.whatsapp.com/message/B26B5WOW7TPII1?autoload=1&app_absent=0",
+    },
     bioShort:
       "More than a real estate agent, Deisy genuinely cares about helping people build a better future through homeownership. As a proud Latina entrepreneur, she's passionate about serving her community.",
     bioFull: <DeisyBio />,
@@ -259,6 +384,11 @@ function MemberCard({
             </svg>
             {member.email}
           </a>
+          {member.socials && (
+            <div className="pt-3">
+              <SocialIconsRow socials={member.socials} size="card" />
+            </div>
+          )}
         </div>
 
         <button
@@ -331,7 +461,7 @@ function Modal({
             <h2 className="font-serif text-[1.9rem] font-light text-charcoal leading-tight mb-1">
               {member.name}
             </h2>
-            <div className="flex flex-wrap gap-x-5 gap-y-1 mb-6">
+            <div className="flex flex-wrap gap-x-5 gap-y-1 mb-4">
               <a href={`tel:${member.phone}`} className="text-[13px] text-charcoal/60 hover:text-charcoal transition-colors">
                 {member.phoneDisplay}
               </a>
@@ -339,6 +469,11 @@ function Modal({
                 {member.email}
               </a>
             </div>
+            {member.socials && (
+              <div className="mb-6">
+                <SocialIconsRow socials={member.socials} size="modal" />
+              </div>
+            )}
 
             <div className="border-t border-charcoal/8 pt-6">
               {member.bioFull}

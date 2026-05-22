@@ -22,6 +22,13 @@ const contactMethods = [
     email: "cindie@onsiteregroup.com",
     emailHref: "mailto:cindie@onsiteregroup.com",
   },
+  {
+    label: "Deisy Duran Ruiz",
+    phone: "253-987-1289",
+    phoneHref: "tel:253-987-1289",
+    email: "deisy@onsiteregroup.com",
+    emailHref: "mailto:deisy@onsiteregroup.com",
+  },
 ];
 
 type FormState = "idle" | "loading" | "success" | "error";

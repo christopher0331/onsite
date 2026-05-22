@@ -1,0 +1,196 @@
+MLS Grid API: Comprehensive Technical Implementation & Compliance Guide
+
+1. Integration Overview and Environment Preparation
+
+The MLS Grid Service Model
+
+The MLS Grid operates on a replication-based architecture designed for stability and high-performance data consumption. Rather than facilitating real-time queries against live MLS databases—which can lead to latency and system instability—the API provides a standardized, unified feed optimized for local data mirroring. As a Senior Architect, I recommend this model for its resilience: by maintaining a local copy of RESO-standardized data, you isolate your application from upstream downtime and disparate data formats.
+
+Environment Setup Checklist
+
+Before beginning data ingestion, your infrastructure must be prepped to handle the standardized JSON payload. Follow these steps sequentially:
+
+1. Staging Environment Initialization: Provision a dedicated "Test Database" to handle initial replication tests without impacting production schemas.
+2. API Client Selection: Identify your retrieval method (e.g., custom service or a tool like Postman) to validate headers and responses.
+3. Subscription & Onboarding: Complete the subscription via the MLS Grid portal and ensure the participating MLS has approved your access.
+4. Database Retooling for JSON: Configure your database to consume JSON output. Be aware that records are dynamic; they only contain fields converted from the originating MLS.
+5. Staging Product Deployment: Deploy a "Test Product" (application instance) to map and test the data flow from the Test Database before the final launch.
+6. Header Verification: Configure application logic to include mandatory authentication and compression headers (see Section 7).
+
+Authentication Protocol
+
+The system utilizes a simplified OAuth 2 authentication schema using long-term tokens. To maximize uptime for background replication tasks, these tokens remain valid indefinitely unless re-generated.
+
+Token Management: Authentication tokens are generated exclusively through the MLS Grid Web Application interface. Once your subscription is approved, navigate to the "Token" tab within your subscription view to retrieve your credential. If a security breach is suspected, contact support@mlsgrid.com to invalidate and re-generate your token.
+
+
+--------------------------------------------------------------------------------
+
+
+2. Data Retrieval via OData Replication
+
+Core Query Logic and Searchable Fields
+
+Data retrieval is governed by OData system query options. To prevent service degradation and ensure predictable performance, the replication server restricts queries to the following Searchable Fields:
+
+* ModificationTimestamp
+* OriginatingSystemName
+* StandardStatus
+* ListingId
+* MlgCanView
+
+Mandatory Query Parameters:
+
+* $top: Must be set to 5000 for initial and incremental imports to maximize throughput.
+* $skip: Used for pagination. Traditional SQL offsets are not supported; use $skip=[count] to advance through records.
+* $expand: This is the exclusive mechanism to retrieve associated resources. You must explicitly request Media, Rooms, and UnitTypes to include them in the property record payload.
+
+Mandatory Filtering and PNW Data
+
+Every request requires an OriginatingSystemName filter to isolate specific MLS sources. This is critical for regional compliance.
+
+* Example (Austin): OriginatingSystemName eq 'actris'
+* Example (Northwest MLS): OriginatingSystemName eq 'nwmls'
+
+Failure Recovery: The "No-Restart" Rule
+
+In a replication environment, starting over from record zero after a network failure or application crash is an inefficient use of resources that may trigger rate limits. Architectural Requirement: If an error occurs during an import, do not start over. You must use a $filter for ModificationTimestamp gt using the greatest timestamp successfully received before the failure to resume the stream.
+
+Initial Import URI Example: https://api.mlsgrid.com/v2/Property?$filter=OriginatingSystemName eq ‘actris’ and MlgCanView eq true&$expand=Media,Rooms,UnitTypes
+
+Pagination Strategy
+
+The API utilizes link-based pagination across all resources (Property, Member, Office, and OpenHouse). Every response includes an @odata.nextLink field. Developers should programmatically follow this URL until the field is no longer present, signifying the end of the dataset.
+
+
+--------------------------------------------------------------------------------
+
+
+3. Data Mapping and RESO Standardization
+
+Conversion Process
+
+MLS Grid automates the transformation of native MLS data into RESO (Real Estate Standards Organization) StandardNames and lookups (enumerations). This ensures that data from disparate sources like NWMLS or MRED shares a common schema in your local database.
+
+Handling Key and Local Fields
+
+Fields that do not map to RESO standards are preserved to ensure data integrity but are managed via a specific prefix convention.
+
+* Prefix Convention: All "Key" and "Local" fields are prefixed with "Mlg" or an MLS-specific identifier (e.g., MlgCanView).
+* Request vs. Display: You must use these prefixes in all API requests and filters. However, these prefixes must be removed by your application logic before the data is displayed to end-users.
+
+Timestamp and Date Handling
+
+* UTC Normalization: All date fields mapped to RESO standards are converted to UTC.
+* Local Fields: Date fields passed through as "Local Fields" retain the original representation from the source MLS.
+* System Tracking: Use ModificationTimestamp for Grid-level updates and OriginatingSystemModificationTimestamp for the last update time in the source MLS.
+
+
+--------------------------------------------------------------------------------
+
+
+4. Media Asset Management & Local Hosting Requirements
+
+Strict No-Hotlinking Policy
+
+Directly linking to MLS Grid media URLs on a public-facing website is a violation of the Data License Agreement. These URLs are provided solely for downloading assets to your own infrastructure.
+
+Download Technicalities
+
+* Resolution: Always use the MediaURL field, which provides the highest resolution asset provided by the source MLS.
+* Mandatory Header: All media download requests MUST include a user-agent header where the value is your OAuth 2 access token. Requests with generic or missing user-agents will be blocked.
+
+Optimization Rules
+
+* URL Persistence: A media URL only changes if the asset itself is updated. If the URL remains the same as what is in your local database, do not download it again.
+* Single-Pass Downloads: Implement logic to check for existing local assets before initiating a download to conserve bandwidth.
+
+
+--------------------------------------------------------------------------------
+
+
+5. Managing Record Lifecycles and Deletions
+
+The MlgCanView Logic
+
+Because this is a replication feed, deletions are handled via the MlgCanView boolean flag. This field reflects whether a record is currently eligible for distribution based on status changes, office permissions, or removals.
+
+MlgCanView Value	Required Action
+true	Save or update the record in your local database.
+false	Remove the record from your local database immediately.
+
+Incremental Syncing Logic
+
+To maintain a "fresh" database, use the ModificationTimestamp gt filter. This prevents redundant data pulls and keeps your system synchronized with minimal overhead.
+
+Sync URI Example (Property): https://api.mlsgrid.com/v2/Property?$filter=OriginatingSystemName eq ‘actris’ and ModificationTimestamp gt [GREATEST ModificationTimestamp RECEIVED]&$expand=Media,Rooms,UnitTypes
+
+
+--------------------------------------------------------------------------------
+
+
+6. NWMLS Data Use Compliance Policy
+
+Compliance Framework (Effective May 2024)
+
+Any application utilizing Northwest MLS (NWMLS) data must adhere to a strict compliance framework. Violations of NWMLS Data Use Policies or Grid IDX/VOW rules are subject to financial penalties and feed termination.
+
+Notification and The 10-Day Grace Period
+
+If a violation is identified, a "Non-Compliance Notification" is sent to the email on file. Licensees are granted a 10-day calendar period to correct the violation before fines are assessed.
+
+Fine Structure
+
+Fines are invoiced through MLS Grid and are the joint responsibility of the Vendor and Participant.
+
+Violation Type	Initial Penalty	Recurring Escalation
+Non-Compliance	10-day grace period; then $250 fine	$250 every 5 business days
+Repeat Non-Compliance (within 180 days)	10-day grace period; then $500 fine	$500 every 5 business days
+Unlicensed Use	$500 fine (Immediate)	$500 every 5 business days
+Repeat Unlicensed Use (within 365 days)	$1,000 fine (Immediate)	$1,000 every 5 business days
+
+Enforcement Actions
+
+* Feed Termination: If a violation persists beyond 30 calendar days from the initial notification, NWMLS may terminate the data feed.
+* Suspension: Failure to pay fines within 10 days of the invoice date will result in license suspension.
+
+
+--------------------------------------------------------------------------------
+
+
+7. Performance Optimization and Rate Limiting
+
+System Constraints
+
+The following hard limits are enforced to ensure platform stability. Exceeding these may result in temporary account suspension:
+
+* 2 Requests Per Second (RPS) maximum.
+* 7,200 requests per hour.
+* 4 GB download per hour.
+* 40,000 requests per 24-hour period.
+* 60 GB download per 24-hour period.
+
+Error Handling & Response Headers
+
+If limits are exceeded, the API returns an HTTP 429 (Too Many Requests). Access is automatically reinstated once your usage (measured in a rolling window) falls back within limits.
+
+Mandatory Compression: To handle large JSON payloads, you must include the following header in every request: Accept-Encoding: gzip, deflate
+
+
+--------------------------------------------------------------------------------
+
+
+8. Prohibited Practices & Final Implementation Checklist
+
+Prohibited Patterns
+
+To maintain your license and ensure service quality, avoid the following anti-patterns:
+
+* Multi-threaded Replication: Replication requests must be sequential. Splitting requests across threads leads to out-of-order pagination and duplicate data.
+* Range Queries: Never use "between" or range-based filters on ModificationTimestamp. Always use the gt operator.
+* Inefficient OpenHouse Requests: Do not request OpenHouse records one listing at a time or via "or" statements. Use the in operator (e.g., $filter=ListingId in ('ID1', 'ID2')).
+* Forbidden Parentheses: Do not use parentheses around OriginatingSystemName, MlgCanView, or ModificationTimestamp unless they are part of an or/in logic block.
+
+Support and Initial Imports
+
+Initial data ingestion will often exceed standard rate limits. To avoid automated suspension, contact support@mlsgrid.com before your first major import to request a "Grace Period" for elevated data caps.
