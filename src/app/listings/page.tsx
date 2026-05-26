@@ -28,6 +28,7 @@ type Listing = {
   status: string;
   lastStatus: string;
   standardStatus?: string | null;
+  raw?: Record<string, unknown> | null;
   listDate: string;
   address: {
     streetNumber: string;

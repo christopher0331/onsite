@@ -1,10 +1,12 @@
 // Centralised status mapping for any surface that renders an NWMLS / MLS
 // Grid listing (cards, detail page hero, map popups). Auditor requires the
-// full sub-status to be visible everywhere — i.e. "Pending – Backup Offer
-// Requested" rather than a flat "Pending" — so all displays read from this
-// helper.
+// full sub-status to be visible everywhere — e.g. "Pending – Backup Offer
+// Requested" rather than a flat "Pending".
 //
-// Inputs come from Repliers (RESO standardStatus + NWMLS lastStatus codes).
+// Prefer Repliers `raw.MlsStatus` when present (requires `fields=raw` on the
+// API request). Fall back to RESO standardStatus + NWMLS lastStatus codes.
+
+import { formatMlsStatusLabel, type RepliersRaw } from "@/lib/repliers-enrich";
 
 export type StatusTone = "active" | "pending" | "sold";
 
@@ -13,8 +15,7 @@ export type ListingStatusBadge = {
   tone: StatusTone;
 };
 
-// NWMLS pending sub-status codes that Repliers exposes via `lastStatus`
-// for listings whose RESO `standardStatus` is "Pending".
+// NWMLS pending sub-status codes via normalized `lastStatus` (legacy).
 const PENDING_SUBSTATUS_LABELS: Record<string, string> = {
   Pen: "Pending",
   Pi: "Pending Inspection",
@@ -23,8 +24,6 @@ const PENDING_SUBSTATUS_LABELS: Record<string, string> = {
   Pba: "Pending – Backup Offer Requested",
 };
 
-// NWMLS contingent sub-status codes that Repliers exposes via `lastStatus`
-// for listings whose RESO `standardStatus` is "Active Under Contract".
 const CONTINGENT_SUBSTATUS_LABELS: Record<string, string> = {
   Sc: "Contingent",
   Ctg: "Contingent",
@@ -34,9 +33,46 @@ type StatusInput = {
   status?: string | null;
   lastStatus?: string | null;
   standardStatus?: string | null;
+  raw?: RepliersRaw | null;
 };
 
+function toneFromMlsStatus(mlsStatus: string): StatusTone {
+  const lc = mlsStatus.toLowerCase();
+  if (lc === "sold" || lc.includes("closed") || lc.includes("cancel") || lc.includes("expir")) {
+    return "sold";
+  }
+  if (
+    lc.includes("pending") ||
+    lc.includes("contingent") ||
+    lc.includes("backup") ||
+    lc.includes("inspection") ||
+    lc.includes("feasibility") ||
+    lc.includes("short sale") ||
+    lc.includes("active under contract")
+  ) {
+    return "pending";
+  }
+  if (lc === "active" || lc.includes("new")) return "active";
+  return "sold";
+}
+
+function toneFromStandard(standard: string): StatusTone {
+  const lc = standard.toLowerCase();
+  if (lc === "active") return "active";
+  if (lc === "closed") return "sold";
+  if (lc === "active under contract" || lc === "pending") return "pending";
+  return "sold";
+}
+
 export function getListingStatusBadge(l: StatusInput): ListingStatusBadge {
+  const mlsStatus = typeof l.raw?.MlsStatus === "string" ? l.raw.MlsStatus.trim() : "";
+  if (mlsStatus) {
+    return {
+      label: formatMlsStatusLabel(mlsStatus),
+      tone: toneFromMlsStatus(mlsStatus),
+    };
+  }
+
   const standard = (l.standardStatus || "").trim();
   const last = (l.lastStatus || "").trim();
 
@@ -56,11 +92,9 @@ export function getListingStatusBadge(l: StatusInput): ListingStatusBadge {
         tone: "pending",
       };
     }
-    // Canceled / Expired / Hold / Withdrawn / Coming Soon — surface verbatim.
-    return { label: standard, tone: "sold" };
+    return { label: standard, tone: toneFromStandard(standard) };
   }
 
-  // Fallback for older / partial Repliers payloads that only ship lastStatus.
   if (PENDING_SUBSTATUS_LABELS[last]) {
     return { label: PENDING_SUBSTATUS_LABELS[last], tone: "pending" };
   }

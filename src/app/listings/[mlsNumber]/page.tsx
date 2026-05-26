@@ -133,6 +133,7 @@ type Listing = {
     phones: string[];
     brokerage: { name: string };
   }[] | null;
+  raw?: Record<string, unknown> | null;
   office: { brokerageName: string } | null;
   permissions?: { displayAddressOnInternet?: string };
   updatedOn: string | null;

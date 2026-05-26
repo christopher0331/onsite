@@ -1,15 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
+import { enrichListing, repliersListingsUrl } from "@/lib/repliers-enrich";
 
-const REPLIERS_BASE = "https://api.repliers.io/listings";
 const KEY = process.env.REPLIERS_API_KEY || "";
 
-const FETCH_OPTS = {
-  headers: {
-    "repliers-api-key": KEY,
-    "Content-Type": "application/json",
-  },
-  next: { revalidate: 300 },
-};
+function fetchOpts() {
+  return {
+    headers: {
+      "repliers-api-key": KEY,
+      "Content-Type": "application/json",
+    },
+    next: { revalidate: 300 } as const,
+  };
+}
 
 // Per Repliers support:
 //   1. The canonical mlsNumber may be prefixed (e.g. NWM2310987). When the
@@ -26,10 +28,12 @@ export async function GET(
   const { mlsNumber } = await params;
 
   try {
-    const direct = await fetch(`${REPLIERS_BASE}/${encodeURIComponent(mlsNumber)}`, FETCH_OPTS);
+    const direct = await fetch(
+      repliersListingsUrl(`/${encodeURIComponent(mlsNumber)}`),
+      fetchOpts()
+    );
     if (direct.ok) {
-      const data = await direct.json();
-      return NextResponse.json(data);
+      return NextResponse.json(enrichListing(await direct.json()));
     }
 
     if (direct.status === 404) {
@@ -45,9 +49,9 @@ export async function GET(
         ? Array.from(new Set([prefixed, bare].filter((v) => v && v !== mlsNumber)))
         : [];
       for (const variant of directVariants) {
-        const r = await fetch(`${REPLIERS_BASE}/${encodeURIComponent(variant)}`, FETCH_OPTS);
+        const r = await fetch(repliersListingsUrl(`/${encodeURIComponent(variant)}`), fetchOpts());
         if (r.ok) {
-          const data = await r.json();
+          const data = enrichListing(await r.json());
           if (data?.mlsNumber) return NextResponse.json(data);
         }
       }
@@ -74,11 +78,11 @@ export async function GET(
           pageSize: "1",
         });
         if (board) p.set("boardId", board);
-        const fallback = await fetch(`${REPLIERS_BASE}?${p}`, FETCH_OPTS);
+        const fallback = await fetch(repliersListingsUrl(`?${p}`), fetchOpts());
         if (fallback.ok) {
           const payload = await fallback.json();
           const hit = Array.isArray(payload?.listings) ? payload.listings[0] : null;
-          if (hit) return NextResponse.json(hit);
+          if (hit) return NextResponse.json(enrichListing(hit));
         }
       }
 

@@ -18,6 +18,7 @@ type MapListing = {
   status: string;
   lastStatus: string;
   standardStatus?: string | null;
+  raw?: Record<string, unknown> | null;
   address: { city: string; state: string; zip: string };
   map?: { latitude: number | null; longitude: number | null } | null;
 };

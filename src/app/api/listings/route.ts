@@ -1,4 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import {
+  enrichListing,
+  enrichListingsResponse,
+  repliersListingsUrl,
+} from "@/lib/repliers-enrich";
 
 const REPLIERS_API = "https://api.repliers.io/listings";
 const ONSITE_BROKERAGE_NAME = process.env.ONSITE_BROKERAGE_NAME || "";
@@ -44,12 +49,12 @@ export async function GET(req: NextRequest) {
       "Content-Type": "application/json",
     };
     for (const id of candidates) {
-      const res = await fetch(`${REPLIERS_API}/${encodeURIComponent(id)}`, {
+      const res = await fetch(repliersListingsUrl(`/${encodeURIComponent(id)}`), {
         headers,
         next: { revalidate: 300 },
       });
       if (res.ok) {
-        const listing = await res.json();
+        const listing = enrichListing(await res.json());
         if (listing?.mlsNumber) {
           return NextResponse.json({ count: 1, numPages: 1, page: 1, listings: [listing] });
         }
@@ -112,7 +117,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const res = await fetch(`${REPLIERS_API}?${params.toString()}`, {
+    const res = await fetch(repliersListingsUrl(`?${params.toString()}`), {
       headers: {
         "repliers-api-key": process.env.REPLIERS_API_KEY || "",
         "Content-Type": "application/json",
@@ -125,7 +130,7 @@ export async function GET(req: NextRequest) {
         { status: res.status }
       );
     }
-    const data = await res.json();
+    const data = enrichListingsResponse(await res.json());
     return NextResponse.json(data);
   } catch {
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
