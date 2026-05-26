@@ -157,7 +157,9 @@ export default function ListingsMap({ listings }: { listings: MapListing[] }) {
                       {badge.label}
                     </span>
                     <p className="text-[12px] text-charcoal/90">
-                      {l.address.city}, {l.address.state} {l.address.zip}
+                      {[l.address?.city, l.address?.state, l.address?.zip]
+                        .filter(Boolean)
+                        .join(", ") || "Location unavailable"}
                     </p>
                     <p className="text-[11px] text-charcoal/80">MLS# {l.mlsNumber}</p>
                     <Link

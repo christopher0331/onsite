@@ -9,13 +9,46 @@ export type ListingAgent = {
   brokerage: { name: string };
 };
 
-/** Append Repliers' raw MLS fields to a listings URL (search or single). */
+// Search/list: `fields=raw` alone returns ONLY `{ raw }` per listing (no address,
+// mlsNumber, etc.). Single-listing GET adds `raw` alongside the full record.
+// See https://help.repliers.com/en/article/raw-mls-data-access-with-repliers-nhlg5o/
+const REPLIERS_SEARCH_FIELDS = [
+  "mlsNumber",
+  "listPrice",
+  "soldPrice",
+  "status",
+  "lastStatus",
+  "standardStatus",
+  "address",
+  "details",
+  "images",
+  "map",
+  "permissions",
+  "office",
+  "agents",
+  "buyerAgents",
+  "listDate",
+  "raw.MlsStatus",
+  "raw.BuyerOfficeName",
+  "raw.BuyerAgentFullName",
+  "raw.BuyerAgentName",
+  "raw.BuyerAgentDirectPhone",
+  "raw.BuyerAgentOfficePhone",
+  "raw.BuyerOfficePhone",
+  "raw.CoBuyerOfficeName",
+].join(",");
+
+/** Build a Repliers listings URL with the correct `fields` for search vs detail. */
 export function repliersListingsUrl(path: string): string {
-  const base = path.startsWith("http")
-    ? path
-    : `https://api.repliers.io/listings${path.startsWith("/") ? path : `/${path}`}`;
-  const u = new URL(base);
-  u.searchParams.set("fields", "raw");
+  const u = path.startsWith("http")
+    ? new URL(path)
+    : new URL(
+        path.startsWith("?")
+          ? `https://api.repliers.io/listings${path}`
+          : `https://api.repliers.io/listings${path.startsWith("/") ? path : `/${path}`}`
+      );
+  // Search queries pass `?pageSize=…`; detail passes `/NWM1234567`.
+  u.searchParams.set("fields", path.startsWith("?") ? REPLIERS_SEARCH_FIELDS : "raw");
   return u.toString();
 }
 
@@ -24,7 +57,8 @@ export function formatMlsStatusLabel(mlsStatus: string): string {
   const trimmed = mlsStatus.trim();
   if (!trimmed) return trimmed;
   // Prefer typographic en-dash between clauses (auditor wording).
-  const withDash = trimmed.replace(/\s+-\s+/g, " – ");
+  // NWMLS uses both "Pending - Backup" and "Pending-Inspection" (no spaces).
+  const withDash = trimmed.replace(/\s*-\s*/g, " – ");
   return withDash
     .split(/\s+/)
     .map((word) => {
@@ -81,11 +115,17 @@ export function enrichListing<T extends { buyerAgents?: ListingAgent[] | null; r
 }
 
 export function enrichListingsResponse(data: {
-  listings?: Array<{ buyerAgents?: ListingAgent[] | null; raw?: RepliersRaw }>;
+  listings?: Array<{
+    mlsNumber?: string;
+    buyerAgents?: ListingAgent[] | null;
+    raw?: RepliersRaw;
+  }>;
 }) {
   if (!Array.isArray(data.listings)) return data;
   return {
     ...data,
-    listings: data.listings.map((l) => enrichListing(l)),
+    listings: data.listings
+      .filter((l) => Boolean(l?.mlsNumber))
+      .map((l) => enrichListing(l)),
   };
 }

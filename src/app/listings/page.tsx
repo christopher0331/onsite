@@ -70,12 +70,19 @@ function formatPrice(n: number) {
   return "$" + n.toLocaleString("en-US");
 }
 
-function formatAddress(a: Listing["address"]) {
+function formatAddress(a: Listing["address"] | undefined | null) {
+  if (!a) return "Address unavailable";
   const street = [a.streetNumber, a.streetDirection, a.streetName, a.streetSuffix]
     .filter(Boolean)
     .join(" ");
   const unit = a.unitNumber ? ` #${a.unitNumber}` : "";
-  return `${street}${unit}`;
+  return street ? `${street}${unit}` : "Address unavailable";
+}
+
+function formatCityLine(a: Listing["address"] | undefined | null) {
+  if (!a) return "";
+  const parts = [a.city, a.state, a.zip].filter(Boolean);
+  return parts.join(", ");
 }
 
 function getImageUrl(images: string[]) {
@@ -109,11 +116,12 @@ const SORT_OPTIONS = [
 ];
 
 function ListingCard({ listing }: { listing: Listing }) {
-  const img = getImageUrl(listing.images);
+  const img = getImageUrl(listing.images ?? []);
   const addr = listing.address;
-  const det = listing.details;
+  const det = listing.details ?? ({} as Listing["details"]);
   const showAddress = listing.permissions?.displayAddressOnInternet !== "N";
   const street = showAddress ? formatAddress(addr) : "Undisclosed";
+  const cityLine = formatCityLine(addr);
 
   return (
     <Link
@@ -174,7 +182,9 @@ function ListingCard({ listing }: { listing: Listing }) {
       </div>
       <div className="flex flex-1 flex-col p-6">
         <h3 className="mb-1 font-serif text-[1.05rem] font-light leading-snug text-charcoal">{street}</h3>
-        <p className="mb-3 text-[13px] text-charcoal/90">{addr.city}, {addr.state} {addr.zip}</p>
+        {cityLine && (
+          <p className="mb-3 text-[13px] text-charcoal/90">{cityLine}</p>
+        )}
         {(det.numBedrooms || det.numBathrooms || det.sqft) && (
           <div className="mb-3 flex gap-4 text-[13px] text-charcoal/75">
             {det.numBedrooms && <span><strong className="text-charcoal font-semibold">{det.numBedrooms}</strong> bd</span>}
@@ -194,7 +204,7 @@ function ListingCard({ listing }: { listing: Listing }) {
           <span className="text-[11px] text-charcoal/80">MLS# {listing.mlsNumber}</span>
           <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal/80 transition-colors duration-300 group-hover:text-charcoal">View →</span>
         </div>
-        <MLSCardAttribution state={listing.address.state} />
+        <MLSCardAttribution state={listing.address?.state} />
       </div>
     </Link>
   );

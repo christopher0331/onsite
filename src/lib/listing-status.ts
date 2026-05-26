@@ -65,7 +65,13 @@ function toneFromStandard(standard: string): StatusTone {
 }
 
 export function getListingStatusBadge(l: StatusInput): ListingStatusBadge {
-  const mlsStatus = typeof l.raw?.MlsStatus === "string" ? l.raw.MlsStatus.trim() : "";
+  const rawStatus = l.raw?.MlsStatus;
+  const mlsStatus =
+    typeof rawStatus === "string"
+      ? rawStatus.trim()
+      : typeof rawStatus === "number"
+        ? String(rawStatus)
+        : "";
   if (mlsStatus) {
     return {
       label: formatMlsStatusLabel(mlsStatus),
