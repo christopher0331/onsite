@@ -6,9 +6,10 @@
 // audit schema changes.
 
 import type { City, Neighborhood } from "@/lib/service-areas/types";
+import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const ORG_NAME = "OnSite ReGroup";
-const ORG_URL = "https://www.onsiteregroup.com";
+const ORG_URL = getCanonicalBaseUrl();
 const ORG_PHONE = "+1-253-441-9764";
 const ORG_ADDRESS = {
   "@type": "PostalAddress" as const,
@@ -21,6 +22,61 @@ const ORG_ADDRESS = {
 const SERVICE_TYPE = "Real Estate Brokerage";
 
 type BreadcrumbEntry = { name: string; url: string };
+
+export function OrganizationSchema() {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    name: ORG_NAME,
+    url: ORG_URL,
+    telephone: ORG_PHONE,
+    address: ORG_ADDRESS,
+    areaServed: [
+      { "@type": "AdministrativeArea", name: "Pierce County, WA" },
+      { "@type": "AdministrativeArea", name: "King County, WA" },
+    ],
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
+export function WebPageSchema({
+  pageUrl,
+  title,
+  description,
+}: {
+  pageUrl: string;
+  title: string;
+  description: string;
+}) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    url: pageUrl,
+    name: title,
+    description,
+    isPartOf: {
+      "@type": "WebSite",
+      name: ORG_NAME,
+      url: ORG_URL,
+    },
+    about: {
+      "@type": "RealEstateAgent",
+      name: ORG_NAME,
+      url: ORG_URL,
+    },
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
 
 export function BreadcrumbSchema({ items }: { items: BreadcrumbEntry[] }) {
   const data = {

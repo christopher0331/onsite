@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
 import { getListingStatusBadge } from "@/lib/listing-status";
+import { getCitySlugByName } from "@/lib/service-areas/data";
 
 const ListingsMap = dynamic(() => import("@/components/ListingsMap"), {
   ssr: false,
@@ -122,6 +123,7 @@ function ListingCard({ listing }: { listing: Listing }) {
   const showAddress = listing.permissions?.displayAddressOnInternet !== "N";
   const street = showAddress ? formatAddress(addr) : "Undisclosed";
   const cityLine = formatCityLine(addr);
+  const serviceAreaSlug = addr?.city ? getCitySlugByName(addr.city) : null;
 
   return (
     <Link
@@ -185,6 +187,14 @@ function ListingCard({ listing }: { listing: Listing }) {
         {cityLine && (
           <p className="mb-3 text-[13px] text-charcoal/90">{cityLine}</p>
         )}
+        {serviceAreaSlug && (
+          <Link
+            href={`/service-areas/${serviceAreaSlug}`}
+            className="mb-3 inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.18em] text-charcoal/70 underline-offset-4 hover:text-charcoal hover:underline"
+          >
+            Service Area: {addr.city}
+          </Link>
+        )}
         {(det.numBedrooms || det.numBathrooms || det.sqft) && (
           <div className="mb-3 flex gap-4 text-[13px] text-charcoal/75">
             {det.numBedrooms && <span><strong className="text-charcoal font-semibold">{det.numBedrooms}</strong> bd</span>}
@@ -230,6 +240,19 @@ export default function ListingsPage() {
   const [stateFilter, setStateFilter] = useState("WA");
   const [totalDbCount, setTotalDbCount] = useState<number | null>(null);
   const [dataRefreshedAt, setDataRefreshedAt] = useState<Date | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const cityFromUrl = params.get("city");
+    const stateFromUrl = params.get("state");
+    const statusFromUrl = params.get("status");
+    if (cityFromUrl) setCity(cityFromUrl);
+    if (stateFromUrl) setStateFilter(stateFromUrl);
+    if (statusFromUrl && ["All", "A", "P", "U"].includes(statusFromUrl)) {
+      setStatus(statusFromUrl);
+    }
+  }, []);
 
   function handleMlsSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -316,6 +339,15 @@ export default function ListingsPage() {
                 <p className="max-w-xl text-[16px] leading-8 text-white/70">
                   Search the full MLS database. Filter by location, price, beds, and more.
                 </p>
+                <Link
+                  href="/service-areas"
+                  className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/75 hover:text-white transition-colors"
+                >
+                  Explore Service Areas
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                  </svg>
+                </Link>
               </div>
               <div className="shrink-0 text-right">
                 {totalDbCount !== null && (

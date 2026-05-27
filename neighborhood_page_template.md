@@ -1,32 +1,53 @@
 # Neighborhood-Level Service Area Page (Spoke) Template
 
-## 1. Page Objective & Routing
-The hyper-local conversion engine targeting exact-match intent and long-tail zip code searches.
-* **URL Structure:** `/service-areas/[city-slug]/[neighborhood-slug]/`
+## 1) Objective, Routing, and Canonical Rules
+Hyper-local spoke page for long-tail neighborhood + ZIP intent.
 
-## 2. Component Architecture
+- **Route:** `/service-areas/[city-slug]/[neighborhood-slug]/`
+- **Rendering:** static params from `getAllNeighborhoodParams()`
+- **Canonical host rule:** always non-`www`
 
-### A. Hyper-Local Hero
-* **H1:** `Dedicated [Service] for [Neighborhood] Residents`
-* **Breadcrumbs:** `Home > Service Areas > [City] > [Neighborhood]` (Strict `BreadcrumbList` Schema implementation).
+## 2) Spoke Page Component Stack (Current Standard)
 
-### B. The Community Authority Matrix `<NeighborhoodGovernance />`
-* **Content:** Details on specific neighborhood characteristics (age of homes, common architectural styles).
-* **Outbound Links:** Must link to local entities. 
-    * *Example:* If the page is White Center, link to the White Center Community Development Association.
+### A) Hyper-Local Hero + Breadcrumb
+- `<NeighborhoodHero />` with neighborhood-specific intro copy.
+- Breadcrumb chain:
+  - Home → Service Areas → City → Neighborhood
+- Must match `BreadcrumbList` schema.
 
-### C. Local Logistics & Proximity `<DispatchLogistics />`
-* **Content:** Proves physical reality to Google's NLP.
-* **Dynamic Injection:** Mentions local thoroughfares or transit.
-    * *Example:* "Routinely dispatching crews via [Hwy 509 / I-5] or serving properties near the [King County Water Taxi / Local Landmark]."
+### B) Community + Governance Layer
+- `<NeighborhoodGovernance />` for housing character, styles, local org links.
 
-### D. Sibling Cross-Linking `<AdjacentAreas />`
-* **UI:** Links to 3-4 bordering neighborhoods to create a tight semantic cluster.
-* *Example:* A White Center page cross-links to Burien, Delridge, and West Seattle.
+### C) Local Dispatch/Logistics Layer
+- `<DispatchLogistics />` with real thoroughfares/landmarks/transit references.
 
-### E. Micro-Local Proof of Work `<LocalReviews zipCodes={zipArray} />`
-* **Functionality:** Filters the review/portfolio database to only show testimonials from the specific zip codes tied to this neighborhood.
+### D) Local Proof + Adjacent Mesh
+- `<LocalReviews />` with neighborhood/ZIP-relevant quotes.
+- `<AdjacentAreas />` links nearby service areas to tighten semantic cluster.
 
-## 3. Schema Payload (JSON-LD)
-* **`Service` Schema:** Define `areaServed` explicitly using an array of the neighborhood's specific `postalCode`s.
-* **`Place` Schema:** Embed coordinates (`geo`) for the exact center of the neighborhood.
+### E) Bidirectional Listing Link
+- Include a direct link to filtered listings:
+  - `/listings?city=[City]&state=WA`
+
+### F) Back-to-City + Geo CTA
+- Back-link to parent city service area hub.
+- `<ServiceAreaCTA />` with neighborhood-aware query params:
+  - `/free-home-evaluation?area=[Neighborhood], [City]`
+  - `/contact-us?area=[Neighborhood], [City]&topic=selling`
+
+## 3) Schema Payload (JSON-LD)
+
+Neighborhood pages should emit:
+
+- `OrganizationSchema` (`RealEstateAgent`)
+- `WebPageSchema`
+- `BreadcrumbList`
+- `Service` (`areaServed` by ZIP/postal array)
+- `Place` (neighborhood geo center)
+
+## 4) Notes on Planned Neighborhood Stubs
+
+Additional neighborhoods may be listed on `/service-areas` before full page rollout.
+
+- Stub neighborhoods should be listed as "planned" only.
+- Do not generate routes until copy, links, and schema are complete.

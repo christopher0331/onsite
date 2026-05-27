@@ -15,6 +15,8 @@ import {
   BreadcrumbSchema,
   NeighborhoodPlaceSchema,
   NeighborhoodServiceSchema,
+  OrganizationSchema,
+  WebPageSchema,
 } from "@/components/service-areas/SchemaLd";
 
 import {
@@ -22,9 +24,9 @@ import {
   getCityBySlug,
   getNeighborhoodBySlug,
 } from "@/lib/service-areas/data";
+import { getCanonicalBaseUrl } from "@/lib/site-url";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://www.onsiteregroup.com";
+const SITE_URL = getCanonicalBaseUrl();
 
 export function generateStaticParams() {
   return getAllNeighborhoodParams();
@@ -93,6 +95,12 @@ export default async function NeighborhoodPage({
         cityName={city.name}
         cityStateCode={city.stateCode}
       />
+      <OrganizationSchema />
+      <WebPageSchema
+        pageUrl={pageUrl}
+        title={`${neighborhood.name}, ${city.name} ${city.stateCode} Real Estate`}
+        description={neighborhood.introCopy}
+      />
 
       <main className="bg-white">
         <NeighborhoodHero city={city} neighborhood={neighborhood} />
@@ -100,6 +108,17 @@ export default async function NeighborhoodPage({
         <DispatchLogistics neighborhood={neighborhood} />
         <LocalReviews neighborhood={neighborhood} />
         <AdjacentAreas neighborhood={neighborhood} />
+
+        <section className="py-10 bg-white border-t border-charcoal/8">
+          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+            <Link
+              href={`/listings?city=${encodeURIComponent(city.name)}&state=WA`}
+              className="inline-flex items-center gap-2 rounded-full border border-charcoal/20 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-charcoal/80 hover:bg-charcoal hover:text-white hover:border-charcoal transition-all duration-500"
+            >
+              View Listings in {city.name}
+            </Link>
+          </div>
+        </section>
 
         {/* Back-to-city link */}
         <section className="py-12 bg-white">
@@ -120,6 +139,8 @@ export default async function NeighborhoodPage({
           headline={`Selling in ${neighborhood.name}?`}
           italicSuffix="Let's price it right."
           image={neighborhood.heroImage}
+          areaLabel={neighborhood.name}
+          areaQuery={`${neighborhood.name}, ${city.name}`}
         />
 
         <Marquee />

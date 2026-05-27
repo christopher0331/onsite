@@ -9,7 +9,7 @@
 // the conditional component flags so the rendered DOM is structurally unique
 // across pages, satisfying the Anti-Doorway Framework.
 
-import type { City, Neighborhood } from "./types";
+import type { City, Neighborhood, PlannedServiceArea } from "./types";
 
 export const CITIES: City[] = [
   {
@@ -483,6 +483,46 @@ export const NEIGHBORHOODS: Neighborhood[] = [
   },
 ];
 
+// Expansion corridor requested for the Seattle commute band.
+// These are listing-only stubs on /service-areas (no dedicated pages yet).
+export const PLANNED_SERVICE_AREAS: PlannedServiceArea[] = [
+  {
+    city: "Puyallup",
+    stateCode: "WA",
+    county: "Pierce County",
+    zipCodes: ["98371", "98372", "98373", "98374", "98375"],
+    neighborhoods: ["South Hill", "Downtown Puyallup", "Sunrise"],
+  },
+  {
+    city: "Tacoma",
+    stateCode: "WA",
+    county: "Pierce County",
+    zipCodes: ["98402", "98405", "98406", "98407", "98409", "98422"],
+    neighborhoods: ["North End", "Proctor District", "Stadium District"],
+  },
+  {
+    city: "Federal Way",
+    stateCode: "WA",
+    county: "King County",
+    zipCodes: ["98003", "98023"],
+    neighborhoods: ["Twin Lakes", "West Campus", "Lakota"],
+  },
+  {
+    city: "Kent",
+    stateCode: "WA",
+    county: "King County",
+    zipCodes: ["98030", "98031", "98032", "98042"],
+    neighborhoods: ["East Hill", "Downtown Kent", "Panther Lake"],
+  },
+  {
+    city: "Seattle",
+    stateCode: "WA",
+    county: "King County",
+    zipCodes: ["98101", "98103", "98105", "98107", "98109", "98115", "98117", "98125"],
+    neighborhoods: ["Ballard", "Green Lake", "West Seattle"],
+  },
+];
+
 // ---------------------------------------------------------------------------
 // Lookup helpers (kept in this file so call sites import from one place).
 // ---------------------------------------------------------------------------
@@ -510,4 +550,11 @@ export function getAllCitySlugs(): string[] {
 
 export function getAllNeighborhoodParams(): { city: string; neighborhood: string }[] {
   return NEIGHBORHOODS.map((n) => ({ city: n.citySlug, neighborhood: n.slug }));
+}
+
+export function getCitySlugByName(name: string): string | null {
+  const normalized = name.trim().toLowerCase();
+  if (!normalized) return null;
+  const city = CITIES.find((c) => c.name.toLowerCase() === normalized);
+  return city?.slug ?? null;
 }

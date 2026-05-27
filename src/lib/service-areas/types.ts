@@ -136,3 +136,11 @@ export type Neighborhood = {
   adjacent: AdjacentArea[];
   reviews: LocalReview[];
 };
+
+export type PlannedServiceArea = {
+  city: string;
+  stateCode: string;
+  county: string;
+  zipCodes: string[];
+  neighborhoods: string[];
+};

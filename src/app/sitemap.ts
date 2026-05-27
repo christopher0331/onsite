@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 import blogData from "@/lib/blog-data.json";
 import { isMainWebsiteHost } from "@/lib/site-visibility";
 import { CITIES, NEIGHBORHOODS } from "@/lib/service-areas/data";
+import { getCanonicalBaseUrl } from "@/lib/site-url";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://onsiteregroup.com";
+const BASE_URL = getCanonicalBaseUrl();
 const showIdxContent = !isMainWebsiteHost(new URL(BASE_URL).hostname);
 
 // ─── FEATURED HOMES ──────────────────────────────────────────────────────────

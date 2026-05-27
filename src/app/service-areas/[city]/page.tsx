@@ -20,6 +20,8 @@ import {
   BreadcrumbSchema,
   CityPlaceSchema,
   CityServiceSchema,
+  OrganizationSchema,
+  WebPageSchema,
 } from "@/components/service-areas/SchemaLd";
 
 import {
@@ -28,9 +30,9 @@ import {
   getCityBySlug,
   getNeighborhoodsByCity,
 } from "@/lib/service-areas/data";
+import { getCanonicalBaseUrl } from "@/lib/site-url";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://www.onsiteregroup.com";
+const SITE_URL = getCanonicalBaseUrl();
 
 export function generateStaticParams() {
   return getAllCitySlugs().map((city) => ({ city }));
@@ -90,6 +92,12 @@ export default async function CityPage({
       />
       <CityServiceSchema city={city} pageUrl={pageUrl} />
       <CityPlaceSchema city={city} />
+      <OrganizationSchema />
+      <WebPageSchema
+        pageUrl={pageUrl}
+        title={`${city.name}, ${city.stateCode} Real Estate Agents`}
+        description={city.heroIntro}
+      />
 
       <main className="bg-white">
         <CityHero city={city} />
@@ -102,6 +110,23 @@ export default async function CityPage({
         {city.features.microClimate && <MicroClimate city={city} />}
         <NeighborhoodDirectory city={city} neighborhoods={neighborhoods} />
         {/* <CityCaseStudies city={city} /> — disabled until real per-city listings are wired in */}
+
+        <section className="py-12 bg-white border-t border-charcoal/8">
+          <div className="mx-auto max-w-[1440px] px-6 lg:px-12 flex flex-wrap gap-3">
+            <a
+              href={`/listings?city=${encodeURIComponent(city.name)}&state=WA`}
+              className="inline-flex items-center gap-2 rounded-full border border-charcoal/20 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-charcoal/80 hover:bg-charcoal hover:text-white hover:border-charcoal transition-all duration-500"
+            >
+              Browse {city.name} Listings
+            </a>
+            <a
+              href={`/listings?status=U&city=${encodeURIComponent(city.name)}&state=WA`}
+              className="inline-flex items-center gap-2 rounded-full border border-charcoal/20 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-charcoal/80 hover:bg-charcoal hover:text-white hover:border-charcoal transition-all duration-500"
+            >
+              Recently Sold in {city.name}
+            </a>
+          </div>
+        </section>
 
         {/* Peer city cross-linking */}
         {peers.length > 0 && (
@@ -134,6 +159,8 @@ export default async function CityPage({
           headline={`Let's talk ${city.name}`}
           italicSuffix="home selling."
           image={city.heroImage}
+          areaLabel={city.name}
+          areaQuery={city.name}
         />
 
         <Marquee />

@@ -6,14 +6,26 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import Breadcrumbs from "@/components/service-areas/Breadcrumbs";
 import ServiceAreaCTA from "@/components/service-areas/ServiceAreaCTA";
-import { CITIES, NEIGHBORHOODS } from "@/lib/service-areas/data";
+import ServiceAreaCoverageMap from "@/components/service-areas/ServiceAreaCoverageMap";
+import {
+  OrganizationSchema,
+  WebPageSchema,
+} from "@/components/service-areas/SchemaLd";
+import {
+  CITIES,
+  NEIGHBORHOODS,
+  PLANNED_SERVICE_AREAS,
+} from "@/lib/service-areas/data";
+import { getCanonicalBaseUrl } from "@/lib/site-url";
+
+const SITE_URL = getCanonicalBaseUrl();
 
 export const metadata: Metadata = {
   title: "Service Areas | Pierce County Real Estate | OnSite ReGroup",
   description:
     "OnSite ReGroup serves Pierce County, WA from Lake Tapps. Explore our city hubs and neighborhood pages for Puyallup, Bonney Lake, Sumner and beyond.",
   alternates: {
-    canonical: "https://www.onsiteregroup.com/service-areas",
+    canonical: `${SITE_URL}/service-areas`,
   },
 };
 
@@ -21,6 +33,12 @@ export default function ServiceAreasIndex() {
   return (
     <>
       <Header />
+      <OrganizationSchema />
+      <WebPageSchema
+        pageUrl={`${SITE_URL}/service-areas`}
+        title="Service Areas | Pierce County Real Estate"
+        description="Explore OnSite service coverage across the Puyallup-to-Seattle corridor with city hubs, neighborhood spokes, and targeted ZIP coverage."
+      />
       <main className="bg-white">
         <section className="relative h-[58vh] min-h-[440px] max-h-[680px] overflow-hidden">
           <Image
@@ -144,10 +162,60 @@ export default function ServiceAreasIndex() {
           </div>
         </section>
 
+        <section className="py-20 sm:py-24 bg-white">
+          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+            <div className="mb-12 max-w-3xl">
+              <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-5">
+                Metro Expansion Stubs
+              </p>
+              <h2 className="font-serif text-[clamp(1.9rem,3.6vw,3rem)] font-light text-charcoal leading-[1.1]">
+                Five larger cities from <span>Puyallup to Seattle.</span>
+              </h2>
+              <p className="mt-5 text-[15px] leading-8 text-charcoal/85">
+                We are staging these neighborhood sets for rollout. They are visible here for SEO
+                architecture and internal-planning, and will become full pages once content is approved.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {PLANNED_SERVICE_AREAS.map((area) => (
+                <article
+                  key={area.city}
+                  className="rounded-3xl border border-charcoal/[0.08] bg-warm-gray/35 p-7"
+                >
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-charcoal/60 mb-3">
+                    {area.county} · {area.stateCode}
+                  </p>
+                  <h3 className="font-serif text-2xl font-light text-charcoal mb-3">{area.city}</h3>
+                  <p className="text-[12px] uppercase tracking-[0.2em] text-charcoal/70 mb-4">
+                    ZIP Coverage: {area.zipCodes.join(" · ")}
+                  </p>
+                  <ul className="space-y-2">
+                    {area.neighborhoods.map((name) => (
+                      <li
+                        key={name}
+                        className="flex items-center justify-between rounded-xl border border-charcoal/10 bg-white/70 px-3 py-2 text-[13px] text-charcoal/90"
+                      >
+                        <span>{name}</span>
+                        <span className="text-[10px] uppercase tracking-[0.2em] text-charcoal/55">
+                          Stub
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <ServiceAreaCoverageMap areas={PLANNED_SERVICE_AREAS} />
+
         <ServiceAreaCTA
-          headline="Let's price your home"
-          italicSuffix="in your zip code."
+          headline="Get a city-specific valuation"
+          italicSuffix="for your exact zip code."
           image="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg"
+          areaLabel="your service area"
         />
 
         <Marquee />

@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import dynamic from "next/dynamic";
 import { getListingStatusBadge } from "@/lib/listing-status";
+import { getCitySlugByName } from "@/lib/service-areas/data";
 
 const MarketChart = dynamic(() => import("@/components/MarketChart"), { ssr: false });
 const InventoryGauge = dynamic(() => import("@/components/InventoryGauge"), { ssr: false });
@@ -280,6 +281,7 @@ export default function ListingDetailPage() {
   const isActive = listing.status === "A";
   const det = listing.details;
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${street}, ${listing.address.city}, ${listing.address.state} ${listing.address.zip}`)}`;
+  const serviceAreaSlug = getCitySlugByName(listing.address.city);
 
   // Build details rows
   const detailRows: { label: string; value: string | number }[] = [];
@@ -352,6 +354,17 @@ export default function ListingDetailPage() {
               <Link href="/listings" className="hover:text-white/70 transition-colors">Listings</Link>
               <span>/</span>
               <span className="text-white/60">{listing.address.city}</span>
+              {serviceAreaSlug && (
+                <>
+                  <span>/</span>
+                  <Link
+                    href={`/service-areas/${serviceAreaSlug}`}
+                    className="text-white/70 hover:text-white transition-colors"
+                  >
+                    Service Area
+                  </Link>
+                </>
+              )}
             </div>
 
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
