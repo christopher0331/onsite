@@ -7,7 +7,11 @@ type Props = {
 };
 
 export default function NeighborhoodDirectory({ city, neighborhoods }: Props) {
-  if (neighborhoods.length === 0) return null;
+  const liveByName = new Map(
+    neighborhoods.map((n) => [n.name.toLowerCase(), n] as const)
+  );
+  const directory = city.neighborhoodDirectory ?? neighborhoods.map((n) => n.name);
+  if (directory.length === 0) return null;
 
   return (
     <section className="py-20 sm:py-28 bg-[#1a1a18]">
@@ -30,29 +34,52 @@ export default function NeighborhoodDirectory({ city, neighborhoods }: Props) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {neighborhoods.map((n) => (
-            <Link
-              key={n.slug}
-              href={`/service-areas/${city.slug}/${n.slug}`}
-              className="group rounded-3xl border border-white/[0.08] bg-white/[0.03] p-7 hover:bg-white/[0.06] transition-all duration-500"
-            >
-              <p className="text-[10px] uppercase tracking-[0.3em] text-white/75 mb-3">
-                {n.zipCodes.join(" · ")}
-              </p>
-              <h3 className="font-serif text-2xl font-light text-white mb-3 group-hover:text-white/80 transition-colors">
-                {n.name}
-              </h3>
-              <p className="text-[14px] leading-7 text-white/85 line-clamp-3">
-                {n.introCopy}
-              </p>
-              <span className="inline-flex items-center gap-2 mt-6 text-[11px] uppercase tracking-[0.2em] text-white/85 group-hover:text-white transition-colors">
-                Explore {n.name}
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                </svg>
-              </span>
-            </Link>
-          ))}
+          {directory.map((name) => {
+            const live = liveByName.get(name.toLowerCase());
+            const card = (
+              <>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-white/75 mb-3">
+                  {live ? live.zipCodes.join(" · ") : city.zipCodes.join(" · ")}
+                </p>
+                <h3 className="font-serif text-2xl font-light text-white mb-3 group-hover:text-white/80 transition-colors">
+                  {name}
+                </h3>
+                <p className="text-[14px] leading-7 text-white/85 line-clamp-3">
+                  {live
+                    ? live.introCopy
+                    : `${name} is part of our ${city.name} service footprint with neighborhood-specific pricing and prep strategy.`}
+                </p>
+                {live && (
+                  <span className="inline-flex items-center gap-2 mt-6 text-[11px] uppercase tracking-[0.2em] text-white/85 group-hover:text-white transition-colors">
+                    Explore {name}
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>
+                  </span>
+                )}
+              </>
+            );
+
+            if (live) {
+              return (
+                <Link
+                  key={name}
+                  href={`/service-areas/${city.slug}/${live.slug}`}
+                  className="group rounded-3xl border border-white/[0.08] bg-white/[0.03] p-7 hover:bg-white/[0.06] transition-all duration-500"
+                >
+                  {card}
+                </Link>
+              );
+            }
+            return (
+              <div
+                key={name}
+                className="group rounded-3xl border border-white/[0.08] bg-white/[0.03] p-7"
+              >
+                {card}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

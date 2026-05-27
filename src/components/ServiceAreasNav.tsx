@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   CITIES,
-  PLANNED_SERVICE_AREAS,
   getNeighborhoodsByCity,
 } from "@/lib/service-areas/data";
 
@@ -111,21 +110,6 @@ export default function ServiceAreasNav({
             >
               All service areas →
             </Link>
-            <div className="pt-2 border-t border-white/10">
-              <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-white/50">
-                Metro Expansion (Stubs)
-              </p>
-              {PLANNED_SERVICE_AREAS.map((area) => (
-                <div key={area.city} className="mb-2 rounded-lg border border-white/10 p-2">
-                  <p className="text-[11px] uppercase tracking-[0.14em] text-white/80">
-                    {area.city}
-                  </p>
-                  <p className="mt-1 text-[10px] text-white/55">
-                    {area.neighborhoods.join(" · ")}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
         )}
       </div>
@@ -209,29 +193,6 @@ export default function ServiceAreasNav({
               );
             })}
           </ul>
-          <div
-            className={`mt-4 border-t pt-3 ${solid ? "border-charcoal/10" : "border-white/10"}`}
-          >
-            <p
-              className={`mb-2 px-2 text-[10px] uppercase tracking-[0.22em] ${
-                solid ? "text-charcoal/50" : "text-white/50"
-              }`}
-            >
-              Metro Expansion (Stubs)
-            </p>
-            <div className="space-y-2 px-2">
-              {PLANNED_SERVICE_AREAS.map((area) => (
-                <div key={area.city}>
-                  <p className={`text-[11px] uppercase tracking-[0.14em] ${linkTone}`}>
-                    {area.city}
-                  </p>
-                  <p className={`mt-0.5 text-[10px] leading-4 ${mutedTone}`}>
-                    {area.neighborhoods.join(" · ")}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
           <div
             className={`mt-4 border-t pt-3 ${solid ? "border-charcoal/10" : "border-white/10"}`}
           >

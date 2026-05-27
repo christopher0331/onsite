@@ -28,6 +28,13 @@ export const CITIES: City[] = [
     heroIntro:
       "From the historic downtown core to the South Hill bench, our team operates as a dedicated Puyallup real-estate desk — pricing strategy, prep, and negotiation calibrated to this exact submarket.",
     activeProjects: 14,
+    neighborhoodDirectory: [
+      "South Hill",
+      "Downtown Puyallup",
+      "Manorwood",
+      "Sunrise",
+      "Lipoma Firs",
+    ],
     permittingOffice: {
       name: "City of Puyallup Development & Permitting Services",
       url: "https://www.cityofpuyallup.org/313/Development-Services",
@@ -128,6 +135,13 @@ export const CITIES: City[] = [
     heroIntro:
       "We've made the Bonney Lake plateau our home base. From lakefront craftsman properties on Lake Tapps to the master-planned communities along SR-410, our pricing models are built on the local comp set — not a county-wide average.",
     activeProjects: 9,
+    neighborhoodDirectory: [
+      "Tehaleh",
+      "Upper Tehaleh",
+      "Lower Tehaleh",
+      "Lake Tapps North Shore",
+      "Falling Water",
+    ],
     permittingOffice: {
       name: "City of Bonney Lake — Community Development",
       url: "https://www.cityofbonneylake.org/",
@@ -210,6 +224,13 @@ export const CITIES: City[] = [
     heroIntro:
       "Sumner is a small town with downtown DNA — historic homes, Main Street character, and farmland on the edge. Our positioning here leans into Sumner's walkable identity and Sounder commuter access, two attributes the broader Pierce comp set tends to undervalue.",
     activeProjects: 6,
+    neighborhoodDirectory: [
+      "Bridge Hill",
+      "Downtown Sumner",
+      "North Sumner",
+      "Valley Corridor",
+      "East Valley Edge",
+    ],
     permittingOffice: {
       name: "City of Sumner — Community Development",
       url: "https://sumnerwa.gov/",
@@ -277,6 +298,283 @@ export const CITIES: City[] = [
         "Historic Design Review is required for any exterior modification visible from the right-of-way.",
       noiseOrdinance:
         "Construction and contractor noise inside the downtown core is restricted to 7:00 a.m. – 7:00 p.m. on weekdays — we sequence prep accordingly.",
+    },
+  },
+  {
+    slug: "tacoma",
+    name: "Tacoma",
+    state: "Washington",
+    stateCode: "WA",
+    county: "Pierce County",
+    taxonomy: "urban",
+    population: 223_536,
+    zipCodes: ["98402", "98403", "98405", "98406", "98407", "98409", "98422"],
+    geo: { lat: 47.2529, lng: -122.4443 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Service Area · Tacoma Core",
+    heroIntro:
+      "Tacoma is a block-by-block market with unique pricing behavior between the North End, Proctor, Stadium, and West Slope corridors. We underwrite by micro-location, not city average.",
+    activeProjects: 11,
+    neighborhoodDirectory: [
+      "North End",
+      "Proctor District",
+      "Stadium District",
+      "West Slope",
+      "South Tacoma",
+    ],
+    permittingOffice: {
+      name: "City of Tacoma Planning & Development Services",
+      url: "https://www.cityoftacoma.org/government/city_departments/planning_and_development_services",
+      context: "Permits, design review, and code compliance.",
+    },
+    utilities: [
+      {
+        name: "Tacoma Public Utilities",
+        url: "https://www.mytpu.org/",
+        context: "Power, water, and rail service.",
+      },
+      {
+        name: "Puget Sound Energy",
+        url: "https://www.pse.com/",
+        context: "Natural-gas service in many Tacoma neighborhoods.",
+      },
+    ],
+    chamberOfCommerce: {
+      name: "Tacoma-Pierce County Chamber",
+      url: "https://www.tacomachamber.org/",
+    },
+    regulations: [
+      {
+        title: "Historic Conservation Districts",
+        description:
+          "Neighborhood conservation overlays and historic controls affect exterior modifications in selected Tacoma districts.",
+      },
+      {
+        title: "Infill / ADU Code",
+        description:
+          "Tacoma infill standards and ADU allowances influence lot utility and highest-and-best-use pricing.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "Tacoma Public Utilities",
+        description:
+          "Service upgrades and meter notes are checked before exterior-prep scopes are finalized.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      urbanLogistics: true,
+    },
+    urban: {
+      parking: "Street parking restrictions vary materially by district and event calendar.",
+      permitOverlay: "Historic and mixed-use corridors may require additional design review.",
+      noiseOrdinance: "Urban contractor windows and neighborhood notice rules are reviewed before prep.",
+    },
+  },
+  {
+    slug: "federal-way",
+    name: "Federal Way",
+    state: "Washington",
+    stateCode: "WA",
+    county: "King County",
+    taxonomy: "suburban",
+    population: 99_037,
+    zipCodes: ["98003", "98023"],
+    geo: { lat: 47.3223, lng: -122.3126 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e5857f0b4e310919f9eda8_contact.webp",
+    heroEyebrow: "Service Area · South King",
+    heroIntro:
+      "Federal Way buyers and sellers move between Twin Lakes, West Campus, and Lakota with sharply different price bands and buyer profiles. We model each cluster independently.",
+    activeProjects: 7,
+    neighborhoodDirectory: [
+      "Twin Lakes",
+      "West Campus",
+      "Lakota",
+      "Dash Point",
+      "Redondo",
+    ],
+    permittingOffice: {
+      name: "City of Federal Way Community Development",
+      url: "https://www.cityoffederalway.com/page/community-development",
+      context: "Permits, inspections, and planning review.",
+    },
+    utilities: [
+      {
+        name: "Lakehaven Water & Sewer District",
+        url: "https://www.lakehaven.org/",
+        context: "Primary water and sewer utility in Federal Way.",
+      },
+      {
+        name: "Puget Sound Energy",
+        url: "https://www.pse.com/",
+        context: "Regional electric/natural-gas service.",
+      },
+    ],
+    regulations: [
+      {
+        title: "Critical Areas / Wetlands",
+        description:
+          "Select properties near marine bluffs and wetland buffers require additional due diligence in disclosures.",
+      },
+      {
+        title: "Short-Term Rental & Rental Compliance",
+        description:
+          "Rental-use and occupancy rules are reviewed pre-list in investor-heavy pockets.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "Lakehaven Utility Coordination",
+        description:
+          "Utility-side notes and side-sewer documentation are pulled early to avoid escrow delays.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      suburbanRegulations: true,
+    },
+    suburban: {
+      typicalLotSize: "0.14 – 0.30 acres across most single-family neighborhoods.",
+      hoaNotes: "HOA resale packages are common in planned communities and must be timed carefully.",
+    },
+  },
+  {
+    slug: "kent",
+    name: "Kent",
+    state: "Washington",
+    stateCode: "WA",
+    county: "King County",
+    taxonomy: "suburban",
+    population: 139_700,
+    zipCodes: ["98030", "98031", "98032", "98042"],
+    geo: { lat: 47.3809, lng: -122.2348 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Service Area · Kent Valley to East Hill",
+    heroIntro:
+      "Kent demand splits between East Hill residential neighborhoods, Panther Lake corridors, and valley access pockets. We position listings against the exact competing submarket.",
+    activeProjects: 8,
+    neighborhoodDirectory: [
+      "East Hill",
+      "Downtown Kent",
+      "Panther Lake",
+      "West Hill",
+      "Lake Meridian",
+    ],
+    permittingOffice: {
+      name: "City of Kent Planning & Development",
+      url: "https://www.kentwa.gov/",
+      context: "Permit intake, code, and zoning review.",
+    },
+    utilities: [
+      {
+        name: "City of Kent Utilities",
+        url: "https://www.kentwa.gov/",
+        context: "Water, sewer, and stormwater services.",
+      },
+      {
+        name: "Puget Sound Energy",
+        url: "https://www.pse.com/",
+        context: "Regional utility service.",
+      },
+    ],
+    regulations: [
+      {
+        title: "Floodplain Overlay (Valley areas)",
+        description:
+          "Portions of Kent Valley are flood-sensitive; flood-zone diligence and lender requirements are handled upfront.",
+      },
+      {
+        title: "Accessory Housing Rules",
+        description:
+          "ADU feasibility and lot-coverage limits can materially impact buyer demand in East Hill submarkets.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "Permit + Utility Synchronization",
+        description:
+          "We align repair scopes with city permit expectations to avoid post-inspection surprises.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      suburbanRegulations: true,
+    },
+    suburban: {
+      typicalLotSize: "0.12 – 0.25 acres with larger lots in select hillside pockets.",
+    },
+  },
+  {
+    slug: "seattle",
+    name: "Seattle",
+    state: "Washington",
+    stateCode: "WA",
+    county: "King County",
+    taxonomy: "urban",
+    population: 755_078,
+    zipCodes: ["98101", "98103", "98105", "98107", "98109", "98115", "98117", "98125"],
+    geo: { lat: 47.6062, lng: -122.3321 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e16372192203004a84a865_We%20Help%20You%20Sell%20Your%20Home%20-%20Pierce%20County.jpg",
+    heroEyebrow: "Service Area · Seattle Corridor",
+    heroIntro:
+      "Seattle neighborhoods price on hyper-local fundamentals: school catchments, transit walkability, lot characteristics, and renovation quality. Our strategy is neighborhood-comp first, city-average never.",
+    activeProjects: 10,
+    neighborhoodDirectory: [
+      "Ballard",
+      "Green Lake",
+      "West Seattle",
+      "Capitol Hill",
+      "Queen Anne",
+    ],
+    permittingOffice: {
+      name: "Seattle Department of Construction & Inspections",
+      url: "https://www.seattle.gov/sdci",
+      context: "Permits, inspections, and zoning interpretation.",
+    },
+    utilities: [
+      {
+        name: "Seattle City Light",
+        url: "https://www.seattle.gov/city-light",
+        context: "Municipal electric utility.",
+      },
+      {
+        name: "Seattle Public Utilities",
+        url: "https://www.seattle.gov/utilities",
+        context: "Water, drainage, and solid waste.",
+      },
+    ],
+    regulations: [
+      {
+        title: "Tree Protection / Lot Coverage Rules",
+        description:
+          "Tree and lot-coverage overlays affect project scope, valuation assumptions, and buyer underwriting confidence.",
+      },
+      {
+        title: "Historic District / Design Review Considerations",
+        description:
+          "Selected neighborhoods include historic/design constraints that impact exterior work and timelines.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "Urban Permit Sequencing",
+        description:
+          "We validate permit close-outs and utility notes before list date to reduce contract-risk in inspection periods.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      urbanLogistics: true,
+    },
+    urban: {
+      parking: "Permit zones and limited street parking alter showing logistics and buyer perception.",
+      permitOverlay: "Many neighborhoods carry specialized zoning or design overlays.",
+      noiseOrdinance: "Urban prep vendors are scheduled around neighborhood noise windows and access rules.",
     },
   },
 ];

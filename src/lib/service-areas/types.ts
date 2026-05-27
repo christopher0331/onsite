@@ -59,6 +59,9 @@ export type City = {
   heroIntro: string;
   // "Currently serving N active projects in the [City] metro area."
   activeProjects: number;
+  // Display-only neighborhood names for the city hub directory.
+  // Not every entry has a routed neighborhood page yet.
+  neighborhoodDirectory: string[];
 
   // Tier-1 authority links per "Entity Salience & The Local Knowledge Graph".
   permittingOffice: EntityLink;

@@ -14,7 +14,6 @@ import {
 import {
   CITIES,
   NEIGHBORHOODS,
-  PLANNED_SERVICE_AREAS,
 } from "@/lib/service-areas/data";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
@@ -30,6 +29,21 @@ export const metadata: Metadata = {
 };
 
 export default function ServiceAreasIndex() {
+  const metroCoverageSlugs = new Set([
+    "puyallup",
+    "tacoma",
+    "federal-way",
+    "kent",
+    "seattle",
+  ]);
+  const metroCoverageAreas = CITIES.filter((c) => metroCoverageSlugs.has(c.slug)).map((city) => ({
+    city: city.name,
+    stateCode: city.stateCode,
+    county: city.county,
+    zipCodes: city.zipCodes,
+    neighborhoods: city.neighborhoodDirectory,
+  }));
+
   return (
     <>
       <Header />
@@ -79,7 +93,7 @@ export default function ServiceAreasIndex() {
                 City Hubs
               </p>
               <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-charcoal leading-[1.08]">
-                Three cities. <span>Real submarket depth.</span>
+                City hubs across our <span>active service footprint.</span>
               </h2>
             </div>
 
@@ -162,54 +176,7 @@ export default function ServiceAreasIndex() {
           </div>
         </section>
 
-        <section className="py-20 sm:py-24 bg-white">
-          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-            <div className="mb-12 max-w-3xl">
-              <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray mb-5">
-                Metro Expansion Stubs
-              </p>
-              <h2 className="font-serif text-[clamp(1.9rem,3.6vw,3rem)] font-light text-charcoal leading-[1.1]">
-                Five larger cities from <span>Puyallup to Seattle.</span>
-              </h2>
-              <p className="mt-5 text-[15px] leading-8 text-charcoal/85">
-                We are staging these neighborhood sets for rollout. They are visible here for SEO
-                architecture and internal-planning, and will become full pages once content is approved.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {PLANNED_SERVICE_AREAS.map((area) => (
-                <article
-                  key={area.city}
-                  className="rounded-3xl border border-charcoal/[0.08] bg-warm-gray/35 p-7"
-                >
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-charcoal/60 mb-3">
-                    {area.county} · {area.stateCode}
-                  </p>
-                  <h3 className="font-serif text-2xl font-light text-charcoal mb-3">{area.city}</h3>
-                  <p className="text-[12px] uppercase tracking-[0.2em] text-charcoal/70 mb-4">
-                    ZIP Coverage: {area.zipCodes.join(" · ")}
-                  </p>
-                  <ul className="space-y-2">
-                    {area.neighborhoods.map((name) => (
-                      <li
-                        key={name}
-                        className="flex items-center justify-between rounded-xl border border-charcoal/10 bg-white/70 px-3 py-2 text-[13px] text-charcoal/90"
-                      >
-                        <span>{name}</span>
-                        <span className="text-[10px] uppercase tracking-[0.2em] text-charcoal/55">
-                          Stub
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <ServiceAreaCoverageMap areas={PLANNED_SERVICE_AREAS} />
+        <ServiceAreaCoverageMap areas={metroCoverageAreas} />
 
         <ServiceAreaCTA
           headline="Get a city-specific valuation"
