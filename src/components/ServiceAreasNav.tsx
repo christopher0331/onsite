@@ -3,10 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  CITIES,
-  getNeighborhoodsByCity,
-} from "@/lib/service-areas/data";
+import { CITIES } from "@/lib/service-areas/data";
 
 type Props = {
   solid: boolean;
@@ -79,30 +76,16 @@ export default function ServiceAreasNav({
         </button>
         {open && (
           <div id={panelId} className="mt-5 space-y-4 text-left w-full">
-            {CITIES.map((city) => {
-              const neighborhoods = getNeighborhoodsByCity(city.slug);
-              return (
-                <div key={city.slug}>
-                  <Link
-                    href={`/service-areas/${city.slug}`}
-                    onClick={onNavigate}
-                    className="block text-[13px] uppercase tracking-[0.2em] text-white hover:text-white/80"
-                  >
-                    {city.name}
-                  </Link>
-                  {neighborhoods.map((n) => (
-                    <Link
-                      key={n.slug}
-                      href={`/service-areas/${city.slug}/${n.slug}`}
-                      onClick={onNavigate}
-                      className="mt-2 block pl-4 text-[12px] uppercase tracking-[0.18em] text-white/65 hover:text-white"
-                    >
-                      {n.name}
-                    </Link>
-                  ))}
-                </div>
-              );
-            })}
+            {CITIES.map((city) => (
+              <Link
+                key={city.slug}
+                href={`/service-areas/${city.slug}`}
+                onClick={onNavigate}
+                className="block text-[13px] uppercase tracking-[0.2em] text-white hover:text-white/80"
+              >
+                {city.name}
+              </Link>
+            ))}
             <Link
               href="/service-areas"
               onClick={onNavigate}
@@ -145,56 +128,74 @@ export default function ServiceAreasNav({
         <div
           id={panelId}
           role="menu"
-          className={`absolute left-1/2 top-full z-[60] mt-4 w-[min(100vw-2rem,17rem)] -translate-x-1/2 rounded-2xl border p-4 ${panelBg}`}
+          className={`absolute left-1/2 top-full z-[60] mt-4 w-[min(100vw-2rem,64rem)] -translate-x-1/2 rounded-3xl border p-6 sm:p-7 ${panelBg}`}
         >
-          <p
-            className={`mb-3 px-2 text-[10px] uppercase tracking-[0.28em] ${
-              solid ? "text-charcoal/50" : "text-white/50"
-            }`}
-          >
-            Pierce County
-          </p>
-          <ul className="space-y-3">
-            {CITIES.map((city) => {
-              const neighborhoods = getNeighborhoodsByCity(city.slug);
-              return (
-                <li key={city.slug}>
-                  <Link
-                    href={`/service-areas/${city.slug}`}
-                    role="menuitem"
-                    onClick={() => {
-                      setOpen(false);
-                      onNavigate?.();
-                    }}
-                    className={`block rounded-lg px-2 py-1 text-[13px] font-medium uppercase tracking-[0.12em] transition-colors hover:opacity-80 ${linkTone}`}
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <div>
+              <p
+                className={`text-[10px] uppercase tracking-[0.28em] ${
+                  solid ? "text-charcoal/50" : "text-white/50"
+                }`}
+              >
+                Service Cities
+              </p>
+              <p className={`mt-2 text-[15px] ${mutedTone}`}>
+                Choose a city hub for localized market coverage.
+              </p>
+            </div>
+            <Link
+              href="/service-areas"
+              role="menuitem"
+              onClick={() => {
+                setOpen(false);
+                onNavigate?.();
+              }}
+              className={`hidden rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.16em] transition-colors hover:opacity-80 sm:inline-flex ${
+                solid
+                  ? "border-charcoal/20 text-charcoal hover:bg-charcoal/5"
+                  : "border-white/25 text-white hover:bg-white/10"
+              }`}
+            >
+              View all areas
+            </Link>
+          </div>
+
+          <ul className="grid grid-cols-1 gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+            {CITIES.map((city) => (
+              <li key={city.slug}>
+                <Link
+                  href={`/service-areas/${city.slug}`}
+                  role="menuitem"
+                  onClick={() => {
+                    setOpen(false);
+                    onNavigate?.();
+                  }}
+                  className={`group flex items-center justify-between rounded-lg px-2 py-2.5 transition-colors ${
+                    solid
+                      ? "hover:bg-charcoal/[0.04]"
+                      : "hover:bg-white/[0.06]"
+                  }`}
+                >
+                  <div>
+                    <p className={`text-[14px] font-medium tracking-[0.02em] ${linkTone}`}>
+                      {city.name}
+                    </p>
+                    <p className={`mt-0.5 text-[11px] uppercase tracking-[0.12em] ${mutedTone}`}>
+                      {city.county}
+                    </p>
+                  </div>
+                  <span
+                    className={`text-[11px] uppercase tracking-[0.16em] transition-transform group-hover:translate-x-0.5 ${mutedTone}`}
                   >
-                    {city.name}
-                  </Link>
-                  {neighborhoods.length > 0 && (
-                    <ul className="mt-1 space-y-0.5 pl-3">
-                      {neighborhoods.map((n) => (
-                        <li key={n.slug}>
-                          <Link
-                            href={`/service-areas/${city.slug}/${n.slug}`}
-                            role="menuitem"
-                            onClick={() => {
-                              setOpen(false);
-                              onNavigate?.();
-                            }}
-                            className={`block rounded-md px-2 py-0.5 text-[11px] uppercase tracking-[0.14em] transition-colors hover:opacity-80 ${mutedTone}`}
-                          >
-                            {n.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              );
-            })}
+                    View
+                  </span>
+                </Link>
+              </li>
+            ))}
           </ul>
+
           <div
-            className={`mt-4 border-t pt-3 ${solid ? "border-charcoal/10" : "border-white/10"}`}
+            className={`mt-4 border-t pt-4 sm:hidden ${solid ? "border-charcoal/10" : "border-white/10"}`}
           >
             <Link
               href="/service-areas"
@@ -205,7 +206,7 @@ export default function ServiceAreasNav({
               }}
               className={`block rounded-lg px-2 py-1 text-[11px] uppercase tracking-[0.2em] transition-colors hover:opacity-80 ${mutedTone}`}
             >
-              View all areas →
+              View all areas
             </Link>
           </div>
         </div>

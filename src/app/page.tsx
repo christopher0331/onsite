@@ -22,7 +22,7 @@ export default async function Home() {
     <>
       <Header />
       <main>
-        <Hero showIdxLink={showIdxContent} />
+        <Hero />
         <Stats />
         <TestimonialsScroll />
         <About />
