@@ -291,7 +291,6 @@ export default function ListingsPage() {
     if (city) params.set("city", city);
     if (stateFilter) {
       params.set("state", stateFilter);
-      if (stateFilter === "WA") params.set("boardId", "110");
     }
     if (mlsSearch) {
       params.set("searchFields", "mlsNumber");

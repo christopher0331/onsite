@@ -117,20 +117,53 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const res = await fetch(repliersListingsUrl(`?${params.toString()}`), {
-      headers: {
-        "repliers-api-key": process.env.REPLIERS_API_KEY || "",
-        "Content-Type": "application/json",
-      },
-      next: { revalidate: 300 },
-    });
-    if (!res.ok) {
+    const fetchListings = async (query: URLSearchParams) => {
+      const res = await fetch(repliersListingsUrl(`?${query.toString()}`), {
+        headers: {
+          "repliers-api-key": process.env.REPLIERS_API_KEY || "",
+          "Content-Type": "application/json",
+        },
+        next: { revalidate: 300 },
+      });
+      if (!res.ok) return { res, data: null as ReturnType<typeof enrichListingsResponse> | null };
+      const data = enrichListingsResponse(await res.json());
+      return { res, data };
+    };
+
+    const primary = await fetchListings(params);
+    if (!primary.res.ok) {
       return NextResponse.json(
         { error: "Failed to fetch listings" },
-        { status: res.status }
+        { status: primary.res.status }
       );
     }
-    const data = enrichListingsResponse(await res.json());
+
+    let data = primary.data!;
+
+    const primaryCount =
+      typeof (data as { count?: unknown }).count === "number"
+        ? ((data as { count: number }).count ?? 0)
+        : 0;
+
+    // Some production keys return zero WA listings when boardId=110 is forced.
+    // Retry once without boardId so WA state filtering still returns inventory.
+    if (
+      boardId &&
+      state?.toUpperCase() === "WA" &&
+      primaryCount === 0
+    ) {
+      const fallbackParams = new URLSearchParams(params);
+      fallbackParams.delete("boardId");
+      const fallback = await fetchListings(fallbackParams);
+      const fallbackCount =
+        fallback.data && typeof (fallback.data as { count?: unknown }).count === "number"
+          ? ((fallback.data as { count: number }).count ?? 0)
+          : 0;
+      if (fallback.res.ok && fallback.data && fallbackCount > 0) {
+        data = fallback.data;
+      }
+    }
+
     return NextResponse.json(data);
   } catch {
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
