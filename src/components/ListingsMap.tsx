@@ -123,23 +123,62 @@ export default function ListingsMap({
 }) {
   const mapRef = useRef<LeafletMap | null>(null);
 
-  const validListings = useMemo(
-    () =>
-      listings.filter(
-        (l): l is MapListing & { map: { latitude: number; longitude: number } } =>
-          !!l.map &&
-          typeof l.map.latitude === "number" &&
-          typeof l.map.longitude === "number"
-      ),
-    [listings]
-  );
+  const validListings = useMemo(() => {
+    const seen = new Set<string>();
+    return listings.filter(
+      (l): l is MapListing & { map: { latitude: number; longitude: number } } => {
+        if (
+          !l.map ||
+          typeof l.map.latitude !== "number" ||
+          typeof l.map.longitude !== "number"
+        ) {
+          return false;
+        }
+        if (seen.has(l.mlsNumber)) return false;
+        seen.add(l.mlsNumber);
+        return true;
+      }
+    );
+  }, [listings]);
 
   return (
     <div className="relative overflow-hidden rounded-3xl border border-charcoal/10 shadow-[0_14px_50px_rgba(0,0,0,0.10)]">
-      {(statusLine || loading) && (
-        <div className="pointer-events-none absolute left-4 right-4 top-4 z-[500] flex justify-center">
-          <div className="rounded-full bg-white/95 px-5 py-2.5 text-[12px] text-charcoal shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-sm">
-            {loading ? "Searching this area…" : statusLine}
+      <style>{`
+        .airbnb-cluster { background: transparent !important; border: none !important; }
+        .airbnb-cluster-inner {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #ffffff;
+          color: #1a1a18;
+          border-radius: 9999px;
+          font-family: ui-sans-serif, system-ui, sans-serif;
+          font-weight: 600;
+          line-height: 1;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.12);
+          border: 1px solid rgba(0,0,0,0.08);
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+          cursor: pointer;
+        }
+        .airbnb-cluster-inner:hover {
+          transform: scale(1.1);
+          box-shadow: 0 4px 14px rgba(0,0,0,0.24), 0 2px 4px rgba(0,0,0,0.14);
+        }
+      `}</style>
+      {loading && (
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[500] flex justify-center pt-6">
+          <div className="flex items-center gap-3 rounded-full bg-charcoal px-7 py-4 text-white shadow-[0_12px_40px_rgba(0,0,0,0.35)]">
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+            <span className="text-[14px] font-medium uppercase tracking-[0.18em]">
+              Searching this area…
+            </span>
+          </div>
+        </div>
+      )}
+      {!loading && statusLine && (
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[500] flex justify-center pt-6">
+          <div className="rounded-full bg-white/95 px-6 py-3 text-[13px] font-medium text-charcoal shadow-[0_10px_36px_rgba(0,0,0,0.18)] backdrop-blur-sm">
+            {statusLine}
           </div>
         </div>
       )}
@@ -157,13 +196,21 @@ export default function ListingsMap({
         <MapViewportWatcher onViewportChange={onViewportChange} />
         <MarkerClusterGroup
           chunkedLoading
+          showCoverageOnHover={false}
+          spiderfyOnMaxZoom={false}
+          zoomToBoundsOnClick
+          removeOutsideVisibleBounds
+          disableClusteringAtZoom={15}
+          maxClusterRadius={48}
           iconCreateFunction={(cluster: MarkerCluster) => {
             const count = cluster.getChildCount();
+            const label = count >= 1000 ? `${(count / 1000).toFixed(1)}k` : `${count}`;
+            const size = count >= 100 ? 48 : count >= 25 ? 42 : 36;
             return L.divIcon({
-              className: "",
-              html: `<div style="background:#1a1a18;color:#fff;border-radius:9999px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-size:13px;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,0.25);border:2px solid #fff;">${count}</div>`,
-              iconSize: [44, 44],
-              iconAnchor: [22, 22],
+              className: "airbnb-cluster",
+              html: `<div class="airbnb-cluster-inner" style="width:${size}px;height:${size}px;font-size:${count >= 100 ? 13 : 14}px;">${label}</div>`,
+              iconSize: [size, size],
+              iconAnchor: [size / 2, size / 2],
             });
           }}
         >
