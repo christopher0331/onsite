@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -59,13 +59,18 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const [showIdxContent] = useState(() => {
-    if (typeof window === "undefined") return defaultShowIdxContent;
-    return !isMainWebsiteHost(window.location.hostname);
-  });
+  // Start from the build-time default so the first client render matches the
+  // server, then refine from the live hostname after mount. Reading
+  // window.location during the initial render causes a hydration mismatch.
+  const [showIdxContent, setShowIdxContent] = useState(defaultShowIdxContent);
+
+  useEffect(() => {
+    setShowIdxContent(!isMainWebsiteHost(window.location.hostname));
+  }, []);
 
   const solutionLinks = [
     { label: "Sell Home", href: "/sell-your-home" },
+    { label: "Our Listings", href: "/our-listings" },
     { label: "Selling Process", href: "/selling-process" },
     { label: "Preparation & Staging", href: "/preparation-and-staging" },
     { label: "Marketing Strategy", href: "/real-estate-marketing" },

@@ -12,6 +12,7 @@ import ServiceAreasNav from "@/components/ServiceAreasNav";
 // the brokerage logo remains visible over white listing cards & photos.
 const SOLID_HEADER_ROUTES = [
   "/listings",
+  "/our-listings",
   "/featured-homes",
   "/sold-homes",
 ];
@@ -22,6 +23,8 @@ const mainNav = [
   { label: "About", href: "/about-us" },
   { label: "Contact", href: "/contact-us" },
 ];
+
+const ourListingsHref = "/our-listings";
 
 const valuationNav = [
   { label: "Free Home Evaluation", href: "/free-home-evaluation" },
@@ -97,6 +100,20 @@ export default function Header() {
                   {item.label}
                 </Link>
               ))}
+              <Link
+                href={ourListingsHref}
+                className={`shrink-0 whitespace-nowrap rounded-full px-5 py-2 text-[13px] font-medium uppercase tracking-[0.15em] transition-all duration-300 ${
+                  pathname?.startsWith(ourListingsHref)
+                    ? solid
+                      ? "bg-charcoal text-white"
+                      : "bg-white text-charcoal"
+                    : solid
+                      ? "bg-charcoal text-white hover:bg-charcoal/90"
+                      : "bg-white text-charcoal hover:bg-white/90"
+                }`}
+              >
+                Our Listings
+              </Link>
               <NavDropdown
                 label="Valuation"
                 items={valuationNav}
@@ -198,6 +215,13 @@ export default function Header() {
                   {item.label}
                 </Link>
               ))}
+              <Link
+                href={ourListingsHref}
+                onClick={() => setMobileOpen(false)}
+                className="rounded-full border border-white/50 bg-white px-8 py-3 font-serif text-2xl text-charcoal transition-colors hover:bg-white/90"
+              >
+                Our Listings
+              </Link>
               <NavDropdown
                 label="Valuation"
                 items={valuationNav}

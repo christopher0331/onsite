@@ -2,14 +2,27 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import type { MarkerCluster } from "leaflet";
-import L, { type LatLngTuple, type Map as LeafletMap } from "leaflet";
+import L, { type LatLngBounds, type LatLngTuple, type Map as LeafletMap } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-cluster/dist/assets/MarkerCluster.css";
 import "react-leaflet-cluster/dist/assets/MarkerCluster.Default.css";
 import { getListingStatusBadge, type StatusTone } from "@/lib/listing-status";
+
+export type MapBounds = {
+  north: number;
+  south: number;
+  east: number;
+  west: number;
+};
+
+export type MapViewport = {
+  bounds: MapBounds;
+  center: { lat: number; lng: number };
+  zoom: number;
+};
 
 type MapListing = {
   mlsNumber: string;
@@ -23,13 +36,13 @@ type MapListing = {
   map?: { latitude: number | null; longitude: number | null } | null;
 };
 
-const FALLBACK_CENTER: LatLngTuple = [47.2529, -122.4443]; // Tacoma, WA
-const FALLBACK_ZOOM = 9;
+const DEFAULT_CENTER: LatLngTuple = [47.1854, -122.2929]; // Puyallup
+const DEFAULT_ZOOM = 11;
 
 const PIN_PALETTE: Record<StatusTone, { bg: string; fg: string; border: string }> = {
   active: { bg: "#ffffff", fg: "#1a1a18", border: "#1a1a18" },
   pending: { bg: "#fbbf24", fg: "#1a1a18", border: "#1a1a18" },
-  sold:    { bg: "#1a1a18", fg: "#ffffff", border: "#1a1a18" },
+  sold: { bg: "#1a1a18", fg: "#ffffff", border: "#1a1a18" },
 };
 
 function dollarPin(label: string, tone: StatusTone) {
@@ -49,27 +62,65 @@ function compactPrice(n: number) {
   return `$${n.toLocaleString()}`;
 }
 
-// Auto-fits the viewport to the visible listings whenever the set changes.
-function FitToListings({ points }: { points: LatLngTuple[] }) {
+function boundsFromLeaflet(b: LatLngBounds): MapBounds {
+  const northWest = b.getNorthWest();
+  const southEast = b.getSouthEast();
+  return {
+    north: northWest.lat,
+    south: southEast.lat,
+    east: southEast.lng,
+    west: northWest.lng,
+  };
+}
+
+function MapViewportWatcher({
+  onViewportChange,
+}: {
+  onViewportChange: (viewport: MapViewport) => void;
+}) {
   const map = useMap();
-  const lastSig = useRef<string>("");
+  const firedInitial = useRef(false);
+  const onChangeRef = useRef(onViewportChange);
+  onChangeRef.current = onViewportChange;
+
+  const emit = () => {
+    const center = map.getCenter();
+    onChangeRef.current({
+      bounds: boundsFromLeaflet(map.getBounds()),
+      center: { lat: center.lat, lng: center.lng },
+      zoom: map.getZoom(),
+    });
+  };
+
+  useMapEvents({
+    moveend: emit,
+    zoomend: emit,
+  });
 
   useEffect(() => {
-    if (points.length === 0) return;
-    const sig = points.map((p) => `${p[0]},${p[1]}`).join("|");
-    if (sig === lastSig.current) return;
-    lastSig.current = sig;
-    if (points.length === 1) {
-      map.setView(points[0], 14);
-    } else {
-      map.fitBounds(points, { padding: [40, 40], maxZoom: 14 });
-    }
-  }, [map, points]);
+    if (firedInitial.current) return;
+    firedInitial.current = true;
+    emit();
+  }, [map]);
 
   return null;
 }
 
-export default function ListingsMap({ listings }: { listings: MapListing[] }) {
+export default function ListingsMap({
+  listings,
+  onViewportChange,
+  statusLine,
+  loading = false,
+  initialCenter = DEFAULT_CENTER,
+  initialZoom = DEFAULT_ZOOM,
+}: {
+  listings: MapListing[];
+  onViewportChange: (viewport: MapViewport) => void;
+  statusLine?: string;
+  loading?: boolean;
+  initialCenter?: LatLngTuple;
+  initialZoom?: number;
+}) {
   const mapRef = useRef<LeafletMap | null>(null);
 
   const validListings = useMemo(
@@ -83,32 +134,19 @@ export default function ListingsMap({ listings }: { listings: MapListing[] }) {
     [listings]
   );
 
-  const points = useMemo<LatLngTuple[]>(
-    () => validListings.map((l) => [l.map.latitude, l.map.longitude]),
-    [validListings]
-  );
-
-  if (validListings.length === 0) {
-    return (
-      <div className="grid h-[640px] place-items-center rounded-3xl border border-charcoal/10 bg-charcoal/5 text-center">
-        <div className="px-6">
-          <p className="font-serif text-2xl font-light text-charcoal/90">
-            No mappable listings in this result set.
-          </p>
-          <p className="mt-3 text-[13px] text-charcoal/80">
-            Repliers did not return coordinates for the current filters. Try widening the search.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="overflow-hidden rounded-3xl border border-charcoal/10 shadow-[0_14px_50px_rgba(0,0,0,0.10)]">
+    <div className="relative overflow-hidden rounded-3xl border border-charcoal/10 shadow-[0_14px_50px_rgba(0,0,0,0.10)]">
+      {(statusLine || loading) && (
+        <div className="pointer-events-none absolute left-4 right-4 top-4 z-[500] flex justify-center">
+          <div className="rounded-full bg-white/95 px-5 py-2.5 text-[12px] text-charcoal shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-sm">
+            {loading ? "Searching this area…" : statusLine}
+          </div>
+        </div>
+      )}
       <MapContainer
         ref={mapRef}
-        center={points[0] ?? FALLBACK_CENTER}
-        zoom={FALLBACK_ZOOM}
+        center={initialCenter}
+        zoom={initialZoom}
         scrollWheelZoom
         style={{ height: 640, width: "100%" }}
       >
@@ -116,7 +154,7 @@ export default function ListingsMap({ listings }: { listings: MapListing[] }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <FitToListings points={points} />
+        <MapViewportWatcher onViewportChange={onViewportChange} />
         <MarkerClusterGroup
           chunkedLoading
           iconCreateFunction={(cluster: MarkerCluster) => {
@@ -175,6 +213,13 @@ export default function ListingsMap({ listings }: { listings: MapListing[] }) {
           })}
         </MarkerClusterGroup>
       </MapContainer>
+      {validListings.length === 0 && !loading && (
+        <div className="pointer-events-none absolute inset-0 grid place-items-center bg-charcoal/5">
+          <p className="rounded-full bg-white/95 px-6 py-3 text-[13px] text-charcoal/80 shadow">
+            No mappable listings in this map area. Pan or zoom to search another neighborhood.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

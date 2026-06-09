@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...(showIdxContent
       ? [
           { url: `${BASE_URL}/listings`, priority: 0.9, changeFrequency: "daily" as const },
+          { url: `${BASE_URL}/our-listings`, priority: 0.85, changeFrequency: "daily" as const },
           { url: `${BASE_URL}/sold-homes`, priority: 0.7, changeFrequency: "weekly" as const },
         ]
       : []),

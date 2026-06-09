@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -34,10 +34,14 @@ const solutions = [
 ];
 
 export default function Solutions() {
-  const [showIdxContent] = useState(() => {
-    if (typeof window === "undefined") return defaultShowIdxContent;
-    return !isMainWebsiteHost(window.location.hostname);
-  });
+  // Start from the build-time default so the first client render matches the
+  // server, then refine from the live hostname after mount. Reading
+  // window.location during the initial render causes a hydration mismatch.
+  const [showIdxContent, setShowIdxContent] = useState(defaultShowIdxContent);
+
+  useEffect(() => {
+    setShowIdxContent(!isMainWebsiteHost(window.location.hostname));
+  }, []);
 
   const visibleSolutions = showIdxContent
     ? solutions

@@ -1,15 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
-import MLSCardAttribution from "@/components/MLSCardAttribution";
-import { getListingStatusBadge } from "@/lib/listing-status";
-import { getCitySlugByName } from "@/lib/service-areas/data";
+import ListingCard from "@/components/ListingCard";
+import type { MapViewport } from "@/components/ListingsMap";
+import { listingInBounds } from "@/lib/listings-api-params";
+
+const MAP_MIN_ZOOM = 9;
 
 const ListingsMap = dynamic(() => import("@/components/ListingsMap"), {
   ssr: false,
@@ -19,8 +21,6 @@ const ListingsMap = dynamic(() => import("@/components/ListingsMap"), {
     </div>
   ),
 });
-
-const CDN = "https://cdn.repliers.io/";
 
 type Listing = {
   mlsNumber: string;
@@ -67,32 +67,6 @@ type ApiResponse = {
   statistics?: { listPrice: { min: number; max: number } };
 };
 
-function formatPrice(n: number) {
-  return "$" + n.toLocaleString("en-US");
-}
-
-function formatAddress(a: Listing["address"] | undefined | null) {
-  if (!a) return "Address unavailable";
-  const street = [a.streetNumber, a.streetDirection, a.streetName, a.streetSuffix]
-    .filter(Boolean)
-    .join(" ");
-  const unit = a.unitNumber ? ` #${a.unitNumber}` : "";
-  return street ? `${street}${unit}` : "Address unavailable";
-}
-
-function formatCityLine(a: Listing["address"] | undefined | null) {
-  if (!a) return "";
-  const parts = [a.city, a.state, a.zip].filter(Boolean);
-  return parts.join(", ");
-}
-
-function getImageUrl(images: string[]) {
-  if (!images?.length) return null;
-  const path = images[0];
-  if (path.startsWith("http")) return path;
-  return CDN + path;
-}
-
 const STATUS_FILTERS = [
   { label: "All", value: "All" },
   { label: "Active", value: "A" },
@@ -116,110 +90,6 @@ const SORT_OPTIONS = [
   { label: "Price: Low to High", value: "listPriceAsc" },
 ];
 
-function ListingCard({ listing }: { listing: Listing }) {
-  const img = getImageUrl(listing.images ?? []);
-  const addr = listing.address;
-  const det = listing.details ?? ({} as Listing["details"]);
-  const showAddress = listing.permissions?.displayAddressOnInternet !== "N";
-  const street = showAddress ? formatAddress(addr) : "Undisclosed";
-  const cityLine = formatCityLine(addr);
-  const serviceAreaSlug = addr?.city ? getCitySlugByName(addr.city) : null;
-
-  return (
-    <Link
-      href={`/listings/${listing.mlsNumber}`}
-      className="group flex flex-col overflow-hidden rounded-3xl bg-white shadow-[0_8px_32px_rgba(0,0,0,0.10)] transition-all duration-500 hover:shadow-[0_22px_70px_rgba(0,0,0,0.18)] hover:-translate-y-1"
-    >
-      <div className="relative aspect-[4/3] overflow-hidden bg-charcoal/5">
-        {img ? (
-          <Image
-            src={img}
-            alt={showAddress ? street : "Property photo"}
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            unoptimized
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-charcoal/20">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-              <polyline points="9 22 9 12 15 12 15 22"/>
-            </svg>
-          </div>
-        )}
-        <div className="absolute left-4 top-4 max-w-[calc(100%-2rem)]">
-          {(() => {
-            const badge = getListingStatusBadge(listing);
-            const tone =
-              badge.tone === "active"
-                ? "bg-white/90 text-charcoal"
-                : badge.tone === "pending"
-                  ? "bg-amber-400/95 text-charcoal"
-                  : "bg-charcoal/80 text-white";
-            return (
-              <span
-                className={`inline-block rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium whitespace-normal text-center ${tone}`}
-              >
-                {badge.label}
-              </span>
-            );
-          })()}
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-5 pb-4 pt-10">
-          {listing.soldPrice ? (
-            <>
-              <p className="text-[10px] uppercase tracking-[0.15em] text-white/60 mb-0.5">Sold</p>
-              <p className="font-serif text-[1.6rem] font-light leading-none text-white">
-                {formatPrice(listing.soldPrice)}
-              </p>
-              <p className="mt-1 text-[12px] text-white/60">Listed: {formatPrice(listing.listPrice)}</p>
-            </>
-          ) : (
-            <p className="font-serif text-[1.6rem] font-light leading-none text-white">
-              {formatPrice(listing.listPrice)}
-            </p>
-          )}
-        </div>
-      </div>
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="mb-1 font-serif text-[1.05rem] font-light leading-snug text-charcoal">{street}</h3>
-        {cityLine && (
-          <p className="mb-3 text-[13px] text-charcoal/90">{cityLine}</p>
-        )}
-        {serviceAreaSlug && (
-          <Link
-            href={`/service-areas/${serviceAreaSlug}`}
-            className="mb-3 inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.18em] text-charcoal/70 underline-offset-4 hover:text-charcoal hover:underline"
-          >
-            Service Area: {addr.city}
-          </Link>
-        )}
-        {(det.numBedrooms || det.numBathrooms || det.sqft) && (
-          <div className="mb-3 flex gap-4 text-[13px] text-charcoal/75">
-            {det.numBedrooms && <span><strong className="text-charcoal font-semibold">{det.numBedrooms}</strong> bd</span>}
-            {det.numBathrooms && <span><strong className="text-charcoal font-semibold">{det.numBathrooms}</strong> ba</span>}
-            {det.sqft && <span><strong className="text-charcoal font-semibold">{Number(det.sqft).toLocaleString()}</strong> sqft</span>}
-          </div>
-        )}
-        {det.propertyType && (
-          <p className="mb-3 text-[11px] uppercase tracking-[0.2em] text-charcoal/80">{det.propertyType}</p>
-        )}
-        {listing.office?.brokerageName && (
-          <p className="mb-3 text-[11px] text-charcoal/80 italic not-italic">
-            Listed by {listing.office.brokerageName}
-          </p>
-        )}
-        <div className="mt-auto flex items-center justify-between border-t border-charcoal/10 pt-4">
-          <span className="text-[11px] text-charcoal/80">MLS# {listing.mlsNumber}</span>
-          <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal/80 transition-colors duration-300 group-hover:text-charcoal">View →</span>
-        </div>
-        <MLSCardAttribution state={listing.address?.state} />
-      </div>
-    </Link>
-  );
-}
-
 export default function ListingsPage() {
   const [listings, setListings] = useState<Listing[]>([]);
   const [count, setCount] = useState(0);
@@ -240,6 +110,14 @@ export default function ListingsPage() {
   const [stateFilter, setStateFilter] = useState("WA");
   const [totalDbCount, setTotalDbCount] = useState<number | null>(null);
   const [dataRefreshedAt, setDataRefreshedAt] = useState<Date | null>(null);
+  const [mapListings, setMapListings] = useState<Listing[]>([]);
+  const [mapLoading, setMapLoading] = useState(false);
+  const [mapStatusLine, setMapStatusLine] = useState("");
+
+  const mapPoolRef = useRef<Map<string, Listing[]>>(new Map());
+  const geocodeCacheRef = useRef<Map<string, string | null>>(new Map());
+  const mapDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const mapRequestIdRef = useRef(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -279,12 +157,193 @@ export default function ListingsPage() {
   }, [status, city, stateFilter, mlsSearch, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy]);
 
   useEffect(() => {
+    mapPoolRef.current.clear();
+    geocodeCacheRef.current.clear();
+  }, [status, city, stateFilter, mlsSearch, propertyType, minBeds, minBaths, minPrice, maxPrice]);
+
+  const mapFilterKey = useCallback(
+    (searchCity: string) =>
+      JSON.stringify({
+        searchCity,
+        status: mlsSearch ? "All" : status,
+        stateFilter,
+        mlsSearch,
+        propertyType,
+        minBeds,
+        minBaths,
+        minPrice,
+        maxPrice,
+      }),
+    [status, stateFilter, mlsSearch, propertyType, minBeds, minBaths, minPrice, maxPrice]
+  );
+
+  const resolveMapCity = useCallback(
+    async (center: { lat: number; lng: number }) => {
+      if (city.trim()) return city.trim();
+      const key = `${center.lat.toFixed(2)},${center.lng.toFixed(2)}`;
+      if (geocodeCacheRef.current.has(key)) {
+        return geocodeCacheRef.current.get(key) || "";
+      }
+      const res = await fetch(
+        `/api/geocode/reverse?lat=${center.lat}&lng=${center.lng}`
+      );
+      if (!res.ok) {
+        geocodeCacheRef.current.set(key, null);
+        return "";
+      }
+      const data = (await res.json()) as { city?: string | null };
+      const resolved = data.city?.trim() || "";
+      geocodeCacheRef.current.set(key, resolved || null);
+      return resolved;
+    },
+    [city]
+  );
+
+  const handleMapViewport = useCallback(
+    (viewport: MapViewport) => {
+      if (viewMode !== "map") return;
+
+      if (mapDebounceRef.current) clearTimeout(mapDebounceRef.current);
+
+      mapDebounceRef.current = setTimeout(() => {
+        void (async () => {
+          const requestId = ++mapRequestIdRef.current;
+          const { bounds, center, zoom } = viewport;
+
+          if (zoom < MAP_MIN_ZOOM) {
+            setMapListings([]);
+            setMapLoading(false);
+            setMapStatusLine("Zoom in to search listings in this area");
+            return;
+          }
+
+          setMapLoading(true);
+
+          if (mlsSearch) {
+            const params = new URLSearchParams({
+              status: "All",
+              pageSize: "1",
+              page: "1",
+              searchFields: "mlsNumber",
+              search: mlsSearch,
+            });
+            if (stateFilter) params.set("state", stateFilter);
+            const res = await fetch(`/api/listings?${params}`);
+            const data = (await res.json()) as ApiResponse;
+            if (requestId !== mapRequestIdRef.current) return;
+            const rows = (data.listings || []).filter((l) => listingInBounds(l, bounds));
+            setMapListings(rows);
+            setMapLoading(false);
+            setMapStatusLine(
+              rows.length
+                ? `1 MLS match in this area`
+                : "MLS match is outside the current map view"
+            );
+            return;
+          }
+
+          const searchCity = await resolveMapCity(center);
+          if (requestId !== mapRequestIdRef.current) return;
+
+          const poolKey = mapFilterKey(searchCity || "__scan__");
+          const cachedPool = mapPoolRef.current.get(poolKey);
+          if (cachedPool) {
+            const visible = cachedPool.filter((l) => listingInBounds(l, bounds));
+            setMapListings(visible);
+            setMapLoading(false);
+            setMapStatusLine(
+              searchCity
+                ? `${visible.length} homes in view · ${cachedPool.length} in ${searchCity}`
+                : `${visible.length} homes in this map area`
+            );
+            return;
+          }
+
+          const params = new URLSearchParams({
+            status,
+            north: String(bounds.north),
+            south: String(bounds.south),
+            east: String(bounds.east),
+            west: String(bounds.west),
+          });
+          if (stateFilter) params.set("state", stateFilter);
+          if (searchCity) params.set("city", searchCity);
+          if (propertyType) params.set("type", propertyType);
+          if (minBeds) params.set("minBeds", minBeds);
+          if (minBaths) params.set("minBaths", minBaths);
+          if (minPrice) params.set("minPrice", minPrice);
+          if (maxPrice) params.set("maxPrice", maxPrice);
+
+          const res = await fetch(`/api/listings/map?${params}`);
+          if (requestId !== mapRequestIdRef.current) return;
+
+          if (!res.ok) {
+            setMapListings([]);
+            setMapLoading(false);
+            setMapStatusLine("Unable to load listings for this area");
+            return;
+          }
+
+          const data = (await res.json()) as {
+            listings: Listing[];
+            pool?: Listing[];
+            inBoundsCount: number;
+            areaTotal: number;
+            searchCity: string | null;
+            truncated?: boolean;
+          };
+
+          const pool = data.pool ?? data.listings;
+          mapPoolRef.current.set(poolKey, pool);
+
+          const visible = pool.filter((l) => listingInBounds(l, bounds));
+          setMapListings(visible);
+          setMapLoading(false);
+
+          const areaLabel = searchCity || data.searchCity || city || "this area";
+          if (data.truncated) {
+            setMapStatusLine(
+              `${visible.length} homes in view · zoom in or add a city filter for more`
+            );
+          } else {
+            setMapStatusLine(
+              `${visible.length} homes in view · ${data.areaTotal.toLocaleString()} in ${areaLabel}`
+            );
+          }
+        })();
+      }, 350);
+    },
+    [
+      viewMode,
+      mlsSearch,
+      stateFilter,
+      status,
+      propertyType,
+      minBeds,
+      minBaths,
+      minPrice,
+      maxPrice,
+      city,
+      mapFilterKey,
+      resolveMapCity,
+    ]
+  );
+
+  useEffect(() => {
+    return () => {
+      if (mapDebounceRef.current) clearTimeout(mapDebounceRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (viewMode !== "list") return;
+
     setLoading(true);
     const params = new URLSearchParams({
       // When searching by MLS#, override status to All so sold/pending
       // listings are included regardless of the status tab selection.
       status: mlsSearch ? "All" : status,
-      pageSize: viewMode === "map" ? "100" : "24",
+      pageSize: "24",
       page: String(page),
       sortBy,
     });
@@ -586,7 +645,14 @@ export default function ListingsPage() {
         {/* Grid */}
         <section className="bg-[#f2ede6] py-20 sm:py-28">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-            {loading ? (
+            {viewMode === "map" ? (
+              <ListingsMap
+                listings={mapListings}
+                onViewportChange={handleMapViewport}
+                loading={mapLoading}
+                statusLine={mapStatusLine}
+              />
+            ) : loading ? (
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div key={i} className="h-[420px] animate-pulse rounded-3xl bg-charcoal/10" />
@@ -599,18 +665,13 @@ export default function ListingsPage() {
               </div>
             ) : (
               <>
-                {viewMode === "map" ? (
-                  <ListingsMap listings={listings} />
-                ) : (
-                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                    {listings.map((listing) => (
-                      <ListingCard key={listing.mlsNumber} listing={listing} />
-                    ))}
-                  </div>
-                )}
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {listings.map((listing) => (
+                    <ListingCard key={listing.mlsNumber} listing={listing} />
+                  ))}
+                </div>
 
-                {/* Pagination — list view only; map view loads up to 100 pins */}
-                {viewMode === "list" && numPages > 1 && (
+                {numPages > 1 && (
                   <div className="mt-14 flex items-center justify-center gap-3">
                     <button
                       disabled={page <= 1}

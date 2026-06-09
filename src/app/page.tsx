@@ -28,10 +28,10 @@ export default async function Home() {
         <About />
         <Solutions />
         <Process />
+        <FeaturedListings />
         {showIdxContent && (
           <>
             <SoldProperties />
-            <FeaturedListings />
             <PropertyVideos />
           </>
         )}

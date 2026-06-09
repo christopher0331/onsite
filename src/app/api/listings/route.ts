@@ -6,7 +6,13 @@ import {
 } from "@/lib/repliers-enrich";
 
 const REPLIERS_API = "https://api.repliers.io/listings";
-const ONSITE_BROKERAGE_NAME = process.env.ONSITE_BROKERAGE_NAME || "";
+// OnSite operates under the "Timber Real Estate" NWMLS brokerage. Repliers
+// ignores the legacy `agentLicense` filter, so owner listings are scoped by
+// brokerage name. Override via env if the brokerage affiliation changes.
+const ONSITE_BROKERAGE_NAME =
+  process.env.ONSITE_BROKERAGE_NAME || "Timber Real Estate";
+const ONSITE_LEAD_AGENT_NAME =
+  process.env.ONSITE_LEAD_AGENT_NAME || "Andre Bohall";
 
 const ALLOWED_SORT_BY = new Set([
   "createdOnDesc",
@@ -32,6 +38,8 @@ export async function GET(req: NextRequest) {
   const county = searchParams.get("county");
   const sortBy = searchParams.get("sortBy") || "createdOnDesc";
   const brokerageOnly = searchParams.get("brokerageOnly") === "true";
+  const agentOnly = searchParams.get("agentOnly") === "true";
+  const agentName = searchParams.get("agentName");
   const search = searchParams.get("search");
   const searchFields = searchParams.get("searchFields");
   const state = searchParams.get("state");
@@ -102,6 +110,13 @@ export async function GET(req: NextRequest) {
   if (brokerageOnly && ONSITE_BROKERAGE_NAME) {
     params.set("office.brokerageName", ONSITE_BROKERAGE_NAME);
   }
+  if (agentOnly) {
+    params.set("searchFields", "agents.name");
+    params.set("search", agentName || ONSITE_LEAD_AGENT_NAME);
+  } else if (agentName) {
+    params.set("searchFields", "agents.name");
+    params.set("search", agentName);
+  }
   if (minPrice) params.set("minPrice", minPrice);
   if (maxPrice) params.set("maxPrice", maxPrice);
   if (minBeds) params.set("minBeds", minBeds);
@@ -111,7 +126,7 @@ export async function GET(req: NextRequest) {
   // MLS# (or any field-targeted) text search — Repliers requires both
   // `searchFields` and `search` to be present. Works with prefixed or
   // un-prefixed MLS numbers (e.g. NWM2310987 or 2310987).
-  if (search && searchFields) {
+  if (!agentOnly && !agentName && search && searchFields) {
     params.set("searchFields", searchFields);
     params.set("search", search);
   }

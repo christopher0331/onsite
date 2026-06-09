@@ -75,13 +75,32 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
           Lake Tapps, Bonney Lake, Sumner, Buckley, Graham, Puyallup & Beyond.
         </motion.p>
 
-        {showIdxLink && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
-            className="mt-12"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.1 }}
+          className="mt-12 flex flex-wrap gap-4"
+        >
+          <Link
+            href="/our-listings"
+            className="group inline-flex items-center gap-3 bg-white text-charcoal px-10 py-4 text-[13px] uppercase tracking-[0.25em] hover:bg-white/90 transition-all duration-500"
           >
+            Our Listings
+            <svg
+              className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+              />
+            </svg>
+          </Link>
+          {showIdxLink && (
             <Link
               href="/listings"
               className="group inline-flex items-center gap-3 border border-white/50 text-white px-10 py-4 text-[13px] uppercase tracking-[0.25em] hover:bg-white hover:text-charcoal transition-all duration-500"
@@ -101,8 +120,8 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
                 />
               </svg>
             </Link>
-          </motion.div>
-        )}
+          )}
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}
