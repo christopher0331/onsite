@@ -187,6 +187,11 @@ export default function ListingsMap({
         center={initialCenter}
         zoom={initialZoom}
         scrollWheelZoom
+        zoomSnap={0.25}
+        zoomDelta={0.5}
+        wheelPxPerZoomLevel={120}
+        wheelDebounceTime={15}
+        zoomAnimation
         style={{ height: 640, width: "100%" }}
       >
         <TileLayer

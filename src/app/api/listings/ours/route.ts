@@ -53,38 +53,49 @@ async function fetchScope(params: URLSearchParams) {
     "Content-Type": "application/json",
   };
 
-  const firstRes = await fetch(repliersListingsUrl(`?${params.toString()}`), {
-    headers,
-    next: { revalidate: 300 },
-  });
-  if (!firstRes.ok) return [];
-
-  const firstPayload = enrichListingsResponse(await firstRes.json());
-  const total =
-    typeof (firstPayload as { count?: unknown }).count === "number"
-      ? ((firstPayload as { count: number }).count ?? 0)
-      : 0;
-  const listings = [...((firstPayload.listings ?? []) as ListingRow[])].filter(
-    (row): row is ListingRow => Boolean(row.mlsNumber)
-  );
-  if (total <= listings.length) return listings;
-
-  const pageSize = Number(params.get("pageSize") || "100");
-  const pages = Math.ceil(total / pageSize);
-
-  for (let page = 2; page <= pages; page++) {
+  // Repliers paginates with `pageNum`/`resultsPerPage`; the `page`/`pageSize`
+  // request params are ignored (they only echo back as metadata), so sending
+  // them returns page 1 every time and floods the pool with duplicates.
+  const resultsPerPage = params.get("pageSize") || "100";
+  const fetchPage = async (pageNum: number) => {
     const pageParams = new URLSearchParams(params);
-    pageParams.set("page", String(page));
+    pageParams.delete("page");
+    pageParams.delete("pageSize");
+    pageParams.set("resultsPerPage", resultsPerPage);
+    pageParams.set("pageNum", String(pageNum));
     const res = await fetch(repliersListingsUrl(`?${pageParams.toString()}`), {
       headers,
       next: { revalidate: 300 },
     });
-    if (!res.ok) break;
-    const payload = enrichListingsResponse(await res.json());
-    listings.push(...((payload.listings ?? []) as ListingRow[]));
+    if (!res.ok) return null;
+    return enrichListingsResponse(await res.json());
+  };
+
+  const firstPayload = await fetchPage(1);
+  if (!firstPayload) return [];
+
+  const total =
+    typeof (firstPayload as { count?: unknown }).count === "number"
+      ? ((firstPayload as { count: number }).count ?? 0)
+      : 0;
+
+  // Dedupe by MLS# — the feed can return the same listing across pages.
+  const byMls = new Map<string, ListingRow>();
+  const ingest = (payload: { listings?: unknown }) => {
+    for (const row of (payload.listings ?? []) as ListingRow[]) {
+      if (row?.mlsNumber && !byMls.has(row.mlsNumber)) byMls.set(row.mlsNumber, row);
+    }
+  };
+  ingest(firstPayload);
+
+  const pages = Math.ceil(total / Number(resultsPerPage));
+  for (let pageNum = 2; pageNum <= pages; pageNum++) {
+    const payload = await fetchPage(pageNum);
+    if (!payload) break;
+    ingest(payload);
   }
 
-  return listings;
+  return Array.from(byMls.values());
 }
 
 export async function GET(req: NextRequest) {

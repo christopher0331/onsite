@@ -114,8 +114,6 @@ export default function ListingsPage() {
   const [mapLoading, setMapLoading] = useState(false);
   const [mapStatusLine, setMapStatusLine] = useState("");
 
-  const mapPoolRef = useRef<Map<string, Listing[]>>(new Map());
-  const geocodeCacheRef = useRef<Map<string, string | null>>(new Map());
   const mapDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const mapRequestIdRef = useRef(0);
 
@@ -156,49 +154,6 @@ export default function ListingsPage() {
     setPage(1);
   }, [status, city, stateFilter, mlsSearch, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy]);
 
-  useEffect(() => {
-    mapPoolRef.current.clear();
-    geocodeCacheRef.current.clear();
-  }, [status, city, stateFilter, mlsSearch, propertyType, minBeds, minBaths, minPrice, maxPrice]);
-
-  const mapFilterKey = useCallback(
-    (searchCity: string) =>
-      JSON.stringify({
-        searchCity,
-        status: mlsSearch ? "All" : status,
-        stateFilter,
-        mlsSearch,
-        propertyType,
-        minBeds,
-        minBaths,
-        minPrice,
-        maxPrice,
-      }),
-    [status, stateFilter, mlsSearch, propertyType, minBeds, minBaths, minPrice, maxPrice]
-  );
-
-  const resolveMapCity = useCallback(
-    async (center: { lat: number; lng: number }) => {
-      if (city.trim()) return city.trim();
-      const key = `${center.lat.toFixed(2)},${center.lng.toFixed(2)}`;
-      if (geocodeCacheRef.current.has(key)) {
-        return geocodeCacheRef.current.get(key) || "";
-      }
-      const res = await fetch(
-        `/api/geocode/reverse?lat=${center.lat}&lng=${center.lng}`
-      );
-      if (!res.ok) {
-        geocodeCacheRef.current.set(key, null);
-        return "";
-      }
-      const data = (await res.json()) as { city?: string | null };
-      const resolved = data.city?.trim() || "";
-      geocodeCacheRef.current.set(key, resolved || null);
-      return resolved;
-    },
-    [city]
-  );
-
   const handleMapViewport = useCallback(
     (viewport: MapViewport) => {
       if (viewMode !== "map") return;
@@ -208,7 +163,8 @@ export default function ListingsPage() {
       mapDebounceRef.current = setTimeout(() => {
         void (async () => {
           const requestId = ++mapRequestIdRef.current;
-          const { bounds, center, zoom } = viewport;
+          const { bounds, zoom } = viewport;
+          const homeLabel = (n: number) => `${n.toLocaleString()} ${n === 1 ? "home" : "homes"}`;
 
           if (zoom < MAP_MIN_ZOOM) {
             setMapListings([]);
@@ -242,23 +198,8 @@ export default function ListingsPage() {
             return;
           }
 
-          const searchCity = await resolveMapCity(center);
-          if (requestId !== mapRequestIdRef.current) return;
-
-          const poolKey = mapFilterKey(searchCity || "__scan__");
-          const cachedPool = mapPoolRef.current.get(poolKey);
-          if (cachedPool) {
-            const visible = cachedPool.filter((l) => listingInBounds(l, bounds));
-            setMapListings(visible);
-            setMapLoading(false);
-            setMapStatusLine(
-              searchCity
-                ? `${visible.length} homes in view · ${cachedPool.length} in ${searchCity}`
-                : `${visible.length} homes in this map area`
-            );
-            return;
-          }
-
+          // Query the visible viewport polygon directly so every listing in the
+          // map area is returned, regardless of which city it sits in.
           const params = new URLSearchParams({
             status,
             north: String(bounds.north),
@@ -267,7 +208,7 @@ export default function ListingsPage() {
             west: String(bounds.west),
           });
           if (stateFilter) params.set("state", stateFilter);
-          if (searchCity) params.set("city", searchCity);
+          if (city) params.set("city", city);
           if (propertyType) params.set("type", propertyType);
           if (minBeds) params.set("minBeds", minBeds);
           if (minBaths) params.set("minBaths", minBaths);
@@ -286,29 +227,20 @@ export default function ListingsPage() {
 
           const data = (await res.json()) as {
             listings: Listing[];
-            pool?: Listing[];
             inBoundsCount: number;
             areaTotal: number;
-            searchCity: string | null;
             truncated?: boolean;
           };
 
-          const pool = data.pool ?? data.listings;
-          mapPoolRef.current.set(poolKey, pool);
-
-          const visible = pool.filter((l) => listingInBounds(l, bounds));
-          setMapListings(visible);
+          setMapListings(data.listings || []);
           setMapLoading(false);
 
-          const areaLabel = searchCity || data.searchCity || city || "this area";
           if (data.truncated) {
             setMapStatusLine(
-              `${visible.length} homes in view · zoom in or add a city filter for more`
+              `Showing ${homeLabel(data.listings.length)} · ${data.areaTotal.toLocaleString()} in view — zoom in for all`
             );
           } else {
-            setMapStatusLine(
-              `${visible.length} homes in view · ${data.areaTotal.toLocaleString()} in ${areaLabel}`
-            );
+            setMapStatusLine(`${homeLabel(data.inBoundsCount)} in view`);
           }
         })();
       }, 350);
@@ -324,8 +256,6 @@ export default function ListingsPage() {
       minPrice,
       maxPrice,
       city,
-      mapFilterKey,
-      resolveMapCity,
     ]
   );
 
