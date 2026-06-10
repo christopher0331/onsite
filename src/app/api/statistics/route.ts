@@ -14,19 +14,23 @@ async function repliersGet(params: Record<string, string>) {
 }
 
 function buildScope(req: NextRequest): Record<string, string> {
-  // Default to WA / NWMLS so market stats reflect the correct geography.
+  // Default to WA so market stats reflect the correct geography. NOTE: do not
+  // force boardId — this production key returns zero results / empty
+  // statistics whenever boardId=110 is set, so it must be omitted (or passed
+  // explicitly) for the NWMLS feed to come back.
   const scope: Record<string, string> = {
     state: "WA",
-    boardId: "110",
   };
   const state = req.nextUrl.searchParams.get("state");
   const city = req.nextUrl.searchParams.get("city");
   const county = req.nextUrl.searchParams.get("county");
   const neighborhood = req.nextUrl.searchParams.get("neighborhood");
+  const boardId = req.nextUrl.searchParams.get("boardId");
   if (state) scope.state = state;
   if (city) scope.city = city;
   else if (county) scope.area = county;
   if (neighborhood) scope.neighborhood = neighborhood;
+  if (boardId) scope.boardId = boardId;
   return scope;
 }
 
