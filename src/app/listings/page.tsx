@@ -268,11 +268,13 @@ export default function ListingsPage() {
   useEffect(() => {
     if (viewMode !== "list") return;
 
+    let cancelled = false;
     setLoading(true);
+    const effectiveStatus = mlsSearch ? "All" : status;
     const params = new URLSearchParams({
       // When searching by MLS#, override status to All so sold/pending
       // listings are included regardless of the status tab selection.
-      status: mlsSearch ? "All" : status,
+      status: effectiveStatus,
       pageSize: "24",
       page: String(page),
       sortBy,
@@ -290,24 +292,65 @@ export default function ListingsPage() {
     if (minPrice) params.set("minPrice", minPrice);
     if (maxPrice) params.set("maxPrice", maxPrice);
 
-    fetch(`/api/listings?${params}`)
-      .then((r) => r.json())
-      .then((data: ApiResponse) => {
+    // On the default first-page browse (no search/filters applied), lead with
+    // OnSite's own inventory — André Bohall first, then Timber Real Estate —
+    // matching the priority order used on /our-listings.
+    const isDefaultBrowse =
+      page === 1 &&
+      !mlsSearch &&
+      !city &&
+      !propertyType &&
+      !minBeds &&
+      !minBaths &&
+      !minPrice &&
+      !maxPrice;
+
+    const ownerParams = new URLSearchParams({
+      status: effectiveStatus,
+      scope: "all",
+      page: "1",
+      pageSize: "48",
+    });
+    if (stateFilter) ownerParams.set("state", stateFilter);
+
+    (async () => {
+      try {
+        const [data, ownerData] = await Promise.all([
+          fetch(`/api/listings?${params}`).then((r) => r.json() as Promise<ApiResponse>),
+          isDefaultBrowse
+            ? fetch(`/api/listings/ours?${ownerParams}`)
+                .then((r) => r.json() as Promise<{ listings?: Listing[] }>)
+                .catch(() => null)
+            : Promise.resolve(null),
+        ]);
+        if (cancelled) return;
+
         let results = data.listings || [];
         if (minBaths) {
           const min = Number(minBaths);
-          results = results.filter(
-            (l) => (l.details.numBathrooms ?? 0) >= min
-          );
+          results = results.filter((l) => (l.details.numBathrooms ?? 0) >= min);
         }
+
+        const owner = ownerData?.listings ?? [];
+        if (owner.length) {
+          const ownerIds = new Set(owner.map((l) => l.mlsNumber));
+          results = [...owner, ...results.filter((l) => !ownerIds.has(l.mlsNumber))];
+        }
+
         setListings(results);
         setCount(data.count || 0);
         setNumPages(data.numPages || 1);
         setDataRefreshedAt(new Date());
         setLoading(false);
         if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
-      })
-      .catch(() => setLoading(false));
+      } catch {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, [status, city, stateFilter, mlsSearch, propertyType, minBeds, minBaths, minPrice, maxPrice, sortBy, page, viewMode]);
 
   return (

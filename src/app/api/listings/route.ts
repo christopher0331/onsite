@@ -71,7 +71,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ count: 0, numPages: 0, page: 1, listings: [] });
   }
 
-  const params = new URLSearchParams({ pageSize, page });
+  // Repliers paginates with `pageNum`/`resultsPerPage`. The `page`/`pageSize`
+  // names are response-only metadata and are ignored as request params, so
+  // sending them returns page 1 every time (broken Next/Prev navigation).
+  const params = new URLSearchParams({ resultsPerPage: pageSize, pageNum: page });
 
   if (state) params.set("state", state);
   if (boardId) params.set("boardId", boardId);
