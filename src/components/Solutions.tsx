@@ -12,22 +12,22 @@ import {
 const solutions = [
   {
     title: "Home Search",
-    href: "https://onsiteregroup.idxbroker.com/idx/map/mapsearch",
-    external: true,
+    href: "/listings",
+    requiresIdx: true,
     image:
       "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
   },
   {
     title: "Home Valuation",
     href: "/free-home-evaluation",
-    external: false,
+    requiresIdx: false,
     image:
       "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e16372192203004a84a865_We%20Help%20You%20Sell%20Your%20Home%20-%20Pierce%20County.jpg",
   },
   {
     title: "Buying & Selling",
     href: "/sell-your-home",
-    external: false,
+    requiresIdx: false,
     image:
       "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67eac6e8fa81e2c2d72de275_HOME.webp",
   },
@@ -45,7 +45,7 @@ export default function Solutions() {
 
   const visibleSolutions = showIdxContent
     ? solutions
-    : solutions.filter((item) => !item.external);
+    : solutions.filter((item) => !item.requiresIdx);
 
   return (
     <section className="relative py-8 sm:py-10 bg-white">
@@ -66,20 +66,9 @@ export default function Solutions() {
             transition={{ duration: 0.8, delay: i * 0.1 }}
             className="group relative overflow-hidden"
           >
-            {item.external ? (
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <SolutionCard title={item.title} image={item.image} />
-              </a>
-            ) : (
-              <Link href={item.href}>
-                <SolutionCard title={item.title} image={item.image} />
-              </Link>
-            )}
+            <Link href={item.href}>
+              <SolutionCard title={item.title} image={item.image} />
+            </Link>
           </motion.div>
         ))}
         </div>

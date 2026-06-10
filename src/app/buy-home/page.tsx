@@ -88,14 +88,12 @@ export default async function BuyHomePage() {
             </p>
             <div className="flex flex-wrap gap-4">
               {showIdxContent && (
-                <a
-                  href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/listings"
                   className="inline-flex items-center bg-white text-charcoal px-8 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/90 transition-all duration-500"
                 >
                   Search All Properties
-                </a>
+                </Link>
               )}
               <Link
                 href="/contact-us"
@@ -121,14 +119,12 @@ export default async function BuyHomePage() {
                 Your dream home is closer than you think. With our expert guidance and in-depth knowledge of the local market, we&apos;ll help you navigate the process and find the home that perfectly suits your needs.
               </p>
               {showIdxContent && (
-                <a
-                  href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/listings"
                   className="inline-flex items-center gap-3 mt-2 border border-charcoal/20 text-charcoal px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-charcoal hover:text-white transition-all duration-500"
                 >
                   Search All Properties
-                </a>
+                </Link>
               )}
             </div>
           </div>
@@ -233,14 +229,12 @@ export default async function BuyHomePage() {
                     Featured Home <span>Listings.</span>
                   </h2>
                 </div>
-                <a
-                  href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/listings"
                   className="hidden sm:inline-flex items-center gap-3 border border-charcoal/20 text-charcoal px-8 py-3.5 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-charcoal hover:text-white transition-all duration-500"
                 >
                   Search All
-                </a>
+                </Link>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {featuredListings.map((listing) => (
@@ -292,14 +286,12 @@ export default async function BuyHomePage() {
                 </h2>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
                   {showIdxContent && (
-                    <a
-                      href="https://onsiteregroup.idxbroker.com/idx/map/mapsearch"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      href="/listings"
                       className="inline-flex items-center justify-center bg-white text-charcoal px-10 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/90 transition-all duration-500"
                     >
                       Search Properties
-                    </a>
+                    </Link>
                   )}
                   <Link
                     href="/contact-us"
