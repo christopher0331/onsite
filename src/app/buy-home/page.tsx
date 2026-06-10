@@ -87,14 +87,12 @@ export default async function BuyHomePage() {
               We give you the guidance, market insight, and negotiation power every step of the way.
             </p>
             <div className="flex flex-wrap gap-4">
-              {showIdxContent && (
-                <Link
-                  href="/listings"
-                  className="inline-flex items-center bg-white text-charcoal px-8 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/90 transition-all duration-500"
-                >
-                  Search All Properties
-                </Link>
-              )}
+              <Link
+                href="/listings"
+                className="inline-flex items-center bg-white text-charcoal px-8 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/90 transition-all duration-500"
+              >
+                Search Homes
+              </Link>
               <Link
                 href="/contact-us"
                 className="inline-flex items-center border border-white/35 text-white px-8 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/10 transition-all duration-500"
