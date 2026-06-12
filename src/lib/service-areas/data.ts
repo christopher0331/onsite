@@ -13,6 +13,98 @@ import type { City, Neighborhood, PlannedServiceArea } from "./types";
 
 export const CITIES: City[] = [
   {
+    slug: "lake-tapps",
+    name: "Lake Tapps",
+    state: "Washington",
+    stateCode: "WA",
+    county: "Pierce County",
+    taxonomy: "suburban",
+    population: 12_159,
+    zipCodes: ["98391", "98092"],
+    geo: { lat: 47.2349, lng: -122.1685 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Service Area · Home Base",
+    heroIntro:
+      "Lake Tapps is our home base. From the island communities to the open-water waterfront, we price reservoir frontage, dock condition, and HOA standing off the most local comp set in our portfolio — because we live on it.",
+    activeProjects: 12,
+    neighborhoodDirectory: [
+      "Tapps Island",
+      "Driftwood Point",
+      "Tacoma Point",
+      "Snag Island",
+      "Inlet Island",
+      "Church Lake Waterfront",
+    ],
+    permittingOffice: {
+      name: "Pierce County Planning & Public Works",
+      url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
+      context:
+        "Lake Tapps is unincorporated Pierce County — building permits, shoreline review, and site development run through the county, not a city hall.",
+    },
+    utilities: [
+      {
+        name: "Cascade Water Alliance",
+        url: "https://cascadewater.org/",
+        context:
+          "Owns and operates the Lake Tapps reservoir, including the annual fall drawdown and spring refill schedule.",
+      },
+      {
+        name: "Puget Sound Energy",
+        url: "https://www.pse.com/",
+        context: "Electric and natural-gas service across the plateau.",
+      },
+    ],
+    regulations: [
+      {
+        title: "Shoreline & Dock Permitting",
+        description:
+          "Bulkhead repair, dock replacement, and boat-lift work on Lake Tapps run through county shoreline review. We sequence permits before list date so waterfront buyers aren't underwriting an open question.",
+      },
+      {
+        title: "Reservoir Drawdown Calendar",
+        description:
+          "Cascade Water Alliance draws the lake down each fall. Waterfront photography, dock inspections, and bulkhead work are scheduled around the refill calendar — a full-pool listing photo is worth real money here.",
+      },
+      {
+        title: "Island HOAs & CC&Rs",
+        description:
+          "Tapps Island and Snag Island carry active HOAs with architectural review, bridge/access rules, and transfer fees. We pull the resale certificate during the disclosure window, not after mutual acceptance.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "Cascade Water Alliance",
+        description:
+          "Lake-level timing drives our waterfront marketing calendar — twilight and drone shoots are booked against the refill schedule.",
+      },
+      {
+        name: "Tacoma–Pierce County Health Department",
+        description:
+          "Most Lake Tapps homes operate on septic. Current Operation & Maintenance reports are sourced and pre-cleared before inspection contingencies open.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      suburbanRegulations: true,
+      microClimate: true,
+    },
+    microClimate: {
+      annualRainfallInches: 41,
+      avgWinterLowF: 33,
+      avgSummerHighF: 79,
+      serviceImpact:
+        "The fall drawdown and wet season arrive together — we front-load exterior prep, dock work, and waterfront photography into late summer so listings carry full-pool imagery through the winter market.",
+    },
+    suburban: {
+      typicalLotSize: "0.25 – 1+ acres; waterfront and island parcels vary widely by frontage.",
+      septicNotes:
+        "The majority of Lake Tapps properties are on septic with O&M cycles every 1–3 years depending on system type.",
+      hoaNotes:
+        "Tapps Island and Snag Island HOAs include architectural review and access rules we verify before going active.",
+    },
+  },
+  {
     slug: "puyallup",
     name: "Puyallup",
     state: "Washington",
@@ -31,9 +123,11 @@ export const CITIES: City[] = [
     neighborhoodDirectory: [
       "South Hill",
       "Downtown Puyallup",
-      "Manorwood",
-      "Sunrise",
-      "Lipoma Firs",
+      "Clark's Creek",
+      "Rodesco",
+      "Shawnee Ridge",
+      "Gem Heights",
+      "Summit",
     ],
     permittingOffice: {
       name: "City of Puyallup Development & Permitting Services",
@@ -137,10 +231,10 @@ export const CITIES: City[] = [
     activeProjects: 9,
     neighborhoodDirectory: [
       "Tehaleh",
-      "Upper Tehaleh",
-      "Lower Tehaleh",
-      "Lake Tapps North Shore",
-      "Falling Water",
+      "Sky Island",
+      "Quiet Water",
+      "Panorama West",
+      "Panorama Heights",
     ],
     permittingOffice: {
       name: "City of Bonney Lake — Community Development",
@@ -298,6 +392,340 @@ export const CITIES: City[] = [
         "Historic Design Review is required for any exterior modification visible from the right-of-way.",
       noiseOrdinance:
         "Construction and contractor noise inside the downtown core is restricted to 7:00 a.m. – 7:00 p.m. on weekdays — we sequence prep accordingly.",
+    },
+  },
+  {
+    slug: "edgewood",
+    name: "Edgewood",
+    state: "Washington",
+    stateCode: "WA",
+    county: "Pierce County",
+    taxonomy: "suburban",
+    population: 12_327,
+    zipCodes: ["98372", "98371"],
+    geo: { lat: 47.2495, lng: -122.2937 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e16372192203004a84a865_We%20Help%20You%20Sell%20Your%20Home%20-%20Pierce%20County.jpg",
+    heroEyebrow: "Service Area · Edgewood Plateau",
+    heroIntro:
+      "Edgewood is large-lot living minutes from the valley floor — acreage parcels, equestrian properties, and newer plats sharing the same hilltop. Comp selection here is about lot utility as much as the house itself.",
+    activeProjects: 5,
+    neighborhoodDirectory: [],
+    permittingOffice: {
+      name: "City of Edgewood — Community Development",
+      url: "https://www.cityofedgewood.org/",
+      context: "Building permits, short-plat review, and critical-areas determinations.",
+    },
+    utilities: [
+      {
+        name: "Puget Sound Energy",
+        url: "https://www.pse.com/",
+        context: "Electric and natural-gas service.",
+      },
+      {
+        name: "City of Edgewood Public Works",
+        url: "https://www.cityofedgewood.org/",
+        context: "Stormwater; water and sewer service vary by parcel and provider.",
+      },
+    ],
+    regulations: [
+      {
+        title: "Septic-to-Sewer Transitions",
+        description:
+          "Sewer availability varies street by street as Edgewood builds out its system. We confirm connection status and any latecomer or assessment obligations before pricing — buyers' lenders will ask.",
+      },
+      {
+        title: "Critical Areas & Wetland Buffers",
+        description:
+          "Wetland and stream buffers cross many of Edgewood's larger parcels. We flag buffer status on the title commitment so usable-acreage claims in marketing hold up at inspection.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "Parcel-by-Parcel Utility Verification",
+        description:
+          "Water purveyor, sewer vs. septic, and gas availability genuinely differ across Edgewood — we document all three before the listing goes active.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      suburbanRegulations: true,
+    },
+    suburban: {
+      typicalLotSize: "0.5 – 2.5 acres on established parcels; smaller lots in newer plats.",
+      septicNotes:
+        "Many established properties remain on septic while sewer expands — connection status materially affects value.",
+      hoaNotes: "Newer subdivisions carry HOAs; acreage parcels typically do not.",
+    },
+  },
+  {
+    slug: "milton",
+    name: "Milton",
+    state: "Washington",
+    stateCode: "WA",
+    county: "Pierce County",
+    taxonomy: "suburban",
+    population: 8_697,
+    zipCodes: ["98354"],
+    geo: { lat: 47.2481, lng: -122.3129 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e6a5a683921a019c3e4f3b_1.jpg",
+    heroEyebrow: "Service Area · Milton",
+    heroIntro:
+      "Milton straddles the Pierce–King county line with quick I-5 access and a tight, established housing stock. Listings here cross-shop against Fife, Edgewood, and Federal Way — we position against all three comp pools at once.",
+    activeProjects: 4,
+    neighborhoodDirectory: [],
+    permittingOffice: {
+      name: "City of Milton — Community Development",
+      url: "https://www.cityofmilton.net/",
+      context: "Building permits, planning, and code review.",
+    },
+    utilities: [
+      {
+        name: "City of Milton Public Works",
+        url: "https://www.cityofmilton.net/",
+        context: "Municipal water and sewer service.",
+      },
+      {
+        name: "Puget Sound Energy",
+        url: "https://www.pse.com/",
+        context: "Electric and natural-gas service.",
+      },
+    ],
+    regulations: [
+      {
+        title: "County-Line Considerations",
+        description:
+          "Milton parcels sit in both Pierce and King counties — tax rates, school assignments, and recording all follow the parcel's county. We verify county standing on day one so disclosures and buyer underwriting are clean.",
+      },
+      {
+        title: "Critical Areas Near Hylebos Creek",
+        description:
+          "Properties near the Hylebos corridor can carry stream-buffer and drainage considerations we surface in the pre-list audit rather than at inspection.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "City of Milton Utilities",
+        description:
+          "Side-sewer documentation and water-meter records are pulled early — small-city records requests can take longer than buyers' timelines allow.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      suburbanRegulations: true,
+    },
+    suburban: {
+      typicalLotSize: "0.15 – 0.35 acres across most of the city.",
+      hoaNotes: "Most of Milton's housing stock predates HOAs; newer infill plats are the exception.",
+    },
+  },
+  {
+    slug: "auburn",
+    name: "Auburn",
+    state: "Washington",
+    stateCode: "WA",
+    county: "King County",
+    taxonomy: "suburban",
+    population: 87_256,
+    zipCodes: ["98001", "98002", "98092"],
+    geo: { lat: 47.3073, lng: -122.2285 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Service Area · Auburn Valley to Lea Hill",
+    heroIntro:
+      "Auburn prices in distinct bands — valley-floor neighborhoods near the Sounder station, established West Hill pockets, and the newer Lea Hill bench above Green River College. We underwrite each band against its own comp pool.",
+    activeProjects: 8,
+    neighborhoodDirectory: ["Lea Hill"],
+    permittingOffice: {
+      name: "City of Auburn — Community Development",
+      url: "https://www.auburnwa.gov/",
+      context: "Permit center, planning review, and rental housing policy.",
+    },
+    utilities: [
+      {
+        name: "City of Auburn Utilities",
+        url: "https://www.auburnwa.gov/",
+        context: "Municipal water, sewer, and storm drainage.",
+      },
+      {
+        name: "Puget Sound Energy",
+        url: "https://www.pse.com/",
+        context: "Electric and natural-gas service.",
+      },
+    ],
+    regulations: [
+      {
+        title: "Floodplain Mapping (Green & White Rivers)",
+        description:
+          "Valley-floor parcels can fall inside FEMA-mapped zones. We pull flood determinations before pricing so lender requirements never surprise the transaction.",
+      },
+      {
+        title: "Rental Housing & Occupancy Rules",
+        description:
+          "Auburn's rental-housing policies matter in investor-heavy pockets — we review compliance standing pre-list on tenant-occupied properties.",
+      },
+      {
+        title: "Lea Hill Annexation Pockets",
+        description:
+          "Parts of Lea Hill carry county-era infrastructure and easements from pre-annexation plats. Title review happens before photos, not during escrow.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "City of Auburn Utilities",
+        description:
+          "Side-sewer cards and latecomer-agreement checks are completed before list date on older valley parcels.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      urbanLogistics: true,
+    },
+    urban: {
+      parking:
+        "Sounder-station and downtown-core parking shapes both showing logistics and the commuter-buyer story — we market transit access with numbers, not adjectives.",
+      permitOverlay:
+        "Downtown urban-center design standards apply to selected corridors; most residential neighborhoods sit outside the overlay.",
+      noiseOrdinance:
+        "Standard construction-hour limits apply citywide; we schedule prep crews inside them.",
+    },
+  },
+  {
+    slug: "buckley",
+    name: "Buckley",
+    state: "Washington",
+    stateCode: "WA",
+    county: "Pierce County",
+    taxonomy: "rural",
+    population: 5_114,
+    zipCodes: ["98321"],
+    geo: { lat: 47.1632, lng: -122.0268 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/680fe409428a57e5320586a0_1.jpg",
+    heroEyebrow: "Service Area · Foothills",
+    heroIntro:
+      "Buckley is the gateway to the foothills — small-town blocks near downtown, newer plats like Elk Run and Elk Heights, and acreage at the edges. Buyers come for the pace and the Rainier views; we price both honestly.",
+    activeProjects: 3,
+    neighborhoodDirectory: ["Elk Run", "Elk Heights"],
+    permittingOffice: {
+      name: "City of Buckley — Planning & Building",
+      url: "https://www.cityofbuckley.com/",
+      context: "Building permits, planning review, and public-works coordination.",
+    },
+    utilities: [
+      {
+        name: "City of Buckley Public Works",
+        url: "https://www.cityofbuckley.com/",
+        context: "Municipal water and sewer inside city limits.",
+      },
+      {
+        name: "Puget Sound Energy",
+        url: "https://www.pse.com/",
+        context: "Electric and natural-gas service.",
+      },
+    ],
+    regulations: [
+      {
+        title: "White River Corridor & Slope Setbacks",
+        description:
+          "Parcels along the White River bench carry slope and erosion-hazard considerations. We document setback status upfront so acreage marketing claims survive inspection.",
+      },
+      {
+        title: "Septic & Well Verification (Edge Parcels)",
+        description:
+          "Properties outside the municipal service area run on septic and private wells — current O&M reports and well-flow tests are sourced before going active.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "City of Buckley Public Works",
+        description:
+          "In-city water/sewer records are confirmed pre-list; edge parcels get health-department septic and well documentation instead.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      suburbanRegulations: true,
+    },
+    suburban: {
+      typicalLotSize: "0.15 – 0.30 acres in town and newer plats; 1 – 5 acres at the edges.",
+      septicNotes:
+        "Septic and private wells are standard outside city utility boundaries, with O&M cycles every 1–3 years.",
+      hoaNotes: "Elk Run and Elk Heights carry HOAs with design review; older in-town blocks do not.",
+    },
+  },
+  {
+    slug: "graham",
+    name: "Graham",
+    state: "Washington",
+    stateCode: "WA",
+    county: "Pierce County",
+    taxonomy: "rural",
+    population: 32_981,
+    zipCodes: ["98338"],
+    geo: { lat: 47.0529, lng: -122.294 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/680fe8304415e6b356d95497_1.jpg",
+    heroEyebrow: "Service Area · Graham & The Foothills",
+    heroIntro:
+      "Graham is acreage country — unincorporated Pierce County where lot size, outbuildings, and well/septic standing drive value as much as finished square footage. Our comp models here are parcel-first, not house-first.",
+    activeProjects: 6,
+    neighborhoodDirectory: ["The Country"],
+    permittingOffice: {
+      name: "Pierce County Planning & Public Works",
+      url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
+      context:
+        "Graham is unincorporated — permits, site development, and zoning all run through Pierce County.",
+    },
+    utilities: [
+      {
+        name: "Puget Sound Energy",
+        url: "https://www.pse.com/",
+        context: "Electric service; natural-gas availability varies by road.",
+      },
+      {
+        name: "Tacoma–Pierce County Health Department",
+        url: "https://www.tpchd.org/",
+        context: "Septic permitting and private-well programs for unincorporated parcels.",
+      },
+    ],
+    regulations: [
+      {
+        title: "Well & Septic Documentation",
+        description:
+          "Most Graham parcels run on private wells and septic. We source well logs, flow tests, and septic O&M reports before list date — the single biggest escrow-delay risk in this submarket.",
+      },
+      {
+        title: "Agricultural & Rural Zoning",
+        description:
+          "Rural-zoned parcels carry use allowances (and limits) that materially affect buyer pools — horse setups, shops, and ADU potential are verified against county zoning before we market them.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "Pierce County Records",
+        description:
+          "Parcel research — easements, access agreements, and outbuilding permits — happens during the pre-list audit, not during the inspection contingency.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      suburbanRegulations: true,
+      microClimate: true,
+    },
+    microClimate: {
+      annualRainfallInches: 48,
+      avgWinterLowF: 32,
+      avgSummerHighF: 78,
+      serviceImpact:
+        "Graham sits higher and wetter than the valley floor — gravel drives, pasture, and roof moss all read differently in photos by November, so exterior prep and photography are front-loaded into late summer.",
+    },
+    suburban: {
+      typicalLotSize: "1 – 5+ acres on most parcels; smaller lots in platted communities like The Country.",
+      septicNotes:
+        "Private wells and septic systems are the norm; documentation drives both pricing confidence and escrow speed.",
+      hoaNotes: "The Country and similar platted communities carry HOAs; open acreage typically does not.",
     },
   },
   {
