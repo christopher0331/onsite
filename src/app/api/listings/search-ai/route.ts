@@ -29,6 +29,17 @@ type NlpResponse = {
   nlpId?: string;
 };
 
+// NWMLS records "no basement" as the literal string "None" (not an empty/null
+// value), so Repliers' NLP filter `basement=not:null` still lets those homes
+// through. Treat a basement as real only when a non-"None" value is present.
+function hasRealBasement(value: unknown): boolean {
+  const arr = Array.isArray(value) ? value : value != null ? [value] : [];
+  return arr.some((v) => {
+    const s = String(v).trim().toLowerCase();
+    return s !== "" && s !== "none";
+  });
+}
+
 export async function POST(req: NextRequest) {
   const key = process.env.REPLIERS_API_KEY;
   if (!key) {
@@ -94,7 +105,22 @@ export async function POST(req: NextRequest) {
     });
   }
   if (nlpRes.status === 403) {
-    // NLP not enabled on the Repliers key yet.
+    // A 403 here covers two very different cases:
+    //   1. NLP not enabled on the Repliers key (feature access), or
+    //   2. The linked OpenAI key erroring (rate limit / insufficient quota),
+    //      which Repliers surfaces as a 403 with an OpenAI error body.
+    const detail = await nlpRes.text();
+    const isOpenAiError = /openai|rate.?limit|quota/i.test(detail);
+    if (isOpenAiError) {
+      return NextResponse.json(
+        {
+          error:
+            "AI search is busy right now — please try again in a few seconds.",
+          code: "nlp_busy",
+        },
+        { status: 503 }
+      );
+    }
     return NextResponse.json(
       {
         error:
@@ -141,15 +167,31 @@ export async function POST(req: NextRequest) {
   params.set("pageNum", "1");
   if (!params.has("state")) params.set("state", "WA");
 
-  const imageBody = nlp.request?.body;
-  const listingsUrl = repliersListingsUrl(`?${params.toString()}`);
+  // "Has a basement" filter (`basement=not:null`) needs server-side validation
+  // because of the NWMLS "None" quirk — see hasRealBasement above.
+  const wantsBasement = (params.get("basement") || "").toLowerCase() === "not:null";
+
+  // NLP may return an `imageSearchItems` body for visual descriptors
+  // ("modern", "white kitchen", etc.). That requires the paid AI Image Search
+  // add-on; without it Repliers rejects the request. We intentionally ignore
+  // the image body and run the structured filters (beds/baths/price/city/etc.),
+  // which still return strong results. To enable visual search later, POST
+  // `nlp.request.body` to this URL once the account is authorized.
+  const listingsUrlObj = new URL(repliersListingsUrl(`?${params.toString()}`));
+  if (wantsBasement) {
+    // Make sure the raw basement value comes back so we can validate it.
+    const fields = listingsUrlObj.searchParams.get("fields") || "";
+    if (!fields.includes("raw.Basement")) {
+      listingsUrlObj.searchParams.set("fields", `${fields},raw.Basement`);
+    }
+  }
+  const listingsUrl = listingsUrlObj.toString();
 
   let listingsRes: Response;
   try {
     listingsRes = await fetch(listingsUrl, {
-      method: imageBody ? "POST" : "GET",
+      method: "GET",
       headers,
-      ...(imageBody ? { body: JSON.stringify(imageBody) } : {}),
       next: { revalidate: 120 },
     });
   } catch {
@@ -169,12 +211,21 @@ export async function POST(req: NextRequest) {
     count?: number;
     listings?: Array<CardListing & { agents?: Array<{ name?: string; boardAgentId?: string }> | null }>;
   };
-  const listings = tagOnsiteListings(enriched.listings ?? []);
+  let listings = tagOnsiteListings(enriched.listings ?? []);
+  let count = enriched.count ?? listings.length;
+
+  if (wantsBasement) {
+    listings = listings.filter((l) =>
+      hasRealBasement((l.raw as Record<string, unknown> | null)?.Basement)
+    );
+    // Repliers' total counts the "None" homes too, so report the validated set.
+    count = listings.length;
+  }
 
   return NextResponse.json({
     summary,
     nlpId,
-    count: enriched.count ?? listings.length,
+    count,
     listings,
   });
 }
