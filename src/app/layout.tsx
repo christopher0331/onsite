@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
+import AiAssistant from "@/components/AiAssistant";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -39,6 +40,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${dmSans.variable} antialiased`}>
         {children}
+        <AiAssistant />
       </body>
     </html>
   );

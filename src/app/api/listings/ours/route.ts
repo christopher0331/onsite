@@ -4,7 +4,7 @@ import type { CardListing } from "@/components/ListingCard";
 import {
   mergeOnsiteListings,
   ONSITE_BROKERAGE_NAME,
-  ONSITE_LEAD_AGENT_NAME,
+  ONSITE_LEAD_AGENTS,
   parseOnsiteListingScope,
   sortOnsiteListings,
   tagOnsiteListings,
@@ -21,7 +21,7 @@ const ALLOWED_SORT_BY = new Set([
 ]);
 
 type ListingRow = CardListing & {
-  agents?: Array<{ name?: string }>;
+  agents?: Array<{ name?: string; boardAgentId?: string }>;
 };
 
 function applyStatus(params: URLSearchParams, status: string) {
@@ -120,22 +120,39 @@ export async function GET(req: NextRequest) {
   const timberParams = new URLSearchParams(base);
   timberParams.set("office.brokerageName", ONSITE_BROKERAGE_NAME);
 
-  const andreParams = new URLSearchParams(base);
-  andreParams.set("searchFields", "agents.name");
-  andreParams.set("search", ONSITE_LEAD_AGENT_NAME);
+  // One fetch per lead agent — by board agent id (precise) or by name search.
+  const agentParamSets = ONSITE_LEAD_AGENTS.map((agent) => {
+    const params = new URLSearchParams(base);
+    if (agent.boardAgentIds?.length) {
+      for (const id of agent.boardAgentIds) params.append("boardAgentId", id);
+    } else if (agent.searchName) {
+      params.set("searchFields", "agents.name");
+      params.set("search", agent.searchName);
+    }
+    return { agent, params };
+  });
 
   try {
-    const [timber, andre] = await Promise.all([
+    const [timber, ...agentResults] = await Promise.all([
       fetchScope(timberParams),
-      fetchScope(andreParams),
+      ...agentParamSets.map((set) => fetchScope(set.params)),
     ]);
 
+    const agentCounts: Record<string, number> = {};
+    agentParamSets.forEach((set, i) => {
+      agentCounts[set.agent.key] = agentResults[i]?.length ?? 0;
+    });
+
+    const scopedAgentIndex = agentParamSets.findIndex(
+      (set) => set.agent.key === scope
+    );
+
     let merged =
-      scope === "andre"
-        ? tagOnsiteListings(andre)
-        : scope === "timber"
-          ? tagOnsiteListings(timber)
-          : mergeOnsiteListings(timber, andre);
+      scope === "timber"
+        ? tagOnsiteListings(timber)
+        : scopedAgentIndex >= 0
+          ? tagOnsiteListings(agentResults[scopedAgentIndex] ?? [])
+          : mergeOnsiteListings(timber, ...agentResults);
 
     merged = sortOnsiteListings(merged, sortBy, scope);
     const start = (page - 1) * pageSize;
@@ -148,7 +165,7 @@ export async function GET(req: NextRequest) {
       pageSize,
       scope,
       timberCount: timber.length,
-      andreCount: andre.length,
+      agentCounts,
       listings: slice,
     });
   } catch {

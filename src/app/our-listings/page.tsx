@@ -9,7 +9,7 @@ import ListingCard from "@/components/ListingCard";
 import type { OnsiteListing, OnsiteListingScope } from "@/lib/onsite-listings";
 import {
   ONSITE_BROKERAGE_NAME,
-  ONSITE_LEAD_AGENT_NAME,
+  ONSITE_LEAD_AGENTS,
 } from "@/lib/onsite-listings";
 
 type ApiResponse = {
@@ -18,14 +18,16 @@ type ApiResponse = {
   page: number;
   scope: OnsiteListingScope;
   timberCount: number;
-  andreCount: number;
+  agentCounts: Record<string, number>;
   listings: OnsiteListing[];
 };
 
-const SCOPE_FILTERS: { label: string; value: OnsiteListingScope; description: string }[] = [
-  { label: "All Listings", value: "all", description: "Timber & André combined" },
-  { label: "André Bohall", value: "andre", description: ONSITE_LEAD_AGENT_NAME },
-  { label: "Timber Real Estate", value: "timber", description: ONSITE_BROKERAGE_NAME },
+const LEAD_AGENT_NAMES = ONSITE_LEAD_AGENTS.map((a) => a.tabLabel).join(", ");
+
+const SCOPE_FILTERS: { label: string; value: OnsiteListingScope }[] = [
+  { label: "All Listings", value: "all" },
+  ...ONSITE_LEAD_AGENTS.map((a) => ({ label: a.tabLabel, value: a.key })),
+  { label: ONSITE_BROKERAGE_NAME, value: "timber" },
 ];
 
 const STATUS_FILTERS = [
@@ -39,7 +41,7 @@ export default function OurListingsPage() {
   const [listings, setListings] = useState<OnsiteListing[]>([]);
   const [count, setCount] = useState(0);
   const [timberCount, setTimberCount] = useState(0);
-  const [andreCount, setAndreCount] = useState(0);
+  const [agentCounts, setAgentCounts] = useState<Record<string, number>>({});
   const [numPages, setNumPages] = useState(1);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -70,7 +72,7 @@ export default function OurListingsPage() {
           setListings([]);
           setCount(0);
           setTimberCount(0);
-          setAndreCount(0);
+          setAgentCounts({});
           setNumPages(1);
           setLoading(false);
         }
@@ -83,7 +85,7 @@ export default function OurListingsPage() {
       setListings(data.listings ?? []);
       setCount(data.count ?? 0);
       setTimberCount(data.timberCount ?? 0);
-      setAndreCount(data.andreCount ?? 0);
+      setAgentCounts(data.agentCounts ?? {});
       setNumPages(data.numPages ?? 1);
       setLoading(false);
     }
@@ -118,7 +120,7 @@ export default function OurListingsPage() {
               Our Listings
             </h1>
             <p className="max-w-2xl text-[15px] leading-relaxed text-charcoal/80">
-              Every property listed by {ONSITE_BROKERAGE_NAME} and {ONSITE_LEAD_AGENT_NAME},
+              Every property listed by {ONSITE_BROKERAGE_NAME} and {LEAD_AGENT_NAMES},
               including active, pending, and sold homes across Washington.
             </p>
             <div className="mt-8 flex flex-wrap gap-3 text-[12px] text-charcoal/75">
@@ -132,16 +134,19 @@ export default function OurListingsPage() {
                 {ONSITE_BROKERAGE_NAME}: {timberCount}{" "}
                 {status === "All" ? "total" : statusLabel}
               </span>
-              <span
-                className={`rounded-full border px-4 py-2 ${
-                  scope === "andre"
-                    ? "border-charcoal bg-charcoal text-white"
-                    : "border-charcoal/15"
-                }`}
-              >
-                {ONSITE_LEAD_AGENT_NAME}: {andreCount}{" "}
-                {status === "All" ? "total" : statusLabel}
-              </span>
+              {ONSITE_LEAD_AGENTS.map((agent) => (
+                <span
+                  key={agent.key}
+                  className={`rounded-full border px-4 py-2 ${
+                    scope === agent.key
+                      ? "border-charcoal bg-charcoal text-white"
+                      : "border-charcoal/15"
+                  }`}
+                >
+                  {agent.tabLabel}: {agentCounts[agent.key] ?? 0}{" "}
+                  {status === "All" ? "total" : statusLabel}
+                </span>
+              ))}
               {scope === "all" && (
                 <span className="rounded-full border border-charcoal/15 bg-charcoal px-4 py-2 text-white">
                   {count} unique {status === "All" ? "total" : statusLabel}
