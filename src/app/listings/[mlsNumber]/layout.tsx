@@ -82,10 +82,25 @@ export async function generateMetadata({
   const cityLine = [a.city, a.state, a.zip].filter(Boolean).join(", ");
   const price = formatPrice(listing.soldPrice ?? listing.listPrice);
 
-  const headline = showAddress && street ? `${street}${unit}` : cityLine || "Home for sale";
-  const title = `${price} · ${headline} | OnSite Real Estate Group`;
-
   const det = listing.details ?? {};
+
+  // Browser tabs truncate the END of the title, so lead with the most
+  // identifiable info (street + city) and keep the brand as a suffix. This
+  // makes multiple open listing tabs instantly distinguishable instead of all
+  // starting with a clipped dollar amount.
+  const streetAddress = showAddress && street ? `${street}${unit}` : null;
+  const tabHeadline = streetAddress
+    ? [streetAddress, a.city].filter(Boolean).join(", ")
+    : a.city
+      ? `${det.numBedrooms ? `${det.numBedrooms} bd ` : ""}home in ${a.city}`
+      : "Home for sale";
+  const title = `${tabHeadline} | OnSite Real Estate Group`;
+
+  // Richer, price-led headline reserved for social share cards where the full
+  // string is shown (not truncated like a tab).
+  const shareHeadline = streetAddress ?? cityLine || "Home for sale";
+  const ogTitle = `${price} · ${shareHeadline} | OnSite Real Estate Group`;
+
   const specs = [
     det.numBedrooms ? `${det.numBedrooms} bd` : null,
     det.numBathrooms ? `${det.numBathrooms} ba` : null,
@@ -112,7 +127,7 @@ export async function generateMetadata({
     description: description || undefined,
     alternates: { canonical: `/listings/${mlsNumber}` },
     openGraph: {
-      title,
+      title: ogTitle,
       description: description || undefined,
       url,
       type: "website",
@@ -123,7 +138,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: img ? "summary_large_image" : "summary",
-      title,
+      title: ogTitle,
       description: description || undefined,
       images: img ? [img] : undefined,
     },
