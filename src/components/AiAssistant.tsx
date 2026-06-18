@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { runAiSearch, AI_SEARCH_EXAMPLES } from "@/lib/ai-search";
-import type { OnsiteListing } from "@/lib/onsite-listings";
+import { runAiSearch, AI_SEARCH_EXAMPLES, type AiSearchListing } from "@/lib/ai-search";
 
 const CDN = "https://cdn.repliers.io/";
 
@@ -12,7 +11,7 @@ type ChatMessage = {
   id: number;
   role: "user" | "assistant";
   text: string;
-  listings?: OnsiteListing[];
+  listings?: AiSearchListing[];
   isError?: boolean;
 };
 
@@ -28,13 +27,13 @@ function imageUrl(images?: string[] | null) {
   return path.startsWith("http") ? path : CDN + path;
 }
 
-function priceLabel(listing: OnsiteListing) {
+function priceLabel(listing: AiSearchListing) {
   const value = listing.soldPrice || listing.listPrice;
   if (!value || Number.isNaN(value)) return "Price on request";
   return "$" + value.toLocaleString("en-US");
 }
 
-function specLine(listing: OnsiteListing) {
+function specLine(listing: AiSearchListing) {
   const d = listing.details ?? {};
   const parts: string[] = [];
   if (d.numBedrooms) parts.push(`${d.numBedrooms} bd`);
@@ -43,7 +42,7 @@ function specLine(listing: OnsiteListing) {
   return parts.join(" · ");
 }
 
-function addressLine(listing: OnsiteListing) {
+function addressLine(listing: AiSearchListing) {
   const a = listing.address;
   if (!a) return "Address unavailable";
   if (listing.permissions?.displayAddressOnInternet === "N") {
@@ -219,6 +218,11 @@ export default function AiAssistant() {
                             <p className="truncate text-[12px] text-charcoal/55">
                               {addressLine(listing)}
                             </p>
+                            {listing.matchedTerms && listing.matchedTerms.length > 0 && (
+                              <p className="mt-0.5 truncate text-[11px] text-emerald-700">
+                                ✓ {listing.matchedTerms.join(", ")}
+                              </p>
+                            )}
                           </div>
                         </Link>
                       );

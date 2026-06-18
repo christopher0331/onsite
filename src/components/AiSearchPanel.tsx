@@ -130,6 +130,11 @@ export default function AiSearchPanel() {
                     <p className="mt-1 text-[12px] uppercase tracking-[0.2em] text-charcoal/55">
                       {result.count} {result.count === 1 ? "home" : "homes"}
                     </p>
+                    {result.features && result.features.length > 0 && (
+                      <p className="mt-2 text-[12px] text-charcoal/60">
+                        Checking listing remarks for: {result.features.join(", ")}
+                      </p>
+                    )}
                   </div>
                   <button
                     onClick={clear}
@@ -147,11 +152,22 @@ export default function AiSearchPanel() {
                   <>
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                       {result.listings.map((listing) => (
-                        <ListingCard
-                          key={listing.mlsNumber}
-                          listing={listing}
-                          sourceLabel={listing.sourceLabel}
-                        />
+                        <div key={listing.mlsNumber} className="flex flex-col gap-2">
+                          <ListingCard listing={listing} sourceLabel={listing.sourceLabel} />
+                          {listing.matchedTerms && listing.matchedTerms.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5 px-1">
+                              {listing.matchedTerms.map((term) => (
+                                <span
+                                  key={term}
+                                  className="inline-flex items-center gap-1 rounded-full bg-charcoal/5 px-2.5 py-1 text-[11px] text-charcoal/75"
+                                >
+                                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                                  {term}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       ))}
                     </div>
 

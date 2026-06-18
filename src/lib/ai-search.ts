@@ -1,10 +1,17 @@
 import type { OnsiteListing } from "@/lib/onsite-listings";
 
+export type AiSearchListing = OnsiteListing & {
+  /** Feature labels from the prompt that this listing's remarks matched. */
+  matchedTerms?: string[];
+};
+
 export type AiSearchResult = {
   summary: string;
   nlpId: string | null;
   count: number;
-  listings: OnsiteListing[];
+  listings: AiSearchListing[];
+  /** Feature labels detected in the prompt (what we matched remarks against). */
+  features?: string[];
   /** Soft, in-band message (e.g. off-topic prompt) — not a hard error. */
   message?: string;
   /** Hard error to surface to the user. */
@@ -58,6 +65,7 @@ export async function runAiSearch(
     nlpId: data.nlpId ?? null,
     count: data.count || 0,
     listings: data.listings || [],
+    features: data.features,
     message: data.message,
   };
 }
