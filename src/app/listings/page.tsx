@@ -470,7 +470,7 @@ export default function ListingsPage() {
                           {mlsInput.trim() !== mlsSearch && mlsInput.trim().length > 0 ? (
                             <button
                               type="submit"
-                              className="absolute right-1 top-1 bottom-1 rounded-full bg-charcoal px-3 text-[10px] font-bold uppercase tracking-[0.1em] text-white hover:bg-charcoal/90 transition"
+                              className="absolute right-1 top-1 bottom-1 rounded-full bg-[#3daf3d] px-3 text-[10px] font-bold uppercase tracking-[0.1em] text-white hover:bg-[#3daf3d]/90 transition"
                             >
                               Go
                             </button>
@@ -499,7 +499,7 @@ export default function ListingsPage() {
                                 value={f.value}
                                 checked={status === f.value}
                                 onChange={() => setStatus(f.value)}
-                                className="w-4 h-4 text-charcoal border-charcoal/20 focus:ring-charcoal cursor-pointer"
+                                className="w-4 h-4 text-[#3daf3d] border-charcoal/20 focus:ring-[#3daf3d] cursor-pointer"
                               />
                               <span className="text-[14px] text-charcoal">{f.label}</span>
                             </label>
@@ -547,7 +547,7 @@ export default function ListingsPage() {
                                   key={val}
                                   onClick={() => setMinBeds(val)}
                                   className={`flex-1 py-2 text-[14px] text-center border-r border-charcoal/20 last:border-r-0 transition ${
-                                    minBeds === val ? "bg-charcoal text-white font-medium" : "bg-white text-charcoal hover:bg-charcoal/5"
+                                    minBeds === val ? "bg-[#3daf3d]/10 text-[#3daf3d] font-bold" : "bg-white text-charcoal hover:bg-charcoal/5"
                                   }`}
                                 >
                                   {val === "" ? "Any" : `${val}+`}
@@ -563,7 +563,7 @@ export default function ListingsPage() {
                                   key={val}
                                   onClick={() => setMinBaths(val)}
                                   className={`flex-1 py-2 text-[14px] text-center border-r border-charcoal/20 last:border-r-0 transition ${
-                                    minBaths === val ? "bg-charcoal text-white font-medium" : "bg-white text-charcoal hover:bg-charcoal/5"
+                                    minBaths === val ? "bg-[#3daf3d]/10 text-[#3daf3d] font-bold" : "bg-white text-charcoal hover:bg-charcoal/5"
                                   }`}
                                 >
                                   {val === "" ? "Any" : `${val}+`}
@@ -586,7 +586,7 @@ export default function ListingsPage() {
                             { label: "Mobile", value: "Mobile" },
                           ].map((opt) => (
                             <label key={opt.value} className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl border cursor-pointer transition ${
-                              propertyType.includes(opt.value) ? "border-charcoal bg-charcoal/5" : "border-charcoal/10 bg-white hover:border-charcoal/30"
+                              propertyType.includes(opt.value) ? "border-[#3daf3d] bg-[#3daf3d]/5 text-[#3daf3d]" : "border-charcoal/10 bg-white hover:border-charcoal/30 text-charcoal"
                             }`}>
                               <input
                                 type="checkbox"
@@ -597,7 +597,7 @@ export default function ListingsPage() {
                                   else setPropertyType(propertyType.filter((t) => t !== opt.value));
                                 }}
                               />
-                              <span className="text-[14px] font-medium text-charcoal">{opt.label}</span>
+                              <span className="text-[14px] font-medium currentColor">{opt.label}</span>
                             </label>
                           ))}
                         </div>
@@ -608,7 +608,7 @@ export default function ListingsPage() {
                         onClick={() => setIsMoreFiltersOpen(true)}
                         className={`flex items-center gap-2 rounded-full border px-4 py-2.5 text-[12px] font-medium tracking-wide transition-all ${
                           isMoreFiltersOpen
-                            ? "border-charcoal bg-charcoal/5 text-charcoal"
+                            ? "border-[#3daf3d] bg-[#3daf3d]/10 text-[#3daf3d]"
                             : "border-charcoal/20 bg-white text-charcoal hover:border-charcoal hover:bg-charcoal/5"
                         }`}
                       >
@@ -651,7 +651,7 @@ export default function ListingsPage() {
                           </button>
                           <button
                             onClick={() => setIsMoreFiltersOpen(false)}
-                            className="rounded-full bg-charcoal px-8 py-3 text-[14px] font-bold text-white hover:bg-charcoal/90 transition"
+                            className="rounded-full bg-[#3daf3d] px-8 py-3 text-[14px] font-bold text-white hover:bg-[#3daf3d]/90 transition"
                           >
                             Apply Filters
                           </button>
@@ -703,7 +703,7 @@ export default function ListingsPage() {
                                   key={val}
                                   onClick={() => setGarageSpots(val)}
                                   className={`px-4 py-2 text-[14px] text-center border-r border-charcoal/20 last:border-r-0 transition ${
-                                    garageSpots === val ? "bg-[#eaf1ed] text-[#1c646d] font-bold" : "bg-white text-charcoal hover:bg-charcoal/5"
+                                    garageSpots === val ? "bg-[#3daf3d]/10 text-[#3daf3d] font-bold" : "bg-white text-charcoal hover:bg-charcoal/5"
                                   }`}
                                 >
                                   {val}
@@ -720,7 +720,7 @@ export default function ListingsPage() {
                             ].map(feat => (
                               <label key={feat} className="flex items-center gap-3 cursor-pointer group">
                                 <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
-                                  homeFeatures.includes(feat) ? "bg-charcoal border-charcoal text-white" : "border-charcoal/30 group-hover:border-charcoal"
+                                  homeFeatures.includes(feat) ? "bg-[#3daf3d] border-[#3daf3d] text-white" : "border-charcoal/30 group-hover:border-[#3daf3d]"
                                 }`}>
                                   {homeFeatures.includes(feat) && (
                                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
