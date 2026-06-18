@@ -428,7 +428,7 @@ export default function ListingsPage() {
                 </p>
                 <Link
                   href="/service-areas"
-                  className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/75 hover:text-white transition-colors"
+                  className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/75 hover:text-[#3daf3d] transition-colors"
                 >
                   Explore Service Areas
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -450,22 +450,22 @@ export default function ListingsPage() {
             <div className="flex flex-wrap items-center gap-3">
               <div className="flex flex-wrap items-center gap-3">
                       {/* Search Bar */}
-                      <div className="relative flex items-center bg-white rounded-full shadow-sm border border-charcoal/10 overflow-hidden">
+                      <div className="relative flex items-center bg-white/5 rounded-full border border-white/20 overflow-hidden transition-all focus-within:bg-white focus-within:border-white group">
                         <input
                           type="text"
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
                           placeholder="City, Neighborhood, Zip"
-                          className="w-48 sm:w-64 px-5 py-2.5 text-[13px] text-charcoal placeholder:text-charcoal/50 focus:outline-none"
+                          className="w-48 sm:w-64 bg-transparent px-5 py-2.5 text-[13px] text-white placeholder:text-white/50 focus:text-charcoal focus:placeholder:text-charcoal/50 group-focus-within:text-charcoal group-focus-within:placeholder:text-charcoal/50 focus:outline-none"
                         />
-                        <div className="w-px h-6 bg-charcoal/10" />
+                        <div className="w-px h-6 bg-white/20 group-focus-within:bg-charcoal/10" />
                         <form onSubmit={handleMlsSubmit} className="m-0 p-0 relative">
                           <input
                             type="text"
                             value={mlsInput}
                             onChange={(e) => setMlsInput(e.target.value)}
                             placeholder="MLS #"
-                            className="w-32 px-5 py-2.5 pr-12 text-[13px] text-charcoal placeholder:text-charcoal/50 focus:outline-none"
+                            className="w-32 bg-transparent px-5 py-2.5 pr-12 text-[13px] text-white placeholder:text-white/50 focus:text-charcoal focus:placeholder:text-charcoal/50 group-focus-within:text-charcoal group-focus-within:placeholder:text-charcoal/50 focus:outline-none"
                           />
                           {mlsInput.trim() !== mlsSearch && mlsInput.trim().length > 0 ? (
                             <button
@@ -478,7 +478,7 @@ export default function ListingsPage() {
                             <button
                               type="button"
                               onClick={clearMlsSearch}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 flex h-6 w-6 items-center justify-center rounded-full text-charcoal/40 hover:bg-charcoal/5 hover:text-charcoal transition"
+                              className="absolute right-2 top-1/2 -translate-y-1/2 flex h-6 w-6 items-center justify-center rounded-full text-white/50 hover:bg-white/10 hover:text-white group-focus-within:text-charcoal/40 group-focus-within:hover:bg-charcoal/5 group-focus-within:hover:text-charcoal transition"
                             >
                               <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2}>
                                 <path d="M1 1l10 10M11 1L1 11" strokeLinecap="round" />
@@ -608,8 +608,8 @@ export default function ListingsPage() {
                         onClick={() => setIsMoreFiltersOpen(true)}
                         className={`flex items-center gap-2 rounded-full border px-4 py-2.5 text-[12px] font-medium tracking-wide transition-all ${
                           isMoreFiltersOpen
-                            ? "border-[#3daf3d] bg-[#3daf3d]/10 text-[#3daf3d]"
-                            : "border-charcoal/20 bg-white text-charcoal hover:border-charcoal hover:bg-charcoal/5"
+                            ? "border-[#3daf3d] bg-[#3daf3d]/20 text-[#3daf3d]"
+                            : "border-white/20 bg-white/5 text-white hover:border-white/40 hover:bg-white/10"
                         }`}
                       >
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -622,12 +622,12 @@ export default function ListingsPage() {
                       <select
                         value={stateFilter}
                         onChange={(e) => setStateFilter(e.target.value)}
-                        className="rounded-full border border-charcoal/20 bg-white px-4 py-2.5 text-[12px] font-medium text-charcoal focus:outline-none"
+                        className="rounded-full border border-white/20 bg-white/5 px-4 py-2.5 text-[12px] font-medium text-white focus:outline-none transition-all hover:bg-white/10 hover:border-white/40 appearance-none"
                       >
-                        <option value="">All States</option>
-                        <option value="WA">WA</option>
-                        <option value="OR">OR</option>
-                        <option value="CA">CA</option>
+                        <option value="" className="text-charcoal bg-white">All States</option>
+                        <option value="WA" className="text-charcoal bg-white">WA</option>
+                        <option value="OR" className="text-charcoal bg-white">OR</option>
+                        <option value="CA" className="text-charcoal bg-white">CA</option>
                       </select>
                     </div>
               

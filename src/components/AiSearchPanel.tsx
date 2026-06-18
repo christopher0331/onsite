@@ -76,7 +76,7 @@ export default function AiSearchPanel() {
               <button
                 type="submit"
                 disabled={loading || !prompt.trim()}
-                className="shrink-0 rounded-full bg-charcoal px-8 py-4 text-[12px] uppercase tracking-[0.22em] text-white transition hover:bg-charcoal/85 disabled:cursor-not-allowed disabled:opacity-40"
+                className="shrink-0 rounded-full bg-[#3daf3d] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.22em] text-white transition hover:bg-[#3daf3d]/90 disabled:cursor-not-allowed disabled:opacity-40"
               >
                 {loading ? "Searching…" : "Search"}
               </button>

@@ -32,10 +32,10 @@ export default function FilterPopover({
         onClick={() => setIsOpen(!isOpen)}
         className={`flex items-center gap-2 rounded-full border px-4 py-2.5 text-[12px] font-medium tracking-wide transition-all ${
           isOpen
-            ? "border-charcoal bg-charcoal/5 text-charcoal"
+            ? "border-white bg-white text-charcoal"
             : isActive
-            ? "border-charcoal bg-white text-charcoal hover:bg-charcoal/5"
-            : "border-charcoal/20 bg-white text-charcoal hover:border-charcoal hover:bg-charcoal/5"
+            ? "border-[#3daf3d] bg-[#3daf3d]/20 text-[#3daf3d]"
+            : "border-white/20 bg-white/5 text-white hover:border-white/40 hover:bg-white/10"
         }`}
       >
         {label}
