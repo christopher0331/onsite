@@ -415,13 +415,22 @@ export default function ListingsPage() {
       <main className="bg-white">
 
         {/* Hero + Controls */}
-        <section className="bg-[#1a1a18] pt-40 pb-24 sm:pt-52 sm:pb-32">
-          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+        <section className="relative overflow-hidden bg-[#13211a] pt-40 pb-24 sm:pt-52 sm:pb-32">
+          {/* Brand-green ambient glow so the hero isn't flat black/white */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(60% 80% at 12% 0%, rgba(61,175,61,0.28) 0%, rgba(61,175,61,0.06) 38%, rgba(19,33,26,0) 70%), radial-gradient(50% 70% at 100% 100%, rgba(61,175,61,0.16) 0%, rgba(19,33,26,0) 60%)",
+            }}
+          />
+          <div className="relative mx-auto max-w-[1440px] px-6 lg:px-12">
 
             <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between mb-10">
               <div>
                 <h1 className="mb-6 font-serif text-[clamp(2.8rem,7vw,5.8rem)] font-light leading-[1.0] text-white">
-                  Search Homes.
+                  Search <span className="text-[#3daf3d]">Homes.</span>
                 </h1>
                 <p className="max-w-xl text-[16px] leading-8 text-white/70">
                   Search the full MLS database. Filter by location, price, beds, and more.
@@ -439,7 +448,7 @@ export default function ListingsPage() {
               <div className="shrink-0 text-right">
                 {totalDbCount !== null && (
                   <p className="text-[13px] text-white/60">
-                    <span className="text-white text-3xl font-serif font-light">{totalDbCount.toLocaleString()}+</span>
+                    <span className="text-[#3daf3d] text-3xl font-serif font-light">{totalDbCount.toLocaleString()}+</span>
                     <br />listings in the database
                   </p>
                 )}
@@ -770,7 +779,7 @@ export default function ListingsPage() {
                   onClick={() => setViewMode("list")}
                   className={`rounded-full px-5 py-1.5 text-[11px] uppercase tracking-[0.2em] transition ${
                     viewMode === "list"
-                      ? "bg-white text-charcoal"
+                      ? "bg-[#3daf3d] text-white"
                       : "text-white/60 hover:text-white"
                   }`}
                 >
@@ -780,7 +789,7 @@ export default function ListingsPage() {
                   onClick={() => setViewMode("map")}
                   className={`rounded-full px-5 py-1.5 text-[11px] uppercase tracking-[0.2em] transition ${
                     viewMode === "map"
-                      ? "bg-white text-charcoal"
+                      ? "bg-[#3daf3d] text-white"
                       : "text-white/60 hover:text-white"
                   }`}
                 >
