@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-cluster";
-import type { MarkerCluster } from "leaflet";
-import L, { type LatLngBounds, type LatLngTuple, type Map as LeafletMap } from "leaflet";
-import "leaflet/dist/leaflet.css";
-import "react-leaflet-cluster/dist/assets/MarkerCluster.css";
-import "react-leaflet-cluster/dist/assets/MarkerCluster.Default.css";
+import {
+  APIProvider,
+  Map as GoogleMap,
+  AdvancedMarker,
+  InfoWindow,
+  useMap,
+  useMapsLibrary,
+} from "@vis.gl/react-google-maps";
+import { MarkerClusterer, type Marker, type Renderer } from "@googlemaps/markerclusterer";
 import { getListingStatusBadge, type StatusTone } from "@/lib/listing-status";
 
 export type MapBounds = {
@@ -22,6 +24,15 @@ export type MapViewport = {
   bounds: MapBounds;
   center: { lat: number; lng: number };
   zoom: number;
+};
+
+export type MapFocus = {
+  lat: number;
+  lng: number;
+  zoom?: number;
+  // Bumped each time the caller wants to recenter, so repeated searches for the
+  // same place still move the map there.
+  nonce: number;
 };
 
 type MapListing = {
@@ -52,13 +63,25 @@ type MapListing = {
   map?: { latitude: number | null; longitude: number | null } | null;
 };
 
-const DEFAULT_CENTER: LatLngTuple = [47.1854, -122.2929]; // Puyallup
+type ValidListing = MapListing & { map: { latitude: number; longitude: number } };
+
+const DEFAULT_CENTER = { lat: 47.1854, lng: -122.2929 }; // Puyallup
 const DEFAULT_ZOOM = 11;
 const CDN = "https://cdn.repliers.io/";
+const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
+// AdvancedMarkers require a Map ID. Set NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID to a
+// Cloud-styled map for production; DEMO_MAP_ID is Google's testing fallback.
+const MAP_ID = process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID || "DEMO_MAP_ID";
 
 function fullPrice(n: number | null | undefined) {
   if (!n || Number.isNaN(n)) return "Price on request";
   return "$" + n.toLocaleString("en-US");
+}
+
+function compactPrice(n: number) {
+  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1)}M`;
+  if (n >= 1_000) return `$${Math.round(n / 1_000)}K`;
+  return `$${n.toLocaleString()}`;
 }
 
 function streetLine(a: MapListing["address"]) {
@@ -68,6 +91,12 @@ function streetLine(a: MapListing["address"]) {
   const unit = a.unitNumber ? ` #${a.unitNumber}` : "";
   return street ? `${street}${unit}` : "";
 }
+
+const PIN_PALETTE: Record<StatusTone, { bg: string; fg: string; border: string }> = {
+  active: { bg: "#ffffff", fg: "#1a1a18", border: "#1a1a18" },
+  pending: { bg: "#fbbf24", fg: "#1a1a18", border: "#1a1a18" },
+  sold: { bg: "#1a1a18", fg: "#ffffff", border: "#1a1a18" },
+};
 
 function ListingPopupCard({
   listing,
@@ -84,9 +113,7 @@ function ListingPopupCard({
 }) {
   const images = useMemo(() => {
     const raw = listing.images ?? [];
-    return raw
-      .slice(0, 8)
-      .map((p) => (p.startsWith("http") ? p : CDN + p));
+    return raw.slice(0, 8).map((p) => (p.startsWith("http") ? p : CDN + p));
   }, [listing.images]);
 
   const [idx, setIdx] = useState(0);
@@ -199,82 +226,201 @@ function ListingPopupCard({
   );
 }
 
-const PIN_PALETTE: Record<StatusTone, { bg: string; fg: string; border: string }> = {
-  active: { bg: "#ffffff", fg: "#1a1a18", border: "#1a1a18" },
-  pending: { bg: "#fbbf24", fg: "#1a1a18", border: "#1a1a18" },
-  sold: { bg: "#1a1a18", fg: "#ffffff", border: "#1a1a18" },
-};
-
-function dollarPin(label: string, tone: StatusTone) {
-  const { bg, fg, border } = PIN_PALETTE[tone];
-  return L.divIcon({
-    className: "",
-    html: `<div style="background:${bg};color:${fg};border:1px solid ${border};border-radius:9999px;padding:4px 10px;font-family:'Times New Roman',serif;font-size:13px;font-weight:500;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,0.18);">${label}</div>`,
-    iconSize: [60, 24],
-    iconAnchor: [30, 24],
-    popupAnchor: [0, -22],
-  });
+// Recenter the map on a caller-provided location (e.g. a geocoded city search).
+function MapFocusController({ focus }: { focus: MapFocus | null }) {
+  const map = useMap();
+  const [lastNonce, setLastNonce] = useState(-1);
+  useEffect(() => {
+    if (!map || !focus || focus.nonce === lastNonce) return;
+    setLastNonce(focus.nonce);
+    map.panTo({ lat: focus.lat, lng: focus.lng });
+    if (typeof focus.zoom === "number") map.setZoom(focus.zoom);
+  }, [map, focus, lastNonce]);
+  return null;
 }
 
-function compactPrice(n: number) {
-  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1)}M`;
-  if (n >= 1_000) return `$${Math.round(n / 1_000)}K`;
-  return `$${n.toLocaleString()}`;
-}
-
-function boundsFromLeaflet(b: LatLngBounds): MapBounds {
-  const northWest = b.getNorthWest();
-  const southEast = b.getSouthEast();
-  return {
-    north: northWest.lat,
-    south: southEast.lat,
-    east: southEast.lng,
-    west: northWest.lng,
-  };
-}
-
-function MapViewportWatcher({
+// Emit the viewport (bounds/center/zoom) whenever the map settles, so the page
+// can fetch listings for the visible area.
+function ViewportWatcher({
   onViewportChange,
 }: {
   onViewportChange: (viewport: MapViewport) => void;
 }) {
   const map = useMap();
-  const firedInitial = useRef(false);
-  const onChangeRef = useRef(onViewportChange);
-  onChangeRef.current = onViewportChange;
-
-  const emit = () => {
-    const center = map.getCenter();
-    onChangeRef.current({
-      bounds: boundsFromLeaflet(map.getBounds()),
-      center: { lat: center.lat, lng: center.lng },
-      zoom: map.getZoom(),
-    });
-  };
-
-  useMapEvents({
-    moveend: emit,
-    zoomend: emit,
-  });
-
   useEffect(() => {
-    if (firedInitial.current) return;
-    firedInitial.current = true;
-    emit();
-  }, [map]);
-
+    if (!map) return;
+    const emit = () => {
+      const b = map.getBounds();
+      const c = map.getCenter();
+      if (!b || !c) return;
+      const ne = b.getNorthEast();
+      const sw = b.getSouthWest();
+      onViewportChange({
+        bounds: { north: ne.lat(), south: sw.lat(), east: ne.lng(), west: sw.lng() },
+        center: { lat: c.lat(), lng: c.lng() },
+        zoom: map.getZoom() ?? DEFAULT_ZOOM,
+      });
+    };
+    const listener = map.addListener("idle", emit);
+    return () => listener.remove();
+  }, [map, onViewportChange]);
   return null;
 }
 
-// The "Searching…"/"Showing X homes" banners live in the wrapper's stacking
-// context (above the map), so a popup that opens near the top can render under
-// them. Hiding the banners while a card is open keeps the card unobstructed.
-function PopupStateWatcher({ onChange }: { onChange: (open: boolean) => void }) {
-  useMapEvents({
-    popupopen: () => onChange(true),
-    popupclose: () => onChange(false),
-  });
-  return null;
+// Custom-styled price pins with Airbnb-style clustering.
+function PriceMarkers({
+  listings,
+  onSelect,
+}: {
+  listings: ValidListing[];
+  onSelect: (listing: ValidListing) => void;
+}) {
+  const map = useMap();
+  const markerLib = useMapsLibrary("marker");
+  const [markers, setMarkers] = useState<Record<string, Marker>>({});
+
+  const clusterer = useMemo(() => {
+    if (!map || !markerLib) return null;
+    const renderer: Renderer = {
+      render: ({ count, position }) => {
+        const div = document.createElement("div");
+        div.className = "gmaps-cluster";
+        div.textContent = count >= 1000 ? `${(count / 1000).toFixed(1)}k` : `${count}`;
+        const size = count >= 100 ? 48 : count >= 25 ? 42 : 36;
+        div.style.width = `${size}px`;
+        div.style.height = `${size}px`;
+        div.style.fontSize = count >= 100 ? "13px" : "14px";
+        return new markerLib.AdvancedMarkerElement({
+          position,
+          content: div,
+          zIndex: 1000,
+        });
+      },
+    };
+    return new MarkerClusterer({ map, renderer });
+  }, [map, markerLib]);
+
+  useEffect(() => {
+    if (!clusterer) return;
+    clusterer.clearMarkers();
+    clusterer.addMarkers(Object.values(markers));
+  }, [clusterer, markers]);
+
+  useEffect(() => {
+    return () => clusterer?.clearMarkers();
+  }, [clusterer]);
+
+  const setMarkerRef = useCallback((marker: Marker | null, key: string) => {
+    setMarkers((prev) => {
+      if (marker && prev[key]) return prev;
+      if (!marker && !prev[key]) return prev;
+      const next = { ...prev };
+      if (marker) next[key] = marker;
+      else delete next[key];
+      return next;
+    });
+  }, []);
+
+  return (
+    <>
+      {listings.map((l) => {
+        const badge = getListingStatusBadge(l);
+        const price = l.soldPrice ?? l.listPrice;
+        const { bg, fg, border } = PIN_PALETTE[badge.tone];
+        return (
+          <AdvancedMarker
+            key={l.mlsNumber}
+            position={{ lat: l.map.latitude, lng: l.map.longitude }}
+            ref={(marker) => setMarkerRef(marker, l.mlsNumber)}
+            onClick={() => onSelect(l)}
+          >
+            <div
+              className="gmaps-price-pin"
+              style={{ background: bg, color: fg, border: `1px solid ${border}` }}
+            >
+              {compactPrice(price)}
+            </div>
+          </AdvancedMarker>
+        );
+      })}
+    </>
+  );
+}
+
+function MapInner({
+  listings,
+  onViewportChange,
+  focus,
+  initialCenter,
+  initialZoom,
+  onPopupChange,
+}: {
+  listings: ValidListing[];
+  onViewportChange: (viewport: MapViewport) => void;
+  focus: MapFocus | null;
+  initialCenter: { lat: number; lng: number };
+  initialZoom: number;
+  onPopupChange: (open: boolean) => void;
+}) {
+  const [selected, setSelected] = useState<ValidListing | null>(null);
+
+  useEffect(() => {
+    onPopupChange(!!selected);
+  }, [selected, onPopupChange]);
+
+  // Drop the open card if its listing leaves the result set (filter/pan).
+  useEffect(() => {
+    if (selected && !listings.some((l) => l.mlsNumber === selected.mlsNumber)) {
+      setSelected(null);
+    }
+  }, [listings, selected]);
+
+  const selectedBadge = selected ? getListingStatusBadge(selected) : null;
+  const selectedPrice = selected ? selected.soldPrice ?? selected.listPrice : 0;
+
+  return (
+    <GoogleMap
+      mapId={MAP_ID}
+      defaultCenter={initialCenter}
+      defaultZoom={initialZoom}
+      gestureHandling="greedy"
+      disableDefaultUI={false}
+      mapTypeControl={false}
+      streetViewControl={false}
+      fullscreenControl={false}
+      clickableIcons={false}
+      onClick={() => setSelected(null)}
+      style={{ height: 640, width: "100%" }}
+    >
+      <ViewportWatcher onViewportChange={onViewportChange} />
+      <MapFocusController focus={focus} />
+      <PriceMarkers listings={listings} onSelect={setSelected} />
+      {selected && (
+        <InfoWindow
+          position={{ lat: selected.map.latitude, lng: selected.map.longitude }}
+          onCloseClick={() => setSelected(null)}
+          headerDisabled
+          minWidth={340}
+          maxWidth={340}
+          pixelOffset={[0, -8]}
+        >
+          <ListingPopupCard
+            listing={selected}
+            price={selectedPrice}
+            badgeLabel={selectedBadge?.label ?? ""}
+            pillBg={
+              selectedBadge?.tone === "active"
+                ? "rgba(255,255,255,0.95)"
+                : selectedBadge?.tone === "pending"
+                  ? "#fbbf24"
+                  : "#1a1a18"
+            }
+            pillFg={selectedBadge?.tone === "sold" ? "#ffffff" : "#1a1a18"}
+          />
+        </InfoWindow>
+      )}
+    </GoogleMap>
+  );
 }
 
 export default function ListingsMap({
@@ -284,21 +430,22 @@ export default function ListingsMap({
   loading = false,
   initialCenter = DEFAULT_CENTER,
   initialZoom = DEFAULT_ZOOM,
+  focus = null,
 }: {
   listings: MapListing[];
   onViewportChange: (viewport: MapViewport) => void;
   statusLine?: string;
   loading?: boolean;
-  initialCenter?: LatLngTuple;
+  initialCenter?: { lat: number; lng: number };
   initialZoom?: number;
+  focus?: MapFocus | null;
 }) {
-  const mapRef = useRef<LeafletMap | null>(null);
   const [popupOpen, setPopupOpen] = useState(false);
 
-  const validListings = useMemo(() => {
+  const validListings = useMemo<ValidListing[]>(() => {
     const seen = new Set<string>();
     return listings.filter(
-      (l): l is MapListing & { map: { latitude: number; longitude: number } } => {
+      (l): l is ValidListing => {
         if (
           !l.map ||
           typeof l.map.latitude !== "number" ||
@@ -313,11 +460,32 @@ export default function ListingsMap({
     );
   }, [listings]);
 
+  if (!API_KEY) {
+    return (
+      <div className="grid h-[640px] place-items-center rounded-3xl border border-charcoal/10 bg-charcoal/5">
+        <p className="rounded-full bg-white px-6 py-3 text-[13px] text-charcoal/80 shadow">
+          Map unavailable — missing Google Maps API key.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="relative overflow-hidden rounded-3xl border border-charcoal/10 shadow-[0_14px_50px_rgba(0,0,0,0.10)]">
       <style>{`
-        .airbnb-cluster { background: transparent !important; border: none !important; }
-        .airbnb-cluster-inner {
+        .gmaps-price-pin {
+          border-radius: 9999px;
+          padding: 4px 10px;
+          font-family: 'Times New Roman', serif;
+          font-size: 13px;
+          font-weight: 500;
+          white-space: nowrap;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+          cursor: pointer;
+          transition: transform 0.12s ease;
+        }
+        .gmaps-price-pin:hover { transform: scale(1.08); }
+        .gmaps-cluster {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -329,53 +497,14 @@ export default function ListingsMap({
           line-height: 1;
           box-shadow: 0 2px 8px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.12);
           border: 1px solid rgba(0,0,0,0.08);
-          transition: transform 0.15s ease, box-shadow 0.15s ease;
           cursor: pointer;
         }
-        .airbnb-cluster-inner:hover {
-          transform: scale(1.1);
-          box-shadow: 0 4px 14px rgba(0,0,0,0.24), 0 2px 4px rgba(0,0,0,0.14);
-        }
-        .listing-popup {
-          z-index: 1200 !important;
-        }
-        .listing-popup .leaflet-popup-content-wrapper {
-          padding: 0;
-          border-radius: 16px;
-          overflow: hidden;
-          box-shadow: 0 8px 28px rgba(0,0,0,0.22), 0 2px 6px rgba(0,0,0,0.12);
-        }
-        .listing-popup .leaflet-popup-content {
-          margin: 0;
-          width: 340px !important;
-        }
-        .listing-popup .leaflet-popup-content p {
-          margin: 0;
-        }
-        .listing-popup .leaflet-popup-tip-container { display: none; }
-        .listing-popup a.leaflet-popup-close-button {
-          top: 12px;
-          right: 12px;
-          width: 28px;
-          height: 28px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: #ffffff;
-          border-radius: 9999px;
-          color: #222222;
-          font-size: 18px;
-          font-weight: 600;
-          line-height: 1;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-          transition: transform 0.15s ease;
-        }
-        .listing-popup a.leaflet-popup-close-button:hover {
-          background: #ffffff;
-          color: #000000;
-          transform: scale(1.08);
-        }
+        /* Strip the default InfoWindow chrome so the card sits flush. */
+        .gm-style .gm-style-iw-c { padding: 0 !important; border-radius: 16px !important; overflow: hidden !important; box-shadow: 0 8px 28px rgba(0,0,0,0.22), 0 2px 6px rgba(0,0,0,0.12) !important; }
+        .gm-style .gm-style-iw-d { overflow: hidden !important; }
+        .gm-style .gm-style-iw-tc { display: none !important; }
       `}</style>
+
       {loading && !popupOpen && (
         <div className="pointer-events-none absolute inset-x-0 top-0 z-[500] flex justify-center pt-6">
           <div className="flex items-center gap-3 rounded-full bg-charcoal px-7 py-4 text-white shadow-[0_12px_40px_rgba(0,0,0,0.35)]">
@@ -393,74 +522,18 @@ export default function ListingsMap({
           </div>
         </div>
       )}
-      <MapContainer
-        ref={mapRef}
-        center={initialCenter}
-        zoom={initialZoom}
-        scrollWheelZoom
-        zoomSnap={0.25}
-        zoomDelta={0.5}
-        wheelPxPerZoomLevel={120}
-        wheelDebounceTime={15}
-        zoomAnimation
-        style={{ height: 640, width: "100%" }}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+
+      <APIProvider apiKey={API_KEY}>
+        <MapInner
+          listings={validListings}
+          onViewportChange={onViewportChange}
+          focus={focus}
+          initialCenter={initialCenter}
+          initialZoom={initialZoom}
+          onPopupChange={setPopupOpen}
         />
-        <MapViewportWatcher onViewportChange={onViewportChange} />
-        <PopupStateWatcher onChange={setPopupOpen} />
-        <MarkerClusterGroup
-          chunkedLoading
-          showCoverageOnHover={false}
-          spiderfyOnMaxZoom={false}
-          zoomToBoundsOnClick
-          removeOutsideVisibleBounds
-          disableClusteringAtZoom={15}
-          maxClusterRadius={48}
-          iconCreateFunction={(cluster: MarkerCluster) => {
-            const count = cluster.getChildCount();
-            const label = count >= 1000 ? `${(count / 1000).toFixed(1)}k` : `${count}`;
-            const size = count >= 100 ? 48 : count >= 25 ? 42 : 36;
-            return L.divIcon({
-              className: "airbnb-cluster",
-              html: `<div class="airbnb-cluster-inner" style="width:${size}px;height:${size}px;font-size:${count >= 100 ? 13 : 14}px;">${label}</div>`,
-              iconSize: [size, size],
-              iconAnchor: [size / 2, size / 2],
-            });
-          }}
-        >
-          {validListings.map((l) => {
-            const badge = getListingStatusBadge(l);
-            const price = l.soldPrice ?? l.listPrice;
-            const pillBg =
-              badge.tone === "active"
-                ? "rgba(255,255,255,0.95)"
-                : badge.tone === "pending"
-                  ? "#fbbf24"
-                  : "#1a1a18";
-            const pillFg = badge.tone === "sold" ? "#ffffff" : "#1a1a18";
-            return (
-              <Marker
-                key={l.mlsNumber}
-                position={[l.map.latitude, l.map.longitude]}
-                icon={dollarPin(compactPrice(price), badge.tone)}
-              >
-                <Popup className="listing-popup" maxWidth={340} minWidth={340} autoPan>
-                  <ListingPopupCard
-                    listing={l}
-                    price={price}
-                    badgeLabel={badge.label}
-                    pillBg={pillBg}
-                    pillFg={pillFg}
-                  />
-                </Popup>
-              </Marker>
-            );
-          })}
-        </MarkerClusterGroup>
-      </MapContainer>
+      </APIProvider>
+
       {validListings.length === 0 && !loading && (
         <div className="pointer-events-none absolute inset-0 grid place-items-center bg-charcoal/5">
           <p className="rounded-full bg-white/95 px-6 py-3 text-[13px] text-charcoal/80 shadow">

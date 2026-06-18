@@ -11,7 +11,7 @@ import ListingCard from "@/components/ListingCard";
 import AiSearchPanel from "@/components/AiSearchPanel";
 import FilterPopover from "@/components/FilterPopover";
 import Modal from "@/components/Modal";
-import type { MapViewport } from "@/components/ListingsMap";
+import type { MapViewport, MapFocus } from "@/components/ListingsMap";
 import { listingInBounds } from "@/lib/listings-api-params";
 
 const MAP_MIN_ZOOM = 9;
@@ -142,13 +142,45 @@ export default function ListingsPage() {
   const [mapListings, setMapListings] = useState<Listing[]>([]);
   const [mapLoading, setMapLoading] = useState(false);
   const [mapStatusLine, setMapStatusLine] = useState("");
+  const [mapFocus, setMapFocus] = useState<MapFocus | null>(null);
   const [filtersAppliedAt, setFiltersAppliedAt] = useState(0);
   const [pendingApplyFeedback, setPendingApplyFeedback] = useState(false);
   const [applyFeedback, setApplyFeedback] = useState<string | null>(null);
 
   const mapDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const mapRequestIdRef = useRef(0);
+  const lastViewportRef = useRef<MapViewport | null>(null);
   const resultsSectionRef = useRef<HTMLElement | null>(null);
+
+  // Geocode a typed place (city / ZIP / neighborhood) and recenter the map on
+  // it. Returns true when the map was recentered (which triggers a refetch via
+  // the resulting moveend). Powered by the server-side Google Maps key.
+  const focusMapOnPlace = useCallback(
+    async (place: string): Promise<boolean> => {
+      try {
+        const params = new URLSearchParams({ q: place });
+        if (stateFilter) params.set("state", stateFilter);
+        const res = await fetch(`/api/geocode?${params}`);
+        if (!res.ok) return false;
+        const data = (await res.json()) as {
+          found?: boolean;
+          center?: { lat: number; lng: number };
+          types?: string[];
+        };
+        if (!data.found || !data.center) return false;
+        const zoom = data.types?.includes("postal_code")
+          ? 13
+          : data.types?.includes("neighborhood")
+            ? 14
+            : 12;
+        setMapFocus({ lat: data.center.lat, lng: data.center.lng, zoom, nonce: Date.now() });
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    [stateFilter]
+  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -163,29 +195,35 @@ export default function ListingsPage() {
     }
   }, []);
 
+  // In map mode the map shows its own progress/status banner, so we skip the
+  // hero "Applying filters…" feedback (which is only cleared by the list-view
+  // fetch and would otherwise hang forever on the map).
+  function markFiltersApplied() {
+    setPage(1);
+    setFiltersAppliedAt((v) => v + 1);
+    if (viewMode === "map") {
+      setPendingApplyFeedback(false);
+      setApplyFeedback(null);
+    } else {
+      setPendingApplyFeedback(true);
+      setApplyFeedback("Applying filters…");
+    }
+  }
+
   function handleMlsSubmit(e: React.FormEvent) {
     e.preventDefault();
     setMlsSearch(mlsInput.trim());
-    setPage(1);
-    setPendingApplyFeedback(true);
-    setApplyFeedback("Applying filters…");
-    setFiltersAppliedAt((v) => v + 1);
+    markFiltersApplied();
   }
 
   function clearMlsSearch() {
     setMlsInput("");
     setMlsSearch("");
-    setPage(1);
-    setPendingApplyFeedback(true);
-    setApplyFeedback("Applying filters…");
-    setFiltersAppliedAt((v) => v + 1);
+    markFiltersApplied();
   }
 
   function applyRegularFilters(closeModal = false) {
-    setPage(1);
-    setPendingApplyFeedback(true);
-    setApplyFeedback("Applying filters…");
-    setFiltersAppliedAt((v) => v + 1);
+    markFiltersApplied();
     if (closeModal) setIsMoreFiltersOpen(false);
   }
 
@@ -202,6 +240,10 @@ export default function ListingsPage() {
   const handleMapViewport = useCallback(
     (viewport: MapViewport) => {
       if (viewMode !== "map") return;
+
+      // Remember the latest viewport so we can refetch in place when filters
+      // change without the user panning/zooming.
+      lastViewportRef.current = viewport;
 
       if (mapDebounceRef.current) clearTimeout(mapDebounceRef.current);
 
@@ -311,9 +353,19 @@ export default function ListingsPage() {
       status,
       propertyType,
       minBeds,
+      maxBeds,
       minBaths,
+      maxBaths,
       minPrice,
       maxPrice,
+      minSqft,
+      maxSqft,
+      minYearBuilt,
+      maxYearBuilt,
+      minLotSize,
+      maxLotSize,
+      garageSpots,
+      homeFeatures,
       city,
     ]
   );
@@ -323,6 +375,26 @@ export default function ListingsPage() {
       if (mapDebounceRef.current) clearTimeout(mapDebounceRef.current);
     };
   }, []);
+
+  // Keep the map in sync when filters are applied (Go/Apply) or when switching
+  // into map view. Recenter on the typed city/ZIP (which refetches via the
+  // resulting move); otherwise refetch the current viewport in place.
+  useEffect(() => {
+    if (viewMode !== "map") return;
+    let cancelled = false;
+    void (async () => {
+      const place = city.trim();
+      const recentered = place ? await focusMapOnPlace(place) : false;
+      if (cancelled || recentered) return;
+      if (lastViewportRef.current) handleMapViewport(lastViewportRef.current);
+    })();
+    return () => {
+      cancelled = true;
+    };
+    // handleMapViewport/focusMapOnPlace are stable enough; re-run on apply +
+    // view switch only.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtersAppliedAt, viewMode]);
 
   useEffect(() => {
     if (viewMode !== "list") return;
@@ -885,6 +957,7 @@ export default function ListingsPage() {
                 onViewportChange={handleMapViewport}
                 loading={mapLoading}
                 statusLine={mapStatusLine}
+                focus={mapFocus}
               />
             ) : loading ? (
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
