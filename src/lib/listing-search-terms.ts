@@ -178,6 +178,41 @@ export const FEATURE_GROUPS: FeatureGroup[] = [
     label: "Commuter access",
     terms: ["commuter", "easy commute", "close to 410", "hwy 410", "close to 167", "close to 512", "close to i-5", "park and ride", "sounder", "sumner station", "auburn station"],
   },
+  {
+    key: "airConditioning",
+    label: "Air conditioning",
+    terms: ["air conditioning", "central a/c", "central ac", "heat pump", "hvac", "mini split", "mini-split", "air conditioned", "a/c"],
+  },
+  {
+    key: "fireplace",
+    label: "Fireplace",
+    terms: ["fireplace", "gas fireplace", "wood fireplace", "wood stove", "pellet stove", "fireplaces"],
+  },
+  {
+    key: "elevator",
+    label: "Elevator",
+    terms: ["elevator", "private elevator", "building elevator"],
+  },
+  {
+    key: "washerDryer",
+    label: "Washer/dryer hookup",
+    terms: ["washer/dryer hookup", "washer and dryer", "in unit laundry", "in-unit laundry", "laundry room", "utility room"],
+  },
+  {
+    key: "pets",
+    label: "Pets allowed",
+    terms: ["pets allowed", "pet friendly", "dogs allowed", "cats allowed", "fenced yard", "fully fenced"],
+  },
+  {
+    key: "greenHome",
+    label: "Green home",
+    terms: ["solar panels", "green home", "leed certified", "energy efficient", "energy star", "tankless water heater", "eco friendly"],
+  },
+  {
+    key: "accessible",
+    label: "Accessible home",
+    terms: ["accessible", "ada compliant", "wheelchair accessible", "ramp", "wide hallways", "roll in shower", "roll-in shower", "grab bars", "zero step entry"],
+  },
 ];
 
 /** Build a case-insensitive, boundary-aware matcher with flexible spacing/hyphens

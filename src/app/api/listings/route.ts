@@ -4,6 +4,7 @@ import {
   enrichListingsResponse,
   repliersListingsUrl,
 } from "@/lib/repliers-enrich";
+import { FEATURE_GROUPS, matchFeaturesInText } from "@/lib/listing-search-terms";
 
 const REPLIERS_API = "https://api.repliers.io/listings";
 // OnSite operates under the "Timber Real Estate" NWMLS brokerage. Repliers
@@ -33,7 +34,19 @@ export async function GET(req: NextRequest) {
   const minPrice = searchParams.get("minPrice");
   const maxPrice = searchParams.get("maxPrice");
   const minBeds = searchParams.get("minBeds");
-  const type = searchParams.get("type");
+  const maxBeds = searchParams.get("maxBeds");
+  const minBaths = searchParams.get("minBaths");
+  const maxBaths = searchParams.get("maxBaths");
+  const minSqft = searchParams.get("minSqft");
+  const maxSqft = searchParams.get("maxSqft");
+  const minYearBuilt = searchParams.get("minYearBuilt");
+  const maxYearBuilt = searchParams.get("maxYearBuilt");
+  const minLotSize = searchParams.get("minLotSize");
+  const maxLotSize = searchParams.get("maxLotSize");
+  const garageSpots = searchParams.get("garageSpots");
+  const features = searchParams.getAll("features"); // Array of feature keys
+  
+  const type = searchParams.getAll("type"); // Now an array for multi-select
   const city = searchParams.get("city");
   const county = searchParams.get("county");
   const sortBy = searchParams.get("sortBy") || "createdOnDesc";
@@ -123,7 +136,38 @@ export async function GET(req: NextRequest) {
   if (minPrice) params.set("minPrice", minPrice);
   if (maxPrice) params.set("maxPrice", maxPrice);
   if (minBeds) params.set("minBeds", minBeds);
-  if (type) params.set("type", type);
+  if (maxBeds) params.set("maxBeds", maxBeds);
+  if (minBaths) params.set("minBaths", minBaths);
+  if (maxBaths) params.set("maxBaths", maxBaths);
+  if (minSqft) params.set("minSqft", minSqft);
+  if (maxSqft) params.set("maxSqft", maxSqft);
+  if (minYearBuilt) params.set("minYearBuilt", minYearBuilt);
+  if (maxYearBuilt) params.set("maxYearBuilt", maxYearBuilt);
+  if (minLotSize) params.set("minLotSqft", minLotSize);
+  if (maxLotSize) params.set("maxLotSqft", maxLotSize);
+  if (garageSpots && garageSpots !== "Any") params.set("minParkingSpaces", garageSpots.replace("+", ""));
+  
+  if (type && type.length > 0) {
+    // Redfin categories mapped to Repliers types
+    const mappedTypes = new Set<string>();
+    for (const t of type) {
+      if (t === "House") mappedTypes.add("Single Family");
+      if (t === "Townhouse") mappedTypes.add("Townhouse");
+      if (t === "Condo") mappedTypes.add("Condo");
+      if (t === "Land") mappedTypes.add("Vacant Land");
+      if (t === "Multi-family") mappedTypes.add("Multi-Family");
+      if (t === "Mobile") mappedTypes.add("Manufactured");
+    }
+    for (const mt of mappedTypes) {
+      params.append("type", mt);
+    }
+  }
+
+  // Exact map for the checkboxes that Repliers supports natively
+  if (features.includes("Waterfront")) params.set("waterfront", "not:null");
+  if (features.includes("Has a view")) params.set("view", "not:null");
+  if (features.includes("Basement")) params.set("basement", "not:null");
+
   if (ALLOWED_SORT_BY.has(sortBy)) params.set("sortBy", sortBy);
 
   // MLS# (or any field-targeted) text search — Repliers requires both
@@ -157,6 +201,23 @@ export async function GET(req: NextRequest) {
     }
 
     let data = primary.data!;
+
+    // Post-filter for text-based features
+    const textFeaturesToMatch = features.filter(
+      (f) => !["Waterfront", "Has a view", "Basement"].includes(f)
+    );
+
+    if (textFeaturesToMatch.length > 0 && data.listings) {
+      const requestedGroups = FEATURE_GROUPS.filter((g) => textFeaturesToMatch.includes(g.label));
+      
+      if (requestedGroups.length > 0) {
+        data.listings = data.listings.filter((listing) => {
+          const matched = matchFeaturesInText((listing as any).details?.description, requestedGroups);
+          return matched.length === requestedGroups.length; // MUST match all requested text features
+        });
+        (data as any).count = data.listings.length; // Note: this count is only for the current page, true pagination is tricky with post-filtering
+      }
+    }
 
     const primaryCount =
       typeof (data as { count?: unknown }).count === "number"
