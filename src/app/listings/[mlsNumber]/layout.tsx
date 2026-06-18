@@ -98,7 +98,7 @@ export async function generateMetadata({
 
   // Richer, price-led headline reserved for social share cards where the full
   // string is shown (not truncated like a tab).
-  const shareHeadline = streetAddress ?? cityLine || "Home for sale";
+  const shareHeadline = streetAddress ?? (cityLine || "Home for sale");
   const ogTitle = `${price} · ${shareHeadline} | OnSite Real Estate Group`;
 
   const specs = [
