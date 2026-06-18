@@ -2,9 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { enrichListingsResponse, repliersListingsUrl } from "@/lib/repliers-enrich";
 import {
   buildListingsQueryParams,
+  FEATURE_LABEL_TO_GROUP,
   listingInBounds,
+  NATIVE_FEATURE_LABELS,
   type MapBounds,
 } from "@/lib/listings-api-params";
+import { FEATURE_GROUPS, matchFeaturesInText } from "@/lib/listing-search-terms";
 
 const PAGE_SIZE = "100";
 const MAX_PAGES = 12; // up to ~1,200 listings per viewport before clustering carries the rest
@@ -13,7 +16,7 @@ const MAX_RETURN = 1200;
 type ListingRow = {
   mlsNumber?: string;
   map?: { latitude?: number | null; longitude?: number | null } | null;
-  details?: { numBathrooms?: number | null };
+  details?: { numBathrooms?: number | null; description?: string | null };
 };
 
 function parseBounds(searchParams: URLSearchParams): MapBounds | null {
@@ -101,6 +104,16 @@ export async function GET(req: NextRequest) {
   }
 
   const minBaths = searchParams.get("minBaths");
+  // Feature checkboxes that aren't native Repliers filters are matched against
+  // remarks text here, mirroring the list route so both views agree.
+  const textFeatures = searchParams
+    .getAll("features")
+    .filter((f) => !NATIVE_FEATURE_LABELS.includes(f));
+  const featureGroups = textFeatures.length
+    ? FEATURE_GROUPS.filter((g) =>
+        new Set(textFeatures.map((f) => FEATURE_LABEL_TO_GROUP[f] ?? f)).has(g.label)
+      )
+    : [];
   // The viewport polygon defines the search area so listings from every city in
   // view are returned. An explicit user-typed `city` filter (if present) still
   // narrows within that area via buildListingsQueryParams.
@@ -124,6 +137,25 @@ export async function GET(req: NextRequest) {
       if (!Number.isNaN(min)) {
         mappable = mappable.filter((row) => (row.details?.numBathrooms ?? 0) >= min);
       }
+    }
+
+    if (featureGroups.length > 0) {
+      // Strict AND for 1-2 features; relaxed overlap for larger sets so users
+      // don't dead-end when one remark term is missing (matches list route).
+      const minMatches =
+        featureGroups.length <= 2
+          ? featureGroups.length
+          : Math.max(2, Math.ceil(featureGroups.length * 0.5));
+      const strict = mappable.filter(
+        (row) =>
+          matchFeaturesInText(row.details?.description, featureGroups).length >= minMatches
+      );
+      mappable =
+        strict.length > 0
+          ? strict
+          : mappable.filter(
+              (row) => matchFeaturesInText(row.details?.description, featureGroups).length > 0
+            );
     }
 
     // The polygon already constrains results to the viewport; this is a safety

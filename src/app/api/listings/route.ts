@@ -5,6 +5,13 @@ import {
   repliersListingsUrl,
 } from "@/lib/repliers-enrich";
 import { FEATURE_GROUPS, matchFeaturesInText } from "@/lib/listing-search-terms";
+import {
+  applyHomeTypeFilters,
+  applyNativeFeatureFilters,
+  applyRangeFilters,
+  FEATURE_LABEL_TO_GROUP,
+  NATIVE_FEATURE_LABELS,
+} from "@/lib/listings-api-params";
 
 const REPLIERS_API = "https://api.repliers.io/listings";
 // OnSite operates under the "Timber Real Estate" NWMLS brokerage. Repliers
@@ -30,23 +37,16 @@ export async function GET(req: NextRequest) {
 
   const status = searchParams.get("status") || "A";
   const pageSize = searchParams.get("pageSize") || "24";
+  const pageSizeNum = Math.max(1, Number(pageSize) || 24);
   const page = searchParams.get("page") || "1";
   const minPrice = searchParams.get("minPrice");
   const maxPrice = searchParams.get("maxPrice");
   const minBeds = searchParams.get("minBeds");
-  const maxBeds = searchParams.get("maxBeds");
-  const minBaths = searchParams.get("minBaths");
-  const maxBaths = searchParams.get("maxBaths");
-  const minSqft = searchParams.get("minSqft");
-  const maxSqft = searchParams.get("maxSqft");
-  const minYearBuilt = searchParams.get("minYearBuilt");
-  const maxYearBuilt = searchParams.get("maxYearBuilt");
-  const minLotSize = searchParams.get("minLotSize");
-  const maxLotSize = searchParams.get("maxLotSize");
-  const garageSpots = searchParams.get("garageSpots");
-  const features = searchParams.getAll("features"); // Array of feature keys
-  
-  const type = searchParams.getAll("type"); // Now an array for multi-select
+  // Numeric ranges (maxBeds, baths, sqft, year, lot, garage) are read and
+  // sanitized inside applyRangeFilters; feature checkboxes drive both native
+  // filters and remarks matching below.
+  const features = searchParams.getAll("features");
+  const type = searchParams.getAll("type"); // Multi-select home-type chips
   const city = searchParams.get("city");
   const county = searchParams.get("county");
   const sortBy = searchParams.get("sortBy") || "createdOnDesc";
@@ -89,6 +89,13 @@ export async function GET(req: NextRequest) {
   // sending them returns page 1 every time (broken Next/Prev navigation).
   const params = new URLSearchParams({ resultsPerPage: pageSize, pageNum: page });
 
+  // When many "home feature" checkboxes are selected, we need a wider candidate
+  // pool before text matching in remarks; otherwise page-size=24 can falsely
+  // look like "no results" even when nearby matches exist.
+  if (features.length > 0 && page === "1" && pageSizeNum < 100) {
+    params.set("resultsPerPage", "100");
+  }
+
   if (state) params.set("state", state);
   if (boardId) params.set("boardId", boardId);
 
@@ -121,7 +128,11 @@ export async function GET(req: NextRequest) {
       break;
   }
 
-  if (city) params.set("city", city);
+  if (city) {
+    const q = city.trim();
+    if (/^\d{5}$/.test(q)) params.set("zip", q);
+    else params.set("city", q);
+  }
   if (county) params.set("area", county);
   if (brokerageOnly && ONSITE_BROKERAGE_NAME) {
     params.set("office.brokerageName", ONSITE_BROKERAGE_NAME);
@@ -136,37 +147,13 @@ export async function GET(req: NextRequest) {
   if (minPrice) params.set("minPrice", minPrice);
   if (maxPrice) params.set("maxPrice", maxPrice);
   if (minBeds) params.set("minBeds", minBeds);
-  if (maxBeds) params.set("maxBeds", maxBeds);
-  if (minBaths) params.set("minBaths", minBaths);
-  if (maxBaths) params.set("maxBaths", maxBaths);
-  if (minSqft) params.set("minSqft", minSqft);
-  if (maxSqft) params.set("maxSqft", maxSqft);
-  if (minYearBuilt) params.set("minYearBuilt", minYearBuilt);
-  if (maxYearBuilt) params.set("maxYearBuilt", maxYearBuilt);
-  if (minLotSize) params.set("minLotSqft", minLotSize);
-  if (maxLotSize) params.set("maxLotSqft", maxLotSize);
-  if (garageSpots && garageSpots !== "Any") params.set("minParkingSpaces", garageSpots.replace("+", ""));
-  
-  if (type && type.length > 0) {
-    // Redfin categories mapped to Repliers types
-    const mappedTypes = new Set<string>();
-    for (const t of type) {
-      if (t === "House") mappedTypes.add("Single Family");
-      if (t === "Townhouse") mappedTypes.add("Townhouse");
-      if (t === "Condo") mappedTypes.add("Condo");
-      if (t === "Land") mappedTypes.add("Vacant Land");
-      if (t === "Multi-family") mappedTypes.add("Multi-Family");
-      if (t === "Mobile") mappedTypes.add("Manufactured");
-    }
-    for (const mt of mappedTypes) {
-      params.append("type", mt);
-    }
-  }
 
-  // Exact map for the checkboxes that Repliers supports natively
-  if (features.includes("Waterfront")) params.set("waterfront", "not:null");
-  if (features.includes("Has a view")) params.set("view", "not:null");
-  if (features.includes("Basement")) params.set("basement", "not:null");
+  // Home types map to native `propertyType`/`style` filters; numeric ranges and
+  // native feature checkboxes are forwarded as Repliers params. Shared with the
+  // map route via listings-api-params so both views filter identically.
+  applyHomeTypeFilters(params, type);
+  applyRangeFilters(params, searchParams);
+  applyNativeFeatureFilters(params, features);
 
   if (ALLOWED_SORT_BY.has(sortBy)) params.set("sortBy", sortBy);
 
@@ -202,20 +189,45 @@ export async function GET(req: NextRequest) {
 
     let data = primary.data!;
 
-    // Post-filter for text-based features
+    // Post-filter for text-based features matched against remarks. Waterfront
+    // and Basement are filtered natively above, so they're excluded here.
     const textFeaturesToMatch = features.filter(
-      (f) => !["Waterfront", "Has a view", "Basement"].includes(f)
+      (f) => !NATIVE_FEATURE_LABELS.includes(f)
     );
 
     if (textFeaturesToMatch.length > 0 && data.listings) {
-      const requestedGroups = FEATURE_GROUPS.filter((g) => textFeaturesToMatch.includes(g.label));
+      // Map UI checkbox labels to FEATURE_GROUPS labels where they differ.
+      const groupLabels = new Set(
+        textFeaturesToMatch.map((f) => FEATURE_LABEL_TO_GROUP[f] ?? f)
+      );
+      const requestedGroups = FEATURE_GROUPS.filter((g) => groupLabels.has(g.label));
       
       if (requestedGroups.length > 0) {
-        data.listings = data.listings.filter((listing) => {
+        const scored = data.listings.map((listing) => {
           const matched = matchFeaturesInText((listing as any).details?.description, requestedGroups);
-          return matched.length === requestedGroups.length; // MUST match all requested text features
+          return { listing, matchedCount: matched.length };
         });
-        (data as any).count = data.listings.length; // Note: this count is only for the current page, true pagination is tricky with post-filtering
+
+        // For 1-2 requested features, keep strict AND semantics.
+        // For larger sets, require overlap so users don't hit empty-dead-end
+        // results because one checkbox term is missing from remarks text.
+        const strictNeedAll = requestedGroups.length <= 2;
+        const minMatches = strictNeedAll
+          ? requestedGroups.length
+          : Math.max(2, Math.ceil(requestedGroups.length * 0.5));
+
+        let filtered = scored.filter((s) => s.matchedCount >= minMatches);
+        if (!filtered.length) {
+          filtered = scored.filter((s) => s.matchedCount > 0);
+        }
+
+        filtered.sort((a, b) => b.matchedCount - a.matchedCount);
+
+        const totalMatched = filtered.length;
+        data.listings = filtered.map((s) => s.listing).slice(0, pageSizeNum);
+        (data as any).count = totalMatched;
+        (data as any).numPages = Math.max(1, Math.ceil(totalMatched / pageSizeNum));
+        (data as any).page = Number(page) || 1;
       }
     }
 

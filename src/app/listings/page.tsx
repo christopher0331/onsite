@@ -93,6 +93,21 @@ const SORT_OPTIONS = [
   { label: "Price: Low to High", value: "listPriceAsc" },
 ];
 
+const HOME_TYPE_OPTIONS = [
+  { label: "House", value: "House" },
+  { label: "Townhouse", value: "Townhouse" },
+  { label: "Condo", value: "Condo" },
+  { label: "Land", value: "Land" },
+  { label: "Multi-family", value: "Multi-family" },
+  { label: "Mobile", value: "Mobile" },
+  { label: "Manufactured On Land", value: "Manufactured On Land" },
+  { label: "Rental", value: "Rental" },
+  { label: "Commercial / Industrial", value: "Commercial / Industrial" },
+  { label: "Boat Slip", value: "Boat Slip" },
+  { label: "Business Opportunity", value: "Business Opportunity" },
+  { label: "Other", value: "Other" },
+];
+
 export default function ListingsPage() {
   const [listings, setListings] = useState<Listing[]>([]);
   const [count, setCount] = useState(0);
@@ -127,9 +142,13 @@ export default function ListingsPage() {
   const [mapListings, setMapListings] = useState<Listing[]>([]);
   const [mapLoading, setMapLoading] = useState(false);
   const [mapStatusLine, setMapStatusLine] = useState("");
+  const [filtersAppliedAt, setFiltersAppliedAt] = useState(0);
+  const [pendingApplyFeedback, setPendingApplyFeedback] = useState(false);
+  const [applyFeedback, setApplyFeedback] = useState<string | null>(null);
 
   const mapDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const mapRequestIdRef = useRef(0);
+  const resultsSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -148,12 +167,26 @@ export default function ListingsPage() {
     e.preventDefault();
     setMlsSearch(mlsInput.trim());
     setPage(1);
+    setPendingApplyFeedback(true);
+    setApplyFeedback("Applying filters…");
+    setFiltersAppliedAt((v) => v + 1);
   }
 
   function clearMlsSearch() {
     setMlsInput("");
     setMlsSearch("");
     setPage(1);
+    setPendingApplyFeedback(true);
+    setApplyFeedback("Applying filters…");
+    setFiltersAppliedAt((v) => v + 1);
+  }
+
+  function applyRegularFilters(closeModal = false) {
+    setPage(1);
+    setPendingApplyFeedback(true);
+    setApplyFeedback("Applying filters…");
+    setFiltersAppliedAt((v) => v + 1);
+    if (closeModal) setIsMoreFiltersOpen(false);
   }
 
   // Fetch total database count once on mount (no filters) to show in hero
@@ -164,13 +197,7 @@ export default function ListingsPage() {
       .catch(() => {});
   }, []);
 
-  useEffect(() => {
-    setPage(1);
-  }, [
-    status, city, stateFilter, mlsSearch, propertyType, minBeds, maxBeds,
-    minBaths, maxBaths, minPrice, maxPrice, minSqft, maxSqft, minYearBuilt,
-    maxYearBuilt, minLotSize, maxLotSize, garageSpots, homeFeatures, sortBy
-  ]);
+  // Filters are applied explicitly via the "Go"/"Apply Filters" action.
 
   const handleMapViewport = useCallback(
     (viewport: MapViewport) => {
@@ -392,22 +419,29 @@ export default function ListingsPage() {
         setCount(data.count || 0);
         setNumPages(data.numPages || 1);
         setDataRefreshedAt(new Date());
+        if (pendingApplyFeedback) {
+          setApplyFeedback(`${(data.count || 0).toLocaleString()} ${(data.count || 0) === 1 ? "home" : "homes"} found`);
+          setTimeout(() => {
+            resultsSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 60);
+          setPendingApplyFeedback(false);
+        }
         setLoading(false);
-        if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
       } catch {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) {
+          if (pendingApplyFeedback) {
+            setApplyFeedback("Unable to load homes. Please try again.");
+            setPendingApplyFeedback(false);
+          }
+          setLoading(false);
+        }
       }
     })();
 
     return () => {
       cancelled = true;
     };
-  }, [
-    status, city, stateFilter, mlsSearch, propertyType, minBeds, maxBeds,
-    minBaths, maxBaths, minPrice, maxPrice, minSqft, maxSqft, minYearBuilt,
-    maxYearBuilt, minLotSize, maxLotSize, garageSpots, homeFeatures, sortBy,
-    page, viewMode
-  ]);
+  }, [filtersAppliedAt, page, viewMode, pendingApplyFeedback]);
 
   return (
     <>
@@ -415,7 +449,7 @@ export default function ListingsPage() {
       <main className="bg-white">
 
         {/* Hero + Controls */}
-        <section className="relative overflow-hidden bg-[#13211a] pt-40 pb-24 sm:pt-52 sm:pb-32">
+        <section className="relative overflow-visible bg-[#13211a] pt-40 pb-24 sm:pt-52 sm:pb-32">
           {/* Brand-green ambient glow so the hero isn't flat black/white */}
           <div
             aria-hidden
@@ -456,7 +490,7 @@ export default function ListingsPage() {
             </div>
 
             {/* Redfin-style Filters UI */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="relative z-40 flex flex-wrap items-center gap-3">
               <div className="flex flex-wrap items-center gap-3">
                       {/* Search Bar */}
                       <div className="relative flex items-center bg-white/5 rounded-full border border-white/20 overflow-hidden transition-all focus-within:bg-white focus-within:border-white group">
@@ -586,14 +620,7 @@ export default function ListingsPage() {
                       {/* Home Type Popover */}
                       <FilterPopover label={propertyType.length > 0 ? `${propertyType.length} Selected` : "Home Type"} isActive={propertyType.length > 0}>
                         <div className="grid grid-cols-2 gap-3 p-2 min-w-[320px]">
-                          {[
-                            { label: "House", value: "House" },
-                            { label: "Townhouse", value: "Townhouse" },
-                            { label: "Condo", value: "Condo" },
-                            { label: "Land", value: "Land" },
-                            { label: "Multi-family", value: "Multi-family" },
-                            { label: "Mobile", value: "Mobile" },
-                          ].map((opt) => (
+                          {HOME_TYPE_OPTIONS.map((opt) => (
                             <label key={opt.value} className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl border cursor-pointer transition ${
                               propertyType.includes(opt.value) ? "border-[#3daf3d] bg-[#3daf3d]/5 text-[#3daf3d]" : "border-charcoal/10 bg-white hover:border-charcoal/30 text-charcoal"
                             }`}>
@@ -638,6 +665,14 @@ export default function ListingsPage() {
                         <option value="OR" className="text-charcoal bg-white">OR</option>
                         <option value="CA" className="text-charcoal bg-white">CA</option>
                       </select>
+
+                      <button
+                        type="button"
+                        onClick={() => applyRegularFilters(false)}
+                        className="rounded-full bg-[#3daf3d] px-5 py-2.5 text-[12px] font-bold uppercase tracking-[0.18em] text-white transition hover:bg-[#3daf3d]/90"
+                      >
+                        Go
+                      </button>
                     </div>
               
                     <Modal
@@ -653,13 +688,15 @@ export default function ListingsPage() {
                               setMinPrice(""); setMaxPrice(""); setMinSqft(""); setMaxSqft(""); setMinYearBuilt("");
                               setMaxYearBuilt(""); setMinLotSize(""); setMaxLotSize(""); setGarageSpots("Any");
                               setHomeFeatures([]); setSortBy("createdOnDesc");
+                              setPage(1);
+                              setFiltersAppliedAt((v) => v + 1);
                             }}
                             className="text-[14px] text-charcoal/60 hover:text-charcoal font-medium underline underline-offset-4"
                           >
                             Clear All
                           </button>
                           <button
-                            onClick={() => setIsMoreFiltersOpen(false)}
+                            onClick={() => applyRegularFilters(true)}
                             className="rounded-full bg-[#3daf3d] px-8 py-3 text-[14px] font-bold text-white hover:bg-[#3daf3d]/90 transition"
                           >
                             Apply Filters
@@ -668,6 +705,36 @@ export default function ListingsPage() {
                       }
                     >
                       <div className="flex flex-col gap-10">
+                        {/* Home Type */}
+                        <section>
+                          <h3 className="text-[18px] font-bold text-charcoal mb-5">Home type</h3>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            {HOME_TYPE_OPTIONS.map((opt) => (
+                              <label
+                                key={opt.value}
+                                className={`flex min-h-[64px] items-center justify-center rounded-xl border px-3 text-center text-[14px] font-medium cursor-pointer transition ${
+                                  propertyType.includes(opt.value)
+                                    ? "border-[#3daf3d] bg-[#3daf3d]/10 text-[#3daf3d]"
+                                    : "border-charcoal/15 bg-white text-charcoal hover:border-charcoal/35"
+                                }`}
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="sr-only"
+                                  checked={propertyType.includes(opt.value)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) setPropertyType([...propertyType, opt.value]);
+                                    else setPropertyType(propertyType.filter((t) => t !== opt.value));
+                                  }}
+                                />
+                                {opt.label}
+                              </label>
+                            ))}
+                          </div>
+                        </section>
+
+                        <hr className="border-charcoal/10" />
+
                         {/* Property Details */}
                         <section>
                           <h3 className="text-[18px] font-bold text-charcoal mb-5">Property details</h3>
@@ -675,25 +742,25 @@ export default function ListingsPage() {
                             <div className="flex flex-col gap-2">
                               <label className="text-[13px] font-medium text-charcoal">Square feet</label>
                               <div className="flex items-center gap-2">
-                                <input type="number" placeholder="No min" value={minSqft} onChange={e => setMinSqft(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
+                                <input type="number" min={1} placeholder="No min" value={minSqft} onChange={e => setMinSqft(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
                                 <span className="text-charcoal/30">-</span>
-                                <input type="number" placeholder="No max" value={maxSqft} onChange={e => setMaxSqft(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
+                                <input type="number" min={1} placeholder="No max" value={maxSqft} onChange={e => setMaxSqft(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
                               </div>
                             </div>
                             <div className="flex flex-col gap-2">
                               <label className="text-[13px] font-medium text-charcoal">Lot size (sqft)</label>
                               <div className="flex items-center gap-2">
-                                <input type="number" placeholder="No min" value={minLotSize} onChange={e => setMinLotSize(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
+                                <input type="number" min={1} placeholder="No min" value={minLotSize} onChange={e => setMinLotSize(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
                                 <span className="text-charcoal/30">-</span>
-                                <input type="number" placeholder="No max" value={maxLotSize} onChange={e => setMaxLotSize(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
+                                <input type="number" min={1} placeholder="No max" value={maxLotSize} onChange={e => setMaxLotSize(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
                               </div>
                             </div>
                             <div className="flex flex-col gap-2">
                               <label className="text-[13px] font-medium text-charcoal">Year built</label>
                               <div className="flex items-center gap-2">
-                                <input type="number" placeholder="No min" value={minYearBuilt} onChange={e => setMinYearBuilt(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
+                                <input type="number" min={1800} max={2100} placeholder="No min" value={minYearBuilt} onChange={e => setMinYearBuilt(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
                                 <span className="text-charcoal/30">-</span>
-                                <input type="number" placeholder="No max" value={maxYearBuilt} onChange={e => setMaxYearBuilt(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
+                                <input type="number" min={1800} max={2100} placeholder="No max" value={maxYearBuilt} onChange={e => setMaxYearBuilt(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
                               </div>
                             </div>
                           </div>
@@ -771,6 +838,12 @@ export default function ListingsPage() {
                     </Modal>
             </div>
 
+            {applyFeedback && (
+              <p className="mt-4 text-[12px] uppercase tracking-[0.18em] text-[#3daf3d]">
+                {applyFeedback}
+              </p>
+            )}
+
             {/* View-mode toggle */}
             <div className="mt-8 flex items-center gap-3">
               <span className="text-[10px] uppercase tracking-[0.25em] text-white/80">View</span>
@@ -804,7 +877,7 @@ export default function ListingsPage() {
         <AiSearchPanel />
 
         {/* Grid */}
-        <section className="bg-[#f2ede6] py-20 sm:py-28">
+        <section ref={resultsSectionRef} className="bg-[#f2ede6] py-20 sm:py-28">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
             {viewMode === "map" ? (
               <ListingsMap
