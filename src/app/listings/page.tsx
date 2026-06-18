@@ -204,6 +204,11 @@ export default function ListingsPage() {
     if (viewMode === "map") {
       setPendingApplyFeedback(false);
       setApplyFeedback(null);
+      // The map has its own status banner instead of the "homes found" hero
+      // feedback, so scroll down to the results so the user sees the updated map.
+      setTimeout(() => {
+        resultsSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 60);
     } else {
       setPendingApplyFeedback(true);
       setApplyFeedback("Applying filters…");

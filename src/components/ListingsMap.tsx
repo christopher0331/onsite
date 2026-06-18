@@ -267,6 +267,45 @@ function ViewportWatcher({
   return null;
 }
 
+// Single price pin. Its ref/onClick callbacks are memoized so the marker's ref
+// identity stays stable across renders — inline callbacks here cause React to
+// re-run the ref every render, which churns the marker map state and locks the
+// page in an infinite render loop.
+function PriceMarker({
+  listing,
+  setMarkerRef,
+  onSelect,
+}: {
+  listing: ValidListing;
+  setMarkerRef: (marker: Marker | null, key: string) => void;
+  onSelect: (listing: ValidListing) => void;
+}) {
+  const ref = useCallback(
+    (marker: Marker | null) => setMarkerRef(marker, listing.mlsNumber),
+    [setMarkerRef, listing.mlsNumber]
+  );
+  const handleClick = useCallback(() => onSelect(listing), [onSelect, listing]);
+
+  const badge = getListingStatusBadge(listing);
+  const price = listing.soldPrice ?? listing.listPrice;
+  const { bg, fg, border } = PIN_PALETTE[badge.tone];
+
+  return (
+    <AdvancedMarker
+      position={{ lat: listing.map.latitude, lng: listing.map.longitude }}
+      ref={ref}
+      onClick={handleClick}
+    >
+      <div
+        className="gmaps-price-pin"
+        style={{ background: bg, color: fg, border: `1px solid ${border}` }}
+      >
+        {compactPrice(price)}
+      </div>
+    </AdvancedMarker>
+  );
+}
+
 // Custom-styled price pins with Airbnb-style clustering.
 function PriceMarkers({
   listings,
@@ -323,26 +362,14 @@ function PriceMarkers({
 
   return (
     <>
-      {listings.map((l) => {
-        const badge = getListingStatusBadge(l);
-        const price = l.soldPrice ?? l.listPrice;
-        const { bg, fg, border } = PIN_PALETTE[badge.tone];
-        return (
-          <AdvancedMarker
-            key={l.mlsNumber}
-            position={{ lat: l.map.latitude, lng: l.map.longitude }}
-            ref={(marker) => setMarkerRef(marker, l.mlsNumber)}
-            onClick={() => onSelect(l)}
-          >
-            <div
-              className="gmaps-price-pin"
-              style={{ background: bg, color: fg, border: `1px solid ${border}` }}
-            >
-              {compactPrice(price)}
-            </div>
-          </AdvancedMarker>
-        );
-      })}
+      {listings.map((l) => (
+        <PriceMarker
+          key={l.mlsNumber}
+          listing={l}
+          setMarkerRef={setMarkerRef}
+          onSelect={onSelect}
+        />
+      ))}
     </>
   );
 }
