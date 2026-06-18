@@ -43,7 +43,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
 
       <motion.div
         style={{ opacity }}
-        className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6"
+        className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 pt-20 lg:pt-0"
       >
         <motion.p
           initial={{ opacity: 0, y: 20 }}
