@@ -56,13 +56,13 @@ export default function MarketChart({
   if (points.length === 0) return null;
 
   return (
-    <div className="rounded-2xl border border-charcoal/10 bg-[#faf9f7] p-8 h-full flex flex-col">
-      <h3 className="text-[1.4rem] font-bold tracking-tight text-charcoal mb-1">
+    <div className="min-w-0 overflow-hidden rounded-2xl border border-charcoal/10 bg-[#faf9f7] p-4 sm:p-8">
+      <h3 className="mb-1 text-[1.1rem] font-bold tracking-tight text-charcoal sm:text-[1.4rem]">
         Sold Price &amp; Days On Market in {city}
       </h3>
 
       {/* Legend */}
-      <div className="flex items-center gap-5 mb-6 mt-2">
+      <div className="mb-4 mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 sm:mb-6">
         <div className="flex items-center gap-2">
           <span className="w-4 h-[3px] rounded-full bg-[#1a1a18]" />
           <span className="text-[12px] font-medium text-charcoal/80">Median Sold Price</span>
@@ -73,9 +73,9 @@ export default function MarketChart({
         </div>
       </div>
 
-      <div className="flex-1 min-h-[320px]">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={points} margin={{ top: 10, right: 15, left: 0, bottom: 5 }}>
+      <div className="h-[280px] min-w-0 w-full overflow-hidden sm:h-[320px]">
+        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+          <LineChart data={points} margin={{ top: 10, right: 8, left: 0, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e0ddd6" vertical={false} />
             <XAxis
               dataKey="month"
@@ -92,7 +92,7 @@ export default function MarketChart({
               tickLine={false}
               axisLine={false}
               tickFormatter={(v: number) => fmtPrice(v)}
-              width={75}
+              width={62}
             />
             <YAxis
               yAxisId="dom"
@@ -101,7 +101,7 @@ export default function MarketChart({
               tickLine={false}
               axisLine={false}
               tickFormatter={(v: number) => `${v} days`}
-              width={60}
+              width={52}
             />
             <Tooltip
               contentStyle={{

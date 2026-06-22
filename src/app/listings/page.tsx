@@ -534,7 +534,7 @@ export default function ListingsPage() {
   return (
     <>
       <Header />
-      <main className="bg-white">
+      <main className="overflow-x-clip bg-white">
 
         {/* Hero + Controls */}
         <section className="relative overflow-visible bg-[#13211a] pt-28 pb-12 sm:pt-44 sm:pb-24 lg:pt-52 lg:pb-32">
@@ -617,7 +617,8 @@ export default function ListingsPage() {
                 </form>
               </div>
 
-              <div className="-mx-6 flex items-center gap-2 overflow-x-auto px-6 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
+              <div className="-mx-6 overflow-x-clip px-6 sm:mx-0 sm:overflow-visible sm:px-0">
+              <div className="flex items-center gap-2 overflow-x-auto overscroll-x-contain pb-1 [scrollbar-width:none] sm:flex-wrap sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
               <div className="flex items-center gap-2 sm:flex-wrap">
                       {/* Tablet+: combined search pill */}
                       <div className="relative hidden items-center overflow-hidden rounded-full border border-white/20 bg-white/5 transition-all focus-within:border-white focus-within:bg-white group sm:flex">
@@ -800,6 +801,7 @@ export default function ListingsPage() {
                         Go
                       </button>
                     </div>
+              </div>
               </div>
                     <Modal
                       isOpen={isMoreFiltersOpen}

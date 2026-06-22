@@ -110,7 +110,7 @@ export default function OurListingsPage() {
   return (
     <>
       <Header />
-      <main className="bg-warm-gray pt-24 sm:pt-32">
+      <main className="overflow-x-clip bg-warm-gray pt-24 sm:pt-32">
         <section className="border-b border-charcoal/10 bg-white">
           <div className="mx-auto max-w-[1440px] px-6 py-10 sm:py-14 lg:px-12 lg:py-20">
             <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-mid-gray">
@@ -158,7 +158,8 @@ export default function OurListingsPage() {
 
         <section className="sticky top-16 z-30 border-b border-charcoal/10 bg-white/95 backdrop-blur-md sm:top-20">
           <div className="mx-auto max-w-[1440px] space-y-3 px-6 py-4 lg:px-12">
-            <div className="-mx-6 flex items-center gap-2 overflow-x-auto px-6 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
+            <div className="-mx-6 overflow-x-clip px-6 sm:mx-0 sm:overflow-visible sm:px-0">
+            <div className="flex items-center gap-2 overflow-x-auto overscroll-x-contain pb-1 [scrollbar-width:none] sm:flex-wrap sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
               <span className="mr-1 shrink-0 text-[10px] uppercase tracking-[0.22em] text-charcoal/50">
                 Listed by
               </span>
@@ -177,7 +178,9 @@ export default function OurListingsPage() {
                 </button>
               ))}
             </div>
-            <div className="-mx-6 flex items-center gap-2 overflow-x-auto border-t border-charcoal/8 px-6 pt-3 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden">
+            </div>
+            <div className="-mx-6 overflow-x-clip border-t border-charcoal/8 px-6 pt-3 sm:mx-0 sm:overflow-visible sm:px-0">
+            <div className="flex items-center gap-2 overflow-x-auto overscroll-x-contain [scrollbar-width:none] sm:flex-wrap sm:overflow-visible [&::-webkit-scrollbar]:hidden">
               <span className="mr-1 shrink-0 text-[10px] uppercase tracking-[0.22em] text-charcoal/50">
                 Status
               </span>
@@ -195,6 +198,7 @@ export default function OurListingsPage() {
                   {filter.label}
                 </button>
               ))}
+            </div>
             </div>
           </div>
         </section>

@@ -37,8 +37,8 @@ export default function InventoryGauge({ months }: { months: number }) {
   // viewBox: arc spans from (cx-r-sw/2) to (cx+r+sw/2) horizontally, top is cy-r-sw/2
   // Crop: x=0 y=0 to 300x155 (semicircle fits tightly)
   return (
-    <div className="rounded-2xl border border-charcoal/10 bg-[#faf9f7] p-8 flex flex-col items-center justify-center h-full">
-      <h3 className="text-[1.4rem] font-bold tracking-tight text-charcoal mb-6 text-center w-full">
+    <div className="flex h-full min-w-0 flex-col items-center justify-center overflow-hidden rounded-2xl border border-charcoal/10 bg-[#faf9f7] p-4 sm:p-8">
+      <h3 className="mb-4 w-full text-center text-[1.1rem] font-bold tracking-tight text-charcoal sm:mb-6 sm:text-[1.4rem]">
         Inventory Graph
       </h3>
 
@@ -80,7 +80,7 @@ export default function InventoryGauge({ months }: { months: number }) {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center gap-6 mt-4">
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-6">
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 rounded-full bg-green-600" />
           <span className="text-[12px] font-medium text-charcoal/80">Seller&apos;s</span>

@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${dmSans.variable} antialiased`}>
+      <body className={`${inter.variable} ${dmSans.variable} antialiased overflow-x-clip`}>
         {children}
         <AiAssistant />
       </body>

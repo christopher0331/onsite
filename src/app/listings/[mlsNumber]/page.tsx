@@ -249,7 +249,7 @@ export default function ListingDetailPage() {
     return (
       <>
         <Header />
-        <main className="bg-white">
+        <main className="overflow-x-clip bg-white">
           <div className="pt-28 pb-20 text-center sm:pt-40">
             <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-charcoal/20 border-t-charcoal" />
             <p className="mt-6 text-[13px] text-charcoal/65">Loading listing…</p>
@@ -264,7 +264,7 @@ export default function ListingDetailPage() {
     return (
       <>
         <Header />
-        <main className="bg-white pt-28 pb-20 text-center sm:pt-40">
+        <main className="overflow-x-clip bg-white pt-28 pb-20 text-center sm:pt-40">
           <p className="font-serif text-2xl font-light text-charcoal/65">Listing not found.</p>
           <Link href="/listings" className="mt-6 inline-block text-[12px] uppercase tracking-[0.25em] text-charcoal/75 hover:text-charcoal">
             ← Back to Listings
@@ -345,11 +345,11 @@ export default function ListingDetailPage() {
   return (
     <>
       <Header />
-      <main className="bg-white">
+      <main className="overflow-x-clip bg-white">
 
         {/* Breadcrumb + hero */}
         <section className="bg-[#1a1a18] pt-28 pb-10 sm:pt-44 sm:pb-16">
-          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+          <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
             <div className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] uppercase tracking-[0.24em] text-white/80 sm:mb-8 sm:text-[11px] sm:tracking-[0.3em]">
               <Link href="/listings" className="hover:text-white/70 transition-colors">Listings</Link>
               <span>/</span>
@@ -498,7 +498,7 @@ export default function ListingDetailPage() {
             with zero photos (e.g. new construction / pre-images sold). */}
         {images.length > 0 && (
           <section className="bg-white py-8 sm:py-10">
-            <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+            <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
               {/* Main image viewer. This is intentionally a plain <img> with
                   inline fit/crop styles, not Next/Image or Tailwind bg-* utils,
                   so production builds cannot rewrite the behavior. */}
@@ -546,7 +546,7 @@ export default function ListingDetailPage() {
                     onClick={() => setActiveImg(i)}
                     className={`relative aspect-square overflow-hidden rounded-xl transition-all duration-200 ${
                       activeImg === i
-                        ? "ring-2 ring-charcoal ring-offset-2"
+                        ? "ring-2 ring-inset ring-charcoal"
                         : "opacity-70 hover:opacity-100"
                     }`}
                   >
@@ -592,7 +592,7 @@ export default function ListingDetailPage() {
           }
           return (
             <section className="bg-white pt-2 pb-8 sm:pt-4">
-              <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+              <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
                 <div className="flex flex-wrap gap-x-12 gap-y-3 border-t border-charcoal/8 pt-5">
                   {hasListing ? (
                     <div className="flex items-start gap-4">
@@ -649,7 +649,7 @@ export default function ListingDetailPage() {
 
         {/* Description + Details */}
         <section className="bg-white py-12 sm:py-16 lg:py-24">
-          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+          <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_380px] lg:gap-16">
 
               {/* Left: description + details table */}
@@ -657,14 +657,14 @@ export default function ListingDetailPage() {
                 {det.description && (
                   <div className="mb-14">
                     <p className="mb-6 text-[11px] uppercase tracking-[0.35em] text-mid-gray">About This Home</p>
-                    <p className="text-[16px] leading-[1.85] text-charcoal whitespace-pre-line">
+                    <p className="break-words whitespace-pre-line text-[16px] leading-[1.85] text-charcoal">
                       {det.description.replace(/\*{4}\s*SAMPLE DATA\s*\*{4}/gi, "").trim()}
                     </p>
                   </div>
                 )}
 
                 {/* Listing Updated + Last Checked + Source */}
-                <div className="mb-14 space-y-2 border-t border-charcoal/8 pt-6">
+                <div className="mb-14 min-w-0 space-y-2 break-words border-t border-charcoal/8 pt-6">
                   {listing.timestamps?.listingUpdated && (
                     <p className="text-[13px] text-charcoal">
                       <span className="font-medium text-charcoal/80">Listing Updated:</span>{" "}
@@ -705,7 +705,7 @@ export default function ListingDetailPage() {
                       ? `NWMLS as Distributed by MLS Grid #${listing.mlsNumber}`
                       : `MLS Grid #${listing.mlsNumber}`}
                   </p>
-                  <p className="text-[12px] leading-[1.7] text-charcoal/80">
+                  <p className="break-words text-[12px] leading-[1.7] text-charcoal/80">
                     Listing provided courtesy of Northwest MLS. Information contained herein is derived from different sources but has not been independently verified by OnSite Real Estate Group, MLS Grid, or the MLS, and should be verified by the buyer. Open house information is subject to change without notice. All information should be independently reviewed and verified for accuracy. Properties may or may not be listed by the office or agent presenting the information.
                   </p>
                 </div>
@@ -715,9 +715,9 @@ export default function ListingDetailPage() {
                     <p className="mb-6 text-[11px] uppercase tracking-[0.35em] text-mid-gray">Property Details</p>
                     <div className="grid grid-cols-1 gap-x-12 sm:grid-cols-2">
                       {detailRows.map((row, i) => (
-                        <div key={i} className="flex items-start justify-between border-b border-charcoal/8 py-3.5">
-                          <span className="text-[13px] text-charcoal/80">{row.label}</span>
-                          <span className="ml-4 text-right text-[13px] font-medium text-charcoal">{row.value}</span>
+                        <div key={i} className="flex min-w-0 items-start justify-between gap-3 border-b border-charcoal/8 py-3.5">
+                          <span className="shrink-0 text-[13px] text-charcoal/80">{row.label}</span>
+                          <span className="min-w-0 break-words text-right text-[13px] font-medium text-charcoal">{row.value}</span>
                         </div>
                       ))}
                     </div>
@@ -1058,7 +1058,7 @@ export default function ListingDetailPage() {
         {/* City Residential Insights */}
         {cityStats && (cityStats.active || cityStats.sold) && (
           <section className="bg-white py-16 sm:py-20 border-t border-charcoal/8">
-            <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+            <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
                 <h2 className="font-serif text-[clamp(1.6rem,3vw,2.4rem)] font-light text-charcoal">
                   {listing.address.city} Residential Insights
@@ -1072,7 +1072,7 @@ export default function ListingDetailPage() {
 
               {/* Chart + Gauge row */}
               {cityStats.chart && (
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-4 mb-8">
+                <div className="grid min-w-0 grid-cols-1 gap-4 mb-8 lg:grid-cols-[minmax(0,1fr)_340px]">
                   <MarketChart data={cityStats.chart} city={listing.address.city} />
                   {(() => {
                     const availMths = recentMonths(cityStats.active?.available?.mth, 1);
@@ -1118,7 +1118,7 @@ export default function ListingDetailPage() {
 
                     <div className="rounded-2xl border border-charcoal/10 p-6">
                       <p className="text-[12px] text-charcoal/80 mb-3">Sales Volume</p>
-                      <div className="flex gap-6">
+                      <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-6">
                         {soldMths.map((m) => (
                           <div key={m}>
                             <p className="text-[1.2rem] font-serif font-light text-charcoal">{fmtCompact(cityStats.sold!.soldPrice.mth[m]?.sum ?? 0)}</p>
@@ -1130,7 +1130,7 @@ export default function ListingDetailPage() {
 
                     <div className="rounded-2xl border border-charcoal/10 p-6">
                       <p className="text-[12px] text-charcoal/80 mb-3">New Listings</p>
-                      <div className="flex gap-6">
+                      <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-6">
                         {newMths.map((m) => (
                           <div key={m}>
                             <p className="text-[1.5rem] font-serif font-light text-charcoal">{cityStats.active!.new.mth[m]?.count ?? 0}</p>
@@ -1142,7 +1142,7 @@ export default function ListingDetailPage() {
 
                     <div className="rounded-2xl border border-charcoal/10 p-6">
                       <p className="text-[12px] text-charcoal/80 mb-3">Residential Sold</p>
-                      <div className="flex gap-6">
+                      <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-6">
                         {closedMths.map((m) => (
                           <div key={m}>
                             <p className="text-[1.5rem] font-serif font-light text-charcoal">{cityStats.sold!.closed.mth[m]?.count ?? 0}</p>
@@ -1154,7 +1154,7 @@ export default function ListingDetailPage() {
 
                     <div className="rounded-2xl border border-charcoal/10 p-6">
                       <p className="text-[12px] text-charcoal/80 mb-3">Days on Market</p>
-                      <div className="flex gap-6">
+                      <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-6">
                         {domMths.map((m) => (
                           <div key={m}>
                             <p className="text-[1.5rem] font-serif font-light text-charcoal">{cityStats.sold!.daysOnMarket.mth[m]?.avg ?? 0}</p>
@@ -1172,7 +1172,7 @@ export default function ListingDetailPage() {
 
         {/* MLS Grid / NWMLS compliance */}
         <section className="bg-white border-t border-charcoal/8 py-10">
-          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+          <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
             <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-10">
               {listing.address.state === "WA" && (
                 <Image
@@ -1216,7 +1216,7 @@ export default function ListingDetailPage() {
 
         {/* CTA */}
         <section className="bg-[#1a1a18] py-20 sm:py-28">
-          <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+          <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
             <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
               <div>
                 <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/60">Interested in This Property?</p>
