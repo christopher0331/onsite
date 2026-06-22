@@ -175,8 +175,8 @@ export default function HeroSearch() {
         }}
         role="search"
       >
-        <div className="flex items-center gap-2 rounded-full bg-white/95 p-2 pl-5 shadow-[0_18px_50px_rgba(0,0,0,0.35)] ring-1 ring-black/5 backdrop-blur transition focus-within:bg-white">
-          <SearchIcon className="h-5 w-5 shrink-0 text-charcoal/40" />
+        <div className="flex items-center gap-1.5 rounded-full bg-white/95 p-1.5 pl-4 shadow-[0_18px_50px_rgba(0,0,0,0.35)] ring-1 ring-black/5 backdrop-blur transition focus-within:bg-white sm:gap-2 sm:p-2 sm:pl-5">
+          <SearchIcon className="h-4 w-4 shrink-0 text-charcoal/40 sm:h-5 sm:w-5" />
           <input
             type="text"
             value={query}
@@ -185,18 +185,18 @@ export default function HeroSearch() {
               if (suggestions.length) setOpen(true);
             }}
             onKeyDown={onKeyDown}
-            placeholder="Enter an address, city, or ZIP"
+            placeholder="Address, city, or ZIP"
             aria-label="Search homes by address, city, or ZIP"
             role="combobox"
             aria-expanded={showDropdown}
             aria-controls={LISTBOX_ID}
             aria-autocomplete="list"
             autoComplete="off"
-            className="min-w-0 flex-1 bg-transparent text-[15px] text-charcoal placeholder:text-charcoal/50 focus:outline-none"
+            className="min-w-0 flex-1 bg-transparent text-[14px] text-charcoal placeholder:text-charcoal/50 focus:outline-none sm:text-[15px]"
           />
           <button
             type="submit"
-            className="shrink-0 rounded-full bg-[#3daf3d] px-5 py-3 text-[12px] font-bold uppercase tracking-[0.18em] text-white transition hover:bg-[#3daf3d]/90 sm:px-7"
+            className="shrink-0 rounded-full bg-[#3daf3d] px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#3daf3d]/90 sm:px-7 sm:py-3 sm:text-[12px] sm:tracking-[0.18em]"
           >
             Search
           </button>

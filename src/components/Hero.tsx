@@ -25,7 +25,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
   return (
     <section
       ref={ref}
-      className="relative h-[72vh] min-h-[560px] max-h-[860px] overflow-x-clip"
+      className="relative overflow-x-clip lg:h-[72vh] lg:min-h-[560px] lg:max-h-[860px]"
     >
       <motion.div style={{ scale }} className="absolute inset-0">
         <video
@@ -44,13 +44,13 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
 
       <motion.div
         style={{ opacity }}
-        className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 pt-20 lg:pt-0"
+        className="relative z-10 flex flex-col items-center justify-start gap-6 px-4 pb-10 pt-24 text-center sm:gap-8 sm:px-6 sm:pb-14 sm:pt-28 lg:h-full lg:min-h-0 lg:justify-center lg:gap-10 lg:px-6 lg:pb-0 lg:pt-0"
       >
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-[11px] sm:text-[13px] uppercase tracking-[0.35em] text-white/80 mb-6"
+          className="text-[10px] uppercase tracking-[0.28em] text-white/80 sm:text-[13px] sm:tracking-[0.35em]"
         >
           Pierce County&apos;s Premier Real Estate Team
         </motion.p>
@@ -59,7 +59,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="font-serif text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] text-white max-w-5xl"
+          className="max-w-5xl font-serif text-[clamp(2rem,8.5vw,6rem)] leading-[0.98] text-white sm:leading-[0.95]"
         >
           Top Rated Real Estate
           <br />
@@ -70,7 +70,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-8 text-[15px] sm:text-base text-white/80 max-w-xl leading-relaxed"
+          className="max-w-xl text-[14px] leading-relaxed text-white/80 sm:text-base"
         >
           Sell your home with confidence. Trusted Real Estate Agents serving
           Lake Tapps, Bonney Lake, Sumner, Buckley, Graham, Puyallup & Beyond.
@@ -80,7 +80,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0 }}
-          className="mt-10 flex w-full justify-center"
+          className="flex w-full max-w-2xl justify-center"
         >
           <HeroSearch />
         </motion.div>
@@ -89,11 +89,11 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="mt-8 flex flex-wrap justify-center gap-4"
+          className="flex w-full max-w-md flex-col gap-3.5 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4"
         >
           <Link
             href="/our-listings"
-            className="group inline-flex items-center gap-3 bg-white text-charcoal px-10 py-4 text-[13px] uppercase tracking-[0.25em] hover:bg-white/90 transition-all duration-500"
+            className="group inline-flex w-full items-center justify-center gap-2.5 bg-white px-6 py-3.5 text-[12px] uppercase tracking-[0.22em] text-charcoal transition-all duration-500 hover:bg-white/90 sm:w-auto sm:gap-3 sm:px-10 sm:py-4 sm:text-[13px] sm:tracking-[0.25em]"
           >
             Our Listings
             <svg
@@ -113,7 +113,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
           {showIdxLink && (
             <Link
               href="/listings"
-              className="group inline-flex items-center gap-3 border border-white/50 text-white px-10 py-4 text-[13px] uppercase tracking-[0.25em] hover:bg-white hover:text-charcoal transition-all duration-500"
+              className="group inline-flex w-full items-center justify-center gap-2.5 border border-white/50 px-6 py-3.5 text-[12px] uppercase tracking-[0.22em] text-white transition-all duration-500 hover:bg-white hover:text-charcoal sm:w-auto sm:gap-3 sm:px-10 sm:py-4 sm:text-[13px] sm:tracking-[0.25em]"
             >
               Search Homes
               <svg
@@ -137,7 +137,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.5 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          className="absolute bottom-12 left-1/2 hidden -translate-x-1/2 lg:block"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}

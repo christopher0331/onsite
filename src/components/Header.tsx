@@ -75,14 +75,15 @@ export default function Header() {
         }`}
       >
         <div className="mx-auto w-full max-w-[1600px] px-6 lg:px-10 xl:px-12">
-          <div className="flex w-full items-center h-20 lg:h-24">
+          <div className="flex h-16 w-full items-center overflow-hidden sm:h-20 lg:h-24">
             <Link href="/" className="relative z-10 shrink-0">
               <Image
                 src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/68dc8d33f60130dc306e6c8e_Timber.png"
                 alt="OnSite ReGroup"
                 width={320}
                 height={80}
-                className={`h-24 lg:h-28 w-auto transition-all duration-500 ${
+                priority
+                className={`h-10 w-auto sm:h-14 lg:h-28 transition-all duration-500 ${
                   solid ? "brightness-0" : "brightness-0 invert"
                 }`}
               />
@@ -196,7 +197,7 @@ export default function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-x-0 bottom-0 top-20 z-40 bg-charcoal"
+            className="fixed inset-x-0 bottom-0 top-16 z-40 bg-charcoal sm:top-20"
           >
             <motion.nav
               initial={{ opacity: 0, y: 20 }}
