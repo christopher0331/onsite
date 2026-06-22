@@ -19,7 +19,7 @@ const MAP_MIN_ZOOM = 9;
 const ListingsMap = dynamic(() => import("@/components/ListingsMap"), {
   ssr: false,
   loading: () => (
-    <div className="grid h-[640px] place-items-center rounded-3xl bg-charcoal/5">
+    <div className="grid h-[68vh] place-items-center rounded-3xl bg-charcoal/5 sm:h-[640px]">
       <p className="text-[12px] uppercase tracking-[0.25em] text-charcoal/75">Loading map…</p>
     </div>
   ),
@@ -185,13 +185,24 @@ export default function ListingsPage() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
-    const cityFromUrl = params.get("city");
+    // `q` is the homepage hero alias for the city / neighborhood / ZIP box.
+    const cityFromUrl = params.get("q") || params.get("city");
     const stateFromUrl = params.get("state");
     const statusFromUrl = params.get("status");
+    // The hero routes un-matched street addresses here with view=map so the map
+    // geocodes the address and recenters on it (via the map-sync effect below).
+    const viewFromUrl = params.get("view");
     if (cityFromUrl) setCity(cityFromUrl);
     if (stateFromUrl) setStateFilter(stateFromUrl);
     if (statusFromUrl && ["All", "A", "P", "U"].includes(statusFromUrl)) {
       setStatus(statusFromUrl);
+    }
+    if (viewFromUrl === "map") setViewMode("map");
+    // Deep links (hero search, service-area pages) arrive with the query
+    // pre-filled — apply it so the grid loads filtered results immediately
+    // instead of the default unfiltered browse.
+    if (cityFromUrl || statusFromUrl || viewFromUrl === "map") {
+      setFiltersAppliedAt((v) => v + 1);
     }
   }, []);
 

@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
+import HeroSearch from "@/components/HeroSearch";
 
 const VIDEO_MP4 =
   "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67b64a09871910cd858654e8_Onsite%20Regroup%20Video-transcode.mp4";
@@ -24,7 +25,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
   return (
     <section
       ref={ref}
-      className="relative h-[72vh] min-h-[560px] max-h-[860px] overflow-hidden"
+      className="relative h-[72vh] min-h-[560px] max-h-[860px] overflow-x-clip"
     >
       <motion.div style={{ scale }} className="absolute inset-0">
         <video
@@ -78,8 +79,17 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          className="mt-12 flex flex-wrap gap-4"
+          transition={{ duration: 0.8, delay: 1.0 }}
+          className="mt-10 flex w-full justify-center"
+        >
+          <HeroSearch />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="mt-8 flex flex-wrap justify-center gap-4"
         >
           <Link
             href="/our-listings"

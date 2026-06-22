@@ -73,6 +73,20 @@ const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
 // Cloud-styled map for production; DEMO_MAP_ID is Google's testing fallback.
 const MAP_ID = process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID || "DEMO_MAP_ID";
 
+// Tracks a viewport breakpoint so the map can adapt touch gestures, height, and
+// popup sizing for phones (where "greedy" gestures trap page scrolling).
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 function fullPrice(n: number | null | undefined) {
   if (!n || Number.isNaN(n)) return "Price on request";
   return "$" + n.toLocaleString("en-US");
@@ -137,7 +151,10 @@ function ListingPopupCard({
     "absolute top-1/2 z-20 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-charcoal shadow-[0_2px_6px_rgba(0,0,0,0.25)] transition hover:bg-white hover:scale-105";
 
   return (
-    <Link href={`/listings/${listing.mlsNumber}`} className="group block w-[340px] no-underline">
+    <Link
+      href={`/listings/${listing.mlsNumber}`}
+      className="group block w-[min(340px,calc(100vw-72px))] no-underline"
+    >
       <div className="relative h-[200px] w-full overflow-hidden bg-charcoal/5">
         {current ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -390,6 +407,8 @@ function MapInner({
   onPopupChange: (open: boolean) => void;
 }) {
   const [selected, setSelected] = useState<ValidListing | null>(null);
+  const isMobile = useIsMobile();
+  const infoWindowWidth = isMobile ? 280 : 340;
 
   useEffect(() => {
     onPopupChange(!!selected);
@@ -410,14 +429,15 @@ function MapInner({
       mapId={MAP_ID}
       defaultCenter={initialCenter}
       defaultZoom={initialZoom}
-      gestureHandling="greedy"
+      gestureHandling={isMobile ? "cooperative" : "greedy"}
       disableDefaultUI={false}
       mapTypeControl={false}
       streetViewControl={false}
       fullscreenControl={false}
+      zoomControl={!isMobile}
       clickableIcons={false}
       onClick={() => setSelected(null)}
-      style={{ height: 640, width: "100%" }}
+      style={{ height: isMobile ? "68vh" : 640, width: "100%" }}
     >
       <ViewportWatcher onViewportChange={onViewportChange} />
       <MapFocusController focus={focus} />
@@ -427,8 +447,8 @@ function MapInner({
           position={{ lat: selected.map.latitude, lng: selected.map.longitude }}
           onCloseClick={() => setSelected(null)}
           headerDisabled
-          minWidth={340}
-          maxWidth={340}
+          minWidth={infoWindowWidth}
+          maxWidth={infoWindowWidth}
           pixelOffset={[0, -8]}
         >
           <ListingPopupCard
@@ -489,7 +509,7 @@ export default function ListingsMap({
 
   if (!API_KEY) {
     return (
-      <div className="grid h-[640px] place-items-center rounded-3xl border border-charcoal/10 bg-charcoal/5">
+      <div className="grid h-[68vh] place-items-center rounded-3xl border border-charcoal/10 bg-charcoal/5 sm:h-[640px]">
         <p className="rounded-full bg-white px-6 py-3 text-[13px] text-charcoal/80 shadow">
           Map unavailable — missing Google Maps API key.
         </p>
@@ -533,18 +553,18 @@ export default function ListingsMap({
       `}</style>
 
       {loading && !popupOpen && (
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-[500] flex justify-center pt-6">
-          <div className="flex items-center gap-3 rounded-full bg-charcoal px-7 py-4 text-white shadow-[0_12px_40px_rgba(0,0,0,0.35)]">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[500] flex justify-center px-4 pt-6">
+          <div className="flex items-center gap-3 rounded-full bg-charcoal px-5 py-3 text-white shadow-[0_12px_40px_rgba(0,0,0,0.35)] sm:px-7 sm:py-4">
             <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-            <span className="text-[14px] font-medium uppercase tracking-[0.18em]">
+            <span className="text-[12px] font-medium uppercase tracking-[0.18em] sm:text-[14px]">
               Searching this area…
             </span>
           </div>
         </div>
       )}
       {!loading && statusLine && !popupOpen && (
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-[500] flex justify-center pt-6">
-          <div className="rounded-full bg-white/95 px-6 py-3 text-[13px] font-medium text-charcoal shadow-[0_10px_36px_rgba(0,0,0,0.18)] backdrop-blur-sm">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-[500] flex justify-center px-4 pt-6">
+          <div className="max-w-[calc(100vw-32px)] rounded-full bg-white/95 px-5 py-2.5 text-center text-[12px] font-medium text-charcoal shadow-[0_10px_36px_rgba(0,0,0,0.18)] backdrop-blur-sm sm:px-6 sm:py-3 sm:text-[13px]">
             {statusLine}
           </div>
         </div>
@@ -562,8 +582,8 @@ export default function ListingsMap({
       </APIProvider>
 
       {validListings.length === 0 && !loading && (
-        <div className="pointer-events-none absolute inset-0 grid place-items-center bg-charcoal/5">
-          <p className="rounded-full bg-white/95 px-6 py-3 text-[13px] text-charcoal/80 shadow">
+        <div className="pointer-events-none absolute inset-0 grid place-items-center bg-charcoal/5 px-6">
+          <p className="max-w-sm rounded-2xl bg-white/95 px-6 py-4 text-center text-[13px] leading-relaxed text-charcoal/80 shadow">
             No mappable listings in this map area. Pan or zoom to search another neighborhood.
           </p>
         </div>
