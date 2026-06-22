@@ -73,7 +73,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
           Lake Tapps, Bonney Lake, Sumner, Buckley, Graham, Puyallup & Beyond.
         </p>
 
-        <div className="relative z-30 flex w-full max-w-2xl animate-[fade-up_0.8s_ease-out_0.65s_both] justify-center">
+        <div className="relative z-20 flex w-full max-w-2xl animate-[fade-up_0.8s_ease-out_0.65s_both] justify-center">
           <HeroSearch />
         </div>
 

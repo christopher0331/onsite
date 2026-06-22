@@ -115,7 +115,7 @@ export default function NavDropdown({
   }
 
   return (
-    <div ref={rootRef} className="relative shrink-0">
+    <div ref={rootRef} className={`relative shrink-0 ${open ? "z-[110]" : ""}`}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -141,7 +141,7 @@ export default function NavDropdown({
         <div
           id={panelId}
           role="menu"
-          className={`absolute left-1/2 top-full z-[60] mt-4 min-w-[12rem] -translate-x-1/2 rounded-2xl border py-2 ${panelBg}`}
+          className={`absolute left-1/2 top-full z-[110] mt-4 min-w-[12rem] -translate-x-1/2 rounded-2xl border py-2 ${panelBg}`}
         >
           {items.map((item) =>
             item.external ? (

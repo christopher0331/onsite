@@ -100,7 +100,7 @@ export default function ServiceAreasNav({
   }
 
   return (
-    <div ref={rootRef} className="relative shrink-0">
+    <div ref={rootRef} className={`relative shrink-0 ${open ? "z-[110]" : ""}`}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -128,7 +128,7 @@ export default function ServiceAreasNav({
         <div
           id={panelId}
           role="menu"
-          className={`absolute left-1/2 top-full z-[60] mt-4 w-[min(92vw,64rem)] -translate-x-1/2 rounded-3xl border p-6 sm:p-7 ${panelBg}`}
+          className={`absolute left-1/2 top-full z-[110] mt-4 w-[min(92vw,64rem)] -translate-x-1/2 rounded-3xl border p-6 sm:p-7 ${panelBg}`}
         >
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>

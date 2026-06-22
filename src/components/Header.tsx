@@ -68,14 +68,14 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 w-full max-w-full overflow-hidden transition-all duration-500 ${
+        className={`fixed inset-x-0 top-0 z-[100] w-full max-w-full overflow-visible transition-all duration-500 ${
           solid
             ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.06)]"
             : "bg-transparent"
         }`}
       >
         <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10 xl:px-12">
-          <div className="grid h-16 w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-3 sm:h-20 lg:flex lg:h-24">
+          <div className="grid h-16 w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-3 overflow-visible sm:h-20 lg:flex lg:h-24">
             <Link href="/" className="relative z-10 block min-w-0">
               <Image
                 src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/68dc8d33f60130dc306e6c8e_Timber.png"
@@ -89,7 +89,7 @@ export default function Header() {
               />
             </Link>
 
-            <nav className="hidden lg:flex flex-1 flex-nowrap items-center justify-evenly ml-6 min-w-0">
+            <nav className="hidden lg:flex flex-1 flex-nowrap items-center justify-evenly ml-6 min-w-0 overflow-visible">
               {mainNav.slice(0, 2).map((item) => (
                 <Link
                   key={item.href}
@@ -191,7 +191,7 @@ export default function Header() {
       </header>
 
       {mobileOpen && (
-        <div className="fixed inset-x-0 bottom-0 top-16 z-40 animate-[fade-in_0.35s_ease-out] bg-charcoal sm:top-20">
+        <div className="fixed inset-x-0 bottom-0 top-16 z-[90] animate-[fade-in_0.35s_ease-out] bg-charcoal sm:top-20">
           <nav className="flex h-full flex-col items-center justify-start gap-6 overflow-y-auto px-6 pb-10 pt-8 animate-[slide-up_0.35s_ease-out]">
             {mainNav.slice(0, 2).map((item) => (
               <Link

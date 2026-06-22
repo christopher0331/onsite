@@ -167,7 +167,7 @@ export default function HeroSearch() {
   const showDropdown = open && query.trim().length >= MIN_CHARS;
 
   return (
-    <div ref={containerRef} className="relative z-30 w-full max-w-2xl text-left">
+    <div ref={containerRef} className="relative z-20 w-full max-w-2xl text-left">
       <form
         onSubmit={(e) => {
           e.preventDefault();

@@ -35,11 +35,17 @@ body {
 
 /* Prevent flex/grid children and embedded charts from forcing horizontal scroll. */
 main,
-header,
 footer {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+}
+
+header {
+  width: 100%;
+  max-width: 100%;
+  /* Nav dropdowns must extend below the fixed bar. */
+  overflow: visible;
 }
 
 img,
