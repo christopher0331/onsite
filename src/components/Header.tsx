@@ -68,28 +68,28 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed inset-x-0 top-0 z-50 w-full max-w-full overflow-hidden transition-all duration-500 ${
           solid
             ? "bg-white/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.06)]"
             : "bg-transparent"
         }`}
       >
-        <div className="mx-auto w-full max-w-[1600px] px-6 lg:px-10 xl:px-12">
-          <div className="flex h-16 w-full items-center overflow-hidden sm:h-20 lg:h-24">
-            <Link href="/" className="relative z-10 shrink-0">
+        <div className="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-10 xl:px-12">
+          <div className="grid h-16 w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-3 sm:h-20 lg:flex lg:h-24">
+            <Link href="/" className="relative z-10 block min-w-0">
               <Image
                 src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/68dc8d33f60130dc306e6c8e_Timber.png"
                 alt="OnSite ReGroup"
                 width={320}
                 height={80}
                 priority
-                className={`h-10 w-auto sm:h-14 lg:h-28 transition-all duration-500 ${
+                className={`h-9 w-auto max-w-full object-contain object-left sm:h-11 lg:h-28 transition-all duration-500 ${
                   solid ? "brightness-0" : "brightness-0 invert"
                 }`}
               />
             </Link>
 
-            <nav className="hidden lg:flex flex-1 flex-nowrap items-center justify-evenly ml-6">
+            <nav className="hidden lg:flex flex-1 flex-nowrap items-center justify-evenly ml-6 min-w-0">
               {mainNav.slice(0, 2).map((item) => (
                 <Link
                   key={item.href}
@@ -160,7 +160,7 @@ export default function Header() {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`lg:hidden relative z-10 ml-auto w-10 h-10 flex flex-col items-center justify-center gap-1.5 transition-colors ${
+              className={`relative z-10 flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-1.5 justify-self-end transition-colors lg:hidden ${
                 mobileOpen
                   ? "text-white"
                   : solid

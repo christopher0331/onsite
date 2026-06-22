@@ -249,7 +249,7 @@ export default function ListingDetailPage() {
     return (
       <>
         <Header />
-        <main className="overflow-x-clip bg-white">
+        <main className="w-full max-w-full overflow-x-hidden bg-white">
           <div className="pt-28 pb-20 text-center sm:pt-40">
             <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-charcoal/20 border-t-charcoal" />
             <p className="mt-6 text-[13px] text-charcoal/65">Loading listing…</p>
@@ -264,7 +264,7 @@ export default function ListingDetailPage() {
     return (
       <>
         <Header />
-        <main className="overflow-x-clip bg-white pt-28 pb-20 text-center sm:pt-40">
+        <main className="w-full max-w-full overflow-x-hidden bg-white pt-28 pb-20 text-center sm:pt-40">
           <p className="font-serif text-2xl font-light text-charcoal/65">Listing not found.</p>
           <Link href="/listings" className="mt-6 inline-block text-[12px] uppercase tracking-[0.25em] text-charcoal/75 hover:text-charcoal">
             ← Back to Listings
@@ -345,11 +345,11 @@ export default function ListingDetailPage() {
   return (
     <>
       <Header />
-      <main className="overflow-x-clip bg-white">
+      <main className="w-full max-w-full overflow-x-hidden bg-white">
 
         {/* Breadcrumb + hero */}
         <section className="bg-[#1a1a18] pt-28 pb-10 sm:pt-44 sm:pb-16">
-          <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
+          <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
             <div className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] uppercase tracking-[0.24em] text-white/80 sm:mb-8 sm:text-[11px] sm:tracking-[0.3em]">
               <Link href="/listings" className="hover:text-white/70 transition-colors">Listings</Link>
               <span>/</span>
@@ -498,7 +498,7 @@ export default function ListingDetailPage() {
             with zero photos (e.g. new construction / pre-images sold). */}
         {images.length > 0 && (
           <section className="bg-white py-8 sm:py-10">
-            <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
+            <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
               {/* Main image viewer. This is intentionally a plain <img> with
                   inline fit/crop styles, not Next/Image or Tailwind bg-* utils,
                   so production builds cannot rewrite the behavior. */}
@@ -592,7 +592,7 @@ export default function ListingDetailPage() {
           }
           return (
             <section className="bg-white pt-2 pb-8 sm:pt-4">
-              <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
+              <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
                 <div className="flex flex-wrap gap-x-12 gap-y-3 border-t border-charcoal/8 pt-5">
                   {hasListing ? (
                     <div className="flex items-start gap-4">
@@ -649,7 +649,7 @@ export default function ListingDetailPage() {
 
         {/* Description + Details */}
         <section className="bg-white py-12 sm:py-16 lg:py-24">
-          <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
+          <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_380px] lg:gap-16">
 
               {/* Left: description + details table */}
@@ -1058,7 +1058,7 @@ export default function ListingDetailPage() {
         {/* City Residential Insights */}
         {cityStats && (cityStats.active || cityStats.sold) && (
           <section className="bg-white py-16 sm:py-20 border-t border-charcoal/8">
-            <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
+            <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
                 <h2 className="font-serif text-[clamp(1.6rem,3vw,2.4rem)] font-light text-charcoal">
                   {listing.address.city} Residential Insights
@@ -1172,7 +1172,7 @@ export default function ListingDetailPage() {
 
         {/* MLS Grid / NWMLS compliance */}
         <section className="bg-white border-t border-charcoal/8 py-10">
-          <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
+          <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
             <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-10">
               {listing.address.state === "WA" && (
                 <Image
@@ -1216,7 +1216,7 @@ export default function ListingDetailPage() {
 
         {/* CTA */}
         <section className="bg-[#1a1a18] py-20 sm:py-28">
-          <div className="mx-auto max-w-[1440px] min-w-0 px-6 lg:px-12">
+          <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
               <div>
                 <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/60">Interested in This Property?</p>

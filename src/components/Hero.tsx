@@ -25,7 +25,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
   return (
     <section
       ref={ref}
-      className="relative overflow-x-clip lg:h-[72vh] lg:min-h-[560px] lg:max-h-[860px]"
+      className="relative w-full max-w-full overflow-x-hidden lg:h-[72vh] lg:min-h-[560px] lg:max-h-[860px]"
     >
       <motion.div style={{ scale }} className="absolute inset-0">
         <video

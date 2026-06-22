@@ -153,7 +153,7 @@ function ListingPopupCard({
   return (
     <Link
       href={`/listings/${listing.mlsNumber}`}
-      className="group block w-[min(340px,calc(100vw-72px))] no-underline"
+      className="group block w-full max-w-[340px] no-underline"
     >
       <div className="relative h-[200px] w-full overflow-hidden bg-charcoal/5">
         {current ? (
@@ -564,7 +564,7 @@ export default function ListingsMap({
       )}
       {!loading && statusLine && !popupOpen && (
         <div className="pointer-events-none absolute inset-x-0 top-0 z-[500] flex justify-center px-4 pt-6">
-          <div className="max-w-[calc(100vw-32px)] rounded-full bg-white/95 px-5 py-2.5 text-center text-[12px] font-medium text-charcoal shadow-[0_10px_36px_rgba(0,0,0,0.18)] backdrop-blur-sm sm:px-6 sm:py-3 sm:text-[13px]">
+          <div className="max-w-[min(100%,calc(100%-2rem))] rounded-full bg-white/95 px-5 py-2.5 text-center text-[12px] font-medium text-charcoal shadow-[0_10px_36px_rgba(0,0,0,0.18)] backdrop-blur-sm sm:px-6 sm:py-3 sm:text-[13px]">
             {statusLine}
           </div>
         </div>

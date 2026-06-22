@@ -5,15 +5,16 @@ export default function Marquee() {
   const repeated = Array(8).fill(text).join(" \u2022 ") + " \u2022 ";
 
   return (
-    <section className="py-10 bg-charcoal overflow-x-clip">
-      <div className="relative flex">
-        <div className="animate-marquee flex shrink-0 whitespace-nowrap">
-          <span className="font-serif text-[clamp(1rem,2vw,1.5rem)] text-white/70 tracking-wide">
+    <section className="marquee-section w-full max-w-full overflow-hidden bg-charcoal py-10">
+      <div className="relative w-full overflow-hidden">
+        <div className="animate-marquee flex w-max whitespace-nowrap">
+          <span className="font-serif text-[clamp(1rem,2vw,1.5rem)] tracking-wide text-white/70">
             {repeated}
           </span>
-        </div>
-        <div className="animate-marquee flex shrink-0 whitespace-nowrap">
-          <span className="font-serif text-[clamp(1rem,2vw,1.5rem)] text-white/70 tracking-wide">
+          <span
+            className="font-serif text-[clamp(1rem,2vw,1.5rem)] tracking-wide text-white/70"
+            aria-hidden
+          >
             {repeated}
           </span>
         </div>

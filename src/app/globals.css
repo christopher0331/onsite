@@ -16,8 +16,9 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: clip;
+  width: 100%;
   max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -26,14 +27,19 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: clip;
+  width: 100%;
   max-width: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
 }
 
 /* Prevent flex/grid children and embedded charts from forcing horizontal scroll. */
-main {
-  overflow-x: clip;
+main,
+header,
+footer {
+  width: 100%;
   max-width: 100%;
+  overflow-x: hidden;
 }
 
 img,
@@ -41,6 +47,11 @@ video,
 svg,
 canvas {
   max-width: 100%;
+}
+
+/* Marquee animation must not expand document scroll width on mobile Safari. */
+.marquee-section {
+  contain: layout paint;
 }
 
 /* ─── Typography: no decorative serif / italic headlines ─────────────── */

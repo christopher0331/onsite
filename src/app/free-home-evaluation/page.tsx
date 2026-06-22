@@ -71,7 +71,7 @@ export default function FreeHomeEvaluationPage() {
       <main className="bg-white">
 
         {/* Hero — full bleed width; content sits below header (not pinned to bottom) */}
-        <section className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 overflow-hidden h-[78vh] min-h-[600px] max-h-[860px]">
+        <section className="relative w-full overflow-hidden h-[78vh] min-h-[600px] max-h-[860px]">
           <div className="absolute inset-0">
             <Image
               src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e16372192203004a84a865_We%20Help%20You%20Sell%20Your%20Home%20-%20Pierce%20County.jpg"

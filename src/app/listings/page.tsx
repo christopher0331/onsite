@@ -534,10 +534,10 @@ export default function ListingsPage() {
   return (
     <>
       <Header />
-      <main className="overflow-x-clip bg-white">
+      <main className="w-full max-w-full overflow-x-hidden bg-white">
 
         {/* Hero + Controls */}
-        <section className="relative overflow-visible bg-[#13211a] pt-28 pb-12 sm:pt-44 sm:pb-24 lg:pt-52 lg:pb-32">
+        <section className="relative w-full max-w-full overflow-hidden bg-[#13211a] pt-28 pb-12 sm:pt-44 sm:pb-24 lg:pt-52 lg:pb-32">
           {/* Brand-green ambient glow so the hero isn't flat black/white */}
           <div
             aria-hidden
@@ -547,7 +547,7 @@ export default function ListingsPage() {
                 "radial-gradient(60% 80% at 12% 0%, rgba(61,175,61,0.28) 0%, rgba(61,175,61,0.06) 38%, rgba(19,33,26,0) 70%), radial-gradient(50% 70% at 100% 100%, rgba(61,175,61,0.16) 0%, rgba(19,33,26,0) 60%)",
             }}
           />
-          <div className="relative mx-auto max-w-[1440px] px-6 lg:px-12">
+          <div className="relative mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
 
             <div className="mb-6 flex flex-col gap-5 sm:mb-10 sm:gap-8 lg:flex-row lg:items-end lg:justify-between">
               <div>
@@ -617,9 +617,8 @@ export default function ListingsPage() {
                 </form>
               </div>
 
-              <div className="-mx-6 overflow-x-clip px-6 sm:mx-0 sm:overflow-visible sm:px-0">
-              <div className="flex items-center gap-2 overflow-x-auto overscroll-x-contain pb-1 [scrollbar-width:none] sm:flex-wrap sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
-              <div className="flex items-center gap-2 sm:flex-wrap">
+              <div className="w-full overflow-x-auto overscroll-x-contain pb-1 [scrollbar-width:none] sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
+              <div className="flex w-max max-w-none items-center gap-2 sm:w-auto sm:flex-wrap">
                       {/* Tablet+: combined search pill */}
                       <div className="relative hidden items-center overflow-hidden rounded-full border border-white/20 bg-white/5 transition-all focus-within:border-white focus-within:bg-white group sm:flex">
                         <input
@@ -801,7 +800,6 @@ export default function ListingsPage() {
                         Go
                       </button>
                     </div>
-              </div>
               </div>
                     <Modal
                       isOpen={isMoreFiltersOpen}

@@ -145,7 +145,7 @@ export default function AiAssistant() {
 
       {/* Panel */}
       {open && (
-        <div className="fixed bottom-24 right-5 z-[120] flex h-[min(620px,calc(100vh-7rem))] w-[calc(100vw-2.5rem)] max-w-[400px] flex-col overflow-hidden rounded-3xl border border-charcoal/10 bg-white shadow-[0_24px_70px_rgba(0,0,0,0.28)] sm:right-6">
+        <div className="fixed bottom-24 left-4 right-4 z-[120] ml-auto flex h-[min(620px,calc(100vh-7rem))] max-w-[400px] flex-col overflow-hidden rounded-3xl border border-charcoal/10 bg-white shadow-[0_24px_70px_rgba(0,0,0,0.28)] sm:left-auto sm:right-6">
           {/* Header */}
           <div className="flex items-center justify-between gap-3 border-b border-charcoal/10 bg-charcoal px-5 py-4 text-white">
             <div>
