@@ -110,9 +110,9 @@ export default function OurListingsPage() {
   return (
     <>
       <Header />
-      <main className="bg-warm-gray pt-28 sm:pt-32">
+      <main className="bg-warm-gray pt-24 sm:pt-32">
         <section className="border-b border-charcoal/10 bg-white">
-          <div className="mx-auto max-w-[1440px] px-6 py-14 lg:px-12 lg:py-20">
+          <div className="mx-auto max-w-[1440px] px-6 py-10 sm:py-14 lg:px-12 lg:py-20">
             <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-mid-gray">
               OnSite Real Estate Group
             </p>
@@ -156,10 +156,10 @@ export default function OurListingsPage() {
           </div>
         </section>
 
-        <section className="sticky top-20 z-30 border-b border-charcoal/10 bg-white/95 backdrop-blur-md">
+        <section className="sticky top-16 z-30 border-b border-charcoal/10 bg-white/95 backdrop-blur-md sm:top-20">
           <div className="mx-auto max-w-[1440px] space-y-3 px-6 py-4 lg:px-12">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="mr-1 text-[10px] uppercase tracking-[0.22em] text-charcoal/50">
+            <div className="-mx-6 flex items-center gap-2 overflow-x-auto px-6 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
+              <span className="mr-1 shrink-0 text-[10px] uppercase tracking-[0.22em] text-charcoal/50">
                 Listed by
               </span>
               {SCOPE_FILTERS.map((filter) => (
@@ -167,7 +167,7 @@ export default function OurListingsPage() {
                   key={filter.value}
                   type="button"
                   onClick={() => setScope(filter.value)}
-                  className={`rounded-full px-5 py-2 text-[11px] uppercase tracking-[0.2em] transition-colors ${
+                  className={`shrink-0 rounded-full px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors sm:px-5 sm:tracking-[0.2em] ${
                     scope === filter.value
                       ? "bg-charcoal text-white"
                       : "bg-charcoal/5 text-charcoal/80 hover:bg-charcoal/10"
@@ -177,8 +177,8 @@ export default function OurListingsPage() {
                 </button>
               ))}
             </div>
-            <div className="flex flex-wrap items-center gap-2 border-t border-charcoal/8 pt-3">
-              <span className="mr-1 text-[10px] uppercase tracking-[0.22em] text-charcoal/50">
+            <div className="-mx-6 flex items-center gap-2 overflow-x-auto border-t border-charcoal/8 px-6 pt-3 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden">
+              <span className="mr-1 shrink-0 text-[10px] uppercase tracking-[0.22em] text-charcoal/50">
                 Status
               </span>
               {STATUS_FILTERS.map((filter) => (
@@ -186,7 +186,7 @@ export default function OurListingsPage() {
                   key={filter.value}
                   type="button"
                   onClick={() => setStatus(filter.value)}
-                  className={`rounded-full px-5 py-2 text-[11px] uppercase tracking-[0.2em] transition-colors ${
+                  className={`shrink-0 rounded-full px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors sm:px-5 sm:tracking-[0.2em] ${
                     status === filter.value
                       ? "bg-charcoal text-white"
                       : "bg-charcoal/5 text-charcoal/80 hover:bg-charcoal/10"

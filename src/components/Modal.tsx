@@ -29,11 +29,11 @@ export default function Modal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+    <div className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center sm:p-6">
       <div className="fixed inset-0 bg-charcoal/40 backdrop-blur-sm transition-opacity" onClick={onClose} />
       
-      <div className="relative flex max-h-full w-full max-w-2xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl">
-        <div className="flex shrink-0 items-center justify-between border-b border-charcoal/10 px-6 py-4">
+      <div className="relative flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:max-h-full sm:max-w-2xl sm:rounded-3xl">
+        <div className="flex shrink-0 items-center justify-between border-b border-charcoal/10 px-5 py-4 sm:px-6">
           <h2 className="text-[18px] font-medium text-charcoal">{title}</h2>
           <button
             onClick={onClose}
@@ -45,12 +45,12 @@ export default function Modal({
           </button>
         </div>
         
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-5 sm:p-6">
           {children}
         </div>
 
         {footer && (
-          <div className="shrink-0 border-t border-charcoal/10 bg-[#f8f6f3] px-6 py-4">
+          <div className="shrink-0 border-t border-charcoal/10 bg-[#f8f6f3] px-5 py-4 sm:px-6">
             {footer}
           </div>
         )}

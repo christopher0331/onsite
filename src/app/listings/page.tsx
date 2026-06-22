@@ -537,7 +537,7 @@ export default function ListingsPage() {
       <main className="bg-white">
 
         {/* Hero + Controls */}
-        <section className="relative overflow-visible bg-[#13211a] pt-40 pb-24 sm:pt-52 sm:pb-32">
+        <section className="relative overflow-visible bg-[#13211a] pt-28 pb-12 sm:pt-44 sm:pb-24 lg:pt-52 lg:pb-32">
           {/* Brand-green ambient glow so the hero isn't flat black/white */}
           <div
             aria-hidden
@@ -549,17 +549,17 @@ export default function ListingsPage() {
           />
           <div className="relative mx-auto max-w-[1440px] px-6 lg:px-12">
 
-            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between mb-10">
+            <div className="mb-6 flex flex-col gap-5 sm:mb-10 sm:gap-8 lg:flex-row lg:items-end lg:justify-between">
               <div>
-                <h1 className="mb-6 font-serif text-[clamp(2.8rem,7vw,5.8rem)] font-light leading-[1.0] text-white">
+                <h1 className="mb-4 font-serif text-[clamp(2rem,6vw,5.8rem)] font-light leading-[1.02] text-white sm:mb-6 sm:leading-[1.0]">
                   Search <span className="text-[#3daf3d]">Homes.</span>
                 </h1>
-                <p className="max-w-xl text-[16px] leading-8 text-white/70">
+                <p className="max-w-xl text-[14px] leading-7 text-white/70 sm:text-[16px] sm:leading-8">
                   Search the full MLS database. Filter by location, price, beds, and more.
                 </p>
                 <Link
                   href="/service-areas"
-                  className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/75 hover:text-[#3daf3d] transition-colors"
+                  className="mt-4 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/75 transition-colors hover:text-[#3daf3d] sm:mt-6"
                 >
                   Explore Service Areas
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -567,30 +567,69 @@ export default function ListingsPage() {
                   </svg>
                 </Link>
               </div>
-              <div className="shrink-0 text-right">
+              <div className="shrink-0 text-left lg:text-right">
                 {totalDbCount !== null && (
                   <p className="text-[13px] text-white/60">
-                    <span className="text-[#3daf3d] text-3xl font-serif font-light">{totalDbCount.toLocaleString()}+</span>
+                    <span className="font-serif text-2xl font-light text-[#3daf3d] sm:text-3xl">{totalDbCount.toLocaleString()}+</span>
                     <br />listings in the database
                   </p>
                 )}
               </div>
             </div>
 
-            {/* Redfin-style Filters UI */}
-            <div className="relative z-40 flex flex-wrap items-center gap-3">
-              <div className="flex flex-wrap items-center gap-3">
-                      {/* Search Bar */}
-                      <div className="relative flex items-center bg-white/5 rounded-full border border-white/20 overflow-hidden transition-all focus-within:bg-white focus-within:border-white group">
+            {/* Filters */}
+            <div className="relative z-40 flex flex-col gap-4">
+              {/* Mobile: stacked search inputs */}
+              <div className="flex w-full flex-col gap-2.5 sm:hidden">
+                <input
+                  type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="City, neighborhood, or ZIP"
+                  className="w-full rounded-full border border-white/20 bg-white/5 px-5 py-3 text-[14px] text-white placeholder:text-white/50 focus:border-white focus:bg-white focus:text-charcoal focus:placeholder:text-charcoal/50 focus:outline-none"
+                />
+                <form onSubmit={handleMlsSubmit} className="relative w-full">
+                  <input
+                    type="text"
+                    value={mlsInput}
+                    onChange={(e) => setMlsInput(e.target.value)}
+                    placeholder="MLS #"
+                    className="w-full rounded-full border border-white/20 bg-white/5 px-5 py-3 pr-16 text-[14px] text-white placeholder:text-white/50 focus:border-white focus:bg-white focus:text-charcoal focus:placeholder:text-charcoal/50 focus:outline-none"
+                  />
+                  {mlsInput.trim() !== mlsSearch && mlsInput.trim().length > 0 ? (
+                    <button
+                      type="submit"
+                      className="absolute right-1.5 top-1.5 bottom-1.5 rounded-full bg-[#3daf3d] px-4 text-[10px] font-bold uppercase tracking-[0.1em] text-white hover:bg-[#3daf3d]/90 transition"
+                    >
+                      Go
+                    </button>
+                  ) : mlsSearch ? (
+                    <button
+                      type="button"
+                      onClick={clearMlsSearch}
+                      className="absolute right-3 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full text-white/50 hover:bg-white/10 hover:text-white"
+                    >
+                      <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2}>
+                        <path d="M1 1l10 10M11 1L1 11" strokeLinecap="round" />
+                      </svg>
+                    </button>
+                  ) : null}
+                </form>
+              </div>
+
+              <div className="-mx-6 flex items-center gap-2 overflow-x-auto px-6 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
+              <div className="flex items-center gap-2 sm:flex-wrap">
+                      {/* Tablet+: combined search pill */}
+                      <div className="relative hidden items-center overflow-hidden rounded-full border border-white/20 bg-white/5 transition-all focus-within:border-white focus-within:bg-white group sm:flex">
                         <input
                           type="text"
                           value={city}
                           onChange={(e) => setCity(e.target.value)}
                           placeholder="City, Neighborhood, Zip"
-                          className="w-48 sm:w-64 bg-transparent px-5 py-2.5 text-[13px] text-white placeholder:text-white/50 focus:text-charcoal focus:placeholder:text-charcoal/50 group-focus-within:text-charcoal group-focus-within:placeholder:text-charcoal/50 focus:outline-none"
+                          className="w-48 bg-transparent px-5 py-2.5 text-[13px] text-white placeholder:text-white/50 focus:text-charcoal focus:placeholder:text-charcoal/50 group-focus-within:text-charcoal group-focus-within:placeholder:text-charcoal/50 focus:outline-none sm:w-64"
                         />
-                        <div className="w-px h-6 bg-white/20 group-focus-within:bg-charcoal/10" />
-                        <form onSubmit={handleMlsSubmit} className="m-0 p-0 relative">
+                        <div className="h-6 w-px bg-white/20 group-focus-within:bg-charcoal/10" />
+                        <form onSubmit={handleMlsSubmit} className="relative m-0 p-0">
                           <input
                             type="text"
                             value={mlsInput}
@@ -609,7 +648,7 @@ export default function ListingsPage() {
                             <button
                               type="button"
                               onClick={clearMlsSearch}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 flex h-6 w-6 items-center justify-center rounded-full text-white/50 hover:bg-white/10 hover:text-white group-focus-within:text-charcoal/40 group-focus-within:hover:bg-charcoal/5 group-focus-within:hover:text-charcoal transition"
+                              className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full text-white/50 transition hover:bg-white/10 hover:text-white group-focus-within:text-charcoal/40 group-focus-within:hover:bg-charcoal/5 group-focus-within:hover:text-charcoal"
                             >
                               <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2}>
                                 <path d="M1 1l10 10M11 1L1 11" strokeLinecap="round" />
@@ -618,7 +657,6 @@ export default function ListingsPage() {
                           ) : null}
                         </form>
                       </div>
-              
                       {/* Status Popover */}
                       <FilterPopover label={status === "A" ? "For Sale" : status === "P" ? "Pending" : status === "U" ? "Sold" : "All Status"} isActive={status !== "A"}>
                         <div className="flex flex-col gap-2">
@@ -730,7 +768,7 @@ export default function ListingsPage() {
                       {/* All Filters Button */}
                       <button
                         onClick={() => setIsMoreFiltersOpen(true)}
-                        className={`flex items-center gap-2 rounded-full border px-4 py-2.5 text-[12px] font-medium tracking-wide transition-all ${
+                        className={`flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-[12px] font-medium tracking-wide whitespace-nowrap transition-all ${
                           isMoreFiltersOpen
                             ? "border-[#3daf3d] bg-[#3daf3d]/20 text-[#3daf3d]"
                             : "border-white/20 bg-white/5 text-white hover:border-white/40 hover:bg-white/10"
@@ -746,7 +784,7 @@ export default function ListingsPage() {
                       <select
                         value={stateFilter}
                         onChange={(e) => setStateFilter(e.target.value)}
-                        className="rounded-full border border-white/20 bg-white/5 px-4 py-2.5 text-[12px] font-medium text-white focus:outline-none transition-all hover:bg-white/10 hover:border-white/40 appearance-none"
+                        className="shrink-0 rounded-full border border-white/20 bg-white/5 px-4 py-2.5 text-[12px] font-medium text-white transition-all hover:border-white/40 hover:bg-white/10 focus:outline-none appearance-none"
                       >
                         <option value="" className="text-charcoal bg-white">All States</option>
                         <option value="WA" className="text-charcoal bg-white">WA</option>
@@ -757,12 +795,12 @@ export default function ListingsPage() {
                       <button
                         type="button"
                         onClick={() => applyRegularFilters(false)}
-                        className="rounded-full bg-[#3daf3d] px-5 py-2.5 text-[12px] font-bold uppercase tracking-[0.18em] text-white transition hover:bg-[#3daf3d]/90"
+                        className="shrink-0 rounded-full bg-[#3daf3d] px-5 py-2.5 text-[12px] font-bold uppercase tracking-[0.18em] text-white transition hover:bg-[#3daf3d]/90"
                       >
                         Go
                       </button>
                     </div>
-              
+              </div>
                     <Modal
                       isOpen={isMoreFiltersOpen}
                       onClose={() => setIsMoreFiltersOpen(false)}
@@ -933,7 +971,7 @@ export default function ListingsPage() {
             )}
 
             {/* View-mode toggle */}
-            <div className="mt-8 flex items-center gap-3">
+            <div className="mt-5 flex items-center gap-3 sm:mt-8">
               <span className="text-[10px] uppercase tracking-[0.25em] text-white/80">View</span>
               <div className="inline-flex rounded-full border border-white/15 p-1">
                 <button
@@ -965,7 +1003,7 @@ export default function ListingsPage() {
         <AiSearchPanel />
 
         {/* Grid */}
-        <section ref={resultsSectionRef} className="bg-[#f2ede6] py-20 sm:py-28">
+        <section ref={resultsSectionRef} className="bg-[#f2ede6] py-12 sm:py-20 lg:py-28">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
             {viewMode === "map" ? (
               <ListingsMap

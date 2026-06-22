@@ -250,7 +250,7 @@ export default function ListingDetailPage() {
       <>
         <Header />
         <main className="bg-white">
-          <div className="pt-40 pb-20 text-center">
+          <div className="pt-28 pb-20 text-center sm:pt-40">
             <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-charcoal/20 border-t-charcoal" />
             <p className="mt-6 text-[13px] text-charcoal/65">Loading listing…</p>
           </div>
@@ -264,7 +264,7 @@ export default function ListingDetailPage() {
     return (
       <>
         <Header />
-        <main className="bg-white pt-40 pb-20 text-center">
+        <main className="bg-white pt-28 pb-20 text-center sm:pt-40">
           <p className="font-serif text-2xl font-light text-charcoal/65">Listing not found.</p>
           <Link href="/listings" className="mt-6 inline-block text-[12px] uppercase tracking-[0.25em] text-charcoal/75 hover:text-charcoal">
             ← Back to Listings
@@ -348,9 +348,9 @@ export default function ListingDetailPage() {
       <main className="bg-white">
 
         {/* Breadcrumb + hero */}
-        <section className="bg-[#1a1a18] pt-36 pb-12 sm:pt-44 sm:pb-16">
+        <section className="bg-[#1a1a18] pt-28 pb-10 sm:pt-44 sm:pb-16">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-            <div className="mb-8 flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-white/80">
+            <div className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] uppercase tracking-[0.24em] text-white/80 sm:mb-8 sm:text-[11px] sm:tracking-[0.3em]">
               <Link href="/listings" className="hover:text-white/70 transition-colors">Listings</Link>
               <span>/</span>
               <span className="text-white/60">{listing.address.city}</span>
@@ -367,8 +367,8 @@ export default function ListingDetailPage() {
               )}
             </div>
 
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div>
+            <div className="flex flex-col gap-5 sm:gap-6 lg:flex-row lg:items-end lg:justify-between">
+              <div className="min-w-0">
                 <div className="mb-4 flex flex-wrap items-center gap-3">
                   {(() => {
                     const badge = getListingStatusBadge(listing);
@@ -392,10 +392,10 @@ export default function ListingDetailPage() {
                     </span>
                   )}
                 </div>
-                <h1 className="mb-3 font-serif text-[clamp(1.8rem,4vw,3.4rem)] font-light leading-tight text-white">
+                <h1 className="mb-2 break-words font-serif text-[clamp(1.6rem,5.5vw,3.4rem)] font-light leading-tight text-white sm:mb-3">
                   {street}
                 </h1>
-                <p className="text-[15px] text-white/60">
+                <p className="text-[14px] text-white/60 sm:text-[15px]">
                   {showAddress ? `${listing.address.city}, ${listing.address.state} ${listing.address.zip}` : listing.address.city}
                   {listing.address.neighborhood && listing.address.neighborhood !== listing.address.city && (
                     <span className="ml-2 text-white/75">· {listing.address.neighborhood}</span>
@@ -403,7 +403,7 @@ export default function ListingDetailPage() {
                 </p>
               </div>
 
-              <div className="shrink-0 text-right">
+              <div className="w-full shrink-0 text-left lg:w-auto lg:text-right">
                 {listing.soldPrice ? (
                   <>
                     <p className="text-[12px] uppercase tracking-[0.2em] text-white/80 mb-1">Sold</p>
@@ -442,7 +442,7 @@ export default function ListingDetailPage() {
 
             {/* Quick stats bar */}
             {(det.numBedrooms || det.numBathrooms || det.sqft || listing.lot?.acres) && (
-              <div className="mt-10 flex flex-wrap gap-8 border-t border-white/10 pt-8">
+              <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-6 sm:mt-10 sm:flex sm:flex-wrap sm:gap-8 sm:pt-8">
                 {det.numBedrooms && (
                   <div>
                     <p className="font-serif text-[1.8rem] font-light text-white">{det.numBedrooms}</p>
@@ -497,13 +497,13 @@ export default function ListingDetailPage() {
             so the Listed By / Bought With block is visible even on listings
             with zero photos (e.g. new construction / pre-images sold). */}
         {images.length > 0 && (
-          <section className="bg-white py-10">
+          <section className="bg-white py-8 sm:py-10">
             <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
               {/* Main image viewer. This is intentionally a plain <img> with
                   inline fit/crop styles, not Next/Image or Tailwind bg-* utils,
                   so production builds cannot rewrite the behavior. */}
               <div
-                className="relative w-full rounded-3xl bg-charcoal/5 shadow-[0_14px_50px_rgba(0,0,0,0.12)] overflow-hidden"
+                className="relative w-full overflow-hidden rounded-2xl bg-charcoal/5 shadow-[0_14px_50px_rgba(0,0,0,0.12)] sm:rounded-3xl"
                 style={{ isolation: "isolate" }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -518,13 +518,13 @@ export default function ListingDetailPage() {
                   <>
                     <button
                       onClick={() => setActiveImg((i) => (i === 0 ? images.length - 1 : i - 1))}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-3 text-white backdrop-blur-sm transition hover:bg-black/60"
+                      className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2.5 text-white backdrop-blur-sm transition hover:bg-black/60 sm:left-4 sm:p-3"
                     >
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
                     </button>
                     <button
                       onClick={() => setActiveImg((i) => (i === images.length - 1 ? 0 : i + 1))}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-3 text-white backdrop-blur-sm transition hover:bg-black/60"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2.5 text-white backdrop-blur-sm transition hover:bg-black/60 sm:right-4 sm:p-3"
                     >
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
                     </button>
@@ -539,7 +539,7 @@ export default function ListingDetailPage() {
               </div>
 
               {/* Thumbnail strip */}
-              <div className="mt-4 grid grid-cols-4 gap-3 sm:grid-cols-6 lg:grid-cols-9">
+              <div className="mt-3 grid grid-cols-4 gap-2 sm:mt-4 sm:gap-3 sm:grid-cols-6 lg:grid-cols-9">
                 {displayImages.map((img, i) => (
                   <button
                     key={i}
@@ -648,12 +648,12 @@ export default function ListingDetailPage() {
         })()}
 
         {/* Description + Details */}
-        <section className="bg-white py-16 sm:py-24">
+        <section className="bg-white py-12 sm:py-16 lg:py-24">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-            <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_380px]">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_380px] lg:gap-16">
 
               {/* Left: description + details table */}
-              <div>
+              <div className="order-2 lg:order-1">
                 {det.description && (
                   <div className="mb-14">
                     <p className="mb-6 text-[11px] uppercase tracking-[0.35em] text-mid-gray">About This Home</p>
@@ -842,15 +842,15 @@ export default function ListingDetailPage() {
                 )}
               </div>
 
-              {/* Right: sticky CTA card */}
-              <div>
-                <div className="sticky top-28 space-y-5">
+              {/* Right: sticky CTA card — shown first on mobile */}
+              <div className="order-1 lg:order-2">
+                <div className="space-y-5 lg:sticky lg:top-28">
                   {/* Price card */}
-                  <div className="rounded-3xl bg-[#1a1a18] p-8 text-white">
+                  <div className="rounded-3xl bg-[#1a1a18] p-6 text-white sm:p-8">
                     <p className="mb-1 text-[11px] uppercase tracking-[0.3em] text-white/80">
                       {isActive ? "Asking Price" : "Sold Price"}
                     </p>
-                    <p className="mb-6 font-serif text-[2.4rem] font-light leading-none">
+                    <p className="mb-5 font-serif text-[2rem] font-light leading-none sm:mb-6 sm:text-[2.4rem]">
                       {formatPrice(listing.soldPrice || listing.listPrice)}
                     </p>
                     <div className="space-y-4">

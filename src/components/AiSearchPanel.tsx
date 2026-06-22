@@ -49,7 +49,7 @@ export default function AiSearchPanel() {
 
   return (
     <section className="border-b border-charcoal/10 bg-gradient-to-b from-white to-[#f7f3ed]">
-      <div className="mx-auto max-w-[1440px] px-6 py-14 lg:px-12 lg:py-20">
+      <div className="mx-auto max-w-[1440px] px-6 py-10 lg:px-12 lg:py-20">
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-3 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-charcoal/55">
             <SparkleIcon className="h-3.5 w-3.5" />
