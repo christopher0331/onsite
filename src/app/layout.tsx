@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
-import AiAssistant from "@/components/AiAssistant";
+import AiAssistantLazy from "@/components/AiAssistantLazy";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -13,7 +13,7 @@ const dmSans = DM_Sans({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
-  weight: ["500", "600", "700"],
+  weight: ["600"],
 });
 
 export const metadata: Metadata = {
@@ -40,7 +40,7 @@ export default function RootLayout({
     <html lang="en" className="overflow-x-hidden">
       <body className={`${inter.variable} ${dmSans.variable} antialiased overflow-x-hidden`}>
         {children}
-        <AiAssistant />
+        <AiAssistantLazy />
       </body>
     </html>
   );

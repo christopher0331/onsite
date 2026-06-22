@@ -1,19 +1,21 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Stats from "@/components/Stats";
-import TestimonialsScroll from "@/components/TestimonialsScroll";
-import About from "@/components/About";
-import Solutions from "@/components/Solutions";
-import Process from "@/components/Process";
-import SoldProperties from "@/components/SoldProperties";
-import FeaturedListings from "@/components/FeaturedListings";
-import PropertyVideos from "@/components/PropertyVideos";
-import Testimonials from "@/components/Testimonials";
-import CTA from "@/components/CTA";
-import Insights from "@/components/Insights";
-import Marquee from "@/components/Marquee";
-import Footer from "@/components/Footer";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
+
+const Stats = dynamic(() => import("@/components/Stats"));
+const TestimonialsScroll = dynamic(() => import("@/components/TestimonialsScroll"));
+const About = dynamic(() => import("@/components/About"));
+const Solutions = dynamic(() => import("@/components/Solutions"));
+const Process = dynamic(() => import("@/components/Process"));
+const FeaturedListings = dynamic(() => import("@/components/FeaturedListings"));
+const SoldProperties = dynamic(() => import("@/components/SoldProperties"));
+const PropertyVideos = dynamic(() => import("@/components/PropertyVideos"));
+const Testimonials = dynamic(() => import("@/components/Testimonials"));
+const CTA = dynamic(() => import("@/components/CTA"));
+const Insights = dynamic(() => import("@/components/Insights"));
+const Marquee = dynamic(() => import("@/components/Marquee"));
+const Footer = dynamic(() => import("@/components/Footer"));
 
 export default async function Home() {
   const showIdxContent = await getShowIdxContentForRequest();

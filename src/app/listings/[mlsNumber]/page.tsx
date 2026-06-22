@@ -1,16 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Marquee from "@/components/Marquee";
 import dynamic from "next/dynamic";
 import { getListingStatusBadge } from "@/lib/listing-status";
 import { getCitySlugByName } from "@/lib/service-areas/data";
+import { repliersImageUrl } from "@/lib/repliers-images";
 
+const Footer = dynamic(() => import("@/components/Footer"));
+const Marquee = dynamic(() => import("@/components/Marquee"), { ssr: false });
 const MarketChart = dynamic(() => import("@/components/MarketChart"), { ssr: false });
 const InventoryGauge = dynamic(() => import("@/components/InventoryGauge"), { ssr: false });
 
@@ -47,8 +48,6 @@ function fmtCompact(n: number) {
   if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`;
   return `$${n.toLocaleString()}`;
 }
-
-const CDN = "https://cdn.repliers.io/";
 
 type Listing = {
   mlsNumber: string;
@@ -195,11 +194,6 @@ function formatAddress(a: Listing["address"]) {
     .join(" ") + (a.unitNumber ? ` #${a.unitNumber}` : "");
 }
 
-function imgUrl(path: string) {
-  if (!path) return null;
-  return path.startsWith("http") ? path : CDN + path;
-}
-
 function formatDate(iso: string) {
   if (!iso) return "";
   return new Date(iso).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
@@ -214,6 +208,8 @@ export default function ListingDetailPage() {
   const [dataRefreshedAt, setDataRefreshedAt] = useState<Date | null>(null);
 
   const [cityStats, setCityStats] = useState<CityStats | null>(null);
+  const [statsEnabled, setStatsEnabled] = useState(false);
+  const statsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!mlsNumber) return;
@@ -233,7 +229,25 @@ export default function ListingDetailPage() {
   }, [mlsNumber]);
 
   useEffect(() => {
-    if (!listing?.address?.city) return;
+    const node = statsRef.current;
+    if (!node || statsEnabled) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsEnabled(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "240px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [statsEnabled, listing?.address?.city]);
+
+  useEffect(() => {
+    if (!statsEnabled || !listing?.address?.city) return;
     const params = new URLSearchParams({
       city: listing.address.city,
       chart: "true",
@@ -243,7 +257,7 @@ export default function ListingDetailPage() {
       .then((r) => r.json())
       .then((data) => setCityStats(data))
       .catch(() => {});
-  }, [listing?.address?.city, listing?.address?.state]);
+  }, [statsEnabled, listing?.address?.city, listing?.address?.state]);
 
   if (loading) {
     return (
@@ -509,9 +523,11 @@ export default function ListingDetailPage() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   key={images[activeImg]}
-                  src={imgUrl(images[activeImg]) || ""}
+                  src={repliersImageUrl(images[activeImg], "medium") || ""}
                   alt={street}
-                  className="block w-full h-auto"
+                  fetchPriority="high"
+                  decoding="async"
+                  className="block h-auto w-full"
                   style={{ display: "block" }}
                 />
                 {images.length > 1 && (
@@ -551,12 +567,12 @@ export default function ListingDetailPage() {
                     }`}
                   >
                     <Image
-                      src={imgUrl(img) || ""}
+                      src={repliersImageUrl(img, "small") || ""}
                       alt={`Photo ${i + 1}`}
                       fill
                       className="object-cover"
                       sizes="120px"
-                      unoptimized
+                      loading="lazy"
                     />
                     {!showAllPhotos && i === 8 && images.length > 9 && (
                       <div
@@ -795,9 +811,7 @@ export default function ListingDetailPage() {
                       {listing.comparables.slice(0, 6).map((c) => {
                         const cStreet = [c.address?.streetNumber, c.address?.streetDirection, c.address?.streetName, c.address?.streetSuffix]
                           .filter(Boolean).join(" ");
-                        const cPhoto = c.images?.[0]
-                          ? (c.images[0].startsWith("http") ? c.images[0] : CDN + c.images[0])
-                          : null;
+                        const cPhoto = repliersImageUrl(c.images?.[0], "small");
                         return (
                           <Link
                             key={c.mlsNumber}
@@ -806,7 +820,7 @@ export default function ListingDetailPage() {
                           >
                             <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-xl bg-charcoal/5">
                               {cPhoto ? (
-                                <Image src={cPhoto} alt={cStreet || c.mlsNumber} fill sizes="100px" className="object-cover" unoptimized />
+                                <Image src={cPhoto} alt={cStreet || c.mlsNumber} fill sizes="100px" className="object-cover" loading="lazy" />
                               ) : null}
                             </div>
                             <div className="flex flex-1 flex-col justify-between py-0.5">
@@ -1054,6 +1068,8 @@ export default function ListingDetailPage() {
             </div>
           </div>
         </section>
+
+        <div ref={statsRef} className="h-px" aria-hidden />
 
         {/* City Residential Insights */}
         {cityStats && (cityStats.active || cityStats.sold) && (

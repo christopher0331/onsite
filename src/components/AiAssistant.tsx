@@ -4,8 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { runAiSearch, AI_SEARCH_EXAMPLES, type AiSearchListing } from "@/lib/ai-search";
-
-const CDN = "https://cdn.repliers.io/";
+import { repliersImageUrl } from "@/lib/repliers-images";
 
 type ChatMessage = {
   id: number;
@@ -22,9 +21,7 @@ const GREETING: ChatMessage = {
 };
 
 function imageUrl(images?: string[] | null) {
-  if (!images?.length) return null;
-  const path = images[0];
-  return path.startsWith("http") ? path : CDN + path;
+  return repliersImageUrl(images?.[0], "small");
 }
 
 function priceLabel(listing: AiSearchListing) {

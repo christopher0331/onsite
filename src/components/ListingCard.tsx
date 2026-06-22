@@ -3,8 +3,7 @@ import Link from "next/link";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
 import { getListingStatusBadge } from "@/lib/listing-status";
 import { getCitySlugByName } from "@/lib/service-areas/data";
-
-const CDN = "https://cdn.repliers.io/";
+import { repliersImageUrl } from "@/lib/repliers-images";
 
 export type CardListing = {
   mlsNumber: string;
@@ -57,10 +56,7 @@ function formatCityLine(a: CardListing["address"]) {
 }
 
 function getImageUrl(images: string[] | null | undefined) {
-  if (!images?.length) return null;
-  const path = images[0];
-  if (path.startsWith("http")) return path;
-  return CDN + path;
+  return repliersImageUrl(images?.[0], "medium");
 }
 
 export default function ListingCard({
@@ -102,7 +98,7 @@ export default function ListingCard({
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            unoptimized
+            loading="lazy"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center text-charcoal/20">

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { repliersListingsUrl } from "@/lib/repliers-enrich";
+import { repliersImageUrl } from "@/lib/repliers-images";
 
-const CDN = "https://cdn.repliers.io/";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://onsiteregroup.com";
 
 type OgListing = {
@@ -50,9 +50,7 @@ async function fetchListing(mlsNumber: string): Promise<OgListing | null> {
 }
 
 function imageUrl(images: string[] | null | undefined) {
-  if (!images?.length) return null;
-  const path = images[0];
-  return path.startsWith("http") ? path : CDN + path;
+  return repliersImageUrl(images?.[0], "medium");
 }
 
 function formatPrice(n: number | null | undefined) {

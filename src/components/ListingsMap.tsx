@@ -11,6 +11,7 @@ import {
   useMapsLibrary,
 } from "@vis.gl/react-google-maps";
 import { MarkerClusterer, type Marker, type Renderer } from "@googlemaps/markerclusterer";
+import { repliersImageUrl } from "@/lib/repliers-images";
 import { getListingStatusBadge, type StatusTone } from "@/lib/listing-status";
 
 export type MapBounds = {
@@ -67,7 +68,6 @@ type ValidListing = MapListing & { map: { latitude: number; longitude: number } 
 
 const DEFAULT_CENTER = { lat: 47.1854, lng: -122.2929 }; // Puyallup
 const DEFAULT_ZOOM = 11;
-const CDN = "https://cdn.repliers.io/";
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
 // AdvancedMarkers require a Map ID. Set NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID to a
 // Cloud-styled map for production; DEMO_MAP_ID is Google's testing fallback.
@@ -127,7 +127,10 @@ function ListingPopupCard({
 }) {
   const images = useMemo(() => {
     const raw = listing.images ?? [];
-    return raw.slice(0, 8).map((p) => (p.startsWith("http") ? p : CDN + p));
+    return raw
+      .slice(0, 8)
+      .map((p) => repliersImageUrl(p, "medium"))
+      .filter(Boolean) as string[];
   }, [listing.images]);
 
   const [idx, setIdx] = useState(0);

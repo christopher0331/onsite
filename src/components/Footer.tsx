@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import {
   isMainWebsiteHost,
   showIdxContent as defaultShowIdxContent,
@@ -85,13 +84,7 @@ export default function Footer() {
     <footer className="bg-charcoal text-white">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12 pt-20 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="lg:col-span-4"
-          >
+          <div className="lg:col-span-4">
             <div className="mb-6">
               <Image
                 src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/68dc8d33f60130dc306e6c8e_Timber.png"
@@ -124,15 +117,9 @@ export default function Footer() {
                 Lake Tapps, WA 98391
               </a>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="lg:col-span-3 lg:col-start-6"
-          >
+          <div className="lg:col-span-3 lg:col-start-6">
             <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/70 mb-6">
               Company
             </h4>
@@ -147,15 +134,9 @@ export default function Footer() {
                 </Link>
               ))}
             </nav>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-3"
-          >
+          <div className="lg:col-span-3">
             <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/70 mb-6">
               Solutions
             </h4>
@@ -182,7 +163,7 @@ export default function Footer() {
                 )
               )}
             </nav>
-          </motion.div>
+          </div>
         </div>
 
         {showIdxContent && (
