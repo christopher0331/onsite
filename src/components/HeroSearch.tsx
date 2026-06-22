@@ -167,7 +167,7 @@ export default function HeroSearch() {
   const showDropdown = open && query.trim().length >= MIN_CHARS;
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-2xl text-left">
+    <div ref={containerRef} className="relative z-30 w-full max-w-2xl text-left">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -207,7 +207,7 @@ export default function HeroSearch() {
         <div
           id={LISTBOX_ID}
           role="listbox"
-          className="absolute left-0 right-0 top-[calc(100%+10px)] z-50 max-h-[380px] overflow-auto rounded-2xl bg-white py-2 text-charcoal shadow-[0_24px_70px_rgba(0,0,0,0.30)] ring-1 ring-black/5"
+          className="absolute left-0 right-0 top-[calc(100%+10px)] z-50 max-h-[min(380px,50vh)] overflow-auto rounded-2xl bg-white py-2 text-charcoal shadow-[0_24px_70px_rgba(0,0,0,0.30)] ring-1 ring-black/5"
         >
           {loading && suggestions.length === 0 ? (
             <p className="px-5 py-4 text-[13px] text-charcoal/55">Searching the MLS…</p>
