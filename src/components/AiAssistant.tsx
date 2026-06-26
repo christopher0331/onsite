@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { runAiSearch, AI_SEARCH_EXAMPLES, type AiSearchListing } from "@/lib/ai-search";
 import { repliersImageUrl } from "@/lib/repliers-images";
+import { formatStreetAddress } from "@/lib/format-address";
 
 type ChatMessage = {
   id: number;
@@ -45,9 +46,7 @@ function addressLine(listing: AiSearchListing) {
   if (listing.permissions?.displayAddressOnInternet === "N") {
     return [a.city, a.state].filter(Boolean).join(", ") || "Undisclosed";
   }
-  const street = [a.streetNumber, a.streetDirection, a.streetName, a.streetSuffix]
-    .filter(Boolean)
-    .join(" ");
+  const street = formatStreetAddress(a);
   return street || [a.city, a.state].filter(Boolean).join(", ") || "Address unavailable";
 }
 

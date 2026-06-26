@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import dynamic from "next/dynamic";
 import { getListingStatusBadge } from "@/lib/listing-status";
 import { getCitySlugByName } from "@/lib/service-areas/data";
+import { formatStreetAddress, formatStreetAddressOrUnavailable } from "@/lib/format-address";
 import { repliersImageUrl } from "@/lib/repliers-images";
 
 const Footer = dynamic(() => import("@/components/Footer"));
@@ -189,9 +190,7 @@ function formatPrice(n: number) {
 }
 
 function formatAddress(a: Listing["address"]) {
-  return [a.streetNumber, a.streetDirection, a.streetName, a.streetSuffix]
-    .filter(Boolean)
-    .join(" ") + (a.unitNumber ? ` #${a.unitNumber}` : "");
+  return formatStreetAddress(a);
 }
 
 function formatDate(iso: string) {
@@ -809,8 +808,7 @@ export default function ListingDetailPage() {
                     </div>
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                       {listing.comparables.slice(0, 6).map((c) => {
-                        const cStreet = [c.address?.streetNumber, c.address?.streetDirection, c.address?.streetName, c.address?.streetSuffix]
-                          .filter(Boolean).join(" ");
+                        const cStreet = formatStreetAddress(c.address);
                         const cPhoto = repliersImageUrl(c.images?.[0], "small");
                         return (
                           <Link

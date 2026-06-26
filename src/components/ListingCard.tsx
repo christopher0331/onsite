@@ -4,6 +4,7 @@ import MLSCardAttribution from "@/components/MLSCardAttribution";
 import { getListingStatusBadge } from "@/lib/listing-status";
 import { getCitySlugByName } from "@/lib/service-areas/data";
 import { repliersImageUrl } from "@/lib/repliers-images";
+import { formatStreetAddressOrUnavailable } from "@/lib/format-address";
 
 export type CardListing = {
   mlsNumber: string;
@@ -42,12 +43,7 @@ function formatPrice(n: number | null | undefined) {
 }
 
 function formatAddress(a: CardListing["address"]) {
-  if (!a) return "Address unavailable";
-  const street = [a.streetNumber, a.streetDirection, a.streetName, a.streetSuffix]
-    .filter(Boolean)
-    .join(" ");
-  const unit = a.unitNumber ? ` #${a.unitNumber}` : "";
-  return street ? `${street}${unit}` : "Address unavailable";
+  return formatStreetAddressOrUnavailable(a);
 }
 
 function formatCityLine(a: CardListing["address"]) {

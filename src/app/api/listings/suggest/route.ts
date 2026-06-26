@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { repliersListingsUrl } from "@/lib/repliers-enrich";
+import { formatStreetAddress } from "@/lib/format-address";
 
 // Address/city autocomplete backed by the live Repliers/MLS feed. Powers the
 // homepage hero "search by address" box: as the user types we query the MLS for
@@ -13,6 +14,7 @@ type RepliersAddress = {
   streetName?: string;
   streetSuffix?: string;
   streetDirection?: string;
+  streetDirectionPrefix?: string | null;
   unitNumber?: string | null;
   city?: string;
   state?: string;
@@ -56,12 +58,7 @@ type CitySuggestion = {
 type Suggestion = AddressSuggestion | CitySuggestion;
 
 function formatStreet(a: RepliersAddress | null | undefined): string {
-  if (!a) return "";
-  const street = [a.streetNumber, a.streetDirection, a.streetName, a.streetSuffix]
-    .filter(Boolean)
-    .join(" ");
-  const unit = a.unitNumber ? ` #${a.unitNumber}` : "";
-  return street ? `${street}${unit}` : "";
+  return formatStreetAddress(a);
 }
 
 function formatCityLine(a: RepliersAddress | null | undefined): string {

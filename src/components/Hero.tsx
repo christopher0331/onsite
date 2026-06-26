@@ -57,7 +57,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
         <div className="hero-overlay-video" aria-hidden />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-start gap-6 px-4 pb-10 pt-24 text-center sm:gap-8 sm:px-6 sm:pb-14 sm:pt-28 lg:h-full lg:min-h-0 lg:justify-center lg:gap-10 lg:px-6 lg:pb-0 lg:pt-0">
+      <div className="relative z-10 flex flex-col items-center justify-start gap-6 px-4 pb-10 pt-24 text-center sm:gap-8 sm:px-6 sm:pb-14 sm:pt-28 lg:h-full lg:min-h-0 lg:justify-center lg:gap-10 lg:px-6 lg:pb-12 lg:pt-32 xl:pt-36">
         <p className="animate-[fade-up_0.8s_ease-out_0.2s_both] text-[10px] uppercase tracking-[0.28em] text-white/80 sm:text-[13px] sm:tracking-[0.35em]">
           Pierce County&apos;s Premier Real Estate Team
         </p>

@@ -12,6 +12,7 @@ import {
 } from "@vis.gl/react-google-maps";
 import { MarkerClusterer, type Marker, type Renderer } from "@googlemaps/markerclusterer";
 import { repliersImageUrl } from "@/lib/repliers-images";
+import { formatStreetAddress } from "@/lib/format-address";
 import { getListingStatusBadge, type StatusTone } from "@/lib/listing-status";
 
 export type MapBounds = {
@@ -99,11 +100,7 @@ function compactPrice(n: number) {
 }
 
 function streetLine(a: MapListing["address"]) {
-  const street = [a.streetNumber, a.streetDirection, a.streetName, a.streetSuffix]
-    .filter(Boolean)
-    .join(" ");
-  const unit = a.unitNumber ? ` #${a.unitNumber}` : "";
-  return street ? `${street}${unit}` : "";
+  return formatStreetAddress(a);
 }
 
 const PIN_PALETTE: Record<StatusTone, { bg: string; fg: string; border: string }> = {

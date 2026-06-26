@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { repliersListingsUrl } from "@/lib/repliers-enrich";
 import { repliersImageUrl } from "@/lib/repliers-images";
+import { formatStreetAddress } from "@/lib/format-address";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://onsiteregroup.com";
 
@@ -15,6 +16,7 @@ type OgListing = {
     streetName?: string;
     streetSuffix?: string;
     streetDirection?: string;
+    streetDirectionPrefix?: string | null;
     unitNumber?: string | null;
     city?: string;
     state?: string;
@@ -73,10 +75,7 @@ export async function generateMetadata({
 
   const a = listing.address ?? {};
   const showAddress = listing.permissions?.displayAddressOnInternet !== "N";
-  const street = [a.streetNumber, a.streetDirection, a.streetName, a.streetSuffix]
-    .filter(Boolean)
-    .join(" ");
-  const unit = a.unitNumber ? ` #${a.unitNumber}` : "";
+  const street = formatStreetAddress(a);
   const cityLine = [a.city, a.state, a.zip].filter(Boolean).join(", ");
   const price = formatPrice(listing.soldPrice ?? listing.listPrice);
 
@@ -86,7 +85,7 @@ export async function generateMetadata({
   // identifiable info (street + city) and keep the brand as a suffix. This
   // makes multiple open listing tabs instantly distinguishable instead of all
   // starting with a clipped dollar amount.
-  const streetAddress = showAddress && street ? `${street}${unit}` : null;
+  const streetAddress = showAddress && street ? street : null;
   const tabHeadline = streetAddress
     ? [streetAddress, a.city].filter(Boolean).join(", ")
     : a.city

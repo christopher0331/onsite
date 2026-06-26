@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { formatStreetAddress } from "@/lib/format-address";
 
 type Listing = {
   mlsNumber: string;
@@ -71,9 +72,7 @@ function getEmbedUrl(raw: string): string | null {
 }
 
 function formatAddress(a: Listing["address"]) {
-  return [a.streetNumber, a.streetDirection, a.streetName, a.streetSuffix]
-    .filter(Boolean)
-    .join(" ");
+  return formatStreetAddress(a);
 }
 
 async function fetchVideoListings(): Promise<Listing[]> {
