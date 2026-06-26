@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import { getListingStatusBadge } from "@/lib/listing-status";
 import { getCitySlugByName } from "@/lib/service-areas/data";
 import { formatStreetAddress, formatStreetAddressOrUnavailable } from "@/lib/format-address";
+import { formatBathroomCount, formatBathroomDetail } from "@/lib/format-bathrooms";
 import { repliersImageUrl } from "@/lib/repliers-images";
 
 const Footer = dynamic(() => import("@/components/Footer"));
@@ -311,12 +312,8 @@ export default function ListingDetailPage() {
       : det.numBedrooms;
     detailRows.push({ label: "Bedrooms", value: bedVal });
   }
-  if (det.numBathrooms) {
-    const bathVal = det.numBathroomsHalf
-      ? `${det.numBathrooms} full · ${det.numBathroomsHalf} half`
-      : det.numBathrooms;
-    detailRows.push({ label: "Bathrooms", value: bathVal });
-  }
+  const bathDetail = formatBathroomDetail(det, listing.raw);
+  if (bathDetail) detailRows.push({ label: "Bathrooms", value: bathDetail });
   if (det.numFireplaces) detailRows.push({ label: "Fireplaces", value: det.numFireplaces });
   if (det.numGarageSpaces) detailRows.push({ label: "Garage Spaces", value: det.numGarageSpaces });
   if (det.numParkingSpaces && det.numParkingSpaces !== det.numGarageSpaces) {
@@ -354,6 +351,7 @@ export default function ListingDetailPage() {
   }
 
   const displayImages = showAllPhotos ? images : images.slice(0, 9);
+  const bathDisplay = formatBathroomCount(det, listing.raw);
 
   return (
     <>
@@ -454,7 +452,7 @@ export default function ListingDetailPage() {
             </div>
 
             {/* Quick stats bar */}
-            {(det.numBedrooms || det.numBathrooms || det.sqft || listing.lot?.acres) && (
+            {(det.numBedrooms || bathDisplay || det.sqft || listing.lot?.acres) && (
               <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-6 sm:mt-10 sm:flex sm:flex-wrap sm:gap-8 sm:pt-8">
                 {det.numBedrooms && (
                   <div>
@@ -462,13 +460,9 @@ export default function ListingDetailPage() {
                     <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Bedrooms</p>
                   </div>
                 )}
-                {det.numBathrooms && (
+                {bathDisplay && (
                   <div>
-                    <p className="font-serif text-[1.8rem] font-light text-white">
-                      {det.numBathroomsHalf
-                        ? `${det.numBathrooms}.${det.numBathroomsHalf > 0 ? "5" : "0"}`
-                        : det.numBathrooms}
-                    </p>
+                    <p className="font-serif text-[1.8rem] font-light text-white">{bathDisplay}</p>
                     <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Bathrooms</p>
                   </div>
                 )}
@@ -810,6 +804,7 @@ export default function ListingDetailPage() {
                       {listing.comparables.slice(0, 6).map((c) => {
                         const cStreet = formatStreetAddress(c.address);
                         const cPhoto = repliersImageUrl(c.images?.[0], "small");
+                        const cBaths = formatBathroomCount(c.details, (c as ComparableListing & { raw?: Record<string, unknown> }).raw);
                         return (
                           <Link
                             key={c.mlsNumber}
@@ -834,7 +829,7 @@ export default function ListingDetailPage() {
                               <div className="flex items-center justify-between text-[12px]">
                                 <span className="text-charcoal/80">
                                   {c.details?.numBedrooms ? `${c.details.numBedrooms}bd` : ""}
-                                  {c.details?.numBathrooms ? ` · ${c.details.numBathrooms}ba` : ""}
+                                  {cBaths ? ` · ${cBaths}ba` : ""}
                                   {c.details?.sqft ? ` · ${Number(c.details.sqft).toLocaleString()} sf` : ""}
                                 </span>
                                 <span className="font-serif font-light text-charcoal">

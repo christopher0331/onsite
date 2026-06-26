@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { repliersListingsUrl } from "@/lib/repliers-enrich";
 import { formatStreetAddress } from "@/lib/format-address";
+import { getBathroomCount } from "@/lib/format-bathrooms";
 
 // Address/city autocomplete backed by the live Repliers/MLS feed. Powers the
 // homepage hero "search by address" box: as the user types we query the MLS for
@@ -29,9 +30,11 @@ type RepliersListing = {
   details?: {
     numBedrooms?: number | null;
     numBathrooms?: number | null;
+    numBathroomsHalf?: number | null;
     sqft?: number | null;
     propertyType?: string | null;
   } | null;
+  raw?: Record<string, unknown> | null;
   images?: string[] | null;
   permissions?: { displayAddressOnInternet?: string } | null;
 };
@@ -135,7 +138,7 @@ export async function GET(req: NextRequest) {
       sublabel: formatCityLine(l.address),
       price: typeof l.listPrice === "number" ? l.listPrice : null,
       beds: l.details?.numBedrooms ?? null,
-      baths: l.details?.numBathrooms ?? null,
+      baths: getBathroomCount(l.details, l.raw),
       image: firstImage(l.images),
     });
     if (addressSuggestions.length >= 6) break;

@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { formatStreetAddress } from "@/lib/format-address";
+import { formatBathroomCount } from "@/lib/format-bathrooms";
+import { repliersListingsUrl } from "@/lib/repliers-enrich";
 
 type Listing = {
   mlsNumber: string;
@@ -20,9 +22,11 @@ type Listing = {
     alternateURLVideoLink: string | null;
     numBedrooms: number | null;
     numBathrooms: number | null;
+    numBathroomsHalf: number | null;
     sqft: number | null;
     propertyType: string | null;
   };
+  raw?: Record<string, unknown> | null;
   images: string[];
   office?: { brokerageName?: string } | null;
 };
@@ -78,7 +82,7 @@ function formatAddress(a: Listing["address"]) {
 async function fetchVideoListings(): Promise<Listing[]> {
   try {
     const res = await fetch(
-      "https://api.repliers.io/listings?pageSize=50&status=A&sortBy=updatedOnDesc&state=WA&boardId=110",
+      repliersListingsUrl("?pageSize=50&status=A&sortBy=updatedOnDesc&state=WA&boardId=110"),
       {
         headers: {
           "repliers-api-key": process.env.REPLIERS_API_KEY || "",
@@ -146,6 +150,7 @@ export default async function PropertyVideos() {
             const embedUrl = getEmbedUrl(rawUrl)!;
             const street = formatAddress(listing.address);
             const det = listing.details;
+            const baths = formatBathroomCount(det, listing.raw);
 
             return (
               <div
@@ -171,11 +176,11 @@ export default async function PropertyVideos() {
                       </p>
                       <p className="text-[11px] text-white/85">
                         {listing.address.city}, {listing.address.state}
-                        {(det.numBedrooms || det.numBathrooms) && (
+                        {(det.numBedrooms || baths) && (
                           <span className="ml-2 text-white/75">
                             {[
                               det.numBedrooms && `${det.numBedrooms} bd`,
-                              det.numBathrooms && `${det.numBathrooms} ba`,
+                              baths && `${baths} ba`,
                             ].filter(Boolean).join(" · ")}
                           </span>
                         )}

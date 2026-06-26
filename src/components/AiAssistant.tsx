@@ -6,6 +6,7 @@ import Link from "next/link";
 import { runAiSearch, AI_SEARCH_EXAMPLES, type AiSearchListing } from "@/lib/ai-search";
 import { repliersImageUrl } from "@/lib/repliers-images";
 import { formatStreetAddress } from "@/lib/format-address";
+import { formatBathroomCount } from "@/lib/format-bathrooms";
 
 type ChatMessage = {
   id: number;
@@ -33,9 +34,10 @@ function priceLabel(listing: AiSearchListing) {
 
 function specLine(listing: AiSearchListing) {
   const d = listing.details ?? {};
+  const baths = formatBathroomCount(d, listing.raw);
   const parts: string[] = [];
   if (d.numBedrooms) parts.push(`${d.numBedrooms} bd`);
-  if (d.numBathrooms) parts.push(`${d.numBathrooms} ba`);
+  if (baths) parts.push(`${baths} ba`);
   if (d.sqft) parts.push(`${Number(d.sqft).toLocaleString("en-US")} sqft`);
   return parts.join(" · ");
 }

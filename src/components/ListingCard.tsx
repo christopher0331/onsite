@@ -5,6 +5,7 @@ import { getListingStatusBadge } from "@/lib/listing-status";
 import { getCitySlugByName } from "@/lib/service-areas/data";
 import { repliersImageUrl } from "@/lib/repliers-images";
 import { formatStreetAddressOrUnavailable } from "@/lib/format-address";
+import { formatBathroomCount } from "@/lib/format-bathrooms";
 
 export type CardListing = {
   mlsNumber: string;
@@ -28,6 +29,7 @@ export type CardListing = {
   details?: {
     numBedrooms?: number | null;
     numBathrooms?: number | null;
+    numBathroomsHalf?: number | null;
     sqft?: number | null;
     propertyType?: string | null;
   } | null;
@@ -76,6 +78,8 @@ export default function ListingCard({
       : badge.tone === "pending"
         ? "bg-amber-400/95 text-charcoal"
         : "bg-charcoal/80 text-white";
+
+  const baths = formatBathroomCount(det, listing.raw);
 
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-3xl bg-white shadow-[0_8px_32px_rgba(0,0,0,0.10)] transition-all duration-500 hover:shadow-[0_22px_70px_rgba(0,0,0,0.18)] hover:-translate-y-1">
@@ -138,10 +142,10 @@ export default function ListingCard({
             Service Area: {addr?.city}
           </Link>
         )}
-        {(det.numBedrooms || det.numBathrooms || det.sqft) && (
+        {(det.numBedrooms || baths || det.sqft) && (
           <div className="mb-3 flex gap-4 text-[13px] text-charcoal/75">
             {det.numBedrooms && <span><strong className="text-charcoal font-semibold">{det.numBedrooms}</strong> bd</span>}
-            {det.numBathrooms && <span><strong className="text-charcoal font-semibold">{det.numBathrooms}</strong> ba</span>}
+            {baths && <span><strong className="text-charcoal font-semibold">{baths}</strong> ba</span>}
             {det.sqft && <span><strong className="text-charcoal font-semibold">{Number(det.sqft).toLocaleString()}</strong> sqft</span>}
           </div>
         )}

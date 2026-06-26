@@ -13,6 +13,7 @@ import FilterPopover from "@/components/FilterPopover";
 import Modal from "@/components/Modal";
 import type { MapViewport, MapFocus } from "@/components/ListingsMap";
 import { listingInBounds } from "@/lib/listings-api-params";
+import { getBathroomCount } from "@/lib/format-bathrooms";
 
 const MAP_MIN_ZOOM = 9;
 
@@ -48,6 +49,7 @@ type Listing = {
   details: {
     numBedrooms: number | null;
     numBathrooms: number | null;
+    numBathroomsHalf: number | null;
     sqft: number | null;
     propertyType: string | null;
     description: string | null;
@@ -494,7 +496,7 @@ export default function ListingsPage() {
         let results = data.listings || [];
         if (minBaths) {
           const min = Number(minBaths);
-          results = results.filter((l) => (l.details.numBathrooms ?? 0) >= min);
+          results = results.filter((l) => (getBathroomCount(l.details, l.raw) ?? 0) >= min);
         }
 
         const owner = ownerData?.listings ?? [];

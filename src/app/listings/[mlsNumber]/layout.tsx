@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { repliersListingsUrl } from "@/lib/repliers-enrich";
 import { repliersImageUrl } from "@/lib/repliers-images";
 import { formatStreetAddress } from "@/lib/format-address";
+import { formatBathroomCount } from "@/lib/format-bathrooms";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://onsiteregroup.com";
 
@@ -25,8 +26,10 @@ type OgListing = {
   details?: {
     numBedrooms?: number | null;
     numBathrooms?: number | null;
+    numBathroomsHalf?: number | null;
     sqft?: number | string | null;
   } | null;
+  raw?: Record<string, unknown> | null;
   office?: { brokerageName?: string } | null;
 };
 
@@ -98,9 +101,10 @@ export async function generateMetadata({
   const shareHeadline = streetAddress ?? (cityLine || "Home for sale");
   const ogTitle = `${price} · ${shareHeadline} | OnSite Real Estate Group`;
 
+  const bathLabel = formatBathroomCount(det, listing.raw);
   const specs = [
     det.numBedrooms ? `${det.numBedrooms} bd` : null,
-    det.numBathrooms ? `${det.numBathrooms} ba` : null,
+    bathLabel ? `${bathLabel} ba` : null,
     det.sqft ? `${Number(det.sqft).toLocaleString()} sqft` : null,
   ]
     .filter(Boolean)

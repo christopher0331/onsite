@@ -8,6 +8,7 @@ import {
   type MapBounds,
 } from "@/lib/listings-api-params";
 import { FEATURE_GROUPS, matchFeaturesInText } from "@/lib/listing-search-terms";
+import { getBathroomCount } from "@/lib/format-bathrooms";
 
 const PAGE_SIZE = "100";
 const MAX_PAGES = 12; // up to ~1,200 listings per viewport before clustering carries the rest
@@ -16,7 +17,12 @@ const MAX_RETURN = 1200;
 type ListingRow = {
   mlsNumber?: string;
   map?: { latitude?: number | null; longitude?: number | null } | null;
-  details?: { numBathrooms?: number | null; description?: string | null };
+  raw?: Record<string, unknown> | null;
+  details?: {
+    numBathrooms?: number | null;
+    numBathroomsHalf?: number | null;
+    description?: string | null;
+  };
 };
 
 function parseBounds(searchParams: URLSearchParams): MapBounds | null {
@@ -135,7 +141,7 @@ export async function GET(req: NextRequest) {
     if (minBaths) {
       const min = Number(minBaths);
       if (!Number.isNaN(min)) {
-        mappable = mappable.filter((row) => (row.details?.numBathrooms ?? 0) >= min);
+        mappable = mappable.filter((row) => (getBathroomCount(row.details, row.raw) ?? 0) >= min);
       }
     }
 

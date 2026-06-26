@@ -36,6 +36,10 @@ const REPLIERS_SEARCH_FIELDS = [
   "raw.BuyerAgentOfficePhone",
   "raw.BuyerOfficePhone",
   "raw.CoBuyerOfficeName",
+  "raw.NWM_Bathrooms",
+  "raw.BathroomsFull",
+  "raw.BathroomsHalf",
+  "raw.BathroomsThreeQuarter",
 ].join(",");
 
 /** Build a Repliers listings URL with the correct `fields` for search vs detail. */

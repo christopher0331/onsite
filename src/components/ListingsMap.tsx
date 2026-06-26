@@ -13,6 +13,7 @@ import {
 import { MarkerClusterer, type Marker, type Renderer } from "@googlemaps/markerclusterer";
 import { repliersImageUrl } from "@/lib/repliers-images";
 import { formatStreetAddress } from "@/lib/format-address";
+import { formatBathroomCount } from "@/lib/format-bathrooms";
 import { getListingStatusBadge, type StatusTone } from "@/lib/listing-status";
 
 export type MapBounds = {
@@ -58,6 +59,7 @@ type MapListing = {
   details?: {
     numBedrooms?: number | null;
     numBathrooms?: number | null;
+    numBathroomsHalf?: number | null;
     sqft?: number | null;
   } | null;
   images?: string[] | null;
@@ -140,6 +142,7 @@ function ListingPopupCard({
     .filter(Boolean)
     .join(", ");
   const det = listing.details ?? {};
+  const baths = formatBathroomCount(det, listing.raw);
 
   const step = (e: React.MouseEvent, dir: 1 | -1) => {
     e.preventDefault();
@@ -215,13 +218,13 @@ function ListingPopupCard({
       <div className="p-4">
         <div className="flex items-baseline justify-between gap-3">
           <p className="font-serif text-[21px] leading-none text-charcoal">{fullPrice(price)}</p>
-          {(det.numBedrooms || det.numBathrooms || det.sqft) && (
+          {(det.numBedrooms || baths || det.sqft) && (
             <div className="flex gap-2.5 whitespace-nowrap text-[12px] text-charcoal/70">
               {det.numBedrooms ? (
                 <span><strong className="font-semibold text-charcoal">{det.numBedrooms}</strong> bd</span>
               ) : null}
-              {det.numBathrooms ? (
-                <span><strong className="font-semibold text-charcoal">{det.numBathrooms}</strong> ba</span>
+              {baths ? (
+                <span><strong className="font-semibold text-charcoal">{baths}</strong> ba</span>
               ) : null}
               {det.sqft ? (
                 <span><strong className="font-semibold text-charcoal">{Number(det.sqft).toLocaleString()}</strong> sqft</span>
