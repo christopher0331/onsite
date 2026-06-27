@@ -1,11 +1,14 @@
 // Repliers hides NWMLS-specific fields unless `fields=raw` is on the request.
 // See https://help.repliers.com/en/article/raw-mls-data-access-with-repliers-nhlg5o/
 
+import { getLeadAgentDirectPhone } from "@/lib/onsite-listings";
+
 export type RepliersRaw = Record<string, unknown>;
 
 export type ListingAgent = {
   name: string;
   phones: string[];
+  boardAgentId?: string;
   brokerage: { name: string };
 };
 
@@ -107,21 +110,42 @@ export function buyerAgentsFromRaw(raw: RepliersRaw | undefined | null): Listing
   ];
 }
 
-/** Merge raw-derived buyer agents onto a listing payload from Repliers. */
-export function enrichListing<T extends { buyerAgents?: ListingAgent[] | null; raw?: RepliersRaw }>(
-  listing: T
-): T {
+/** Merge raw-derived buyer agents and OnSite direct lines onto a Repliers listing. */
+export function enrichListing<
+  T extends {
+    buyerAgents?: ListingAgent[] | null;
+    agents?: ListingAgent[] | null;
+    raw?: RepliersRaw;
+  },
+>(listing: T): T {
+  let result: T = listing;
+
   const hasBuyer = (listing.buyerAgents?.length ?? 0) > 0;
-  if (hasBuyer) return listing;
-  const fromRaw = buyerAgentsFromRaw(listing.raw);
-  if (!fromRaw) return listing;
-  return { ...listing, buyerAgents: fromRaw };
+  if (!hasBuyer) {
+    const fromRaw = buyerAgentsFromRaw(listing.raw);
+    if (fromRaw) result = { ...result, buyerAgents: fromRaw };
+  }
+
+  // NWMLS/Repliers often populate listing-agent phones with the office line
+  // (e.g. Timber Real Estate) instead of the agent's direct number.
+  if (listing.agents?.length) {
+    result = {
+      ...result,
+      agents: listing.agents.map((agent) => {
+        const direct = getLeadAgentDirectPhone(agent);
+        return direct ? { ...agent, phones: [direct] } : agent;
+      }),
+    };
+  }
+
+  return result;
 }
 
 export function enrichListingsResponse(data: {
   listings?: Array<{
     mlsNumber?: string;
     buyerAgents?: ListingAgent[] | null;
+    agents?: ListingAgent[] | null;
     raw?: RepliersRaw;
   }>;
 }) {

@@ -29,6 +29,8 @@ export type LeadAgentConfig = {
   searchName?: string;
   /** NWMLS board agent ids (e.g. "NWM155267") that identify this agent. */
   boardAgentIds?: string[];
+  /** Direct contact line shown on listing pages (MLS often returns the office phone). */
+  directPhone?: string;
 };
 
 export const ONSITE_LEAD_AGENTS: LeadAgentConfig[] = [
@@ -38,6 +40,8 @@ export const ONSITE_LEAD_AGENTS: LeadAgentConfig[] = [
     tabLabel: "André Bohall",
     cardLabel: "Listed by André Bohall",
     searchName: ONSITE_LEAD_AGENT_NAME,
+    boardAgentIds: ["NWM109253"],
+    directPhone: "(253) 441-9764",
   },
   {
     key: "cindie",
@@ -46,6 +50,7 @@ export const ONSITE_LEAD_AGENTS: LeadAgentConfig[] = [
     cardLabel: "Listed by Cindie",
     // MLS agent #155267. Repliers filters/returns this as the NWMLS boardAgentId.
     boardAgentIds: ["NWM155267"],
+    directPhone: "(253) 799-0609",
   },
 ];
 
@@ -81,20 +86,36 @@ export function listingMatchesAgent(
   agent: LeadAgentConfig
 ): boolean {
   const agents = listing.agents ?? [];
-  const wantedIds = (agent.boardAgentIds ?? []).map(digits).filter(Boolean);
-  const wantedName = agent.searchName ? normalizeName(agent.searchName) : "";
+  return agents.some((a) => agentRecordMatchesLead(a, agent));
+}
 
-  return agents.some((a) => {
-    if (wantedIds.length) {
-      const id = typeof a?.boardAgentId === "string" ? digits(a.boardAgentId) : "";
-      if (id && wantedIds.includes(id)) return true;
+/** Match a single MLS/Repliers agent row to a lead-agent config. */
+export function agentRecordMatchesLead(
+  agent: RawAgent,
+  config: LeadAgentConfig
+): boolean {
+  const wantedIds = (config.boardAgentIds ?? []).map(digits).filter(Boolean);
+  const wantedName = config.searchName ? normalizeName(config.searchName) : "";
+
+  if (wantedIds.length) {
+    const id = typeof agent?.boardAgentId === "string" ? digits(agent.boardAgentId) : "";
+    if (id && wantedIds.includes(id)) return true;
+  }
+  if (wantedName) {
+    const name = typeof agent?.name === "string" ? agent.name : "";
+    if (normalizeName(name).includes(wantedName)) return true;
+  }
+  return false;
+}
+
+/** Direct line for OnSite lead agents; null when this row is not a configured lead agent. */
+export function getLeadAgentDirectPhone(agent: RawAgent): string | null {
+  for (const config of ONSITE_LEAD_AGENTS) {
+    if (agentRecordMatchesLead(agent, config) && config.directPhone) {
+      return config.directPhone;
     }
-    if (wantedName) {
-      const name = typeof a?.name === "string" ? a.name : "";
-      if (normalizeName(name).includes(wantedName)) return true;
-    }
-    return false;
-  });
+  }
+  return null;
 }
 
 export function listingHasBrokerage(
