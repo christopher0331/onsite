@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,6 +12,7 @@ import ListingCard from "@/components/ListingCard";
 import AiSearchPanel from "@/components/AiSearchPanel";
 import FilterPopover from "@/components/FilterPopover";
 import Modal from "@/components/Modal";
+import LocationSearchInput from "@/components/LocationSearchInput";
 import type { MapViewport, MapFocus } from "@/components/ListingsMap";
 import { listingInBounds } from "@/lib/listings-api-params";
 import { getBathroomCount } from "@/lib/format-bathrooms";
@@ -111,6 +113,7 @@ const HOME_TYPE_OPTIONS = [
 ];
 
 export default function ListingsPage() {
+  const router = useRouter();
   const [listings, setListings] = useState<Listing[]>([]);
   const [count, setCount] = useState(0);
   const [numPages, setNumPages] = useState(1);
@@ -243,6 +246,20 @@ export default function ListingsPage() {
   function applyRegularFilters(closeModal = false) {
     markFiltersApplied();
     if (closeModal) setIsMoreFiltersOpen(false);
+  }
+
+  // Address suggestion selected from the location autocomplete — jump straight
+  // to the property page instead of trying to filter the grid by street name.
+  function handleSelectAddress(mlsNumber: string) {
+    router.push(`/listings/${encodeURIComponent(mlsNumber)}`);
+  }
+
+  // City suggestion selected from the location autocomplete — apply it as the
+  // city filter immediately, same as picking a city on the homepage hero.
+  function handleSelectCity(selectedCity: string, selectedState: string) {
+    setCity(selectedCity);
+    if (selectedState) setStateFilter(selectedState);
+    markFiltersApplied();
   }
 
   // Fetch total database count once on mount (no filters) to show in hero
@@ -538,8 +555,11 @@ export default function ListingsPage() {
       <Header />
       <main className="w-full max-w-full overflow-x-hidden bg-white">
 
-        {/* Hero + Controls */}
-        <section className="relative w-full max-w-full overflow-hidden bg-[#13211a] pt-28 pb-12 sm:pt-44 sm:pb-24 lg:pt-52 lg:pb-32">
+        {/* Hero + Controls. overflow-x-hidden (not overflow-hidden) so the
+            address-autocomplete dropdown below the search bar isn't clipped
+            vertically by the hero's bottom edge — only horizontal bleed from
+            the ambient glow needs containing. */}
+        <section className="relative w-full max-w-full overflow-x-hidden bg-[#13211a] pt-28 pb-12 sm:pt-44 sm:pb-24 lg:pt-52 lg:pb-32">
           {/* Brand-green ambient glow so the hero isn't flat black/white */}
           <div
             aria-hidden
@@ -583,12 +603,16 @@ export default function ListingsPage() {
             <div className="relative z-40 flex flex-col gap-4">
               {/* Mobile: stacked search inputs */}
               <div className="flex w-full flex-col gap-2.5 sm:hidden">
-                <input
-                  type="text"
+                <LocationSearchInput
                   value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  placeholder="City, neighborhood, or ZIP"
-                  className="w-full rounded-full border border-white/20 bg-white/5 px-5 py-3 text-[14px] text-white placeholder:text-white/50 focus:border-white focus:bg-white focus:text-charcoal focus:placeholder:text-charcoal/50 focus:outline-none"
+                  onValueChange={setCity}
+                  onSelectAddress={handleSelectAddress}
+                  onSelectCity={handleSelectCity}
+                  onEnterNoSelection={() => applyRegularFilters(false)}
+                  state={stateFilter}
+                  placeholder="Address, city, or ZIP"
+                  listboxId="listings-search-mobile"
+                  inputClassName="w-full rounded-full border border-white/20 bg-white/5 px-5 py-3 text-[14px] text-white placeholder:text-white/50 focus:border-white focus:bg-white focus:text-charcoal focus:placeholder:text-charcoal/50 focus:outline-none"
                 />
                 <form onSubmit={handleMlsSubmit} className="relative w-full">
                   <input
@@ -622,13 +646,19 @@ export default function ListingsPage() {
               <div className="w-full overflow-x-auto overscroll-x-contain pb-1 [scrollbar-width:none] sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
               <div className="flex w-max max-w-none items-center gap-2 sm:w-auto sm:flex-wrap">
                       {/* Tablet+: combined search pill */}
-                      <div className="relative hidden items-center overflow-hidden rounded-full border border-white/20 bg-white/5 transition-all focus-within:border-white focus-within:bg-white group sm:flex">
-                        <input
-                          type="text"
+                      <div className="relative hidden items-center rounded-full border border-white/20 bg-white/5 transition-all focus-within:border-white focus-within:bg-white group sm:flex">
+                        <LocationSearchInput
                           value={city}
-                          onChange={(e) => setCity(e.target.value)}
-                          placeholder="City, Neighborhood, Zip"
-                          className="w-48 bg-transparent px-5 py-2.5 text-[13px] text-white placeholder:text-white/50 focus:text-charcoal focus:placeholder:text-charcoal/50 group-focus-within:text-charcoal group-focus-within:placeholder:text-charcoal/50 focus:outline-none sm:w-64"
+                          onValueChange={setCity}
+                          onSelectAddress={handleSelectAddress}
+                          onSelectCity={handleSelectCity}
+                          onEnterNoSelection={() => applyRegularFilters(false)}
+                          state={stateFilter}
+                          placeholder="Address, City, Zip"
+                          listboxId="listings-search-desktop"
+                          wrapperClassName="relative w-48 sm:w-64"
+                          dropdownMinWidthPx={380}
+                          inputClassName="w-full bg-transparent px-5 py-2.5 text-[13px] text-white placeholder:text-white/50 focus:text-charcoal focus:placeholder:text-charcoal/50 group-focus-within:text-charcoal group-focus-within:placeholder:text-charcoal/50 focus:outline-none"
                         />
                         <div className="h-6 w-px bg-white/20 group-focus-within:bg-charcoal/10" />
                         <form onSubmit={handleMlsSubmit} className="relative m-0 p-0">

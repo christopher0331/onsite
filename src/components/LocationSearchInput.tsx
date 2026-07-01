@@ -2,7 +2,6 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { useRouter } from "next/navigation";
 
 type AddressSuggestion = {
   type: "address";
@@ -28,19 +27,56 @@ type Suggestion = AddressSuggestion | CitySuggestion;
 type Rect = { top: number; left: number; width: number; bottom: number };
 
 const MIN_CHARS = 2;
-const LISTBOX_ID = "hero-search-listbox";
-const GAP = 10;
+const GAP = 8;
 const MIN_DROPDOWN_HEIGHT = 180;
-const MAX_DROPDOWN_HEIGHT = 480;
+const MAX_DROPDOWN_HEIGHT = 560;
 
 function formatPrice(n: number | null): string {
   if (!n || Number.isNaN(n)) return "";
   return "$" + n.toLocaleString("en-US");
 }
 
-export default function HeroSearch() {
-  const router = useRouter();
-  const [query, setQuery] = useState("");
+/**
+ * Live address/city autocomplete backed by `/api/listings/suggest` — the same
+ * MLS-powered dropdown used on the homepage hero. Drop this in anywhere a
+ * plain "city / neighborhood / ZIP" text input previously lived so typing a
+ * street address (not just a city name) actually finds the listing.
+ *
+ * The suggestion panel is rendered in a portal at `document.body` and
+ * positioned with `fixed` coordinates measured from the input. This is
+ * deliberate: no ancestor's `overflow`, `transform`, or stacking context can
+ * clip it, shrink it, or bury it under later sections — and because it lives
+ * outside the input's own DOM subtree, it can never stretch that subtree's
+ * layout height the way an `absolute` child inside a clipped/flex ancestor
+ * sometimes does.
+ */
+export default function LocationSearchInput({
+  value,
+  onValueChange,
+  onSelectAddress,
+  onSelectCity,
+  onEnterNoSelection,
+  state,
+  placeholder = "Address, city, or ZIP",
+  inputClassName = "",
+  wrapperClassName = "relative w-full",
+  dropdownMinWidthPx,
+  listboxId,
+}: {
+  value: string;
+  onValueChange: (v: string) => void;
+  onSelectAddress: (mlsNumber: string) => void;
+  onSelectCity: (city: string, state: string) => void;
+  onEnterNoSelection?: () => void;
+  state?: string;
+  placeholder?: string;
+  inputClassName?: string;
+  wrapperClassName?: string;
+  /** Floors the dropdown's width in px — use when the input itself is
+   * narrower than a usable suggestion list should be. */
+  dropdownMinWidthPx?: number;
+  listboxId: string;
+}) {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -55,9 +91,8 @@ export default function HeroSearch() {
 
   useEffect(() => setMounted(true), []);
 
-  // Debounced autocomplete fetch against the live MLS feed.
   useEffect(() => {
-    const q = query.trim();
+    const q = value.trim();
     if (debounceRef.current) clearTimeout(debounceRef.current);
 
     if (q.length < MIN_CHARS) {
@@ -74,7 +109,9 @@ export default function HeroSearch() {
       abortRef.current = controller;
       void (async () => {
         try {
-          const res = await fetch(`/api/listings/suggest?q=${encodeURIComponent(q)}`, {
+          const params = new URLSearchParams({ q });
+          if (state) params.set("state", state);
+          const res = await fetch(`/api/listings/suggest?${params}`, {
             signal: controller.signal,
           });
           if (!res.ok) {
@@ -96,13 +133,13 @@ export default function HeroSearch() {
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
     };
-  }, [query]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, state]);
 
   // Measure the input's on-screen position whenever the dropdown is open, and
-  // keep it pinned to the input across scroll/resize. The panel itself is
-  // rendered in a portal at `document.body` (see render below) so no
-  // ancestor's overflow/stacking context can clip it or bury it under later
-  // sections, and it can never stretch this component's own layout height.
+  // keep it pinned to the input across scroll/resize (capture phase so it
+  // also reacts to scrolling inside any nested scroll container, not just
+  // the window).
   const measure = () => {
     const el = containerRef.current;
     if (!el) return;
@@ -128,8 +165,6 @@ export default function HeroSearch() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
-  // Close the dropdown when clicking outside the search input or the
-  // (portaled, DOM-detached) dropdown panel.
   useEffect(() => {
     function onDocMouseDown(e: MouseEvent) {
       const target = e.target as Node;
@@ -141,53 +176,14 @@ export default function HeroSearch() {
     return () => document.removeEventListener("mousedown", onDocMouseDown);
   }, []);
 
-  function goToSuggestion(s: Suggestion) {
+  function pick(s: Suggestion) {
     setOpen(false);
+    setSuggestions([]);
     if (s.type === "address") {
-      router.push(`/listings/${encodeURIComponent(s.mlsNumber)}`);
+      onSelectAddress(s.mlsNumber);
     } else {
-      const params = new URLSearchParams({ city: s.city, state: s.state || "WA" });
-      router.push(`/listings?${params.toString()}`);
+      onSelectCity(s.city, s.state);
     }
-  }
-
-  function submit() {
-    const q = query.trim();
-    if (!q) return;
-
-    const isZip = /^\d{5}$/.test(q);
-    const looksLikeStreetAddress = /^\d+\s+\S/.test(q);
-
-    if (highlight >= 0 && suggestions[highlight]) {
-      goToSuggestion(suggestions[highlight]);
-      return;
-    }
-
-    // ZIP codes always filter the listings page — don't deep-link to one address
-    // just because it appeared first in autocomplete.
-    if (isZip) {
-      const params = new URLSearchParams({ city: q, state: "WA" });
-      router.push(`/listings?${params.toString()}`);
-      return;
-    }
-
-    if (suggestions.length > 0) {
-      const pick =
-        looksLikeStreetAddress
-          ? suggestions.find((s) => s.type === "address") ?? suggestions[0]
-          : suggestions[0];
-      goToSuggestion(pick);
-      return;
-    }
-
-    // No suggestion matched. A place name filters the list directly; anything
-    // that reads like a street address goes to the map, which geocodes it and
-    // recenters so nearby for-sale homes still show.
-    const params =
-      !isZip && looksLikeStreetAddress
-        ? new URLSearchParams({ q, view: "map" })
-        : new URLSearchParams({ city: q, state: "WA" });
-    router.push(`/listings?${params.toString()}`);
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -199,18 +195,28 @@ export default function HeroSearch() {
       e.preventDefault();
       setHighlight((h) => Math.max(h - 1, -1));
     } else if (e.key === "Enter") {
-      e.preventDefault();
-      submit();
+      if (highlight >= 0 && suggestions[highlight]) {
+        e.preventDefault();
+        pick(suggestions[highlight]);
+      } else if (onEnterNoSelection) {
+        e.preventDefault();
+        setOpen(false);
+        onEnterNoSelection();
+      }
     } else if (e.key === "Escape") {
       setOpen(false);
       setHighlight(-1);
     }
   }
 
-  const showDropdown = open && query.trim().length >= MIN_CHARS;
+  const showDropdown = open && value.trim().length >= MIN_CHARS;
 
   let dropdownStyle: React.CSSProperties | null = null;
   if (rect) {
+    const width = dropdownMinWidthPx ? Math.max(rect.width, dropdownMinWidthPx) : rect.width;
+    // Prefer opening below the input; if there isn't enough room left in the
+    // viewport, flip above it instead so it's never forced to overflow the
+    // screen (which is what made users have to scroll the page to see it).
     const spaceBelow = window.innerHeight - rect.bottom - GAP - 16;
     const spaceAbove = rect.top - GAP - 16;
     const openAbove = spaceBelow < MIN_DROPDOWN_HEIGHT && spaceAbove > spaceBelow;
@@ -220,7 +226,7 @@ export default function HeroSearch() {
     dropdownStyle = {
       position: "fixed",
       left: rect.left,
-      width: rect.width,
+      width,
       maxHeight,
       ...(openAbove
         ? { bottom: window.innerHeight - rect.top + GAP }
@@ -229,59 +235,38 @@ export default function HeroSearch() {
   }
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-2xl text-left">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          submit();
+    <div ref={containerRef} className={wrapperClassName}>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onValueChange(e.target.value)}
+        onFocus={() => {
+          if (suggestions.length) setOpen(true);
         }}
-        role="search"
-      >
-        <div className="flex items-center gap-1.5 rounded-full bg-white/95 p-1.5 pl-4 shadow-[0_18px_50px_rgba(0,0,0,0.35)] ring-1 ring-black/5 backdrop-blur transition focus-within:bg-white sm:gap-2 sm:p-2 sm:pl-5">
-          <SearchIcon className="h-4 w-4 shrink-0 text-charcoal/40 sm:h-5 sm:w-5" />
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onFocus={() => {
-              if (suggestions.length) setOpen(true);
-            }}
-            onKeyDown={onKeyDown}
-            placeholder="Address, city, or ZIP"
-            aria-label="Search homes by address, city, or ZIP"
-            role="combobox"
-            aria-expanded={showDropdown}
-            aria-controls={LISTBOX_ID}
-            aria-autocomplete="list"
-            autoComplete="off"
-            className="min-w-0 flex-1 bg-transparent text-[14px] text-charcoal placeholder:text-charcoal/50 focus:outline-none sm:text-[15px]"
-          />
-          <button
-            type="submit"
-            className="shrink-0 rounded-full bg-[#3daf3d] px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#3daf3d]/90 sm:px-7 sm:py-3 sm:text-[12px] sm:tracking-[0.18em]"
-          >
-            Search
-          </button>
-        </div>
-      </form>
+        onKeyDown={onKeyDown}
+        placeholder={placeholder}
+        aria-label={placeholder}
+        role="combobox"
+        aria-expanded={showDropdown}
+        aria-controls={listboxId}
+        aria-autocomplete="list"
+        autoComplete="off"
+        className={inputClassName}
+      />
 
-      {/* Rendered in a portal at document.body and positioned with fixed
-          viewport coordinates — see the comment on `measure()` above. This
-          guarantees the panel always lays on top of everything else on the
-          page and never affects this component's own layout height. */}
       {mounted && showDropdown && dropdownStyle
         ? createPortal(
             <div
               ref={dropdownRef}
-              id={LISTBOX_ID}
+              id={listboxId}
               role="listbox"
               style={dropdownStyle}
-              className="z-[2147483000] overflow-auto rounded-2xl bg-white py-2 text-charcoal shadow-[0_24px_70px_rgba(0,0,0,0.30)] ring-1 ring-black/5"
+              className="z-[2147483000] overflow-auto rounded-2xl bg-white py-2 text-charcoal shadow-[0_24px_70px_rgba(0,0,0,0.30)] ring-1 ring-black/10"
             >
               {loading && suggestions.length === 0 ? (
-                <p className="px-5 py-4 text-[13px] text-charcoal/55">Searching the MLS…</p>
+                <p className="px-4 py-3 text-[13px] text-charcoal/55">Searching the MLS…</p>
               ) : suggestions.length === 0 ? (
-                <p className="px-5 py-4 text-[13px] text-charcoal/55">
+                <p className="px-4 py-3 text-[13px] text-charcoal/55">
                   No matches yet — try a street name, city, or ZIP.
                 </p>
               ) : (
@@ -295,7 +280,7 @@ export default function HeroSearch() {
                       role="option"
                       aria-selected={active}
                       onMouseEnter={() => setHighlight(i)}
-                      onClick={() => goToSuggestion(s)}
+                      onClick={() => pick(s)}
                       className={`flex w-full items-center gap-3 px-3 py-2.5 text-left transition ${
                         active ? "bg-[#3daf3d]/10" : "hover:bg-charcoal/[0.04]"
                       }`}
@@ -303,7 +288,7 @@ export default function HeroSearch() {
                       {s.type === "address" ? (
                         <Thumbnail image={s.image} alt={s.label} />
                       ) : (
-                        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-[#3daf3d]/10 text-[#3daf3d]">
+                        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-[#3daf3d]/10 text-[#3daf3d]">
                           <PinIcon className="h-5 w-5" />
                         </span>
                       )}
@@ -353,7 +338,7 @@ export default function HeroSearch() {
 function Thumbnail({ image, alt }: { image: string | null; alt: string }) {
   if (!image) {
     return (
-      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-charcoal/5 text-charcoal/30">
+      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-charcoal/5 text-charcoal/30">
         <HomeIcon className="h-5 w-5" />
       </span>
     );
@@ -363,17 +348,9 @@ function Thumbnail({ image, alt }: { image: string | null; alt: string }) {
     <img
       src={image}
       alt={alt}
-      className="h-12 w-12 shrink-0 rounded-lg object-cover"
+      className="h-11 w-11 shrink-0 rounded-lg object-cover"
       loading="lazy"
     />
-  );
-}
-
-function SearchIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
-    </svg>
   );
 }
 
