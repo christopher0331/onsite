@@ -155,7 +155,7 @@ export const CITIES: City[] = [
     ],
     permittingOffice: {
       name: "City of Puyallup Development & Permitting Services",
-      url: "https://www.cityofpuyallup.org/313/Development-Services",
+      url: "https://www.puyallupwa.gov/2438/Development-Permitting-Services",
       context:
         "Single-family permits, ADU review, and SEPA threshold determinations are issued here.",
     },
@@ -167,7 +167,7 @@ export const CITIES: City[] = [
       },
       {
         name: "Puyallup Public Works — Water & Sewer",
-        url: "https://www.cityofpuyallup.org/153/Public-Works",
+        url: "https://www.puyallupwa.gov/149/Public-Works",
         context: "Municipal water, side-sewer connections, and stormwater.",
       },
     ],
@@ -281,7 +281,7 @@ export const CITIES: City[] = [
     ],
     permittingOffice: {
       name: "City of Bonney Lake — Community Development",
-      url: "https://www.cityofbonneylake.org/",
+      url: "https://www.bonneylake.gov/260/Permit-Center",
       context: "Building permits, short-plat review, and shoreline determinations.",
     },
     utilities: [
@@ -292,7 +292,7 @@ export const CITIES: City[] = [
       },
       {
         name: "Bonney Lake Public Works",
-        url: "https://www.cityofbonneylake.org/",
+        url: "https://www.bonneylake.gov/258/Public-Works",
         context: "Municipal water; many plateau properties remain on septic systems.",
       },
     ],
@@ -1291,7 +1291,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
       {
         name: "Puyallup School District",
-        url: "https://www.puyallup.k12.wa.us/",
+        url: "https://www.puyallupsd.org/",
         context: "South Hill draws on Rogers HS, Emerald Ridge HS, and Edgemont/Glacier View Junior Highs.",
       },
     ],
@@ -1417,7 +1417,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     communityOrgs: [
       {
         name: "Sumner Main Street Association",
-        url: "https://www.sumnermainstreet.org/",
+        url: "https://www.sumnermainstreet.com/",
         context: "Downtown advocacy organization; Bridge Hill drains directly into downtown Sumner.",
       },
       {
