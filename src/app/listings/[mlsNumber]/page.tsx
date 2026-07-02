@@ -506,23 +506,40 @@ export default function ListingDetailPage() {
         {images.length > 0 && (
           <section className="bg-white py-8 sm:py-10">
             <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
-              {/* Main image viewer. This is intentionally a plain <img> with
-                  inline fit/crop styles, not Next/Image or Tailwind bg-* utils,
-                  so production builds cannot rewrite the behavior. */}
+              {/* Main image viewer. The container has a fixed height so
+                  switching photos never resizes/collapses the hero. Slides
+                  are plain <img> tags (not Next/Image) positioned with
+                  translateX so paging feels like a true filmstrip carousel:
+                  the outgoing photo slides fully off-screen while the
+                  incoming one slides in from the opposite edge, and every
+                  pixel of each photo stays visible via object-contain. */}
               <div
-                className="relative w-full overflow-hidden rounded-2xl bg-charcoal/5 shadow-[0_14px_50px_rgba(0,0,0,0.12)] sm:rounded-3xl"
+                className="relative mx-auto w-full max-w-4xl overflow-hidden rounded-2xl bg-charcoal/5 shadow-[0_14px_50px_rgba(0,0,0,0.12)] sm:rounded-3xl h-[min(45vh,360px)] sm:h-[min(50vh,440px)] lg:h-[480px]"
                 style={{ isolation: "isolate" }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  key={images[activeImg]}
-                  src={repliersImageUrl(images[activeImg], "medium") || ""}
-                  alt={street}
-                  fetchPriority="high"
-                  decoding="async"
-                  className="block h-auto w-full"
-                  style={{ display: "block" }}
-                />
+                {(images.length >= 3
+                  ? [
+                      { i: (activeImg - 1 + images.length) % images.length, offset: -1 },
+                      { i: activeImg, offset: 0 },
+                      { i: (activeImg + 1) % images.length, offset: 1 },
+                    ]
+                  : images.map((_, i) => ({ i, offset: i === activeImg ? 0 : i < activeImg ? -1 : 1 }))
+                ).map(({ i, offset }) => (
+                  <div
+                    key={i}
+                    className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-in-out will-change-transform"
+                    style={{ transform: `translateX(${offset * 100}%)` }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={repliersImageUrl(images[i], "medium") || ""}
+                      alt={`${street} photo ${i + 1}`}
+                      fetchPriority={i === activeImg ? "high" : "low"}
+                      decoding="async"
+                      className="block max-h-full max-w-full w-auto h-auto object-contain"
+                    />
+                  </div>
+                ))}
                 {images.length > 1 && (
                   <>
                     <button
