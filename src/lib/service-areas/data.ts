@@ -55,6 +55,30 @@ export const CITIES: City[] = [
         context: "Electric and natural-gas service across the plateau.",
       },
     ],
+    schoolDistricts: [
+      {
+        name: "Dieringer School District",
+        url: "https://www.dieringer.wednet.edu/",
+        context: "Headquartered in Lake Tapps; serves Lake Tapps Elementary and North Tapps Middle School.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Covers the southern Lake Tapps shoreline, feeding into Bonney Lake High School.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Pierce County Library System",
+        url: "https://mypcls.org/",
+        context: "Bonney Lake and Sumner branches are the closest full-service locations.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records for every Lake Tapps address.",
+      },
+    ],
     regulations: [
       {
         title: "Shoreline & Dock Permitting",
@@ -151,6 +175,25 @@ export const CITIES: City[] = [
       name: "Puyallup Sumner Chamber of Commerce",
       url: "https://www.puyallupsumnerchamber.com/",
     },
+    schoolDistricts: [
+      {
+        name: "Puyallup School District",
+        url: "https://www.puyallupsd.org/",
+        context: "Washington's 6th-largest district — Rogers HS, Emerald Ridge HS, and Puyallup HS attendance areas.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Pierce County Library System — Puyallup Branch",
+        url: "https://mypcls.org/",
+        context: "Public library branches serving downtown and South Hill.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records.",
+      },
+    ],
     regulations: [
       {
         title: "Historic District Overlay (Downtown)",
@@ -253,6 +296,25 @@ export const CITIES: City[] = [
         context: "Municipal water; many plateau properties remain on septic systems.",
       },
     ],
+    schoolDistricts: [
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Bonney Lake HS, Mountain View Middle School, and eight plateau elementary schools.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Pierce County Library System — Bonney Lake Branch",
+        url: "https://mypcls.org/",
+        context: "Public library branch on the plateau.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records.",
+      },
+    ],
     regulations: [
       {
         title: "Shoreline Master Program (Lake Tapps)",
@@ -342,6 +404,25 @@ export const CITIES: City[] = [
         context: "Municipal water and side-sewer connections.",
       },
     ],
+    schoolDistricts: [
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Sumner HS and Sumner Middle School serve most in-city addresses.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Pierce County Library System — Sumner Branch",
+        url: "https://mypcls.org/",
+        context: "Public library branch in downtown Sumner.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records.",
+      },
+    ],
     regulations: [
       {
         title: "Downtown Historic District",
@@ -428,6 +509,30 @@ export const CITIES: City[] = [
         context: "Stormwater; water and sewer service vary by parcel and provider.",
       },
     ],
+    schoolDistricts: [
+      {
+        name: "Puyallup School District",
+        url: "https://www.puyallupsd.org/",
+        context: "Primary district for most Edgewood addresses.",
+      },
+      {
+        name: "Fife Public Schools",
+        url: "https://www.fifeschools.com/",
+        context: "Serves a portion of Edgewood — Hedden Elementary sits inside city limits.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Pierce County Library System",
+        url: "https://mypcls.org/",
+        context: "Nearest branches are in Puyallup and Milton.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records.",
+      },
+    ],
     regulations: [
       {
         title: "Septic-to-Sewer Transitions",
@@ -492,6 +597,25 @@ export const CITIES: City[] = [
         context: "Electric and natural-gas service.",
       },
     ],
+    schoolDistricts: [
+      {
+        name: "Fife Public Schools",
+        url: "https://www.fifeschools.com/",
+        context: "District office is in Milton; serves Discovery Primary and Surprise Lake Middle School.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Pierce County Library System",
+        url: "https://mypcls.org/",
+        context: "Nearest branches are in Edgewood and Fife.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records for the Pierce County portion of Milton.",
+      },
+    ],
     regulations: [
       {
         title: "County-Line Considerations",
@@ -552,6 +676,25 @@ export const CITIES: City[] = [
         name: "Puget Sound Energy",
         url: "https://www.pse.com/",
         context: "Electric and natural-gas service.",
+      },
+    ],
+    schoolDistricts: [
+      {
+        name: "Auburn School District",
+        url: "https://www.auburn.wednet.edu/",
+        context: "Serves Auburn, Lea Hill, and the Lake Tapps corner of King County.",
+      },
+    ],
+    localResources: [
+      {
+        name: "King County Library System — Auburn Branch",
+        url: "https://kcls.org/",
+        context: "Public library branches in downtown Auburn and Lea Hill.",
+      },
+      {
+        name: "King County Assessor",
+        url: "https://kingcounty.gov/en/dept/assessor",
+        context: "Parcel data, assessed value, and property-tax records.",
       },
     ],
     regulations: [
@@ -625,6 +768,25 @@ export const CITIES: City[] = [
         context: "Electric and natural-gas service.",
       },
     ],
+    schoolDistricts: [
+      {
+        name: "White River School District",
+        url: "https://www.whiteriver.wednet.edu/",
+        context: "District office is in downtown Buckley; serves the foothills communities.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Pierce County Library System — Buckley Branch",
+        url: "https://mypcls.org/",
+        context: "Public library branch in downtown Buckley.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records.",
+      },
+    ],
     regulations: [
       {
         title: "White River Corridor & Slope Setbacks",
@@ -688,6 +850,25 @@ export const CITIES: City[] = [
         name: "Tacoma–Pierce County Health Department",
         url: "https://www.tpchd.org/",
         context: "Septic permitting and private-well programs for unincorporated parcels.",
+      },
+    ],
+    schoolDistricts: [
+      {
+        name: "Bethel School District",
+        url: "https://bethelsd.org/",
+        context: "Serves Graham, Kapowsin, and Spanaway — Graham Elementary and Graham-Kapowsin HS sit in-area.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Pierce County Library System",
+        url: "https://mypcls.org/",
+        context: "Nearest branch is in South Hill / Puyallup.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records.",
       },
     ],
     regulations: [
@@ -772,6 +953,25 @@ export const CITIES: City[] = [
       name: "Tacoma-Pierce County Chamber",
       url: "https://www.tacomachamber.org/",
     },
+    schoolDistricts: [
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Washington's third-largest district, covering all Tacoma neighborhoods.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Tacoma Public Library",
+        url: "https://www.tacomalibrary.org/",
+        context: "City library system with branches in the North End, Proctor, and South Tacoma.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records.",
+      },
+    ],
     regulations: [
       {
         title: "Historic Conservation Districts",
@@ -839,6 +1039,25 @@ export const CITIES: City[] = [
         name: "Puget Sound Energy",
         url: "https://www.pse.com/",
         context: "Regional electric/natural-gas service.",
+      },
+    ],
+    schoolDistricts: [
+      {
+        name: "Federal Way Public Schools",
+        url: "https://www.fwps.org/",
+        context: "Covers Twin Lakes, West Campus, and the Dash Point/Redondo waterfront.",
+      },
+    ],
+    localResources: [
+      {
+        name: "King County Library System — Federal Way Branch",
+        url: "https://kcls.org/",
+        context: "Public library branches across Federal Way.",
+      },
+      {
+        name: "King County Assessor",
+        url: "https://kingcounty.gov/en/dept/assessor",
+        context: "Parcel data, assessed value, and property-tax records.",
       },
     ],
     regulations: [
@@ -909,6 +1128,25 @@ export const CITIES: City[] = [
         context: "Regional utility service.",
       },
     ],
+    schoolDistricts: [
+      {
+        name: "Kent School District",
+        url: "https://www.kent.k12.wa.us/",
+        context: "One of Washington's largest districts, covering East Hill, West Hill, and the valley core.",
+      },
+    ],
+    localResources: [
+      {
+        name: "King County Library System — Kent Branch",
+        url: "https://kcls.org/",
+        context: "Public library branches in downtown Kent and on East Hill.",
+      },
+      {
+        name: "King County Assessor",
+        url: "https://kingcounty.gov/en/dept/assessor",
+        context: "Parcel data, assessed value, and property-tax records.",
+      },
+    ],
     regulations: [
       {
         title: "Floodplain Overlay (Valley areas)",
@@ -974,6 +1212,25 @@ export const CITIES: City[] = [
         name: "Seattle Public Utilities",
         url: "https://www.seattle.gov/utilities",
         context: "Water, drainage, and solid waste.",
+      },
+    ],
+    schoolDistricts: [
+      {
+        name: "Seattle Public Schools",
+        url: "https://www.seattleschools.org/",
+        context: "Washington's largest district — attendance areas vary block by block in Ballard, Green Lake, and Queen Anne.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Seattle Public Library",
+        url: "https://www.spl.org/",
+        context: "Branches in every neighborhood we cover, from Ballard to Green Lake.",
+      },
+      {
+        name: "King County Assessor",
+        url: "https://kingcounty.gov/en/dept/assessor",
+        context: "Parcel data, assessed value, and property-tax records.",
       },
     ],
     regulations: [

@@ -8,7 +8,9 @@ import TestimonialsScroll from "@/components/TestimonialsScroll";
 import CityHero from "@/components/service-areas/CityHero";
 import CityRegulations from "@/components/service-areas/CityRegulations";
 import LocalUtilities from "@/components/service-areas/LocalUtilities";
+import LocalResources from "@/components/service-areas/LocalResources";
 import NeighborhoodDirectory from "@/components/service-areas/NeighborhoodDirectory";
+import AreaListings from "@/components/service-areas/AreaListings";
 // import CityCaseStudies from "@/components/service-areas/CityCaseStudies";
 // ^ Re-enable once the per-city sold/featured listing data is sourced from
 //   the real CRM/MLS pull instead of the curated seed set.
@@ -17,7 +19,9 @@ import UrbanLogistics from "@/components/service-areas/UrbanLogistics";
 import MicroClimate from "@/components/service-areas/MicroClimate";
 import ServiceAreaCTA from "@/components/service-areas/ServiceAreaCTA";
 import {
+  AreaListingsItemListSchema,
   BreadcrumbSchema,
+  buildCityMentions,
   CityPlaceSchema,
   CityServiceSchema,
   OrganizationSchema,
@@ -30,6 +34,7 @@ import {
   getCityBySlug,
   getNeighborhoodsByCity,
 } from "@/lib/service-areas/data";
+import { getServiceAreaListings } from "@/lib/service-area-listings";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const SITE_URL = getCanonicalBaseUrl();
@@ -76,6 +81,7 @@ export default async function CityPage({
 
   const neighborhoods = getNeighborhoodsByCity(city.slug);
   const pageUrl = `${SITE_URL}/service-areas/${city.slug}`;
+  const { listings } = await getServiceAreaListings(city.name, 6);
 
   // Other cities for cross-linking at the bottom.
   const peers = CITIES.filter((c) => c.slug !== city.slug);
@@ -97,7 +103,9 @@ export default async function CityPage({
         pageUrl={pageUrl}
         title={`${city.name}, ${city.stateCode} Real Estate Agents`}
         description={city.heroIntro}
+        mentions={buildCityMentions(city)}
       />
+      <AreaListingsItemListSchema listings={listings} pageUrl={pageUrl} />
 
       <main className="bg-white">
         <CityHero city={city} />
@@ -108,8 +116,15 @@ export default async function CityPage({
         {city.features.urbanLogistics && <UrbanLogistics city={city} />}
         <LocalUtilities city={city} />
         {city.features.microClimate && <MicroClimate city={city} />}
+        <LocalResources city={city} />
         <NeighborhoodDirectory city={city} neighborhoods={neighborhoods} />
         {/* <CityCaseStudies city={city} /> — disabled until real per-city listings are wired in */}
+
+        <AreaListings
+          areaLabel={city.name}
+          listings={listings}
+          viewAllHref={`/listings?city=${encodeURIComponent(city.name)}&state=WA`}
+        />
 
         <section className="py-12 bg-white border-t border-charcoal/8">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12 flex flex-wrap gap-3">

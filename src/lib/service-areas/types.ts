@@ -67,6 +67,13 @@ export type City = {
   permittingOffice: EntityLink;
   utilities: EntityLink[];
   chamberOfCommerce?: EntityLink;
+  // School district(s) serving the area — some cities split across two
+  // districts, so this is always an array even when it has one entry.
+  schoolDistricts: EntityLink[];
+  // Grab-bag of additional authoritative local links (library system,
+  // county assessor/property records, parks & rec, etc.) surfaced in the
+  // "Local Resources" section and cited in the page's JSON-LD `mentions`.
+  localResources: EntityLink[];
 
   // Structured payloads consumed by the city components.
   regulations: RegulationNote[];

@@ -141,7 +141,10 @@ function buildSourceLabel(leadAgentKeys: string[], isTimber: boolean): string {
     const base = `Listed by ${names.join(" & ")}`;
     return isTimber ? `${base} · ${ONSITE_BROKERAGE_NAME}` : base;
   }
-  return `${ONSITE_BROKERAGE_NAME} Team`;
+  // Neither a lead agent nor Timber — a general-market listing pulled in on
+  // a service-area page. Leave blank so ListingCard falls back to the
+  // listing's real office/brokerage name instead of mislabeling it.
+  return isTimber ? `${ONSITE_BROKERAGE_NAME} Team` : "";
 }
 
 export function tagOnsiteListing(listing: TaggableListing): OnsiteListing {
@@ -163,14 +166,19 @@ export function isLeadAgentListing(listing: OnsiteListing) {
   return listing.leadAgentKeys.length > 0;
 }
 
-/** Lowest index in `ONSITE_LEAD_AGENTS` among this listing's agents. */
+/**
+ * Lowest index in `ONSITE_LEAD_AGENTS` among this listing's agents, with two
+ * trailing tiers: Timber-brokerage listings with no lead agent match, then
+ * everyone else (general-market listings pulled in for service-area pages).
+ */
 function leadAgentRank(listing: OnsiteListing): number {
-  let best = ONSITE_LEAD_AGENTS.length; // timber-only / unaffiliated
+  let best = -1;
   for (const key of listing.leadAgentKeys) {
     const idx = ONSITE_LEAD_AGENT_KEYS.indexOf(key);
-    if (idx >= 0 && idx < best) best = idx;
+    if (idx >= 0 && (best === -1 || idx < best)) best = idx;
   }
-  return best;
+  if (best >= 0) return best;
+  return listing.isTimber ? ONSITE_LEAD_AGENTS.length : ONSITE_LEAD_AGENTS.length + 1;
 }
 
 const STATUS_ORDER: Record<StatusTone, number> = {
@@ -232,11 +240,9 @@ export function sortOnsiteListings(
     const rankB = leadAgentRank(b);
     if (rankA !== rankB) return rankA - rankB;
 
-    // Same group: order lead-agent groups by status before date.
-    if (rankA < ONSITE_LEAD_AGENTS.length) {
-      const statusDiff = statusSortKey(a) - statusSortKey(b);
-      if (statusDiff !== 0) return statusDiff;
-    }
+    // Same group: order by status (Active → Pending → Sold) before date.
+    const statusDiff = statusSortKey(a) - statusSortKey(b);
+    if (statusDiff !== 0) return statusDiff;
 
     return compareOnsiteListings(a, b, sortBy);
   });

@@ -10,9 +10,12 @@ import NeighborhoodGovernance from "@/components/service-areas/NeighborhoodGover
 import DispatchLogistics from "@/components/service-areas/DispatchLogistics";
 import AdjacentAreas from "@/components/service-areas/AdjacentAreas";
 import LocalReviews from "@/components/service-areas/LocalReviews";
+import AreaListings from "@/components/service-areas/AreaListings";
 import ServiceAreaCTA from "@/components/service-areas/ServiceAreaCTA";
 import {
+  AreaListingsItemListSchema,
   BreadcrumbSchema,
+  buildNeighborhoodMentions,
   NeighborhoodPlaceSchema,
   NeighborhoodServiceSchema,
   OrganizationSchema,
@@ -24,6 +27,7 @@ import {
   getCityBySlug,
   getNeighborhoodBySlug,
 } from "@/lib/service-areas/data";
+import { filterListingsByZip, getServiceAreaListings } from "@/lib/service-area-listings";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const SITE_URL = getCanonicalBaseUrl();
@@ -72,6 +76,13 @@ export default async function NeighborhoodPage({
   if (!city || !neighborhood) notFound();
 
   const pageUrl = `${SITE_URL}/service-areas/${city.slug}/${neighborhood.slug}`;
+  const { listings: cityListings } = await getServiceAreaListings(city.name, 24);
+  const listings = filterListingsByZip(cityListings, neighborhood.zipCodes, 6);
+  const scopeNote = cityListings.some(
+    (l) => l.address?.zip && neighborhood.zipCodes.includes(l.address.zip)
+  )
+    ? undefined
+    : `No active ${neighborhood.name}-specific listings right now — showing current ${city.name} inventory instead.`;
 
   return (
     <>
@@ -100,7 +111,9 @@ export default async function NeighborhoodPage({
         pageUrl={pageUrl}
         title={`${neighborhood.name}, ${city.name} ${city.stateCode} Real Estate`}
         description={neighborhood.introCopy}
+        mentions={buildNeighborhoodMentions(neighborhood)}
       />
+      <AreaListingsItemListSchema listings={listings} pageUrl={pageUrl} />
 
       <main className="bg-white">
         <NeighborhoodHero city={city} neighborhood={neighborhood} />
@@ -108,6 +121,13 @@ export default async function NeighborhoodPage({
         <DispatchLogistics neighborhood={neighborhood} />
         <LocalReviews neighborhood={neighborhood} />
         <AdjacentAreas neighborhood={neighborhood} />
+
+        <AreaListings
+          areaLabel={neighborhood.name}
+          listings={listings}
+          viewAllHref={`/listings?city=${encodeURIComponent(city.name)}&state=WA`}
+          scopeNote={scopeNote}
+        />
 
         <section className="py-10 bg-white border-t border-charcoal/8">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">

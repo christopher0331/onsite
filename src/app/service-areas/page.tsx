@@ -65,7 +65,7 @@ export default function ServiceAreasIndex() {
           />
           <div className="hero-overlay" aria-hidden />
 
-          <div className="relative z-10 mx-auto max-w-[1440px] h-full px-6 lg:px-12 flex flex-col justify-end pb-20 sm:pb-24">
+          <div className="relative z-10 mx-auto max-w-[1440px] h-full px-6 lg:px-12 flex flex-col justify-start pt-24 sm:pt-28 lg:pt-32 pb-20 sm:pb-24">
             <Breadcrumbs
               items={[
                 { label: "Home", href: "/" },
