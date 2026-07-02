@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import AiAssistantLazy from "@/components/AiAssistantLazy";
+
+const GA_MEASUREMENT_ID = "G-70Q8F15W0D";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -41,6 +44,18 @@ export default function RootLayout({
       <body className={`${inter.variable} ${dmSans.variable} antialiased overflow-x-hidden`}>
         {children}
         <AiAssistantLazy />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
       </body>
     </html>
   );

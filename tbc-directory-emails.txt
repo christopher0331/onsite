@@ -1,0 +1,267 @@
+TAPPS BUSINESS CONNECT — DIRECTORY MEMBER EMAILS
+Source: https://tappsbusinessconnect.com/directory (27 members, all categories)
+Compiled: research from member websites, business listings, LinkedIn, and state records.
+
+CONFIDENCE LEGEND
+  [VERIFIED]  = Email is published on the business's own site or an official listing.
+  [LIKELY]    = Strong inference (e.g., obvious typo correction, standard corporate format).
+  [SUSPECTED] = Pattern guess from the company domain; NOT confirmed. Verify before sending.
+  [UNVERIFIED]= Could not confirm domain or email at all.
+
+NOTE: For solo owners/operators, the firstname@ address is the best first guess and the
+info@/general inbox is the safer fallback. Both are listed where relevant.
+
+============================================================
+QUICK LIST (sorted by confidence: VERIFIED -> LIKELY -> SUSPECTED -> UNVERIFIED)
+============================================================
+--- VERIFIED (8) ---
+Andre Bohall         -> andre@onsiteregroup.com                        [VERIFIED]
+Eva Armas            -> ecohaulsolutions253@gmail.com                  [VERIFIED]
+Devin Quinn          -> dquinn@evergreenhomeloans.com                  [VERIFIED]
+Kevin Barquest       -> kevin@theinsalliance.com                       [VERIFIED]
+Brittany Guempel     -> brittany.guempel@wafd.com                      [VERIFIED]
+Kim Campbell         -> kim@campbelltaxandaccounting.com               [VERIFIED]
+Chelsea Scott        -> chelsea@nawslaw.com                            [VERIFIED]
+Stephanie Jensen     -> coffeevault@tappscoffee.com                    [VERIFIED]
+
+--- LIKELY (1) ---
+Jasmine Guerrero     -> ilovecarpetcleaning@outlook.com                [LIKELY]
+
+--- SUSPECTED (17) ---
+Jesus Perez          -> info@superiorroofcleaningandconstruction.com   [SUSPECTED]
+Lesa Say             -> lesa@raincitycapital.com                       [SUSPECTED]
+Alan Dueck           -> info@caringtransitionsofpuyallup.com           [SUSPECTED]
+Dekota Bramsche      -> dekota@rpmtoday.com                            [SUSPECTED]
+Becky Barringer      -> becky@beckybarringer.com                       [SUSPECTED]
+Anna Jacobson        -> anna@theinsalliance.com                        [SUSPECTED]
+Gina Humphries       -> gina.humphries@edwardjones.com                 [SUSPECTED] (see conflict note)
+Lyndsy Vasquez       -> lyndsy@odegardlawfirm.com                      [SUSPECTED]
+JNKElectric (Jeff/Kevin) -> info@jnkelectrical.com                     [SUSPECTED]
+Jimmy Alekseenko     -> jimmy@simplefloorsolutions.com                 [SUSPECTED]
+Travis Ohlde         -> travis@maxcare247.com                          [SUSPECTED] (info@ verified)
+Crystal Waltz        -> info@flowtechheatingac.com                     [SUSPECTED]
+Pat Wheeler          -> info@trustworthy-construction.com              [SUSPECTED]
+Justin Schulke       -> Justin.Schulke@blackpearlpainters.com           [SUSPECTED]
+Matt Cahill          -> info@eikonhomes.com                            [SUSPECTED]
+Andrew Knudsen       -> andrew@myfence.com                             [SUSPECTED]
+Amanda Matthews      -> info@precisionandgraceaesthetics.com           [SUSPECTED]
+
+--- UNVERIFIED (1) ---
+Stephanie Lyman      -> (unverified — see notes)                       [UNVERIFIED]
+
+============================================================
+HOME SERVICES (9)
+============================================================
+1. Jesus Perez — Superior Roof Cleaning & Construction
+   Email:   info@superiorroofcleaningandconstruction.com   [SUSPECTED]
+   Phone:   253-200-7194
+   Website: superiorroofcleaningandconstruction.com
+   Notes:   Site uses a contact form only; no public email found. Roof/exterior cleaning.
+
+2. Andre Bohall — OnSite Real Estate Group
+   Email:   andre@onsiteregroup.com                         [VERIFIED]
+   Phone:   253-441-9764
+   Website: onsiteregroup.com
+   Notes:   Published as a mailto link on onsiteregroup.net. TBC co-founder.
+
+3. Jasmine Guerrero — I Love Carpet Cleaning
+   Email:   ilovecarpetcleaning@outlook.com                 [LIKELY]
+   Phone:   253-861-8098
+   Notes:   Listed on Nextdoor as "ilovecarpetcleaning@outloo.com" — almost certainly an
+            "outlook.com" typo. Husband & wife team, Downtown Puyallup.
+
+4. Lesa Say — Rain City Capital
+   Email:   lesa@raincitycapital.com                        [SUSPECTED]
+   Phone:   206-271-8009
+   Website: raincitycapital.com
+   Notes:   Sales Director / "Team Say." Company uses contact forms; no public personal email.
+
+5. Eva Armas — EcoHaul Solutions Junk & Hauling
+   Email:   ecohaulsolutions253@gmail.com                   [VERIFIED]
+   Phone:   253-290-3514 (alt 206-631-9543)
+   Website: ecohaulsolutionsllc.com
+   Notes:   Published on their site. Co-owner Edward Melendez-Barradas (husband/wife team).
+
+6. Alan Dueck — Caring Transitions of Puyallup
+   Email:   info@caringtransitionsofpuyallup.com            [SUSPECTED]
+   Alt:     alan.dueck@caringtransitions.com (franchise format)
+   Phone:   253-286-9950
+   Website: caringtransitionsofpuyallup.com
+   Notes:   Senior relocation / estate sales. Run with Carrie Dueck.
+
+7. Devin Quinn — Evergreen Home Loans
+   Email:   dquinn@evergreenhomeloans.com                   [VERIFIED]
+   Phone:   253-278-9192 (office 206-519-3749)
+   Website: evergreenhomeloans.com/loan-officers/devin-quinn
+   Notes:   Published on his Evergreen profile. NMLS 1305012. "The Dorman Team."
+
+8. Dekota Bramsche — RPM Today (Real Property Management Today)
+   Email:   dekota@rpmtoday.com                             [SUSPECTED]
+   Alt:     info@rpmtoday.com
+   Website: rpmtoday.com
+   Notes:   Leads owner onboarding; residential & commercial property mgmt, South Puget Sound.
+            (Not in your local business-connect-data.ts.)
+
+9. Becky Barringer — Barringer Design Studio
+   Email:   becky@beckybarringer.com                        [SUSPECTED]
+   Alt:     info@beckybarringer.com
+   Website: beckybarringer.com (Bonney Lake interior designer; also on Houzz)
+   Notes:   Interior design, remodels & new construction. (Not in local data.)
+            Do NOT confuse with "Barringer Interiors" of Dallas, TX (different person).
+
+============================================================
+FINANCE & PROFESSIONAL (7)
+============================================================
+10. Kevin Barquest — Insurance Alliance LLC
+    Email:   kevin@theinsalliance.com                       [VERIFIED]
+    General: insurance@theinsalliance.com                  [VERIFIED]
+    Phone:   253-642-4010
+    Website: theinsalliance.com
+    Notes:   President. Confirmed via Coterie + LinkedIn. Sumner, WA.
+
+11. Anna Jacobson — Insurance Alliance LLC
+    Email:   anna@theinsalliance.com                        [SUSPECTED]
+    General: insurance@theinsalliance.com                  [VERIFIED]
+    Phone:   253-642-4010
+    Notes:   Same firm as Kevin; inferred from the kevin@ pattern.
+
+12. Brittany Guempel — WaFd Bank
+    Email:   brittany.guempel@wafd.com                      [VERIFIED]
+    Website: wafdbank.com
+    Notes:   Branch Manager, Federal Way branch. Published on WaFd branch page.
+
+13. Gina Humphries — Edward Jones  ***CONFLICT — VERIFY***
+    Email:   gina.humphries@edwardjones.com                 [SUSPECTED] (standard EJ format)
+    Phone:   253-648-7114
+    Notes:   The TBC directory lists her under "Ameriprise Financial Services, LLC," but
+             LinkedIn, Nextdoor, and other directories still show her at EDWARD JONES in
+             Bonney Lake (and the Ameriprise Bonney Lake branch lists different advisors).
+             Likely either a very recent move or a TBC data error — confirm her current firm
+             before emailing. If Ameriprise, format is usually gina.x.humphries@ampf.com.
+
+14. Kim Campbell — Campbell Tax & Accounting, LLC
+    Email:   kim@campbelltaxandaccounting.com               [VERIFIED]
+    Phone:   253-528-5860 (also listed 253-397-0836)
+    Website: campbelltaxandaccounting.com
+    Notes:   Published on the About page. Bonney Lake CPA.
+
+15. Lyndsy Vasquez — Odegard Law
+    Email:   lyndsy@odegardlawfirm.com                      [SUSPECTED]
+    Alt:     info@odegardlawfirm.com
+    Website: odegardlawfirm.com (also odegardlegal.com)
+    Notes:   Personal injury team member (case manager/paralegal; Ryan Odegard is the attorney).
+
+16. Chelsea Scott — Nelson Allen Walk & Scott, PLLC
+    Email:   chelsea@nawslaw.com                            [VERIFIED]
+    General: info@nawslaw.com                              [VERIFIED]
+    Phone:   253-845-8895
+    Website: nawslaw.com
+    Notes:   Family Law Partner. Published on her attorney bio page. Puyallup.
+
+============================================================
+TRADES & SPECIALTY (8)
+============================================================
+17. JNKElectric — JNK Electrical Solutions LLC (founders Jeff & Kevin)
+    Email:   info@jnkelectrical.com                         [SUSPECTED]
+    Phone:   206-535-1636 (also 253-553-1046)
+    Website: jnkelectrical.com
+    Notes:   Contact form only; no public email found. Bonney Lake.
+
+18. Jimmy Alekseenko — Simple Floor Solutions
+    Email:   jimmy@simplefloorsolutions.com                 [SUSPECTED]
+    Alt:     info@simplefloorsolutions.com
+    Phone:   253-316-5886
+    Website: simplefloorsolutions.com
+    Notes:   Founder/owner; family business (Black Diamond, WA).
+
+19. Travis Ohlde — MaxCare of Washington, Inc.
+    Email:   travis@maxcare247.com                          [SUSPECTED]
+    General: info@maxcare247.com                           [VERIFIED]
+    Phone:   253-864-6445
+    Website: maxcare247.com
+    Notes:   info@ confirmed via LinkedIn company data. Disaster restoration, Sumner.
+
+20. Crystal Waltz — Flow Tech Heating, AC & Electric
+    Email:   info@flowtechheatingac.com                     [SUSPECTED]
+    Alt:     crystal@flowtechheatingac.com
+    Phone:   253-448-0801
+    Website: flowtechheatingac.com
+    Notes:   Family owned; Eatonville, WA. Contact form only.
+
+21. Pat Wheeler — Trustworthy Roofing (Trustworthy Construction)
+    Email:   info@trustworthy-construction.com              [SUSPECTED]
+    Phone:   253-455-4347
+    Website: trustworthy-construction.com
+    Notes:   No public email found; web search collides with other "Wheeler"/"Trustworthy"
+             companies, so verify the domain before sending.
+
+22. Justin Schulke — Black Pearl Painters
+    Email:   justin@blackpearlpainters.com                  [SUSPECTED]
+    Alt:     info@blackpearlpainters.com
+    Phone:   253-203-5335 (quote line 253-921-2549)
+    Website: blackpearlpainters.com
+    Notes:   Owner/Estimator (with co-owner Kellie Myler). Bonney Lake.
+
+23. Matt Cahill — Eikon Homes
+    Email:   info@eikonhomes.com                            [SUSPECTED]
+    Phone:   253-300-6644
+    Website: eikonhomes.com
+    Notes:   Contact page shows an email but it is obfuscated to scrapers; info@ is the likely
+             general inbox. Owner/Army veteran. Orting, WA.
+
+24. Andrew Knudsen — MyFence.com
+    Email:   andrew@myfence.com                             [SUSPECTED]
+    Alt:     info@myfence.com
+    Website: myfence.com
+    Notes:   Father & son owned (Eric & Andrew Knudsen); Fence Genius tech. Seattle/Maple Valley.
+             (Not in your local data.)
+
+============================================================
+HEALTH & WELLNESS (2)  — none of these are in your local data
+============================================================
+25. Amanda Matthews — Precision and Grace Aesthetics
+    Email:   info@precisionandgraceaesthetics.com           [SUSPECTED — domain unconfirmed]
+    Phone:   253-961-1528
+    Address: 6023 205th Ave E, Bonney Lake, WA 98391
+    Notes:   ARNP (Nurse Practitioner). Medical aesthetics / neurotoxins, filler, IV therapy.
+             Could not confirm a website/domain — verify before using the guessed address.
+
+26. Stephanie Lyman — Welling Health
+    Email:   (UNVERIFIED)                                   [UNVERIFIED]
+    Guess:   info@wellinghealth.com (domain NOT confirmed)
+    Notes:   Telehealth, metabolic health & hormone optimization. Could not confirm a website
+             or email via search — needs manual lookup (try her TBC profile page:
+             tappsbusinessconnect.com/profiles/stephanie-lyman-welling-health).
+
+============================================================
+FOOD & HOSPITALITY (1)  — not in your local data
+============================================================
+27. Stephanie Jensen — Coffee Vault & Lake Tapps Society (Tapps Coffee LLC)
+    Email:   coffeevault@tappscoffee.com                    [VERIFIED]
+    Alt:     stephanie@tappscoffee.com (suspected personal)
+    Phone:   253-290-8063 (drive-thru) / 253-290-8064 (walk-up)
+    Website: coffeevaultco.com
+    Notes:   coffeevault@tappscoffee.com published on their site. Stephanie Jensen is a
+             listed officer of Tapps Coffee LLC. (Interesting cross-link: Chelsea Scott —
+             member #16 — is also an officer of Tapps Coffee LLC.)
+
+============================================================
+LIFESTYLE & PERSONAL SERVICES (0)
+============================================================
+(No members listed in this category on the live site.)
+
+============================================================
+SUMMARY
+============================================================
+Total members: 27
+  Verified emails:        9  (Bohall, Armas, Quinn, Barquest, Guempel, Campbell, Scott, Jensen, + MaxCare/Insurance general)
+  Likely (typo fix):      1  (Guerrero)
+  Suspected (pattern):   16
+  Unverified:             1  (Lyman)
+
+ITEMS TO DOUBLE-CHECK BEFORE OUTREACH
+  - Gina Humphries: Edward Jones vs. Ameriprise (firm conflict).
+  - Stephanie Lyman (Welling Health): no confirmed domain/email.
+  - Amanda Matthews (Precision and Grace Aesthetics): domain unconfirmed.
+  - Pat Wheeler (Trustworthy Roofing): confirm trustworthy-construction.com is the right domain.
+  - All [SUSPECTED] firstname@ guesses: confirm the company actually uses that format.
