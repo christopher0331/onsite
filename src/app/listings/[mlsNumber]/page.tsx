@@ -11,6 +11,7 @@ import { getCitySlugByName } from "@/lib/service-areas/data";
 import { formatStreetAddress, formatStreetAddressOrUnavailable } from "@/lib/format-address";
 import { formatBathroomCount, formatBathroomDetail } from "@/lib/format-bathrooms";
 import { repliersImageUrl } from "@/lib/repliers-images";
+import ShareListingCard from "@/components/listings/ShareListingCard";
 
 const Footer = dynamic(() => import("@/components/Footer"));
 const Marquee = dynamic(() => import("@/components/Marquee"), { ssr: false });
@@ -901,6 +902,13 @@ export default function ListingDetailPage() {
                       </Link>
                     </div>
                   </div>
+
+                  <ShareListingCard
+                    mlsNumber={listing.mlsNumber}
+                    street={street}
+                    cityLine={[listing.address.city, listing.address.state, listing.address.zip].filter(Boolean).join(", ")}
+                    priceLabel={formatPrice(listing.soldPrice || listing.listPrice)}
+                  />
 
                   {/* Agent card — listing agent(s) + buyer agent(s).
                       For sold listings the Bought With section always shows
