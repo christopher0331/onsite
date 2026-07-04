@@ -6,10 +6,12 @@ export default function FilterPopover({
   label,
   isActive,
   children,
+  variant = "hero",
 }: {
   label: ReactNode;
   isActive: boolean;
   children: ReactNode;
+  variant?: "hero" | "light";
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -32,10 +34,16 @@ export default function FilterPopover({
         onClick={() => setIsOpen(!isOpen)}
         className={`flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-[12px] font-medium tracking-wide whitespace-nowrap transition-all ${
           isOpen
-            ? "border-white bg-white text-charcoal"
+            ? variant === "light"
+              ? "border-charcoal bg-white text-charcoal shadow-sm"
+              : "border-white bg-white text-charcoal"
             : isActive
-            ? "border-[#3daf3d] bg-[#3daf3d]/20 text-[#3daf3d]"
-            : "border-white/20 bg-white/5 text-white hover:border-white/40 hover:bg-white/10"
+              ? variant === "light"
+                ? "border-[#3daf3d] bg-[#3daf3d]/10 text-[#3daf3d]"
+                : "border-[#3daf3d] bg-[#3daf3d]/20 text-[#3daf3d]"
+              : variant === "light"
+                ? "border-charcoal/20 bg-white text-charcoal hover:border-charcoal/35 hover:bg-charcoal/5"
+                : "border-white/20 bg-white/5 text-white hover:border-white/40 hover:bg-white/10"
         }`}
       >
         {label}

@@ -10,9 +10,7 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import ListingCard from "@/components/ListingCard";
 import AiSearchPanel from "@/components/AiSearchPanel";
-import FilterPopover from "@/components/FilterPopover";
-import Modal from "@/components/Modal";
-import LocationSearchInput from "@/components/LocationSearchInput";
+import ListingsFilterToolbar from "@/components/listings/ListingsFilterToolbar";
 import type { MapViewport, MapFocus } from "@/components/ListingsMap";
 import { listingInBounds } from "@/lib/listings-api-params";
 import { getBathroomCount } from "@/lib/format-bathrooms";
@@ -73,44 +71,6 @@ type ApiResponse = {
   listings: Listing[];
   statistics?: { listPrice: { min: number; max: number } };
 };
-
-const STATUS_FILTERS = [
-  { label: "All", value: "All" },
-  { label: "Active", value: "A" },
-  { label: "Pending", value: "P" },
-  { label: "Sold", value: "U" },
-];
-
-const PROPERTY_TYPE_OPTIONS = [
-  { label: "Any Type", value: "" },
-  { label: "Residential", value: "Residential" },
-  { label: "Condominium", value: "Condominium" },
-  { label: "Manufactured", value: "Manufactured" },
-  { label: "Land", value: "Land" },
-  { label: "Multi-Family", value: "Multi-Family" },
-];
-
-const SORT_OPTIONS = [
-  { label: "Newest First", value: "createdOnDesc" },
-  { label: "Recently Updated", value: "updatedOnDesc" },
-  { label: "Price: High to Low", value: "listPriceDesc" },
-  { label: "Price: Low to High", value: "listPriceAsc" },
-];
-
-const HOME_TYPE_OPTIONS = [
-  { label: "House", value: "House" },
-  { label: "Townhouse", value: "Townhouse" },
-  { label: "Condo", value: "Condo" },
-  { label: "Land", value: "Land" },
-  { label: "Multi-family", value: "Multi-family" },
-  { label: "Mobile", value: "Mobile" },
-  { label: "Manufactured On Land", value: "Manufactured On Land" },
-  { label: "Rental", value: "Rental" },
-  { label: "Commercial / Industrial", value: "Commercial / Industrial" },
-  { label: "Boat Slip", value: "Boat Slip" },
-  { label: "Business Opportunity", value: "Business Opportunity" },
-  { label: "Other", value: "Other" },
-];
 
 export default function ListingsPage() {
   const router = useRouter();
@@ -550,6 +510,83 @@ export default function ListingsPage() {
     };
   }, [filtersAppliedAt, page, viewMode, pendingApplyFeedback]);
 
+  function clearAllFilters() {
+    setCity("");
+    setMlsInput("");
+    setMlsSearch("");
+    setStateFilter("WA");
+    setPropertyType([]);
+    setMinBeds("");
+    setMaxBeds("");
+    setMinBaths("");
+    setMaxBaths("");
+    setMinPrice("");
+    setMaxPrice("");
+    setMinSqft("");
+    setMaxSqft("");
+    setMinYearBuilt("");
+    setMaxYearBuilt("");
+    setMinLotSize("");
+    setMaxLotSize("");
+    setGarageSpots("Any");
+    setHomeFeatures([]);
+    setSortBy("createdOnDesc");
+    setPage(1);
+    setFiltersAppliedAt((v) => v + 1);
+  }
+
+  const filterToolbarProps = {
+    city,
+    setCity,
+    status,
+    setStatus,
+    propertyType,
+    setPropertyType,
+    minBeds,
+    setMinBeds,
+    maxBeds,
+    setMaxBeds,
+    minBaths,
+    setMinBaths,
+    maxBaths,
+    setMaxBaths,
+    minPrice,
+    setMinPrice,
+    maxPrice,
+    setMaxPrice,
+    minSqft,
+    setMinSqft,
+    maxSqft,
+    setMaxSqft,
+    minYearBuilt,
+    setMinYearBuilt,
+    maxYearBuilt,
+    setMaxYearBuilt,
+    minLotSize,
+    setMinLotSize,
+    maxLotSize,
+    setMaxLotSize,
+    garageSpots,
+    setGarageSpots,
+    homeFeatures,
+    setHomeFeatures,
+    sortBy,
+    setSortBy,
+    mlsInput,
+    setMlsInput,
+    mlsSearch,
+    stateFilter,
+    setStateFilter,
+    isMoreFiltersOpen,
+    setIsMoreFiltersOpen,
+    handleMlsSubmit,
+    clearMlsSearch,
+    applyRegularFilters,
+    handleSelectAddress,
+    handleSelectCity,
+    onClearAll: clearAllFilters,
+  };
+
   return (
     <>
       <Header />
@@ -559,7 +596,13 @@ export default function ListingsPage() {
             address-autocomplete dropdown below the search bar isn't clipped
             vertically by the hero's bottom edge — only horizontal bleed from
             the ambient glow needs containing. */}
-        <section className="relative w-full max-w-full overflow-x-hidden bg-[#13211a] pt-28 pb-12 sm:pt-44 sm:pb-24 lg:pt-52 lg:pb-32">
+        <section
+          className={`relative w-full max-w-full overflow-x-hidden bg-[#13211a] ${
+            viewMode === "map"
+              ? "pt-28 pb-8 sm:pt-36 sm:pb-10 lg:pt-40 lg:pb-12"
+              : "pt-28 pb-12 sm:pt-44 sm:pb-24 lg:pt-52 lg:pb-32"
+          }`}
+        >
           {/* Brand-green ambient glow so the hero isn't flat black/white */}
           <div
             aria-hidden
@@ -599,404 +642,11 @@ export default function ListingsPage() {
               </div>
             </div>
 
-            {/* Filters */}
-            <div className="relative z-40 flex flex-col gap-4">
-              {/* Mobile: stacked search inputs */}
-              <div className="flex w-full flex-col gap-2.5 sm:hidden">
-                <LocationSearchInput
-                  value={city}
-                  onValueChange={setCity}
-                  onSelectAddress={handleSelectAddress}
-                  onSelectCity={handleSelectCity}
-                  onEnterNoSelection={() => applyRegularFilters(false)}
-                  state={stateFilter}
-                  placeholder="Address, city, or ZIP"
-                  listboxId="listings-search-mobile"
-                  inputClassName="w-full rounded-full border border-white/20 bg-white/5 px-5 py-3 text-[14px] text-white placeholder:text-white/50 focus:border-white focus:bg-white focus:text-charcoal focus:placeholder:text-charcoal/50 focus:outline-none"
-                />
-                <form onSubmit={handleMlsSubmit} className="relative w-full">
-                  <input
-                    type="text"
-                    value={mlsInput}
-                    onChange={(e) => setMlsInput(e.target.value)}
-                    placeholder="MLS #"
-                    className="w-full rounded-full border border-white/20 bg-white/5 px-5 py-3 pr-16 text-[14px] text-white placeholder:text-white/50 focus:border-white focus:bg-white focus:text-charcoal focus:placeholder:text-charcoal/50 focus:outline-none"
-                  />
-                  {mlsInput.trim() !== mlsSearch && mlsInput.trim().length > 0 ? (
-                    <button
-                      type="submit"
-                      className="absolute right-1.5 top-1.5 bottom-1.5 rounded-full bg-[#3daf3d] px-4 text-[10px] font-bold uppercase tracking-[0.1em] text-white hover:bg-[#3daf3d]/90 transition"
-                    >
-                      Go
-                    </button>
-                  ) : mlsSearch ? (
-                    <button
-                      type="button"
-                      onClick={clearMlsSearch}
-                      className="absolute right-3 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full text-white/50 hover:bg-white/10 hover:text-white"
-                    >
-                      <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2}>
-                        <path d="M1 1l10 10M11 1L1 11" strokeLinecap="round" />
-                      </svg>
-                    </button>
-                  ) : null}
-                </form>
-              </div>
+            {viewMode !== "map" && (
+              <ListingsFilterToolbar variant="hero" {...filterToolbarProps} />
+            )}
 
-              <div className="w-full overflow-x-auto overscroll-x-contain pb-1 [scrollbar-width:none] sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
-              <div className="flex w-max max-w-none items-center gap-2 sm:w-auto sm:flex-wrap">
-                      {/* Tablet+: combined search pill */}
-                      <div className="relative hidden items-center rounded-full border border-white/20 bg-white/5 transition-all focus-within:border-white focus-within:bg-white group sm:flex">
-                        <LocationSearchInput
-                          value={city}
-                          onValueChange={setCity}
-                          onSelectAddress={handleSelectAddress}
-                          onSelectCity={handleSelectCity}
-                          onEnterNoSelection={() => applyRegularFilters(false)}
-                          state={stateFilter}
-                          placeholder="Address, City, Zip"
-                          listboxId="listings-search-desktop"
-                          wrapperClassName="relative w-48 sm:w-64"
-                          dropdownMinWidthPx={380}
-                          inputClassName="w-full bg-transparent px-5 py-2.5 text-[13px] text-white placeholder:text-white/50 focus:text-charcoal focus:placeholder:text-charcoal/50 group-focus-within:text-charcoal group-focus-within:placeholder:text-charcoal/50 focus:outline-none"
-                        />
-                        <div className="h-6 w-px bg-white/20 group-focus-within:bg-charcoal/10" />
-                        <form onSubmit={handleMlsSubmit} className="relative m-0 p-0">
-                          <input
-                            type="text"
-                            value={mlsInput}
-                            onChange={(e) => setMlsInput(e.target.value)}
-                            placeholder="MLS #"
-                            className="w-32 bg-transparent px-5 py-2.5 pr-12 text-[13px] text-white placeholder:text-white/50 focus:text-charcoal focus:placeholder:text-charcoal/50 group-focus-within:text-charcoal group-focus-within:placeholder:text-charcoal/50 focus:outline-none"
-                          />
-                          {mlsInput.trim() !== mlsSearch && mlsInput.trim().length > 0 ? (
-                            <button
-                              type="submit"
-                              className="absolute right-1 top-1 bottom-1 rounded-full bg-[#3daf3d] px-3 text-[10px] font-bold uppercase tracking-[0.1em] text-white hover:bg-[#3daf3d]/90 transition"
-                            >
-                              Go
-                            </button>
-                          ) : mlsSearch ? (
-                            <button
-                              type="button"
-                              onClick={clearMlsSearch}
-                              className="absolute right-2 top-1/2 flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full text-white/50 transition hover:bg-white/10 hover:text-white group-focus-within:text-charcoal/40 group-focus-within:hover:bg-charcoal/5 group-focus-within:hover:text-charcoal"
-                            >
-                              <svg className="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={2}>
-                                <path d="M1 1l10 10M11 1L1 11" strokeLinecap="round" />
-                              </svg>
-                            </button>
-                          ) : null}
-                        </form>
-                      </div>
-                      {/* Status Popover */}
-                      <FilterPopover label={status === "A" ? "For Sale" : status === "P" ? "Pending" : status === "U" ? "Sold" : "All Status"} isActive={status !== "A"}>
-                        <div className="flex flex-col gap-2">
-                          {STATUS_FILTERS.map((f) => (
-                            <label key={f.value} className="flex items-center gap-3 cursor-pointer p-2 hover:bg-charcoal/5 rounded-lg">
-                              <input
-                                type="radio"
-                                name="status"
-                                value={f.value}
-                                checked={status === f.value}
-                                onChange={() => setStatus(f.value)}
-                                className="w-4 h-4 text-[#3daf3d] border-charcoal/20 focus:ring-[#3daf3d] cursor-pointer"
-                              />
-                              <span className="text-[14px] text-charcoal">{f.label}</span>
-                            </label>
-                          ))}
-                        </div>
-                      </FilterPopover>
-              
-                      {/* Price Popover */}
-                      <FilterPopover label={minPrice || maxPrice ? `${minPrice ? '$'+(Number(minPrice)/1000)+'k' : '$0'} - ${maxPrice ? '$'+(Number(maxPrice)/1000)+'k' : 'Any'}` : "Price"} isActive={!!minPrice || !!maxPrice}>
-                        <div className="flex items-center gap-4 p-2">
-                          <div className="flex flex-col gap-1">
-                            <label className="text-[11px] uppercase tracking-wider text-charcoal/50">Minimum</label>
-                            <select value={minPrice} onChange={(e) => setMinPrice(e.target.value)} className="w-32 border border-charcoal/20 rounded-lg p-2 text-[14px] focus:outline-none focus:border-charcoal">
-                              <option value="">No Min</option>
-                              <option value="300000">$300k</option>
-                              <option value="500000">$500k</option>
-                              <option value="750000">$750k</option>
-                              <option value="1000000">$1M</option>
-                              <option value="1500000">$1.5M</option>
-                            </select>
-                          </div>
-                          <span className="mt-5 text-charcoal/30">-</span>
-                          <div className="flex flex-col gap-1">
-                            <label className="text-[11px] uppercase tracking-wider text-charcoal/50">Maximum</label>
-                            <select value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} className="w-32 border border-charcoal/20 rounded-lg p-2 text-[14px] focus:outline-none focus:border-charcoal">
-                              <option value="">No Max</option>
-                              <option value="500000">$500k</option>
-                              <option value="750000">$750k</option>
-                              <option value="1000000">$1M</option>
-                              <option value="1500000">$1.5M</option>
-                              <option value="2500000">$2.5M</option>
-                            </select>
-                          </div>
-                        </div>
-                      </FilterPopover>
-              
-                      {/* Beds & Baths Popover */}
-                      <FilterPopover label={minBeds || minBaths ? `${minBeds ? minBeds+'+ Beds' : 'Any Beds'}, ${minBaths ? minBaths+'+ Baths' : 'Any Baths'}` : "Beds & Baths"} isActive={!!minBeds || !!minBaths}>
-                        <div className="flex flex-col gap-6 p-2 min-w-[300px]">
-                          <div>
-                            <p className="text-[14px] font-medium text-charcoal mb-3">Bedrooms</p>
-                            <div className="flex rounded-lg border border-charcoal/20 overflow-hidden">
-                              {["", "1", "2", "3", "4", "5"].map((val, idx) => (
-                                <button
-                                  key={val}
-                                  onClick={() => setMinBeds(val)}
-                                  className={`flex-1 py-2 text-[14px] text-center border-r border-charcoal/20 last:border-r-0 transition ${
-                                    minBeds === val ? "bg-[#3daf3d]/10 text-[#3daf3d] font-bold" : "bg-white text-charcoal hover:bg-charcoal/5"
-                                  }`}
-                                >
-                                  {val === "" ? "Any" : `${val}+`}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                          <div>
-                            <p className="text-[14px] font-medium text-charcoal mb-3">Bathrooms</p>
-                            <div className="flex rounded-lg border border-charcoal/20 overflow-hidden">
-                              {["", "1", "2", "3", "4"].map((val, idx) => (
-                                <button
-                                  key={val}
-                                  onClick={() => setMinBaths(val)}
-                                  className={`flex-1 py-2 text-[14px] text-center border-r border-charcoal/20 last:border-r-0 transition ${
-                                    minBaths === val ? "bg-[#3daf3d]/10 text-[#3daf3d] font-bold" : "bg-white text-charcoal hover:bg-charcoal/5"
-                                  }`}
-                                >
-                                  {val === "" ? "Any" : `${val}+`}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </FilterPopover>
-              
-                      {/* Home Type Popover */}
-                      <FilterPopover label={propertyType.length > 0 ? `${propertyType.length} Selected` : "Home Type"} isActive={propertyType.length > 0}>
-                        <div className="grid grid-cols-2 gap-3 p-2 min-w-[320px]">
-                          {HOME_TYPE_OPTIONS.map((opt) => (
-                            <label key={opt.value} className={`flex flex-col items-center justify-center gap-2 p-4 rounded-xl border cursor-pointer transition ${
-                              propertyType.includes(opt.value) ? "border-[#3daf3d] bg-[#3daf3d]/5 text-[#3daf3d]" : "border-charcoal/10 bg-white hover:border-charcoal/30 text-charcoal"
-                            }`}>
-                              <input
-                                type="checkbox"
-                                className="sr-only"
-                                checked={propertyType.includes(opt.value)}
-                                onChange={(e) => {
-                                  if (e.target.checked) setPropertyType([...propertyType, opt.value]);
-                                  else setPropertyType(propertyType.filter((t) => t !== opt.value));
-                                }}
-                              />
-                              <span className="text-[14px] font-medium currentColor">{opt.label}</span>
-                            </label>
-                          ))}
-                        </div>
-                      </FilterPopover>
-              
-                      {/* All Filters Button */}
-                      <button
-                        onClick={() => setIsMoreFiltersOpen(true)}
-                        className={`flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-[12px] font-medium tracking-wide whitespace-nowrap transition-all ${
-                          isMoreFiltersOpen
-                            ? "border-[#3daf3d] bg-[#3daf3d]/20 text-[#3daf3d]"
-                            : "border-white/20 bg-white/5 text-white hover:border-white/40 hover:bg-white/10"
-                        }`}
-                      >
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-                        </svg>
-                        All Filters
-                      </button>
-                      
-                      {/* State dropdown, small */}
-                      <select
-                        value={stateFilter}
-                        onChange={(e) => setStateFilter(e.target.value)}
-                        className="shrink-0 rounded-full border border-white/20 bg-white/5 px-4 py-2.5 text-[12px] font-medium text-white transition-all hover:border-white/40 hover:bg-white/10 focus:outline-none appearance-none"
-                      >
-                        <option value="" className="text-charcoal bg-white">All States</option>
-                        <option value="WA" className="text-charcoal bg-white">WA</option>
-                        <option value="OR" className="text-charcoal bg-white">OR</option>
-                        <option value="CA" className="text-charcoal bg-white">CA</option>
-                      </select>
-
-                      <button
-                        type="button"
-                        onClick={() => applyRegularFilters(false)}
-                        className="shrink-0 rounded-full bg-[#3daf3d] px-5 py-2.5 text-[12px] font-bold uppercase tracking-[0.18em] text-white transition hover:bg-[#3daf3d]/90"
-                      >
-                        Go
-                      </button>
-                    </div>
-              </div>
-                    <Modal
-                      isOpen={isMoreFiltersOpen}
-                      onClose={() => setIsMoreFiltersOpen(false)}
-                      title="All Filters"
-                      footer={
-                        <div className="flex justify-between items-center w-full">
-                          <button
-                            onClick={() => {
-                              setCity(""); setMlsInput(""); setMlsSearch(""); setStateFilter("WA");
-                              setPropertyType([]); setMinBeds(""); setMaxBeds(""); setMinBaths(""); setMaxBaths("");
-                              setMinPrice(""); setMaxPrice(""); setMinSqft(""); setMaxSqft(""); setMinYearBuilt("");
-                              setMaxYearBuilt(""); setMinLotSize(""); setMaxLotSize(""); setGarageSpots("Any");
-                              setHomeFeatures([]); setSortBy("createdOnDesc");
-                              setPage(1);
-                              setFiltersAppliedAt((v) => v + 1);
-                            }}
-                            className="text-[14px] text-charcoal/60 hover:text-charcoal font-medium underline underline-offset-4"
-                          >
-                            Clear All
-                          </button>
-                          <button
-                            onClick={() => applyRegularFilters(true)}
-                            className="rounded-full bg-[#3daf3d] px-8 py-3 text-[14px] font-bold text-white hover:bg-[#3daf3d]/90 transition"
-                          >
-                            Apply Filters
-                          </button>
-                        </div>
-                      }
-                    >
-                      <div className="flex flex-col gap-10">
-                        {/* Home Type */}
-                        <section>
-                          <h3 className="text-[18px] font-bold text-charcoal mb-5">Home type</h3>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                            {HOME_TYPE_OPTIONS.map((opt) => (
-                              <label
-                                key={opt.value}
-                                className={`flex min-h-[64px] items-center justify-center rounded-xl border px-3 text-center text-[14px] font-medium cursor-pointer transition ${
-                                  propertyType.includes(opt.value)
-                                    ? "border-[#3daf3d] bg-[#3daf3d]/10 text-[#3daf3d]"
-                                    : "border-charcoal/15 bg-white text-charcoal hover:border-charcoal/35"
-                                }`}
-                              >
-                                <input
-                                  type="checkbox"
-                                  className="sr-only"
-                                  checked={propertyType.includes(opt.value)}
-                                  onChange={(e) => {
-                                    if (e.target.checked) setPropertyType([...propertyType, opt.value]);
-                                    else setPropertyType(propertyType.filter((t) => t !== opt.value));
-                                  }}
-                                />
-                                {opt.label}
-                              </label>
-                            ))}
-                          </div>
-                        </section>
-
-                        <hr className="border-charcoal/10" />
-
-                        {/* Property Details */}
-                        <section>
-                          <h3 className="text-[18px] font-bold text-charcoal mb-5">Property details</h3>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div className="flex flex-col gap-2">
-                              <label className="text-[13px] font-medium text-charcoal">Square feet</label>
-                              <div className="flex items-center gap-2">
-                                <input type="number" min={1} placeholder="No min" value={minSqft} onChange={e => setMinSqft(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
-                                <span className="text-charcoal/30">-</span>
-                                <input type="number" min={1} placeholder="No max" value={maxSqft} onChange={e => setMaxSqft(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
-                              </div>
-                            </div>
-                            <div className="flex flex-col gap-2">
-                              <label className="text-[13px] font-medium text-charcoal">Lot size (sqft)</label>
-                              <div className="flex items-center gap-2">
-                                <input type="number" min={1} placeholder="No min" value={minLotSize} onChange={e => setMinLotSize(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
-                                <span className="text-charcoal/30">-</span>
-                                <input type="number" min={1} placeholder="No max" value={maxLotSize} onChange={e => setMaxLotSize(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
-                              </div>
-                            </div>
-                            <div className="flex flex-col gap-2">
-                              <label className="text-[13px] font-medium text-charcoal">Year built</label>
-                              <div className="flex items-center gap-2">
-                                <input type="number" min={1800} max={2100} placeholder="No min" value={minYearBuilt} onChange={e => setMinYearBuilt(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
-                                <span className="text-charcoal/30">-</span>
-                                <input type="number" min={1800} max={2100} placeholder="No max" value={maxYearBuilt} onChange={e => setMaxYearBuilt(e.target.value)} className="w-full border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal" />
-                              </div>
-                            </div>
-                          </div>
-                        </section>
-              
-                        <hr className="border-charcoal/10" />
-              
-                        {/* Home Features */}
-                        <section>
-                          <h3 className="text-[18px] font-bold text-charcoal mb-5">Home features</h3>
-                          <div className="mb-6">
-                            <label className="text-[13px] font-medium text-charcoal block mb-2">Garage spots</label>
-                            <div className="inline-flex rounded-lg border border-charcoal/20 overflow-hidden">
-                              {["Any", "1+", "2+", "3+", "4+", "5+"].map((val) => (
-                                <button
-                                  key={val}
-                                  onClick={() => setGarageSpots(val)}
-                                  className={`px-4 py-2 text-[14px] text-center border-r border-charcoal/20 last:border-r-0 transition ${
-                                    garageSpots === val ? "bg-[#3daf3d]/10 text-[#3daf3d] font-bold" : "bg-white text-charcoal hover:bg-charcoal/5"
-                                  }`}
-                                >
-                                  {val}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-              
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {[
-                              "Air conditioning", "Waterfront", "Has a view", "Fireplace", "Fixer / opportunity",
-                              "ADU / MIL / multigen", "Elevator", "Basement", "Washer/dryer hookup", "Pets allowed",
-                              "Primary on main", "RV parking / storage", "Green home", "Accessible home"
-                            ].map(feat => (
-                              <label key={feat} className="flex items-center gap-3 cursor-pointer group">
-                                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
-                                  homeFeatures.includes(feat) ? "bg-[#3daf3d] border-[#3daf3d] text-white" : "border-charcoal/30 group-hover:border-[#3daf3d]"
-                                }`}>
-                                  {homeFeatures.includes(feat) && (
-                                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                    </svg>
-                                  )}
-                                </div>
-                                <input
-                                  type="checkbox"
-                                  className="sr-only"
-                                  checked={homeFeatures.includes(feat)}
-                                  onChange={(e) => {
-                                    if (e.target.checked) setHomeFeatures([...homeFeatures, feat]);
-                                    else setHomeFeatures(homeFeatures.filter(f => f !== feat));
-                                  }}
-                                />
-                                <span className="text-[15px] text-charcoal">{feat}</span>
-                              </label>
-                            ))}
-                          </div>
-                        </section>
-              
-                        <hr className="border-charcoal/10" />
-              
-                        {/* Sort */}
-                        <section>
-                          <h3 className="text-[18px] font-bold text-charcoal mb-5">Sort By</h3>
-                          <select
-                            value={sortBy}
-                            onChange={(e) => setSortBy(e.target.value)}
-                            className="w-full max-w-xs border border-charcoal/20 rounded-lg p-2.5 text-[14px] focus:outline-none focus:border-charcoal bg-white"
-                          >
-                            {SORT_OPTIONS.map((opt) => (
-                              <option key={opt.value} value={opt.value}>{opt.label}</option>
-                            ))}
-                          </select>
-                        </section>
-                      </div>
-                    </Modal>
-            </div>
-
-            {applyFeedback && (
+            {applyFeedback && viewMode !== "map" && (
               <p className="mt-4 text-[12px] uppercase tracking-[0.18em] text-[#3daf3d]">
                 {applyFeedback}
               </p>
@@ -1017,7 +667,12 @@ export default function ListingsPage() {
                   List
                 </button>
                 <button
-                  onClick={() => setViewMode("map")}
+                  onClick={() => {
+                    setViewMode("map");
+                    setTimeout(() => {
+                      resultsSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }, 60);
+                  }}
                   className={`rounded-full px-5 py-1.5 text-[11px] uppercase tracking-[0.2em] transition ${
                     viewMode === "map"
                       ? "bg-[#3daf3d] text-white"
@@ -1031,12 +686,19 @@ export default function ListingsPage() {
           </div>
         </section>
 
-        {/* AI natural-language search */}
-        <AiSearchPanel />
+        {viewMode !== "map" && <AiSearchPanel />}
 
-        {/* Grid */}
-        <section ref={resultsSectionRef} className="bg-[#f2ede6] py-12 sm:py-20 lg:py-28">
+        {/* Grid / Map */}
+        <section
+          ref={resultsSectionRef}
+          className={`bg-[#f2ede6] ${viewMode === "map" ? "py-4 sm:py-6" : "py-12 sm:py-20 lg:py-28"}`}
+        >
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
+            {viewMode === "map" && (
+              <div className="sticky top-16 z-40 -mx-6 mb-4 border-b border-charcoal/10 bg-[#f2ede6]/95 px-6 py-4 backdrop-blur-sm sm:top-20 lg:top-24 lg:-mx-12 lg:px-12">
+                <ListingsFilterToolbar variant="map" {...filterToolbarProps} />
+              </div>
+            )}
             {viewMode === "map" ? (
               <ListingsMap
                 listings={mapListings}
