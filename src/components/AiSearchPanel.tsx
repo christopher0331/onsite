@@ -51,16 +51,26 @@ export default function AiSearchPanel() {
     <section className="border-b border-charcoal/10 bg-gradient-to-b from-white to-[#f7f3ed]">
       <div className="mx-auto max-w-[1440px] px-6 py-10 lg:px-12 lg:py-20">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-charcoal/55">
-            <SparkleIcon className="h-3.5 w-3.5" />
-            AI-Powered Search
-          </p>
+          <div className="mb-3 flex flex-wrap items-center justify-center gap-2">
+            <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-charcoal/55">
+              <SparkleIcon className="h-3.5 w-3.5" />
+              AI-Powered Search
+            </p>
+            <span className="rounded-full border border-amber-300/80 bg-amber-50 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-amber-900">
+              Beta Testing
+            </span>
+          </div>
           <h2 className="font-serif text-[clamp(1.9rem,3.6vw,3rem)] font-light leading-tight text-charcoal">
             Describe your dream home
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-charcoal/70">
             Skip the filters — just tell us what you want in plain words and we&apos;ll find
             matching homes across the MLS.
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl rounded-2xl border border-amber-200/80 bg-amber-50/70 px-5 py-3 text-left text-[13px] leading-relaxed text-amber-950/85 sm:text-center">
+            <span className="font-medium">Beta disclaimer:</span> This feature is still being tuned and may miss homes,
+            return weak matches, or misunderstand your request. For the most reliable results, use the filters above
+            or switch to map view.
           </p>
 
           <form onSubmit={handleSubmit} className="mt-7">
