@@ -190,10 +190,6 @@ export function CityServiceSchema({
         addressRegion: city.stateCode,
         addressCountry: "US",
       },
-      containsPlace: city.zipCodes.map((zip) => ({
-        "@type": "PostalCodeArea",
-        postalCode: zip,
-      })),
     },
     url: pageUrl,
   };
@@ -252,12 +248,17 @@ export function NeighborhoodServiceSchema({
       telephone: ORG_PHONE,
       address: ORG_ADDRESS,
     },
-    areaServed: neighborhood.zipCodes.map((zip) => ({
-      "@type": "PostalCodeArea",
-      postalCode: zip,
-      addressRegion: cityStateCode,
-      addressCountry: "US",
-    })),
+    areaServed: {
+      "@type": "Place",
+      name: `${neighborhood.name}, ${cityName}`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: cityName,
+        addressRegion: cityStateCode,
+        addressCountry: "US",
+        ...(neighborhood.zipCodes[0] ? { postalCode: neighborhood.zipCodes[0] } : {}),
+      },
+    },
     url: pageUrl,
     name: `Real Estate in ${neighborhood.name}, ${cityName}`,
   };
