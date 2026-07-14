@@ -24,6 +24,8 @@ type TeamMember = {
   bioFull: React.ReactNode;
   objectPosition?: string;
   socials?: SocialLinks;
+  /** Optional highlight next to contact info (e.g. language ability). */
+  badge?: string;
 };
 
 // Display order — every card uses the same left-to-right ordering even
@@ -216,6 +218,7 @@ const TEAM: TeamMember[] = [
     phone: "2539871289",
     phoneDisplay: "(253) 987-1289",
     email: "deisy@onsiteregroup.com",
+    badge: "Spanish Speaking",
     socials: {
       facebook: "https://www.facebook.com/profile.php?id=61570958523132",
       instagram: "https://www.instagram.com/deisyrealestateagent",
@@ -355,9 +358,16 @@ function MemberCard({
         <p className="text-[11px] uppercase tracking-[0.3em] text-charcoal/50 mb-2">
           {member.role}
         </p>
-        <h3 className="font-serif text-[1.6rem] font-light text-charcoal leading-tight mb-4">
-          {member.name}
-        </h3>
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <h3 className="font-serif text-[1.6rem] font-light text-charcoal leading-tight">
+            {member.name}
+          </h3>
+          {member.badge && (
+            <span className="rounded-full border border-[#3daf3d]/35 bg-[#3daf3d]/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-[#2d8a2d]">
+              {member.badge}
+            </span>
+          )}
+        </div>
 
         {/* Truncated bio */}
         <p className="text-[14.5px] leading-7 text-charcoal/70 line-clamp-3 mb-5">
@@ -458,9 +468,16 @@ function Modal({
             <p className="text-[11px] uppercase tracking-[0.3em] text-charcoal/50 mb-1">
               {member.role}
             </p>
-            <h2 className="font-serif text-[1.9rem] font-light text-charcoal leading-tight mb-1">
-              {member.name}
-            </h2>
+            <div className="mb-1 flex flex-wrap items-center gap-2">
+              <h2 className="font-serif text-[1.9rem] font-light text-charcoal leading-tight">
+                {member.name}
+              </h2>
+              {member.badge && (
+                <span className="rounded-full border border-[#3daf3d]/35 bg-[#3daf3d]/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-[#2d8a2d]">
+                  {member.badge}
+                </span>
+              )}
+            </div>
             <div className="flex flex-wrap gap-x-5 gap-y-1 mb-4">
               <a href={`tel:${member.phone}`} className="text-[13px] text-charcoal/60 hover:text-charcoal transition-colors">
                 {member.phoneDisplay}

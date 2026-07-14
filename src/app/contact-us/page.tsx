@@ -28,6 +28,7 @@ const contactMethods = [
     phoneHref: "tel:253-987-1289",
     email: "deisy@onsiteregroup.com",
     emailHref: "mailto:deisy@onsiteregroup.com",
+    badge: "Spanish Speaking",
   },
 ];
 
@@ -122,7 +123,14 @@ export default function ContactUsPage() {
                     key={person.label}
                     className="rounded-3xl border border-charcoal/[0.08] bg-warm-gray/50 p-6 shadow-[0_14px_40px_rgba(0,0,0,0.06)]"
                   >
-                    <p className="text-[11px] uppercase tracking-[0.3em] text-mid-gray mb-3">{person.label}</p>
+                    <div className="mb-3 flex flex-wrap items-center gap-2">
+                      <p className="text-[11px] uppercase tracking-[0.3em] text-mid-gray">{person.label}</p>
+                      {"badge" in person && person.badge && (
+                        <span className="rounded-full border border-[#3daf3d]/35 bg-[#3daf3d]/10 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-[#2d8a2d]">
+                          {person.badge}
+                        </span>
+                      )}
+                    </div>
                     <div className="flex flex-col gap-2">
                       <a
                         href={person.phoneHref}
