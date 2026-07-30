@@ -1,0 +1,24 @@
+import type { ServiceAreaArticle } from "./types";
+
+export const puyallupArticle: ServiceAreaArticle = {
+  slug: "puyallup",
+  title: "Buying, Selling, and Living in Puyallup, WA",
+  excerpt:
+    "What buying, selling, and living in Puyallup really involves — downtown and South Hill pockets, Puyallup School District, permits and utilities, Sound Transit access, and practical Pierce County due diligence.",
+  updatedAt: "2026-07-29",
+  bodyMarkdown: `Puyallup is one of Pierce County's broadest housing markets — historic downtown streets, the South Hill bench, and named pockets like Clark's Creek, Rodesco, Shawnee Ridge, Gem Heights, and Summit across ZIPs 98371–98375. Buyers comparing [Puyallup homes for sale](/listings?city=Puyallup&state=WA) often weigh walkable downtown living against South Hill space, then check nearby options in [Sumner](/service-areas/sumner), [Bonney Lake](/service-areas/bonney-lake), and [Edgewood](/service-areas/edgewood).
+
+Downtown Puyallup offers older homes, local businesses, and closer ties to the valley floor and transit. Parts of the core sit in a historic overlay where exterior changes and signage can require design review — sellers should disclose overlay status early and confirm past exterior work was documented. South Hill and related bench neighborhoods tend to draw move-up buyers looking for different lot sizes, newer construction, and retail access along Meridian. For a hyper-local look at the largest spoke, see our [South Hill service area page](/service-areas/puyallup/south-hill).
+
+Schools are central for many Puyallup moves. The [Puyallup School District](https://www.puyallupsd.org/) is one of Washington's larger districts, with attendance areas that can shift by address across Rogers, Emerald Ridge, and Puyallup High School corridors. Verify the exact property assignment rather than assuming a neighborhood name tells the full story — especially when comparing Summit, Gem Heights, and South Hill streets that sit near boundary lines.
+
+Permits and utilities are a practical ownership layer. [City of Puyallup Development & Permitting Services](https://www.puyallupwa.gov/2438/Development-Permitting-Services) handles single-family permits, ADU review, and related land-use questions; [Puyallup Public Works](https://www.puyallupwa.gov/149/Public-Works) covers municipal water, side-sewer, and stormwater. Buyers should confirm sheds, decks, fences, and additions were permitted. The city allows attached and detached ADUs on many residential parcels — a detail that can widen the buyer pool when marketed accurately. Power and gas across much of Puyallup come from [Puget Sound Energy](https://www.pse.com/).
+
+Some lots near Clark's Creek and designated critical areas trigger extra review for riparian buffers or aquifer recharge. Flagging those on the title and planning timeline early avoids surprise delays. Homes on septic in Pierce County need a separate inspection path; our [Pierce County septic systems guide](/blog/pierce-county-septic-systems-what-homebuyers-and-sellers-must-know-in-todays-market) covers O&M and Report of System Status expectations, with the [Tacoma–Pierce County Health Department](https://www.tpchd.org/) as the primary public health source.
+
+Commute patterns shape how buyers rank Puyallup pockets. Many residents use SR-512, Meridian, and nearby arterials toward Tacoma, Joint Base Lewis-McChord, and other South Sound job centers, while [Sound Transit](https://www.soundtransit.org/) Sounder and regional bus connections support Tacoma and Seattle trips. Test-driving peak-hour routes from South Hill versus downtown is as useful as counting bedrooms.
+
+Everyday civic context comes from the [City of Puyallup](https://www.puyallupwa.gov/), the [Puyallup Sumner Chamber of Commerce](https://www.puyallupsumnerchamber.com/), and the [Pierce County Library System](https://mypcls.org/). For taxes, assessed values, and parcel history, use the [Pierce County Assessor-Treasurer](https://www.piercecountywa.gov/91/Assessor---Treasurer). Active and sold listing context typically runs through [NWMLS](https://www.nwmls.com/) — useful for comparing downtown, South Hill, and named subdivisions on a like-for-like basis rather than a single citywide average.
+
+Living in Puyallup is about matching lifestyle to a specific pocket: downtown walkability and historic-street character, South Hill convenience and space, or quieter named neighborhoods in between. Whether you are selling a long-held Gem Heights home or buying near Clark's Creek, André and Cindie Bohall at OnSite Real Estate Group focus on micro-neighborhood pricing, permits, schools, and commute realities so decisions match everyday life. When you are ready, browse [Puyallup homes for sale](/listings?city=Puyallup&state=WA) or [start a conversation with our team](/contact-us?area=Puyallup&topic=selling).`,
+};
