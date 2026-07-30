@@ -18,6 +18,7 @@ import SuburbanRegulations from "@/components/service-areas/SuburbanRegulations"
 import UrbanLogistics from "@/components/service-areas/UrbanLogistics";
 import MicroClimate from "@/components/service-areas/MicroClimate";
 import ServiceAreaCTA from "@/components/service-areas/ServiceAreaCTA";
+import ServiceAreaArticle from "@/components/service-areas/ServiceAreaArticle";
 import {
   AreaListingsItemListSchema,
   BreadcrumbSchema,
@@ -34,6 +35,7 @@ import {
   getCityBySlug,
   getNeighborhoodsByCity,
 } from "@/lib/service-areas/data";
+import { getServiceAreaArticle } from "@/lib/service-areas/articles";
 import { getServiceAreaListings } from "@/lib/service-area-listings";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
@@ -82,6 +84,7 @@ export default async function CityPage({
   const neighborhoods = getNeighborhoodsByCity(city.slug);
   const pageUrl = `${SITE_URL}/service-areas/${city.slug}`;
   const { listings } = await getServiceAreaListings(city.name, 6);
+  const article = getServiceAreaArticle(city.slug);
 
   // Other cities for cross-linking at the bottom.
   const peers = CITIES.filter((c) => c.slug !== city.slug);
@@ -177,6 +180,8 @@ export default async function CityPage({
           areaLabel={city.name}
           areaQuery={city.name}
         />
+
+        {article ? <ServiceAreaArticle article={article} /> : null}
 
         <Marquee />
       </main>
