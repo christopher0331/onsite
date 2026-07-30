@@ -3,12 +3,14 @@ import { lakeTappsArticle } from "./lake-tapps";
 import { bonneyLakeArticle } from "./bonney-lake";
 import { sumnerArticle } from "./sumner";
 import { puyallupArticle } from "./puyallup";
+import { edgewoodArticle } from "./edgewood";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
   [bonneyLakeArticle.slug]: bonneyLakeArticle,
   [sumnerArticle.slug]: sumnerArticle,
   [puyallupArticle.slug]: puyallupArticle,
+  [edgewoodArticle.slug]: edgewoodArticle,
 };
 
 export function getServiceAreaArticle(
