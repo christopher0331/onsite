@@ -5,6 +5,7 @@ import { sumnerArticle } from "./sumner";
 import { puyallupArticle } from "./puyallup";
 import { edgewoodArticle } from "./edgewood";
 import { miltonArticle } from "./milton";
+import { auburnArticle } from "./auburn";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -13,6 +14,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [puyallupArticle.slug]: puyallupArticle,
   [edgewoodArticle.slug]: edgewoodArticle,
   [miltonArticle.slug]: miltonArticle,
+  [auburnArticle.slug]: auburnArticle,
 };
 
 export function getServiceAreaArticle(
