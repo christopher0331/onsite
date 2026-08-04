@@ -25,9 +25,11 @@ function buildScope(req: NextRequest): Record<string, string> {
   const city = req.nextUrl.searchParams.get("city");
   const county = req.nextUrl.searchParams.get("county");
   const neighborhood = req.nextUrl.searchParams.get("neighborhood");
+  const zip = req.nextUrl.searchParams.get("zip");
   const boardId = req.nextUrl.searchParams.get("boardId");
   if (state) scope.state = state;
-  if (city) scope.city = city;
+  if (zip && /^\d{5}$/.test(zip.trim())) scope.zip = zip.trim();
+  else if (city) scope.city = city;
   else if (county) scope.area = county;
   if (neighborhood) scope.neighborhood = neighborhood;
   if (boardId) scope.boardId = boardId;

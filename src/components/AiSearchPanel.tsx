@@ -4,8 +4,25 @@ import { useState } from "react";
 import ListingCard from "@/components/ListingCard";
 import { runAiSearch, AI_SEARCH_EXAMPLES, type AiSearchResult } from "@/lib/ai-search";
 
-export default function AiSearchPanel() {
-  const [prompt, setPrompt] = useState("");
+type Props = {
+  /** Prefill the search box (e.g. city-scoped prompt on a hub page). */
+  initialPrompt?: string;
+  /** Override example chips; defaults to global AI_SEARCH_EXAMPLES. */
+  examples?: string[];
+  /** Compact spacing for embedding on service-area hubs. */
+  compact?: boolean;
+  heading?: string;
+  subheading?: string;
+};
+
+export default function AiSearchPanel({
+  initialPrompt = "",
+  examples = AI_SEARCH_EXAMPLES,
+  compact = false,
+  heading = "Describe your dream home",
+  subheading = "Skip the filters — just tell us what you want in plain words and we'll find matching homes across the MLS.",
+}: Props) {
+  const [prompt, setPrompt] = useState(initialPrompt);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<AiSearchResult | null>(null);
   const [refine, setRefine] = useState("");
@@ -41,15 +58,16 @@ export default function AiSearchPanel() {
 
   function clear() {
     setResult(null);
-    setPrompt("");
+    setPrompt(initialPrompt);
     setRefine("");
   }
 
   const hasResults = (result?.listings.length ?? 0) > 0;
+  const sectionPad = compact ? "py-10 lg:py-14" : "py-10 lg:py-20";
 
   return (
-    <section className="border-b border-charcoal/10 bg-gradient-to-b from-white to-[#f7f3ed]">
-      <div className="mx-auto max-w-[1440px] px-6 py-10 lg:px-12 lg:py-20">
+    <section className={`border-b border-charcoal/10 bg-gradient-to-b from-white to-[#f7f3ed]`}>
+      <div className={`mx-auto max-w-[1440px] px-6 ${sectionPad} lg:px-12`}>
         <div className="mx-auto max-w-3xl text-center">
           <div className="mb-3 flex flex-wrap items-center justify-center gap-2">
             <p className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-charcoal/55">
@@ -61,16 +79,15 @@ export default function AiSearchPanel() {
             </span>
           </div>
           <h2 className="font-serif text-[clamp(1.9rem,3.6vw,3rem)] font-light leading-tight text-charcoal">
-            Describe your dream home
+            {heading}
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-charcoal/70">
-            Skip the filters — just tell us what you want in plain words and we&apos;ll find
-            matching homes across the MLS.
+            {subheading}
           </p>
           <p className="mx-auto mt-4 max-w-2xl rounded-2xl border border-amber-200/80 bg-amber-50/70 px-5 py-3 text-left text-[13px] leading-relaxed text-amber-950/85 sm:text-center">
             <span className="font-medium">Beta disclaimer:</span> This feature is still being tuned and may miss homes,
-            return weak matches, or misunderstand your request. For the most reliable results, use the filters above
-            or switch to map view.
+            return weak matches, or misunderstand your request. For the most reliable results, use the listings filters
+            or map view.
           </p>
 
           <form onSubmit={handleSubmit} className="mt-7">
@@ -95,7 +112,7 @@ export default function AiSearchPanel() {
 
           {!result && (
             <div className="mt-5 flex flex-wrap justify-center gap-2">
-              {AI_SEARCH_EXAMPLES.map((example) => (
+              {examples.map((example) => (
                 <button
                   key={example}
                   type="button"

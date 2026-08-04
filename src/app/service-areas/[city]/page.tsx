@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
+import AiSearchPanel from "@/components/AiSearchPanel";
 
 import CityHero from "@/components/service-areas/CityHero";
 import CityRegulations from "@/components/service-areas/CityRegulations";
@@ -11,15 +12,16 @@ import LocalUtilities from "@/components/service-areas/LocalUtilities";
 import LocalResources from "@/components/service-areas/LocalResources";
 import NeighborhoodDirectory from "@/components/service-areas/NeighborhoodDirectory";
 import AreaListings from "@/components/service-areas/AreaListings";
-// import CityCaseStudies from "@/components/service-areas/CityCaseStudies";
-// ^ Re-enable once the per-city sold/featured listing data is sourced from
-//   the real CRM/MLS pull instead of the curated seed set.
+import CityCaseStudies from "@/components/service-areas/CityCaseStudies";
 import SuburbanRegulations from "@/components/service-areas/SuburbanRegulations";
 import UrbanLogistics from "@/components/service-areas/UrbanLogistics";
 import MicroClimate from "@/components/service-areas/MicroClimate";
 import ServiceAreaCTA from "@/components/service-areas/ServiceAreaCTA";
 import ServiceAreaArticle from "@/components/service-areas/ServiceAreaArticle";
 import AboutTheArea from "@/components/service-areas/AboutTheArea";
+import MarketPulse from "@/components/service-areas/MarketPulse";
+import RecentlySoldTable from "@/components/service-areas/RecentlySoldTable";
+import MarketBrief from "@/components/service-areas/MarketBrief";
 import {
   AreaListingsItemListSchema,
   BreadcrumbSchema,
@@ -38,10 +40,22 @@ import {
 } from "@/lib/service-areas/data";
 import { getServiceAreaArticle } from "@/lib/service-areas/articles";
 import { getServiceAreaDiscover } from "@/lib/service-areas/discover";
+import { getServiceAreaMarketBrief } from "@/lib/service-areas/briefs";
 import { getServiceAreaListings } from "@/lib/service-area-listings";
+import {
+  getServiceAreaMarketPulse,
+  getServiceAreaSoldListings,
+} from "@/lib/service-area-market";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const SITE_URL = getCanonicalBaseUrl();
+
+const PUYALLUP_AI_EXAMPLES = [
+  "3-bed home in South Hill Puyallup under $650k",
+  "single-story house in Puyallup with a big yard",
+  "newer construction near Meridian in Puyallup",
+  "Puyallup home with garage near Sounder",
+];
 
 export function generateStaticParams() {
   return getAllCitySlugs().map((city) => ({ city }));
@@ -85,9 +99,21 @@ export default async function CityPage({
 
   const neighborhoods = getNeighborhoodsByCity(city.slug);
   const pageUrl = `${SITE_URL}/service-areas/${city.slug}`;
-  const { listings } = await getServiceAreaListings(city.name, 6);
-  const article = getServiceAreaArticle(city.slug);
-  const discover = getServiceAreaDiscover(city.slug);
+  const isPuyallup = city.slug === "puyallup";
+
+  const [{ listings }, soldListings, pulse, article, discover, brief] =
+    await Promise.all([
+      getServiceAreaListings(city.name, 6),
+      isPuyallup
+        ? getServiceAreaSoldListings(city.name, 8)
+        : Promise.resolve([]),
+      isPuyallup
+        ? getServiceAreaMarketPulse(city.name, city.zipCodes)
+        : Promise.resolve(null),
+      Promise.resolve(getServiceAreaArticle(city.slug)),
+      Promise.resolve(getServiceAreaDiscover(city.slug)),
+      Promise.resolve(getServiceAreaMarketBrief(city.slug)),
+    ]);
 
   // Other cities for cross-linking at the bottom.
   const peers = CITIES.filter((c) => c.slug !== city.slug);
@@ -124,13 +150,33 @@ export default async function CityPage({
         {city.features.microClimate && <MicroClimate city={city} />}
         <LocalResources city={city} />
         <NeighborhoodDirectory city={city} neighborhoods={neighborhoods} />
-        {/* <CityCaseStudies city={city} /> — disabled until real per-city listings are wired in */}
+
+        {pulse ? <MarketPulse cityName={city.name} pulse={pulse} /> : null}
+        {brief ? <MarketBrief brief={brief} /> : null}
+
+        {isPuyallup ? (
+          <AiSearchPanel
+            compact
+            initialPrompt="homes for sale in Puyallup WA"
+            examples={PUYALLUP_AI_EXAMPLES}
+            heading={`Search ${city.name} with AI`}
+            subheading="Describe the Puyallup home you want — South Hill, downtown, yard, budget — and we'll match live MLS inventory."
+          />
+        ) : null}
 
         <AreaListings
           areaLabel={city.name}
           listings={listings}
           viewAllHref={`/listings?city=${encodeURIComponent(city.name)}&state=WA`}
         />
+
+        <RecentlySoldTable
+          cityName={city.name}
+          listings={soldListings}
+          viewAllHref={`/listings?status=U&city=${encodeURIComponent(city.name)}&state=WA`}
+        />
+
+        {city.caseStudies.length > 0 ? <CityCaseStudies city={city} /> : null}
 
         <section className="py-12 bg-white border-t border-charcoal/8">
           <div className="mx-auto max-w-[1440px] px-6 lg:px-12 flex flex-wrap gap-3">
