@@ -6,6 +6,12 @@ import { puyallupDiscover } from "./puyallup";
 import { edgewoodDiscover } from "./edgewood";
 import { miltonDiscover } from "./milton";
 import { auburnDiscover } from "./auburn";
+import { downtownPuyallupDiscover } from "./downtown-puyallup";
+import { clarksCreekDiscover } from "./clarks-creek";
+import { rodescoDiscover } from "./rodesco";
+import { shawneeRidgeDiscover } from "./shawnee-ridge";
+import { gemHeightsDiscover } from "./gem-heights";
+import { summitDiscover } from "./summit";
 
 const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [lakeTappsDiscover.slug]: lakeTappsDiscover,
@@ -15,6 +21,12 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [edgewoodDiscover.slug]: edgewoodDiscover,
   [miltonDiscover.slug]: miltonDiscover,
   [auburnDiscover.slug]: auburnDiscover,
+  [downtownPuyallupDiscover.slug]: downtownPuyallupDiscover,
+  [clarksCreekDiscover.slug]: clarksCreekDiscover,
+  [rodescoDiscover.slug]: rodescoDiscover,
+  [shawneeRidgeDiscover.slug]: shawneeRidgeDiscover,
+  [gemHeightsDiscover.slug]: gemHeightsDiscover,
+  [summitDiscover.slug]: summitDiscover,
 };
 
 export function getServiceAreaDiscover(

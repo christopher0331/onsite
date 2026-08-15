@@ -12,6 +12,8 @@ import AdjacentAreas from "@/components/service-areas/AdjacentAreas";
 import LocalReviews from "@/components/service-areas/LocalReviews";
 import AreaListings from "@/components/service-areas/AreaListings";
 import ServiceAreaCTA from "@/components/service-areas/ServiceAreaCTA";
+import ServiceAreaArticle from "@/components/service-areas/ServiceAreaArticle";
+import AboutTheArea from "@/components/service-areas/AboutTheArea";
 import {
   AreaListingsItemListSchema,
   BreadcrumbSchema,
@@ -27,6 +29,8 @@ import {
   getCityBySlug,
   getNeighborhoodBySlug,
 } from "@/lib/service-areas/data";
+import { getServiceAreaArticle } from "@/lib/service-areas/articles";
+import { getServiceAreaDiscover } from "@/lib/service-areas/discover";
 import { filterListingsByZip, getServiceAreaListings } from "@/lib/service-area-listings";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
@@ -78,6 +82,8 @@ export default async function NeighborhoodPage({
   const pageUrl = `${SITE_URL}/service-areas/${city.slug}/${neighborhood.slug}`;
   const { listings: cityListings } = await getServiceAreaListings(city.name, 24);
   const listings = filterListingsByZip(cityListings, neighborhood.zipCodes, 6);
+  const article = getServiceAreaArticle(neighborhood.slug);
+  const discover = getServiceAreaDiscover(neighborhood.slug);
   const scopeNote = cityListings.some(
     (l) => l.address?.zip && neighborhood.zipCodes.includes(l.address.zip)
   )
@@ -162,6 +168,16 @@ export default async function NeighborhoodPage({
           areaLabel={neighborhood.name}
           areaQuery={`${neighborhood.name}, ${city.name}`}
         />
+
+        {discover ? (
+          <AboutTheArea
+            cityName={city.name}
+            neighborhoodName={neighborhood.name}
+            discover={discover}
+          />
+        ) : null}
+
+        {article ? <ServiceAreaArticle article={article} /> : null}
 
         <Marquee />
       </main>

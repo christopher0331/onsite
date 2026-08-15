@@ -3,9 +3,9 @@
 **Goal:** Own winnable Puyallup queries (`Puyallup real estate agent`, sell/buy long-tails, ZIP + neighborhood) by beating indie SEO (esp. Mike Rudnev) on data freshness + spoke depth, while leaning into OnSite’s AI + IDX moat.
 
 **Money page:** `/service-areas/puyallup`  
-**Live spoke today:** `/service-areas/puyallup/south-hill` only (1 of 7 directory pockets)  
+**Live spokes today:** South Hill + Downtown + Clark's Creek + Rodesco + Shawnee Ridge + Gem Heights + Summit  
 **Canvas:** `puyallup-competitive-gap.canvas.tsx`  
-**Last updated:** 2026-08-04
+**Last updated:** 2026-08-13
 
 ---
 
@@ -67,22 +67,23 @@
 
 Directory pockets still missing live pages:
 
-- [ ] Downtown Puyallup — data + route + Discover + article
-- [ ] Clark's Creek — data + route + Discover + article
-- [ ] Rodesco — data + route + Discover + article
-- [ ] Shawnee Ridge — data + route + Discover + article
-- [ ] Gem Heights — data + route + Discover + article
-- [ ] Summit — data + route + Discover + article
+- [x] Downtown Puyallup — data + route + Discover + article
+- [x] Clark's Creek — data + route + Discover + article
+- [x] Rodesco — data + route + Discover + article
+- [x] Shawnee Ridge — data + route + Discover + article
+- [x] Gem Heights — data + route + Discover + article
+- [x] Summit — data + route + Discover + article
 
 Per spoke checklist (repeat for each):
 
-- [ ] Add full `NEIGHBORHOODS` entry in `src/lib/service-areas/data.ts`
-- [ ] Generate Perplexity article → `src/lib/service-areas/articles/`
-- [ ] Generate Discover → `src/lib/service-areas/discover/`
-- [ ] Wire `NeighborhoodDirectory` so cards link (not placeholders)
-- [ ] Adjacent/peer links from hub + South Hill
-- [ ] Sitemap picks up via `getAllNeighborhoodParams()`
-- [ ] Push + request indexing (GSC / searchConsoleRL IndexStatus)
+- [x] Add full `NEIGHBORHOODS` entry in `src/lib/service-areas/data.ts`
+- [x] Generate Perplexity article → `src/lib/service-areas/articles/`
+- [x] Generate Discover → `src/lib/service-areas/discover/`
+- [x] Wire `NeighborhoodDirectory` so cards link (not placeholders)
+- [x] Adjacent/peer links from hub + South Hill
+- [x] Sitemap picks up via `getAllNeighborhoodParams()`
+- [x] Push to `main`
+- [ ] Request indexing (GSC / searchConsoleRL IndexStatus)
 
 **Suggested order:** Downtown → Gem Heights → Clark's Creek → Summit → Shawnee Ridge → Rodesco
 
@@ -135,8 +136,8 @@ Optional later (Rudnev vocabulary — only if real MLS/geo coverage exists):
 
 ## Next up (pick one to start)
 
-1. **Market Pulse + sold table on hub** (highest leverage vs Rudnev)
-2. **Downtown Puyallup spoke** (article + Discover)
-3. **Internal link pass** (fastest win, low build)
+1. **Phase 3.1 Buyer programs strip** (DPA / VA / JBLM on the hub)
+2. **Phase 3.3 Internal link pass** (fastest win, low build)
+3. **Phase 4 indexing** after this spoke cluster is pushed
 
-Default recommendation: **#1**, then Downtown + Gem Heights spokes.
+Default recommendation: **GSC index requests** for the six new spokes, then Phase 3.3 internal links.

@@ -1303,17 +1303,20 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       {
         name: "Downtown Puyallup",
         citySlug: "puyallup",
+        neighborhoodSlug: "downtown-puyallup",
         blurb: "Historic downtown core — smaller lots, Craftsman & bungalow inventory.",
       },
       {
-        name: "Bonney Lake",
-        citySlug: "bonney-lake",
-        blurb: "Plateau sibling community to the east via SR-410.",
+        name: "Gem Heights",
+        citySlug: "puyallup",
+        neighborhoodSlug: "gem-heights",
+        blurb: "South Hill pocket near 176th — HOA amenities and Emerald Ridge attendance.",
       },
       {
-        name: "Sumner",
-        citySlug: "sumner",
-        blurb: "Sumner Valley to the north — Sounder commuter access.",
+        name: "Clark's Creek",
+        citySlug: "puyallup",
+        neighborhoodSlug: "clarks-creek",
+        blurb: "West-side creek corridor — parks, buffers, and established lots.",
       },
     ],
     reviews: [
@@ -1330,6 +1333,429 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "The South Hill comp set is dense and we'd been burned before with agents who priced off the wider Puyallup MLS pull. These folks priced our home on the right four streets — exactly the call.",
+      },
+    ],
+  },
+  {
+    slug: "downtown-puyallup",
+    citySlug: "puyallup",
+    name: "Downtown Puyallup",
+    zipCodes: ["98371"],
+    geo: { lat: 47.1925, lng: -122.2937 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e6a5a683921a019c3e4f3b_1.jpg",
+    heroEyebrow: "Puyallup · Downtown",
+    introCopy:
+      "Downtown Puyallup is the historic valley-floor core — Craftsman and bungalow streets, Pioneer Park, Sounder access, and a design-review overlay that changes how you prep, price, and disclose a listing.",
+    characteristics: {
+      medianHomeYear: "1910 – 1955",
+      architecturalStyles: ["Craftsman bungalow", "Victorian / early 20th-century", "Small-lot infill"],
+      typicalLotSize: "0.08 – 0.20 acres",
+      notes:
+        "Parcels inside the downtown historic overlay need design review for exterior changes and signage — confirm overlay status before listing photos and contractor work.",
+    },
+    communityOrgs: [
+      {
+        name: "Puyallup Sumner Chamber of Commerce",
+        url: "https://www.puyallupsumnerchamber.com/",
+        context: "Downtown business district and event calendar that shape showing logistics.",
+      },
+      {
+        name: "Puyallup School District",
+        url: "https://www.puyallupsd.org/",
+        context: "Downtown addresses typically feed Puyallup High School attendance areas — verify by parcel.",
+      },
+    ],
+    thoroughfares: ["Meridian Ave (SR-161)", "Main Ave", "3rd Street SW"],
+    landmarks: ["Pioneer Park", "Puyallup Sounder Station", "Washington State Fair Events Center"],
+    dispatchCopy:
+      "Downtown sits on the valley floor a short hop from our Lake Tapps base via SR-410 → Meridian. Fair-week traffic and Sounder parking change showing windows — we schedule around both.",
+    adjacent: [
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "The bench above the valley — newer plats, wider lots, Meridian retail.",
+      },
+      {
+        name: "Clark's Creek",
+        citySlug: "puyallup",
+        neighborhoodSlug: "clarks-creek",
+        blurb: "West of the core — parks, creek buffers, and established lots.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Next valley town east — Sounder twin and Main Street comparison set.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Elena P.",
+        zip: "98371",
+        rating: 5,
+        quote:
+          "The historic overlay was the whole listing. They pulled permit history, flagged what buyers would ask, and priced the bungalow against downtown streets — not South Hill averages.",
+      },
+      {
+        author: "Marcus T.",
+        zip: "98371",
+        rating: 5,
+        quote:
+          "Sounder access was sold with actual commute numbers, not adjectives. We had serious Seattle-commuter traffic from the first weekend.",
+      },
+    ],
+  },
+  {
+    slug: "clarks-creek",
+    citySlug: "puyallup",
+    name: "Clark's Creek",
+    zipCodes: ["98371"],
+    geo: { lat: 47.1762, lng: -122.3184 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e6a96b499447cc30f637df_1.jpg",
+    heroEyebrow: "Puyallup · Clark's Creek",
+    introCopy:
+      "Clark's Creek is the west-side corridor where parks, riparian buffers, and established lots sit between downtown and Summit. Pricing here is about creek proximity and critical-area diligence, not a citywide median.",
+    characteristics: {
+      medianHomeYear: "1965 – 1995",
+      architecturalStyles: ["Rambler", "Split-level", "Northwest Contemporary"],
+      typicalLotSize: "0.20 – 0.50 acres",
+      notes:
+        "Lots in the Clarks Creek riparian buffer or aquifer-recharge zones can trigger extra review — flag that on title before photos and inspections are booked.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Puyallup Parks — Clarks Creek Park",
+        url: "https://www.cityofpuyallup.org/Facilities/Facility/Details/Clarks-Creek-Park-21",
+        context: "Primary neighborhood park and trail access along the creek corridor.",
+      },
+      {
+        name: "Puyallup School District",
+        url: "https://www.puyallupsd.org/",
+        context: "Clark's Creek Elementary and related attendance areas — confirm by address.",
+      },
+    ],
+    thoroughfares: ["Pioneer Ave W", "7th Avenue SW", "39th Avenue SW"],
+    landmarks: ["Clarks Creek Park", "Clarks Creek Elementary", "Pioneer Park (downtown)"],
+    dispatchCopy:
+      "From Lake Tapps we reach Clark's Creek via SR-410 into west Puyallup. Park events and school pickup on Pioneer change curb availability — we pad showing times accordingly.",
+    adjacent: [
+      {
+        name: "Downtown Puyallup",
+        citySlug: "puyallup",
+        neighborhoodSlug: "downtown-puyallup",
+        blurb: "Walkable historic core and Sounder access a few minutes east.",
+      },
+      {
+        name: "Summit",
+        citySlug: "puyallup",
+        neighborhoodSlug: "summit",
+        blurb: "West/south bench — mixed city and unincorporated Pierce County streets.",
+      },
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "Plateau inventory and Meridian retail above the valley floor.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Dana & Chris L.",
+        zip: "98371",
+        rating: 5,
+        quote:
+          "They caught the critical-area note on our creek-side lot before we listed. That one checklist item saved us a delayed closing.",
+      },
+      {
+        author: "Priya S.",
+        zip: "98371",
+        rating: 5,
+        quote:
+          "Buyers kept comparing us to South Hill. The team priced Clark's Creek as Clark's Creek — park access, lot size, and all.",
+      },
+    ],
+  },
+  {
+    slug: "rodesco",
+    citySlug: "puyallup",
+    name: "Rodesco",
+    zipCodes: ["98374"],
+    geo: { lat: 47.1694, lng: -122.2436 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Puyallup · Rodesco",
+    introCopy:
+      "Rodesco is an east-Puyallup pocket of large, tree-covered lots off Shaw Road — late-1970s plats where setbacks, privacy, and acreage logic beat a South Hill subdivision average.",
+    characteristics: {
+      medianHomeYear: "1978 – 1995",
+      architecturalStyles: ["Northwest rambler", "Two-story traditional", "Custom acreage"],
+      typicalLotSize: "0.50 – 1.0+ acres",
+      notes:
+        "Larger lots and mature vegetation are the product. Comp against other Shaw Road acreage, not 0.18-acre South Hill plats.",
+    },
+    communityOrgs: [
+      {
+        name: "Puyallup School District",
+        url: "https://www.puyallupsd.org/",
+        context: "Rodesco streets typically sit in Puyallup SD — verify the exact elementary/high school map.",
+      },
+      {
+        name: "Puyallup Sumner Chamber of Commerce",
+        url: "https://www.puyallupsumnerchamber.com/",
+        context: "East-side business corridor along Shaw Road and downtown Puyallup.",
+      },
+    ],
+    thoroughfares: ["Shaw Road E", "27th Avenue SE", "39th Avenue SE"],
+    landmarks: ["Shaw Road corridor", "Wildwood Park", "Downtown Puyallup"],
+    dispatchCopy:
+      "Rodesco sits east of downtown via Shaw Road. From Lake Tapps we come in on SR-410 → Shaw, typically inside a 15-minute window for inspections and twilight photography.",
+    adjacent: [
+      {
+        name: "Shawnee Ridge",
+        citySlug: "puyallup",
+        neighborhoodSlug: "shawnee-ridge",
+        blurb: "View lots above the Orting Valley along Shawnee Road E.",
+      },
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "Denser plats and retail along Meridian — the comparison set buyers often start with.",
+      },
+      {
+        name: "Downtown Puyallup",
+        citySlug: "puyallup",
+        neighborhoodSlug: "downtown-puyallup",
+        blurb: "Valley-floor core west of Shaw Road.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Greg H.",
+        zip: "98374",
+        rating: 5,
+        quote:
+          "Every other agent wanted to price us like a South Hill tract home. They used Shaw Road acreage comps. We sold without sitting.",
+      },
+      {
+        author: "Nina W.",
+        zip: "98374",
+        rating: 5,
+        quote:
+          "The lot and the trees were the story. They photographed it that way and the offers followed.",
+      },
+    ],
+  },
+  {
+    slug: "shawnee-ridge",
+    citySlug: "puyallup",
+    name: "Shawnee Ridge",
+    zipCodes: ["98374"],
+    geo: { lat: 47.1458, lng: -122.2412 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e6a96b499447cc30f637df_1.jpg",
+    heroEyebrow: "Puyallup · Shawnee Ridge",
+    introCopy:
+      "Shawnee Ridge sits on Shawnee Road E above the Orting Valley — custom homes, Rainier views, and larger lots where HOA timing and view orientation drive value more than bedroom count.",
+    characteristics: {
+      medianHomeYear: "1995 – 2015",
+      architecturalStyles: ["Custom Northwest", "View rambler", "Daylight basement"],
+      typicalLotSize: "0.35 – 1.2 acres",
+      notes:
+        "View corridors and unfinished daylight/ADU space show up in this pocket. Pull HOA resale docs early when a homeowners association applies.",
+    },
+    communityOrgs: [
+      {
+        name: "Puyallup School District",
+        url: "https://www.puyallupsd.org/",
+        context: "Shawnee-area addresses sit in Puyallup SD — confirm elementary and high-school lines.",
+      },
+      {
+        name: "Puyallup Sumner Chamber of Commerce",
+        url: "https://www.puyallupsumnerchamber.com/",
+        context: "East Pierce business community covering Shawnee Road and downtown.",
+      },
+    ],
+    thoroughfares: ["Shawnee Road E", "Shaw Road E", "128th Street E"],
+    landmarks: ["Shawnee Road view corridor", "Orting Valley overlook", "South Hill retail"],
+    dispatchCopy:
+      "Shawnee Ridge is a short run from Lake Tapps via SR-410 and Shawnee Road E. We time twilight shoots for the Rainier view window and pad for the hill climb on showing days.",
+    adjacent: [
+      {
+        name: "Rodesco",
+        citySlug: "puyallup",
+        neighborhoodSlug: "rodesco",
+        blurb: "Large-lot east Puyallup pocket off Shaw Road.",
+      },
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "Broader bench inventory and Meridian amenities.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Valley floor and Sounder access north of the ridge.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Lauren & Ben C.",
+        zip: "98374",
+        rating: 5,
+        quote:
+          "The view was the asset. They priced orientation and lot, not just square footage, and the right buyers showed up.",
+      },
+      {
+        author: "Alicia M.",
+        zip: "98374",
+        rating: 5,
+        quote:
+          "HOA paperwork was in the file before the first showing. Closing did not stall on a resale certificate.",
+      },
+    ],
+  },
+  {
+    slug: "gem-heights",
+    citySlug: "puyallup",
+    name: "Gem Heights",
+    zipCodes: ["98375"],
+    geo: { lat: 47.1254, lng: -122.2896 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e6a96b499447cc30f637df_1.jpg",
+    heroEyebrow: "Puyallup · Gem Heights",
+    introCopy:
+      "Gem Heights is a South Hill pocket near 176th and Sunrise — 1980s–1990s plats with HOA amenities, Gem Heights Elementary nearby, and a pricing band that should not be blended with downtown 98371.",
+    characteristics: {
+      medianHomeYear: "1985 – 2000",
+      architecturalStyles: ["Two-story traditional", "Rambler", "PNW Craftsman update"],
+      typicalLotSize: "0.15 – 0.28 acres",
+      notes:
+        "Community club amenities (pool/courts where the HOA still operates them) belong in the listing story. Pull the resale packet before going live.",
+    },
+    communityOrgs: [
+      {
+        name: "Puyallup School District",
+        url: "https://www.puyallupsd.org/",
+        context: "Gem Heights Elementary and Emerald Ridge High School corridors — verify by address.",
+      },
+      {
+        name: "City of Puyallup",
+        url: "https://www.puyallupwa.gov/",
+        context: "Permits and utilities for city-limit parcels on the south bench.",
+      },
+    ],
+    thoroughfares: ["176th Street E", "Sunrise Boulevard", "Gem Heights Drive E"],
+    landmarks: ["Gem Heights Elementary", "Emerald Ridge High School", "South Hill retail"],
+    dispatchCopy:
+      "Gem Heights is the south end of the South Hill bench. From Lake Tapps we run SR-410 → SR-161 / 176th, typically a 20-minute window for inspections and twilight shoots.",
+    adjacent: [
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "Parent bench — mall, Meridian, and the wider 98373–98374 comp set.",
+      },
+      {
+        name: "Summit",
+        citySlug: "puyallup",
+        neighborhoodSlug: "summit",
+        blurb: "West-side CDP streets with mixed school-district lines.",
+      },
+      {
+        name: "Shawnee Ridge",
+        citySlug: "puyallup",
+        neighborhoodSlug: "shawnee-ridge",
+        blurb: "Larger view lots to the northeast along Shawnee Road E.",
+      },
+    ],
+    reviews: [
+      {
+        author: "K. Nguyen",
+        zip: "98375",
+        rating: 5,
+        quote:
+          "They treated Gem Heights as its own market — HOA, elementary, and 176th access — instead of dumping us into a generic South Hill CMA.",
+      },
+      {
+        author: "Stephanie R.",
+        zip: "98375",
+        rating: 5,
+        quote:
+          "Single-story buyers found us because the listing was honest about layout and the HOA amenities. We were under contract in the first stretch.",
+      },
+    ],
+  },
+  {
+    slug: "summit",
+    citySlug: "puyallup",
+    name: "Summit",
+    zipCodes: ["98373", "98371"],
+    geo: { lat: 47.1694, lng: -122.3756 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e5f1f692b6e8f42f5bf2a0_1.jpg",
+    heroEyebrow: "Puyallup · Summit",
+    introCopy:
+      "Summit is the west-side CDP between Puyallup and Tacoma — mixed city and unincorporated streets where school district (Puyallup vs Franklin Pierce) and sewer vs septic can change a sale more than paint color.",
+    characteristics: {
+      medianHomeYear: "1960 – 1990",
+      architecturalStyles: ["Rambler", "Split-level", "Updated mid-century"],
+      typicalLotSize: "0.20 – 0.50 acres",
+      notes:
+        "Confirm city vs unincorporated Pierce County, then school district and septic/sewer, before setting list price. Those three facts are the Summit underwriting.",
+    },
+    communityOrgs: [
+      {
+        name: "Puyallup School District",
+        url: "https://www.puyallupsd.org/",
+        context: "Part of Summit sits in Puyallup SD — never assume from the postal city.",
+      },
+      {
+        name: "Franklin Pierce Schools",
+        url: "https://www.fpschools.org/",
+        context: "Much of the Summit CDP feeds Franklin Pierce — verify elementary and high school by parcel.",
+      },
+    ],
+    thoroughfares: ["Canyon Road E", "112th Street E", "66th Avenue E"],
+    landmarks: ["Summit-Waller corridor", "Clarks Creek Park (east)", "South Hill / Meridian retail"],
+    dispatchCopy:
+      "Summit sits west of the South Hill bench toward Tacoma. We dispatch via SR-410 / Canyon Road; unincorporated addresses can mean different permit desks, so we confirm jurisdiction on the first walkthrough.",
+    adjacent: [
+      {
+        name: "Clark's Creek",
+        citySlug: "puyallup",
+        neighborhoodSlug: "clarks-creek",
+        blurb: "Creek parks and established Puyallup city lots just east.",
+      },
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "Plateau retail and denser plats east of Canyon Road.",
+      },
+      {
+        name: "Tacoma",
+        citySlug: "tacoma",
+        blurb: "Western neighbor — different permit desk and buyer pool.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Heather J.",
+        zip: "98373",
+        rating: 5,
+        quote:
+          "They mapped school district and septic before we priced. That is the whole Summit conversation, and they had it on day one.",
+      },
+      {
+        author: "Omar F.",
+        zip: "98371",
+        rating: 5,
+        quote:
+          "We sit on the Puyallup–Tacoma line. They marketed the commute and the jurisdiction accurately. No surprises in escrow.",
       },
     ],
   },
