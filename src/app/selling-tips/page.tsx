@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
+import { getCategoryCards, type BlogCard as Post } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Home Selling Tips & Advice | Pierce County Real Estate Guidance",
@@ -12,117 +13,7 @@ export const metadata: Metadata = {
     "Practical, expert-backed advice for Pierce County home sellers. From pricing and prep to inspections and closing — get the guidance you need to sell with confidence.",
 };
 
-const CDN2 = "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0";
-
-type Post = { title: string; excerpt: string; slug: string; image: string; isNew: boolean };
-
-const posts: Post[] = [
-  {
-    title: "What Home Inspectors Really Look For in Western Washington (Before You List)",
-    excerpt: "Before you put your home on the market, knowing what a home inspector will flag can save you thousands. Here's what they actually focus on in Western Washington.",
-    slug: "what-home-inspectors-really-look-for-in-western-washington-before-you-list",
-    image: `${CDN2}/698b81074c1a8db00bf0ef53_ChatGPT%20Image%20Feb%2010%2C%202026%2C%2010_58_56%20AM.png`,
-    isNew: true,
-  },
-  {
-    title: "Prep Your Pierce County Home for a Successful Sale: Local Insights and Actionable Tips",
-    excerpt: "Local market knowledge meets practical preparation advice. Here's exactly how to get your Pierce County home ready to attract buyers and maximize your sale price.",
-    slug: "prep-your-pierce-county-home-for-a-successful-sale",
-    image: `${CDN2}/69729b9c707b3f1527b84124_unsplash_main_compressed.jpg`,
-    isNew: true,
-  },
-  {
-    title: "How You Get The Most Money When Selling Your Home",
-    excerpt: "Maximizing your sale price isn't just about luck — it's about strategy, timing, and presentation. Here's the approach that consistently gets sellers top dollar.",
-    slug: "how-you-get-the-most-money-when-selling-your-home",
-    image: `${CDN2}/68f29e6d3bc5c87cfbac68eb_Gemini_Generated_Image_8u8ix18u8ix18u8i.png`,
-    isNew: true,
-  },
-  {
-    title: "Should You Sell Your Home As-Is or Make Repairs First?",
-    excerpt: "It's one of the most common questions sellers ask. The answer depends on your timeline, budget, and the current market conditions in Pierce County.",
-    slug: "should-you-sell-your-home-as-is-or-make-repairs-first-2",
-    image: `${CDN2}/68c9944b662f7c0cb20f4cc3_1.jpg`,
-    isNew: true,
-  },
-  {
-    title: "How to Attract More Buyers With Virtual Tours and Online Marketing",
-    excerpt: "In today's market, your home's online presence is its first showing. Here's how to use virtual tours and digital marketing to put your listing in front of more buyers.",
-    slug: "how-to-attract-more-buyers-with-virtual-tours-and-online-marketing",
-    image: `${CDN2}/68c992d28c8c859baa98fbfc_1.jpg`,
-    isNew: true,
-  },
-  {
-    title: "Should You Sell Your Home Before You Buy a New One?",
-    excerpt: "If you're planning to move, one of the biggest decisions you'll face is whether to sell your current home before buying the next. For Pierce County homeowners, here's how to think through it.",
-    slug: "should-you-sell-your-home-before-you-buy-a-new-one",
-    image: `${CDN2}/67ec3d04c02934af15c0d101_67eacb74491984e4a61650f6_success%20stories.jpg`,
-    isNew: false,
-  },
-  {
-    title: "5 Simple Improvements That Can Help Your Home Sell Faster",
-    excerpt: "Selling your home doesn't always mean spending big on renovations. A few affordable upgrades can make a major difference in how quickly your home sells and how much you get.",
-    slug: "5-simple-improvements-that-can-help-your-home-sell-faster",
-    image: `${CDN2}/67ed5b3e15edfb93fc91fc00_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Should You Sell Your Home As-Is or Make Repairs First?",
-    excerpt: "Weighing the cost of repairs against what buyers will pay is one of the most important decisions a seller makes. Here's a framework for making the right call.",
-    slug: "should-you-sell-your-home-as-is-or-make-repairs-first",
-    image: `${CDN2}/67eebdb2a68b3a0991575e2c_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "How to Price Your Home to Sell in Today's Market",
-    excerpt: "Pricing is everything. Too high and your home sits. Too low and you leave money on the table. Here's how to find the number that attracts offers and maximizes your return.",
-    slug: "how-to-price-your-home-to-sell-in-todays-market",
-    image: `${CDN2}/67eebf47863c395d27b6f096_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "How to Prepare Your Home for a Faster, More Profitable Sale",
-    excerpt: "From decluttering to deep cleaning to minor repairs, the right prep work can dramatically reduce days on market and improve your final sale price.",
-    slug: "how-to-prepare-your-home-for-a-faster-more-profitable-sale",
-    image: `${CDN2}/67eec0afe4f179dad08054b0_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "The Powerful Tool Every Landlord Should Know About",
-    excerpt: "If you own investment property in Pierce County, there's a strategy most landlords don't know about that can significantly impact your sale outcome.",
-    slug: "the-powerful-tool-every-landlord-should-know-about",
-    image: `${CDN2}/6824d8ec7673e09afbe56228_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "The Ultimate Pre-Sale Home Prep Checklist",
-    excerpt: "A comprehensive, room-by-room checklist to get your home show-ready. Use this guide to make sure nothing is overlooked before your first showing.",
-    slug: "the-ultimate-pre-sale-home-prep-checklist",
-    image: `${CDN2}/68269039b09fa529fe781ad7_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "HOA Document Requirements: What Sellers Need to Know",
-    excerpt: "Selling in a community with an HOA? There are specific documents you're required to disclose — and missing them can delay or kill your closing.",
-    slug: "hoa-document-requirements-what-sellers-need-to-know",
-    image: `${CDN2}/682692566155098e418322d8_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Should I Sell My House As-Is or Make Repairs?",
-    excerpt: "There's no one-size-fits-all answer. Learn how to evaluate your specific situation and make the decision that protects your bottom line.",
-    slug: "should-i-sell-my-house-as-is-or-make-repairs",
-    image: `${CDN2}/682e3cb12ef5680c98456bd4_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Do I Need to Disclose Everything When Selling My Home?",
-    excerpt: "Washington State disclosure requirements can be confusing. Here's what sellers are legally required to disclose — and why transparency actually protects you.",
-    slug: "do-i-need-to-disclose-everything-when-selling-my-home",
-    image: `${CDN2}/682e3ec377324444342f651b_1.jpg`,
-    isNew: false,
-  },
-];
+const posts = getCategoryCards("selling-tips");
 
 function ArticleCard({ post }: { post: Post }) {
   return (

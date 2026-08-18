@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
+import { getCategoryCards, type BlogCard as Post } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Pierce County Housing Market Trends | 2025–2026 Real Estate Updates",
@@ -12,96 +13,7 @@ export const metadata: Metadata = {
     "Stay up to date on Pierce County's housing market. Get expert insights on home prices, mortgage rates, buyer demand, and what sellers need to know right now.",
 };
 
-const CDN2 = "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0";
-
-type Post = { title: string; excerpt: string; slug: string; image: string; isNew: boolean };
-
-const posts: Post[] = [
-  {
-    title: "Pierce County Housing Market: What Stability Really Looks Like After the Frenzy",
-    excerpt: "The frenzied market of 2021–2022 is behind us — but what does a stable Pierce County market actually look like for sellers today? We break down what the data is really saying.",
-    slug: "pierce-county-housing-market-what-stability-really-looks-like-after-the-frenzy",
-    image: `${CDN2}/698b9a6e51771cf4ac693163_ChatGPT%20Image%20Feb%2010%2C%202026%2C%2012_51_46%20PM.png`,
-    isNew: true,
-  },
-  {
-    title: "Pierce County Homeowners: Don't Get Stuck by Incomplete Real Estate Info",
-    excerpt: "Outdated or incomplete information can cost sellers thousands. Here's what Pierce County homeowners need to know before making any decisions about their property.",
-    slug: "pierce-county-homeowners-dont-get-stuck",
-    image: `${CDN2}/697960ca488d6d041ad954b8_18-Andre_Bohall1003.jpg`,
-    isNew: true,
-  },
-  {
-    title: "2026 Pierce County Housing Market Update: What Buyers and Sellers in Bonney Lake, Lake Tapps, and Sumner Should Expect",
-    excerpt: "A comprehensive look at where the Pierce County market is headed in 2026 — what's driving demand, how prices are holding, and what it means for buyers and sellers in the area.",
-    slug: "2026-pierce-county-housing-market-update-what-buyers-and-sellers-in-bonney-lake-lake-tapps-and-sumner-should-expect",
-    image: `${CDN2}/6968244f093bbf91ef2af90b_Pierce%20County%20Pic%20(1).jpg`,
-    isNew: true,
-  },
-  {
-    title: "5.99% Mortgage Rate in Pierce County: Why Your Monthly Payment Might Not Drop",
-    excerpt: "A rate drop sounds like good news — but taxes, insurance, and other costs mean your monthly payment may not change as much as you'd expect. Here's the real math.",
-    slug: "5-99-mortgage-rate-in-pierce-county-why-your-monthly-payment-might-not-drop-taxes-insurance-math",
-    image: `${CDN2}/696534f0118a1f7e3ed7e322_pexels-energepic-com-27411-159888.jpg`,
-    isNew: true,
-  },
-  {
-    title: "Pierce County Housing Market: What Sellers Should Know in 2025",
-    excerpt: "Thinking about selling your home in 2025? The Pierce County market is showing some important shifts — making it more critical than ever to list strategically and price correctly.",
-    slug: "pierce-county-housing-market-what-sellers-should-know-in-2025",
-    image: `${CDN2}/67ed56509e07b9dd67e74302_2.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Are Home Prices Rising or Falling in Pierce County in 2025?",
-    excerpt: "If you're planning to sell or buy in 2025, one of your biggest questions is: what's happening with home prices? We break down the current data for Pierce County.",
-    slug: "are-home-prices-rising-or-falling-in-pierce-county-in-2025",
-    image: `${CDN2}/67ed751ddaa36de5a0e61b8d_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Will Interest Rates Impact Home Sales in Pierce County This Year?",
-    excerpt: "Interest rates have been top of mind for buyers and sellers alike. Here's how current rate trends are playing out in Pierce County's real estate market.",
-    slug: "will-interest-rates-impact-home-sales-in-pierce-county-this-year",
-    image: `${CDN2}/67eeb6a2d8fcd8a0a5cd220d_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Are Homes Still Selling Over Asking Price in Pierce County?",
-    excerpt: "The over-asking bidding wars of 2021 may be behind us, but competitive offers are still happening in the right conditions. Here's what the data shows for Pierce County today.",
-    slug: "are-homes-still-selling-over-asking-price-in-pierce-county",
-    image: `${CDN2}/67eeb85a7c06c82c3b7d1e52_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Is It a Buyer's or Seller's Market in Pierce County Right Now?",
-    excerpt: "Depending on price range and location, the answer might surprise you. We break down the current inventory levels and what they mean for buyers and sellers.",
-    slug: "is-it-a-buyers-or-sellers-market-in-pierce-county-right-now",
-    image: `${CDN2}/67eebaf871f652dc1c2de360_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Will Home Prices Drop in Washington in 2025?",
-    excerpt: "With national headlines painting a mixed picture, Washington homeowners want answers. Here's what the local data says about price direction in Pierce County.",
-    slug: "will-home-prices-drop-in-washington-in-2025",
-    image: `${CDN2}/682e4064a5069db8f4955562_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "How Interest Rates Are Affecting Home Sales in 2025",
-    excerpt: "From buyer qualification to seller strategy, rising rates have reshaped how real estate transactions work. Here's what sellers and buyers in Pierce County need to understand.",
-    slug: "how-interest-rates-are-affecting-home-sales-in-2025",
-    image: `${CDN2}/682f4731b4438620dbcc51f3_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Is the Housing Market Headed for a Crash in 2025?",
-    excerpt: "Headlines can be alarming — but the data tells a different story. Here's what Pierce County homeowners need to know about market stability heading into 2025.",
-    slug: "is-the-housing-market-headed-for-a-crash-in-2025",
-    image: `${CDN2}/684dbdc35fe85b113c2e3928_2.jpg`,
-    isNew: false,
-  },
-];
+const posts = getCategoryCards("market-trends");
 
 export default function MarketTrendsPage() {
   const [featured, ...rest] = posts;

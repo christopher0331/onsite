@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
+import { getCategoryCards, type BlogCard as Post } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Real Estate Insights for Home Sellers | Pierce County Real Estate Advice",
@@ -12,117 +13,7 @@ export const metadata: Metadata = {
     "Expert real estate insights for Pierce County homeowners — from home valuations and staging to agent strategy and timing. Everything you need to sell with confidence.",
 };
 
-const CDN2 = "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0";
-
-type Post = { title: string; excerpt: string; slug: string; image: string; isNew: boolean };
-
-const posts: Post[] = [
-  {
-    title: "Pierce County Septic Systems: What Homebuyers and Sellers Must Know in Today's Market",
-    excerpt: "Septic systems are one of the most overlooked factors in a real estate transaction — and one of the most expensive to get wrong. Here's what every buyer and seller in Pierce County needs to know.",
-    slug: "pierce-county-septic-systems-what-homebuyers-and-sellers-must-know-in-todays-market",
-    image: `${CDN2}/69276010a017b9c15aeee4a8_pexels-hafidz-alifuddin-18111-88808.jpg`,
-    isNew: true,
-  },
-  {
-    title: "How Buyer Expectations Have Changed Since 2020",
-    excerpt: "Today's buyers are more informed, more selective, and more demanding than ever before. Understanding how expectations have evolved helps sellers prepare their homes to compete.",
-    slug: "how-buyer-expectations-have-changed-since-2020",
-    image: `${CDN2}/688aad14aedd394c7f000843_1.jpg`,
-    isNew: true,
-  },
-  {
-    title: "What's Worth Upgrading Before You Sell (And What's Not)",
-    excerpt: "Not every upgrade pays off. Some improvements deliver strong returns — others are money pits. Here's a strategic breakdown for Pierce County sellers.",
-    slug: "whats-worth-upgrading-before-you-sell-and-whats-not",
-    image: `${CDN2}/688aac1129bfc217e9127842_1.jpg`,
-    isNew: true,
-  },
-  {
-    title: "Why Professional Photography Still Sells Homes in 2025",
-    excerpt: "In a world of AI-generated content, authentic professional photography continues to be one of the highest-ROI investments a seller can make. Here's why.",
-    slug: "why-professional-photography-still-sells-homes-in-2025",
-    image: `${CDN2}/688aaa7508fca618e9e799a5_1.jpg`,
-    isNew: true,
-  },
-  {
-    title: "How Listing Descriptions Influence Buyer Behavior",
-    excerpt: "The words in your listing description shape how buyers perceive your home before they ever walk through the door. Learn what works — and what turns buyers off.",
-    slug: "how-listing-descriptions-influence-buyer-behavior",
-    image: `${CDN2}/688aa7f4c24322a6a6fdba4f_1212.jpg`,
-    isNew: true,
-  },
-  {
-    title: "How Much Is My Home Worth? 5 Factors That Affect Your Home's Value",
-    excerpt: "When it comes to selling your home, one of the first things you need to know is what it's worth. In a competitive market like Pierce County, understanding these five factors is critical.",
-    slug: "how-much-is-my-home-worth-5-factors-that-affect-your-homes-value",
-    image: `${CDN2}/67ec45ae21ed6ebbeb9e20c5_1%5C.jpg`,
-    isNew: false,
-  },
-  {
-    title: "What's the Best Time of Year to Sell a Home in Pierce County?",
-    excerpt: "Timing matters in real estate. If you're planning to sell your home in Pierce County, choosing the right time of year could help you attract more buyers and maximize your sale price.",
-    slug: "whats-the-best-time-of-year-to-sell-a-home-in-pierce-county",
-    image: `${CDN2}/67ed538e0cd8e9e4d813d006_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "How Long Does It Take to Sell a Home in Pierce County?",
-    excerpt: "Every seller wants to know: how long will my home sit on the market? The answer depends on several factors — here's a realistic look at timelines in Pierce County.",
-    slug: "how-long-does-it-take-to-sell-a-home-in-pierce-county",
-    image: `${CDN2}/67edb8a85fbebf614dfe04e0_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Is Staging Your Home Worth It? Here's What Sellers Should Know",
-    excerpt: "Home staging can make a significant difference in how quickly your home sells and at what price. But is it always worth the investment? Here's an honest breakdown.",
-    slug: "is-staging-your-home-worth-it-heres-what-sellers-should-know",
-    image: `${CDN2}/67edbc002d0ae67cee18437e_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "What all is Included in a Free Home Evaluation?",
-    excerpt: "A free home evaluation is more than just a number — it's a strategic consultation. Here's what you can expect and how to use the insights to your advantage.",
-    slug: "whats-included-in-a-home-evaluation",
-    image: `${CDN2}/67edbe23ec789166a66f0ceb_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "The Power of First Impressions in Real Estate",
-    excerpt: "Buyers form opinions within seconds of arriving at a property. Curb appeal, entry, and the first room they see all carry enormous weight. Here's how to make every impression count.",
-    slug: "the-power-of-first-impressions-in-real-estate",
-    image: `${CDN2}/681e10d708e6dabd1d32e226_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "How the Right Agent Makes All the Difference When Selling",
-    excerpt: "The agent you choose can be the difference between a fast, profitable sale and months of frustration. Here's what separates great agents from the rest in today's market.",
-    slug: "how-the-right-agent-makes-all-the-difference-when-selling",
-    image: `${CDN2}/681e15dbfbdd125c126a274d_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Septic Pumping and County Inspection: What Sellers Need to Know",
-    excerpt: "In Pierce County, septic inspections are a common part of the transaction process. Here's what sellers need to do before listing to avoid delays at closing.",
-    slug: "septic-pumping-and-county-inspection-what-sellers-need-to-know",
-    image: `${CDN2}/6824d2360cd3918b23d57277_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Understanding Your Home's Market Value: What Affects It and Why It Matters",
-    excerpt: "Market value isn't just square footage and location — it's a complex equation influenced by dozens of variables. Here's how to understand what your home is truly worth.",
-    slug: "understanding-your-homes-market-value-what-affects-it-and-why-it-matters",
-    image: `${CDN2}/6826888dc360e9461d1460e6_1.jpg`,
-    isNew: false,
-  },
-  {
-    title: "Top 5 Mistakes Sellers Make (And How to Avoid Them)",
-    excerpt: "Even well-intentioned sellers make costly mistakes. These five missteps consistently derail transactions, reduce final sale prices, and extend time on market.",
-    slug: "top-5-mistakes-sellers-make-and-how-to-avoid-them",
-    image: `${CDN2}/68268af3f6c80ae7736abe37_1.jpg`,
-    isNew: false,
-  },
-];
+const posts = getCategoryCards("insights");
 
 function ArticleCard({ post }: { post: Post }) {
   return (
