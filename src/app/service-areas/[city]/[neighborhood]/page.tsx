@@ -20,7 +20,6 @@ import {
   buildNeighborhoodMentions,
   NeighborhoodPlaceSchema,
   NeighborhoodServiceSchema,
-  OrganizationSchema,
   WebPageSchema,
 } from "@/components/service-areas/SchemaLd";
 
@@ -112,7 +111,6 @@ export default async function NeighborhoodPage({
         cityName={city.name}
         cityStateCode={city.stateCode}
       />
-      <OrganizationSchema />
       <WebPageSchema
         pageUrl={pageUrl}
         title={`${neighborhood.name}, ${city.name} ${city.stateCode} Real Estate`}

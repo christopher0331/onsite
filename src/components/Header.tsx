@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import NavDropdown from "@/components/NavDropdown";
 import ServiceAreasNav from "@/components/ServiceAreasNav";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
 
 // Routes that display NWMLS / IDX listing data — header must stay solid so
 // the brokerage logo remains visible over white listing cards & photos.
@@ -149,12 +150,12 @@ export default function Header() {
                 TBC
               </a>
               <a
-                href="tel:253-441-9764"
+                href={PHONE_HREF}
                 className={`shrink-0 whitespace-nowrap text-[15px] font-medium tracking-[0.06em] transition-colors duration-300 hover:opacity-60 ${
                   solid ? "text-charcoal" : "text-white"
                 }`}
               >
-                (253) 441-9764
+                {PHONE_DISPLAY}
               </a>
             </nav>
 
@@ -258,10 +259,10 @@ export default function Header() {
             ))}
             <div className="mt-4">
               <a
-                href="tel:253-441-9764"
+                href={PHONE_HREF}
                 className="text-sm uppercase tracking-[0.2em] text-white/80 hover:text-white/80 transition-colors"
               >
-                (253) 441-9764
+                {PHONE_DISPLAY}
               </a>
             </div>
           </nav>

@@ -6,12 +6,22 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
+import {
+  ADDRESS_LINE,
+  GBP_DESCRIPTION,
+  GBP_NAME,
+  GOOGLE_MAPS_PLACE_URL,
+  GOOGLE_RATING,
+  MAPS_DIRECTIONS_URL,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+} from "@/lib/nap";
 
 const contactMethods = [
   {
     label: "André Bohall",
-    phone: "253-441-9764",
-    phoneHref: "tel:253-441-9764",
+    phone: PHONE_DISPLAY,
+    phoneHref: PHONE_HREF,
     email: "andre@onsiteregroup.com",
     emailHref: "mailto:andre@onsiteregroup.com",
   },
@@ -158,8 +168,29 @@ export default function ContactUsPage() {
               {/* Office / Map */}
               <div className="rounded-3xl border border-charcoal/[0.08] bg-warm-gray/50 p-6 shadow-[0_14px_40px_rgba(0,0,0,0.06)]">
                 <p className="text-[11px] uppercase tracking-[0.3em] text-mid-gray mb-3">Find Us</p>
+                <p className="text-[15px] font-medium text-charcoal mb-1">{GBP_NAME}</p>
+                <p className="text-[14px] text-charcoal/80 leading-relaxed mb-4">
+                  {GBP_DESCRIPTION}
+                </p>
                 <a
-                  href="https://www.google.com/maps/dir//3920+W+Tapps+Dr+E,+Lake+Tapps,+WA+98391"
+                  href={GOOGLE_MAPS_PLACE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-[14px] text-charcoal/80 hover:text-charcoal transition-colors mb-4"
+                >
+                  {GOOGLE_RATING.ratingValue.toFixed(1)} · {GOOGLE_RATING.reviewCount} Google reviews
+                </a>
+                <a
+                  href={PHONE_HREF}
+                  className="flex items-center gap-3 text-[15px] text-charcoal hover:text-charcoal/80 transition-colors mb-3"
+                >
+                  <svg className="w-4 h-4 shrink-0 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                  </svg>
+                  {PHONE_DISPLAY}
+                </a>
+                <a
+                  href={MAPS_DIRECTIONS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-3 text-[15px] text-charcoal hover:text-charcoal/80 transition-colors"
@@ -168,7 +199,7 @@ export default function ContactUsPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                   </svg>
-                  3920 W Tapps Dr E, Lake Tapps, WA 98391
+                  {ADDRESS_LINE}
                 </a>
               </div>
             </div>

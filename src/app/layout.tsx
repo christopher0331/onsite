@@ -3,6 +3,9 @@ import Script from "next/script";
 import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import AiAssistantLazy from "@/components/AiAssistantLazy";
+import { OrganizationSchema } from "@/components/service-areas/SchemaLd";
+import { SITE_BRAND } from "@/lib/nap";
+import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const GA_MEASUREMENT_ID = "G-70Q8F15W0D";
 
@@ -20,6 +23,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(getCanonicalBaseUrl()),
   title: "Real Estate Agents Lake Tapps | Onsite ReGroup",
   description:
     "Top rated real estate agents in Pierce County. Sell your home with confidence. Trusted agents serving Lake Tapps, Bonney Lake, Sumner, Buckley, Graham, Puyallup & Beyond.",
@@ -27,8 +31,8 @@ export const metadata: Metadata = {
     title: "Real Estate Agents Lake Tapps | Onsite ReGroup",
     description:
       "Top rated real estate agents in Pierce County. Sell your home with confidence.",
-    url: "https://www.onsiteregroup.com",
-    siteName: "OnSite ReGroup",
+    url: getCanonicalBaseUrl(),
+    siteName: SITE_BRAND,
     locale: "en_US",
     type: "website",
   },
@@ -42,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-x-hidden">
       <body className={`${inter.variable} ${dmSans.variable} antialiased overflow-x-hidden`}>
+        <OrganizationSchema />
         {children}
         <AiAssistantLazy />
         <Script

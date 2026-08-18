@@ -7,6 +7,19 @@ import {
   isMainWebsiteHost,
   showIdxContent as defaultShowIdxContent,
 } from "@/lib/site-visibility";
+import {
+  ADDRESS_LOCALITY,
+  ADDRESS_POSTAL,
+  ADDRESS_REGION,
+  ADDRESS_STREET,
+  GBP_DESCRIPTION,
+  GBP_NAME,
+  GOOGLE_MAPS_PLACE_URL,
+  GOOGLE_RATING,
+  MAPS_DIRECTIONS_URL,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+} from "@/lib/nap";
 
 const companyLinks = [
   { label: "Home", href: "/" },
@@ -94,27 +107,38 @@ export default function Footer() {
                 className="h-10 w-auto brightness-0 invert"
               />
             </div>
+            <p className="text-[14px] text-white/80 leading-relaxed max-w-xs mb-6">
+              {GBP_NAME}
+            </p>
             <p className="text-[14px] text-white/80 leading-relaxed max-w-xs mb-8">
-              Expert Negotiation. Maximize Value. Your trusted real estate team
-              in Pierce County.
+              {GBP_DESCRIPTION}
             </p>
 
             <div className="space-y-3">
               <a
-                href="tel:253-441-9764"
+                href={GOOGLE_MAPS_PLACE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-[14px] text-white/60 hover:text-white transition-colors"
               >
-                (253) 441-9764
+                {GOOGLE_RATING.ratingValue.toFixed(1)} · {GOOGLE_RATING.reviewCount}{" "}
+                Google reviews
               </a>
               <a
-                href="https://www.google.com/maps/dir//3920+W+Tapps+Dr+E,+Lake+Tapps,+WA+98391"
+                href={PHONE_HREF}
+                className="block text-[14px] text-white/60 hover:text-white transition-colors"
+              >
+                {PHONE_DISPLAY}
+              </a>
+              <a
+                href={MAPS_DIRECTIONS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-[14px] text-white/80 hover:text-white/60 transition-colors leading-relaxed"
               >
-                3920 W Tapps Dr E
+                {ADDRESS_STREET}
                 <br />
-                Lake Tapps, WA 98391
+                {ADDRESS_LOCALITY}, {ADDRESS_REGION} {ADDRESS_POSTAL}
               </a>
             </div>
           </div>

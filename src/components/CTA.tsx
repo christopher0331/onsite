@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
 
 export default function CTA() {
   const ref = useRef<HTMLElement>(null);
@@ -71,10 +72,10 @@ export default function CTA() {
             Home Selling Solutions
           </Link>
           <a
-            href="tel:253-441-9764"
+            href={PHONE_HREF}
             className="group inline-flex items-center justify-center gap-3 border border-white/35 text-white px-10 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/10 transition-all duration-500"
           >
-            Call (253) 441-9764
+            Call {PHONE_DISPLAY}
           </a>
         </motion.div>
       </div>

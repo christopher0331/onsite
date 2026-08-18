@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TeamSection from "@/components/TeamSection";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
 
 export const metadata: Metadata = {
   title: "About Onsite Real Estate Agents | Local Expertise, Proven Results",
@@ -221,10 +222,10 @@ export default function AboutUsPage() {
                     Contact Us
                   </Link>
                   <a
-                    href="tel:253-441-9764"
+                    href={PHONE_HREF}
                     className="inline-flex items-center justify-center border border-white/35 text-white px-10 py-4 text-[12px] uppercase tracking-[0.25em] rounded-full hover:bg-white/10 transition-all duration-500"
                   >
-                    (253) 441-9764
+                    {PHONE_DISPLAY}
                   </a>
                 </div>
               </div>

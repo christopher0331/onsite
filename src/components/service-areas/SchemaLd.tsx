@@ -7,28 +7,11 @@
 
 import type { CardListing } from "@/components/ListingCard";
 import type { City, EntityLink, Neighborhood } from "@/lib/service-areas/types";
+import { localBusinessId, localBusinessNode, SITE_BRAND } from "@/lib/nap";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
-const ORG_NAME = "OnSite ReGroup";
 const ORG_URL = getCanonicalBaseUrl();
-const ORG_PHONE = "+1-253-441-9764";
-const ORG_ADDRESS = {
-  "@type": "PostalAddress" as const,
-  streetAddress: "3920 W Tapps Dr E",
-  addressLocality: "Lake Tapps",
-  addressRegion: "WA",
-  postalCode: "98391",
-  addressCountry: "US",
-};
-
-/** RealEstateAgent is a LocalBusiness — Google/Semrush require a street address. */
-const ORG_AGENT = {
-  "@type": "RealEstateAgent" as const,
-  name: ORG_NAME,
-  url: ORG_URL,
-  telephone: ORG_PHONE,
-  address: ORG_ADDRESS,
-};
+const ORG_REF = { "@id": localBusinessId(ORG_URL) };
 
 const SERVICE_TYPE = "Real Estate Brokerage";
 
@@ -98,11 +81,7 @@ export function buildNeighborhoodMentions(neighborhood: Neighborhood): Array<{
 export function OrganizationSchema() {
   const data = {
     "@context": "https://schema.org",
-    ...ORG_AGENT,
-    areaServed: [
-      { "@type": "AdministrativeArea", name: "Pierce County, WA" },
-      { "@type": "AdministrativeArea", name: "King County, WA" },
-    ],
+    ...localBusinessNode(ORG_URL),
   };
   return (
     <script
@@ -132,10 +111,10 @@ export function WebPageSchema({
     description,
     isPartOf: {
       "@type": "WebSite",
-      name: ORG_NAME,
+      name: SITE_BRAND,
       url: ORG_URL,
     },
-    about: ORG_AGENT,
+    about: ORG_REF,
     ...(mentions && mentions.length > 0 ? { mentions } : {}),
   };
   return (
@@ -176,7 +155,7 @@ export function CityServiceSchema({
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: SERVICE_TYPE,
-    provider: ORG_AGENT,
+    provider: ORG_REF,
     areaServed: {
       "@type": "City",
       name: city.name,
@@ -238,7 +217,7 @@ export function NeighborhoodServiceSchema({
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: SERVICE_TYPE,
-    provider: ORG_AGENT,
+    provider: ORG_REF,
     areaServed: {
       "@type": "Place",
       name: `${neighborhood.name}, ${cityName}`,

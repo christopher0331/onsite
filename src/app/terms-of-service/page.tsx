@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
+import { ADDRESS_LINE, GBP_NAME, PHONE_DISPLAY } from "@/lib/nap";
 
 export const metadata: Metadata = {
   title: "Terms of Service | OnSite Real Estate Group",
@@ -121,10 +122,10 @@ export default async function TermsOfServicePage() {
               </p>
               <dl className="space-y-3">
                 {[
-                  { label: "Brokerage", value: "Onsite Real Estate Group" },
-                  { label: "Address", value: "3920 W Tapps Dr E, Lake Tapps, WA 98391" },
+                  { label: "Brokerage", value: GBP_NAME },
+                  { label: "Address", value: ADDRESS_LINE },
                   { label: "Email", value: "Andre@OnsiteRegroup.com" },
-                  { label: "Phone", value: "253-441-9764" },
+                  { label: "Phone", value: PHONE_DISPLAY },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-8">
                     <dt className="w-24 shrink-0 text-[11px] uppercase tracking-[0.2em] text-charcoal/70">{label}</dt>

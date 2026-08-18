@@ -7,10 +7,7 @@ import Marquee from "@/components/Marquee";
 import Breadcrumbs from "@/components/service-areas/Breadcrumbs";
 import ServiceAreaCTA from "@/components/service-areas/ServiceAreaCTA";
 import ServiceAreaCoverageMap from "@/components/service-areas/ServiceAreaCoverageMap";
-import {
-  OrganizationSchema,
-  WebPageSchema,
-} from "@/components/service-areas/SchemaLd";
+import { WebPageSchema } from "@/components/service-areas/SchemaLd";
 import {
   CITIES,
   NEIGHBORHOODS,
@@ -47,7 +44,6 @@ export default function ServiceAreasIndex() {
   return (
     <>
       <Header />
-      <OrganizationSchema />
       <WebPageSchema
         pageUrl={`${SITE_URL}/service-areas`}
         title="Service Areas | Pierce County Real Estate"

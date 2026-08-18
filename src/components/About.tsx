@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
 
 export default function About() {
   const ref = useRef<HTMLElement>(null);
@@ -93,10 +94,10 @@ export default function About() {
                   André Bohall
                 </p>
                 <a
-                  href="tel:253-441-9764"
+                  href={PHONE_HREF}
                   className="text-[13px] text-charcoal/80 hover:text-charcoal transition-colors mt-1 block"
                 >
-                  (253) 441-9764
+                  {PHONE_DISPLAY}
                 </a>
               </div>
               <div>

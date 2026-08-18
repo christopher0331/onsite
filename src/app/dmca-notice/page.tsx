@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
+import { ADDRESS_LINE, GBP_NAME, PHONE_DISPLAY } from "@/lib/nap";
 
 export const metadata: Metadata = {
   title: "DMCA Notice | OnSite Real Estate Group",
@@ -79,10 +80,10 @@ export default function DmcaNoticePage() {
               <div className="rounded-3xl border border-charcoal/8 p-8 shadow-[0_8px_32px_rgba(0,0,0,0.05)]">
                 <dl className="space-y-5">
                   {[
-                    { label: "Agent", value: "Copyright Agent — Onsite Real Estate" },
-                    { label: "Address", value: "3920 W Tapps Dr E, Lake Tapps, WA 98391" },
+                    { label: "Agent", value: `Copyright Agent — ${GBP_NAME}` },
+                    { label: "Address", value: ADDRESS_LINE },
                     { label: "Email", value: "Andre@OnsiteRegroup.com" },
-                    { label: "Phone", value: "253-441-9764" },
+                    { label: "Phone", value: PHONE_DISPLAY },
                   ].map(({ label, value }) => (
                     <div key={label} className="flex flex-col gap-1 border-b border-charcoal/8 pb-5 last:border-0 last:pb-0 sm:flex-row sm:items-baseline sm:gap-8">
                       <dt className="w-20 shrink-0 text-[11px] uppercase tracking-[0.2em] text-charcoal/70">{label}</dt>
