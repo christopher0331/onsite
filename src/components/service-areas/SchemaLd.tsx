@@ -20,6 +20,16 @@ const ORG_ADDRESS = {
   postalCode: "98391",
   addressCountry: "US",
 };
+
+/** RealEstateAgent is a LocalBusiness — Google/Semrush require a street address. */
+const ORG_AGENT = {
+  "@type": "RealEstateAgent" as const,
+  name: ORG_NAME,
+  url: ORG_URL,
+  telephone: ORG_PHONE,
+  address: ORG_ADDRESS,
+};
+
 const SERVICE_TYPE = "Real Estate Brokerage";
 
 type BreadcrumbEntry = { name: string; url: string };
@@ -88,11 +98,7 @@ export function buildNeighborhoodMentions(neighborhood: Neighborhood): Array<{
 export function OrganizationSchema() {
   const data = {
     "@context": "https://schema.org",
-    "@type": "RealEstateAgent",
-    name: ORG_NAME,
-    url: ORG_URL,
-    telephone: ORG_PHONE,
-    address: ORG_ADDRESS,
+    ...ORG_AGENT,
     areaServed: [
       { "@type": "AdministrativeArea", name: "Pierce County, WA" },
       { "@type": "AdministrativeArea", name: "King County, WA" },
@@ -129,11 +135,7 @@ export function WebPageSchema({
       name: ORG_NAME,
       url: ORG_URL,
     },
-    about: {
-      "@type": "RealEstateAgent",
-      name: ORG_NAME,
-      url: ORG_URL,
-    },
+    about: ORG_AGENT,
     ...(mentions && mentions.length > 0 ? { mentions } : {}),
   };
   return (
@@ -174,21 +176,18 @@ export function CityServiceSchema({
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: SERVICE_TYPE,
-    provider: {
-      "@type": "RealEstateAgent",
-      name: ORG_NAME,
-      url: ORG_URL,
-      telephone: ORG_PHONE,
-      address: ORG_ADDRESS,
-    },
+    provider: ORG_AGENT,
     areaServed: {
       "@type": "City",
       name: city.name,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: city.name,
-        addressRegion: city.stateCode,
-        addressCountry: "US",
+      containedInPlace: {
+        "@type": "AdministrativeArea",
+        name: `${city.county}, ${city.stateCode}`,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: city.geo.lat,
+        longitude: city.geo.lng,
       },
     },
     url: pageUrl,
@@ -206,11 +205,9 @@ export function CityPlaceSchema({ city }: { city: City }) {
     "@context": "https://schema.org",
     "@type": "Place",
     name: `${city.name}, ${city.stateCode}`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: city.name,
-      addressRegion: city.stateCode,
-      addressCountry: "US",
+    containedInPlace: {
+      "@type": "AdministrativeArea",
+      name: `${city.county}, ${city.stateCode}`,
     },
     geo: {
       "@type": "GeoCoordinates",
@@ -241,23 +238,22 @@ export function NeighborhoodServiceSchema({
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: SERVICE_TYPE,
-    provider: {
-      "@type": "RealEstateAgent",
-      name: ORG_NAME,
-      url: ORG_URL,
-      telephone: ORG_PHONE,
-      address: ORG_ADDRESS,
-    },
+    provider: ORG_AGENT,
     areaServed: {
       "@type": "Place",
       name: `${neighborhood.name}, ${cityName}`,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: cityName,
-        addressRegion: cityStateCode,
-        addressCountry: "US",
-        ...(neighborhood.zipCodes[0] ? { postalCode: neighborhood.zipCodes[0] } : {}),
+      containedInPlace: {
+        "@type": "City",
+        name: `${cityName}, ${cityStateCode}`,
       },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: neighborhood.geo.lat,
+        longitude: neighborhood.geo.lng,
+      },
+      ...(neighborhood.zipCodes[0]
+        ? { postalCode: neighborhood.zipCodes[0] }
+        : {}),
     },
     url: pageUrl,
     name: `Real Estate in ${neighborhood.name}, ${cityName}`,
@@ -321,11 +317,9 @@ export function NeighborhoodPlaceSchema({
     "@context": "https://schema.org",
     "@type": "Place",
     name: `${neighborhood.name}, ${cityName}, ${cityStateCode}`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: cityName,
-      addressRegion: cityStateCode,
-      addressCountry: "US",
+    containedInPlace: {
+      "@type": "City",
+      name: `${cityName}, ${cityStateCode}`,
     },
     geo: {
       "@type": "GeoCoordinates",
