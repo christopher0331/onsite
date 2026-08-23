@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
+import { trackLeadSubmitted } from "@/lib/analytics";
 
 const valuationBenefits = [
   {
@@ -62,6 +63,7 @@ export default function FreeHomeEvaluationPage() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    trackLeadSubmitted("home_evaluation");
     setFormState("success");
   }
 

@@ -6,7 +6,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import NavDropdown from "@/components/NavDropdown";
 import ServiceAreasNav from "@/components/ServiceAreasNav";
-import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
+import { PHONE_DISPLAY, PHONE_HREF, PHONE_TEL } from "@/lib/nap";
+import { trackPhoneCall } from "@/lib/analytics";
 
 // Routes that display NWMLS / IDX listing data — header must stay solid so
 // the brokerage logo remains visible over white listing cards & photos.
@@ -151,6 +152,7 @@ export default function Header() {
               </a>
               <a
                 href={PHONE_HREF}
+                onClick={() => trackPhoneCall(PHONE_TEL)}
                 className={`shrink-0 whitespace-nowrap text-[15px] font-medium tracking-[0.06em] transition-colors duration-300 hover:opacity-60 ${
                   solid ? "text-charcoal" : "text-white"
                 }`}
@@ -260,6 +262,7 @@ export default function Header() {
             <div className="mt-4">
               <a
                 href={PHONE_HREF}
+                onClick={() => trackPhoneCall(PHONE_TEL)}
                 className="text-sm uppercase tracking-[0.2em] text-white/80 hover:text-white/80 transition-colors"
               >
                 {PHONE_DISPLAY}

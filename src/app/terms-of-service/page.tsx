@@ -39,7 +39,7 @@ const sections = [
   },
   {
     title: "Privacy",
-    body: "Your use of the Site is also governed by our Privacy Policy. By using the Site, you consent to the collection and use of information as described in our Privacy Policy.",
+    body: "We collect contact details you submit through forms so we can respond to inquiries. We also use PostHog for website analytics and session recordings (clicks, scrolling, navigation, and heatmaps). Form fields in recordings are masked. Your use of the Site constitutes consent to this collection as described here.",
   },
   {
     title: "Disclaimer of Warranties",

@@ -16,6 +16,7 @@ import {
   PHONE_DISPLAY,
   PHONE_HREF,
 } from "@/lib/nap";
+import { trackLeadSubmitted, trackPhoneCall } from "@/lib/analytics";
 
 const contactMethods = [
   {
@@ -71,6 +72,7 @@ export default function ContactUsPage() {
         body: JSON.stringify(data),
       });
       if (res.ok) {
+        trackLeadSubmitted("contact", { topic: topic || "unspecified" });
         setFormState("success");
       } else {
         const json = await res.json().catch(() => ({}));
@@ -144,6 +146,7 @@ export default function ContactUsPage() {
                     <div className="flex flex-col gap-2">
                       <a
                         href={person.phoneHref}
+                        onClick={() => trackPhoneCall(person.phone)}
                         className="flex items-center gap-3 text-[15px] text-charcoal hover:text-charcoal/80 transition-colors"
                       >
                         <svg className="w-4 h-4 shrink-0 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -182,6 +185,7 @@ export default function ContactUsPage() {
                 </a>
                 <a
                   href={PHONE_HREF}
+                  onClick={() => trackPhoneCall(PHONE_DISPLAY)}
                   className="flex items-center gap-3 text-[15px] text-charcoal hover:text-charcoal/80 transition-colors mb-3"
                 >
                   <svg className="w-4 h-4 shrink-0 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

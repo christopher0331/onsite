@@ -3,6 +3,7 @@ import Script from "next/script";
 import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import AiAssistantLazy from "@/components/AiAssistantLazy";
+import PostHogScript from "@/components/PostHogScript";
 import { OrganizationSchema } from "@/components/service-areas/SchemaLd";
 import { SITE_BRAND } from "@/lib/nap";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
@@ -49,6 +50,7 @@ export default function RootLayout({
         <OrganizationSchema />
         {children}
         <AiAssistantLazy />
+        <PostHogScript />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
