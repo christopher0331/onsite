@@ -26,7 +26,6 @@ import {
   AreaListingsItemListSchema,
   BreadcrumbSchema,
   buildCityMentions,
-  CityPlaceSchema,
   CityServiceSchema,
   WebPageSchema,
 } from "@/components/service-areas/SchemaLd";
@@ -128,7 +127,6 @@ export default async function CityPage({
         ]}
       />
       <CityServiceSchema city={city} pageUrl={pageUrl} />
-      <CityPlaceSchema city={city} />
       <WebPageSchema
         pageUrl={pageUrl}
         title={`${city.name}, ${city.stateCode} Real Estate Agents`}

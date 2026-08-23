@@ -66,7 +66,7 @@ export function localBusinessId(baseUrl = getCanonicalBaseUrl()) {
 
 export function localBusinessNode(baseUrl = getCanonicalBaseUrl()) {
   return {
-    "@type": "RealEstateAgent" as const,
+    "@type": ["RealEstateAgent", "LocalBusiness"] as const,
     "@id": localBusinessId(baseUrl),
     name: GBP_NAME,
     alternateName: [...GBP_ALTERNATE_NAMES],

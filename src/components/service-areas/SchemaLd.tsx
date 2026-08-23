@@ -7,11 +7,11 @@
 
 import type { CardListing } from "@/components/ListingCard";
 import type { City, EntityLink, Neighborhood } from "@/lib/service-areas/types";
-import { localBusinessId, localBusinessNode, SITE_BRAND } from "@/lib/nap";
+import { localBusinessNode, SITE_BRAND } from "@/lib/nap";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const ORG_URL = getCanonicalBaseUrl();
-const ORG_REF = { "@id": localBusinessId(ORG_URL) };
+const ORG_AGENT = localBusinessNode(ORG_URL);
 
 const SERVICE_TYPE = "Real Estate Brokerage";
 
@@ -114,7 +114,7 @@ export function WebPageSchema({
       name: SITE_BRAND,
       url: ORG_URL,
     },
-    about: ORG_REF,
+    about: ORG_AGENT,
     ...(mentions && mentions.length > 0 ? { mentions } : {}),
   };
   return (
@@ -155,10 +155,10 @@ export function CityServiceSchema({
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: SERVICE_TYPE,
-    provider: ORG_REF,
+    provider: ORG_AGENT,
     areaServed: {
-      "@type": "City",
-      name: city.name,
+      "@type": "AdministrativeArea",
+      name: `${city.name}, ${city.stateCode}`,
       containedInPlace: {
         "@type": "AdministrativeArea",
         name: `${city.county}, ${city.stateCode}`,
@@ -170,29 +170,6 @@ export function CityServiceSchema({
       },
     },
     url: pageUrl,
-  };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
-}
-
-export function CityPlaceSchema({ city }: { city: City }) {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "Place",
-    name: `${city.name}, ${city.stateCode}`,
-    containedInPlace: {
-      "@type": "AdministrativeArea",
-      name: `${city.county}, ${city.stateCode}`,
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: city.geo.lat,
-      longitude: city.geo.lng,
-    },
   };
   return (
     <script
@@ -217,12 +194,12 @@ export function NeighborhoodServiceSchema({
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: SERVICE_TYPE,
-    provider: ORG_REF,
+    provider: ORG_AGENT,
     areaServed: {
-      "@type": "Place",
+      "@type": "AdministrativeArea",
       name: `${neighborhood.name}, ${cityName}`,
       containedInPlace: {
-        "@type": "City",
+        "@type": "AdministrativeArea",
         name: `${cityName}, ${cityStateCode}`,
       },
       geo: {
@@ -274,37 +251,6 @@ export function AreaListingsItemListSchema({
         name,
       };
     }),
-  };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
-}
-
-export function NeighborhoodPlaceSchema({
-  neighborhood,
-  cityName,
-  cityStateCode,
-}: {
-  neighborhood: Neighborhood;
-  cityName: string;
-  cityStateCode: string;
-}) {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "Place",
-    name: `${neighborhood.name}, ${cityName}, ${cityStateCode}`,
-    containedInPlace: {
-      "@type": "City",
-      name: `${cityName}, ${cityStateCode}`,
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: neighborhood.geo.lat,
-      longitude: neighborhood.geo.lng,
-    },
   };
   return (
     <script
