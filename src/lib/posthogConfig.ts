@@ -1,5 +1,5 @@
 /**
- * Onsite Real Estate Group lives in the billed Reactiv Labs / MyFence.com
+ * Onsite Real Estate Group lives in the billed Reactiv Labs
  * PostHog organization as its own project. Do not use the MyFence token.
  */
 export const SITE_ID = String(process.env.NEXT_PUBLIC_SITE_ID ?? "onsiteregroup").trim() || "onsiteregroup";
