@@ -1,7 +1,7 @@
-import { posthogSuperProperties } from "@/lib/posthogConfig";
+import { posthogSuperProperties, shouldSkipPosthogCapture } from "@/lib/posthogConfig";
 
 function capturePosthog(event: string, properties?: Record<string, unknown>): void {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || shouldSkipPosthogCapture()) return;
   const props = { ...posthogSuperProperties(), ...properties };
   try {
     if (window.posthog && typeof window.posthog.capture === "function") {
