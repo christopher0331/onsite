@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import { POSTHOG_HOST, POSTHOG_KEY, posthogSuperProperties } from "@/lib/posthogConfig";
+import { POSTHOG_HOST, POSTHOG_KEY, posthogSuperProperties, shouldSkipPosthogCapture } from "@/lib/posthogConfig";
 
 /**
  * Loads PostHog (session replay + heatmaps) on first interaction or after 8s.
  */
 export default function PostHogScript() {
   useEffect(() => {
-    if (!POSTHOG_KEY) return;
+    if (!POSTHOG_KEY || shouldSkipPosthogCapture()) return;
 
     let loaded = false;
     const events = ["pointerdown", "scroll", "keydown", "touchstart"] as const;

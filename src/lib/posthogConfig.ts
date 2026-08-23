@@ -18,6 +18,24 @@ export function posthogSuperProperties(): Record<string, string> {
   };
 }
 
+const INTERNAL_OPT_OUT_KEY = "ph_internal_opt_out";
+
+/** Persist opt-out for this browser via `?ph_internal=1` (use `?ph_internal=0` to resume). */
+export function shouldSkipPosthogCapture(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("ph_internal") === "1") {
+      window.localStorage.setItem(INTERNAL_OPT_OUT_KEY, "1");
+    } else if (params.get("ph_internal") === "0") {
+      window.localStorage.removeItem(INTERNAL_OPT_OUT_KEY);
+    }
+    return window.localStorage.getItem(INTERNAL_OPT_OUT_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
 export type PosthogQueueItem = { event: string; properties?: Record<string, unknown> };
 
 declare global {
