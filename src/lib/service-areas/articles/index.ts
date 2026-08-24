@@ -7,6 +7,7 @@ import { edgewoodArticle } from "./edgewood";
 import { miltonArticle } from "./milton";
 import { auburnArticle } from "./auburn";
 import { buckleyArticle } from "./buckley";
+import { grahamArticle } from "./graham";
 import { downtownPuyallupArticle } from "./downtown-puyallup";
 import { clarksCreekArticle } from "./clarks-creek";
 import { rodescoArticle } from "./rodesco";
@@ -23,6 +24,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [miltonArticle.slug]: miltonArticle,
   [auburnArticle.slug]: auburnArticle,
   [buckleyArticle.slug]: buckleyArticle,
+  [grahamArticle.slug]: grahamArticle,
   [downtownPuyallupArticle.slug]: downtownPuyallupArticle,
   [clarksCreekArticle.slug]: clarksCreekArticle,
   [rodescoArticle.slug]: rodescoArticle,
