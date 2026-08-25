@@ -13,6 +13,7 @@ import { rodescoArticle } from "./rodesco";
 import { shawneeRidgeArticle } from "./shawnee-ridge";
 import { gemHeightsArticle } from "./gem-heights";
 import { summitArticle } from "./summit";
+import { southHillArticle } from "./south-hill";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -29,6 +30,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [shawneeRidgeArticle.slug]: shawneeRidgeArticle,
   [gemHeightsArticle.slug]: gemHeightsArticle,
   [summitArticle.slug]: summitArticle,
+  [southHillArticle.slug]: southHillArticle,
 };
 
 export function getServiceAreaArticle(

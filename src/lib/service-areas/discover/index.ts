@@ -13,6 +13,7 @@ import { rodescoDiscover } from "./rodesco";
 import { shawneeRidgeDiscover } from "./shawnee-ridge";
 import { gemHeightsDiscover } from "./gem-heights";
 import { summitDiscover } from "./summit";
+import { southHillDiscover } from "./south-hill";
 
 const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [lakeTappsDiscover.slug]: lakeTappsDiscover,
@@ -29,6 +30,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [shawneeRidgeDiscover.slug]: shawneeRidgeDiscover,
   [gemHeightsDiscover.slug]: gemHeightsDiscover,
   [summitDiscover.slug]: summitDiscover,
+  [southHillDiscover.slug]: southHillDiscover,
 };
 
 export function getServiceAreaDiscover(
