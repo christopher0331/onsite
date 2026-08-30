@@ -5,7 +5,8 @@
 **Money page:** `/service-areas/puyallup`  
 **Live spokes today:** South Hill + Downtown + Clark's Creek + Rodesco + Shawnee Ridge + Gem Heights + Summit  
 **Canvas:** `puyallup-competitive-gap.canvas.tsx`  
-**Last updated:** 2026-08-13
+**Last updated:** 2026-08-30  
+**Content depth (2026-08-30):** Discover + long-form articles now cover all 13 hubs and all 9 spokes (incl. South Hill, Tehaleh, Bridge Hill, Graham, Tacoma, Federal Way, Kent, Seattle).
 
 ---
 
