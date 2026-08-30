@@ -156,19 +156,10 @@ export function CityServiceSchema({
     "@type": "Service",
     serviceType: SERVICE_TYPE,
     provider: ORG_AGENT,
-    areaServed: {
-      "@type": "AdministrativeArea",
-      name: `${city.name}, ${city.stateCode}`,
-      containedInPlace: {
-        "@type": "AdministrativeArea",
-        name: `${city.county}, ${city.stateCode}`,
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: city.geo.lat,
-        longitude: city.geo.lng,
-      },
-    },
+    // String areaServed (schema.org allows Text or Place). Place/City nodes
+    // without a street address are reported by Semrush as LocalBusiness
+    // missing `address` on every city hub.
+    areaServed: `${city.name}, ${city.stateCode}`,
     url: pageUrl,
   };
   return (
@@ -195,22 +186,9 @@ export function NeighborhoodServiceSchema({
     "@type": "Service",
     serviceType: SERVICE_TYPE,
     provider: ORG_AGENT,
-    areaServed: {
-      "@type": "AdministrativeArea",
-      name: `${neighborhood.name}, ${cityName}`,
-      containedInPlace: {
-        "@type": "AdministrativeArea",
-        name: `${cityName}, ${cityStateCode}`,
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: neighborhood.geo.lat,
-        longitude: neighborhood.geo.lng,
-      },
-      ...(neighborhood.zipCodes[0]
-        ? { postalCode: neighborhood.zipCodes[0] }
-        : {}),
-    },
+    areaServed: neighborhood.zipCodes[0]
+      ? `${neighborhood.name}, ${cityName}, ${cityStateCode} ${neighborhood.zipCodes[0]}`
+      : `${neighborhood.name}, ${cityName}, ${cityStateCode}`,
     url: pageUrl,
     name: `Real Estate in ${neighborhood.name}, ${cityName}`,
   };

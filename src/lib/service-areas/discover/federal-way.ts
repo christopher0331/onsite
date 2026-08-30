@@ -2,59 +2,59 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const federalWayDiscover: ServiceAreaDiscover = {
   slug: "federal-way",
-  updatedAt: "2026-08-29",
+  updatedAt: "2026-08-30",
   attractions: [
     {
       name: "Twin Lakes",
       url: "https://www.google.com/maps/place/Twin+Lakes,+Federal+Way,+WA",
       description:
-        "Twin Lakes is one of Federal Way's most established residential clusters — golf-course adjacency, quieter single-family streets, and a neighborhood rhythm that draws buyers who want separation from the I-5 commercial spine.",
+        "Twin Lakes is one of Federal Way's best-known residential clusters — established streets, lake-adjacent living, and a buyer pool that often compares this pocket against West Campus and Lakota rather than a citywide average.",
     },
     {
       name: "Dash Point State Park",
       url: "https://www.parks.wa.gov/find-parks/state-parks/dash-point-state-park",
       description:
-        "Dash Point State Park anchors Federal Way's Sound-side outdoor life with beach access, wooded trails, and camping. It is a major lifestyle draw for households comparing Dash Point and Redondo living with inland neighborhoods.",
+        "Dash Point State Park anchors the waterfront edge of Federal Way with beach access, trails, and camping. It is a lifestyle draw for households prioritizing Sound views and outdoor routines near home.",
     },
     {
-      name: "Celebration Park",
-      url: "https://www.cityoffederalway.com/page/celebration-park",
+      name: "Redondo Waterfront",
+      url: "https://www.google.com/maps/place/Redondo+Beach,+Federal+Way,+WA",
       description:
-        "Celebration Park is a central recreation hub with fields, trails, and event space that serves families across Twin Lakes, West Campus, and Lakota. Buyers often weigh proximity to this park when comparing inland Federal Way pockets.",
-    },
-    {
-      name: "Steel Lake Park",
-      url: "https://www.cityoffederalway.com/page/steel-lake-park",
-      description:
-        "Steel Lake Park offers swimming, picnic areas, and a neighborhood lake setting close to central Federal Way. It adds everyday outdoor value for residents who want recreation without driving to the Sound.",
-    },
-    {
-      name: "Redondo / Dumas Bay Waterfront",
-      url: "https://www.google.com/maps/place/Redondo,+Federal+Way,+WA",
-      description:
-        "Redondo and the Dumas Bay shoreline give Federal Way a distinct waterfront edge — beach access, marine views, and a different buyer profile than inland plats. Homes here often trade for Sound lifestyle as much as square footage.",
+        "Redondo's pier and waterfront pocket give Federal Way a distinct marine-edge identity. Buyers here weigh views and recreation against bluff, wetland, and critical-area diligence that inland plats may not face.",
     },
     {
       name: "Federal Way Public Schools",
       url: "https://www.fwps.org/",
       description:
-        "Federal Way Public Schools covers Twin Lakes, West Campus, Lakota, and the Dash Point / Redondo waterfront, remaining a key filter for relocating families comparing clusters across 98003 and 98023.",
+        "Federal Way Public Schools serve Twin Lakes, West Campus, Lakota, and the Dash Point/Redondo waterfront. Confirm attendance boundaries by address — neighborhood names alone are not a substitute for the district map.",
     },
     {
-      name: "KCLS Federal Way Library",
-      url: "https://kcls.org/locations/federal-way-30025-1st-ave-s/",
+      name: "King County Library System — Federal Way",
+      url: "https://kcls.org/",
       description:
-        "Federal Way's King County Library System branch gives families, students, and remote workers nearby learning space and community programs — a practical everyday amenity for inland and waterfront-adjacent households alike.",
+        "KCLS branches across Federal Way support everyday reading, study space, and family programs — a practical amenity for suburban households balancing school and work routines.",
     },
     {
-      name: "The Commons at Federal Way",
-      url: "https://www.google.com/maps/place/The+Commons+at+Federal+Way",
+      name: "Lakehaven Water & Sewer District",
+      url: "https://www.lakehaven.org/",
       description:
-        "The Commons retail corridor anchors everyday shopping and services near West Campus and central Federal Way. Buyers who want arterial convenience often weigh this access against quieter Twin Lakes or Dash Point settings.",
+        "Lakehaven is the primary water and sewer utility for most Federal Way homes. Side-sewer documentation and utility notes belong early in the transaction timeline to avoid escrow delays.",
+    },
+    {
+      name: "City of Federal Way Community Development",
+      url: "https://www.cityoffederalway.com/page/community-development",
+      description:
+        "Community Development handles permits, inspections, and planning review — including critical-area questions near bluffs and wetlands, plus rental-compliance checks in investor-heavy pockets.",
+    },
+    {
+      name: "West Campus & Lakota",
+      url: "https://www.google.com/maps/place/Federal+Way,+WA",
+      description:
+        "West Campus and Lakota offer different street patterns and housing stock than Twin Lakes or the waterfront. Federal Way shopping often starts by picking a cluster first, then comps within that pocket.",
     },
   ],
   localLivingMarkdown: [
-    "Federal Way offers a cluster-driven south King County lifestyle, with housing that ranges from Twin Lakes and Lakota single-family streets to West Campus convenience, Dash Point bluff living, and Redondo waterfront access across ZIPs 98003 and 98023. Buyers often compare [Federal Way](/service-areas/federal-way) with [Auburn](/service-areas/auburn), [Kent](/service-areas/kent), [Milton](/service-areas/milton), and [Tacoma](/service-areas/tacoma) while weighing I-5 and SR-18 commute times, [Federal Way Public Schools](https://www.fwps.org/) boundaries, [Lakehaven](https://www.lakehaven.org/) utility documentation, and whether they want inland parks or Sound-side recreation. Everyday life stays close to Celebration Park, Steel Lake, Dash Point State Park, The Commons retail corridor, and [KCLS](https://kcls.org/) library resources.",
-    "Buyers comparing [Federal Way homes for sale](/listings?city=Federal%20Way&state=WA) usually sort by pocket: Twin Lakes residential living, West Campus arterial convenience, Lakota school-oriented streets, or Dash Point / Redondo Sound access. That split also shapes how sellers should prepare — critical-area disclosures, side-sewer records, and HOA packages in planned communities matter as much as staging. OnSite Real Estate Group helps households weigh those tradeoffs against nearby options in [Edgewood](/service-areas/edgewood) and the broader Pierce–King corridor so the next move fits daily life, not just a listing photo.",
+    "Federal Way sits in south King County across ZIPs 98003 and 98023, with distinct pockets in Twin Lakes, West Campus, Lakota, Dash Point, and Redondo. Buyers comparing [Federal Way homes for sale](/listings?city=Federal%20Way&state=WA) usually sort by cluster — waterfront edge versus inland plats — while checking [Federal Way Public Schools](https://www.fwps.org/) boundaries, [Lakehaven Water & Sewer District](https://www.lakehaven.org/) service, and planning context through [City of Federal Way Community Development](https://www.cityoffederalway.com/page/community-development). Everyday resources include [King County Library System](https://kcls.org/) branches, [Puget Sound Energy](https://www.pse.com/), and parcel records from the [King County Assessor](https://kingcounty.gov/en/dept/assessor).",
+    "Cross-shopping often expands to [Tacoma](/service-areas/tacoma), [Kent](/service-areas/kent), [Auburn](/service-areas/auburn), and [Milton](/service-areas/milton) when buyers weigh commute, schools, and housing style. OnSite Real Estate Group helps households match the right Federal Way pocket — and the diligence that goes with bluffs, wetlands, and rental rules — so the next move fits daily life.",
   ],
 };

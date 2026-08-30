@@ -1,7 +1,16 @@
 import dynamic from "next/dynamic";
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import { pageMetadata } from "@/lib/page-meta";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
+
+export const metadata: Metadata = pageMetadata({
+  title: "Real Estate Agents Lake Tapps | Onsite ReGroup",
+  description:
+    "Top rated real estate agents in Pierce County. Sell your home with confidence. Trusted agents serving Lake Tapps, Bonney Lake, Sumner, Buckley, Graham, Puyallup & Beyond.",
+  path: "/",
+});
 
 const Stats = dynamic(() => import("@/components/Stats"));
 const TestimonialsScroll = dynamic(() => import("@/components/TestimonialsScroll"));

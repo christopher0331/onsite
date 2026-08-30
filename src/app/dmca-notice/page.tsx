@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import { ADDRESS_LINE, GBP_NAME, PHONE_DISPLAY } from "@/lib/nap";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "DMCA Notice | OnSite Real Estate Group",
   description:
     "Digital Millennium Copyright Act (DMCA) notice and copyright infringement reporting information for OnSite Real Estate Group.",
-};
+  path: "/dmca-notice",
+});
 
 const requirements = [
   "A physical or electronic signature of the copyright owner or person authorized to act on their behalf",
