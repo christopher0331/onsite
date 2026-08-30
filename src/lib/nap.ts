@@ -64,9 +64,23 @@ export function localBusinessId(baseUrl = getCanonicalBaseUrl()) {
   return `${baseUrl}/#localbusiness`;
 }
 
+export function postalAddressNode() {
+  return {
+    "@type": "PostalAddress" as const,
+    streetAddress: ADDRESS_STREET,
+    addressLocality: ADDRESS_LOCALITY,
+    addressRegion: ADDRESS_REGION,
+    postalCode: ADDRESS_POSTAL,
+    addressCountry: ADDRESS_COUNTRY,
+  };
+}
+
 export function localBusinessNode(baseUrl = getCanonicalBaseUrl()) {
   return {
-    "@type": ["RealEstateAgent", "LocalBusiness"] as const,
+    // LocalBusiness first: Semrush (and some crawlers) only bind required
+    // fields like address to @type[0]. RealEstateAgent remains as the
+    // more specific type.
+    "@type": ["LocalBusiness", "RealEstateAgent"] as const,
     "@id": localBusinessId(baseUrl),
     name: GBP_NAME,
     alternateName: [...GBP_ALTERNATE_NAMES],
@@ -75,14 +89,7 @@ export function localBusinessNode(baseUrl = getCanonicalBaseUrl()) {
     telephone: PHONE_E164,
     image: LOGO_URL,
     logo: LOGO_URL,
-    address: {
-      "@type": "PostalAddress" as const,
-      streetAddress: ADDRESS_STREET,
-      addressLocality: ADDRESS_LOCALITY,
-      addressRegion: ADDRESS_REGION,
-      postalCode: ADDRESS_POSTAL,
-      addressCountry: ADDRESS_COUNTRY,
-    },
+    address: postalAddressNode(),
     geo: {
       "@type": "GeoCoordinates" as const,
       latitude: GEO.latitude,
@@ -96,10 +103,12 @@ export function localBusinessNode(baseUrl = getCanonicalBaseUrl()) {
       reviewCount: GOOGLE_RATING.reviewCount,
       bestRating: GOOGLE_RATING.bestRating,
     },
+    // Text, not Place nodes — Place/AdminArea without streetAddress gets
+    // flagged as "Local Business / address required" in Semrush.
     areaServed: [
-      { "@type": "Place", name: "Lake Tapps, WA" },
-      { "@type": "AdministrativeArea", name: "Pierce County, WA" },
-      { "@type": "AdministrativeArea", name: "King County, WA" },
+      "Lake Tapps, WA",
+      "Pierce County, WA",
+      "King County, WA",
     ],
   };
 }
