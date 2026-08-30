@@ -2,47 +2,59 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const southHillDiscover: ServiceAreaDiscover = {
   slug: "south-hill",
-  updatedAt: "2026-08-25",
+  updatedAt: "2026-08-30",
   attractions: [
     {
       name: "South Hill Mall",
       url: "https://www.southhillmall.com/",
       description:
-        "South Hill Mall is the retail anchor of the bench — everyday shopping, dining, and services that keep many households on Meridian for errands instead of driving into the valley. Buyers often treat proximity to the mall corridor as a practical lifestyle filter when comparing South Hill streets.",
+        "South Hill Mall is the primary retail and everyday-services hub along Meridian Ave E, giving nearby neighborhoods shopping, dining, and errands without dropping into the valley. For buyers comparing South Hill pockets, it is one of the clearest lifestyle markers for convenience on the bench.",
     },
     {
       name: "Bradley Lake Park",
-      url: "https://www.cityofpuyallup.org/Facilities/Facility/Details/Bradley-Lake-Park-20",
+      url: "https://www.puyallupwa.gov/2503/Bradley-Lake-Park",
       description:
-        "Bradley Lake Park gives South Hill residents a local trail, open space, and water-adjacent recreation without leaving the plateau. It is a frequent weekend draw for families and a soft amenity that supports neighborhood demand near the park.",
+        "Bradley Lake Park is a city park on South Hill with lake shoreline, trails, picnic space, and play areas that support everyday outdoor routines. Households shopping 98373–98375 often treat it as a neighborhood amenity they can reach without a long drive.",
     },
     {
       name: "Pioneer Park",
       url: "https://www.cityofpuyallup.org/Facilities/Facility/Details/Pioneer-Park-23",
       description:
-        "Pioneer Park sits down the hill in downtown Puyallup and remains an easy outing for South Hill households who want valley-floor events and open space. The short drive links plateau living with the historic core's community calendar.",
+        "Pioneer Park anchors community gatherings just down the hill in downtown Puyallup and remains a familiar destination for South Hill residents who want open space, events, and a valley-floor outing. It pairs well with the mall-and-corridor rhythm of life on the plateau.",
     },
     {
-      name: "Puyallup School District",
-      url: "https://www.puyallupsd.org/",
+      name: "Emerald Ridge High School",
+      url: "https://www.puyallupsd.org/schools/emerald-ridge-high-school",
       description:
-        "Puyallup School District attendance areas — including Rogers and Emerald Ridge corridors — are one of the main reasons families shop South Hill street by street. Confirming the exact campus by address is part of every serious offer conversation here.",
+        "Emerald Ridge High School is one of the main Puyallup School District campuses serving South Hill families. Buyers comparing streets near 176th, Sunrise, and the southern ZIPs often start here when verifying attendance and school-year logistics.",
     },
     {
-      name: "Pierce County Library System",
-      url: "https://mypcls.org/",
+      name: "Rogers High School",
+      url: "https://rhs.puyallupsd.org/",
       description:
-        "Library branches serving South Hill and downtown Puyallup give residents study space, programs, and community resources close to home. For remote workers and families, that everyday amenity rounds out plateau living beyond retail alone.",
+        "Rogers High School serves another major South Hill attendance corridor within the Puyallup School District. Exact assignment still needs to be confirmed by address, because Rogers and Emerald Ridge boundaries can shift street by street across the bench.",
     },
     {
-      name: "Meridian Ave E (SR-161)",
-      url: "https://www.google.com/maps/place/Meridian+Ave+E,+Puyallup,+WA",
+      name: "South Hill Community Park",
+      url: "https://www.piercecountywa.gov/3649/South-Hill-Community-Park",
       description:
-        "Meridian is South Hill's primary north–south spine for shopping, commuting, and cross-shopping against other Pierce County submarkets. How close a home sits to Meridian versus quieter interior streets often shows up in both buyer traffic and list strategy.",
+        "South Hill Community Park gives plateau residents fields, walking space, and casual recreation without leaving the broader South Hill area. It fits buyers who want neighborhood living with park access close to Meridian and the residential grids off 112th and 94th.",
+    },
+    {
+      name: "Pierce College Puyallup",
+      url: "https://www.pierce.ctc.edu/puyallup",
+      description:
+        "Pierce College Puyallup sits on the South Hill side of town and adds local higher-education and continuing-education options for residents. It reinforces the area as a practical place to live for households balancing work, school, and commute needs.",
+    },
+    {
+      name: "Pierce County Library — South Hill",
+      url: "https://www.piercecountylibrary.org/locations/southhilllibrary.htm",
+      description:
+        "The South Hill library branch is an everyday community resource for reading, study space, and family programs without dropping into downtown. For homebuyers, it is another sign that the plateau has its own service layer beyond retail along Meridian.",
     },
   ],
   localLivingMarkdown: [
-    "South Hill is the bench above [Puyallup](/service-areas/puyallup)'s valley floor — a mix of 1980s–2010s plats, Meridian retail, and school corridors that price differently from [Downtown Puyallup](/service-areas/puyallup/downtown-puyallup) or creek-side streets near [Clark's Creek](/service-areas/puyallup/clarks-creek). Everyday life centers on South Hill Mall, Bradley Lake Park, and quick access toward Tacoma and Joint Base Lewis-McChord via Meridian and SR-512, with Sounder rail a short drive into the valley. Families typically verify [Puyallup School District](https://www.puyallupsd.org/) boundaries by address, while buyers comparing pockets often weigh [Gem Heights](/service-areas/puyallup/gem-heights), [Summit](/service-areas/puyallup/summit), and [Shawnee Ridge](/service-areas/puyallup/shawnee-ridge) against the wider South Hill band.",
-    "Shoppers browsing [South Hill / Puyallup homes for sale](/listings?city=Puyallup&state=WA) usually sort by lot size, HOA status, and school line rather than a single ZIP average. Sellers benefit from the same micro-comps: a rambler near 128th and a newer Craftsman off 112th are not the same product. OnSite Real Estate Group helps households match those street-level tradeoffs to prep, pricing, and disclosure timing so the next move fits daily life on the plateau.",
+    "South Hill is the growth bench above the Puyallup valley — ZIPs 98373, 98374, and 98375 along Meridian Ave E (SR-161), 112th Street E, and 94th Avenue E. Much of the housing stock dates from roughly 1988–2008, with single-story ramblers, two-story Craftsman plans, and PNW Contemporary homes on lots commonly in the 0.18–0.45 acre range. Everyday life centers on [South Hill Mall](https://www.southhillmall.com/), [Bradley Lake Park](https://www.puyallupwa.gov/2503/Bradley-Lake-Park), and [Puyallup School District](https://www.puyallupsd.org/) campuses including Rogers High, Emerald Ridge High, and the Edgemont and Glacier View junior highs. Buyers often compare this corridor with [Downtown Puyallup](/service-areas/puyallup/downtown-puyallup), [Gem Heights](/service-areas/puyallup/gem-heights), [Clark's Creek](/service-areas/puyallup/clarks-creek), [Summit](/service-areas/puyallup/summit), [Shawnee Ridge](/service-areas/puyallup/shawnee-ridge), and [Rodesco](/service-areas/puyallup/rodesco) while staying inside the wider [Puyallup](/service-areas/puyallup) map.",
+    "Shoppers browsing [South Hill homes for sale](/listings?city=Puyallup&state=WA) usually sort by pocket — mall-adjacent streets, quieter residential grids, or older parcels near 128th where private wells and septic can still show up. That utility split is why parcel-level checks with [Puget Sound Energy](https://www.pse.com/), the [Pierce County Assessor-Treasurer](https://www.piercecountywa.gov/91/Assessor---Treasurer), and the [Tacoma–Pierce County Health Department](https://www.tpchd.org/) matter as much as curb appeal. Community and business context runs through the [Puyallup Sumner Chamber of Commerce](https://www.puyallupsumnerchamber.com/), while outdoor routines lean on Bradley Lake, Pioneer Park downtown, and South Hill Community Park. OnSite Real Estate Group — André and Cindie Bohall — serves South Hill with street-by-street guidance for buyers and sellers who need more than a generic Puyallup listing pull.",
   ],
 };

@@ -20,6 +20,7 @@ import {
   PHONE_DISPLAY,
   PHONE_HREF,
 } from "@/lib/nap";
+import { CITIES } from "@/lib/service-areas/data";
 
 const companyLinks = [
   { label: "Home", href: "/" },
@@ -97,7 +98,7 @@ export default function Footer() {
     <footer className="bg-charcoal text-white">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12 pt-20 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <div className="mb-6">
               <Image
                 src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/68dc8d33f60130dc306e6c8e_Timber.png"
@@ -143,7 +144,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="lg:col-span-3 lg:col-start-6">
+          <div className="lg:col-span-2 lg:col-start-5">
             <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/70 mb-6">
               Company
             </h4>
@@ -160,7 +161,7 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/70 mb-6">
               Solutions
             </h4>
@@ -186,6 +187,29 @@ export default function Footer() {
                   </Link>
                 )
               )}
+            </nav>
+          </div>
+
+          <div className="lg:col-span-4">
+            <h4 className="text-[11px] uppercase tracking-[0.25em] text-white/70 mb-6">
+              Service Areas
+            </h4>
+            <nav className="grid grid-cols-2 gap-x-4 gap-y-3">
+              {CITIES.map((city) => (
+                <Link
+                  key={city.slug}
+                  href={`/service-areas/${city.slug}`}
+                  className="text-[14px] text-white/80 hover:text-white transition-colors duration-300"
+                >
+                  {city.name}
+                </Link>
+              ))}
+              <Link
+                href="/service-areas"
+                className="col-span-2 pt-1 text-[13px] text-white/55 hover:text-white transition-colors duration-300"
+              >
+                All service areas →
+              </Link>
             </nav>
           </div>
         </div>

@@ -1,23 +1,12 @@
 import type { Metadata } from "next";
-import { getCanonicalBaseUrl } from "@/lib/site-url";
+import { pageMetadata } from "@/lib/page-meta";
 
-const url = `${getCanonicalBaseUrl()}/listings`;
-
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Homes for Sale | Pierce County Listings | OnSite ReGroup",
   description:
     "Browse Pierce County homes for sale with OnSite ReGroup. Filter by city, status, and map to find active listings across Lake Tapps, Bonney Lake, Sumner, and Puyallup.",
-  alternates: { canonical: url },
-  openGraph: {
-    title: "Homes for Sale | Pierce County Listings | OnSite ReGroup",
-    description:
-      "Browse Pierce County homes for sale with OnSite ReGroup. Filter by city, status, and map to find active listings across Lake Tapps, Bonney Lake, Sumner, and Puyallup.",
-    url,
-    siteName: "OnSite ReGroup",
-    locale: "en_US",
-    type: "website",
-  },
-};
+  path: "/listings",
+});
 
 export default function ListingsLayout({
   children,

@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { legacy301Redirects } from "./src/lib/legacy-301-redirects";
 
 const nextConfig: NextConfig = {
   experimental: {
@@ -25,6 +26,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      ...legacy301Redirects,
       {
         source:
           "/blog/2026-pierce-county-housing-market-update-what-buyers-and-sellers-in-bonney-lake-lake-tapps-and-sumner-should-expect",

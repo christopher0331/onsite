@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -8,11 +9,12 @@ import TestimonialsScroll from "@/components/TestimonialsScroll";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Sell Your Home in East Pierce County | Free Home Valuation & Expert Realtors",
   description:
     "Knowledgeable realtors dedicated to helping homeowners sell with confidence. Expert guidance, proven marketing strategies, and local market knowledge across Pierce County.",
-};
+  path: "/sell-your-home",
+});
 
 const pricingTools = [
   {

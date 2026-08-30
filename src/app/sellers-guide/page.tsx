@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -8,11 +9,12 @@ import TestimonialsScroll from "@/components/TestimonialsScroll";
 import SellHomeInfoGraphic from "@/components/SellHomeInfoGraphic";
 import SellerProofPath from "@/components/SellerProofPath";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Home Seller's Guide | Step-by-Step Process to Sell with Confidence",
   description:
     "Your guide to a profitable sale. From pricing to closing, we provide expert insights, market strategies, and practical steps to get you the best results.",
-};
+  path: "/sellers-guide",
+});
 
 const CDN = "https://cdn.prod.website-files.com/67ad0482477bce360af7c269";
 
