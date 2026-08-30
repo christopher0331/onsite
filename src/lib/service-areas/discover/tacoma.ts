@@ -2,59 +2,59 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const tacomaDiscover: ServiceAreaDiscover = {
   slug: "tacoma",
-  updatedAt: "2026-08-28",
+  updatedAt: "2026-08-30",
   attractions: [
     {
       name: "Proctor District",
       url: "https://www.proctordistrict.com/",
       description:
-        "Proctor is one of Tacoma's most walkable neighborhood hubs — independent shops, dining, and everyday services that draw buyers who want urban convenience without leaving a residential district feel.",
+        "Proctor is one of Tacoma's most walkable neighborhood hubs — local shops, dining, and everyday services that give North End and nearby buyers a true village center without leaving the city grid.",
     },
     {
       name: "Stadium District",
       url: "https://www.cityoftacoma.org/",
       description:
-        "Stadium District pairs historic housing stock with proximity to downtown, Wright Park, and the stadium event corridor. Buyers weigh character and location against parking and showing logistics on event nights.",
+        "The Stadium District pairs historic street character with urban density near downtown. Buyers who want architecture, walkability, and event-adjacent living often start their Tacoma search here.",
     },
     {
       name: "Point Defiance Park",
       url: "https://www.metroparkstacoma.org/place/point-defiance-park/",
       description:
-        "Point Defiance Park anchors North End outdoor life with trails, waterfront access, and the zoo & aquarium. It is a major lifestyle draw for households comparing Tacoma's North End to other Pierce County options.",
-    },
-    {
-      name: "Ruston Way Waterfront",
-      url: "https://www.metroparkstacoma.org/",
-      description:
-        "The Ruston Way waterfront path gives residents an everyday shoreline walk and bike corridor along Commencement Bay — a practical amenity for North End and waterfront-adjacent living.",
+        "Point Defiance is Tacoma's signature open-space draw — trails, waterfront, and year-round recreation that shape lifestyle priorities for North End and West Slope households.",
     },
     {
       name: "Tacoma Public Schools",
       url: "https://www.tacomaschools.org/",
       description:
-        "Tacoma Public Schools serves the full city and remains a key filter for relocating families comparing North End, Proctor, West Slope, and South Tacoma addresses.",
+        "Tacoma Public Schools cover neighborhoods across the city. Attendance boundaries and campus fit still need address-level confirmation — a North End listing and a South Tacoma listing are not interchangeable for school planning.",
     },
     {
       name: "Tacoma Public Library",
       url: "https://www.tacomalibrary.org/",
       description:
-        "Tacoma Public Library branches across the North End, Proctor, and South Tacoma give families, students, and remote workers nearby learning space and community programs.",
+        "Branches across the North End, Proctor, and South Tacoma support everyday learning and community routines for urban households who want services close to home.",
     },
     {
-      name: "Museum of Glass / Downtown Arts Corridor",
-      url: "https://www.museumofglass.org/",
+      name: "Tacoma-Pierce County Chamber",
+      url: "https://www.tacomachamber.org/",
       description:
-        "Downtown Tacoma's arts corridor — including the Museum of Glass and nearby cultural venues — adds urban lifestyle appeal for buyers who want galleries, events, and waterfront dining close to home.",
+        "The chamber reflects Tacoma's business and civic fabric — useful context for buyers and sellers who care how neighborhood commerce and employment corridors support day-to-day living.",
     },
     {
-      name: "Tacoma Dome / Sounder Transit Spine",
-      url: "https://www.soundtransit.org/",
+      name: "City of Tacoma Planning & Development Services",
+      url: "https://www.cityoftacoma.org/government/city_departments/planning_and_development_services",
       description:
-        "The Tacoma Dome area and Sounder / Link connections give urban households a regional transit option toward Seattle and south Pierce County — a concrete commute input when comparing downtown-adjacent homes.",
+        "Planning and Development Services is the desk for permits, design review, historic conservation overlays, and ADU/infill questions that change what you can actually do with a Tacoma lot.",
+    },
+    {
+      name: "West Slope & South Tacoma",
+      url: "https://www.google.com/maps/place/Tacoma,+WA",
+      description:
+        "West Slope and South Tacoma offer different street patterns, housing stock, and commute logic than the North End or Proctor. Tacoma pricing and buyer pools shift block by block — micro-location comps matter more than a citywide average.",
     },
   ],
   localLivingMarkdown: [
-    "Tacoma offers a denser, more district-driven lifestyle than the East Pierce plateau cities, with housing that ranges from North End and Proctor bungalows to Stadium District character homes, West Slope view properties, and more approachable South Tacoma stock. Buyers often compare [Tacoma](/service-areas/tacoma) with [Puyallup](/service-areas/puyallup), [Federal Way](/service-areas/federal-way), and [Lake Tapps](/service-areas/lake-tapps) while weighing I-5 and SR-16 commute times, [Tacoma Public Schools](https://www.tacomaschools.org/) boundaries, historic overlay rules, and whether they want walkable urban amenities or quieter hillside streets. Everyday life stays close to Proctor and Stadium retail, [Point Defiance Park](https://www.metroparkstacoma.org/place/point-defiance-park/), the Ruston Way waterfront, and [Tacoma Public Library](https://www.tacomalibrary.org/) branches.",
-    "Buyers comparing [Tacoma homes for sale](/listings?city=Tacoma&state=WA) usually sort by pocket: walkable North End / Proctor living, Stadium and downtown-adjacent character, West Slope views, or mid-city value in South Tacoma. That split also shapes how sellers should prepare — permit history, overlay constraints, and parking/event logistics matter as much as staging in the urban core. OnSite Real Estate Group helps households weigh those tradeoffs against nearby options in [Summit](/service-areas/puyallup/summit) and the broader Pierce County corridor so the next move fits daily life, not just a listing photo.",
+    "Tacoma is a block-by-block urban market — North End, Proctor, Stadium, West Slope, and South Tacoma each behave differently across ZIPs 98402, 98403, 98405, 98406, 98407, 98409, and 98422. Buyers comparing [Tacoma homes for sale](/listings?city=Tacoma&state=WA) usually start with neighborhood character, parking and permit overlays, and [Tacoma Public Schools](https://www.tacomaschools.org/) boundaries rather than a single city headline. Everyday services run through [Tacoma Public Utilities](https://www.mytpu.org/), [Puget Sound Energy](https://www.pse.com/) for gas in many neighborhoods, [Tacoma Public Library](https://www.tacomalibrary.org/), and civic context from the [Tacoma-Pierce County Chamber](https://www.tacomachamber.org/).",
+    "From OnSite's Lake Tapps base, Tacoma sits on our Pierce County coverage corridor alongside peer hubs like [Puyallup](/service-areas/puyallup), [Federal Way](/service-areas/federal-way), and [Lake Tapps](/service-areas/lake-tapps). We underwrite by micro-neighborhood comps — historic conservation and ADU/infill potential included — so buying or selling decisions match the block you will actually live on.",
   ],
 };

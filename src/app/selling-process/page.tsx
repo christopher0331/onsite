@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -7,11 +8,12 @@ import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 import PrepListSellPath from "@/components/PrepListSellPath";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "The Home Selling Process | OnSite Real Estate Group",
   description:
     "Our process ensures a smooth, profitable home sale with expert guidance. From home evaluation to negotiation and closing, we simplify every step.",
-};
+  path: "/selling-process",
+});
 
 const processSteps = [
   {

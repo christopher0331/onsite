@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Follow Onsite Real Estate on Social Media | Facebook, Instagram & YouTube",
   description:
     "Follow OnSite Real Estate Group on social for real-time updates, property highlights, and marketing tips — Facebook, Instagram, YouTube & TikTok.",
-};
+  path: "/social-hub",
+});
 
 const platforms = [
   {

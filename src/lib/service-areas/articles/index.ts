@@ -7,13 +7,20 @@ import { edgewoodArticle } from "./edgewood";
 import { miltonArticle } from "./milton";
 import { auburnArticle } from "./auburn";
 import { buckleyArticle } from "./buckley";
+import { grahamArticle } from "./graham";
 import { tacomaArticle } from "./tacoma";
+import { federalWayArticle } from "./federal-way";
+import { kentArticle } from "./kent";
+import { seattleArticle } from "./seattle";
 import { downtownPuyallupArticle } from "./downtown-puyallup";
 import { clarksCreekArticle } from "./clarks-creek";
 import { rodescoArticle } from "./rodesco";
 import { shawneeRidgeArticle } from "./shawnee-ridge";
 import { gemHeightsArticle } from "./gem-heights";
 import { summitArticle } from "./summit";
+import { southHillArticle } from "./south-hill";
+import { tehalehArticle } from "./tehaleh";
+import { bridgeHillArticle } from "./bridge-hill";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -24,13 +31,20 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [miltonArticle.slug]: miltonArticle,
   [auburnArticle.slug]: auburnArticle,
   [buckleyArticle.slug]: buckleyArticle,
+  [grahamArticle.slug]: grahamArticle,
   [tacomaArticle.slug]: tacomaArticle,
+  [federalWayArticle.slug]: federalWayArticle,
+  [kentArticle.slug]: kentArticle,
+  [seattleArticle.slug]: seattleArticle,
   [downtownPuyallupArticle.slug]: downtownPuyallupArticle,
   [clarksCreekArticle.slug]: clarksCreekArticle,
   [rodescoArticle.slug]: rodescoArticle,
   [shawneeRidgeArticle.slug]: shawneeRidgeArticle,
   [gemHeightsArticle.slug]: gemHeightsArticle,
   [summitArticle.slug]: summitArticle,
+  [southHillArticle.slug]: southHillArticle,
+  [tehalehArticle.slug]: tehalehArticle,
+  [bridgeHillArticle.slug]: bridgeHillArticle,
 };
 
 export function getServiceAreaArticle(

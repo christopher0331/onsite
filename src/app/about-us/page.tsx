@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -7,11 +8,12 @@ import Marquee from "@/components/Marquee";
 import TeamSection from "@/components/TeamSection";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Onsite Real Estate Agents | Local Expertise, Proven Results",
   description:
     "Meet André and Cindie Bohall of OnSite Real Estate Group — delivering tailored real estate solutions with local expertise across Pierce County.",
-};
+  path: "/about-us",
+});
 
 const values = [
   {
