@@ -7,6 +7,8 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MLSGridTimestamp from "@/components/MLSGridTimestamp";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
+import { getCitySlugByName, getNeighborhoodsByCity } from "@/lib/service-areas/data";
+import { ServiceAreaLinkedText } from "@/lib/service-areas/linkify";
 
 const NWMLS_LOGO = "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png";
 
@@ -160,6 +162,15 @@ export default async function FeaturedHomeDetailPage({
 
   const [hero, ...gallery] = prop.images;
   const otherProps = Object.entries(properties).filter(([s]) => s !== slug);
+  const cityName = prop.city.split(",")[0]?.trim() ?? "";
+  const citySlug = getCitySlugByName(cityName);
+  const cityHref = citySlug ? `/service-areas/${citySlug}` : null;
+  const neighborhood = getNeighborhoodsByCity(citySlug ?? "").find(
+    (n) => n.name.toLowerCase() === prop.neighborhood.toLowerCase()
+  );
+  const neighborhoodHref = neighborhood
+    ? `/service-areas/${neighborhood.citySlug}/${neighborhood.slug}`
+    : null;
 
   return (
     <>
@@ -190,7 +201,19 @@ export default async function FeaturedHomeDetailPage({
             <h1 className="mb-4 max-w-3xl font-serif text-[clamp(2rem,5vw,4rem)] font-light leading-[1.05] text-white">
               {prop.title}
             </h1>
-            <p className="mb-8 text-[15px] text-white/70">{prop.address}, {prop.city}</p>
+            <p className="mb-8 text-[15px] text-white/70">
+              {prop.address},{" "}
+              {cityHref ? (
+                <Link
+                  href={cityHref}
+                  className="underline decoration-white/35 underline-offset-[0.22em] hover:text-white hover:decoration-white transition-colors"
+                >
+                  {prop.city}
+                </Link>
+              ) : (
+                prop.city
+              )}
+            </p>
             <div className="flex flex-wrap gap-8">
               <div>
                 <p className="font-serif text-[2.2rem] font-light leading-none text-white">{prop.price}</p>
@@ -227,7 +250,7 @@ export default async function FeaturedHomeDetailPage({
                   {prop.title}
                 </h2>
                 <p className="mb-10 text-[16px] leading-8 text-charcoal/90 not-italic">
-                  {prop.description}
+                  <ServiceAreaLinkedText text={prop.description} />
                 </p>
 
                 <div>
@@ -254,7 +277,19 @@ export default async function FeaturedHomeDetailPage({
                       { label: "List Price", value: prop.price },
                       { label: "Status", value: prop.status },
                       { label: "County", value: prop.county },
-                      { label: "Neighborhood", value: prop.neighborhood },
+                      {
+                        label: "Neighborhood",
+                        value: neighborhoodHref ? (
+                          <Link
+                            href={neighborhoodHref}
+                            className="underline decoration-charcoal/25 underline-offset-[0.18em] hover:decoration-charcoal/70 transition-colors"
+                          >
+                            {prop.neighborhood}
+                          </Link>
+                        ) : (
+                          prop.neighborhood
+                        ),
+                      },
                       { label: "School District", value: prop.schoolDistrict },
                       { label: "Lot Size", value: prop.lotSize },
                       { label: "Year Built", value: prop.yearBuilt },

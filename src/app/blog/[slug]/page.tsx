@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
+import { ServiceAreaLinkedText } from "@/lib/service-areas/linkify";
 import blogData from "@/lib/blog-data.json";
 
 type BlogPost = {
@@ -43,6 +44,7 @@ export async function generateMetadata({
 function renderBody(body: string) {
   const paragraphs = body.split(/\n{1,}/);
   const elements: React.ReactNode[] = [];
+  const usedHrefs = new Set<string>();
 
   paragraphs.forEach((p, i) => {
     const trimmed = p.trim();
@@ -68,13 +70,18 @@ function renderBody(body: string) {
       elements.push(
         <li key={i} className="flex items-start gap-3 text-[16px] leading-8 text-charcoal/90">
           <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-charcoal/30" />
-          <span>{trimmed.replace(/^[•\-]\s*/, "")}</span>
+          <span>
+            <ServiceAreaLinkedText
+              text={trimmed.replace(/^[•\-]\s*/, "")}
+              usedHrefs={usedHrefs}
+            />
+          </span>
         </li>
       );
     } else {
       elements.push(
         <p key={i} className="mb-6 text-[16px] leading-8 text-charcoal/90 not-italic">
-          {trimmed}
+          <ServiceAreaLinkedText text={trimmed} usedHrefs={usedHrefs} />
         </p>
       );
     }
@@ -233,7 +240,23 @@ export default async function BlogPostPage({
               </div>
               <div className="flex flex-col gap-6 lg:items-end">
                 <p className="text-[16px] leading-8 text-white/70 lg:text-right">
-                  Whether you&apos;re ready to sell, curious about your home&apos;s value, or just have questions — our team is here to help with honest, local expertise.
+                  Whether you&apos;re ready to sell, curious about your home&apos;s value, or just have questions — our team is here to help with honest, local expertise in{" "}
+                  <Link href="/service-areas/lake-tapps" className="underline decoration-white/30 underline-offset-[0.22em] hover:decoration-white transition-colors">
+                    Lake Tapps
+                  </Link>
+                  ,{" "}
+                  <Link href="/service-areas/puyallup" className="underline decoration-white/30 underline-offset-[0.22em] hover:decoration-white transition-colors">
+                    Puyallup
+                  </Link>
+                  ,{" "}
+                  <Link href="/service-areas/bonney-lake" className="underline decoration-white/30 underline-offset-[0.22em] hover:decoration-white transition-colors">
+                    Bonney Lake
+                  </Link>
+                  , and{" "}
+                  <Link href="/service-areas" className="underline decoration-white/30 underline-offset-[0.22em] hover:decoration-white transition-colors">
+                    across Pierce County
+                  </Link>
+                  .
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
