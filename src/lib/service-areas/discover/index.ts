@@ -7,6 +7,7 @@ import { edgewoodDiscover } from "./edgewood";
 import { miltonDiscover } from "./milton";
 import { auburnDiscover } from "./auburn";
 import { buckleyDiscover } from "./buckley";
+import { kentDiscover } from "./kent";
 import { downtownPuyallupDiscover } from "./downtown-puyallup";
 import { clarksCreekDiscover } from "./clarks-creek";
 import { rodescoDiscover } from "./rodesco";
@@ -23,6 +24,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [miltonDiscover.slug]: miltonDiscover,
   [auburnDiscover.slug]: auburnDiscover,
   [buckleyDiscover.slug]: buckleyDiscover,
+  [kentDiscover.slug]: kentDiscover,
   [downtownPuyallupDiscover.slug]: downtownPuyallupDiscover,
   [clarksCreekDiscover.slug]: clarksCreekDiscover,
   [rodescoDiscover.slug]: rodescoDiscover,
