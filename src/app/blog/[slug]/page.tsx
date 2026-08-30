@@ -5,6 +5,10 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
+import { pageMetadata } from "@/lib/page-meta";
+import { SITE_BRAND } from "@/lib/nap";
+import { ServiceAreaLinkedText } from "@/lib/service-areas/linkify";
+import { getCanonicalBaseUrl } from "@/lib/site-url";
 import blogData from "@/lib/blog-data.json";
 
 type BlogPost = {
@@ -21,6 +25,12 @@ type BlogPost = {
 
 const posts = blogData as Record<string, BlogPost>;
 
+function parseBlogDate(date: string): string | undefined {
+  const parsed = Date.parse(date);
+  if (Number.isNaN(parsed)) return undefined;
+  return new Date(parsed).toISOString();
+}
+
 export async function generateStaticParams() {
   return Object.keys(posts).map((slug) => ({ slug }));
 }
@@ -33,16 +43,20 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = posts[slug];
   if (!post) return {};
-  return {
+  return pageMetadata({
     title: `${post.title} | OnSite Real Estate Group`,
     description: post.excerpt,
-  };
+    path: `/blog/${post.slug}`,
+    image: post.image || undefined,
+    type: "article",
+  });
 }
 
 // Split body text into paragraphs, preserving H2-style headings
 function renderBody(body: string) {
   const paragraphs = body.split(/\n{1,}/);
   const elements: React.ReactNode[] = [];
+  const usedHrefs = new Set<string>();
 
   paragraphs.forEach((p, i) => {
     const trimmed = p.trim();
@@ -68,13 +82,18 @@ function renderBody(body: string) {
       elements.push(
         <li key={i} className="flex items-start gap-3 text-[16px] leading-8 text-charcoal/90">
           <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-charcoal/30" />
-          <span>{trimmed.replace(/^[•\-]\s*/, "")}</span>
+          <span>
+            <ServiceAreaLinkedText
+              text={trimmed.replace(/^[•\-]\s*/, "")}
+              usedHrefs={usedHrefs}
+            />
+          </span>
         </li>
       );
     } else {
       elements.push(
         <p key={i} className="mb-6 text-[16px] leading-8 text-charcoal/90 not-italic">
-          {trimmed}
+          <ServiceAreaLinkedText text={trimmed} usedHrefs={usedHrefs} />
         </p>
       );
     }
@@ -119,8 +138,34 @@ export default async function BlogPostPage({
     post.category === "Market Trends" ? "Market Trends" :
     post.category === "Selling Tips" ? "Selling Tips" : "Insights";
 
+  const base = getCanonicalBaseUrl();
+  const url = `${base}/blog/${post.slug}`;
+  const published = parseBlogDate(post.date);
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.image ? [post.image] : undefined,
+    datePublished: published,
+    dateModified: published,
+    author: post.author
+      ? { "@type": "Person", name: post.author }
+      : { "@type": "Organization", name: SITE_BRAND },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_BRAND,
+      url: base,
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
       <Header />
       <main className="bg-white">
 
@@ -233,7 +278,23 @@ export default async function BlogPostPage({
               </div>
               <div className="flex flex-col gap-6 lg:items-end">
                 <p className="text-[16px] leading-8 text-white/70 lg:text-right">
-                  Whether you&apos;re ready to sell, curious about your home&apos;s value, or just have questions — our team is here to help with honest, local expertise.
+                  Whether you&apos;re ready to sell, curious about your home&apos;s value, or just have questions — our team is here to help with honest, local expertise in{" "}
+                  <Link href="/service-areas/lake-tapps" className="underline decoration-white/30 underline-offset-[0.22em] hover:decoration-white transition-colors">
+                    Lake Tapps
+                  </Link>
+                  ,{" "}
+                  <Link href="/service-areas/puyallup" className="underline decoration-white/30 underline-offset-[0.22em] hover:decoration-white transition-colors">
+                    Puyallup
+                  </Link>
+                  ,{" "}
+                  <Link href="/service-areas/bonney-lake" className="underline decoration-white/30 underline-offset-[0.22em] hover:decoration-white transition-colors">
+                    Bonney Lake
+                  </Link>
+                  , and{" "}
+                  <Link href="/service-areas" className="underline decoration-white/30 underline-offset-[0.22em] hover:decoration-white transition-colors">
+                    across Pierce County
+                  </Link>
+                  .
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link

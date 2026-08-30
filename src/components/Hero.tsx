@@ -11,6 +11,18 @@ const VIDEO_WEBM =
 const POSTER =
   "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67b64a09871910cd858654e8_Onsite%20Regroup%20Video-poster-00001.jpg";
 
+const HERO_CITIES = [
+  { name: "Lake Tapps", href: "/service-areas/lake-tapps" },
+  { name: "Bonney Lake", href: "/service-areas/bonney-lake" },
+  { name: "Sumner", href: "/service-areas/sumner" },
+  { name: "Buckley", href: "/service-areas/buckley" },
+  { name: "Graham", href: "/service-areas/graham" },
+  { name: "Puyallup", href: "/service-areas/puyallup" },
+] as const;
+
+const heroCityLinkClass =
+  "underline decoration-white/55 underline-offset-[0.22em] transition-colors hover:text-white hover:decoration-white";
+
 export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const [videoReady, setVideoReady] = useState(false);
@@ -69,8 +81,20 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
         </h1>
 
         <p className="animate-[fade-up_0.8s_ease-out_0.5s_both] max-w-xl text-[14px] leading-relaxed text-white/80 sm:text-base">
-          Sell your home with confidence. Trusted Real Estate Agents serving
-          Lake Tapps, Bonney Lake, Sumner, Buckley, Graham, Puyallup & Beyond.
+          Sell your home with confidence. Trusted Real Estate Agents serving{" "}
+          {HERO_CITIES.map((city, i) => (
+            <span key={city.href}>
+              <Link href={city.href} className={heroCityLinkClass}>
+                {city.name}
+              </Link>
+              {i < HERO_CITIES.length - 1 ? ", " : ""}
+            </span>
+          ))}{" "}
+          &amp;{" "}
+          <Link href="/service-areas" className={heroCityLinkClass}>
+            Beyond
+          </Link>
+          .
         </p>
 
         <div className="relative z-20 flex w-full max-w-2xl animate-[fade-up_0.8s_ease-out_0.65s_both] justify-center">

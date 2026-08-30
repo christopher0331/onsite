@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -7,11 +8,12 @@ import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 import { getCategoryCards, type BlogCard as Post } from "@/lib/blog";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Pierce County Housing Market Trends | 2025–2026 Real Estate Updates",
   description:
     "Stay up to date on Pierce County's housing market. Get expert insights on home prices, mortgage rates, buyer demand, and what sellers need to know right now.",
-};
+  path: "/market-trends",
+});
 
 const posts = getCategoryCards("market-trends");
 

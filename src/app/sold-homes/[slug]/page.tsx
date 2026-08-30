@@ -7,6 +7,9 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MLSGridTimestamp from "@/components/MLSGridTimestamp";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
+import { pageMetadata } from "@/lib/page-meta";
+import { getCitySlugByName } from "@/lib/service-areas/data";
+import { ServiceAreaLinkedText } from "@/lib/service-areas/linkify";
 
 const CDN2 = "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0";
 
@@ -264,10 +267,11 @@ export async function generateMetadata({
   const { slug } = await params;
   const prop = properties[slug as Slug];
   if (!prop) return {};
-  return {
+  return pageMetadata({
     title: `${prop.title} — Sold for ${prop.price} | OnSite Real Estate Group`,
     description: `${prop.title} at ${prop.address}, ${prop.city}. Sold for ${prop.price} in ${prop.daysListed} days. MLS #${prop.mls}.`,
-  };
+    path: `/sold-homes/${slug}`,
+  });
 }
 
 export default async function SoldHomeDetailPage({
@@ -281,6 +285,9 @@ export default async function SoldHomeDetailPage({
 
   const [hero, ...gallery] = prop.images;
   const otherProps = Object.entries(properties).filter(([s]) => s !== slug).slice(0, 3);
+  const cityName = prop.city.split(",")[0]?.trim() ?? "";
+  const citySlug = getCitySlugByName(cityName);
+  const cityHref = citySlug ? `/service-areas/${citySlug}` : null;
 
   return (
     <>
@@ -305,7 +312,19 @@ export default async function SoldHomeDetailPage({
             <h1 className="mb-4 max-w-3xl font-serif text-[clamp(2rem,5vw,4rem)] font-light leading-[1.05] text-white">
               {prop.title}
             </h1>
-            <p className="mb-8 text-[15px] text-white/70">{prop.address}, {prop.city}</p>
+            <p className="mb-8 text-[15px] text-white/70">
+              {prop.address},{" "}
+              {cityHref ? (
+                <Link
+                  href={cityHref}
+                  className="underline decoration-white/35 underline-offset-[0.22em] hover:text-white hover:decoration-white transition-colors"
+                >
+                  {prop.city}
+                </Link>
+              ) : (
+                prop.city
+              )}
+            </p>
             <div className="flex flex-wrap gap-8">
               <div>
                 <p className="font-serif text-[2.2rem] font-light leading-none text-white">{prop.price}</p>
@@ -342,7 +361,7 @@ export default async function SoldHomeDetailPage({
                   {prop.title}
                 </h2>
                 <p className="mb-10 text-[16px] leading-8 text-charcoal/90 not-italic">
-                  {prop.description}
+                  <ServiceAreaLinkedText text={prop.description} />
                 </p>
 
                 <div className="mb-10">

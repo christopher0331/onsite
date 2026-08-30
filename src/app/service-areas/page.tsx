@@ -23,6 +23,20 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${SITE_URL}/service-areas`,
   },
+  openGraph: {
+    title: "Service Areas | Pierce County Real Estate | OnSite ReGroup",
+    description:
+      "OnSite ReGroup serves Pierce County, WA from Lake Tapps. Explore our city hubs and neighborhood pages for Puyallup, Bonney Lake, Sumner and beyond.",
+    url: `${SITE_URL}/service-areas`,
+    siteName: "OnSite ReGroup",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e16372192203004a84a865_We%20Help%20You%20Sell%20Your%20Home%20-%20Pierce%20County.jpg",
+      },
+    ],
+  },
 };
 
 export default function ServiceAreasIndex() {
