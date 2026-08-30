@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -6,11 +7,12 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import blogData from "@/lib/blog-data.json";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Blog | Real Estate Tips, Market Trends & Insights | OnSite Real Estate Group",
   description:
     "Expert real estate articles for Pierce County homeowners — market trends, selling tips, and local insights from OnSite Real Estate Group.",
-};
+  path: "/blog",
+});
 
 type BlogPost = {
   slug: string;

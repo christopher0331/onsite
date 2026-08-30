@@ -1,0 +1,20 @@
+import type { ServiceAreaArticle } from "./types";
+
+export const seattleArticle: ServiceAreaArticle = {
+  slug: "seattle",
+  title: "Buying, Selling, and Living in Seattle, WA",
+  excerpt:
+    "Neighborhood-comp guidance for Seattle corridor moves — Ballard, Green Lake, West Seattle, Capitol Hill, and Queen Anne — from a Pierce and East Pierce team that prices by block, not citywide averages.",
+  updatedAt: "2026-08-30",
+  bodyMarkdown: `OnSite Real Estate Group is based in Pierce and East Pierce County. We help households with Seattle corridor moves — relocating into or out of neighborhoods like Ballard, Green Lake, West Seattle, Capitol Hill, and Queen Anne — with a neighborhood-comp strategy, not a claim of downtown Seattle market dominance. Buyers comparing [Seattle homes for sale](/listings?city=Seattle&state=WA) across ZIPs such as 98101, 98103, 98105, 98107, 98109, 98115, 98117, and 98125 often cross-shop [Tacoma](/service-areas/tacoma), [Federal Way](/service-areas/federal-way), and [Kent](/service-areas/kent) while underwriting school catchments, transit walkability, lot characteristics, and renovation quality on the specific block.
+
+Ballard and Green Lake tend to attract buyers who want neighborhood commercial cores and recreation routines — Green Lake Park for daily walks and runs, Ballard for a denser mix of older housing and newer multifamily. West Seattle offers a more peninsula-oriented rhythm, where bridge timing and neighborhood business districts shape how a home lives day to day. Capitol Hill is denser and more urban; Queen Anne ranges from Lower Queen Anne's edge to quieter upper-hill streets where view and lot premiums show up in comps. None of these pockets share a single pricing logic.
+
+Permitting and utility diligence are urban and specific. The [Seattle Department of Construction & Inspections (SDCI)](https://www.seattle.gov/sdci) handles permits, inspections, and zoning interpretation — including tree protection, lot-coverage rules, and historic or design-review overlays that affect exterior work and timelines. Electric service typically runs through [Seattle City Light](https://www.seattle.gov/city-light); water, drainage, and solid waste through [Seattle Public Utilities](https://www.seattle.gov/utilities). Validate permit close-outs before list date so inspection periods do not reopen old remodel risk.
+
+Schools require address-level verification. [Seattle Public Schools](https://www.seattleschools.org/) attendance areas can vary block by block in Ballard, Green Lake, Queen Anne, and elsewhere — do not assume a neighborhood name equals a campus. Everyday community resources include [Seattle Public Library](https://www.spl.org/) branches across the neighborhoods we cover. For taxes, lot details, and assessed value, use the [King County Assessor](https://kingcounty.gov/en/dept/assessor). Active and sold context typically runs through [NWMLS](https://www.nwmls.com/).
+
+Urban logistics matter on list day: permit parking zones, limited street parking, and noise windows change showing schedules and buyer perception. Sellers who document renovations, tree and lot-coverage constraints, and utility notes upfront help buyers underwrite with confidence. Buyers relocating from Pierce County should expect different product types, different overlay rules, and different comp sets than a Sumner or Bonney Lake street — we translate those differences rather than forcing a South Sound template onto a Seattle block.
+
+Living in Seattle through an OnSite lens means honest scoping: we serve corridor moves with street-level comps and SDCI-aware prep, while remaining clear that our home base and deepest daily inventory knowledge sit in Pierce and East Pierce. Whether you are selling a Green Lake bungalow ahead of a South Sound move or buying in Ballard after years in Tacoma, André and Cindie Bohall focus on the right micro-market, permits, schools, and commute realities. When you are ready, browse [Seattle homes for sale](/listings?city=Seattle&state=WA) or [start a conversation with our team](/contact-us?area=Seattle&topic=selling).`,
+};

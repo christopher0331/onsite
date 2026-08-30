@@ -1,23 +1,12 @@
 import type { Metadata } from "next";
-import { getCanonicalBaseUrl } from "@/lib/site-url";
+import { pageMetadata } from "@/lib/page-meta";
 
-const url = `${getCanonicalBaseUrl()}/free-home-evaluation`;
-
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Free Home Evaluation | Pierce County Real Estate | OnSite ReGroup",
   description:
     "Request a free home evaluation from OnSite ReGroup. Local pricing insight for Lake Tapps, Bonney Lake, Sumner, Puyallup, and nearby Pierce County.",
-  alternates: { canonical: url },
-  openGraph: {
-    title: "Free Home Evaluation | Pierce County Real Estate | OnSite ReGroup",
-    description:
-      "Request a free home evaluation from OnSite ReGroup. Local pricing insight for Lake Tapps, Bonney Lake, Sumner, Puyallup, and nearby Pierce County.",
-    url,
-    siteName: "OnSite ReGroup",
-    locale: "en_US",
-    type: "website",
-  },
-};
+  path: "/free-home-evaluation",
+});
 
 export default function FreeHomeEvaluationLayout({
   children,

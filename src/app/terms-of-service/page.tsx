@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -6,11 +7,12 @@ import Marquee from "@/components/Marquee";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 import { ADDRESS_LINE, GBP_NAME, PHONE_DISPLAY } from "@/lib/nap";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Terms of Service | OnSite Real Estate Group",
   description:
     "Terms of Service for OnSite Real Estate Group. Please read these terms carefully before using our website.",
-};
+  path: "/terms-of-service",
+});
 
 const sections = [
   {

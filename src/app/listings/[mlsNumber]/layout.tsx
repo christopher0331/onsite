@@ -3,8 +3,9 @@ import { repliersListingsUrl } from "@/lib/repliers-enrich";
 import { repliersImageUrl } from "@/lib/repliers-images";
 import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount } from "@/lib/format-bathrooms";
+import { getCanonicalBaseUrl } from "@/lib/site-url";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://onsiteregroup.com";
+const SITE_URL = getCanonicalBaseUrl();
 
 type OgListing = {
   mlsNumber?: string;
@@ -126,7 +127,7 @@ export async function generateMetadata({
     metadataBase: new URL(SITE_URL),
     title,
     description: description || undefined,
-    alternates: { canonical: `/listings/${mlsNumber}` },
+    alternates: { canonical: url },
     openGraph: {
       title: ogTitle,
       description: description || undefined,

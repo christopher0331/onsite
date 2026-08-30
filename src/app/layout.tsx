@@ -32,7 +32,6 @@ export const metadata: Metadata = {
     title: "Real Estate Agents Lake Tapps | Onsite ReGroup",
     description:
       "Top rated real estate agents in Pierce County. Sell your home with confidence.",
-    url: getCanonicalBaseUrl(),
     siteName: SITE_BRAND,
     locale: "en_US",
     type: "website",

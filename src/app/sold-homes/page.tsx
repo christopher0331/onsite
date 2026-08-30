@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -7,11 +8,12 @@ import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Recently Sold Homes | OnSite Real Estate Group",
   description:
     "Browse recently sold homes by OnSite Real Estate Group across Pierce County, Federal Way, Sumner, Graham, Buckley, and Puyallup, WA.",
-};
+  path: "/sold-homes",
+});
 
 const CDN2 = "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0";
 

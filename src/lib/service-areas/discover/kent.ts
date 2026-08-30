@@ -8,53 +8,47 @@ export const kentDiscover: ServiceAreaDiscover = {
       name: "Downtown Kent",
       url: "https://www.kentwa.gov/",
       description:
-        "Downtown Kent is the civic and commercial core — city services, dining, and events that give valley-floor and nearby neighborhood residents a walkable center without leaving the city.",
+        "Downtown Kent is the civic and transit-oriented core — city services, dining, and Sounder access that give valley-floor living a walkable center without losing freeway reach toward Tacoma and Seattle.",
     },
     {
-      name: "Kent Station / Sounder Access",
-      url: "https://www.soundtransit.org/ride-with-us/stops-stations/kent-station",
+      name: "East Hill Kent",
+      url: "https://www.google.com/maps/place/East+Hill,+Kent,+WA",
       description:
-        "Kent Station anchors Sounder and regional bus connections for Seattle-bound commuters. Transit proximity shapes how buyers weigh downtown and valley homes against East Hill and West Hill car-oriented living.",
+        "East Hill is Kent's primary residential bench above the valley — established plats, family streets, and ADU-capable lots that many buyers compare when they want separation from industrial and floodplain corridors.",
     },
     {
       name: "Lake Meridian Park",
-      url: "https://www.kentwa.gov/residents/parks-recreation-community-services/parks-trails/lake-meridian-park",
+      url: "https://www.kentwa.gov/",
       description:
-        "Lake Meridian Park is one of Kent's signature outdoor amenities — swimming, trails, and shoreline gathering space that make nearby residential streets especially appealing to active households.",
+        "Lake Meridian anchors recreation on East Hill with shoreline access, trails, and neighborhood parks nearby. It is a practical amenity for households that want everyday outdoor space without leaving the Kent ZIP cluster.",
     },
     {
       name: "Panther Lake Area",
       url: "https://www.google.com/maps/place/Panther+Lake,+Kent,+WA",
       description:
-        "The Panther Lake corridor offers established residential streets and a quieter pocket feel that buyers often compare against East Hill and Federal Way when shopping school catchments and commute timing.",
+        "The Panther Lake corridor blends residential streets with lake-adjacent living and quick connections toward Federal Way and I-5. Buyers often weigh this pocket against East Hill for commute and neighborhood feel.",
     },
     {
       name: "Kent School District",
       url: "https://www.kent.k12.wa.us/",
       description:
-        "Kent School District is one of Washington's largest and covers East Hill, West Hill, and the valley core — a primary filter for families comparing neighborhoods across 98030–98042.",
+        "Kent School District covers East Hill, West Hill, Downtown, and valley neighborhoods across a large King County footprint. Confirming attendance by address is a standard early filter for family buyers.",
     },
     {
-      name: "KCLS Kent Library",
-      url: "https://kcls.org/locations/kent-library/",
+      name: "King County Library System — Kent",
+      url: "https://kcls.org/",
       description:
-        "Kent Library branches downtown and on East Hill give families, students, and remote workers nearby learning space and community programs without driving to neighboring cities.",
+        "KCLS branches in downtown Kent and on East Hill support students, remote workers, and everyday community programs — useful anchors when comparing Kent pockets for daily livability.",
     },
     {
-      name: "Green River Natural Resources Area",
+      name: "City of Kent Planning & Utilities",
       url: "https://www.kentwa.gov/",
       description:
-        "Green River trails and open space along the valley corridor give Kent residents outdoor access close to home — and remind buyers that flood-zone diligence belongs in the purchase timeline on valley-floor parcels.",
-    },
-    {
-      name: "East Hill Corridor",
-      url: "https://www.google.com/maps/place/East+Hill,+Kent,+WA",
-      description:
-        "East Hill is Kent's high-volume residential band — retail, established plats, and move-up inventory that should be priced against its own comps rather than downtown or valley averages.",
+        "City Planning and Utilities are the practical hubs for permits, zoning, water, sewer, and stormwater. Sellers and remodel buyers who sync repair scopes with city expectations avoid mid-escrow surprises.",
     },
   ],
   localLivingMarkdown: [
-    "Kent offers a mix of housing styles across East Hill, West Hill, Panther Lake, Lake Meridian, and downtown/valley pockets, so buyers can match lot size, school catchments, and commute to the band that fits. The city sits between [Auburn](/service-areas/auburn) and [Federal Way](/service-areas/federal-way), with [Seattle](/service-areas/seattle) reachable via Sounder and I-5 for households that want south King County pricing without giving up regional access. Families often weigh [Kent School District](https://www.kent.k12.wa.us/) boundaries alongside everyday routines around [KCLS Kent Library](https://kcls.org/locations/kent-library/) and Lake Meridian Park.",
-    "Outdoor access and transit both shape daily life here — lake parks and Green River trails for weekends, Kent Station for Seattle-bound workdays, and East Hill retail for errands without leaving the plateau. Buyers comparing [Kent homes for sale](/listings?city=Kent&state=WA) usually sort by pocket first, then price, because valley flood diligence and hillside lot utility are not interchangeable. OnSite Real Estate Group helps households weigh those tradeoffs so the next move fits commute, schools, and neighborhood feel — not just a listing photo.",
+    "Kent spans East Hill, Downtown, Panther Lake, West Hill, and Lake Meridian across ZIPs 98030, 98031, 98032, and 98042 — valley-floor access pockets next to hillside residential streets. Buyers comparing [Kent homes for sale](/listings?city=Kent&state=WA) often cross-shop [Federal Way](/service-areas/federal-way), [Auburn](/service-areas/auburn), and [Tacoma](/service-areas/tacoma) while sorting by floodplain diligence on the valley floor, ADU feasibility on East Hill lots, and [Kent School District](https://www.kent.k12.wa.us/) boundaries. Everyday life ties to [City of Kent](https://www.kentwa.gov/) services, [Puget Sound Energy](https://www.pse.com/), and [King County Library System](https://kcls.org/) branches downtown and on the hill.",
+    "OnSite Real Estate Group positions Kent listings against the exact competing submarket — East Hill comps stay with East Hill, valley parcels get flood and lender documentation early, and Panther Lake or West Hill homes are framed for their own commute and lot patterns. Parcel detail from the [King County Assessor](https://kingcounty.gov/en/dept/assessor) and permit context from city Planning keep pricing and disclosures grounded in how each pocket actually lives.",
   ],
 };
