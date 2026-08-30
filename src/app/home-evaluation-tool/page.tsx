@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
@@ -8,11 +9,12 @@ const toolUrl =
   process.env.NEXT_PUBLIC_HOME_EVALUATION_TOOL_URL ||
   "https://lead-valuator.replit.app";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Home Evaluation Tool | OnSite Real Estate Group",
   description:
     "Use OnSite ReGroup's home evaluation tool to start your property valuation.",
-};
+  path: "/home-evaluation-tool",
+});
 
 export default function HomeEvaluationToolPage() {
   return (

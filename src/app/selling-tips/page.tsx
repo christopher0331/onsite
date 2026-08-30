@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-meta";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -7,11 +8,12 @@ import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 import { getCategoryCards, type BlogCard as Post } from "@/lib/blog";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Home Selling Tips & Advice | Pierce County Real Estate Guidance",
   description:
     "Practical, expert-backed advice for Pierce County home sellers. From pricing and prep to inspections and closing — get the guidance you need to sell with confidence.",
-};
+  path: "/selling-tips",
+});
 
 const posts = getCategoryCards("selling-tips");
 

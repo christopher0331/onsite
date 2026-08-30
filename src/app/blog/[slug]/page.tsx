@@ -5,7 +5,10 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
+import { pageMetadata } from "@/lib/page-meta";
+import { SITE_BRAND } from "@/lib/nap";
 import { ServiceAreaLinkedText } from "@/lib/service-areas/linkify";
+import { getCanonicalBaseUrl } from "@/lib/site-url";
 import blogData from "@/lib/blog-data.json";
 
 type BlogPost = {
@@ -22,6 +25,12 @@ type BlogPost = {
 
 const posts = blogData as Record<string, BlogPost>;
 
+function parseBlogDate(date: string): string | undefined {
+  const parsed = Date.parse(date);
+  if (Number.isNaN(parsed)) return undefined;
+  return new Date(parsed).toISOString();
+}
+
 export async function generateStaticParams() {
   return Object.keys(posts).map((slug) => ({ slug }));
 }
@@ -34,10 +43,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = posts[slug];
   if (!post) return {};
-  return {
+  return pageMetadata({
     title: `${post.title} | OnSite Real Estate Group`,
     description: post.excerpt,
-  };
+    path: `/blog/${post.slug}`,
+    image: post.image || undefined,
+    type: "article",
+  });
 }
 
 // Split body text into paragraphs, preserving H2-style headings
@@ -126,8 +138,34 @@ export default async function BlogPostPage({
     post.category === "Market Trends" ? "Market Trends" :
     post.category === "Selling Tips" ? "Selling Tips" : "Insights";
 
+  const base = getCanonicalBaseUrl();
+  const url = `${base}/blog/${post.slug}`;
+  const published = parseBlogDate(post.date);
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.image ? [post.image] : undefined,
+    datePublished: published,
+    dateModified: published,
+    author: post.author
+      ? { "@type": "Person", name: post.author }
+      : { "@type": "Organization", name: SITE_BRAND },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_BRAND,
+      url: base,
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
       <Header />
       <main className="bg-white">
 
