@@ -21,6 +21,7 @@ import { summitArticle } from "./summit";
 import { southHillArticle } from "./south-hill";
 import { tehalehArticle } from "./tehaleh";
 import { bridgeHillArticle } from "./bridge-hill";
+import { northEndArticle } from "./north-end";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -45,6 +46,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [southHillArticle.slug]: southHillArticle,
   [tehalehArticle.slug]: tehalehArticle,
   [bridgeHillArticle.slug]: bridgeHillArticle,
+  [northEndArticle.slug]: northEndArticle,
 };
 
 export function getServiceAreaArticle(

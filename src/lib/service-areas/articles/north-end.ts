@@ -1,0 +1,20 @@
+import type { ServiceAreaArticle } from "./types";
+
+export const northEndArticle: ServiceAreaArticle = {
+  slug: "north-end",
+  title: "North End Tacoma Real Estate Guide",
+  excerpt:
+    "Tacoma's North End covers ZIPs 98403, 98406, and 98407 — Craftsman and period homes near Point Defiance, Proctor, and Ruston Way, with micro-neighborhood comps, school lines, and urban logistics that citywide averages miss.",
+  updatedAt: "2026-08-31",
+  bodyMarkdown: `Tacoma's North End is established urban-residential living across ZIPs 98403, 98406, and 98407 — Craftsman bungalows, period revivals, and mid-century ranches on typically compact lots near Point Defiance, Ruston Way, and the Proctor village core. Buyers comparing this pocket to the broader [Tacoma](/service-areas/tacoma) market, [Puyallup](/service-areas/puyallup), or [Federal Way](/service-areas/federal-way) should underwrite by North End block comps first, not a citywide median. Active search usually starts with [Tacoma homes for sale](/listings?city=Tacoma&state=WA).
+
+Daily life here is oriented toward parks and walkable retail. [Point Defiance Park](https://www.metroparkstacoma.org/place/point-defiance-park/) anchors outdoor routines with trails, waterfront, and year-round recreation, while the [Proctor District](https://www.proctordistrict.com/) supplies shops, dining, and a seasonal farmers market that function as a true neighborhood village. Ruston Way and N Pearl Street shape waterfront access and commute patterns; N Proctor Street and N 21st Street organize the residential grid buyers actually walk and park on.
+
+Housing stock rewards street-level diligence. Many North End homes date from roughly 1920–1965, so systems age, foundation notes, and exterior integrity belong in the pre-list audit — especially when a renovation story is baked into asking price. Selected streets sit near historic or conservation overlays administered through [City of Tacoma Planning & Development Services](https://www.cityoftacoma.org/government/city_departments/planning_and_development_services); confirm overlay status before promising exterior changes. ADU and infill potential can matter on some lots, but treat it as a verified code path rather than a marketing adjective.
+
+Schools and community services drive family demand. [Tacoma Public Schools](https://www.tacomaschools.org/) cover the North End — Stadium and Silas pathways are common high-school references, with elementary and middle assignments that still need address-level confirmation. [Tacoma Public Library](https://www.tacomalibrary.org/) branches and the [Tacoma-Pierce County Chamber](https://www.tacomachamber.org/) round out everyday civic context for urban households who want services close to home.
+
+Utilities inside the city are generally straightforward. [Tacoma Public Utilities](https://www.mytpu.org/) typically provides power and water; natural gas in many North End streets comes from [Puget Sound Energy](https://www.pse.com/). Urban logistics still shape listings: street-parking patterns, permit zones, and contractor windows vary by block, and Point Defiance weekend traffic or Proctor event days can change showing curb availability. For taxes, lot dimensions, and assessed value, use the [Pierce County Assessor-Treasurer](https://www.piercecountywa.gov/91/Assessor---Treasurer). Active and sold context typically runs through [NWMLS](https://www.nwmls.com/) — compare North End streets to North End streets.
+
+Living in Tacoma's North End is about matching Craftsman character, park access, and Proctor walkability to schools and the commute you will actually drive. Whether you are selling a long-held bungalow near Point Defiance or buying into a Proctor-adjacent street, André and Cindie Bohall at OnSite Real Estate Group focus on micro-neighborhood comps, overlay diligence, and honest urban logistics. When you are ready, browse [Tacoma homes for sale](/listings?city=Tacoma&state=WA) or [start a conversation with our team](/contact-us?area=North%20End&topic=selling).`,
+};

@@ -1741,6 +1741,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "tacoma",
         blurb: "Western neighbor — different permit desk and buyer pool.",
       },
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Tacoma's Point Defiance / Proctor corridor — denser urban stock and park-oriented living.",
+      },
     ],
     reviews: [
       {
@@ -1887,6 +1893,80 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "The Sounder-station proximity was sold to buyers as a real numbers story, not a buzzword. Three offers in five days.",
+      },
+    ],
+  },
+  {
+    slug: "north-end",
+    citySlug: "tacoma",
+    name: "North End",
+    zipCodes: ["98403", "98406", "98407"],
+    geo: { lat: 47.2735, lng: -122.4889 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Tacoma · North End",
+    introCopy:
+      "Tacoma's North End is established urban-residential living near Point Defiance, Ruston Way, and the Proctor village core — historic and mid-century stock where micro-location, parking, and school lines matter more than a citywide median.",
+    characteristics: {
+      medianHomeYear: "1920 – 1965",
+      architecturalStyles: ["Craftsman bungalow", "Tudor / period revival", "Mid-century ranch"],
+      typicalLotSize: "0.10 – 0.25 acres",
+      notes:
+        "Selected streets sit near historic or conservation overlays — confirm exterior-work rules before pricing a renovation story into list price. Street-parking patterns and permit zones vary block by block.",
+    },
+    communityOrgs: [
+      {
+        name: "Proctor District",
+        url: "https://www.proctordistrict.com/",
+        context: "Walkable North End village hub for shops, dining, and the seasonal farmers market.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "North End addresses commonly feed Stadium or Silas pathways — verify elementary and high school by parcel.",
+      },
+    ],
+    thoroughfares: ["N Proctor St", "N Pearl St", "N 21st St", "Ruston Way"],
+    landmarks: ["Point Defiance Park", "Proctor District", "Ruston Way Waterfront", "University of Puget Sound"],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Tacoma's North End via SR-410 → I-5 / Pearl Street corridors, typically inside a 30–40 minute window for inspections and twilight photography. Point Defiance weekend traffic and Proctor event days change curb availability — we pad showing times accordingly.",
+    adjacent: [
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — Stadium, West Slope, and South Tacoma micro-markets on the same urban desk.",
+      },
+      {
+        name: "Summit",
+        citySlug: "puyallup",
+        neighborhoodSlug: "summit",
+        blurb: "East Pierce CDP toward Canyon Road — a common cross-shop for buyers wanting more lot size.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor — Twin Lakes and West Campus comparison set for commute shoppers.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley and South Hill inventory when North End pricing stretches the budget.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Claire & Nate R.",
+        zip: "98406",
+        rating: 5,
+        quote:
+          "They priced our Craftsman against North End streets — not a Tacoma average — and flagged the parking story buyers would ask about. We were under contract in the first stretch.",
+      },
+      {
+        author: "Diego M.",
+        zip: "98407",
+        rating: 5,
+        quote:
+          "Point Defiance and Proctor were sold with real lifestyle detail, and school boundaries were confirmed before we listed. No surprises in escrow.",
       },
     ],
   },
