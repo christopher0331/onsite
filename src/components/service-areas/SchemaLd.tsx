@@ -7,7 +7,7 @@
 
 import type { CardListing } from "@/components/ListingCard";
 import type { City, EntityLink, Neighborhood } from "@/lib/service-areas/types";
-import { localBusinessNode, SITE_BRAND } from "@/lib/nap";
+import { localBusinessNode, postalAddressNode, SITE_BRAND } from "@/lib/nap";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const ORG_URL = getCanonicalBaseUrl();
@@ -155,11 +155,12 @@ export function CityServiceSchema({
     "@context": "https://schema.org",
     "@type": "Service",
     serviceType: SERVICE_TYPE,
+    name: `${SERVICE_TYPE} in ${city.name}, ${city.stateCode}`,
     provider: ORG_AGENT,
-    // String areaServed (schema.org allows Text or Place). Place/City nodes
-    // without a street address are reported by Semrush as LocalBusiness
-    // missing `address` on every city hub.
+    // Text areaServed plus the brokerage NAP. Semrush treats city-hub
+    // Service / Place nodes as LocalBusiness and requires `address`.
     areaServed: `${city.name}, ${city.stateCode}`,
+    address: postalAddressNode(),
     url: pageUrl,
   };
   return (
@@ -189,6 +190,7 @@ export function NeighborhoodServiceSchema({
     areaServed: neighborhood.zipCodes[0]
       ? `${neighborhood.name}, ${cityName}, ${cityStateCode} ${neighborhood.zipCodes[0]}`
       : `${neighborhood.name}, ${cityName}, ${cityStateCode}`,
+    address: postalAddressNode(),
     url: pageUrl,
     name: `Real Estate in ${neighborhood.name}, ${cityName}`,
   };
