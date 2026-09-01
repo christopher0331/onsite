@@ -22,6 +22,7 @@ import { southHillArticle } from "./south-hill";
 import { tehalehArticle } from "./tehaleh";
 import { bridgeHillArticle } from "./bridge-hill";
 import { northEndArticle } from "./north-end";
+import { proctorDistrictArticle } from "./proctor-district";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -47,6 +48,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [tehalehArticle.slug]: tehalehArticle,
   [bridgeHillArticle.slug]: bridgeHillArticle,
   [northEndArticle.slug]: northEndArticle,
+  [proctorDistrictArticle.slug]: proctorDistrictArticle,
 };
 
 export function getServiceAreaArticle(
