@@ -38,6 +38,7 @@ import { downtownKentArticle } from "./downtown-kent";
 import { eastHillArticle } from "./east-hill";
 import { redondoArticle } from "./redondo";
 import { twinLakesArticle } from "./twin-lakes";
+import { proctorDistrictArticle } from "./proctor-district";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -79,6 +80,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [eastHillArticle.slug]: eastHillArticle,
   [redondoArticle.slug]: redondoArticle,
   [twinLakesArticle.slug]: twinLakesArticle,
+  [proctorDistrictArticle.slug]: proctorDistrictArticle,
 };
 
 export function getServiceAreaArticle(

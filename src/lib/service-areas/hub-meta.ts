@@ -92,6 +92,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "South Tacoma homes around South Tacoma Way and Wapato Park in 98409. Mid-century stock and street-level comps, live NWMLS listings.",
   "tacoma/west-slope":
     "West Slope Tacoma homes near Narrowmoor and Titlow in 98465–98466. Narrows view lots and street-level comps, live NWMLS listings.",
+  "tacoma/proctor-district":
+    "Proctor District Tacoma homes around N Proctor and N 26th in 98406–98407. Craftsman streets and street-level comps, live NWMLS listings.",
 };
 
 function neighborhoodKey(citySlug: string, neighborhoodSlug: string): string {
