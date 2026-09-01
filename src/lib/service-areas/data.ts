@@ -1932,6 +1932,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "From our Lake Tapps base we reach Tacoma's North End via SR-410 → I-5 / Pearl Street corridors, typically inside a 30–40 minute window for inspections and twilight photography. Point Defiance weekend traffic and Proctor event days change curb availability — we pad showing times accordingly.",
     adjacent: [
       {
+        name: "Proctor District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "proctor-district",
+        blurb: "Walkable village core around N Proctor and N 26th — retail, Blue Mouse, and school-adjacent streets.",
+      },
+      {
         name: "Tacoma (City)",
         citySlug: "tacoma",
         blurb: "Parent hub — Stadium, West Slope, and South Tacoma micro-markets on the same urban desk.",
@@ -1967,6 +1973,87 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "Point Defiance and Proctor were sold with real lifestyle detail, and school boundaries were confirmed before we listed. No surprises in escrow.",
+      },
+    ],
+  },
+  {
+    slug: "proctor-district",
+    citySlug: "tacoma",
+    name: "Proctor District",
+    zipCodes: ["98406", "98407"],
+    geo: { lat: 47.2597, lng: -122.4865 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Tacoma · Proctor District",
+    introCopy:
+      "Tacoma's Proctor District is the walkable North End village around N Proctor and N 26th — Craftsman streets, historic retail, Blue Mouse evenings, and school pathways where micro-location comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1915 – 1960",
+      architecturalStyles: ["Craftsman bungalow", "Tudor / period revival", "Early mid-century"],
+      typicalLotSize: "0.10 – 0.22 acres",
+      notes:
+        "Selected streets sit near historic or conservation overlays — confirm exterior-work rules before pricing a renovation story into list price. Retail-core parking and event nights change curb availability on showing days.",
+    },
+    communityOrgs: [
+      {
+        name: "Proctor District",
+        url: "https://www.proctordistrict.com/",
+        context: "Business district association for the village retail core — shops, dining, and seasonal market life.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Proctor addresses commonly reference Washington Elementary and Mason Middle — verify high-school pathway by parcel.",
+      },
+    ],
+    thoroughfares: ["N Proctor St", "N 26th St", "N 21st St", "N Pearl St"],
+    landmarks: [
+      "Blue Mouse Theatre",
+      "Wheelock Library",
+      "Jane Clark Park",
+      "Puget Gulch",
+      "Point Defiance Park",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Tacoma's Proctor District via SR-410 → I-5 / Pearl Street corridors, typically inside a 30–40 minute window for inspections and twilight photography. Farmers-market days and Blue Mouse showtimes tighten curb space near N Proctor and N 26th — we pad showing times accordingly.",
+    adjacent: [
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Parent North End corridor — Point Defiance, Ruston Way, and broader 98403 / 98406 / 98407 residential fabric.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — Stadium, West Slope, and South Tacoma micro-markets on the same urban desk.",
+      },
+      {
+        name: "Summit",
+        citySlug: "puyallup",
+        neighborhoodSlug: "summit",
+        blurb: "East Pierce CDP toward Canyon Road — a common cross-shop for buyers wanting more lot size.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor — Twin Lakes and West Campus comparison set for commute shoppers.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Maya & Jordan T.",
+        zip: "98406",
+        rating: 5,
+        quote:
+          "They priced us against Proctor streets — not a Tacoma average — and explained how market-day parking would show up in buyer feedback. Under contract without a price cut.",
+      },
+      {
+        author: "Helen K.",
+        zip: "98407",
+        rating: 5,
+        quote:
+          "Blue Mouse and Wheelock were sold as real daily life, not fluff. School boundaries were confirmed before we listed, and escrow stayed clean.",
       },
     ],
   },
