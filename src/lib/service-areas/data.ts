@@ -1932,6 +1932,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "From our Lake Tapps base we reach Tacoma's North End via SR-410 → I-5 / Pearl Street corridors, typically inside a 30–40 minute window for inspections and twilight photography. Point Defiance weekend traffic and Proctor event days change curb availability — we pad showing times accordingly.",
     adjacent: [
       {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic downtown-edge pocket around Stadium High and Wright Park — denser urban patterns and event logistics.",
+      },
+      {
         name: "Tacoma (City)",
         citySlug: "tacoma",
         blurb: "Parent hub — Stadium, West Slope, and South Tacoma micro-markets on the same urban desk.",
@@ -1967,6 +1973,87 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "Point Defiance and Proctor were sold with real lifestyle detail, and school boundaries were confirmed before we listed. No surprises in escrow.",
+      },
+    ],
+  },
+  {
+    slug: "stadium-district",
+    citySlug: "tacoma",
+    name: "Stadium District",
+    zipCodes: ["98403"],
+    geo: { lat: 47.2638, lng: -122.4506 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Tacoma · Stadium District",
+    introCopy:
+      "Tacoma's Stadium District is the historic pocket around Stadium High School and Wright Park — period homes, downtown-edge density, and school-pathway demand where micro-location comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1910 – 1955",
+      architecturalStyles: ["Craftsman bungalow", "Period revival", "Early multifamily / duplex"],
+      typicalLotSize: "0.08 – 0.20 acres",
+      notes:
+        "Selected streets sit near historic or conservation overlays — confirm exterior-work rules before pricing a renovation story into list price. Stadium High event days and downtown festivals change curb availability on showing days.",
+    },
+    communityOrgs: [
+      {
+        name: "Metro Parks Tacoma — Wright Park",
+        url: "https://www.metroparkstacoma.org/place/wright-park/",
+        context: "Everyday open-space anchor with the W.W. Seymour Botanical Conservatory.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Stadium High School is the neighborhood namesake — verify elementary and middle pathways by parcel.",
+      },
+    ],
+    thoroughfares: ["Stadium Way", "Division Ave", "N 1st St", "Yakima Ave"],
+    landmarks: [
+      "Stadium High School",
+      "Wright Park",
+      "W.W. Seymour Botanical Conservatory",
+      "Annie Wright Schools",
+      "Downtown Tacoma",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Tacoma's Stadium District via SR-410 → I-5 / downtown arterials, typically inside a 30–40 minute window for inspections and twilight photography. Stadium High event days and downtown festival weekends tighten curb space near Division Avenue and Stadium Way — we pad showing times accordingly.",
+    adjacent: [
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Northern residential corridor — Point Defiance, Proctor village, and broader 98406 / 98407 fabric.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — Proctor, West Slope, and South Tacoma micro-markets on the same urban desk.",
+      },
+      {
+        name: "Summit",
+        citySlug: "puyallup",
+        neighborhoodSlug: "summit",
+        blurb: "East Pierce CDP toward Canyon Road — a common cross-shop for buyers wanting more lot size.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor — Twin Lakes and West Campus comparison set for commute shoppers.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Priya & Evan L.",
+        zip: "98403",
+        rating: 5,
+        quote:
+          "They priced us against Stadium streets — not a Tacoma average — and explained how event-day parking would show up in buyer feedback. We were under contract without chasing the market down.",
+      },
+      {
+        author: "Marcus W.",
+        zip: "98403",
+        rating: 5,
+        quote:
+          "Wright Park and Stadium High were sold as real daily life, not fluff. Overlay and school details were confirmed before we listed, and escrow stayed clean.",
       },
     ],
   },

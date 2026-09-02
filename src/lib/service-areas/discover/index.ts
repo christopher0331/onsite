@@ -22,6 +22,7 @@ import { southHillDiscover } from "./south-hill";
 import { tehalehDiscover } from "./tehaleh";
 import { bridgeHillDiscover } from "./bridge-hill";
 import { northEndDiscover } from "./north-end";
+import { stadiumDistrictDiscover } from "./stadium-district";
 
 const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [lakeTappsDiscover.slug]: lakeTappsDiscover,
@@ -47,6 +48,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [tehalehDiscover.slug]: tehalehDiscover,
   [bridgeHillDiscover.slug]: bridgeHillDiscover,
   [northEndDiscover.slug]: northEndDiscover,
+  [stadiumDistrictDiscover.slug]: stadiumDistrictDiscover,
 };
 
 export function getServiceAreaDiscover(

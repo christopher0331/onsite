@@ -3,10 +3,10 @@
 **Goal:** Own winnable Puyallup queries (`Puyallup real estate agent`, sell/buy long-tails, ZIP + neighborhood) by beating indie SEO (esp. Mike Rudnev) on data freshness + spoke depth, while leaning into OnSite’s AI + IDX moat.
 
 **Money page:** `/service-areas/puyallup`  
-**Live spokes today:** South Hill + Downtown + Clark's Creek + Rodesco + Shawnee Ridge + Gem Heights + Summit (+ Tacoma North End spoke in progress)  
+**Live spokes today:** South Hill + Downtown + Clark's Creek + Rodesco + Shawnee Ridge + Gem Heights + Summit + Tacoma North End + Tacoma Stadium District  
 **Canvas:** `puyallup-competitive-gap.canvas.tsx`  
-**Last updated:** 2026-08-31  
-**Content depth (2026-08-31):** Discover + long-form articles cover all 13 hubs and prior 9 spokes; next spoke cluster expands Tacoma (North End first), then Federal Way / Kent / Seattle directory stubs.
+**Last updated:** 2026-09-02  
+**Content depth (2026-09-02):** Discover + long-form articles cover all 13 hubs and prior spokes; next Tacoma spokes: Proctor District (open PR), West Slope, South Tacoma — then Federal Way / Kent / Seattle directory stubs.
 
 ---
 
