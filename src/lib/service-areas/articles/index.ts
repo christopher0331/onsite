@@ -23,6 +23,12 @@ import { tehalehArticle } from "./tehaleh";
 import { bridgeHillArticle } from "./bridge-hill";
 import { northEndArticle } from "./north-end";
 import { stadiumDistrictArticle } from "./stadium-district";
+import { tappsIslandArticle } from "./tapps-island";
+import { driftwoodPointArticle } from "./driftwood-point";
+import { tacomaPointArticle } from "./tacoma-point";
+import { snagIslandArticle } from "./snag-island";
+import { inletIslandArticle } from "./inlet-island";
+import { churchLakeWaterfrontArticle } from "./church-lake-waterfront";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -49,6 +55,12 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [bridgeHillArticle.slug]: bridgeHillArticle,
   [northEndArticle.slug]: northEndArticle,
   [stadiumDistrictArticle.slug]: stadiumDistrictArticle,
+  [tappsIslandArticle.slug]: tappsIslandArticle,
+  [driftwoodPointArticle.slug]: driftwoodPointArticle,
+  [tacomaPointArticle.slug]: tacomaPointArticle,
+  [snagIslandArticle.slug]: snagIslandArticle,
+  [inletIslandArticle.slug]: inletIslandArticle,
+  [churchLakeWaterfrontArticle.slug]: churchLakeWaterfrontArticle,
 };
 
 export function getServiceAreaArticle(

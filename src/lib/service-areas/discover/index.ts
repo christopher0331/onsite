@@ -23,6 +23,12 @@ import { tehalehDiscover } from "./tehaleh";
 import { bridgeHillDiscover } from "./bridge-hill";
 import { northEndDiscover } from "./north-end";
 import { stadiumDistrictDiscover } from "./stadium-district";
+import { tappsIslandDiscover } from "./tapps-island";
+import { driftwoodPointDiscover } from "./driftwood-point";
+import { tacomaPointDiscover } from "./tacoma-point";
+import { snagIslandDiscover } from "./snag-island";
+import { inletIslandDiscover } from "./inlet-island";
+import { churchLakeWaterfrontDiscover } from "./church-lake-waterfront";
 
 const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [lakeTappsDiscover.slug]: lakeTappsDiscover,
@@ -49,6 +55,12 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [bridgeHillDiscover.slug]: bridgeHillDiscover,
   [northEndDiscover.slug]: northEndDiscover,
   [stadiumDistrictDiscover.slug]: stadiumDistrictDiscover,
+  [tappsIslandDiscover.slug]: tappsIslandDiscover,
+  [driftwoodPointDiscover.slug]: driftwoodPointDiscover,
+  [tacomaPointDiscover.slug]: tacomaPointDiscover,
+  [snagIslandDiscover.slug]: snagIslandDiscover,
+  [inletIslandDiscover.slug]: inletIslandDiscover,
+  [churchLakeWaterfrontDiscover.slug]: churchLakeWaterfrontDiscover,
 };
 
 export function getServiceAreaDiscover(
