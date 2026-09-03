@@ -13,8 +13,6 @@ import { getCanonicalBaseUrl } from "@/lib/site-url";
 const ORG_URL = getCanonicalBaseUrl();
 const ORG_AGENT = localBusinessNode(ORG_URL);
 
-const SERVICE_TYPE = "Real Estate Brokerage";
-
 type BreadcrumbEntry = { name: string; url: string };
 
 type MentionCategory =
@@ -135,62 +133,6 @@ export function BreadcrumbSchema({ items }: { items: BreadcrumbEntry[] }) {
       name: item.name,
       item: item.url,
     })),
-  };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
-}
-
-export function CityServiceSchema({
-  city,
-  pageUrl,
-}: {
-  city: City;
-  pageUrl: string;
-}) {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: SERVICE_TYPE,
-    provider: ORG_AGENT,
-    // String areaServed (schema.org allows Text or Place). Place/City nodes
-    // without a street address are reported by Semrush as LocalBusiness
-    // missing `address` on every city hub.
-    areaServed: `${city.name}, ${city.stateCode}`,
-    url: pageUrl,
-  };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-    />
-  );
-}
-
-export function NeighborhoodServiceSchema({
-  neighborhood,
-  cityName,
-  cityStateCode,
-  pageUrl,
-}: {
-  neighborhood: Neighborhood;
-  cityName: string;
-  cityStateCode: string;
-  pageUrl: string;
-}) {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    serviceType: SERVICE_TYPE,
-    provider: ORG_AGENT,
-    areaServed: neighborhood.zipCodes[0]
-      ? `${neighborhood.name}, ${cityName}, ${cityStateCode} ${neighborhood.zipCodes[0]}`
-      : `${neighborhood.name}, ${cityName}, ${cityStateCode}`,
-    url: pageUrl,
-    name: `Real Estate in ${neighborhood.name}, ${cityName}`,
   };
   return (
     <script
