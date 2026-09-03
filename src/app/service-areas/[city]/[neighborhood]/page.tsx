@@ -18,7 +18,6 @@ import {
   AreaListingsItemListSchema,
   BreadcrumbSchema,
   buildNeighborhoodMentions,
-  NeighborhoodServiceSchema,
   WebPageSchema,
 } from "@/components/service-areas/SchemaLd";
 
@@ -98,12 +97,6 @@ export default async function NeighborhoodPage({
           { name: city.name, url: `${SITE_URL}/service-areas/${city.slug}` },
           { name: neighborhood.name, url: pageUrl },
         ]}
-      />
-      <NeighborhoodServiceSchema
-        neighborhood={neighborhood}
-        cityName={city.name}
-        cityStateCode={city.stateCode}
-        pageUrl={pageUrl}
       />
       <WebPageSchema
         pageUrl={pageUrl}
