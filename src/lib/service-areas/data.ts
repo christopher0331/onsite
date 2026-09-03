@@ -2057,6 +2057,476 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
+  {
+    slug: "tapps-island",
+    citySlug: "lake-tapps",
+    name: "Tapps Island",
+    zipCodes: ["98391", "98092"],
+    geo: { lat: 47.2401, lng: -122.1626 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Lake Tapps · Tapps Island",
+    introCopy:
+      "Tapps Island is Lake Tapps’ signature island neighborhood—where buying and selling often come down to waterfront access, dock reality, and HOA expectations alongside the usual home-prep checklist.",
+    characteristics: {
+      medianHomeYear: "1980 – 2005",
+      architecturalStyles: [
+        "Waterfront craftsman",
+        "Northwest contemporary",
+        "Custom remodels",
+      ],
+      typicalLotSize: "0.25 – 1+ acres; waterfront/island lots vary by frontage",
+      notes:
+        "Waterfront underwriting (view lines, shoreline condition, dock usability) is usually the decision driver—not a citywide lot-size average.",
+    },
+    communityOrgs: [
+      {
+        name: "Dieringer School District",
+        url: "https://www.dieringer.wednet.edu/",
+        context:
+          "Lake Tapps-area education anchor; confirm attendance boundaries by address.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context:
+          "Often relevant for southern shoreline access points; verify school splits by parcel.",
+      },
+      {
+        name: "Cascade Water Alliance",
+        url: "https://cascadewater.org/",
+        context:
+          "Lake operations and reservoir timing—important context for waterfront prep and seasonal expectations.",
+      },
+    ],
+    thoroughfares: ["W Tapps Dr E", "Tapps Dr E", "214th Ave E"],
+    landmarks: ["Tapps Island Golf Course", "Lake Tapps County Park", "Allan Yorke Park"],
+    dispatchCopy:
+      "Our team’s dispatch starts on Lake Tapps and stays neighborhood-close—so when you’re evaluating waterfront availability, dock timing, or shoreline-protection needs, we can sequence inspections and showings around what actually matters on the island.",
+    adjacent: [
+      {
+        name: "Driftwood Point",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "driftwood-point",
+        blurb:
+          "More “community beach + active waterfront” energy with near-shore lifestyle appeal.",
+      },
+      {
+        name: "Snag Island",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "snag-island",
+        blurb:
+          "Quieter coves and filtered/open-water views—often chosen for privacy and long-term calm.",
+      },
+      {
+        name: "Church Lake Waterfront",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "church-lake-waterfront",
+        blurb:
+          "Church Lake frontage and dock access considerations—paired with island-style living expectations.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Andre P.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "They didn’t just show us pictures—they helped us understand dock reality and shoreline prep. We priced with confidence and moved quickly.",
+      },
+      {
+        author: "Jordan & Sam R.",
+        zip: "98092",
+        rating: 5,
+        quote:
+          "The process felt neighborhood-specific. The team organized waterfront due diligence so we weren’t reacting late in escrow.",
+      },
+    ],
+  },
+  {
+    slug: "driftwood-point",
+    citySlug: "lake-tapps",
+    name: "Driftwood Point",
+    zipCodes: ["98391", "98092"],
+    geo: { lat: 47.2296, lng: -122.1730 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Lake Tapps · Driftwood Point",
+    introCopy:
+      "Driftwood Point is an active Lake Tapps pocket where waterfront access, shoreline rules, and everyday “launch-from-home” routines influence both pricing and buyer fit.",
+    characteristics: {
+      medianHomeYear: "1975 – 2003",
+      architecturalStyles: [
+        "Ranch & waterfront ranch",
+        "Northwest craftsman",
+        "Waterfront remodels",
+      ],
+      typicalLotSize: "0.20 – 1+ acres; near-shore lots vary by view corridor",
+      notes:
+        "Dock and shoreline planning tends to be the underwriting starting point, especially for buyers comparing active-water lifestyles.",
+    },
+    communityOrgs: [
+      {
+        name: "Dieringer School District",
+        url: "https://www.dieringer.wednet.edu/",
+        context: "Lake Tapps-area school anchor; confirm boundaries by address.",
+      },
+      {
+        name: "Cascade Water Alliance",
+        url: "https://cascadewater.org/",
+        context: "Reservoir timing context for waterfront photography and planning.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Often relevant near southern shoreline access points; verify by parcel.",
+      },
+    ],
+    thoroughfares: ["Tapps Dr E", "214th Ave E", "W Tapps Dr E"],
+    landmarks: ["Driftwood Point Community Waterfront Area", "Lake Tapps County Park", "Allan Yorke Park"],
+    dispatchCopy:
+      "We keep Driftwood Point showings logistics-tight so buyers can evaluate how the neighborhood fits real routines—dock access, seasonal expectations, and convenient access to nearby everyday services.",
+    adjacent: [
+      {
+        name: "Tapps Island",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "tapps-island",
+        blurb: "Island lifestyle anchor—often chosen for golf-course access and calm waterfront living.",
+      },
+      {
+        name: "Tacoma Point",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "tacoma-point",
+        blurb: "North/shipping-lifestyle feel—buyers who want waterfront charm with practical access compare here.",
+      },
+      {
+        name: "Church Lake Waterfront",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "church-lake-waterfront",
+        blurb: "Frontage and dock considerations that support the broader Church Lake live/work playbook.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Maya S.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "They helped us understand what to ask about shoreline and dock plans before we got attached. That saved us later.",
+      },
+      {
+        author: "Chris & Alina T.",
+        zip: "98092",
+        rating: 5,
+        quote:
+          "Driftwood Point felt “walk-in” to lake life, and the team matched us with the right neighborhoods and comps—no generic advice.",
+      },
+    ],
+  },
+  {
+    slug: "tacoma-point",
+    citySlug: "lake-tapps",
+    name: "Tacoma Point",
+    zipCodes: ["98391", "98092"],
+    geo: { lat: 47.2260, lng: -122.1552 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Lake Tapps · Tacoma Point",
+    introCopy:
+      "Tacoma Point blends Lake Tapps waterfront life with practical access rhythms—so buyers often choose it when they want dock-friendly living without sacrificing daily convenience.",
+    characteristics: {
+      medianHomeYear: "1970 – 2000",
+      architecturalStyles: ["Craftsman", "Northwest ranch", "Lake-home additions"],
+      typicalLotSize: "0.20 – 0.90 acres; shoreline lots vary by frontage and views",
+      notes:
+        "For Tacoma Point, the “fit” conversation is usually about access timing and shoreline usability—not just aesthetics.",
+    },
+    communityOrgs: [
+      {
+        name: "Dieringer School District",
+        url: "https://www.dieringer.wednet.edu/",
+        context: "Lake Tapps-area school anchor; verify by address.",
+      },
+      {
+        name: "Cascade Water Alliance",
+        url: "https://cascadewater.org/",
+        context: "Lake operations context for planning waterfront prep around seasonal changes.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Relevant near the southern shoreline; verify splits by parcel.",
+      },
+    ],
+    thoroughfares: ["Tapps Dr E", "211th Ave E", "214th Ave E"],
+    landmarks: ["Allan Yorke Park", "Lake Tapps County Park", "Cascade Water Alliance (Lake Operations Info)"],
+    dispatchCopy:
+      "From the Lake Tapps base, our showing logistics stay neighborhood-tight so buyers can evaluate “daily life” and waterfront usability together—especially for families balancing lake weekends with weekday access.",
+    adjacent: [
+      {
+        name: "Driftwood Point",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "driftwood-point",
+        blurb: "Active-water pocket—buyers compare for community beach energy and near-shore routines.",
+      },
+      {
+        name: "Tapps Island",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "tapps-island",
+        blurb: "Island lifestyle anchor—often chosen for golf-course adjacency and calm views.",
+      },
+      {
+        name: "Inlet Island",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "inlet-island",
+        blurb: "Another island-style pocket where waterfront planning and seasonal expectations drive the buyer story.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Taylor B.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "They priced our Tacoma Point home as its own micro-market. The dock/shoreline diligence made the sale feel clean and fast.",
+      },
+      {
+        author: "Renee K.",
+        zip: "98092",
+        rating: 5,
+        quote:
+          "We wanted practical access to lake life. Their neighborhood-first approach made it easy to compare what actually fit our routine.",
+      },
+    ],
+  },
+  {
+    slug: "snag-island",
+    citySlug: "lake-tapps",
+    name: "Snag Island",
+    zipCodes: ["98391", "98092"],
+    geo: { lat: 47.2477, lng: -122.1724 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Lake Tapps · Snag Island",
+    introCopy:
+      "Snag Island is chosen for its quieter coves and calm waterfront feel—where shoreline planning, HOA expectations, and access timing often matter as much as the view.",
+    characteristics: {
+      medianHomeYear: "1978 – 2004",
+      architecturalStyles: ["Lake cottage", "Northwest contemporary", "Island remodels"],
+      typicalLotSize: "0.25 – 1+ acres; island frontage drives variation",
+      notes:
+        "The neighborhood story is usually about privacy and waterfront usability—so we start due diligence with shoreline + dock questions.",
+    },
+    communityOrgs: [
+      {
+        name: "Dieringer School District",
+        url: "https://www.dieringer.wednet.edu/",
+        context: "School boundaries should be verified by address.",
+      },
+      {
+        name: "Cascade Water Alliance",
+        url: "https://cascadewater.org/",
+        context: "Reservoir timing and operations context for waterfront expectations.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Relevant near the southern shoreline; confirm splits by parcel.",
+      },
+    ],
+    thoroughfares: ["Tapps Dr E", "Pierce County Road Corridors", "214th Ave E"],
+    landmarks: ["Snag Island and Church Lake Area", "Lake Tapps County Park", "Cascade Water Alliance"],
+    dispatchCopy:
+      "We keep Snag Island showing and listing preparation tuned to what buyers ask about: shoreline condition, dock usability, and neighborhood privacy expectations—so you don’t discover problems late.",
+    adjacent: [
+      {
+        name: "Tapps Island",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "tapps-island",
+        blurb: "Island comparison pocket—buyers weigh calm waterfront vs. other lake-access styles.",
+      },
+      {
+        name: "Inlet Island",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "inlet-island",
+        blurb: "Another island-style pocket where shoreline planning and seasonal expectations drive fit.",
+      },
+      {
+        name: "Church Lake Waterfront",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "church-lake-waterfront",
+        blurb: "Adjacent frontage/shoreline considerations with similar quiet-living appeal.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Olivia & Ben W.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "They handled the HOA/shoreline questions with real confidence. We felt like our offer was based on facts, not guesswork.",
+      },
+      {
+        author: "Sam R.",
+        zip: "98092",
+        rating: 5,
+        quote:
+          "The Snag Island comparison set helped us understand why the view matters differently here. Super helpful.",
+      },
+    ],
+  },
+  {
+    slug: "inlet-island",
+    citySlug: "lake-tapps",
+    name: "Inlet Island",
+    zipCodes: ["98391", "98092"],
+    geo: { lat: 47.2249, lng: -122.1830 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Lake Tapps · Inlet Island",
+    introCopy:
+      "Inlet Island is a Lake Tapps island pocket where waterfront lifestyle and shoreline planning go together—so buyers often want a neighborhood-first underwriting approach.",
+    characteristics: {
+      medianHomeYear: "1970 – 2002",
+      architecturalStyles: ["Lake home", "Northwest contemporary", "Custom dockside remodels"],
+      typicalLotSize: "0.25 – 1+ acres; island frontage varies by access and view corridor",
+      notes:
+        "Water operations and seasonal dock usability are part of the buying story for Inlet Island.",
+    },
+    communityOrgs: [
+      {
+        name: "Cascade Water Alliance",
+        url: "https://cascadewater.org/",
+        context: "Reservoir operations context for seasonal waterfront expectations.",
+      },
+      {
+        name: "Dieringer School District",
+        url: "https://www.dieringer.wednet.edu/",
+        context: "Verify school boundaries by address.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Often relevant for southern access points; confirm by parcel.",
+      },
+    ],
+    thoroughfares: ["Tapps Dr E", "214th Ave E", "SR-410 (Route Context)"],
+    landmarks: ["Lake Tapps County Park", "Allan Yorke Park", "Cascade Water Alliance"],
+    dispatchCopy:
+      "Because Inlet Island living is seasonal by nature, we schedule showings and inspections around the timing buyers care about: dock usability, shoreline prep windows, and real everyday access from the Lake Tapps base.",
+    adjacent: [
+      {
+        name: "Tacoma Point",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "tacoma-point",
+        blurb: "Practical access comparison for buyers balancing lifestyle + convenience.",
+      },
+      {
+        name: "Snag Island",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "snag-island",
+        blurb: "Quiet cove contrast for shoppers choosing privacy and calm waterfront living.",
+      },
+      {
+        name: "Driftwood Point",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "driftwood-point",
+        blurb: "Active waterfront contrast—buyers compare energy level and near-shore routine fit.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Morgan L.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "The team explained seasonal timing in a way that made sense. We didn’t overpay or rush—we chose based on real waterfront context.",
+      },
+      {
+        author: "Casey & Pat T.",
+        zip: "98092",
+        rating: 5,
+        quote:
+          "We loved the neighborhood-first guidance. It felt like our offer respected the island’s unique shoreline rules.",
+      },
+    ],
+  },
+  {
+    slug: "church-lake-waterfront",
+    citySlug: "lake-tapps",
+    name: "Church Lake Waterfront",
+    zipCodes: ["98391", "98092"],
+    geo: { lat: 47.2160, lng: -122.1688 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Lake Tapps · Church Lake Waterfront",
+    introCopy:
+      "Church Lake Waterfront is Lake Tapps’ shoreline-forward pocket where buyers weigh dock access, shoreline condition, and neighborhood calm—then price accordingly.",
+    characteristics: {
+      medianHomeYear: "1965 – 2001",
+      architecturalStyles: ["Waterfront craftsman", "Lake ranch", "Island-adjacent remodels"],
+      typicalLotSize: "0.20 – 1+ acres; frontage and shoreline condition drive value",
+      notes:
+        "Shoreline projects and dock usability are often the most practical underwriting questions for Church Lake buyers.",
+    },
+    communityOrgs: [
+      {
+        name: "Cascade Water Alliance",
+        url: "https://cascadewater.org/",
+        context: "Lake operations context that influences seasonal dock experience.",
+      },
+      {
+        name: "Dieringer School District",
+        url: "https://www.dieringer.wednet.edu/",
+        context: "Confirm school boundaries by address before committing.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Relevant for certain southern shoreline parcels; verify by parcel.",
+      },
+    ],
+    thoroughfares: ["Tapps Dr E", "214th Ave E", "Allan Yorke Park Access Routes"],
+    landmarks: ["Snag Island and Church Lake Area", "Lake Tapps County Park", "Church Lake Waterfront (Shoreline Area)"],
+    dispatchCopy:
+      "Church Lake Waterfront living is about blending shoreline access with quiet daily routines. We help clients evaluate dock planning, shoreline rules, and seasonal usability early—so there are no surprises when you go to escrow.",
+    adjacent: [
+      {
+        name: "Snag Island",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "snag-island",
+        blurb: "Quiet cove comparison with similar shoreline planning considerations.",
+      },
+      {
+        name: "Tapps Island",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "tapps-island",
+        blurb: "Island anchor comparison—buyers weigh calmer frontage vs. golf-course adjacency.",
+      },
+      {
+        name: "Driftwood Point",
+        citySlug: "lake-tapps",
+        neighborhoodSlug: "driftwood-point",
+        blurb: "Active waterfront contrast—buyers compare energy level and near-shore routine fit.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Derek H.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "We were impressed by how much real shoreline diligence they organized before closing. It made the whole process calmer.",
+      },
+      {
+        author: "Amy K.",
+        zip: "98092",
+        rating: 5,
+        quote:
+          "They helped us compare Church Lake frontage like a real neighborhood market—dock condition, view lines, and timing were front and center.",
+      },
+    ],
+  },
 ];
 
 // Expansion corridor requested for the Seattle commute band.
