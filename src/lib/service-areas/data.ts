@@ -917,7 +917,7 @@ export const CITIES: City[] = [
     county: "Pierce County",
     taxonomy: "urban",
     population: 223_536,
-    zipCodes: ["98402", "98403", "98405", "98406", "98407", "98409", "98422"],
+    zipCodes: ["98402", "98403", "98405", "98406", "98407", "98409", "98422", "98465", "98466"],
     geo: { lat: 47.2529, lng: -122.4443 },
     heroImage:
       "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
@@ -1938,6 +1938,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Historic downtown-edge pocket around Stadium High and Wright Park — denser urban patterns and event logistics.",
       },
       {
+        name: "West Slope",
+        citySlug: "tacoma",
+        neighborhoodSlug: "west-slope",
+        blurb: "Narrows-facing terraces and Titlow / Narrowmoor living — view lots and SR-16 commute logic west of the North End grid.",
+      },
+      {
         name: "Tacoma (City)",
         citySlug: "tacoma",
         blurb: "Parent hub — Stadium, West Slope, and South Tacoma micro-markets on the same urban desk.",
@@ -2024,6 +2030,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Northern residential corridor — Point Defiance, Proctor village, and broader 98406 / 98407 fabric.",
       },
       {
+        name: "West Slope",
+        citySlug: "tacoma",
+        neighborhoodSlug: "west-slope",
+        blurb: "Narrows-facing terraces and Titlow / Narrowmoor living — view lots and SR-16 commute logic west of downtown.",
+      },
+      {
         name: "Tacoma (City)",
         citySlug: "tacoma",
         blurb: "Parent hub — Proctor, West Slope, and South Tacoma micro-markets on the same urban desk.",
@@ -2054,6 +2066,93 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "Wright Park and Stadium High were sold as real daily life, not fluff. Overlay and school details were confirmed before we listed, and escrow stayed clean.",
+      },
+    ],
+  },
+  {
+    slug: "west-slope",
+    citySlug: "tacoma",
+    name: "West Slope",
+    zipCodes: ["98465", "98466"],
+    geo: { lat: 47.2554, lng: -122.5218 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Tacoma · West Slope",
+    introCopy:
+      "Tacoma's West Slope is the Narrows-facing hillside around Narrowmoor and Titlow — mid-century view lots, terrace plats, and SR-16 commute logic where micro-location comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1950 – 1975",
+      architecturalStyles: ["Mid-century ranch", "Northwest contemporary", "View-oriented custom"],
+      typicalLotSize: "0.20 – 0.40 acres; terrace / through-lots in Narrowmoor",
+      notes:
+        "View corridors, slope drainage, and shoreline-adjacent setbacks can matter as much as interior finishes. Confirm any design-guideline or overlay expectations before pricing a renovation story into list price.",
+    },
+    communityOrgs: [
+      {
+        name: "Metro Parks Tacoma — Titlow Park",
+        url: "https://www.metroparkstacoma.org/place/titlow-park/",
+        context: "Waterfront park and beach access anchoring West Slope outdoor routines.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "West Slope addresses need parcel-level elementary, middle, and high-school confirmation — ZIP alone is not enough.",
+      },
+    ],
+    thoroughfares: ["S Jackson Ave", "6th Ave", "S 19th St", "SR-16"],
+    landmarks: [
+      "Titlow Park",
+      "Tacoma Narrows Bridge",
+      "Narrowmoor",
+      "China Lake Park",
+      "Point Defiance Park",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Tacoma's West Slope via SR-410 → I-5 / SR-16, typically inside a 30–40 minute window for inspections and twilight photography. Narrows Bridge traffic and 6th Avenue / 19th Street arterial timing change curb availability on showing days — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Northern residential corridor — Point Defiance, Proctor village, and broader 98406 / 98407 fabric.",
+      },
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic downtown-edge pocket around Stadium High and Wright Park — denser urban patterns and event logistics.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — Proctor, Stadium, and South Tacoma micro-markets on the same urban desk.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor — Twin Lakes and West Campus comparison set for commute shoppers.",
+      },
+      {
+        name: "Summit",
+        citySlug: "puyallup",
+        neighborhoodSlug: "summit",
+        blurb: "East Pierce CDP toward Canyon Road — a common cross-shop for buyers wanting more lot size.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Elena & Chris B.",
+        zip: "98466",
+        rating: 5,
+        quote:
+          "They priced our Narrowmoor view against West Slope streets — not a Tacoma average — and explained how slope drainage would show up in inspections. We were under contract without chasing the market down.",
+      },
+      {
+        author: "Omar S.",
+        zip: "98465",
+        rating: 5,
+        quote:
+          "Titlow and the Narrows Bridge were sold as real daily life, not fluff. School and overlay details were confirmed before we listed, and escrow stayed clean.",
       },
     ],
   },

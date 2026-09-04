@@ -47,14 +47,14 @@ export const tacomaDiscover: ServiceAreaDiscover = {
         "Planning and Development Services is the desk for permits, design review, historic conservation overlays, and ADU/infill questions that change what you can actually do with a Tacoma lot.",
     },
     {
-      name: "West Slope & South Tacoma",
-      url: "https://www.google.com/maps/place/Tacoma,+WA",
+      name: "West Slope",
+      url: "/service-areas/tacoma/west-slope",
       description:
-        "West Slope and South Tacoma offer different street patterns, housing stock, and commute logic than the North End or Proctor. Tacoma pricing and buyer pools shift block by block — micro-location comps matter more than a citywide average.",
+        "West Slope offers Narrows-facing terraces, Titlow access, and different street patterns than the North End or Proctor. Tacoma pricing and buyer pools shift block by block — micro-location comps matter more than a citywide average.",
     },
   ],
   localLivingMarkdown: [
-    "Tacoma is a block-by-block urban market — [North End](/service-areas/tacoma/north-end), Proctor, [Stadium District](/service-areas/tacoma/stadium-district), West Slope, and South Tacoma each behave differently across ZIPs 98402, 98403, 98405, 98406, 98407, 98409, and 98422. Buyers comparing [Tacoma homes for sale](/listings?city=Tacoma&state=WA) usually start with neighborhood character, parking and permit overlays, and [Tacoma Public Schools](https://www.tacomaschools.org/) boundaries rather than a single city headline. Everyday services run through [Tacoma Public Utilities](https://www.mytpu.org/), [Puget Sound Energy](https://www.pse.com/) for gas in many neighborhoods, [Tacoma Public Library](https://www.tacomalibrary.org/), and civic context from the [Tacoma-Pierce County Chamber](https://www.tacomachamber.org/).",
+    "Tacoma is a block-by-block urban market — [North End](/service-areas/tacoma/north-end), Proctor, [Stadium District](/service-areas/tacoma/stadium-district), [West Slope](/service-areas/tacoma/west-slope), and South Tacoma each behave differently across ZIPs 98402, 98403, 98405, 98406, 98407, 98409, 98422, 98465, and 98466. Buyers comparing [Tacoma homes for sale](/listings?city=Tacoma&state=WA) usually start with neighborhood character, parking and permit overlays, and [Tacoma Public Schools](https://www.tacomaschools.org/) boundaries rather than a single city headline. Everyday services run through [Tacoma Public Utilities](https://www.mytpu.org/), [Puget Sound Energy](https://www.pse.com/) for gas in many neighborhoods, [Tacoma Public Library](https://www.tacomalibrary.org/), and civic context from the [Tacoma-Pierce County Chamber](https://www.tacomachamber.org/).",
     "From OnSite's Lake Tapps base, Tacoma sits on our Pierce County coverage corridor alongside peer hubs like [Puyallup](/service-areas/puyallup), [Federal Way](/service-areas/federal-way), and [Lake Tapps](/service-areas/lake-tapps). We underwrite by micro-neighborhood comps — historic conservation and ADU/infill potential included — so buying or selling decisions match the block you will actually live on.",
   ],
 };
