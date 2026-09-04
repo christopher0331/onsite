@@ -23,6 +23,7 @@ import { tehalehDiscover } from "./tehaleh";
 import { bridgeHillDiscover } from "./bridge-hill";
 import { northEndDiscover } from "./north-end";
 import { stadiumDistrictDiscover } from "./stadium-district";
+import { westSlopeDiscover } from "./west-slope";
 import { tappsIslandDiscover } from "./tapps-island";
 import { driftwoodPointDiscover } from "./driftwood-point";
 import { tacomaPointDiscover } from "./tacoma-point";
@@ -55,6 +56,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [bridgeHillDiscover.slug]: bridgeHillDiscover,
   [northEndDiscover.slug]: northEndDiscover,
   [stadiumDistrictDiscover.slug]: stadiumDistrictDiscover,
+  [westSlopeDiscover.slug]: westSlopeDiscover,
   [tappsIslandDiscover.slug]: tappsIslandDiscover,
   [driftwoodPointDiscover.slug]: driftwoodPointDiscover,
   [tacomaPointDiscover.slug]: tacomaPointDiscover,
