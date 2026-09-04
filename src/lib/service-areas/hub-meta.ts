@@ -90,6 +90,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Twin Lakes Federal Way homes in 98023 near Lake Lorene, Lake Jeane, and the golf club. HOA timing and street-level comps, live NWMLS listings.",
   "tacoma/south-tacoma":
     "South Tacoma homes around South Tacoma Way and Wapato Park in 98409. Mid-century stock and street-level comps, live NWMLS listings.",
+  "tacoma/west-slope":
+    "West Slope Tacoma homes near Narrowmoor and Titlow in 98465–98466. Narrows view lots and street-level comps, live NWMLS listings.",
 };
 
 function neighborhoodKey(citySlug: string, neighborhoodSlug: string): string {
