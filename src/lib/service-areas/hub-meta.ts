@@ -88,6 +88,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "East Hill Kent homes above the valley in 98030–98031. Lake Meridian access, ADU lot diligence, and street-level comps, live NWMLS listings.",
   "federal-way/twin-lakes":
     "Twin Lakes Federal Way homes in 98023 near Lake Lorene, Lake Jeane, and the golf club. HOA timing and street-level comps, live NWMLS listings.",
+  "tacoma/south-tacoma":
+    "South Tacoma homes around South Tacoma Way and Wapato Park in 98409. Mid-century stock and street-level comps, live NWMLS listings.",
 };
 
 function neighborhoodKey(citySlug: string, neighborhoodSlug: string): string {
