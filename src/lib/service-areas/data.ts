@@ -1938,6 +1938,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Historic downtown-edge pocket around Stadium High and Wright Park — denser urban patterns and event logistics.",
       },
       {
+        name: "South Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "south-tacoma",
+        blurb: "South-central corridor around South Tacoma Way and Wapato Park — practical mid-century stock and I-5 commute logic.",
+      },
+      {
         name: "Tacoma (City)",
         citySlug: "tacoma",
         blurb: "Parent hub — Stadium, West Slope, and South Tacoma micro-markets on the same urban desk.",
@@ -2024,6 +2030,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Northern residential corridor — Point Defiance, Proctor village, and broader 98406 / 98407 fabric.",
       },
       {
+        name: "South Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "south-tacoma",
+        blurb: "South-central corridor around South Tacoma Way and Wapato Park — practical mid-century stock and I-5 commute logic.",
+      },
+      {
         name: "Tacoma (City)",
         citySlug: "tacoma",
         blurb: "Parent hub — Proctor, West Slope, and South Tacoma micro-markets on the same urban desk.",
@@ -2054,6 +2066,93 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "Wright Park and Stadium High were sold as real daily life, not fluff. Overlay and school details were confirmed before we listed, and escrow stayed clean.",
+      },
+    ],
+  },
+  {
+    slug: "south-tacoma",
+    citySlug: "tacoma",
+    name: "South Tacoma",
+    zipCodes: ["98409"],
+    geo: { lat: 47.2097, lng: -122.4826 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Tacoma · South Tacoma",
+    introCopy:
+      "Tacoma's South Tacoma corridor is the south-central pocket around South Tacoma Way and Wapato Park — mid-century stock, mall-adjacent convenience, and I-5 commute logic where micro-location comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1945 – 1975",
+      architecturalStyles: ["Mid-century ranch", "Postwar craftsman", "Modest multifamily"],
+      typicalLotSize: "0.12 – 0.25 acres",
+      notes:
+        "Arterial noise, commercial overlays near South Tacoma Way, and renovation quality vary street by street. Confirm zoning before pricing a renovation or ADU story into list price.",
+    },
+    communityOrgs: [
+      {
+        name: "Metro Parks Tacoma — Wapato Park",
+        url: "https://www.metroparkstacoma.org/place/wapato-park/",
+        context: "Lake paths and recreation anchoring South Tacoma outdoor routines.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "South Tacoma addresses need parcel-level elementary, middle, and high-school confirmation — ZIP alone is not enough.",
+      },
+    ],
+    thoroughfares: ["S Tacoma Way", "S 38th St", "S 56th St", "I-5"],
+    landmarks: [
+      "Wapato Park",
+      "South Tacoma Way",
+      "Tacoma Mall",
+      "Tacoma Public Library — South Tacoma",
+      "I-5 / South Tacoma Interchange",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Tacoma's South Tacoma corridor via SR-410 → I-5, typically inside a 25–35 minute window for inspections and twilight photography. South Tacoma Way traffic and mall-area congestion change curb availability on showing days — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Northern residential corridor — Point Defiance, Proctor village, and broader 98406 / 98407 fabric.",
+      },
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic downtown-edge pocket around Stadium High and Wright Park — denser urban patterns and event logistics.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — Proctor, Stadium, West Slope, and South Tacoma micro-markets on the same urban desk.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor — Twin Lakes and West Campus comparison set for commute shoppers.",
+      },
+      {
+        name: "Summit",
+        citySlug: "puyallup",
+        neighborhoodSlug: "summit",
+        blurb: "East Pierce CDP toward Canyon Road — a common cross-shop for buyers wanting more lot size.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Jordan & Mei K.",
+        zip: "98409",
+        rating: 5,
+        quote:
+          "They priced our ranch against South Tacoma streets — not a Tacoma average — and explained how South Tacoma Way traffic would show up in buyer feedback. We were under contract without chasing the market down.",
+      },
+      {
+        author: "Andre T.",
+        zip: "98409",
+        rating: 5,
+        quote:
+          "Wapato Park and the I-5 commute were sold as real daily life, not fluff. School and zoning details were confirmed before we listed, and escrow stayed clean.",
       },
     ],
   },

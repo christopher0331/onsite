@@ -23,6 +23,7 @@ import { tehalehArticle } from "./tehaleh";
 import { bridgeHillArticle } from "./bridge-hill";
 import { northEndArticle } from "./north-end";
 import { stadiumDistrictArticle } from "./stadium-district";
+import { southTacomaArticle } from "./south-tacoma";
 import { tappsIslandArticle } from "./tapps-island";
 import { driftwoodPointArticle } from "./driftwood-point";
 import { tacomaPointArticle } from "./tacoma-point";
@@ -55,6 +56,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [bridgeHillArticle.slug]: bridgeHillArticle,
   [northEndArticle.slug]: northEndArticle,
   [stadiumDistrictArticle.slug]: stadiumDistrictArticle,
+  [southTacomaArticle.slug]: southTacomaArticle,
   [tappsIslandArticle.slug]: tappsIslandArticle,
   [driftwoodPointArticle.slug]: driftwoodPointArticle,
   [tacomaPointArticle.slug]: tacomaPointArticle,
