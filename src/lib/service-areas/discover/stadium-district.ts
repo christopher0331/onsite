@@ -48,7 +48,7 @@ export const stadiumDistrictDiscover: ServiceAreaDiscover = {
     },
   ],
   localLivingMarkdown: [
-    "Tacoma's Stadium District centers on ZIP 98403 — historic and period homes near Stadium High School, Wright Park, and the downtown edge. Buyers comparing this pocket often look at the broader [Tacoma](/service-areas/tacoma) hub, the [North End](/service-areas/tacoma/north-end) spoke, [Puyallup](/service-areas/puyallup), and [Federal Way](/service-areas/federal-way) while weighing walkability, school pathways through [Tacoma Public Schools](https://www.tacomaschools.org/), and park access. Active search usually starts with [Tacoma homes for sale](/listings?city=Tacoma&state=WA).",
+    "Tacoma's Stadium District centers on ZIP 98403 — historic and period homes near Stadium High School, Wright Park, and the downtown edge. Buyers comparing this pocket often look at the broader [Tacoma](/service-areas/tacoma) hub, the [North End](/service-areas/tacoma/north-end) spoke, [South Tacoma](/service-areas/tacoma/south-tacoma), [Puyallup](/service-areas/puyallup), and [Federal Way](/service-areas/federal-way) while weighing walkability, school pathways through [Tacoma Public Schools](https://www.tacomaschools.org/), and park access. Active search usually starts with [Tacoma homes for sale](/listings?city=Tacoma&state=WA).",
     "Urban logistics matter here: street parking near event days, historic or conservation overlays, and contractor windows can shift by block. OnSite Real Estate Group prices Stadium-adjacent streets against Stadium comps, confirms overlay and school details early, and frames Wright Park and Stadium High life as concrete daily routines — not soft lifestyle adjectives.",
   ],
 };
