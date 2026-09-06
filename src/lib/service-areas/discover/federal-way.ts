@@ -6,9 +6,9 @@ export const federalWayDiscover: ServiceAreaDiscover = {
   attractions: [
     {
       name: "Twin Lakes",
-      url: "https://www.google.com/maps/place/Twin+Lakes,+Federal+Way,+WA",
+      url: "/service-areas/federal-way/twin-lakes",
       description:
-        "Twin Lakes is one of Federal Way's best-known residential clusters — established streets, lake-adjacent living, and a buyer pool that often compares this pocket against West Campus and Lakota rather than a citywide average.",
+        "Twin Lakes is one of Federal Way's best-known residential clusters — established streets, lake-adjacent living, and a buyer pool that often compares this pocket against West Campus and Lakota rather than a citywide average. See the dedicated Twin Lakes spoke for HOA timing, lake micro-comps, and school-pathway detail.",
     },
     {
       name: "Dash Point State Park",

@@ -29,6 +29,7 @@ import { tacomaPointArticle } from "./tacoma-point";
 import { snagIslandArticle } from "./snag-island";
 import { inletIslandArticle } from "./inlet-island";
 import { churchLakeWaterfrontArticle } from "./church-lake-waterfront";
+import { twinLakesArticle } from "./twin-lakes";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -61,6 +62,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [snagIslandArticle.slug]: snagIslandArticle,
   [inletIslandArticle.slug]: inletIslandArticle,
   [churchLakeWaterfrontArticle.slug]: churchLakeWaterfrontArticle,
+  [twinLakesArticle.slug]: twinLakesArticle,
 };
 
 export function getServiceAreaArticle(
