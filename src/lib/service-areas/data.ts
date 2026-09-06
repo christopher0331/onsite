@@ -2527,6 +2527,97 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
+  {
+    slug: "twin-lakes",
+    citySlug: "federal-way",
+    name: "Twin Lakes",
+    zipCodes: ["98023"],
+    geo: { lat: 47.3078, lng: -122.3836 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e5857f0b4e310919f9eda8_contact.webp",
+    heroEyebrow: "Federal Way · Twin Lakes",
+    introCopy:
+      "Federal Way's Twin Lakes is the established golf-and-lake pocket in ZIP 98023 — Lake Lorene, Lake Jeane, Twin Lakes Golf & Country Club, and HOA-timed resales where micro-neighborhood comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1968 – 1988",
+      architecturalStyles: ["Split-level", "Ranch", "Remodeled contemporary"],
+      typicalLotSize: "0.18 – 0.35 acres",
+      notes:
+        "Twin Lakes HOA membership is typical — pull resale certificates, dues, and aesthetics / CC&R rules before pricing exterior work into list price. Lake-adjacent parcels need their own micro-comp set versus inland Twin Lakes streets.",
+    },
+    communityOrgs: [
+      {
+        name: "Twin Lakes Homeowners Association",
+        url: "https://www.twinlakeshoa.com/",
+        context: "Community standards, aesthetics reviews, and shared amenity administration for Twin Lakes divisions.",
+      },
+      {
+        name: "Federal Way Public Schools",
+        url: "https://www.fwps.org/",
+        context: "Twin Lakes Elementary / Lakota Middle / Decatur High are common pathway references — verify by parcel.",
+      },
+    ],
+    thoroughfares: ["SW 320th St", "SW 336th St", "Dash Point Rd", "21st Ave SW"],
+    landmarks: [
+      "Twin Lakes Golf & Country Club",
+      "Lake Lorene",
+      "Lake Jeane",
+      "Ponce De Leon Lake",
+      "Dash Point State Park",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Federal Way's Twin Lakes via SR-410 → SR-167 / I-5 → SW 320th corridors, typically inside a 25–35 minute window for inspections and twilight photography. Internal Twin Lakes streets and HOA aesthetics timing can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Federal Way (City)",
+        citySlug: "federal-way",
+        blurb: "Parent hub — West Campus, Lakota, Dash Point, and Redondo micro-markets on the same south King desk.",
+      },
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Tacoma urban-residential alternative — Point Defiance / Proctor fabric for buyers comparing Pierce vs King.",
+      },
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic Tacoma downtown-edge pocket — denser urban patterns when Twin Lakes suburban stock feels too HOA-heavy.",
+      },
+      {
+        name: "Milton",
+        citySlug: "milton",
+        blurb: "Pierce County neighbor toward the Tacoma–Federal Way seam — a common cross-shop for commute shoppers.",
+      },
+      {
+        name: "Auburn",
+        citySlug: "auburn",
+        blurb: "Valley and Lea Hill inventory when Twin Lakes pricing or HOA expectations stretch the budget.",
+      },
+      {
+        name: "Kent",
+        citySlug: "kent",
+        blurb: "East Hill and valley alternatives for buyers weighing south King school and commute tradeoffs.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Elena & Craig H.",
+        zip: "98023",
+        rating: 5,
+        quote:
+          "They priced us against Twin Lakes streets — not a Federal Way average — and had the HOA resale package timed before showings started. We were under contract without chasing the market down.",
+      },
+      {
+        author: "Omar J.",
+        zip: "98023",
+        rating: 5,
+        quote:
+          "Lake Lorene and the golf-course setting were sold as real daily life, not fluff. School boundaries were confirmed before we listed, and escrow stayed clean.",
+      },
+    ],
+  },
 ];
 
 // Expansion corridor requested for the Seattle commute band.
