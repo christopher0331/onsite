@@ -29,6 +29,7 @@ import { tacomaPointDiscover } from "./tacoma-point";
 import { snagIslandDiscover } from "./snag-island";
 import { inletIslandDiscover } from "./inlet-island";
 import { churchLakeWaterfrontDiscover } from "./church-lake-waterfront";
+import { westCampusDiscover } from "./west-campus";
 
 const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [lakeTappsDiscover.slug]: lakeTappsDiscover,
@@ -61,6 +62,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [snagIslandDiscover.slug]: snagIslandDiscover,
   [inletIslandDiscover.slug]: inletIslandDiscover,
   [churchLakeWaterfrontDiscover.slug]: churchLakeWaterfrontDiscover,
+  [westCampusDiscover.slug]: westCampusDiscover,
 };
 
 export function getServiceAreaDiscover(
