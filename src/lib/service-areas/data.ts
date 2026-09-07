@@ -2527,6 +2527,97 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
+  {
+    slug: "west-campus",
+    citySlug: "federal-way",
+    name: "West Campus",
+    zipCodes: ["98003", "98023"],
+    geo: { lat: 47.3125, lng: -122.3489 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e5857f0b4e310919f9eda8_contact.webp",
+    heroEyebrow: "Federal Way · West Campus",
+    introCopy:
+      "Federal Way's West Campus is the inland trail-and-park pocket west of I-5 — Celebration Park access, greenbelt-buffered plats, and school-route convenience where micro-neighborhood comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1975 – 1995",
+      architecturalStyles: ["Split-level", "Ranch", "Two-story contemporary"],
+      typicalLotSize: "0.15 – 0.30 acres",
+      notes:
+        "Selected plats carry HOA aesthetics or shared-amenity rules — pull dues and CC&Rs before pricing exterior work into list price. Greenbelt-backed lots need their own micro-comp set versus interior West Campus streets. Wetland-edge parcels near Hylebos corridors deserve critical-area review.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Federal Way Parks",
+        url: "https://www.federalwaywa.gov/page/our-parks",
+        context: "Celebration Park, Steel Lake, West Campus Trail, BPA Trail, and West Hylebos Wetlands Park.",
+      },
+      {
+        name: "Federal Way Public Schools",
+        url: "https://www.fwps.org/",
+        context: "West Campus attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: ["SW Campus Dr", "SW 320th St", "Pacific Hwy S (SR-99)", "I-5"],
+    landmarks: [
+      "Celebration Park",
+      "West Campus Trail",
+      "BPA Trail",
+      "Steel Lake Park",
+      "West Hylebos Wetlands Park",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Federal Way's West Campus via SR-410 → SR-167 / I-5 → SW 320th / SW Campus Drive corridors, typically inside a 25–35 minute window for inspections and twilight photography. City Center retail traffic and school pickup on Campus Drive can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Federal Way (City)",
+        citySlug: "federal-way",
+        blurb: "Parent hub — Twin Lakes, Lakota, Dash Point, and Redondo micro-markets on the same south King desk.",
+      },
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Tacoma urban-residential alternative — Point Defiance / Proctor fabric for buyers comparing Pierce vs King.",
+      },
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic Tacoma downtown-edge pocket — denser urban patterns when West Campus suburban stock feels too inland.",
+      },
+      {
+        name: "Milton",
+        citySlug: "milton",
+        blurb: "Pierce County neighbor toward the Tacoma–Federal Way seam — a common cross-shop for commute shoppers.",
+      },
+      {
+        name: "Auburn",
+        citySlug: "auburn",
+        blurb: "Valley and Lea Hill inventory when West Campus pricing or school pathways stretch the search.",
+      },
+      {
+        name: "Kent",
+        citySlug: "kent",
+        blurb: "East Hill and valley alternatives for buyers weighing south King school and commute tradeoffs.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Priya & Sam N.",
+        zip: "98023",
+        rating: 5,
+        quote:
+          "They priced us against West Campus streets — not a Federal Way average — and explained how the greenbelt and Celebration Park access would show up in buyer tours. We were under contract without chasing the market down.",
+      },
+      {
+        author: "Derek L.",
+        zip: "98003",
+        rating: 5,
+        quote:
+          "School boundaries and HOA timing were confirmed before we listed. Trail access was sold as real daily life, not fluff, and escrow stayed clean.",
+      },
+    ],
+  },
 ];
 
 // Expansion corridor requested for the Seattle commute band.

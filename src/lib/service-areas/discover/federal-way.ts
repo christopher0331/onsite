@@ -47,10 +47,16 @@ export const federalWayDiscover: ServiceAreaDiscover = {
         "Community Development handles permits, inspections, and planning review — including critical-area questions near bluffs and wetlands, plus rental-compliance checks in investor-heavy pockets.",
     },
     {
-      name: "West Campus & Lakota",
-      url: "https://www.google.com/maps/place/Federal+Way,+WA",
+      name: "West Campus",
+      url: "/service-areas/federal-way/west-campus",
       description:
-        "West Campus and Lakota offer different street patterns and housing stock than Twin Lakes or the waterfront. Federal Way shopping often starts by picking a cluster first, then comps within that pocket.",
+        "West Campus is Federal Way's inland trail-and-park cluster — Celebration Park access, greenbelt-buffered streets, and a buyer pool that often compares this pocket against Twin Lakes and Lakota rather than a citywide average. See the dedicated West Campus spoke for micro-comps, school pathways, and suburban logistics.",
+    },
+    {
+      name: "Lakota",
+      url: "https://www.google.com/maps/place/Lakota,+Federal+Way,+WA",
+      description:
+        "Lakota offers a different street pattern and housing stock than Twin Lakes or West Campus. Federal Way shopping often starts by picking a cluster first, then comps within that pocket.",
     },
   ],
   localLivingMarkdown: [
