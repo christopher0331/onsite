@@ -1045,7 +1045,7 @@ export const CITIES: City[] = [
       {
         name: "Federal Way Public Schools",
         url: "https://www.fwps.org/",
-        context: "Covers Twin Lakes, West Campus, and the Dash Point/Redondo waterfront.",
+        context: "Covers Twin Lakes, West Campus, Lakota, and the Dash Point/Redondo waterfront.",
       },
     ],
     localResources: [
@@ -2600,6 +2600,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "kent",
         blurb: "East Hill and valley alternatives for buyers weighing south King school and commute tradeoffs.",
       },
+      {
+        name: "Lakota",
+        citySlug: "federal-way",
+        neighborhoodSlug: "lakota",
+        blurb: "West-side park-and-school sibling — Lakota Park and Sound-edge access when West Campus inland trails are not the fit.",
+      },
     ],
     reviews: [
       {
@@ -2615,6 +2621,98 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "School boundaries and HOA timing were confirmed before we listed. Trail access was sold as real daily life, not fluff, and escrow stayed clean.",
+      },
+    ],
+  },
+  {
+    slug: "lakota",
+    citySlug: "federal-way",
+    name: "Lakota",
+    zipCodes: ["98023"],
+    geo: { lat: 47.3095, lng: -122.361 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e5857f0b4e310919f9eda8_contact.webp",
+    heroEyebrow: "Federal Way · Lakota",
+    introCopy:
+      "Federal Way's Lakota is the west-side park-and-school pocket in ZIP 98023 — Lakota Park, Adelaide and Lakota Middle pathways, mid-century stock, and Sound-edge access where street-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1965 – 1990",
+      architecturalStyles: ["Split-level", "Ranch", "Remodeled contemporary", "Duplex"],
+      typicalLotSize: "0.15 – 0.30 acres",
+      notes:
+        "Selected plats carry HOA aesthetics or shared-amenity rules — pull dues and CC&Rs before pricing exterior work into list price. Park-adjacent streets and near-Sound edges need their own micro-comp sets versus interior Lakota grid. Wetland or critical-area parcels deserve early mapping review.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Federal Way Parks",
+        url: "https://www.federalwaywa.gov/page/our-parks",
+        context: "Lakota Park, Lake Grove Park, SW 312th sports courts, and nearby Dash Point / Steel Lake recreation.",
+      },
+      {
+        name: "Federal Way Public Schools",
+        url: "https://www.fwps.org/",
+        context: "Adelaide Elementary / Lakota Middle pathways are common references — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: ["SW 304th St", "SW 312th St", "SW 320th St", "Dash Point Rd"],
+    landmarks: [
+      "Lakota Park",
+      "Lakota Middle School",
+      "Adelaide Elementary School",
+      "Lake Grove Park",
+      "Dash Point State Park",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Federal Way's Lakota via SR-410 → SR-167 / I-5 → SW 320th / Dash Point Road corridors, typically inside a 25–35 minute window for inspections and twilight photography. School pickup near Lakota Middle and City Center retail traffic can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Federal Way (City)",
+        citySlug: "federal-way",
+        blurb: "Parent hub — Twin Lakes, West Campus, Dash Point, and Redondo micro-markets on the same south King desk.",
+      },
+      {
+        name: "West Campus",
+        citySlug: "federal-way",
+        neighborhoodSlug: "west-campus",
+        blurb: "Inland trail-and-park sibling — Celebration Park and greenbelt comps when Lakota's west-side pattern is not the fit.",
+      },
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Tacoma urban-residential alternative — Point Defiance / Proctor fabric for buyers comparing Pierce vs King.",
+      },
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic Tacoma downtown-edge pocket — denser urban patterns when Lakota suburban stock feels too inland.",
+      },
+      {
+        name: "Milton",
+        citySlug: "milton",
+        blurb: "Pierce County neighbor toward the Tacoma–Federal Way seam — a common cross-shop for commute shoppers.",
+      },
+      {
+        name: "Auburn",
+        citySlug: "auburn",
+        blurb: "Valley and Lea Hill inventory when Lakota pricing or school pathways stretch the search.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Maya & Chris T.",
+        zip: "98023",
+        rating: 5,
+        quote:
+          "They priced us against Lakota streets — not a Federal Way average — and explained how Lakota Park and the middle-school route would show up in buyer tours. We were under contract without chasing the market down.",
+      },
+      {
+        author: "Jordan P.",
+        zip: "98023",
+        rating: 5,
+        quote:
+          "School boundaries and HOA timing were confirmed before we listed. Dash Point access was sold as real weekend life, not fluff, and escrow stayed clean.",
       },
     ],
   },

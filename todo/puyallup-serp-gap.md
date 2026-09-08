@@ -6,7 +6,7 @@
 **Live spokes today:** South Hill + Downtown + Clark's Creek + Rodesco + Shawnee Ridge + Gem Heights + Summit + Tacoma North End + Tacoma Stadium District + Federal Way West Campus  
 **Canvas:** `puyallup-competitive-gap.canvas.tsx`  
 **Last updated:** 2026-09-07  
-**Content depth (2026-09-07):** Discover + long-form articles cover all 13 hubs and prior spokes; shipping Federal Way West Campus spoke. Twin Lakes draft still open (#18). Tacoma drafts still open: Proctor (#12), West Slope (#16), South Tacoma (#17). Next directory stubs: Lakota; East Hill / Downtown Kent / Panther Lake; Ballard / Green Lake / West Seattle.
+**Content depth (2026-09-08):** Discover + long-form articles cover all 13 hubs and prior spokes; shipping Federal Way Lakota spoke. Twin Lakes draft still open (#18). Tacoma drafts still open: Proctor (#12), West Slope (#16), South Tacoma (#17). Next directory stubs: East Hill / Downtown Kent / Panther Lake; Ballard / Green Lake / West Seattle.
 
 ---
 
