@@ -30,6 +30,7 @@ import { snagIslandDiscover } from "./snag-island";
 import { inletIslandDiscover } from "./inlet-island";
 import { churchLakeWaterfrontDiscover } from "./church-lake-waterfront";
 import { westCampusDiscover } from "./west-campus";
+import { lakotaDiscover } from "./lakota";
 
 const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [lakeTappsDiscover.slug]: lakeTappsDiscover,
@@ -63,6 +64,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [inletIslandDiscover.slug]: inletIslandDiscover,
   [churchLakeWaterfrontDiscover.slug]: churchLakeWaterfrontDiscover,
   [westCampusDiscover.slug]: westCampusDiscover,
+  [lakotaDiscover.slug]: lakotaDiscover,
 };
 
 export function getServiceAreaDiscover(

@@ -30,6 +30,7 @@ import { snagIslandArticle } from "./snag-island";
 import { inletIslandArticle } from "./inlet-island";
 import { churchLakeWaterfrontArticle } from "./church-lake-waterfront";
 import { westCampusArticle } from "./west-campus";
+import { lakotaArticle } from "./lakota";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -63,6 +64,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [inletIslandArticle.slug]: inletIslandArticle,
   [churchLakeWaterfrontArticle.slug]: churchLakeWaterfrontArticle,
   [westCampusArticle.slug]: westCampusArticle,
+  [lakotaArticle.slug]: lakotaArticle,
 };
 
 export function getServiceAreaArticle(
