@@ -2606,6 +2606,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         neighborhoodSlug: "lakota",
         blurb: "West-side park-and-school sibling — Lakota Park and Sound-edge access when West Campus inland trails are not the fit.",
       },
+      {
+        name: "Dash Point",
+        citySlug: "federal-way",
+        neighborhoodSlug: "dash-point",
+        blurb: "True Sound-edge waterfront — marine-bluff diligence and Dash Point State Park when inland West Campus trails are not enough.",
+      },
     ],
     reviews: [
       {
@@ -2698,6 +2704,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "auburn",
         blurb: "Valley and Lea Hill inventory when Lakota pricing or school pathways stretch the search.",
       },
+      {
+        name: "Dash Point",
+        citySlug: "federal-way",
+        neighborhoodSlug: "dash-point",
+        blurb: "True Sound-edge waterfront — marine-bluff diligence and Dash Point State Park when inland Lakota streets are not the fit.",
+      },
     ],
     reviews: [
       {
@@ -2713,6 +2725,104 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "School boundaries and HOA timing were confirmed before we listed. Dash Point access was sold as real weekend life, not fluff, and escrow stayed clean.",
+      },
+    ],
+  },
+  {
+    slug: "dash-point",
+    citySlug: "federal-way",
+    name: "Dash Point",
+    zipCodes: ["98023"],
+    geo: { lat: 47.3189, lng: -122.4165 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e5857f0b4e310919f9eda8_contact.webp",
+    heroEyebrow: "Federal Way · Dash Point",
+    introCopy:
+      "Federal Way's Dash Point is the Sound-edge waterfront pocket in ZIP 98023 — Dash Point State Park, marine-bluff diligence, and shoreline micro-comps that a citywide Federal Way average misses.",
+    characteristics: {
+      medianHomeYear: "1960 – 1995",
+      architecturalStyles: ["Ranch", "Split-level", "Remodeled contemporary", "View contemporary"],
+      typicalLotSize: "0.18 – 0.50+ acres",
+      notes:
+        "Marine-bluff, shoreline, and wetland-buffer parcels need critical-area review before pricing additions or yard plans into list price. View lots and inland Dash Point streets are related but not identical micro-comp sets. Selected plats carry HOA aesthetics — pull dues and CC&Rs early.",
+    },
+    communityOrgs: [
+      {
+        name: "Washington State Parks — Dash Point State Park",
+        url: "https://www.parks.wa.gov/find-parks/state-parks/dash-point-state-park",
+        context: "Beach access, trails, camping, and shoreline recreation that define Dash Point weekend routines.",
+      },
+      {
+        name: "Federal Way Public Schools",
+        url: "https://www.fwps.org/",
+        context: "Dash Point / west Federal Way pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: ["Dash Point Rd", "SW 320th St", "SW 312th St", "21st Ave SW"],
+    landmarks: [
+      "Dash Point State Park",
+      "Dash Point Beach & Pier approaches",
+      "Puget Sound marine bluffs",
+      "Lakota Park (nearby inland)",
+      "Redondo Waterfront (adjacent Sound edge)",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Federal Way's Dash Point via SR-410 → SR-167 / I-5 → SW 320th / Dash Point Road corridors, typically inside a 25–40 minute window for inspections and twilight photography. Narrow Sound-edge streets, park traffic, and bluff-access logistics can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Federal Way (City)",
+        citySlug: "federal-way",
+        blurb: "Parent hub — Twin Lakes, West Campus, Lakota, and Redondo micro-markets on the same south King desk.",
+      },
+      {
+        name: "Lakota",
+        citySlug: "federal-way",
+        neighborhoodSlug: "lakota",
+        blurb: "West-side park-and-school sibling — inland Lakota Park living when true Sound-edge diligence is not the fit.",
+      },
+      {
+        name: "West Campus",
+        citySlug: "federal-way",
+        neighborhoodSlug: "west-campus",
+        blurb: "Inland trail-and-park cluster — Celebration Park and greenbelt comps when Dash Point waterfront is not the product.",
+      },
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Tacoma urban-residential alternative — Point Defiance / Proctor fabric for buyers comparing Pierce vs King Sound-edge living.",
+      },
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic Tacoma downtown-edge pocket — denser urban patterns when Dash Point bluff living feels too quiet.",
+      },
+      {
+        name: "Milton",
+        citySlug: "milton",
+        blurb: "Pierce County neighbor toward the Tacoma–Federal Way seam — a common cross-shop for commute shoppers.",
+      },
+      {
+        name: "Auburn",
+        citySlug: "auburn",
+        blurb: "Valley and Lea Hill inventory when Dash Point pricing or critical-area expectations stretch the search.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Nina & Theo R.",
+        zip: "98023",
+        rating: 5,
+        quote:
+          "They priced us against Dash Point streets — not a Federal Way average — and walked us through bluff and shoreline diligence before photos went live. Escrow stayed clean.",
+      },
+      {
+        author: "Marcus W.",
+        zip: "98023",
+        rating: 5,
+        quote:
+          "Dash Point State Park access was sold as real weekend life, not fluff. School boundaries and utility notes were confirmed early, and buyers understood the Sound-edge tradeoffs.",
       },
     ],
   },
