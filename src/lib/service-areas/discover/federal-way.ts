@@ -2,7 +2,7 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const federalWayDiscover: ServiceAreaDiscover = {
   slug: "federal-way",
-  updatedAt: "2026-09-08",
+  updatedAt: "2026-09-09",
   attractions: [
     {
       name: "Twin Lakes",
@@ -15,6 +15,12 @@ export const federalWayDiscover: ServiceAreaDiscover = {
       url: "https://www.parks.wa.gov/find-parks/state-parks/dash-point-state-park",
       description:
         "Dash Point State Park anchors the waterfront edge of Federal Way with beach access, trails, and camping. It is a lifestyle draw for households prioritizing Sound views and outdoor routines near home.",
+    },
+    {
+      name: "Dash Point",
+      url: "/service-areas/federal-way/dash-point",
+      description:
+        "Dash Point is Federal Way's Sound-edge waterfront cluster — Dash Point State Park access, marine-bluff diligence, and a buyer pool that often compares this pocket against Lakota, West Campus, Twin Lakes, and Redondo rather than a citywide average. See the dedicated Dash Point spoke for micro-comps, shoreline underwriting, and suburban logistics.",
     },
     {
       name: "Redondo Waterfront",
@@ -60,7 +66,7 @@ export const federalWayDiscover: ServiceAreaDiscover = {
     },
   ],
   localLivingMarkdown: [
-    "Federal Way sits in south King County across ZIPs 98003 and 98023, with distinct pockets in Twin Lakes, [West Campus](/service-areas/federal-way/west-campus), [Lakota](/service-areas/federal-way/lakota), Dash Point, and Redondo. Buyers comparing [Federal Way homes for sale](/listings?city=Federal%20Way&state=WA) usually sort by cluster — waterfront edge versus inland plats — while checking [Federal Way Public Schools](https://www.fwps.org/) boundaries, [Lakehaven Water & Sewer District](https://www.lakehaven.org/) service, and planning context through [City of Federal Way Community Development](https://www.cityoffederalway.com/page/community-development). Everyday resources include [King County Library System](https://kcls.org/) branches, [Puget Sound Energy](https://www.pse.com/), and parcel records from the [King County Assessor](https://kingcounty.gov/en/dept/assessor).",
+    "Federal Way sits in south King County across ZIPs 98003 and 98023, with distinct pockets in Twin Lakes, [West Campus](/service-areas/federal-way/west-campus), [Lakota](/service-areas/federal-way/lakota), [Dash Point](/service-areas/federal-way/dash-point), and Redondo. Buyers comparing [Federal Way homes for sale](/listings?city=Federal%20Way&state=WA) usually sort by cluster — waterfront edge versus inland plats — while checking [Federal Way Public Schools](https://www.fwps.org/) boundaries, [Lakehaven Water & Sewer District](https://www.lakehaven.org/) service, and planning context through [City of Federal Way Community Development](https://www.cityoffederalway.com/page/community-development). Everyday resources include [King County Library System](https://kcls.org/) branches, [Puget Sound Energy](https://www.pse.com/), and parcel records from the [King County Assessor](https://kingcounty.gov/en/dept/assessor).",
     "Cross-shopping often expands to [Tacoma](/service-areas/tacoma), [Kent](/service-areas/kent), [Auburn](/service-areas/auburn), and [Milton](/service-areas/milton) when buyers weigh commute, schools, and housing style. OnSite Real Estate Group helps households match the right Federal Way pocket — and the diligence that goes with bluffs, wetlands, and rental rules — so the next move fits daily life.",
   ],
 };
