@@ -13,7 +13,7 @@ export default function ServiceAreaVideo({ areaName, video, pageUrl }: Props) {
 
   return (
     <section
-      className="py-14 sm:py-16 bg-[#1a1a18] border-t border-charcoal"
+      className="py-8 sm:py-10 bg-[#1a1a18] border-t border-charcoal"
       aria-labelledby="area-video-heading"
     >
       <VideoObjectSchema
@@ -24,20 +24,20 @@ export default function ServiceAreaVideo({ areaName, video, pageUrl }: Props) {
         pageUrl={pageUrl}
       />
 
-      <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 lg:items-center">
-          <div className="lg:col-span-5">
-            <p className="text-[11px] uppercase tracking-[0.35em] text-white/55 mb-4">
+      <div className="mx-auto max-w-[960px] px-6 lg:px-12">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-center lg:gap-8">
+          <div className="max-w-[30rem] shrink-0">
+            <p className="text-[11px] uppercase tracking-[0.28em] text-white/55 mb-2">
               OnSite on YouTube
             </p>
             <h2
               id="area-video-heading"
-              className="font-serif text-[clamp(1.6rem,3vw,2.4rem)] font-light text-white leading-[1.12] mb-4"
+              className="font-serif text-[clamp(1.45rem,2.5vw,1.95rem)] font-light text-white leading-[1.15] mb-2.5 text-balance"
             >
               A {areaName} listing,{" "}
               <span className="italic">on camera.</span>
             </h2>
-            <p className="text-[15px] leading-7 text-white/70 mb-6 max-w-md">
+            <p className="text-[14px] leading-6 text-white/70 mb-4 max-w-md">
               André and Cindie walk {areaName} inventory the same way they
               price it — street by street. This tour is from the OnSite Real
               Estate Group channel.
@@ -46,7 +46,7 @@ export default function ServiceAreaVideo({ areaName, video, pageUrl }: Props) {
               href={ONSITE_YOUTUBE_CHANNEL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-2.5 text-[11px] uppercase tracking-[0.2em] text-white/75 transition-all duration-300 hover:bg-white/10 hover:border-white/40"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2 text-[11px] uppercase tracking-[0.2em] text-white/75 transition-all duration-300 hover:bg-white/10 hover:border-white/40"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -60,24 +60,20 @@ export default function ServiceAreaVideo({ areaName, video, pageUrl }: Props) {
             </a>
           </div>
 
-          <div className="lg:col-span-6 lg:col-start-7">
-            <div className="max-w-[420px] lg:ml-auto">
-              <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.04]">
-                <div className="relative aspect-video w-full">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${video.youtubeId}?rel=0&modestbranding=1`}
-                    title={video.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="h-full w-full"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="px-4 py-3">
-                  <p className="text-[12px] leading-5 text-white/85">{video.title}</p>
-                </div>
-              </div>
+          <div className="w-full overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.04] lg:w-[26rem] lg:shrink-0">
+            <div className="relative aspect-video w-full">
+              <iframe
+                src={`https://www.youtube.com/embed/${video.youtubeId}?rel=0&modestbranding=1`}
+                title={video.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="h-full w-full"
+                loading="lazy"
+              />
             </div>
+            <p className="px-3.5 py-2 text-[12px] leading-5 text-white/75">
+              {video.title}
+            </p>
           </div>
         </div>
       </div>
