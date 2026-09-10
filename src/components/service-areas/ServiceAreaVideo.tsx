@@ -13,7 +13,7 @@ export default function ServiceAreaVideo({ areaName, video, pageUrl }: Props) {
 
   return (
     <section
-      className="py-20 sm:py-28 bg-[#1a1a18] border-t border-charcoal"
+      className="py-14 sm:py-16 bg-[#1a1a18] border-t border-charcoal"
       aria-labelledby="area-video-heading"
     >
       <VideoObjectSchema
@@ -25,21 +25,19 @@ export default function ServiceAreaVideo({ areaName, video, pageUrl }: Props) {
       />
 
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end mb-10">
-          <div className="lg:col-span-7">
-            <p className="text-[11px] uppercase tracking-[0.35em] text-white/55 mb-5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 lg:items-center">
+          <div className="lg:col-span-5">
+            <p className="text-[11px] uppercase tracking-[0.35em] text-white/55 mb-4">
               OnSite on YouTube
             </p>
             <h2
               id="area-video-heading"
-              className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light text-white leading-[1.08]"
+              className="font-serif text-[clamp(1.6rem,3vw,2.4rem)] font-light text-white leading-[1.12] mb-4"
             >
               A {areaName} listing,{" "}
               <span className="italic">on camera.</span>
             </h2>
-          </div>
-          <div className="lg:col-span-5">
-            <p className="text-[16px] leading-8 text-white/70 mb-6">
+            <p className="text-[15px] leading-7 text-white/70 mb-6 max-w-md">
               André and Cindie walk {areaName} inventory the same way they
               price it — street by street. This tour is from the OnSite Real
               Estate Group channel.
@@ -61,21 +59,25 @@ export default function ServiceAreaVideo({ areaName, video, pageUrl }: Props) {
               Subscribe
             </a>
           </div>
-        </div>
 
-        <div className="overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.04]">
-          <div className="relative aspect-video w-full">
-            <iframe
-              src={`https://www.youtube.com/embed/${video.youtubeId}?rel=0&modestbranding=1`}
-              title={video.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="h-full w-full"
-              loading="lazy"
-            />
-          </div>
-          <div className="px-5 py-4 sm:px-6">
-            <p className="text-[13px] leading-6 text-white/90">{video.title}</p>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <div className="max-w-[420px] lg:ml-auto">
+              <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.04]">
+                <div className="relative aspect-video w-full">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video.youtubeId}?rel=0&modestbranding=1`}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="h-full w-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="px-4 py-3">
+                  <p className="text-[12px] leading-5 text-white/85">{video.title}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
