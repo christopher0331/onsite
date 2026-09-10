@@ -36,6 +36,7 @@ import {
   getCityBySlug,
   getNeighborhoodsByCity,
 } from "@/lib/service-areas/data";
+import { hubMetaDescription } from "@/lib/service-areas/hub-meta";
 import { getServiceAreaArticle } from "@/lib/service-areas/articles";
 import { getServiceAreaDiscover } from "@/lib/service-areas/discover";
 import { getServiceAreaMarketBrief } from "@/lib/service-areas/briefs";
@@ -70,7 +71,7 @@ export async function generateMetadata({
   if (!city) return {};
   const url = `${SITE_URL}/service-areas/${city.slug}`;
   const title = `${city.name}, ${city.stateCode} Real Estate Agents | OnSite ReGroup`;
-  const description = `Local ${city.name} real estate brokerage. Pricing, prep, and negotiation services across ${city.zipCodes.join(", ")}. ${city.activeProjects} active projects this cycle.`;
+  const description = hubMetaDescription(city);
   return {
     title,
     description,

@@ -5,7 +5,7 @@ export const auburnArticle: ServiceAreaArticle = {
   title: "Buying, Selling, and Living in Auburn, WA",
   excerpt:
     "What buying, selling, and living in Auburn really involves — valley-floor and Sounder living, West Hill, Lea Hill, Auburn School District, Green River flood diligence, and King County practicalities.",
-  updatedAt: "2026-07-29",
+  updatedAt: "2026-09-10",
   bodyMarkdown: `Auburn sits at the southern edge of King County with distinct pricing bands: valley-floor neighborhoods near downtown and the Sounder station, established West Hill pockets, and the Lea Hill bench above Green River College across ZIPs 98001, 98002, and 98092. Buyers comparing [Auburn homes for sale](/listings?city=Auburn&state=WA) often cross-shop [Kent](/service-areas/kent), [Federal Way](/service-areas/federal-way), and [Sumner](/service-areas/sumner) while underwriting each Auburn band against its own comps. The [City of Auburn](https://www.auburnwa.gov/) is the hub for permits, planning, utilities, and parks.
 
 Downtown Auburn and the Sounder station corridor lean toward smaller single-family homes, townhomes, and multifamily options with quicker walkability to dining, civic services, and [Sound Transit](https://www.soundtransit.org/) rail north toward Seattle and south toward Tacoma. Parking and showing logistics near the station matter for both buyers and sellers — transit access is a concrete marketing input, not just a lifestyle adjective.

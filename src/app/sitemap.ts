@@ -3,6 +3,7 @@ import blogData from "@/lib/blog-data.json";
 import { isMainWebsiteHost } from "@/lib/site-visibility";
 import { getServiceAreaArticle } from "@/lib/service-areas/articles";
 import { CITIES, NEIGHBORHOODS } from "@/lib/service-areas/data";
+import { SERVICE_AREA_META_UPDATED_AT } from "@/lib/service-areas/hub-meta";
 import { getServiceAreaDiscover } from "@/lib/service-areas/discover";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
@@ -47,7 +48,8 @@ function latestDate(...candidates: Array<string | undefined>): Date | undefined 
 function serviceAreaLastModified(slug: string): Date | undefined {
   return latestDate(
     getServiceAreaArticle(slug)?.updatedAt,
-    getServiceAreaDiscover(slug)?.updatedAt
+    getServiceAreaDiscover(slug)?.updatedAt,
+    SERVICE_AREA_META_UPDATED_AT
   );
 }
 

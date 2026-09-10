@@ -27,6 +27,7 @@ import {
   getCityBySlug,
   getNeighborhoodBySlug,
 } from "@/lib/service-areas/data";
+import { neighborhoodMetaDescription } from "@/lib/service-areas/hub-meta";
 import { getServiceAreaArticle } from "@/lib/service-areas/articles";
 import { getServiceAreaDiscover } from "@/lib/service-areas/discover";
 import { filterListingsByZip, getServiceAreaListings } from "@/lib/service-area-listings";
@@ -51,7 +52,7 @@ export async function generateMetadata({
 
   const url = `${SITE_URL}/service-areas/${city.slug}/${neighborhood.slug}`;
   const title = `${neighborhood.name}, ${city.name} ${city.stateCode} Real Estate | OnSite ReGroup`;
-  const description = `Dedicated ${neighborhood.name} real estate. We serve zip codes ${neighborhood.zipCodes.join(", ")} with pricing, prep, and negotiation calibrated to this exact submarket.`;
+  const description = neighborhoodMetaDescription(city, neighborhood);
   return {
     title,
     description,
