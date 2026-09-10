@@ -7,11 +7,11 @@
 
 import type { CardListing } from "@/components/ListingCard";
 import type { City, EntityLink, Neighborhood } from "@/lib/service-areas/types";
-import { localBusinessNode, SITE_BRAND } from "@/lib/nap";
+import { localBusinessNode, localBusinessRef, LOGO_URL, SITE_BRAND } from "@/lib/nap";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const ORG_URL = getCanonicalBaseUrl();
-const ORG_AGENT = localBusinessNode(ORG_URL);
+const ORG_REF = localBusinessRef(ORG_URL);
 
 type BreadcrumbEntry = { name: string; url: string };
 
@@ -112,7 +112,7 @@ export function WebPageSchema({
       name: SITE_BRAND,
       url: ORG_URL,
     },
-    about: ORG_AGENT,
+    about: ORG_REF,
     ...(mentions && mentions.length > 0 ? { mentions } : {}),
   };
   return (
@@ -133,6 +133,50 @@ export function BreadcrumbSchema({ items }: { items: BreadcrumbEntry[] }) {
       name: item.name,
       item: item.url,
     })),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
+/** VideoObject for an embedded OnSite listing tour on a service-area page. */
+export function VideoObjectSchema({
+  name,
+  description,
+  youtubeId,
+  uploadDate,
+  pageUrl,
+}: {
+  name: string;
+  description: string;
+  youtubeId: string;
+  uploadDate?: string;
+  pageUrl: string;
+}) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name,
+    description,
+    thumbnailUrl: `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`,
+    embedUrl: `https://www.youtube.com/embed/${youtubeId}`,
+    contentUrl: `https://www.youtube.com/watch?v=${youtubeId}`,
+    url: pageUrl,
+    publisher: {
+      "@type": "Organization",
+      name: SITE_BRAND,
+      url: ORG_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: LOGO_URL,
+      },
+    },
+    isPartOf: { "@id": pageUrl },
+    about: ORG_REF,
+    ...(uploadDate ? { uploadDate } : {}),
   };
   return (
     <script

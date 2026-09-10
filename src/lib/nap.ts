@@ -64,6 +64,11 @@ export function localBusinessId(baseUrl = getCanonicalBaseUrl()) {
   return `${baseUrl}/#localbusiness`;
 }
 
+/** JSON-LD pointer to the sitewide LocalBusiness node. Never embed a second aggregateRating. */
+export function localBusinessRef(baseUrl = getCanonicalBaseUrl()) {
+  return { "@id": localBusinessId(baseUrl) };
+}
+
 export function postalAddressNode() {
   return {
     "@type": "PostalAddress" as const,

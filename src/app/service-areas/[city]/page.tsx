@@ -22,6 +22,7 @@ import AboutTheArea from "@/components/service-areas/AboutTheArea";
 import MarketPulse from "@/components/service-areas/MarketPulse";
 import RecentlySoldTable from "@/components/service-areas/RecentlySoldTable";
 import MarketBrief from "@/components/service-areas/MarketBrief";
+import ServiceAreaVideo from "@/components/service-areas/ServiceAreaVideo";
 import {
   AreaListingsItemListSchema,
   BreadcrumbSchema,
@@ -43,6 +44,7 @@ import {
   getServiceAreaMarketPulse,
   getServiceAreaSoldListings,
 } from "@/lib/service-area-market";
+import { getServiceAreaVideo } from "@/lib/service-areas/videos";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const SITE_URL = getCanonicalBaseUrl();
@@ -98,6 +100,8 @@ export default async function CityPage({
   const pageUrl = `${SITE_URL}/service-areas/${city.slug}`;
   const isPuyallup = city.slug === "puyallup";
 
+  const areaVideo = getServiceAreaVideo(city.slug);
+
   const [{ listings }, soldListings, pulse, article, discover, brief] =
     await Promise.all([
       getServiceAreaListings(city.name, 6),
@@ -147,6 +151,14 @@ export default async function CityPage({
 
         {pulse ? <MarketPulse cityName={city.name} pulse={pulse} /> : null}
         {brief ? <MarketBrief brief={brief} /> : null}
+
+        {areaVideo ? (
+          <ServiceAreaVideo
+            areaName={city.name}
+            video={areaVideo}
+            pageUrl={pageUrl}
+          />
+        ) : null}
 
         {isPuyallup ? (
           <AiSearchPanel

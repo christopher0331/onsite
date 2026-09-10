@@ -14,6 +14,7 @@ import AreaListings from "@/components/service-areas/AreaListings";
 import ServiceAreaCTA from "@/components/service-areas/ServiceAreaCTA";
 import ServiceAreaArticle from "@/components/service-areas/ServiceAreaArticle";
 import AboutTheArea from "@/components/service-areas/AboutTheArea";
+import ServiceAreaVideo from "@/components/service-areas/ServiceAreaVideo";
 import {
   AreaListingsItemListSchema,
   BreadcrumbSchema,
@@ -29,6 +30,7 @@ import {
 import { getServiceAreaArticle } from "@/lib/service-areas/articles";
 import { getServiceAreaDiscover } from "@/lib/service-areas/discover";
 import { filterListingsByZip, getServiceAreaListings } from "@/lib/service-area-listings";
+import { getServiceAreaVideo } from "@/lib/service-areas/videos";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const SITE_URL = getCanonicalBaseUrl();
@@ -81,6 +83,7 @@ export default async function NeighborhoodPage({
   const listings = filterListingsByZip(cityListings, neighborhood.zipCodes, 6);
   const article = getServiceAreaArticle(neighborhood.slug);
   const discover = getServiceAreaDiscover(neighborhood.slug);
+  const areaVideo = getServiceAreaVideo(neighborhood.slug, city.slug);
   const scopeNote = cityListings.some(
     (l) => l.address?.zip && neighborhood.zipCodes.includes(l.address.zip)
   )
@@ -112,6 +115,14 @@ export default async function NeighborhoodPage({
         <DispatchLogistics neighborhood={neighborhood} />
         <LocalReviews neighborhood={neighborhood} />
         <AdjacentAreas neighborhood={neighborhood} />
+
+        {areaVideo ? (
+          <ServiceAreaVideo
+            areaName={neighborhood.name}
+            video={areaVideo}
+            pageUrl={pageUrl}
+          />
+        ) : null}
 
         <AreaListings
           areaLabel={neighborhood.name}
