@@ -11,7 +11,8 @@ export const ONSITE_LEAD_AGENT_NAME =
  * A "lead agent" is one of OnSite's own agents whose listings get top
  * priority across the site (their own tab on /our-listings, prepended on the
  * default /listings browse, etc.). Add a new agent by appending to
- * `ONSITE_LEAD_AGENTS` — array order is the display/priority order.
+ * `ONSITE_LEAD_AGENTS` — array order is tab/display order. Default browse
+ * rank is handled in `leadAgentRank` (Cindie-only first, then André).
  *
  * Each agent is matched against a listing either by NWMLS board agent id
  * (precise) or by a name substring (the Repliers `agents.name` search term).
@@ -167,18 +168,23 @@ export function isLeadAgentListing(listing: OnsiteListing) {
 }
 
 /**
- * Lowest index in `ONSITE_LEAD_AGENTS` among this listing's agents, with two
- * trailing tiers: Timber-brokerage listings with no lead agent match, then
- * everyone else (general-market listings pulled in for service-area pages).
+ * Default browse order (lower = earlier):
+ *   0 Cindie-only
+ *   1 André-only
+ *   2 André & Cindie
+ *   3 other lead agents (if any are added later)
+ *   4 Timber-brokerage listings with no lead agent
+ *   5 everyone else (general-market, e.g. service-area pages)
  */
 function leadAgentRank(listing: OnsiteListing): number {
-  let best = -1;
-  for (const key of listing.leadAgentKeys) {
-    const idx = ONSITE_LEAD_AGENT_KEYS.indexOf(key);
-    if (idx >= 0 && (best === -1 || idx < best)) best = idx;
-  }
-  if (best >= 0) return best;
-  return listing.isTimber ? ONSITE_LEAD_AGENTS.length : ONSITE_LEAD_AGENTS.length + 1;
+  const hasAndre = listing.leadAgentKeys.includes("andre");
+  const hasCindie = listing.leadAgentKeys.includes("cindie");
+
+  if (hasCindie && !hasAndre) return 0;
+  if (hasAndre && !hasCindie) return 1;
+  if (hasAndre && hasCindie) return 2;
+  if (listing.leadAgentKeys.length > 0) return 3;
+  return listing.isTimber ? 4 : 5;
 }
 
 const STATUS_ORDER: Record<StatusTone, number> = {
@@ -222,8 +228,8 @@ export function parseOnsiteListingScope(value: string | null): OnsiteListingScop
 }
 
 /**
- * `all`: lead agents first (in config order — André, then Cindie, …), then
- * team-only; within a lead-agent group → Active → Pending → Sold.
+ * `all`: Cindie-only, then André-only, then André & Cindie, then Timber,
+ * then everyone else; within a group → Active → Pending → Sold.
  * A single-agent or `timber` scope: Active → Pending → Sold, then the sort.
  */
 export function sortOnsiteListings(

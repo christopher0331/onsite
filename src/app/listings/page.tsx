@@ -434,8 +434,8 @@ export default function ListingsPage() {
     }
 
     // On the default first-page browse (no search/filters applied), lead with
-    // OnSite's own inventory — lead agents first (André, then Cindie), then
-    // Timber Real Estate — matching the priority order used on /our-listings.
+    // OnSite's own inventory — Cindie-only, then André, then André & Cindie,
+    // then Timber Real Estate — matching the priority used on /our-listings.
     const isDefaultBrowse =
       page === 1 &&
       !mlsSearch &&
