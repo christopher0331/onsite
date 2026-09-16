@@ -12,8 +12,8 @@ type RawListingRow = CardListing & {
 
 /**
  * Active/pending listings for a service-area page, ranked with the same
- * priority as the rest of the site: Cindie-only, then André, then André &
- * Cindie, then Timber, then the general market — per `sortOnsiteListings`.
+ * priority as the rest of the site: Active before Pending/Sold, then
+ * Cindie-only, André, André & Cindie, Timber, then the general market.
  *
  * This hits Repliers directly (rather than round-tripping through our own
  * `/api/listings` route) since it's called from server components at build

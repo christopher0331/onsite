@@ -12,7 +12,7 @@ export const ONSITE_LEAD_AGENT_NAME =
  * priority across the site (their own tab on /our-listings, prepended on the
  * default /listings browse, etc.). Add a new agent by appending to
  * `ONSITE_LEAD_AGENTS` — array order is tab/display order. Default browse
- * rank is handled in `leadAgentRank` (Cindie-only first, then André).
+ * rank is handled in `leadAgentRank` after status (Active still leads).
  *
  * Each agent is matched against a listing either by NWMLS board agent id
  * (precise) or by a name substring (the Repliers `agents.name` search term).
@@ -215,12 +215,6 @@ function compareOnsiteListings(a: OnsiteListing, b: OnsiteListing, sortBy: strin
   }
 }
 
-function sortByStatusThenDate(a: OnsiteListing, b: OnsiteListing, sortBy: string) {
-  const statusDiff = statusSortKey(a) - statusSortKey(b);
-  if (statusDiff !== 0) return statusDiff;
-  return compareOnsiteListings(a, b, sortBy);
-}
-
 export function parseOnsiteListingScope(value: string | null): OnsiteListingScope {
   if (value === "timber") return "timber";
   if (value && ONSITE_LEAD_AGENT_KEYS.includes(value)) return value;
@@ -228,9 +222,9 @@ export function parseOnsiteListingScope(value: string | null): OnsiteListingScop
 }
 
 /**
- * `all`: Cindie-only, then André-only, then André & Cindie, then Timber,
- * then everyone else; within a group → Active → Pending → Sold.
- * A single-agent or `timber` scope: Active → Pending → Sold, then the sort.
+ * `all`: Active → Pending → Sold first. Within a status, Cindie-only, then
+ * André-only, then André & Cindie, then Timber, then everyone else, then the
+ * requested sort. A single-agent or `timber` scope skips agent rank.
  */
 export function sortOnsiteListings(
   listings: OnsiteListing[],
@@ -238,17 +232,14 @@ export function sortOnsiteListings(
   scope: OnsiteListingScope = "all"
 ) {
   return [...listings].sort((a, b) => {
-    if (scope !== "all") {
-      return sortByStatusThenDate(a, b, sortBy);
-    }
-
-    const rankA = leadAgentRank(a);
-    const rankB = leadAgentRank(b);
-    if (rankA !== rankB) return rankA - rankB;
-
-    // Same group: order by status (Active → Pending → Sold) before date.
     const statusDiff = statusSortKey(a) - statusSortKey(b);
     if (statusDiff !== 0) return statusDiff;
+
+    if (scope === "all") {
+      const rankA = leadAgentRank(a);
+      const rankB = leadAgentRank(b);
+      if (rankA !== rankB) return rankA - rankB;
+    }
 
     return compareOnsiteListings(a, b, sortBy);
   });
