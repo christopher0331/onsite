@@ -83,7 +83,7 @@ function digits(value: string) {
 }
 
 export function listingMatchesAgent(
-  listing: TaggableListing,
+  listing: { agents?: RawAgent[] | null },
   agent: LeadAgentConfig
 ): boolean {
   const agents = listing.agents ?? [];

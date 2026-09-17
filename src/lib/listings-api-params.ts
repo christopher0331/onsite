@@ -1,3 +1,8 @@
+import {
+  applyEastPierceCityFilters,
+  shouldDefaultEastPierceScope,
+} from "@/lib/listing-index-policy";
+
 const ALLOWED_SORT_BY = new Set([
   "createdOnDesc",
   "createdOnAsc",
@@ -156,6 +161,8 @@ export function buildListingsQueryParams(searchParams: URLSearchParams, pageSize
     const q = city.trim();
     if (/^\d{5}$/.test(q)) params.set("zip", q);
     else params.set("city", q);
+  } else if (shouldDefaultEastPierceScope(searchParams)) {
+    applyEastPierceCityFilters(params);
   }
   if (county) params.set("area", county);
   if (brokerageOnly) {

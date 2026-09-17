@@ -1,68 +1,8 @@
 import type { Metadata } from "next";
-import { repliersListingsUrl } from "@/lib/repliers-enrich";
-import { repliersImageUrl } from "@/lib/repliers-images";
-import { formatStreetAddress } from "@/lib/format-address";
-import { formatBathroomCount } from "@/lib/format-bathrooms";
-import { getCanonicalBaseUrl } from "@/lib/site-url";
+import { getListingByMlsNumber } from "@/lib/listing-fetch";
+import { listingDetailMetadata } from "@/lib/listing-seo";
 
-const SITE_URL = getCanonicalBaseUrl();
-
-type OgListing = {
-  mlsNumber?: string;
-  listPrice?: number | null;
-  soldPrice?: number | null;
-  images?: string[] | null;
-  permissions?: { displayAddressOnInternet?: string } | null;
-  address?: {
-    streetNumber?: string;
-    streetName?: string;
-    streetSuffix?: string;
-    streetDirection?: string;
-    streetDirectionPrefix?: string | null;
-    unitNumber?: string | null;
-    city?: string;
-    state?: string;
-    zip?: string;
-  } | null;
-  details?: {
-    numBedrooms?: number | null;
-    numBathrooms?: number | null;
-    numBathroomsHalf?: number | null;
-    sqft?: number | string | null;
-  } | null;
-  raw?: Record<string, unknown> | null;
-  office?: { brokerageName?: string } | null;
-};
-
-async function fetchListing(mlsNumber: string): Promise<OgListing | null> {
-  const headers = {
-    "repliers-api-key": process.env.REPLIERS_API_KEY || "",
-    "Content-Type": "application/json",
-  };
-  const bare = mlsNumber.replace(/^[A-Za-z]+/, "");
-  const candidates = [...new Set([mlsNumber, `NWM${bare}`, bare].filter(Boolean))];
-  for (const id of candidates) {
-    try {
-      const res = await fetch(repliersListingsUrl(`/${encodeURIComponent(id)}`), {
-        headers,
-        next: { revalidate: 300 },
-      });
-      if (res.ok) return (await res.json()) as OgListing;
-    } catch {
-      // try next candidate
-    }
-  }
-  return null;
-}
-
-function imageUrl(images: string[] | null | undefined) {
-  return repliersImageUrl(images?.[0], "medium");
-}
-
-function formatPrice(n: number | null | undefined) {
-  if (!n || Number.isNaN(n)) return "Price on request";
-  return "$" + n.toLocaleString("en-US");
-}
+export const revalidate = 300;
 
 export async function generateMetadata({
   params,
@@ -70,81 +10,8 @@ export async function generateMetadata({
   params: Promise<{ mlsNumber: string }>;
 }): Promise<Metadata> {
   const { mlsNumber } = await params;
-  const listing = await fetchListing(mlsNumber);
-
-  const fallbackTitle = "Listing | OnSite Real Estate Group";
-  if (!listing) {
-    return { title: fallbackTitle };
-  }
-
-  const a = listing.address ?? {};
-  const showAddress = listing.permissions?.displayAddressOnInternet !== "N";
-  const street = formatStreetAddress(a);
-  const cityLine = [a.city, a.state, a.zip].filter(Boolean).join(", ");
-  const price = formatPrice(listing.soldPrice ?? listing.listPrice);
-
-  const det = listing.details ?? {};
-
-  // Browser tabs truncate the END of the title, so lead with the most
-  // identifiable info (street + city) and keep the brand as a suffix. This
-  // makes multiple open listing tabs instantly distinguishable instead of all
-  // starting with a clipped dollar amount.
-  const streetAddress = showAddress && street ? street : null;
-  const tabHeadline = streetAddress
-    ? [streetAddress, a.city].filter(Boolean).join(", ")
-    : a.city
-      ? `${det.numBedrooms ? `${det.numBedrooms} bd ` : ""}home in ${a.city}`
-      : "Home for sale";
-  const title = `${tabHeadline} | OnSite Real Estate Group`;
-
-  // Richer, price-led headline reserved for social share cards where the full
-  // string is shown (not truncated like a tab).
-  const shareHeadline = streetAddress ?? (cityLine || "Home for sale");
-  const ogTitle = `${price} · ${shareHeadline} | OnSite Real Estate Group`;
-
-  const bathLabel = formatBathroomCount(det, listing.raw);
-  const specs = [
-    det.numBedrooms ? `${det.numBedrooms} bd` : null,
-    bathLabel ? `${bathLabel} ba` : null,
-    det.sqft ? `${Number(det.sqft).toLocaleString()} sqft` : null,
-  ]
-    .filter(Boolean)
-    .join(" · ");
-  const brokerage = listing.office?.brokerageName;
-  const description = [
-    specs,
-    cityLine ? `in ${cityLine}` : null,
-    brokerage ? `Listed by ${brokerage}.` : null,
-  ]
-    .filter(Boolean)
-    .join(" · ")
-    .replace(" · in ", " in ");
-
-  const img = imageUrl(listing.images);
-  const url = `${SITE_URL}/listings/${mlsNumber}`;
-
-  return {
-    metadataBase: new URL(SITE_URL),
-    title,
-    description: description || undefined,
-    alternates: { canonical: url },
-    openGraph: {
-      title: ogTitle,
-      description: description || undefined,
-      url,
-      type: "website",
-      siteName: "OnSite Real Estate Group",
-      images: img
-        ? [{ url: img, width: 1200, height: 630, alt: showAddress && street ? street : "Property photo" }]
-        : undefined,
-    },
-    twitter: {
-      card: img ? "summary_large_image" : "summary",
-      title: ogTitle,
-      description: description || undefined,
-      images: img ? [img] : undefined,
-    },
-  };
+  const listing = await getListingByMlsNumber(mlsNumber);
+  return listingDetailMetadata(mlsNumber, listing);
 }
 
 export default function ListingLayout({ children }: { children: React.ReactNode }) {

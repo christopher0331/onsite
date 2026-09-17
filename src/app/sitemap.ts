@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import blogData from "@/lib/blog-data.json";
-import { isMainWebsiteHost } from "@/lib/site-visibility";
+import { getIndexableListingSitemapEntries } from "@/lib/listing-fetch";
 import { getServiceAreaArticle } from "@/lib/service-areas/articles";
 import { CITIES, NEIGHBORHOODS } from "@/lib/service-areas/data";
 import { SERVICE_AREA_META_UPDATED_AT } from "@/lib/service-areas/hub-meta";
@@ -8,7 +8,6 @@ import { getServiceAreaDiscover } from "@/lib/service-areas/discover";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const BASE_URL = getCanonicalBaseUrl();
-const showIdxContent = !isMainWebsiteHost(new URL(BASE_URL).hostname);
 
 // ─── FEATURED HOMES ──────────────────────────────────────────────────────────
 // When you add or remove a listing in featured-homes/[slug]/page.tsx,
@@ -53,7 +52,7 @@ function serviceAreaLastModified(slug: string): Date | undefined {
   );
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   // ─── STATIC CORE PAGES ───────────────────────────────────────────────────
@@ -65,13 +64,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/sell-your-home`, priority: 0.9, changeFrequency: "weekly", lastModified: now },
     { url: `${BASE_URL}/free-home-evaluation`, priority: 0.8, changeFrequency: "monthly", lastModified: now },
     { url: `${BASE_URL}/home-evaluation-tool`, priority: 0.8, changeFrequency: "monthly", lastModified: now },
-    ...(showIdxContent
-      ? [
-          { url: `${BASE_URL}/listings`, priority: 0.9, changeFrequency: "daily" as const, lastModified: now },
-          { url: `${BASE_URL}/our-listings`, priority: 0.85, changeFrequency: "daily" as const, lastModified: now },
-          { url: `${BASE_URL}/sold-homes`, priority: 0.7, changeFrequency: "weekly" as const, lastModified: now },
-        ]
-      : []),
+    { url: `${BASE_URL}/listings`, priority: 0.9, changeFrequency: "daily", lastModified: now },
+    { url: `${BASE_URL}/our-listings`, priority: 0.85, changeFrequency: "daily", lastModified: now },
+    { url: `${BASE_URL}/sold-homes`, priority: 0.7, changeFrequency: "weekly", lastModified: now },
     { url: `${BASE_URL}/frequently-asked-questions`, priority: 0.6, changeFrequency: "monthly", lastModified: now },
     { url: `${BASE_URL}/terms-of-service`, priority: 0.3, changeFrequency: "yearly", lastModified: now },
     { url: `${BASE_URL}/dmca-notice`, priority: 0.3, changeFrequency: "yearly", lastModified: now },
@@ -149,6 +144,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  const listingDetails: MetadataRoute.Sitemap = (
+    await getIndexableListingSitemapEntries()
+  ).map((entry) => ({
+    url: `${BASE_URL}/listings/${entry.mlsNumber}`,
+    priority: 0.6,
+    changeFrequency: "daily" as const,
+    lastModified: entry.lastModified ?? now,
+  }));
+
   return [
     ...staticPages,
     ...sellingPages,
@@ -157,7 +161,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...serviceAreaIndex,
     ...serviceAreaCities,
     ...serviceAreaNeighborhoods,
-    ...(showIdxContent ? featuredHomes : []),
-    ...(showIdxContent ? soldHomes : []),
+    ...featuredHomes,
+    ...soldHomes,
+    ...listingDetails,
   ];
 }
