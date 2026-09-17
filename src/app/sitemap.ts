@@ -7,6 +7,8 @@ import { SERVICE_AREA_META_UPDATED_AT } from "@/lib/service-areas/hub-meta";
 import { getServiceAreaDiscover } from "@/lib/service-areas/discover";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
+export const revalidate = 3600;
+
 const BASE_URL = getCanonicalBaseUrl();
 
 // ─── FEATURED HOMES ──────────────────────────────────────────────────────────
