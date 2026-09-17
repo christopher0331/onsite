@@ -1,4 +1,5 @@
 import type { CardListing } from "@/components/ListingCard";
+import { isListingIndexable } from "@/lib/listing-index-policy";
 import { enrichListingsResponse, repliersListingsUrl } from "@/lib/repliers-enrich";
 import {
   sortOnsiteListings,
@@ -47,7 +48,7 @@ export async function getServiceAreaListings(
       listings?: RawListingRow[];
     };
     const rows = Array.isArray(data.listings) ? data.listings : [];
-    const ranked = sortOnsiteListings(tagOnsiteListings(rows));
+    const ranked = sortOnsiteListings(tagOnsiteListings(rows)).filter(isListingIndexable);
 
     return { listings: ranked.slice(0, limit), count: ranked.length };
   } catch {

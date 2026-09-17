@@ -6,6 +6,10 @@ import {
 } from "@/lib/repliers-enrich";
 import { FEATURE_GROUPS, matchFeaturesInText } from "@/lib/listing-search-terms";
 import {
+  applyEastPierceCityFilters,
+  shouldDefaultEastPierceScope,
+} from "@/lib/listing-index-policy";
+import {
   applyHomeTypeFilters,
   applyNativeFeatureFilters,
   applyRangeFilters,
@@ -132,6 +136,8 @@ export async function GET(req: NextRequest) {
     const q = city.trim();
     if (/^\d{5}$/.test(q)) params.set("zip", q);
     else params.set("city", q);
+  } else if (shouldDefaultEastPierceScope(searchParams)) {
+    applyEastPierceCityFilters(params);
   }
   if (county) params.set("area", county);
   if (brokerageOnly && ONSITE_BROKERAGE_NAME) {

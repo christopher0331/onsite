@@ -89,9 +89,7 @@ export default function Footer() {
     { label: "Marketing Strategy", href: "/real-estate-marketing" },
     { label: "Negotiation & Closing", href: "/negotiation-closing" },
     { label: "Buy Home", href: "/buy-home" },
-    ...(showIdxContent
-      ? [{ label: "Search Homes", href: "https://www.onsiteregroup.net/search" }]
-      : []),
+    { label: "Search Homes", href: "/listings" },
   ];
 
   return (

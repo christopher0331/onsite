@@ -1,0 +1,1263 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import Header from "@/components/Header";
+import dynamic from "next/dynamic";
+import { getListingStatusBadge } from "@/lib/listing-status";
+import { getCitySlugByName } from "@/lib/service-areas/data";
+import { formatStreetAddress } from "@/lib/format-address";
+import { formatBathroomCount, formatBathroomDetail } from "@/lib/format-bathrooms";
+import { repliersImageUrl } from "@/lib/repliers-images";
+import ShareListingCard from "@/components/listings/ShareListingCard";
+
+const Footer = dynamic(() => import("@/components/Footer"));
+const Marquee = dynamic(() => import("@/components/Marquee"), { ssr: false });
+const MarketChart = dynamic(() => import("@/components/MarketChart"), { ssr: false });
+const InventoryGauge = dynamic(() => import("@/components/InventoryGauge"), { ssr: false });
+
+type CityStats = {
+  active: {
+    available: { mth: Record<string, number> };
+    new: { count: number; mth: Record<string, { count: number }> };
+  } | null;
+  sold: {
+    soldPrice: { med: number; sum: number; mth: Record<string, { med: number; sum: number; count: number }> };
+    daysOnMarket: { avg: number; mth: Record<string, { avg: number; count: number }> };
+    closed: { count: number; mth: Record<string, { count: number }> };
+  } | null;
+  chart: {
+    soldPrice?: { med: number; mth: Record<string, { med: number; count: number }> };
+    daysOnMarket?: { med: number; mth: Record<string, { med: number; count: number }> };
+  } | null;
+};
+
+function recentMonths(mth: Record<string, unknown> | undefined, count: number): string[] {
+  if (!mth) return [];
+  return Object.keys(mth).sort().slice(-count);
+}
+
+function monthLabel(key: string) {
+  const [y, m] = key.split("-");
+  const d = new Date(Number(y), Number(m) - 1);
+  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+}
+
+function fmtCompact(n: number) {
+  if (n >= 1_000_000_000) return `$${(n / 1_000_000_000).toFixed(1)}B`;
+  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(0)}M`;
+  if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`;
+  return `$${n.toLocaleString()}`;
+}
+
+export type Listing = {
+  mlsNumber: string;
+  status: string;
+  lastStatus: string;
+  standardStatus: string;
+  type: string;
+  listPrice: number;
+  soldPrice: number | null;
+  originalPrice: number | null;
+  listDate: string;
+  soldDate: string | null;
+  daysOnMarket: number;
+  simpleDaysOnMarket: number;
+  address: {
+    streetNumber: string;
+    streetName: string;
+    streetSuffix: string;
+    streetDirection: string;
+    unitNumber: string | null;
+    city: string;
+    state: string;
+    zip: string;
+    neighborhood: string;
+    area: string;
+  };
+  map: { latitude: number; longitude: number };
+  details: {
+    numBedrooms: number | null;
+    numBedroomsPlus: number | null;
+    numBathrooms: number | null;
+    numBathroomsHalf: number | null;
+    numFireplaces: string | null;
+    numParkingSpaces: number | null;
+    sqft: number | null;
+    propertyType: string | null;
+    description: string | null;
+    style: string | null;
+    yearBuilt: string | null;
+    garage: string | null;
+    numGarageSpaces: number | null;
+    viewType: string | null;
+    heating: string | null;
+    airConditioning: string | null;
+    sewer: string | null;
+    waterSource: string | null;
+    HOAFee: string | null;
+    zoningDescription: string | null;
+    waterfront: string | null;
+    virtualTourUrl: string | null;
+    flooringType: string | null;
+    foundationType: string | null;
+    roofMaterial: string | null;
+    swimmingPool: string | null;
+    extras: string | null;
+    landscapeFeatures: string | null;
+    basement1: string | null;
+    basement2: string | null;
+    furnished: string | null;
+    elevator: string | null;
+    energuideRating: string | null;
+    livingAreaMeasurement: string | null;
+  };
+  lot: {
+    acres: number | null;
+    squareFeet: number | null;
+    features: string | null;
+    size: string | null;
+    dimensions: string | null;
+    source: string | null;
+    measurement: string | null;
+  } | null;
+  taxes: { annualAmount: number | null; assessmentYear: string | null } | null;
+  nearby: { amenities: string[] } | null;
+  openHouse: { startTime: string; endTime: string; type: string }[];
+  agents: {
+    name: string;
+    phones: string[];
+    brokerage: { name: string };
+  }[];
+  buyerAgents: {
+    name: string;
+    phones: string[];
+    brokerage: { name: string };
+  }[] | null;
+  raw?: Record<string, unknown> | null;
+  office: { brokerageName: string } | null;
+  permissions?: { displayAddressOnInternet?: string };
+  updatedOn: string | null;
+  timestamps: {
+    listingUpdated: string | null;
+    idxUpdated: string | null;
+    photosUpdated: string | null;
+    repliersUpdatedOn: string | null;
+  } | null;
+  estimate: {
+    value: number;
+    low: number;
+    high: number;
+    confidence: number;
+    date: string | null;
+    history?: { mth: Record<string, { value: number }> } | null;
+  } | null;
+  comparables: ComparableListing[] | null;
+  images: string[];
+  photoCount: number;
+  condominium: { fees: { maintenance: number | null } } | null;
+};
+
+type ComparableListing = {
+  mlsNumber: string;
+  listPrice: number;
+  soldPrice: number | null;
+  soldDate: string | null;
+  lastStatus: string | null;
+  distance: number | null;
+  address: {
+    streetNumber?: string;
+    streetName?: string;
+    streetSuffix?: string;
+    streetDirection?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+    neighborhood?: string;
+  };
+  details: {
+    numBedrooms: number | null;
+    numBathrooms: number | null;
+    sqft: string | number | null;
+    yearBuilt: string | null;
+    style: string | null;
+  };
+  images?: string[];
+};
+
+function formatPrice(n: number) {
+  return "$" + n.toLocaleString("en-US");
+}
+
+function formatAddress(a: Listing["address"]) {
+  return formatStreetAddress(a);
+}
+
+function formatDate(iso: string) {
+  if (!iso) return "";
+  return new Date(iso).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+}
+
+export default function ListingDetailView({
+  listing,
+  fetchedAtIso,
+}: {
+  listing: Listing;
+  fetchedAtIso: string;
+}) {
+  const [activeImg, setActiveImg] = useState(0);
+  const [showAllPhotos, setShowAllPhotos] = useState(false);
+  const [dataRefreshedAt] = useState(() => new Date(fetchedAtIso));
+
+  const [cityStats, setCityStats] = useState<CityStats | null>(null);
+  const [statsEnabled, setStatsEnabled] = useState(false);
+  const statsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const node = statsRef.current;
+    if (!node || statsEnabled) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsEnabled(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "240px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [statsEnabled, listing?.address?.city]);
+
+  useEffect(() => {
+    if (!statsEnabled || !listing?.address?.city) return;
+    const params = new URLSearchParams({
+      city: listing.address.city,
+      chart: "true",
+    });
+    if (listing.address.state) params.set("state", listing.address.state);
+    fetch(`/api/statistics?${params.toString()}`)
+      .then((r) => r.json())
+      .then((data) => setCityStats(data))
+      .catch(() => {});
+  }, [statsEnabled, listing?.address?.city, listing?.address?.state]);
+
+  if (!listing) {
+    return (
+      <>
+        <Header />
+        <main className="w-full max-w-full overflow-x-hidden bg-white pt-28 pb-20 text-center sm:pt-40">
+          <p className="font-serif text-2xl font-light text-charcoal/65">Listing not found.</p>
+          <Link href="/listings" className="mt-6 inline-block text-[12px] uppercase tracking-[0.25em] text-charcoal/75 hover:text-charcoal">
+            ← Back to Listings
+          </Link>
+        </main>
+        <Footer />
+      </>
+    );
+  }
+
+  const showAddress = listing.permissions?.displayAddressOnInternet !== "N";
+  const street = showAddress ? formatAddress(listing.address) : "Undisclosed";
+  const images = listing.images || [];
+  const isActive = listing.status === "A";
+  const det = listing.details;
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${street}, ${listing.address.city}, ${listing.address.state} ${listing.address.zip}`)}`;
+  const serviceAreaSlug = getCitySlugByName(listing.address.city);
+
+  // Build details rows
+  const detailRows: { label: string; value: string | number }[] = [];
+  if (det.propertyType) detailRows.push({ label: "Property Type", value: det.propertyType });
+  if (det.style) detailRows.push({ label: "Style", value: det.style });
+  if (det.yearBuilt) detailRows.push({ label: "Year Built", value: det.yearBuilt });
+  if (det.sqft) detailRows.push({ label: "Living Area", value: `${Number(det.sqft).toLocaleString()} ${det.livingAreaMeasurement === "Square Feet" || !det.livingAreaMeasurement ? "sqft" : det.livingAreaMeasurement.toLowerCase()}` });
+  if (listing.lot?.squareFeet) detailRows.push({ label: "Lot Size", value: `${Number(listing.lot.squareFeet).toLocaleString()} sqft` });
+  if (listing.lot?.acres) detailRows.push({ label: "Lot Acres", value: `${listing.lot.acres} ac` });
+  if (listing.lot?.dimensions) detailRows.push({ label: "Lot Dimensions", value: listing.lot.dimensions });
+  if (det.numBedrooms) {
+    const bedVal = det.numBedroomsPlus
+      ? `${det.numBedrooms} + ${det.numBedroomsPlus}`
+      : det.numBedrooms;
+    detailRows.push({ label: "Bedrooms", value: bedVal });
+  }
+  const bathDetail = formatBathroomDetail(det, listing.raw);
+  if (bathDetail) detailRows.push({ label: "Bathrooms", value: bathDetail });
+  if (det.numFireplaces) detailRows.push({ label: "Fireplaces", value: det.numFireplaces });
+  if (det.numGarageSpaces) detailRows.push({ label: "Garage Spaces", value: det.numGarageSpaces });
+  if (det.numParkingSpaces && det.numParkingSpaces !== det.numGarageSpaces) {
+    detailRows.push({ label: "Total Parking", value: det.numParkingSpaces });
+  }
+  if (det.basement1) {
+    const basementVal = det.basement2 ? `${det.basement1} · ${det.basement2}` : det.basement1;
+    detailRows.push({ label: "Basement", value: basementVal });
+  }
+  if (det.furnished) detailRows.push({ label: "Furnished", value: det.furnished });
+  if (det.elevator === "Y") detailRows.push({ label: "Elevator", value: "Yes" });
+  if (det.heating) detailRows.push({ label: "Heating", value: det.heating });
+  if (det.airConditioning) detailRows.push({ label: "Cooling", value: det.airConditioning });
+  if (det.energuideRating) detailRows.push({ label: "Energy Rating", value: det.energuideRating });
+  if (det.sewer) detailRows.push({ label: "Sewer", value: det.sewer });
+  if (det.waterSource) detailRows.push({ label: "Water", value: det.waterSource });
+  if (det.flooringType) detailRows.push({ label: "Flooring", value: det.flooringType });
+  if (det.roofMaterial) detailRows.push({ label: "Roof", value: det.roofMaterial });
+  if (det.foundationType) detailRows.push({ label: "Foundation", value: det.foundationType });
+  if (det.viewType) detailRows.push({ label: "View", value: det.viewType });
+  if (det.waterfront === "Y") detailRows.push({ label: "Waterfront", value: "Yes" });
+  if (det.swimmingPool) detailRows.push({ label: "Pool", value: det.swimmingPool });
+  if (det.zoningDescription) detailRows.push({ label: "Zoning", value: det.zoningDescription });
+  if (det.HOAFee) detailRows.push({ label: "HOA Fee", value: `$${det.HOAFee}/mo` });
+  if (listing.condominium?.fees?.maintenance) detailRows.push({ label: "Maintenance", value: `$${listing.condominium.fees.maintenance}/mo` });
+  if (listing.taxes?.annualAmount) detailRows.push({ label: "Annual Taxes", value: `$${listing.taxes.annualAmount.toLocaleString()} (${listing.taxes.assessmentYear})` });
+  if (listing.lot?.features) detailRows.push({ label: "Lot Features", value: listing.lot.features });
+  if (listing.lot?.source) detailRows.push({ label: "Lot Source", value: listing.lot.source });
+  if (det.landscapeFeatures) detailRows.push({ label: "Landscaping", value: det.landscapeFeatures });
+  if (det.extras) detailRows.push({ label: "Extras", value: det.extras });
+  detailRows.push({ label: "Days on Market", value: listing.simpleDaysOnMarket ?? listing.daysOnMarket });
+  if (listing.listDate) detailRows.push({ label: "Listed", value: formatDate(listing.listDate) });
+  if (listing.originalPrice && listing.originalPrice !== listing.listPrice) {
+    detailRows.push({ label: "Original Price", value: formatPrice(listing.originalPrice) });
+  }
+
+  const displayImages = showAllPhotos ? images : images.slice(0, 9);
+  const bathDisplay = formatBathroomCount(det, listing.raw);
+
+  return (
+    <>
+      <Header />
+      <main className="w-full max-w-full overflow-x-hidden bg-white">
+
+        {/* Breadcrumb + hero */}
+        <section className="bg-[#1a1a18] pt-28 pb-10 sm:pt-44 sm:pb-16">
+          <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
+            <div className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] uppercase tracking-[0.24em] text-white/80 sm:mb-8 sm:text-[11px] sm:tracking-[0.3em]">
+              <Link href="/listings" className="hover:text-white/70 transition-colors">Listings</Link>
+              <span>/</span>
+              <span className="text-white/60">{listing.address.city}</span>
+              {serviceAreaSlug && (
+                <>
+                  <span>/</span>
+                  <Link
+                    href={`/service-areas/${serviceAreaSlug}`}
+                    className="text-white/70 hover:text-white transition-colors"
+                  >
+                    Service Area
+                  </Link>
+                </>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-5 sm:gap-6 lg:flex-row lg:items-end lg:justify-between">
+              <div className="min-w-0">
+                <div className="mb-4 flex flex-wrap items-center gap-3">
+                  {(() => {
+                    const badge = getListingStatusBadge(listing);
+                    const tone =
+                      badge.tone === "active"
+                        ? "bg-white text-charcoal"
+                        : badge.tone === "pending"
+                          ? "bg-amber-400 text-charcoal"
+                          : "bg-white/20 text-white";
+                    return (
+                      <span
+                        className={`rounded-full px-4 py-1.5 text-[10px] uppercase tracking-[0.25em] font-medium ${tone}`}
+                      >
+                        {badge.label}
+                      </span>
+                    );
+                  })()}
+                  {det.propertyType && (
+                    <span className="rounded-full border border-white/20 px-4 py-1.5 text-[10px] uppercase tracking-[0.25em] text-white/80">
+                      {det.propertyType}
+                    </span>
+                  )}
+                </div>
+                <h1 className="mb-2 break-words font-serif text-[clamp(1.6rem,5.5vw,3.4rem)] font-light leading-tight text-white sm:mb-3">
+                  {street}
+                </h1>
+                <p className="text-[14px] text-white/60 sm:text-[15px]">
+                  {showAddress ? `${listing.address.city}, ${listing.address.state} ${listing.address.zip}` : listing.address.city}
+                  {listing.address.neighborhood && listing.address.neighborhood !== listing.address.city && (
+                    <span className="ml-2 text-white/75">· {listing.address.neighborhood}</span>
+                  )}
+                </p>
+              </div>
+
+              <div className="w-full shrink-0 text-left lg:w-auto lg:text-right">
+                {listing.soldPrice ? (
+                  <>
+                    <p className="text-[12px] uppercase tracking-[0.2em] text-white/80 mb-1">Sold</p>
+                    <p className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-none text-white">
+                      {formatPrice(listing.soldPrice)}
+                    </p>
+                    <p className="mt-2 text-[14px] text-white/70">
+                      Listed: {formatPrice(listing.listPrice)}
+                    </p>
+                    {(() => {
+                      const diff = listing.soldPrice! - listing.listPrice;
+                      const absDiff = Math.abs(diff);
+                      if (absDiff < 100) return null;
+                      return (
+                        <p className={`mt-1 text-[13px] font-medium ${diff > 0 ? "text-green-400" : "text-red-400"}`}>
+                          {diff > 0 ? "▲" : "▼"} {formatPrice(absDiff)} {diff > 0 ? "above" : "below"} asking
+                        </p>
+                      );
+                    })()}
+                    {listing.soldDate && (
+                      <p className="mt-2 text-[13px] text-white/60">
+                        Sale date: {new Date(listing.soldDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <p className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-none text-white">
+                    {formatPrice(listing.listPrice)}
+                  </p>
+                )}
+                <p className="mt-2 text-[11px] uppercase tracking-[0.25em] text-white/75">
+                  MLS# {listing.mlsNumber}
+                </p>
+              </div>
+            </div>
+
+            {/* Quick stats bar */}
+            {(det.numBedrooms || bathDisplay || det.sqft || listing.lot?.acres) && (
+              <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-6 sm:mt-10 sm:flex sm:flex-wrap sm:gap-8 sm:pt-8">
+                {det.numBedrooms && (
+                  <div>
+                    <p className="font-serif text-[1.8rem] font-light text-white">{det.numBedrooms}</p>
+                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Bedrooms</p>
+                  </div>
+                )}
+                {bathDisplay && (
+                  <div>
+                    <p className="font-serif text-[1.8rem] font-light text-white">{bathDisplay}</p>
+                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Bathrooms</p>
+                  </div>
+                )}
+                {det.sqft && (
+                  <div>
+                    <p className="font-serif text-[1.8rem] font-light text-white">{Number(det.sqft).toLocaleString()}</p>
+                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Sq Ft</p>
+                  </div>
+                )}
+                {listing.lot?.acres && (
+                  <div>
+                    <p className="font-serif text-[1.8rem] font-light text-white">{listing.lot.acres}</p>
+                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Acres</p>
+                  </div>
+                )}
+                {listing.estimate?.value && (
+                  <div>
+                    <p className="font-serif text-[1.8rem] font-light text-white">{formatPrice(Math.round(listing.estimate.value))}</p>
+                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Est. Value</p>
+                  </div>
+                )}
+                {(listing.simpleDaysOnMarket ?? listing.daysOnMarket) > 0 && (
+                  <div>
+                    <p className="font-serif text-[1.8rem] font-light text-white">
+                      {listing.simpleDaysOnMarket ?? listing.daysOnMarket}
+                    </p>
+                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">
+                      {listing.soldPrice ? "Days on Market" : "Days Listed"}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Photo Gallery — the inline brokerage attribution that used to
+            live inside this section is now rendered unconditionally below
+            so the Listed By / Bought With block is visible even on listings
+            with zero photos (e.g. new construction / pre-images sold). */}
+        {images.length > 0 && (
+          <section className="bg-white py-8 sm:py-10">
+            <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
+              {/* Main image viewer. The container has a fixed height so
+                  switching photos never resizes/collapses the hero. Slides
+                  are plain <img> tags (not Next/Image) positioned with
+                  translateX so paging feels like a true filmstrip carousel:
+                  the outgoing photo slides fully off-screen while the
+                  incoming one slides in from the opposite edge, and every
+                  pixel of each photo stays visible via object-contain. */}
+              <div
+                className="relative mx-auto w-full max-w-4xl overflow-hidden rounded-2xl bg-charcoal/5 shadow-[0_14px_50px_rgba(0,0,0,0.12)] sm:rounded-3xl h-[min(45vh,360px)] sm:h-[min(50vh,440px)] lg:h-[480px]"
+                style={{ isolation: "isolate" }}
+              >
+                {(images.length >= 3
+                  ? [
+                      { i: (activeImg - 1 + images.length) % images.length, offset: -1 },
+                      { i: activeImg, offset: 0 },
+                      { i: (activeImg + 1) % images.length, offset: 1 },
+                    ]
+                  : images.map((_, i) => ({ i, offset: i === activeImg ? 0 : i < activeImg ? -1 : 1 }))
+                ).map(({ i, offset }) => (
+                  <div
+                    key={i}
+                    className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-in-out will-change-transform"
+                    style={{ transform: `translateX(${offset * 100}%)` }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={repliersImageUrl(images[i], "medium") || ""}
+                      alt={`${street} photo ${i + 1}`}
+                      fetchPriority={i === activeImg ? "high" : "low"}
+                      decoding="async"
+                      className="block max-h-full max-w-full w-auto h-auto object-contain"
+                    />
+                  </div>
+                ))}
+                {images.length > 1 && (
+                  <>
+                    <button
+                      onClick={() => setActiveImg((i) => (i === 0 ? images.length - 1 : i - 1))}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2.5 text-white backdrop-blur-sm transition hover:bg-black/60 sm:left-4 sm:p-3"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button
+                      onClick={() => setActiveImg((i) => (i === images.length - 1 ? 0 : i + 1))}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2.5 text-white backdrop-blur-sm transition hover:bg-black/60 sm:right-4 sm:p-3"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                    {/* Photo counter sits at top-right so it cannot overlap the
+                        NWMLS "Three Trees" watermark that the source MLS bakes
+                        into the bottom corner of every photo. */}
+                    <div className="absolute top-4 right-4 rounded-full bg-black/40 px-4 py-1.5 text-[11px] text-white/80 backdrop-blur-sm">
+                      {activeImg + 1} / {images.length}
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* Thumbnail strip */}
+              <div className="mt-3 grid grid-cols-4 gap-2 sm:mt-4 sm:gap-3 sm:grid-cols-6 lg:grid-cols-9">
+                {displayImages.map((img, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveImg(i)}
+                    className={`relative aspect-square overflow-hidden rounded-xl transition-all duration-200 ${
+                      activeImg === i
+                        ? "ring-2 ring-inset ring-charcoal"
+                        : "opacity-70 hover:opacity-100"
+                    }`}
+                  >
+                    <Image
+                      src={repliersImageUrl(img, "small") || ""}
+                      alt={`Photo ${i + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="120px"
+                      loading="lazy"
+                    />
+                    {!showAllPhotos && i === 8 && images.length > 9 && (
+                      <div
+                        onClick={(e) => { e.stopPropagation(); setShowAllPhotos(true); }}
+                        className="absolute inset-0 flex items-center justify-center bg-black/60 text-[12px] font-medium text-white"
+                      >
+                        +{images.length - 9} more
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+
+            </div>
+          </section>
+        )}
+
+        {/* Listed By + Bought With attribution. Rendered as its own section
+            (outside the photo gallery) so the brokerage line is always
+            visible — including on listings that have zero photos in the
+            Repliers feed, e.g. MLS #2310987. On sold listings the Bought
+            With row always renders so the buyer brokerage sits alongside
+            the listing brokerage per NWMLS data-display rules. When
+            Repliers does not return a buyer agent we still show the row
+            with a clear "Not provided" placeholder. */}
+        {(() => {
+          const isSold = listing.lastStatus === "Sld" || listing.status === "U";
+          const hasListing = (listing.agents?.length ?? 0) > 0;
+          const hasBuyer = (listing.buyerAgents?.length ?? 0) > 0;
+          const listingBrokerageFallback = listing.office?.brokerageName ?? "";
+          if (!hasListing && !hasBuyer && !isSold && !listingBrokerageFallback) {
+            return null;
+          }
+          return (
+            <section className="bg-white pt-2 pb-8 sm:pt-4">
+              <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
+                <div className="flex flex-wrap gap-x-12 gap-y-3 border-t border-charcoal/8 pt-5">
+                  {hasListing ? (
+                    <div className="flex items-start gap-4">
+                      <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Listed By:</span>
+                      <div className="flex flex-col gap-0.5">
+                        {listing.agents.map((agent, i) => {
+                          const brokerage =
+                            agent.brokerage?.name || listingBrokerageFallback;
+                          return (
+                            <span key={i} className="text-[13px]">
+                              <span className="font-medium text-charcoal">{agent.name}</span>
+                              {brokerage && (
+                                <span className="text-charcoal/80">,&nbsp;{brokerage}</span>
+                              )}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : listingBrokerageFallback ? (
+                    <div className="flex items-start gap-4">
+                      <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Listed By:</span>
+                      <span className="text-[13px] font-medium text-charcoal">
+                        {listingBrokerageFallback}
+                      </span>
+                    </div>
+                  ) : null}
+                  {(hasBuyer || isSold) && (
+                    <div className="flex items-start gap-4">
+                      <span className="text-[12px] text-charcoal/80 shrink-0 pt-0.5">Bought With:</span>
+                      <div className="flex flex-col gap-0.5">
+                        {hasBuyer ? (
+                          listing.buyerAgents!.map((agent, i) => (
+                            <span key={i} className="text-[13px]">
+                              <span className="font-medium text-charcoal">{agent.name}</span>
+                              {agent.brokerage?.name && (
+                                <span className="text-charcoal/80">,&nbsp;{agent.brokerage.name}</span>
+                              )}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="text-[13px] italic text-charcoal/80">
+                            Buyer brokerage not provided
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          );
+        })()}
+
+        {/* Description + Details */}
+        <section className="bg-white py-12 sm:py-16 lg:py-24">
+          <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_380px] lg:gap-16">
+
+              {/* Left: description + details table */}
+              <div className="order-2 lg:order-1">
+                {det.description && (
+                  <div className="mb-14">
+                    <p className="mb-6 text-[11px] uppercase tracking-[0.35em] text-mid-gray">About This Home</p>
+                    <p className="break-words whitespace-pre-line text-[16px] leading-[1.85] text-charcoal">
+                      {det.description.replace(/\*{4}\s*SAMPLE DATA\s*\*{4}/gi, "").trim()}
+                    </p>
+                  </div>
+                )}
+
+                {/* Listing Updated + Last Checked + Source */}
+                <div className="mb-14 min-w-0 space-y-2 break-words border-t border-charcoal/8 pt-6">
+                  {listing.timestamps?.listingUpdated && (
+                    <p className="text-[13px] text-charcoal">
+                      <span className="font-medium text-charcoal/80">Listing Updated:</span>{" "}
+                      {new Date(listing.timestamps.listingUpdated).toLocaleString("en-US", {
+                        month: "short", day: "numeric", year: "numeric",
+                        hour: "numeric", minute: "2-digit", timeZoneName: "short",
+                      })}
+                    </p>
+                  )}
+                  {listing.timestamps?.idxUpdated && listing.timestamps.idxUpdated !== listing.timestamps.listingUpdated && (
+                    <p className="text-[13px] text-charcoal">
+                      <span className="font-medium text-charcoal/80">IDX Feed Updated:</span>{" "}
+                      {new Date(listing.timestamps.idxUpdated).toLocaleString("en-US", {
+                        month: "short", day: "numeric", year: "numeric",
+                        hour: "numeric", minute: "2-digit", timeZoneName: "short",
+                      })}
+                    </p>
+                  )}
+                  {listing.timestamps?.photosUpdated && (
+                    <p className="text-[13px] text-charcoal">
+                      <span className="font-medium text-charcoal/80">Photos Updated:</span>{" "}
+                      {new Date(listing.timestamps.photosUpdated).toLocaleString("en-US", {
+                        month: "short", day: "numeric", year: "numeric",
+                      })}
+                    </p>
+                  )}
+                  <p className="text-[13px] text-charcoal">
+                    <span className="font-medium text-charcoal/80">OnSite last checked:</span>{" "}
+                    {dataRefreshedAt
+                      ? dataRefreshedAt.toLocaleString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                          hour: "numeric",
+                          minute: "2-digit",
+                          timeZoneName: "short",
+                        })
+                      : "just now"}
+                    <span className="mx-3 text-charcoal/65">|</span>
+                    <span className="font-medium text-charcoal/80">Source:</span>{" "}
+                    {listing.address.state === "WA"
+                      ? `NWMLS as Distributed by MLS Grid #${listing.mlsNumber}`
+                      : `MLS Grid #${listing.mlsNumber}`}
+                  </p>
+                  <p className="break-words text-[12px] leading-[1.7] text-charcoal/80">
+                    Listing provided courtesy of Northwest MLS. Information contained herein is derived from different sources but has not been independently verified by OnSite Real Estate Group, MLS Grid, or the MLS, and should be verified by the buyer. Open house information is subject to change without notice. All information should be independently reviewed and verified for accuracy. Properties may or may not be listed by the office or agent presenting the information.
+                  </p>
+                </div>
+
+                {detailRows.length > 0 && (
+                  <div>
+                    <p className="mb-6 text-[11px] uppercase tracking-[0.35em] text-mid-gray">Property Details</p>
+                    <div className="grid grid-cols-1 gap-x-12 sm:grid-cols-2">
+                      {detailRows.map((row, i) => (
+                        <div key={i} className="flex min-w-0 items-start justify-between gap-3 border-b border-charcoal/8 py-3.5">
+                          <span className="shrink-0 text-[13px] text-charcoal/80">{row.label}</span>
+                          <span className="min-w-0 break-words text-right text-[13px] font-medium text-charcoal">{row.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Nearby amenities */}
+                {(listing.nearby?.amenities?.length ?? 0) > 0 && (
+                  <div className="mt-12">
+                    <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-mid-gray">Nearby & Community</p>
+                    <div className="flex flex-wrap gap-2">
+                      {listing.nearby?.amenities.map((a, i) => (
+                        <span key={i} className="rounded-full border border-charcoal/20 px-4 py-2 text-[12px] text-charcoal">
+                          {a}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Open Houses */}
+                {listing.openHouse?.length > 0 && (
+                  <div className="mt-12">
+                    <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-mid-gray">Open House</p>
+                    <div className="space-y-3">
+                      {listing.openHouse.map((oh, i) => {
+                        const start = new Date(oh.startTime);
+                        const end = new Date(oh.endTime);
+                        const dateStr = start.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+                        const startTime = start.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+                        const endTime = end.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+                        return (
+                          <div key={i} className="flex items-start gap-4 rounded-2xl border border-charcoal/10 bg-[#f9f7f4] p-4">
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-charcoal text-white text-[12px] font-medium">
+                              {start.toLocaleDateString("en-US", { month: "short" }).toUpperCase()}
+                              <br className="hidden" />
+                            </div>
+                            <div>
+                              <p className="text-[14px] font-medium text-charcoal">{dateStr}</p>
+                              <p className="text-[13px] text-charcoal">{startTime} – {endTime}</p>
+                              {oh.type && <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-charcoal/90">{oh.type}</p>}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Virtual tour */}
+                {det.virtualTourUrl && (
+                  <div className="mt-12">
+                    <a
+                      href={det.virtualTourUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 rounded-full border border-charcoal/20 px-6 py-3 text-[12px] uppercase tracking-[0.2em] text-charcoal transition hover:border-charcoal/50"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                      Virtual Tour
+                    </a>
+                  </div>
+                )}
+
+                {/* Comparable Sales */}
+                {listing.comparables && listing.comparables.length > 0 && (
+                  <div className="mt-14">
+                    <div className="mb-6 flex items-end justify-between">
+                      <p className="text-[11px] uppercase tracking-[0.35em] text-mid-gray">Comparable Sales</p>
+                      <p className="text-[11px] text-charcoal/80">
+                        {listing.comparables.length} similar nearby {listing.comparables.length === 1 ? "property" : "properties"}
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      {listing.comparables.slice(0, 6).map((c) => {
+                        const cStreet = formatStreetAddress(c.address);
+                        const cPhoto = repliersImageUrl(c.images?.[0], "small");
+                        const cBaths = formatBathroomCount(c.details, (c as ComparableListing & { raw?: Record<string, unknown> }).raw);
+                        return (
+                          <Link
+                            key={c.mlsNumber}
+                            href={`/listings/${c.mlsNumber}`}
+                            className="group flex gap-4 rounded-2xl border border-charcoal/10 bg-white p-3 transition hover:border-charcoal/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
+                          >
+                            <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-xl bg-charcoal/5">
+                              {cPhoto ? (
+                                <Image src={cPhoto} alt={cStreet || c.mlsNumber} fill sizes="100px" className="object-cover" loading="lazy" />
+                              ) : null}
+                            </div>
+                            <div className="flex flex-1 flex-col justify-between py-0.5">
+                              <div>
+                                <p className="font-serif text-[0.95rem] font-light leading-tight text-charcoal">
+                                  {cStreet || `MLS# ${c.mlsNumber}`}
+                                </p>
+                                <p className="text-[11px] text-charcoal/80">
+                                  {c.address?.city}, {c.address?.state}
+                                  {c.distance ? ` · ${c.distance.toFixed(1)} mi` : ""}
+                                </p>
+                              </div>
+                              <div className="flex items-center justify-between text-[12px]">
+                                <span className="text-charcoal/80">
+                                  {c.details?.numBedrooms ? `${c.details.numBedrooms}bd` : ""}
+                                  {cBaths ? ` · ${cBaths}ba` : ""}
+                                  {c.details?.sqft ? ` · ${Number(c.details.sqft).toLocaleString()} sf` : ""}
+                                </span>
+                                <span className="font-serif font-light text-charcoal">
+                                  {c.soldPrice ? formatPrice(c.soldPrice) : formatPrice(c.listPrice)}
+                                  {c.lastStatus === "Sld" && <span className="ml-1 text-[10px] uppercase tracking-[0.15em] text-charcoal/75">sold</span>}
+                                </span>
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                    <p className="mt-4 text-[11px] text-charcoal/80 italic not-italic">
+                      Comparable sales are selected by Repliers.io based on proximity, size, and type — they are not part of the NWMLS listing data for this property.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Right: sticky CTA card — shown first on mobile */}
+              <div className="order-1 lg:order-2">
+                <div className="space-y-5 lg:sticky lg:top-28">
+                  {/* Price card */}
+                  <div className="rounded-3xl bg-[#1a1a18] p-6 text-white sm:p-8">
+                    <p className="mb-1 text-[11px] uppercase tracking-[0.3em] text-white/80">
+                      {isActive ? "Asking Price" : "Sold Price"}
+                    </p>
+                    <p className="mb-5 font-serif text-[2rem] font-light leading-none sm:mb-6 sm:text-[2.4rem]">
+                      {formatPrice(listing.soldPrice || listing.listPrice)}
+                    </p>
+                    <div className="space-y-4">
+                      <Link
+                        href="/contact-us"
+                        className="flex w-full items-center justify-center rounded-full bg-white px-6 py-4 text-[12px] uppercase tracking-[0.25em] text-charcoal transition hover:bg-white/90"
+                      >
+                        Request a Showing
+                      </Link>
+                      <a
+                        href="tel:2534419764"
+                        className="flex w-full items-center justify-center rounded-full border border-white/30 px-6 py-4 text-[12px] uppercase tracking-[0.25em] text-white transition hover:bg-white/10"
+                      >
+                        (253) 441-9764
+                      </a>
+                      <Link
+                        href={mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-4 text-[12px] uppercase tracking-[0.2em] text-white/60 transition hover:bg-white/10 hover:text-white"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        View on Map
+                      </Link>
+                    </div>
+                  </div>
+
+                  <ShareListingCard
+                    mlsNumber={listing.mlsNumber}
+                    street={street}
+                    cityLine={[listing.address.city, listing.address.state, listing.address.zip].filter(Boolean).join(", ")}
+                    priceLabel={formatPrice(listing.soldPrice || listing.listPrice)}
+                  />
+
+                  {/* Agent card — listing agent(s) + buyer agent(s).
+                      For sold listings the Bought With section always shows
+                      so the buyer brokerage is visible per NWMLS rules.
+                      When Repliers omits the agent list entirely we still
+                      surface `office.brokerageName` as the Listed By
+                      brokerage so the card never goes blank. */}
+                  {(() => {
+                    const isSold = listing.lastStatus === "Sld" || listing.status === "U";
+                    const hasListing = (listing.agents?.length ?? 0) > 0;
+                    const hasBuyer = (listing.buyerAgents?.length ?? 0) > 0;
+                    const listingBrokerageFallback = listing.office?.brokerageName ?? "";
+                    if (!hasListing && !hasBuyer && !isSold && !listingBrokerageFallback) {
+                      return null;
+                    }
+
+                    return (
+                      <div className="rounded-3xl border border-charcoal/10 bg-[#f9f7f4] p-7 space-y-5">
+                        {hasListing ? (
+                          <div>
+                            <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Listed By</p>
+                            <div className="space-y-3">
+                              {listing.agents.map((agent, i) => {
+                                const brokerage =
+                                  agent.brokerage?.name || listingBrokerageFallback;
+                                return (
+                                  <div key={i} className="flex items-center gap-4">
+                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-charcoal/10 text-charcoal text-[12px] font-serif font-light">
+                                      {agent.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                                    </div>
+                                    <div>
+                                      <p className="font-serif text-[1rem] font-light text-charcoal">{agent.name}</p>
+                                      {brokerage && (
+                                        <p className="text-[12px] text-charcoal/80">{brokerage}</p>
+                                      )}
+                                      {agent.phones?.[0] && (
+                                        <a href={`tel:${agent.phones[0].replace(/\D/g, "")}`} className="text-[12px] text-charcoal/80 hover:text-charcoal transition-colors">
+                                          {agent.phones[0]}
+                                        </a>
+                                      )}
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ) : listingBrokerageFallback ? (
+                          <div>
+                            <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Listed By</p>
+                            <p className="font-serif text-[1rem] font-light text-charcoal">
+                              {listingBrokerageFallback}
+                            </p>
+                          </div>
+                        ) : null}
+                        {(hasBuyer || isSold) && (
+                          <div className={hasListing ? "border-t border-charcoal/8 pt-5" : ""}>
+                            <p className="mb-3 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Bought With</p>
+                            {hasBuyer ? (
+                              <div className="space-y-3">
+                                {listing.buyerAgents!.map((agent, i) => (
+                                  <div key={i} className="flex items-center gap-4">
+                                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-charcoal/10 text-charcoal text-[12px] font-serif font-light">
+                                      {agent.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                                    </div>
+                                    <div>
+                                      <p className="font-serif text-[1rem] font-light text-charcoal">{agent.name}</p>
+                                      {agent.brokerage?.name && (
+                                        <p className="text-[12px] text-charcoal/80">{agent.brokerage.name}</p>
+                                      )}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : (
+                              <p className="text-[12px] italic text-charcoal/80">
+                                Buyer brokerage information was not provided in the MLS feed for this sold listing.
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+
+                  {/* OnSite contact card */}
+                  <div className="rounded-3xl border border-charcoal/10 bg-[#f9f7f4] p-7">
+                    <p className="mb-4 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Questions? Contact OnSite</p>
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-charcoal text-white text-[14px] font-light font-serif">
+                        AB
+                      </div>
+                      <div>
+                        <p className="font-serif text-[1.1rem] font-light text-charcoal">André Bohall</p>
+                        <p className="text-[12px] text-charcoal/80">WA Lic. #25031564 · OnSite Real Estate Group</p>
+                      </div>
+                    </div>
+                    <div className="mt-5 space-y-2 text-[13px] text-charcoal">
+                      <a href="tel:2534419764" className="flex items-center gap-2 hover:text-charcoal transition-colors">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                        (253) 441-9764
+                      </a>
+                      <a href="mailto:andre@onsiteregroup.com" className="flex items-center gap-2 hover:text-charcoal transition-colors">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        andre@onsiteregroup.com
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Estimate card */}
+                  {listing.estimate?.value && (
+                    <div className="rounded-3xl border border-charcoal/10 bg-[#f9f7f4] p-7">
+                      <p className="mb-1 text-[11px] uppercase tracking-[0.3em] text-mid-gray">Estimated Value</p>
+                      <p className="font-serif text-[1.8rem] font-light text-charcoal">
+                        {formatPrice(Math.round(listing.estimate.value))}
+                      </p>
+                      <p className="mt-1 text-[12px] text-charcoal/80">
+                        Range: {formatPrice(Math.round(listing.estimate.low))} – {formatPrice(Math.round(listing.estimate.high))}
+                      </p>
+
+                      {/* 12-month history sparkline */}
+                      {listing.estimate.history?.mth && Object.keys(listing.estimate.history.mth).length > 1 && (() => {
+                        const entries = Object.entries(listing.estimate.history.mth)
+                          .sort(([a], [b]) => a.localeCompare(b))
+                          .slice(-12);
+                        const values = entries.map(([, v]) => v.value);
+                        const min = Math.min(...values);
+                        const max = Math.max(...values);
+                        const range = max - min || 1;
+                        const W = 260, H = 44, pad = 2;
+                        const points = entries.map(([, v], i) => {
+                          const x = pad + (i * (W - 2 * pad)) / Math.max(1, entries.length - 1);
+                          const y = pad + (H - 2 * pad) * (1 - (v.value - min) / range);
+                          return `${x.toFixed(1)},${y.toFixed(1)}`;
+                        }).join(" ");
+                        const first = entries[0][1].value;
+                        const last = entries[entries.length - 1][1].value;
+                        const change = ((last - first) / first) * 100;
+                        return (
+                          <div className="mt-4 border-t border-charcoal/8 pt-4">
+                            <div className="mb-2 flex items-baseline justify-between">
+                              <p className="text-[11px] uppercase tracking-[0.2em] text-charcoal/80">12-Month Trend</p>
+                              <p className={`text-[12px] font-medium ${change >= 0 ? "text-green-700" : "text-red-700"}`}>
+                                {change >= 0 ? "▲" : "▼"} {Math.abs(change).toFixed(1)}%
+                              </p>
+                            </div>
+                            <svg viewBox={`0 0 ${W} ${H}`} className="h-11 w-full">
+                              <polyline
+                                fill="none"
+                                stroke="#1a1a18"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                points={points}
+                              />
+                            </svg>
+                          </div>
+                        );
+                      })()}
+
+                      {listing.estimate.confidence !== null && listing.estimate.confidence !== undefined && (
+                        <p className="mt-3 text-[11px] text-charcoal/90">
+                          Confidence: {(listing.estimate.confidence * 100).toFixed(1)}%
+                          {listing.estimate.date && (
+                            <> · As of {new Date(listing.estimate.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</>
+                          )}
+                        </p>
+                      )}
+                      <p className="mt-3 text-[11px] text-charcoal/80 border-t border-charcoal/8 pt-3">
+                        Estimated value provided by Repliers.io — not sourced from NWMLS or MLS Grid.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div ref={statsRef} className="h-px" aria-hidden />
+
+        {/* City Residential Insights */}
+        {cityStats && (cityStats.active || cityStats.sold) && (
+          <section className="bg-white py-16 sm:py-20 border-t border-charcoal/8">
+            <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
+                <h2 className="font-serif text-[clamp(1.6rem,3vw,2.4rem)] font-light text-charcoal">
+                  {listing.address.city} Residential Insights
+                </h2>
+                <p className="text-[13px] leading-relaxed text-charcoal bg-[#f0ede8] rounded-xl px-5 py-3 max-w-md sm:text-right">
+                  Market statistics and visualizations are provided by{" "}
+                  <a href="https://repliers.com" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-charcoal/90">Repliers.com</a>{" "}
+                  and are based on NWMLS data as Distributed by MLS Grid.
+                </p>
+              </div>
+
+              {/* Chart + Gauge row */}
+              {cityStats.chart && (
+                <div className="grid min-w-0 grid-cols-1 gap-4 mb-8 lg:grid-cols-[minmax(0,1fr)_340px]">
+                  <MarketChart data={cityStats.chart} city={listing.address.city} />
+                  {(() => {
+                    const availMths = recentMonths(cityStats.active?.available?.mth, 1);
+                    const latestAvail = availMths[availMths.length - 1];
+                    const activeCount = latestAvail ? (cityStats.active?.available?.mth?.[latestAvail] ?? 0) : 0;
+                    const closedMths = recentMonths(cityStats.sold?.closed?.mth, 3);
+                    const avgMonthlySold = closedMths.length > 0
+                      ? closedMths.reduce((sum, m) => sum + (cityStats.sold?.closed?.mth?.[m]?.count ?? 0), 0) / closedMths.length
+                      : 1;
+                    const monthsOfInventory = avgMonthlySold > 0 ? activeCount / avgMonthlySold : 0;
+                    return <InventoryGauge months={monthsOfInventory} />;
+                  })()}
+                </div>
+              )}
+
+              {/* Stat cards */}
+              {(() => {
+                const soldMths = recentMonths(cityStats.sold?.soldPrice?.mth, 3);
+                const newMths = recentMonths(cityStats.active?.new?.mth, 3);
+                const closedMths = recentMonths(cityStats.sold?.closed?.mth, 3);
+                const domMths = recentMonths(cityStats.sold?.daysOnMarket?.mth, 3);
+                const availMths = recentMonths(cityStats.active?.available?.mth, 1);
+                const latestAvail = availMths[availMths.length - 1];
+
+                return (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="rounded-2xl border border-charcoal/10 p-6">
+                      <p className="text-[12px] text-charcoal/80 mb-1">Active Listings</p>
+                      <p className="text-[2rem] font-serif font-light text-charcoal">
+                        {latestAvail ? cityStats.active?.available?.mth?.[latestAvail] ?? "\u2014" : "\u2014"}
+                        <span className="text-[13px] font-sans text-charcoal/90 ml-1">active listings</span>
+                      </p>
+                      {latestAvail && <p className="mt-1 text-[11px] text-charcoal/90">For {monthLabel(latestAvail)}</p>}
+                    </div>
+
+                    <div className="rounded-2xl border border-charcoal/10 p-6">
+                      <p className="text-[12px] text-charcoal/80 mb-1">Median Sold Price</p>
+                      <p className="text-[2rem] font-serif font-light text-charcoal">
+                        {cityStats.sold?.soldPrice?.med ? formatPrice(cityStats.sold.soldPrice.med) : "\u2014"}
+                      </p>
+                      {soldMths.length > 0 && <p className="mt-1 text-[11px] text-charcoal/90">For {monthLabel(soldMths[soldMths.length - 1])}</p>}
+                    </div>
+
+                    <div className="rounded-2xl border border-charcoal/10 p-6">
+                      <p className="text-[12px] text-charcoal/80 mb-3">Sales Volume</p>
+                      <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-6">
+                        {soldMths.map((m) => (
+                          <div key={m}>
+                            <p className="text-[1.2rem] font-serif font-light text-charcoal">{fmtCompact(cityStats.sold!.soldPrice.mth[m]?.sum ?? 0)}</p>
+                            <p className="text-[10px] text-charcoal/90">{monthLabel(m)}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="rounded-2xl border border-charcoal/10 p-6">
+                      <p className="text-[12px] text-charcoal/80 mb-3">New Listings</p>
+                      <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-6">
+                        {newMths.map((m) => (
+                          <div key={m}>
+                            <p className="text-[1.5rem] font-serif font-light text-charcoal">{cityStats.active!.new.mth[m]?.count ?? 0}</p>
+                            <p className="text-[10px] text-charcoal/90">{monthLabel(m)}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="rounded-2xl border border-charcoal/10 p-6">
+                      <p className="text-[12px] text-charcoal/80 mb-3">Residential Sold</p>
+                      <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-6">
+                        {closedMths.map((m) => (
+                          <div key={m}>
+                            <p className="text-[1.5rem] font-serif font-light text-charcoal">{cityStats.sold!.closed.mth[m]?.count ?? 0}</p>
+                            <p className="text-[10px] text-charcoal/90">{monthLabel(m)}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="rounded-2xl border border-charcoal/10 p-6">
+                      <p className="text-[12px] text-charcoal/80 mb-3">Days on Market</p>
+                      <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-6">
+                        {domMths.map((m) => (
+                          <div key={m}>
+                            <p className="text-[1.5rem] font-serif font-light text-charcoal">{cityStats.sold!.daysOnMarket.mth[m]?.avg ?? 0}</p>
+                            <p className="text-[10px] text-charcoal/90">{monthLabel(m)}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          </section>
+        )}
+
+        {/* MLS Grid / NWMLS compliance */}
+        <section className="bg-white border-t border-charcoal/8 py-10">
+          <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-10">
+              {listing.address.state === "WA" && (
+                <Image
+                  src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67c78bf7764f04b090341ec5_three-trees-icon.png"
+                  alt="NWMLS Three Trees Logo"
+                  width={48}
+                  height={48}
+                  className="h-10 w-auto shrink-0 opacity-50"
+                />
+              )}
+              <div className="space-y-2">
+                <p className="text-[12px] text-charcoal font-medium">
+                  {listing.address.state === "WA"
+                    ? "Listing data provided by NWMLS as distributed by MLS Grid."
+                    : "Listing data provided by MLS Grid."}
+                  {dataRefreshedAt && (
+                    <> Data last refreshed: {dataRefreshedAt.toLocaleString("en-US", {
+                      month: "short", day: "numeric", year: "numeric",
+                      hour: "numeric", minute: "2-digit", timeZoneName: "short",
+                    })}.</>
+                  )}
+                </p>
+                <p className="text-[11px] leading-[1.8] text-charcoal/90 max-w-4xl">
+                  Based on information submitted to the MLS Grid as of {dataRefreshedAt?.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" }) ?? "today"}.
+                  All data is obtained from various sources and may not have been verified by broker or MLS Grid.
+                  Supplied Open House Information is subject to change without notice.
+                  All information should be independently reviewed and verified for accuracy.
+                  Properties may or may not be listed by the office/agent presenting the information.
+                </p>
+                <p className="text-[11px] leading-[1.8] text-charcoal/90 max-w-4xl">
+                  IDX information is provided exclusively for consumers&apos; personal noncommercial use, that it may not be
+                  used for any purpose other than to identify prospective properties consumers may be interested in
+                  purchasing, that the data is deemed reliable but is not guaranteed by MLS GRID, and that the use of
+                  the MLS GRID Data may be subject to an end user license agreement prescribed by the Member
+                  Participant&apos;s applicable MLS if any and as amended from time to time.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="bg-[#1a1a18] py-20 sm:py-28">
+          <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
+            <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+              <div>
+                <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-white/60">Interested in This Property?</p>
+                <h2 className="font-serif text-[clamp(2rem,4vw,3.4rem)] font-light leading-[1.08] text-white">
+                  Let&apos;s Make It<br />Happen.
+                </h2>
+              </div>
+              <div className="flex flex-col gap-6 lg:items-end">
+                <p className="text-[16px] leading-8 text-white/70 lg:text-right">
+                  The OnSite team is ready to walk you through this home, answer every question, and guide you to the closing table.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    href="/contact-us"
+                    className="inline-flex items-center rounded-full bg-white px-8 py-4 text-[12px] uppercase tracking-[0.25em] text-charcoal transition-all duration-500 hover:bg-white/90"
+                  >
+                    Schedule a Tour
+                  </Link>
+                  <Link
+                    href="/listings"
+                    className="inline-flex items-center rounded-full border border-white/35 px-8 py-4 text-[12px] uppercase tracking-[0.25em] text-white transition-all duration-500 hover:bg-white/10"
+                  >
+                    ← All Listings
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <Marquee />
+      </main>
+      <Footer />
+    </>
+  );
+}
