@@ -23,10 +23,10 @@ export const dashPointDiscover: ServiceAreaDiscover = {
         "Marine-bluff and shoreline parcels define Dash Point's premium and its diligence load — critical-area, drainage, and setback review belong early, not as a last-week escrow scramble.",
     },
     {
-      name: "Redondo Waterfront (Adjacent)",
-      url: "https://www.google.com/maps/place/Redondo+Beach,+Federal+Way,+WA",
+      name: "Redondo (Adjacent)",
+      url: "/service-areas/federal-way/redondo",
       description:
-        "Redondo's pier and marine-edge pocket sit a short drive along the Sound — a common comparison set when buyers weigh Dash Point bluff living against Redondo waterfront character.",
+        "Redondo's pier and marine-edge pocket sit a short drive along the Sound — a common comparison set when buyers weigh Dash Point bluff living against Redondo waterfront character. See the dedicated Redondo spoke for micro-comps and shoreline underwriting.",
     },
     {
       name: "Federal Way Public Schools",
@@ -48,7 +48,7 @@ export const dashPointDiscover: ServiceAreaDiscover = {
     },
   ],
   localLivingMarkdown: [
-    "Federal Way's Dash Point centers on ZIP 98023 — Sound-edge streets with [Dash Point State Park](https://www.parks.wa.gov/find-parks/state-parks/dash-point-state-park) access, marine-bluff views, and shoreline recreation within a short walk or drive. Buyers comparing this pocket often look at the broader [Federal Way](/service-areas/federal-way) hub, [Lakota](/service-areas/federal-way/lakota), [West Campus](/service-areas/federal-way/west-campus), Twin Lakes, Redondo, [Tacoma](/service-areas/tacoma), [Kent](/service-areas/kent), [Auburn](/service-areas/auburn), and [Milton](/service-areas/milton) while weighing school pathways through [Federal Way Public Schools](https://www.fwps.org/), utility documentation through [Lakehaven Water & Sewer District](https://www.lakehaven.org/), and critical-area context through [City of Federal Way Community Development](https://www.cityoffederalway.com/page/community-development). Active search usually starts with [Federal Way homes for sale](/listings?city=Federal%20Way&state=WA).",
+    "Federal Way's Dash Point centers on ZIP 98023 — Sound-edge streets with [Dash Point State Park](https://www.parks.wa.gov/find-parks/state-parks/dash-point-state-park) access, marine-bluff views, and shoreline recreation within a short walk or drive. Buyers comparing this pocket often look at the broader [Federal Way](/service-areas/federal-way) hub, [Lakota](/service-areas/federal-way/lakota), [West Campus](/service-areas/federal-way/west-campus), Twin Lakes, [Redondo](/service-areas/federal-way/redondo), [Tacoma](/service-areas/tacoma), [Kent](/service-areas/kent), [Auburn](/service-areas/auburn), and [Milton](/service-areas/milton) while weighing school pathways through [Federal Way Public Schools](https://www.fwps.org/), utility documentation through [Lakehaven Water & Sewer District](https://www.lakehaven.org/), and critical-area context through [City of Federal Way Community Development](https://www.cityoffederalway.com/page/community-development). Active search usually starts with [Federal Way homes for sale](/listings?city=Federal%20Way&state=WA).",
     "Shoreline logistics matter here: bluff versus inland micro-comps, park traffic near the state park, and arterial timing on Dash Point Road / SW 320th can shift by block. OnSite Real Estate Group prices Dash Point streets against Dash Point comps, confirms critical-area and school details early, and frames Sound-edge living as concrete daily routines — not soft lifestyle adjectives.",
   ],
 };
