@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { CITIES, NEIGHBORHOODS } from "@/lib/service-areas/data";
 
@@ -106,4 +107,75 @@ export function ServiceAreaLinkedText({
       )}
     </>
   );
+}
+
+const MD_LINK_RE = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+
+function isExternalHref(href: string) {
+  return /^https?:\/\//i.test(href);
+}
+
+/** Inline markdown links plus one-time service-area auto-links. Used by blog bodies. */
+export function BlogLinkedText({
+  text,
+  usedHrefs,
+  className = BLOG_LINK_CLASS,
+}: {
+  text: string;
+  usedHrefs?: Set<string>;
+  className?: string;
+}) {
+  const nodes: ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+  const re = new RegExp(MD_LINK_RE);
+
+  const pushPlain = (chunk: string) => {
+    if (!chunk) return;
+    nodes.push(
+      <ServiceAreaLinkedText
+        key={`plain-${key++}`}
+        text={chunk}
+        usedHrefs={usedHrefs}
+        className={className}
+      />
+    );
+  };
+
+  while ((match = re.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      pushPlain(text.slice(lastIndex, match.index));
+    }
+    const label = match[1];
+    const href = match[2];
+    const external = isExternalHref(href);
+    if (!external && usedHrefs) usedHrefs.add(href);
+    if (external) {
+      nodes.push(
+        <a
+          key={`md-${key++}`}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={className}
+        >
+          {label}
+        </a>
+      );
+    } else {
+      nodes.push(
+        <Link key={`md-${key++}`} href={href} className={className}>
+          {label}
+        </Link>
+      );
+    }
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    pushPlain(text.slice(lastIndex));
+  }
+
+  return <>{nodes}</>;
 }

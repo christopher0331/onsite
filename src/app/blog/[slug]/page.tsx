@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import { pageMetadata } from "@/lib/page-meta";
 import { SITE_BRAND } from "@/lib/nap";
-import { ServiceAreaLinkedText } from "@/lib/service-areas/linkify";
+import { BlogLinkedText } from "@/lib/service-areas/linkify";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 import blogData from "@/lib/blog-data.json";
 
@@ -83,7 +83,7 @@ function renderBody(body: string) {
         <li key={i} className="flex items-start gap-3 text-[16px] leading-8 text-charcoal/90">
           <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-charcoal/30" />
           <span>
-            <ServiceAreaLinkedText
+            <BlogLinkedText
               text={trimmed.replace(/^[•\-]\s*/, "")}
               usedHrefs={usedHrefs}
             />
@@ -93,7 +93,7 @@ function renderBody(body: string) {
     } else {
       elements.push(
         <p key={i} className="mb-6 text-[16px] leading-8 text-charcoal/90 not-italic">
-          <ServiceAreaLinkedText text={trimmed} usedHrefs={usedHrefs} />
+          <BlogLinkedText text={trimmed} usedHrefs={usedHrefs} />
         </p>
       );
     }
