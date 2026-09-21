@@ -24,9 +24,9 @@ const insightsPosts = [
     isNew: true,
   },
   {
-    title: "How Much Is My Home Worth in Pierce County? 5 Factors That Actually Move the Number",
+    title: "How Much Is My Home Worth? 5 Factors That Affect Your Home's Value",
     excerpt:
-      "Online estimates skip school lines, shoreline, and the last three solds on your street. These five factors are what Bonney Lake, Lake Tapps, and Sumner buyers actually pay for.",
+      "When it comes to selling your home, one of the first things you need to know is what it's worth. In a competitive market like Pierce County, understanding these five factors is critical.",
     slug: "how-much-is-my-home-worth-5-factors-that-affect-your-homes-value",
     image: "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67ec45ae21ed6ebbeb9e20c5_1%5C.jpg",
     isNew: false,
