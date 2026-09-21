@@ -33,6 +33,7 @@ import { westCampusArticle } from "./west-campus";
 import { lakotaArticle } from "./lakota";
 import { dashPointArticle } from "./dash-point";
 import { downtownKentArticle } from "./downtown-kent";
+import { eastHillArticle } from "./east-hill";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -69,6 +70,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakotaArticle.slug]: lakotaArticle,
   [dashPointArticle.slug]: dashPointArticle,
   [downtownKentArticle.slug]: downtownKentArticle,
+  [eastHillArticle.slug]: eastHillArticle,
 };
 
 export function getServiceAreaArticle(

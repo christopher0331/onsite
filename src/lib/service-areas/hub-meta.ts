@@ -82,6 +82,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Dash Point Federal Way homes on the Sound edge in 98023. State Park access, marine-bluff diligence, and shoreline comps, live NWMLS listings.",
   "kent/downtown-kent":
     "Downtown Kent homes near Kent Station and Sounder in 98032. Floodplain diligence, compact lots, and street-level comps, live NWMLS listings.",
+  "kent/east-hill":
+    "East Hill Kent homes above the valley in 98030–98031. Lake Meridian access, ADU lot diligence, and street-level comps, live NWMLS listings.",
 };
 
 function neighborhoodKey(citySlug: string, neighborhoodSlug: string): string {
