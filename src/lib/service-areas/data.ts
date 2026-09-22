@@ -2624,6 +2624,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         neighborhoodSlug: "dash-point",
         blurb: "True Sound-edge waterfront — marine-bluff diligence and Dash Point State Park when inland West Campus trails are not enough.",
       },
+      {
+        name: "Redondo",
+        citySlug: "federal-way",
+        neighborhoodSlug: "redondo",
+        blurb: "Pier-and-boardwalk Sound edge — Redondo waterfront when inland West Campus trails are not enough.",
+      },
     ],
     reviews: [
       {
@@ -2722,6 +2728,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         neighborhoodSlug: "dash-point",
         blurb: "True Sound-edge waterfront — marine-bluff diligence and Dash Point State Park when inland Lakota streets are not the fit.",
       },
+      {
+        name: "Redondo",
+        citySlug: "federal-way",
+        neighborhoodSlug: "redondo",
+        blurb: "Pier-and-boardwalk Sound edge — Redondo waterfront when Lakota park-and-school living is not the product.",
+      },
     ],
     reviews: [
       {
@@ -2819,6 +2831,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Auburn",
         citySlug: "auburn",
         blurb: "Valley and Lea Hill inventory when Dash Point pricing or critical-area expectations stretch the search.",
+      },
+      {
+        name: "Redondo",
+        citySlug: "federal-way",
+        neighborhoodSlug: "redondo",
+        blurb: "Pier-and-boardwalk Sound-edge sibling — Redondo waterfront character when Dash Point bluff living is not the product.",
       },
     ],
     reviews: [
@@ -3033,6 +3051,110 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "School boundaries and lot-coverage notes were confirmed before we listed. Lake Meridian was sold as real weekend life, not fluff, and escrow stayed clean.",
+      },
+    ],
+  },
+  {
+    slug: "redondo",
+    citySlug: "federal-way",
+    name: "Redondo",
+    zipCodes: ["98003"],
+    geo: { lat: 47.3485, lng: -122.3239 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e5857f0b4e310919f9eda8_contact.webp",
+    heroEyebrow: "Federal Way · Redondo",
+    introCopy:
+      "Federal Way's Redondo is the pier-and-boardwalk Sound-edge pocket in ZIP 98003 — marine-edge recreation, shoreline diligence, and waterfront micro-comps that a citywide Federal Way average misses.",
+    characteristics: {
+      medianHomeYear: "1960 – 1995",
+      architecturalStyles: ["Ranch", "Split-level", "Remodeled contemporary", "View contemporary"],
+      typicalLotSize: "0.15 – 0.40+ acres",
+      notes:
+        "Marine-edge, shoreline, and wetland-buffer parcels need critical-area review before pricing additions or yard plans into list price. Pier-adjacent view lots and inland Redondo streets are related but not identical micro-comp sets. Selected plats carry HOA aesthetics — pull dues and CC&Rs early.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Federal Way Parks — Redondo Waterfront",
+        url: "https://www.federalwaywa.gov/page/our-parks",
+        context: "Pier, boardwalk, and Sound-edge recreation that define Redondo weekend routines.",
+      },
+      {
+        name: "Federal Way Public Schools",
+        url: "https://www.fwps.org/",
+        context: "Redondo / north Federal Way pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: ["Redondo Beach Dr", "Marine View Dr S", "SW 272nd St", "16th Ave S"],
+    landmarks: [
+      "Redondo Fishing Pier",
+      "Redondo Boardwalk",
+      "Puget Sound marine edge",
+      "Dash Point State Park (nearby Sound edge)",
+      "Twin Lakes (nearby inland)",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Federal Way's Redondo via SR-410 → SR-167 / I-5 → Marine View Drive / Redondo Beach Drive corridors, typically inside a 25–40 minute window for inspections and twilight photography. Narrow waterfront streets, pier traffic, and weekend boardwalk logistics can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Federal Way (City)",
+        citySlug: "federal-way",
+        blurb: "Parent hub — Twin Lakes, West Campus, Lakota, and Dash Point micro-markets on the same south King desk.",
+      },
+      {
+        name: "Dash Point",
+        citySlug: "federal-way",
+        neighborhoodSlug: "dash-point",
+        blurb: "Sibling Sound-edge waterfront — Dash Point State Park and marine-bluff diligence when Redondo pier living is not the product.",
+      },
+      {
+        name: "Lakota",
+        citySlug: "federal-way",
+        neighborhoodSlug: "lakota",
+        blurb: "West-side park-and-school sibling — inland Lakota Park living when true Sound-edge diligence is not the fit.",
+      },
+      {
+        name: "West Campus",
+        citySlug: "federal-way",
+        neighborhoodSlug: "west-campus",
+        blurb: "Inland trail-and-park cluster — Celebration Park and greenbelt comps when Redondo waterfront is not the product.",
+      },
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Tacoma urban-residential alternative — Point Defiance / Proctor fabric for buyers comparing Pierce vs King Sound-edge living.",
+      },
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic Tacoma downtown-edge pocket — denser urban patterns when Redondo pier living feels too quiet.",
+      },
+      {
+        name: "Milton",
+        citySlug: "milton",
+        blurb: "Pierce County neighbor toward the Tacoma–Federal Way seam — a common cross-shop for commute shoppers.",
+      },
+      {
+        name: "Auburn",
+        citySlug: "auburn",
+        blurb: "Valley and Lea Hill inventory when Redondo pricing or critical-area expectations stretch the search.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Elena & Mark S.",
+        zip: "98003",
+        rating: 5,
+        quote:
+          "They priced us against Redondo streets — not a Federal Way average — and walked us through pier-adjacent and shoreline diligence before photos went live. Escrow stayed clean.",
+      },
+      {
+        author: "Chris D.",
+        zip: "98003",
+        rating: 5,
+        quote:
+          "The pier and boardwalk access was sold as real weekend life, not fluff. School boundaries and utility notes were confirmed early, and buyers understood the Sound-edge tradeoffs.",
       },
     ],
   },

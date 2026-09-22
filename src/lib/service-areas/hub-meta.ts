@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-09-17";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-09-20";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -80,6 +80,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Lakota Federal Way homes in 98023 near Lakota Park, Adelaide, and Dash Point. Mid-century stock and street-level comps, live NWMLS listings.",
   "federal-way/dash-point":
     "Dash Point Federal Way homes on the Sound edge in 98023. State Park access, marine-bluff diligence, and shoreline comps, live NWMLS listings.",
+  "federal-way/redondo":
+    "Redondo Federal Way homes on the Sound edge in 98003. Pier and boardwalk access, marine-edge diligence, and shoreline comps, live NWMLS listings.",
   "kent/downtown-kent":
     "Downtown Kent homes near Kent Station and Sounder in 98032. Floodplain diligence, compact lots, and street-level comps, live NWMLS listings.",
   "kent/east-hill":
