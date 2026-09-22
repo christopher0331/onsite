@@ -70,7 +70,7 @@ export async function generateMetadata({
   const city = getCityBySlug(citySlug);
   if (!city) return {};
   const url = `${SITE_URL}/service-areas/${city.slug}`;
-  const title = `${city.name}, ${city.stateCode} Real Estate Agents | OnSite ReGroup`;
+  const title = `${city.name}, ${city.stateCode} Real Estate Agents | OnSite Real Estate Group`;
   const description = hubMetaDescription(city);
   return {
     title,
@@ -80,7 +80,7 @@ export async function generateMetadata({
       title,
       description,
       url,
-      siteName: "OnSite ReGroup",
+      siteName: "OnSite Real Estate Group",
       locale: "en_US",
       type: "website",
       images: [{ url: city.heroImage }],

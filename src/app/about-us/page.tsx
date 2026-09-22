@@ -9,7 +9,7 @@ import TeamSection from "@/components/TeamSection";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Onsite Real Estate Agents | Local Expertise, Proven Results",
+  title: "About OnSite Real Estate Group | Local Expertise, Proven Results",
   description:
     "Meet André and Cindie Bohall of OnSite Real Estate Group — delivering tailored real estate solutions with local expertise across Pierce County.",
   path: "/about-us",

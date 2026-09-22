@@ -25,11 +25,11 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(getCanonicalBaseUrl()),
-  title: "Real Estate Agents Lake Tapps | Onsite ReGroup",
+  title: "OnSite Real Estate Group | Pierce County Real Estate Agents",
   description:
     "Top rated real estate agents in Pierce County. Sell your home with confidence. Trusted agents serving Lake Tapps, Bonney Lake, Sumner, Buckley, Graham, Puyallup & Beyond.",
   openGraph: {
-    title: "Real Estate Agents Lake Tapps | Onsite ReGroup",
+    title: "OnSite Real Estate Group | Pierce County Real Estate Agents",
     description:
       "Top rated real estate agents in Pierce County. Sell your home with confidence.",
     siteName: SITE_BRAND,

@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/page-meta";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Real Estate Agents Lake Tapps | Onsite ReGroup",
+  title: "OnSite Real Estate Group | Pierce County Real Estate Agents",
   description:
     "Top rated real estate agents in Pierce County. Sell your home with confidence. Trusted agents serving Lake Tapps, Bonney Lake, Sumner, Buckley, Graham, Puyallup & Beyond.",
   path: "/",

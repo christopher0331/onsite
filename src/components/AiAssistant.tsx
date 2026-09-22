@@ -148,7 +148,7 @@ export default function AiAssistant() {
           <div className="flex items-center justify-between gap-3 border-b border-charcoal/10 bg-charcoal px-5 py-4 text-white">
             <div>
               <p className="text-[10px] uppercase tracking-[0.28em] text-white/55">
-                OnSite ReGroup
+                OnSite Real Estate Group
               </p>
               <p className="font-serif text-[18px] font-light leading-tight">Home Search Assistant</p>
             </div>
