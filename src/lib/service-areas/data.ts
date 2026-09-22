@@ -2607,6 +2607,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Kent's valley-floor civic and Sounder core — transit-oriented comps when West Campus inland trails are not the fit.",
       },
       {
+        name: "East Hill",
+        citySlug: "kent",
+        neighborhoodSlug: "east-hill",
+        blurb: "Kent's hillside residential bench — Lake Meridian access and ADU-aware lots when West Campus inland trails are not the fit.",
+      },
+      {
         name: "Lakota",
         citySlug: "federal-way",
         neighborhoodSlug: "lakota",
@@ -2931,6 +2937,102 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "Kent Station and Sounder access were sold as real commute math, not fluff. School boundaries and flood notes were confirmed early, and buyers understood the valley-floor tradeoffs.",
+      },
+    ],
+  },
+  {
+    slug: "east-hill",
+    citySlug: "kent",
+    name: "East Hill",
+    zipCodes: ["98030", "98031"],
+    geo: { lat: 47.3725, lng: -122.165 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Kent · East Hill",
+    introCopy:
+      "Kent's East Hill is the hillside residential bench above the valley — Lake Meridian recreation, established single-family plats, and ADU-aware lot diligence where micro-neighborhood comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1975 – 2005",
+      architecturalStyles: ["Ranch", "Split-level", "Two-story Craftsman", "Contemporary update"],
+      typicalLotSize: "0.15 – 0.30 acres",
+      notes:
+        "ADU feasibility and lot-coverage limits can materially change buyer demand on larger East Hill parcels — confirm with City of Kent Planning before pricing income or remodel scope into list price. Lake Meridian–adjacent streets need their own micro-comp set versus interior East Hill grid inventory. Selected plats carry HOA aesthetics — pull dues and CC&Rs early when they apply.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Kent Parks — Lake Meridian",
+        url: "https://www.kentwa.gov/",
+        context: "Lake Meridian Park shoreline access, trails, and neighborhood park network on the East Hill bench.",
+      },
+      {
+        name: "Kent School District",
+        url: "https://www.kent.k12.wa.us/",
+        context: "East Hill attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: ["SE 240th St", "SE 256th St", "Canyon Dr (SR-516)", "104th Ave SE", "132nd Ave SE"],
+    landmarks: [
+      "Lake Meridian Park",
+      "East Hill residential plats",
+      "Kent Station (valley access)",
+      "KCLS East Hill / Kent branches",
+      "SR-167 / I-5 commute corridors",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Kent's East Hill via SR-410 → SR-167 → SE 240th / Canyon Drive corridors, typically inside a 25–40 minute window for inspections and twilight photography. School pickup on the hill and Kent Station retail traffic can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Kent (City)",
+        citySlug: "kent",
+        blurb: "Parent hub — Downtown Kent, Panther Lake, West Hill, and Lake Meridian micro-markets on the same south King desk.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "West Campus, Twin Lakes, and Sound-edge alternatives for buyers weighing south King school and commute tradeoffs.",
+      },
+      {
+        name: "West Campus",
+        citySlug: "federal-way",
+        neighborhoodSlug: "west-campus",
+        blurb: "Federal Way inland trail-and-park sibling — Celebration Park comps when East Hill pricing or pathways stretch the search.",
+      },
+      {
+        name: "Auburn",
+        citySlug: "auburn",
+        blurb: "Valley and Lea Hill inventory when East Hill pricing or Kent School District pathways stretch the search.",
+      },
+      {
+        name: "Tacoma",
+        citySlug: "tacoma",
+        blurb: "Pierce County urban-residential alternative — North End and Stadium District fabric for cross-county shoppers.",
+      },
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Tacoma urban-residential alternative — Point Defiance / Proctor fabric when East Hill suburban stock feels too hillside.",
+      },
+      {
+        name: "Milton",
+        citySlug: "milton",
+        blurb: "Pierce–King seam neighbor — a common cross-shop for I-5 commute shoppers comparing Kent and Federal Way.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Elena & Mark H.",
+        zip: "98031",
+        rating: 5,
+        quote:
+          "They priced us against East Hill streets — not a Kent average — and explained how Lake Meridian access and ADU potential would show up in buyer tours. We were under contract without chasing the market down.",
+      },
+      {
+        author: "Priya S.",
+        zip: "98030",
+        rating: 5,
+        quote:
+          "School boundaries and lot-coverage notes were confirmed before we listed. Lake Meridian was sold as real weekend life, not fluff, and escrow stayed clean.",
       },
     ],
   },
