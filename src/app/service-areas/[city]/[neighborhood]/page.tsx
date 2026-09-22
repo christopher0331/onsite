@@ -51,7 +51,7 @@ export async function generateMetadata({
   if (!city || !neighborhood) return {};
 
   const url = `${SITE_URL}/service-areas/${city.slug}/${neighborhood.slug}`;
-  const title = `${neighborhood.name}, ${city.name} ${city.stateCode} Real Estate | OnSite ReGroup`;
+  const title = `${neighborhood.name}, ${city.name} ${city.stateCode} Real Estate | OnSite Real Estate Group`;
   const description = neighborhoodMetaDescription(city, neighborhood);
   return {
     title,
@@ -61,7 +61,7 @@ export async function generateMetadata({
       title,
       description,
       url,
-      siteName: "OnSite ReGroup",
+      siteName: "OnSite Real Estate Group",
       locale: "en_US",
       type: "website",
       images: [{ url: neighborhood.heroImage }],

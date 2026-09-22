@@ -10,7 +10,7 @@ import MLSCardAttribution from "@/components/MLSCardAttribution";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Find Your Perfect Home | Onsite Real Estate",
+  title: "Find Your Perfect Home | OnSite Real Estate Group",
   description:
     "We give you the guidance, market insight, and negotiation power every step of the way. Search homes across Pierce County with OnSite Real Estate Group.",
   path: "/buy-home",

@@ -1,6 +1,6 @@
 /**
  * Canonical NAP aligned to the Google Business Profile:
- * OnSite Real Estate Agents - Lake Tapps
+ * OnSite Real Estate Group
  * 3920 W Tapps Dr E, Lake Tapps, WA 98391 · (253) 441-9764
  *
  * Visible contact blocks and JSON-LD should read from here so Google,
@@ -8,13 +8,10 @@
  */
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
-export const GBP_NAME = "OnSite Real Estate Agents - Lake Tapps";
-export const SITE_BRAND = "OnSite ReGroup";
-export const GBP_ALTERNATE_NAMES = [
-  "OnSite ReGroup",
-  "OnSite Real Estate Group",
-  "Onsite ReGroup",
-] as const;
+export const GBP_NAME = "OnSite Real Estate Group";
+/** Primary brand for titles, Open Graph site name, and chrome. */
+export const SITE_BRAND = GBP_NAME;
+export const GBP_ALTERNATE_NAMES = ["OnSite ReGroup"] as const;
 export const GBP_DESCRIPTION =
   "Real estate agency specializing in buying and selling residential properties.";
 export const GBP_CATEGORY = "Real estate agent";
@@ -51,6 +48,7 @@ export const SAME_AS = [
   "https://www.instagram.com/watchmeasirealestate",
   "https://www.tiktok.com/@onsiteregroup",
   "https://www.youtube.com/@OnSiteRealEstateGroup",
+  "https://x.com/OnSiteREGroup",
 ] as const;
 
 /** Google Business Profile aggregate as of 2026-08-18. */

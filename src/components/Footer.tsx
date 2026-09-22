@@ -100,7 +100,7 @@ export default function Footer() {
             <div className="mb-6">
               <Image
                 src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/68dc8d33f60130dc306e6c8e_Timber.png"
-                alt="OnSite ReGroup"
+                alt="OnSite Real Estate Group"
                 width={180}
                 height={45}
                 className="h-10 w-auto brightness-0 invert"
@@ -256,7 +256,7 @@ export default function Footer() {
         <div className="mx-auto max-w-[1440px] px-6 lg:px-12 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-[12px] text-white/25">
-              Copyright &copy; {new Date().getFullYear()} | Onsite Regroup | All
+              Copyright &copy; {new Date().getFullYear()} | {GBP_NAME} | All
               Rights Reserved
             </p>
             <div className="flex items-center gap-6">

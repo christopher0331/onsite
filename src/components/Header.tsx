@@ -81,7 +81,7 @@ export default function Header() {
             <Link href="/" className="relative z-10 block min-w-0">
               <Image
                 src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/68dc8d33f60130dc306e6c8e_Timber.png"
-                alt="OnSite ReGroup"
+                alt="OnSite Real Estate Group"
                 width={320}
                 height={80}
                 priority={isHome}

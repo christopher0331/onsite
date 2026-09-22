@@ -7,7 +7,7 @@ import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Follow Onsite Real Estate on Social Media | Facebook, Instagram & YouTube",
+  title: "Follow OnSite Real Estate Group on Social Media | Facebook, Instagram & YouTube",
   description:
     "Follow OnSite Real Estate Group on social for real-time updates, property highlights, and marketing tips — Facebook, Instagram, YouTube & TikTok.",
   path: "/social-hub",
