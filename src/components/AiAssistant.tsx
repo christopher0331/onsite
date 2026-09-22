@@ -7,6 +7,7 @@ import { runAiSearch, AI_SEARCH_EXAMPLES, type AiSearchListing } from "@/lib/ai-
 import { repliersImageUrl } from "@/lib/repliers-images";
 import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount } from "@/lib/format-bathrooms";
+import { SITE_BRAND } from "@/lib/nap";
 
 type ChatMessage = {
   id: number;
@@ -148,7 +149,7 @@ export default function AiAssistant() {
           <div className="flex items-center justify-between gap-3 border-b border-charcoal/10 bg-charcoal px-5 py-4 text-white">
             <div>
               <p className="text-[10px] uppercase tracking-[0.28em] text-white/55">
-                OnSite Real Estate Group
+                {SITE_BRAND}
               </p>
               <p className="font-serif text-[18px] font-light leading-tight">Home Search Assistant</p>
             </div>

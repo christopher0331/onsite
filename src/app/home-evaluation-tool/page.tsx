@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_BRAND } from "@/lib/nap";
 import { pageMetadata } from "@/lib/page-meta";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,9 +11,8 @@ const toolUrl =
   "https://lead-valuator.replit.app";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Home Evaluation Tool | OnSite Real Estate Group",
-  description:
-    "Use OnSite ReGroup's home evaluation tool to start your property valuation.",
+  title: `Home Evaluation Tool | ${SITE_BRAND}`,
+  description: `Use ${SITE_BRAND}'s home evaluation tool to start your property valuation.`,
   path: "/home-evaluation-tool",
 });
 

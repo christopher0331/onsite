@@ -12,23 +12,22 @@ import {
   CITIES,
   NEIGHBORHOODS,
 } from "@/lib/service-areas/data";
+import { SITE_BRAND } from "@/lib/nap";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const SITE_URL = getCanonicalBaseUrl();
 
 export const metadata: Metadata = {
-  title: "Service Areas | Pierce County Real Estate | OnSite Real Estate Group",
-  description:
-    "OnSite ReGroup serves Pierce County, WA from Lake Tapps. Explore our city hubs and neighborhood pages for Puyallup, Bonney Lake, Sumner and beyond.",
+  title: `Service Areas | Pierce County Real Estate | ${SITE_BRAND}`,
+  description: `${SITE_BRAND} serves Pierce County, WA from Lake Tapps. Explore our city hubs and neighborhood pages for Puyallup, Bonney Lake, Sumner and beyond.`,
   alternates: {
     canonical: `${SITE_URL}/service-areas`,
   },
   openGraph: {
-    title: "Service Areas | Pierce County Real Estate | OnSite Real Estate Group",
-    description:
-      "OnSite ReGroup serves Pierce County, WA from Lake Tapps. Explore our city hubs and neighborhood pages for Puyallup, Bonney Lake, Sumner and beyond.",
+    title: `Service Areas | Pierce County Real Estate | ${SITE_BRAND}`,
+    description: `${SITE_BRAND} serves Pierce County, WA from Lake Tapps. Explore our city hubs and neighborhood pages for Puyallup, Bonney Lake, Sumner and beyond.`,
     url: `${SITE_URL}/service-areas`,
-    siteName: "OnSite Real Estate Group",
+    siteName: SITE_BRAND,
     locale: "en_US",
     type: "website",
     images: [

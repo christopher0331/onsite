@@ -32,6 +32,7 @@ import { getServiceAreaArticle } from "@/lib/service-areas/articles";
 import { getServiceAreaDiscover } from "@/lib/service-areas/discover";
 import { filterListingsByZip, getServiceAreaListings } from "@/lib/service-area-listings";
 import { getServiceAreaVideo } from "@/lib/service-areas/videos";
+import { SITE_BRAND } from "@/lib/nap";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const SITE_URL = getCanonicalBaseUrl();
@@ -51,7 +52,7 @@ export async function generateMetadata({
   if (!city || !neighborhood) return {};
 
   const url = `${SITE_URL}/service-areas/${city.slug}/${neighborhood.slug}`;
-  const title = `${neighborhood.name}, ${city.name} ${city.stateCode} Real Estate | OnSite Real Estate Group`;
+  const title = `${neighborhood.name}, ${city.name} ${city.stateCode} Real Estate | ${SITE_BRAND}`;
   const description = neighborhoodMetaDescription(city, neighborhood);
   return {
     title,
@@ -61,7 +62,7 @@ export async function generateMetadata({
       title,
       description,
       url,
-      siteName: "OnSite Real Estate Group",
+      siteName: SITE_BRAND,
       locale: "en_US",
       type: "website",
       images: [{ url: neighborhood.heroImage }],

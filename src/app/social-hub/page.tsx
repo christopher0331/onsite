@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_BRAND } from "@/lib/nap";
 import { pageMetadata } from "@/lib/page-meta";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -7,7 +8,7 @@ import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Follow OnSite Real Estate Group on Social Media | Facebook, Instagram & YouTube",
+  title: `Follow ${SITE_BRAND} on Social Media | Facebook, Instagram & YouTube`,
   description:
     "Follow OnSite Real Estate Group on social for real-time updates, property highlights, and marketing tips — Facebook, Instagram, YouTube & TikTok.",
   path: "/social-hub",

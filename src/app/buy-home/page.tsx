@@ -7,10 +7,11 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
+import { SITE_BRAND } from "@/lib/nap";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Find Your Perfect Home | OnSite Real Estate Group",
+  title: `Find Your Perfect Home | ${SITE_BRAND}`,
   description:
     "We give you the guidance, market insight, and negotiation power every step of the way. Search homes across Pierce County with OnSite Real Estate Group.",
   path: "/buy-home",
