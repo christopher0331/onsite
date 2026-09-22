@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-09-20";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-09-22";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -86,6 +86,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Downtown Kent homes near Kent Station and Sounder in 98032. Floodplain diligence, compact lots, and street-level comps, live NWMLS listings.",
   "kent/east-hill":
     "East Hill Kent homes above the valley in 98030–98031. Lake Meridian access, ADU lot diligence, and street-level comps, live NWMLS listings.",
+  "federal-way/twin-lakes":
+    "Twin Lakes Federal Way homes in 98023 near Lake Lorene, Lake Jeane, and the golf club. HOA timing and street-level comps, live NWMLS listings.",
 };
 
 function neighborhoodKey(citySlug: string, neighborhoodSlug: string): string {
