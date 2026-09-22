@@ -46,6 +46,7 @@ import {
   getServiceAreaSoldListings,
 } from "@/lib/service-area-market";
 import { getServiceAreaVideo } from "@/lib/service-areas/videos";
+import { SITE_BRAND } from "@/lib/nap";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const SITE_URL = getCanonicalBaseUrl();
@@ -70,7 +71,7 @@ export async function generateMetadata({
   const city = getCityBySlug(citySlug);
   if (!city) return {};
   const url = `${SITE_URL}/service-areas/${city.slug}`;
-  const title = `${city.name}, ${city.stateCode} Real Estate Agents | OnSite Real Estate Group`;
+  const title = `${city.name}, ${city.stateCode} Real Estate Agents | ${SITE_BRAND}`;
   const description = hubMetaDescription(city);
   return {
     title,
@@ -80,7 +81,7 @@ export async function generateMetadata({
       title,
       description,
       url,
-      siteName: "OnSite Real Estate Group",
+      siteName: SITE_BRAND,
       locale: "en_US",
       type: "website",
       images: [{ url: city.heroImage }],

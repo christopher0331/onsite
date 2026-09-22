@@ -6,10 +6,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TeamSection from "@/components/TeamSection";
-import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
+import { PHONE_DISPLAY, PHONE_HREF, SITE_BRAND } from "@/lib/nap";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About OnSite Real Estate Group | Local Expertise, Proven Results",
+  title: `About ${SITE_BRAND} | Local Expertise, Proven Results`,
   description:
     "Meet André and Cindie Bohall of OnSite Real Estate Group — delivering tailored real estate solutions with local expertise across Pierce County.",
   path: "/about-us",
