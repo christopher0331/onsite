@@ -40,7 +40,7 @@ export const GEO = {
 export const MAPS_DIRECTIONS_URL =
   "https://www.google.com/maps/dir//3920+W+Tapps+Dr+E,+Lake+Tapps,+WA+98391";
 export const GOOGLE_MAPS_PLACE_URL =
-  "https://maps.google.com/?cid=7810132482151176316";
+  "https://maps.google.com/?cid=7815725805259282556";
 
 export const LOGO_URL =
   "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/68dc8d33f60130dc306e6c8e_Timber.png";
