@@ -80,6 +80,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Lakota Federal Way homes in 98023 near Lakota Park, Adelaide, and Dash Point. Mid-century stock and street-level comps, live NWMLS listings.",
   "federal-way/dash-point":
     "Dash Point Federal Way homes on the Sound edge in 98023. State Park access, marine-bluff diligence, and shoreline comps, live NWMLS listings.",
+  "kent/downtown-kent":
+    "Downtown Kent homes near Kent Station and Sounder in 98032. Floodplain diligence, compact lots, and street-level comps, live NWMLS listings.",
 };
 
 function neighborhoodKey(citySlug: string, neighborhoodSlug: string): string {

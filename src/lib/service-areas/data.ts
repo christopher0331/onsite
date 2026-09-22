@@ -2601,6 +2601,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "East Hill and valley alternatives for buyers weighing south King school and commute tradeoffs.",
       },
       {
+        name: "Downtown Kent",
+        citySlug: "kent",
+        neighborhoodSlug: "downtown-kent",
+        blurb: "Kent's valley-floor civic and Sounder core — transit-oriented comps when West Campus inland trails are not the fit.",
+      },
+      {
         name: "Lakota",
         citySlug: "federal-way",
         neighborhoodSlug: "lakota",
@@ -2823,6 +2829,108 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "Dash Point State Park access was sold as real weekend life, not fluff. School boundaries and utility notes were confirmed early, and buyers understood the Sound-edge tradeoffs.",
+      },
+    ],
+  },
+  {
+    slug: "downtown-kent",
+    citySlug: "kent",
+    name: "Downtown Kent",
+    zipCodes: ["98032"],
+    geo: { lat: 47.3809, lng: -122.2348 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Kent · Downtown",
+    introCopy:
+      "Downtown Kent is the valley-floor civic and transit core — Kent Station, Sounder access, compact lots, and floodplain diligence where micro-neighborhood comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1920 – 1975",
+      architecturalStyles: ["Bungalow", "Craftsman", "Mid-century remodel", "Small-lot infill", "Duplex / condo"],
+      typicalLotSize: "0.08 – 0.18 acres",
+      notes:
+        "Portions of Downtown Kent sit on flood-sensitive valley floor — confirm FEMA designations and gather elevation documentation before pricing lender risk into list price. Downtown-core streets and near-industrial valley edges need separate micro-comp sets. Condo and small HOA buildings require early dues, reserve, and resale-certificate review.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Kent — Downtown / Kent Station",
+        url: "https://www.kentwa.gov/",
+        context: "Civic services, Kent Station retail, Town Square Park, and downtown event calendar that shape showing logistics.",
+      },
+      {
+        name: "Kent School District",
+        url: "https://www.kent.k12.wa.us/",
+        context: "Downtown Kent attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: ["Central Ave", "Meeker St", "Willis St (SR-516)", "SR-167", "I-5"],
+    landmarks: [
+      "Kent Station",
+      "Kent Sounder Station",
+      "Town Square Park",
+      "KCLS Kent Branch",
+      "Green River valley floor",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Downtown Kent via SR-410 → SR-167 into Central Avenue / Meeker corridors, typically inside a 25–40 minute window for inspections and twilight photography. Sounder parking, Kent Station events, and freight traffic on the valley floor can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Kent (City)",
+        citySlug: "kent",
+        blurb: "Parent hub — East Hill, Panther Lake, West Hill, and Lake Meridian micro-markets on the same south King desk.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "West Campus, Twin Lakes, and Sound-edge alternatives for buyers weighing south King school and commute tradeoffs.",
+      },
+      {
+        name: "West Campus",
+        citySlug: "federal-way",
+        neighborhoodSlug: "west-campus",
+        blurb: "Federal Way inland trail-and-park sibling — Celebration Park comps when Downtown Kent valley-floor living is not the fit.",
+      },
+      {
+        name: "Auburn",
+        citySlug: "auburn",
+        blurb: "Valley and Lea Hill inventory when Downtown Kent pricing, flood diligence, or Kent School District pathways stretch the search.",
+      },
+      {
+        name: "Tacoma",
+        citySlug: "tacoma",
+        blurb: "Pierce County urban-residential alternative — North End and Stadium District fabric for cross-county shoppers.",
+      },
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Tacoma urban-residential alternative — Point Defiance / Proctor fabric when Downtown Kent valley stock feels too industrial-adjacent.",
+      },
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic Tacoma downtown-edge pocket — denser urban patterns for buyers comparing valley-floor Kent to Pierce civic cores.",
+      },
+      {
+        name: "Milton",
+        citySlug: "milton",
+        blurb: "Pierce–King seam neighbor — a common cross-shop for I-5 commute shoppers comparing Kent and Federal Way.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Carla & James M.",
+        zip: "98032",
+        rating: 5,
+        quote:
+          "They priced us against Downtown Kent streets — not a city average — and walked flood-zone and Sounder logistics before photos went live. Escrow stayed clean.",
+      },
+      {
+        author: "Omar F.",
+        zip: "98032",
+        rating: 5,
+        quote:
+          "Kent Station and Sounder access were sold as real commute math, not fluff. School boundaries and flood notes were confirmed early, and buyers understood the valley-floor tradeoffs.",
       },
     ],
   },
