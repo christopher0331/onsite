@@ -2817,6 +2817,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Kent's hillside residential bench — Lake Meridian access and ADU-aware lots when West Campus inland trails are not the fit.",
       },
       {
+        name: "Panther Lake",
+        citySlug: "kent",
+        neighborhoodSlug: "panther-lake",
+        blurb: "Kent's west-corridor lake-adjacent pocket — Panther Lake comps when West Campus inland trails are not the fit.",
+      },
+      {
         name: "Lakota",
         citySlug: "federal-way",
         neighborhoodSlug: "lakota",
@@ -3107,6 +3113,18 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Parent hub — East Hill, Panther Lake, West Hill, and Lake Meridian micro-markets on the same south King desk.",
       },
       {
+        name: "East Hill",
+        citySlug: "kent",
+        neighborhoodSlug: "east-hill",
+        blurb: "Kent's hillside residential bench — Lake Meridian access when Downtown Kent valley-floor living is not the fit.",
+      },
+      {
+        name: "Panther Lake",
+        citySlug: "kent",
+        neighborhoodSlug: "panther-lake",
+        blurb: "West-corridor lake-adjacent pocket — Panther Lake comps when Downtown Kent Sounder access is not the fit.",
+      },
+      {
         name: "Federal Way",
         citySlug: "federal-way",
         blurb: "West Campus, Twin Lakes, and Sound-edge alternatives for buyers weighing south King school and commute tradeoffs.",
@@ -3209,6 +3227,18 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Parent hub — Downtown Kent, Panther Lake, West Hill, and Lake Meridian micro-markets on the same south King desk.",
       },
       {
+        name: "Downtown Kent",
+        citySlug: "kent",
+        neighborhoodSlug: "downtown-kent",
+        blurb: "Valley-floor civic and Sounder core — transit-oriented comps when East Hill hillside living is not the fit.",
+      },
+      {
+        name: "Panther Lake",
+        citySlug: "kent",
+        neighborhoodSlug: "panther-lake",
+        blurb: "West-corridor lake-adjacent pocket — Panther Lake comps when East Hill Lake Meridian living is not the fit.",
+      },
+      {
         name: "Federal Way",
         citySlug: "federal-way",
         blurb: "West Campus, Twin Lakes, and Sound-edge alternatives for buyers weighing south King school and commute tradeoffs.",
@@ -3255,6 +3285,108 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "School boundaries and lot-coverage notes were confirmed before we listed. Lake Meridian was sold as real weekend life, not fluff, and escrow stayed clean.",
+      },
+    ],
+  },
+  {
+    slug: "panther-lake",
+    citySlug: "kent",
+    name: "Panther Lake",
+    zipCodes: ["98030", "98032"],
+    geo: { lat: 47.3858, lng: -122.2725 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67d84788b3b88386e8c24f01_sell%20your%20home%20in%20east%20pierce%20county.jpg",
+    heroEyebrow: "Kent · Panther Lake",
+    introCopy:
+      "Kent's Panther Lake corridor is the west-side lake-adjacent residential band — shoreline and inland plats with Federal Way and I-5 reach where micro-neighborhood comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1965 – 2005",
+      architecturalStyles: ["Ranch", "Split-level", "Remodeled contemporary", "Lake-adjacent update"],
+      typicalLotSize: "0.15 – 0.35 acres",
+      notes:
+        "Lake-frontage, wetland-buffer, and critical-area parcels need Planning review before pricing shoreline projects or additions into list price. True shore-edge lots and inland Panther Lake streets are related but not identical micro-comp sets. Selected plats carry HOA aesthetics — pull dues and CC&Rs early when they apply.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Kent Parks — Panther Lake area",
+        url: "https://www.kentwa.gov/",
+        context: "Lake access, neighborhood parks, and west Kent recreation that shape Panther Lake weekend routines.",
+      },
+      {
+        name: "Kent School District",
+        url: "https://www.kent.k12.wa.us/",
+        context: "Panther Lake attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: ["Military Rd S", "S 272nd St", "Kent-Des Moines Rd (SR-516)", "I-5", "Pacific Hwy S"],
+    landmarks: [
+      "Panther Lake",
+      "West Kent residential plats",
+      "Federal Way / I-5 seam",
+      "Kent Station (valley access)",
+      "KCLS Kent branches",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Kent's Panther Lake corridor via SR-410 → SR-167 / I-5 into Military Road and Kent-Des Moines corridors, typically inside a 25–40 minute window for inspections and twilight photography. School pickup and Federal Way–seam arterial traffic can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Kent (City)",
+        citySlug: "kent",
+        blurb: "Parent hub — East Hill, Downtown Kent, West Hill, and Lake Meridian micro-markets on the same south King desk.",
+      },
+      {
+        name: "East Hill",
+        citySlug: "kent",
+        neighborhoodSlug: "east-hill",
+        blurb: "Kent's hillside residential bench — Lake Meridian access when Panther Lake west-corridor living is not the fit.",
+      },
+      {
+        name: "Downtown Kent",
+        citySlug: "kent",
+        neighborhoodSlug: "downtown-kent",
+        blurb: "Valley-floor civic and Sounder core — transit-oriented comps when Panther Lake lake-adjacent streets are not the fit.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "West Campus, Twin Lakes, and Sound-edge alternatives for buyers weighing south King school and commute tradeoffs.",
+      },
+      {
+        name: "West Campus",
+        citySlug: "federal-way",
+        neighborhoodSlug: "west-campus",
+        blurb: "Federal Way inland trail-and-park sibling — Celebration Park comps when Panther Lake lake-adjacent living is not the fit.",
+      },
+      {
+        name: "Auburn",
+        citySlug: "auburn",
+        blurb: "Valley and Lea Hill inventory when Panther Lake pricing or Kent School District pathways stretch the search.",
+      },
+      {
+        name: "Tacoma",
+        citySlug: "tacoma",
+        blurb: "Pierce County urban-residential alternative — North End and Stadium District fabric for cross-county shoppers.",
+      },
+      {
+        name: "Milton",
+        citySlug: "milton",
+        blurb: "Pierce–King seam neighbor — a common cross-shop for I-5 commute shoppers comparing Kent and Federal Way.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Dana & Chris L.",
+        zip: "98030",
+        rating: 5,
+        quote:
+          "They priced us against Panther Lake streets — not a Kent average — and walked lake-edge versus inland comps before photos went live. Escrow stayed clean.",
+      },
+      {
+        author: "Jordan P.",
+        zip: "98032",
+        rating: 5,
+        quote:
+          "I-5 and Federal Way reach were sold as real commute math, not fluff. School boundaries and shoreline notes were confirmed early, and buyers understood the west-corridor tradeoffs.",
       },
     ],
   },

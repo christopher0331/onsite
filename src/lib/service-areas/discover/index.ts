@@ -36,6 +36,7 @@ import { lakotaDiscover } from "./lakota";
 import { dashPointDiscover } from "./dash-point";
 import { downtownKentDiscover } from "./downtown-kent";
 import { eastHillDiscover } from "./east-hill";
+import { pantherLakeDiscover } from "./panther-lake";
 import { redondoDiscover } from "./redondo";
 import { twinLakesDiscover } from "./twin-lakes";
 import { proctorDistrictDiscover } from "./proctor-district";
@@ -78,6 +79,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [dashPointDiscover.slug]: dashPointDiscover,
   [downtownKentDiscover.slug]: downtownKentDiscover,
   [eastHillDiscover.slug]: eastHillDiscover,
+  [pantherLakeDiscover.slug]: pantherLakeDiscover,
   [redondoDiscover.slug]: redondoDiscover,
   [twinLakesDiscover.slug]: twinLakesDiscover,
   [proctorDistrictDiscover.slug]: proctorDistrictDiscover,
