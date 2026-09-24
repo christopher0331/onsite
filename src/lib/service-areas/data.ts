@@ -2823,6 +2823,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Kent's west-corridor lake-adjacent pocket — Panther Lake comps when West Campus inland trails are not the fit.",
       },
       {
+        name: "West Hill",
+        citySlug: "kent",
+        neighborhoodSlug: "west-hill",
+        blurb: "Kent's west-side residential bench — I-5 reach and established plats when West Campus inland trails are not the fit.",
+      },
+      {
         name: "Lakota",
         citySlug: "federal-way",
         neighborhoodSlug: "lakota",
