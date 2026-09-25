@@ -88,6 +88,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "East Hill Kent homes above the valley in 98030–98031. Lake Meridian access, ADU lot diligence, and street-level comps, live NWMLS listings.",
   "kent/panther-lake":
     "Panther Lake Kent homes on the west corridor near I-5 and Federal Way. Lake-adjacent comps and street-level pricing, live NWMLS listings.",
+  "kent/west-hill":
+    "West Hill Kent homes west of the Green River valley near I-5 and Federal Way. Established plats and street-level comps, live NWMLS listings.",
   "federal-way/twin-lakes":
     "Twin Lakes Federal Way homes in 98023 near Lake Lorene, Lake Jeane, and the golf club. HOA timing and street-level comps, live NWMLS listings.",
   "tacoma/south-tacoma":
