@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-09-23";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-09-25";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -34,7 +34,7 @@ const HUB_META: Record<string, string> = {
   "federal-way":
     "Federal Way homes in Twin Lakes, West Campus, and Lakota. Separate price bands and buyer pools across 98003 and 98023, live NWMLS listings.",
   kent:
-    "Kent homes from East Hill to Panther Lake and the valley floor. Submarket-specific pricing, not a city average, live NWMLS listings in 98030–98032 and 98042.",
+    "Kent homes from East Hill and West Hill to Lake Meridian and Panther Lake. Submarket pricing, not a city average, live NWMLS listings.",
   seattle:
     "Seattle neighborhood homes — Ballard, Green Lake, West Seattle, and more. School catchments, transit, and lot quality first, never a city-wide average.",
 };
@@ -90,6 +90,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Panther Lake Kent homes on the west corridor near I-5 and Federal Way. Lake-adjacent comps and street-level pricing, live NWMLS listings.",
   "kent/west-hill":
     "West Hill Kent homes west of the Green River valley near I-5 and Federal Way. Established plats and street-level comps, live NWMLS listings.",
+  "kent/lake-meridian":
+    "Lake Meridian Kent homes near Lake Meridian Park on the East Hill bench. Shoreline comps and street-level pricing, live NWMLS listings.",
   "federal-way/twin-lakes":
     "Twin Lakes Federal Way homes in 98023 near Lake Lorene, Lake Jeane, and the golf club. HOA timing and street-level comps, live NWMLS listings.",
   "tacoma/south-tacoma":
