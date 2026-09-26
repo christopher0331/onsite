@@ -3288,7 +3288,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       {
         name: "Auburn",
         citySlug: "auburn",
-        blurb: "Valley inventory when East Hill pricing or Kent School District pathways stretch the search.",
+        blurb: "Valley and Lea Hill inventory when East Hill pricing or Kent School District pathways stretch the search.",
       },
       {
         name: "Lea Hill",
@@ -3528,13 +3528,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       {
         name: "Auburn",
         citySlug: "auburn",
-        blurb: "Valley inventory when West Hill pricing or Kent School District pathways stretch the search.",
-      },
-      {
-        name: "Lea Hill",
-        citySlug: "auburn",
-        neighborhoodSlug: "lea-hill",
-        blurb: "Auburn's Green River College bench — campus-adjacent comps when West Hill Kent living is not the fit.",
+        blurb: "Valley and Lea Hill inventory when West Hill pricing or Kent School District pathways stretch the search.",
       },
       {
         name: "Tacoma",
@@ -3651,6 +3645,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Valley and Lea Hill inventory when Lake Meridian pricing or Kent School District pathways stretch the search.",
       },
       {
+        name: "Lea Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "lea-hill",
+        blurb: "Auburn's Green River College bench — campus-adjacent comps when Lake Meridian shoreline living is not the fit.",
+      },
+      {
         name: "Tacoma",
         citySlug: "tacoma",
         blurb: "Pierce County urban-residential alternative — North End and Stadium District fabric for cross-county shoppers.",
@@ -3678,7 +3678,6 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-
   {
     slug: "lea-hill",
     citySlug: "auburn",
@@ -3728,19 +3727,19 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       {
         name: "Kent",
         citySlug: "kent",
-        blurb: "East Hill, Downtown Kent, Panther Lake, and West Hill alternatives for buyers weighing Auburn School District vs Kent pathways.",
+        blurb: "East Hill and Lake Meridian alternatives for buyers weighing Auburn School District vs Kent pathways.",
       },
       {
         name: "East Hill",
         citySlug: "kent",
         neighborhoodSlug: "east-hill",
-        blurb: "Kent's hillside residential bench — Lake Meridian access when Lea Hill campus-adjacent living is not the fit.",
+        blurb: "Kent's broader hillside bench — interior East Hill comps when Lea Hill campus-adjacent living is not the fit.",
       },
       {
-        name: "West Hill",
+        name: "Lake Meridian",
         citySlug: "kent",
-        neighborhoodSlug: "west-hill",
-        blurb: "Kent west-corridor residential bench — I-5 and Federal Way reach when Lea Hill eastern-Auburn living is not the fit.",
+        neighborhoodSlug: "lake-meridian",
+        blurb: "Kent's nearest shoreline band — Lake Meridian Park comps when Lea Hill campus-adjacent living is not the fit.",
       },
       {
         name: "Federal Way",
@@ -3785,7 +3784,6 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-
   {
     slug: "redondo",
     citySlug: "federal-way",
