@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-09-25";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-09-26";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -92,6 +92,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "West Hill Kent homes west of the Green River valley near I-5 and Federal Way. Established plats and street-level comps, live NWMLS listings.",
   "kent/lake-meridian":
     "Lake Meridian Kent homes near Lake Meridian Park on the East Hill bench. Shoreline comps and street-level pricing, live NWMLS listings.",
+  "auburn/lea-hill":
+    "Lea Hill Auburn homes near Green River College in 98092. Annexation-title diligence and street-level comps, live NWMLS listings.",
   "federal-way/twin-lakes":
     "Twin Lakes Federal Way homes in 98023 near Lake Lorene, Lake Jeane, and the golf club. HOA timing and street-level comps, live NWMLS listings.",
   "tacoma/south-tacoma":
