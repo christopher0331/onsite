@@ -3288,7 +3288,13 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       {
         name: "Auburn",
         citySlug: "auburn",
-        blurb: "Valley and Lea Hill inventory when East Hill pricing or Kent School District pathways stretch the search.",
+        blurb: "Valley inventory when East Hill pricing or Kent School District pathways stretch the search.",
+      },
+      {
+        name: "Lea Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "lea-hill",
+        blurb: "Auburn's Green River College bench — campus-adjacent comps when East Hill Lake Meridian living is not the fit.",
       },
       {
         name: "Tacoma",
@@ -3522,7 +3528,13 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       {
         name: "Auburn",
         citySlug: "auburn",
-        blurb: "Valley and Lea Hill inventory when West Hill pricing or Kent School District pathways stretch the search.",
+        blurb: "Valley inventory when West Hill pricing or Kent School District pathways stretch the search.",
+      },
+      {
+        name: "Lea Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "lea-hill",
+        blurb: "Auburn's Green River College bench — campus-adjacent comps when West Hill Kent living is not the fit.",
       },
       {
         name: "Tacoma",
@@ -3666,6 +3678,114 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
+
+  {
+    slug: "lea-hill",
+    citySlug: "auburn",
+    name: "Lea Hill",
+    zipCodes: ["98092"],
+    geo: { lat: 47.3128, lng: -122.1695 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Auburn · Lea Hill",
+    introCopy:
+      "Auburn's Lea Hill is the residential bench above Green River College in ZIP 98092 — move-up plats and campus-adjacent streets where micro-neighborhood comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1995 – 2015",
+      architecturalStyles: ["Two-story Craftsman", "Contemporary", "Planned-community update", "Split-level"],
+      typicalLotSize: "0.15 – 0.35 acres",
+      notes:
+        "Parts of Lea Hill carry county-era infrastructure and easements from pre-annexation plats — title review belongs before photos, not mid-escrow. Campus-adjacent streets and deeper plateau plats are related but not identical micro-comp sets. Selected plats carry HOA aesthetics or design review — pull dues and CC&Rs early when they apply.",
+    },
+    communityOrgs: [
+      {
+        name: "Green River College",
+        url: "https://www.greenriver.edu/",
+        context: "Campus anchor that shapes Lea Hill weekday traffic, staff housing demand, and eastern Auburn amenities.",
+      },
+      {
+        name: "Auburn School District",
+        url: "https://www.auburn.wednet.edu/",
+        context: "Lea Hill attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: ["Lea Hill Rd", "SE 320th St", "Auburn-Black Diamond Rd", "SE 288th St", "SR-18"],
+    landmarks: [
+      "Green River College",
+      "Lea Hill residential plats",
+      "Eastern Auburn / Lake Tapps seam",
+      "KCLS Auburn / Lea Hill branches",
+      "Auburn Station (valley access)",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Auburn's Lea Hill via SR-410 → SR-167 / SR-18 into Lea Hill Road and SE 320th corridors, typically inside a 20–35 minute window for inspections and twilight photography. Campus class-change traffic near Green River College and school pickup can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Auburn (City)",
+        citySlug: "auburn",
+        blurb: "Parent hub — Sounder downtown, West Hill, and Lea Hill micro-markets on the same south King desk.",
+      },
+      {
+        name: "Kent",
+        citySlug: "kent",
+        blurb: "East Hill, Downtown Kent, Panther Lake, and West Hill alternatives for buyers weighing Auburn School District vs Kent pathways.",
+      },
+      {
+        name: "East Hill",
+        citySlug: "kent",
+        neighborhoodSlug: "east-hill",
+        blurb: "Kent's hillside residential bench — Lake Meridian access when Lea Hill campus-adjacent living is not the fit.",
+      },
+      {
+        name: "West Hill",
+        citySlug: "kent",
+        neighborhoodSlug: "west-hill",
+        blurb: "Kent west-corridor residential bench — I-5 and Federal Way reach when Lea Hill eastern-Auburn living is not the fit.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "West Campus, Twin Lakes, and Sound-edge alternatives for buyers weighing south King school and commute tradeoffs.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Pierce County valley neighbor — Sounder Sumner and Bridge Hill comps when Lea Hill plateau living is not the fit.",
+      },
+      {
+        name: "Lake Tapps",
+        citySlug: "lake-tapps",
+        blurb: "Reservoir waterfront and upland sibling — lake lifestyle when Lea Hill inland residential living is not the product.",
+      },
+      {
+        name: "Bonney Lake",
+        citySlug: "bonney-lake",
+        blurb: "Plateau neighbor via SR-410 — Tehaleh and lakefront alternatives for east Pierce / south King shoppers.",
+      },
+      {
+        name: "Milton",
+        citySlug: "milton",
+        blurb: "Pierce–King seam neighbor — a common cross-shop for I-5 commute shoppers comparing Auburn and Federal Way.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Megan & Drew H.",
+        zip: "98092",
+        rating: 5,
+        quote:
+          "They priced us against Lea Hill streets — not an Auburn average — and flagged annexation-era easements before photos went live. Escrow stayed clean.",
+      },
+      {
+        author: "Priya S.",
+        zip: "98092",
+        rating: 5,
+        quote:
+          "Green River College proximity was sold as real daily life, not fluff. School boundaries were confirmed early, and buyers understood the hillside tradeoffs.",
+      },
+    ],
+  },
+
   {
     slug: "redondo",
     citySlug: "federal-way",
