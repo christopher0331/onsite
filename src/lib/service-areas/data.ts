@@ -1806,9 +1806,20 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Parent city — lakefront and commercial corridor on SR-410.",
       },
       {
+        name: "Sky Island",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "sky-island",
+        blurb: "Established plateau view pocket — HOA design review when Tehaleh trail living is not the fit.",
+      },
+      {
         name: "Sumner",
         citySlug: "sumner",
         blurb: "Sumner Valley to the northwest — Sounder commuter access.",
+      },
+      {
+        name: "Lake Tapps",
+        citySlug: "lake-tapps",
+        blurb: "Reservoir waterfront sibling — dock lifestyle when master-planned plateau living is not the product.",
       },
     ],
     reviews: [
@@ -1825,6 +1836,108 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "They walked the resale certificate request through with the HOA office for us. Closing happened on schedule because of that single piece of legwork.",
+      },
+    ],
+  },
+  {
+    slug: "sky-island",
+    citySlug: "bonney-lake",
+    name: "Sky Island",
+    zipCodes: ["98391"],
+    geo: { lat: 47.1775, lng: -122.1665 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Bonney Lake · Sky Island",
+    introCopy:
+      "Bonney Lake's Sky Island is the established plateau view pocket in ZIP 98391 — Rainier and valley outlooks, HOA design review, and micro-neighborhood comps that a citywide Bonney Lake average misses.",
+    characteristics: {
+      medianHomeYear: "1997 – 2008",
+      architecturalStyles: ["Two-story Traditional", "Northwest Craftsman", "Contemporary update", "Split-level"],
+      typicalLotSize: "0.15 – 0.30 acres",
+      notes:
+        "Sky Island carries an active HOA with architectural control, common-area amenities (clubhouse, playground, nature trails), and view-sensitive landscaping expectations. Pull CC&Rs, ACC guidelines, dues, and any special assessments early — treat resale-document timing like a closing path, not an afterthought. View lots and interior streets are related but not identical micro-comp sets.",
+    },
+    communityOrgs: [
+      {
+        name: "Sky Island HOA",
+        url: "https://skyislandhoa.frontsteps.net/about/",
+        context: "Governing association for design review, common areas, and community standards.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Sky Island attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: ["176th Avenue E", "104th Street E", "SR-410", "214th Avenue E"],
+    landmarks: [
+      "Sky Island overlook / Rainier view corridors",
+      "Sky Island HOA clubhouse & trails",
+      "Allan Yorke Park (lake access)",
+      "Bonney Lake Pierce County Library",
+      "SR-410 retail corridor",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Bonney Lake's Sky Island via SR-410 into the 176th Avenue E / 104th Street E grid, typically inside a 10–20 minute window for inspections and twilight photography. School pickup and weekend lake traffic toward Allan Yorke can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Bonney Lake (City)",
+        citySlug: "bonney-lake",
+        blurb: "Parent hub — SR-410 retail, Tehaleh, and Lake Tapps shoreline pockets on the same East Pierce desk.",
+      },
+      {
+        name: "Tehaleh",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "tehaleh",
+        blurb: "Newer master-planned sibling — trail amenities and builder-spec comps when Sky Island view living is not the fit.",
+      },
+      {
+        name: "Lake Tapps",
+        citySlug: "lake-tapps",
+        blurb: "Reservoir waterfront and island sibling — dock lifestyle when inland plateau views are not the product.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Valley neighbor below the plateau — Sounder Sumner and Bridge Hill comps for commute shoppers.",
+      },
+      {
+        name: "Bridge Hill",
+        citySlug: "sumner",
+        neighborhoodSlug: "bridge-hill",
+        blurb: "Sumner's bluff pocket — established view lots when Bonney Lake plateau HOA living is not the fit.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley and South Hill alternative — downtown Sounder and hillside comps across the East Pierce corridor.",
+      },
+      {
+        name: "Auburn",
+        citySlug: "auburn",
+        blurb: "South King neighbor via SR-410 / SR-167 — Lea Hill campus-adjacent comps for cross-county shoppers.",
+      },
+      {
+        name: "Lea Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "lea-hill",
+        blurb: "Auburn's Green River College bench — hillside residential when Bonney Lake plateau living is not the fit.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Kara & Ben T.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "They priced us against Sky Island view streets — not a Bonney Lake average — and had the HOA packet requested before photos. Escrow stayed clean.",
+      },
+      {
+        author: "Luis M.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "Rainier views were sold as real daily life, not fluff. School boundaries and ACC exterior rules were confirmed early, and buyers understood the plateau tradeoffs.",
       },
     ],
   },
@@ -3759,7 +3872,13 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       {
         name: "Bonney Lake",
         citySlug: "bonney-lake",
-        blurb: "Plateau neighbor via SR-410 — Tehaleh and lakefront alternatives for east Pierce / south King shoppers.",
+        blurb: "Plateau neighbor via SR-410 — Tehaleh, Sky Island, and lakefront alternatives for east Pierce / south King shoppers.",
+      },
+      {
+        name: "Sky Island",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "sky-island",
+        blurb: "Bonney Lake's established plateau view pocket — HOA design review when Lea Hill campus-adjacent living is not the fit.",
       },
       {
         name: "Milton",
