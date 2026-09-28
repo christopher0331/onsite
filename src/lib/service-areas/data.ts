@@ -2062,6 +2062,75 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
   },
   {
+    slug: "quiet-water",
+    citySlug: "bonney-lake",
+    name: "Quiet Water",
+    zipCodes: ["98391"],
+    geo: { lat: 47.2323, lng: -122.139 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Bonney Lake · Quiet Water",
+    introCopy:
+      "Quiet Water is the 159-home HOA pocket east of 214th Avenue E near Lake Tapps — pasture, woods, wetlands, Dieringer schools, and micro-comps that a citywide Bonney Lake average misses.",
+    characteristics: {
+      medianHomeYear: "2004 – 2008",
+      architecturalStyles: ["Two-story Traditional", "Northwest Craftsman", "Contemporary update", "Split-level"],
+      typicalLotSize: "0.18 – 0.35 acres",
+      notes:
+        "Quiet Water sits in unincorporated Pierce County with an active HOA, common-area park amenities, and no through traffic east of 214th Avenue E. Pull CC&Rs, ACC guidelines, dues, and any special assessments early — treat resale-document timing like a closing path. Rainier-view lots and interior wetland-edge streets are related but not identical micro-comp sets. Confirm Pierce County permitting jurisdiction before pricing remodel scope into list price.",
+    },
+    communityOrgs: [
+      {
+        name: "Quiet Water HOA",
+        url: "https://quietwaterhoa.org/about/",
+        context: "Governing association for design standards, common areas, and community documents.",
+      },
+      {
+        name: "Dieringer School District",
+        url: "https://www.dieringer.wednet.edu/",
+        context: "Quiet Water attendance pathways for preschool through eighth grade — verify elementary and middle by parcel; high school typically continues into Sumner-Bonney Lake.",
+      },
+    ],
+    thoroughfares: ["Quiet Water Loop E", "214th Avenue E", "215th Avenue E", "SR-410"],
+    landmarks: [
+      "Quiet Water neighborhood park",
+      "Pasture / wetland common areas",
+      "Allan Yorke Park (lake access)",
+      "Dieringer Heights Elementary",
+      "SR-410 retail corridor",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Quiet Water via 214th Avenue E into Quiet Water Loop E, typically inside a 10–20 minute window for inspections and twilight photography. School pickup and weekend lake traffic toward Allan Yorke can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Bonney Lake (City)",
+        citySlug: "bonney-lake",
+        blurb: "Parent hub — SR-410 retail and the plateau desk for buyers comparing this inland Lake Tapps pocket with city services.",
+      },
+      {
+        name: "Lake Tapps",
+        citySlug: "lake-tapps",
+        blurb: "Reservoir and island neighborhoods just west of 214th — dock lifestyle when Quiet Water's inland HOA pocket is not the fit.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Dana & Chris H.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "They priced us against Quiet Water streets — not a Bonney Lake average — and flagged the unincorporated Pierce County permit path before photos. Escrow stayed clean.",
+      },
+      {
+        author: "Priya N.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "Dieringer schools and the no-through-traffic layout were sold as real daily life, not fluff. HOA docs and wetland-edge notes were confirmed early, and buyers understood the tradeoffs.",
+      },
+    ],
+  },
+  {
     slug: "bridge-hill",
     citySlug: "sumner",
     name: "Bridge Hill",
