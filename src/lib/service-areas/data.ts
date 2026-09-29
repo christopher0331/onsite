@@ -1812,6 +1812,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Established plateau view pocket — HOA design review when Tehaleh trail living is not the fit.",
       },
       {
+        name: "Panorama West",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "panorama-west",
+        blurb: "View-centric HOA pocket off Sky Island Drive — Orting Valley outlooks when Tehaleh trail living is not the fit.",
+      },
+      {
         name: "Sumner",
         citySlug: "sumner",
         blurb: "Sumner Valley to the northwest — Sounder commuter access.",
@@ -1892,6 +1898,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Newer master-planned sibling — trail amenities and builder-spec comps when Sky Island view living is not the fit.",
       },
       {
+        name: "Panorama West",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "panorama-west",
+        blurb: "Neighboring view HOA pocket off Sky Island Drive — Orting Valley outlooks when Sky Island street comps are not the fit.",
+      },
+      {
         name: "Lake Tapps",
         citySlug: "lake-tapps",
         blurb: "Reservoir waterfront and island sibling — dock lifestyle when inland plateau views are not the product.",
@@ -1938,6 +1950,114 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "Rainier views were sold as real daily life, not fluff. School boundaries and ACC exterior rules were confirmed early, and buyers understood the plateau tradeoffs.",
+      },
+    ],
+  },
+  {
+    slug: "panorama-west",
+    citySlug: "bonney-lake",
+    name: "Panorama West",
+    zipCodes: ["98391"],
+    geo: { lat: 47.1715, lng: -122.1685 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Bonney Lake · Panorama West",
+    introCopy:
+      "Bonney Lake's Panorama West is the view-centric HOA pocket off Sky Island Drive in ZIP 98391 — Orting Valley outlooks, mid-2010s DR Horton stock, and micro-neighborhood comps that a citywide Bonney Lake average misses.",
+    characteristics: {
+      medianHomeYear: "2013 – 2014",
+      architecturalStyles: ["Two-story Traditional", "Northwest Craftsman", "Contemporary update"],
+      typicalLotSize: "0.20 – 0.30 acres",
+      notes:
+        "Panorama West carries an active HOA with architectural control, common-area park amenities, and view-sensitive landscaping expectations. Pull CC&Rs, ACC guidelines, dues, and any special assessments early — treat resale-document timing like a closing path, not an afterthought. West-facing view lots and interior streets are related but not identical micro-comp sets. Housing stock is predominantly mid-2010s DR Horton construction.",
+    },
+    communityOrgs: [
+      {
+        name: "Panorama West HOA",
+        url: "https://www.panoramawesthoa.org/",
+        context: "Governing association for design review, common areas, and community standards (J & M Property Management).",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Panorama West attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: ["Sky Island Drive E", "174th Avenue E", "111th Street E", "Rhodes Lake Road E", "SR-410"],
+    landmarks: [
+      "Panorama West / Orting Valley view corridors",
+      "Panorama West HOA park amenities",
+      "Allan Yorke Park (lake access)",
+      "Bonney Lake Pierce County Library",
+      "SR-410 retail corridor",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Bonney Lake's Panorama West via SR-410 into Sky Island Drive E and the 174th Avenue E grid, typically inside a 10–20 minute window for inspections and twilight photography. School pickup and weekend lake traffic toward Allan Yorke can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Bonney Lake (City)",
+        citySlug: "bonney-lake",
+        blurb: "Parent hub — SR-410 retail, Tehaleh, and Lake Tapps shoreline pockets on the same East Pierce desk.",
+      },
+      {
+        name: "Sky Island",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "sky-island",
+        blurb: "Neighboring established plateau view pocket — HOA design review when Panorama West DR Horton stock is not the fit.",
+      },
+      {
+        name: "Tehaleh",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "tehaleh",
+        blurb: "Newer master-planned sibling — trail amenities and builder-spec comps when Panorama West view living is not the fit.",
+      },
+      {
+        name: "Lake Tapps",
+        citySlug: "lake-tapps",
+        blurb: "Reservoir waterfront and island sibling — dock lifestyle when inland plateau views are not the product.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Valley neighbor below the plateau — Sounder Sumner and Bridge Hill comps for commute shoppers.",
+      },
+      {
+        name: "Bridge Hill",
+        citySlug: "sumner",
+        neighborhoodSlug: "bridge-hill",
+        blurb: "Sumner's bluff pocket — established view lots when Bonney Lake plateau HOA living is not the fit.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley and South Hill alternative — downtown Sounder and hillside comps across the East Pierce corridor.",
+      },
+      {
+        name: "Auburn",
+        citySlug: "auburn",
+        blurb: "South King neighbor via SR-410 / SR-167 — Lea Hill campus-adjacent comps for cross-county shoppers.",
+      },
+      {
+        name: "Lea Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "lea-hill",
+        blurb: "Auburn's Green River College bench — hillside residential when Bonney Lake plateau living is not the fit.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Megan & Tyler R.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "They priced us against Panorama West view streets — not a Bonney Lake average — and had the HOA packet requested before photos. Escrow stayed clean.",
+      },
+      {
+        author: "Omar S.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "Orting Valley views were sold as real daily life, not fluff. School boundaries and ACC exterior rules were confirmed early, and buyers understood the plateau tradeoffs.",
       },
     ],
   },
@@ -3879,6 +3999,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "bonney-lake",
         neighborhoodSlug: "sky-island",
         blurb: "Bonney Lake's established plateau view pocket — HOA design review when Lea Hill campus-adjacent living is not the fit.",
+      },
+      {
+        name: "Panorama West",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "panorama-west",
+        blurb: "Bonney Lake view HOA pocket off Sky Island Drive — Orting Valley outlooks when Lea Hill campus-adjacent living is not the fit.",
       },
       {
         name: "Milton",
