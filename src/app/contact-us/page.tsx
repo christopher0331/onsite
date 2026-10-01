@@ -17,6 +17,7 @@ import {
   PHONE_HREF,
 } from "@/lib/nap";
 import { trackLeadSubmitted, trackPhoneCall } from "@/lib/analytics";
+import { useFormBotGate } from "@/hooks/useFormBotGate";
 
 const contactMethods = [
   {
@@ -49,11 +50,18 @@ export default function ContactUsPage() {
   const [formState, setFormState] = useState<FormState>("idle");
   const [topic, setTopic] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const botGate = useFormBotGate("contact-");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setFormState("loading");
     setErrorMsg("");
+
+    if (botGate.shouldFakeSuccess()) {
+      setFormState("success");
+      return;
+    }
+
+    setFormState("loading");
 
     const form = e.currentTarget;
     const data = {
@@ -63,6 +71,7 @@ export default function ContactUsPage() {
       phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
       topic,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      ...botGate.getFields(),
     };
 
     try {
@@ -224,7 +233,8 @@ export default function ContactUsPage() {
                     </p>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="relative space-y-6">
+                    {botGate.trap}
                     <p className="text-[11px] uppercase tracking-[0.3em] text-mid-gray mb-2">Let us know how we can help</p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
