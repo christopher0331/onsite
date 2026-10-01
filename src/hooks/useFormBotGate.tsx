@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { FormBotTrap } from "@/components/forms/FormBotTrap";
 import {
   evaluateClientBotGate,
@@ -9,24 +9,19 @@ import {
 } from "@/lib/formBotGate";
 
 export function useFormBotGate(idPrefix = "") {
-  const loadedAtRef = useRef(0);
   const websiteRef = useRef<HTMLInputElement>(null);
   const faxRef = useRef<HTMLInputElement>(null);
-  const [loadedAt, setLoadedAt] = useState(0);
-
-  useEffect(() => {
-    const ts = getPageLoadedAt();
-    loadedAtRef.current = ts;
-    setLoadedAt(ts);
-  }, []);
+  // Captured when the form mounts. Server and client clocks differ by a few
+  // milliseconds; the hidden input opts out of the hydration warning.
+  const [loadedAt] = useState(getPageLoadedAt);
 
   const getFields = useCallback((): Required<BotGateFields> => {
     return {
       website: websiteRef.current?.value ?? "",
       fax_number: faxRef.current?.value ?? "",
-      form_loaded_at: loadedAtRef.current || getPageLoadedAt(),
+      form_loaded_at: loadedAt,
     };
-  }, []);
+  }, [loadedAt]);
 
   const shouldFakeSuccess = useCallback(() => {
     return !evaluateClientBotGate(getFields()).allow;

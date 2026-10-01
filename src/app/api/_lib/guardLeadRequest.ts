@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import {
   botGateBlockReason,
   clientIpFromHeaders,
@@ -35,5 +34,5 @@ export function guardLeadRequest(req: Request, body: Record<string, unknown>): G
 
 /** Same JSON shape as a real contact success (`{ ok: true }`). */
 export function fakeLeadSuccess() {
-  return NextResponse.json({ ok: true });
+  return Response.json({ ok: true });
 }

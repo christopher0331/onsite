@@ -57,6 +57,7 @@ export function FormBotTrap({ idPrefix = "", websiteRef, faxRef, loadedAt }: For
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
+        suppressHydrationWarning
       />
     </div>
   );

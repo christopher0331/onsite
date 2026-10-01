@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:bot-gate": "node --experimental-strip-types scripts/test-form-bot-gate.mjs"
+    "test:bot-gate": "node --experimental-strip-types --import ./scripts/register-ts-ext.mjs scripts/test-form-bot-gate.mjs"
   },
   "dependencies": {
     "@googlemaps/markerclusterer": "^2.6.2",
