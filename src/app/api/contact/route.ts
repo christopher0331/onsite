@@ -1,3 +1,5 @@
+import { fakeLeadSuccess, guardLeadRequest } from "../_lib/guardLeadRequest";
+
 type ContactPayload = {
   firstName: string;
   lastName: string;
@@ -17,17 +19,22 @@ function escapeHtml(value: string) {
 }
 
 export async function POST(request: Request) {
-  const apiKey = process.env.ONSITE_REGROUP_RESEND_KEY;
-
-  if (!apiKey) {
-    return Response.json({ error: "Missing Resend API key." }, { status: 500 });
-  }
-
   let payload: ContactPayload;
   try {
     payload = (await request.json()) as ContactPayload;
   } catch {
     return Response.json({ error: "Invalid request body." }, { status: 400 });
+  }
+
+  const gate = guardLeadRequest(request, payload as unknown as Record<string, unknown>);
+  if (gate.blocked) {
+    return fakeLeadSuccess();
+  }
+
+  const apiKey = process.env.ONSITE_REGROUP_RESEND_KEY;
+
+  if (!apiKey) {
+    return Response.json({ error: "Missing Resend API key." }, { status: 500 });
   }
 
   const { firstName, lastName, email, phone, topic, message } = payload;

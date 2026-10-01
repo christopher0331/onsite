@@ -9,6 +9,7 @@ import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
 import { trackLeadSubmitted } from "@/lib/analytics";
+import { useFormBotGate } from "@/hooks/useFormBotGate";
 
 const valuationBenefits = [
   {
@@ -60,10 +61,15 @@ type FormState = "idle" | "success" | "error";
 
 export default function FreeHomeEvaluationPage() {
   const [formState, setFormState] = useState<FormState>("idle");
+  const botGate = useFormBotGate("home-eval-");
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    trackLeadSubmitted("home_evaluation");
+    // This form has no server destination. A filled honeypot or instant submit
+    // still shows the same thank-you and is not counted as a lead.
+    if (!botGate.shouldFakeSuccess()) {
+      trackLeadSubmitted("home_evaluation");
+    }
     setFormState("success");
   }
 
@@ -245,7 +251,8 @@ export default function FreeHomeEvaluationPage() {
                     </p>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  <form onSubmit={handleSubmit} className="relative space-y-5">
+                    {botGate.trap}
                     <p className="text-[11px] uppercase tracking-[0.3em] text-mid-gray mb-2">Your property details</p>
 
                     <div className="flex flex-col gap-2">
