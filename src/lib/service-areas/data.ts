@@ -2074,7 +2074,6 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
   },
   {
-  {
     slug: "quiet-water",
     citySlug: "bonney-lake",
     name: "Quiet Water",
