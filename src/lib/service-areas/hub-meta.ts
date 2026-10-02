@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-09-29";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-10-01";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -18,7 +18,7 @@ const HUB_META: Record<string, string> = {
   puyallup:
     "Puyallup homes for sale from historic downtown to South Hill. Street-by-street pricing, Puyallup School District, and live NWMLS listings across 98371–98375.",
   "bonney-lake":
-    "Bonney Lake plateau homes along SR-410, Tehaleh, Sky Island, Panorama West, and near Lake Tapps. Local comps, not county averages. Sumner-Bonney Lake schools, live NWMLS listings.",
+    "Bonney Lake plateau homes — Tehaleh, Sky Island, Panorama West, Quiet Water, and Lake Tapps. Local comps, Sumner-Bonney Lake schools, live NWMLS listings.",
   sumner:
     "Sumner homes near Sounder, historic Main Street, and Bridge Hill. Floodplain diligence on the White and Stuck Rivers in 98390, live NWMLS listings.",
   edgewood:
@@ -60,6 +60,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Sky Island Bonney Lake homes with Rainier and valley views in 98391. HOA design review and street-level comps, live NWMLS listings.",
   "bonney-lake/panorama-west":
     "Panorama West Bonney Lake homes off Sky Island Drive in 98391. Orting Valley views, HOA diligence, and street-level comps, live NWMLS listings.",
+  "bonney-lake/quiet-water":
+    "Quiet Water Bonney Lake / Lake Tapps homes east of 214th Ave E in 98391. Dieringer schools, HOA diligence, and street-level comps, live NWMLS listings.",
   "sumner/bridge-hill":
     "Bridge Hill homes on the bluff above downtown Sumner. View lots, established trees, and Sounder access with tight inventory in 98390, live NWMLS listings.",
   "tacoma/north-end":
