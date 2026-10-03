@@ -484,6 +484,65 @@ export default function ListingDetailView({
                 <p className="mt-2 text-[11px] uppercase tracking-[0.25em] text-white/75">
                   MLS# {listing.mlsNumber}
                 </p>
+
+                {/* Upcoming open houses — directly under the price in the dark
+                    header so they are visible immediately on mobile. Past open
+                    houses are filtered out against the visitor's current time
+                    (Pacific). */}
+                {upcomingOpenHouses.length > 0 && (
+                  <div className="mt-5 w-full text-left lg:ml-auto lg:w-[340px]">
+                    <p className="mb-2.5 text-[11px] uppercase tracking-[0.25em] text-[#3daf3d] lg:text-right">
+                      {upcomingOpenHouses.length === 1 ? "Upcoming Open House" : "Upcoming Open Houses"}
+                    </p>
+                    <div className="flex flex-col gap-2">
+                      {upcomingOpenHouses.map((oh, i) => {
+                        const hasStart = !Number.isNaN(oh.start);
+                        const start = new Date(hasStart ? oh.start : oh.end);
+                        const end = new Date(oh.end);
+                        const tz = { timeZone: LISTING_TZ } as const;
+                        const dateStr = start.toLocaleDateString("en-US", { ...tz, weekday: "long", month: "long", day: "numeric" });
+                        const timeOpts = { ...tz, hour: "numeric", minute: "2-digit" } as const;
+                        const isNow = hasStart && oh.start <= now;
+                        return (
+                          <div
+                            key={i}
+                            className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 ${
+                              isNow ? "border-[#3daf3d]/60 bg-[#3daf3d]/10" : "border-white/15 bg-white/[0.04]"
+                            }`}
+                          >
+                            <div className="flex h-11 w-11 shrink-0 flex-col items-center justify-center rounded-lg bg-[#3daf3d] text-white">
+                              <span className="text-[9px] font-semibold uppercase leading-none tracking-[0.12em]">
+                                {start.toLocaleDateString("en-US", { ...tz, month: "short" })}
+                              </span>
+                              <span className="mt-0.5 text-[17px] font-semibold leading-none">
+                                {start.toLocaleDateString("en-US", { ...tz, day: "numeric" })}
+                              </span>
+                            </div>
+                            <div className="min-w-0">
+                              <p className="text-[14px] font-medium leading-snug text-white">{dateStr}</p>
+                              {(hasStart || isNow || oh.type) && (
+                                <p className="text-[13px] leading-snug text-white/75">
+                                  {hasStart ? start.toLocaleTimeString("en-US", timeOpts) : null}
+                                  {hasStart && oh.hasEnd ? ` – ${end.toLocaleTimeString("en-US", timeOpts)}` : null}
+                                  {isNow ? (
+                                    <span className="ml-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3daf3d]">
+                                      Open now
+                                    </span>
+                                  ) : null}
+                                  {oh.type ? (
+                                    <span className="ml-2 text-[10px] uppercase tracking-[0.18em] text-white/60">
+                                      {oh.type}
+                                    </span>
+                                  ) : null}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -632,58 +691,6 @@ export default function ListingDetailView({
                 ))}
               </div>
 
-            </div>
-          </section>
-        )}
-
-        {/* Upcoming open houses — shown right under the hero/gallery so
-            they are visible almost immediately on mobile. Past open houses
-            are filtered out against the visitor's current time (Pacific). */}
-        {upcomingOpenHouses.length > 0 && (
-          <section className="bg-white pb-6 pt-2 sm:pb-8 sm:pt-4">
-            <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
-              <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-mid-gray">
-                {upcomingOpenHouses.length === 1 ? "Upcoming Open House" : "Upcoming Open Houses"}
-              </p>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {upcomingOpenHouses.map((oh, i) => {
-                  const hasStart = !Number.isNaN(oh.start);
-                  const start = new Date(hasStart ? oh.start : oh.end);
-                  const end = new Date(oh.end);
-                  const tz = { timeZone: LISTING_TZ } as const;
-                  const dateStr = start.toLocaleDateString("en-US", { ...tz, weekday: "long", month: "long", day: "numeric" });
-                  const timeOpts = { ...tz, hour: "numeric", minute: "2-digit" } as const;
-                  const isNow = hasStart && oh.start <= now;
-                  return (
-                    <div key={i} className="flex items-center gap-4 rounded-2xl border border-charcoal/10 bg-[#f9f7f4] p-4">
-                      <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl bg-charcoal text-white">
-                        <span className="text-[10px] font-medium uppercase tracking-[0.15em]">
-                          {start.toLocaleDateString("en-US", { ...tz, month: "short" })}
-                        </span>
-                        <span className="font-serif text-[22px] leading-none">
-                          {start.toLocaleDateString("en-US", { ...tz, day: "numeric" })}
-                        </span>
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-[15px] font-medium text-charcoal">{dateStr}</p>
-                        {hasStart && (
-                          <p className="text-[14px] text-charcoal">
-                            {start.toLocaleTimeString("en-US", timeOpts)}
-                            {oh.hasEnd ? ` – ${end.toLocaleTimeString("en-US", timeOpts)}` : null}
-                          </p>
-                        )}
-                        {(isNow || oh.type) && (
-                          <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-charcoal/90">
-                            {isNow ? "Open now" : null}
-                            {isNow && oh.type ? " · " : null}
-                            {oh.type}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
             </div>
           </section>
         )}
