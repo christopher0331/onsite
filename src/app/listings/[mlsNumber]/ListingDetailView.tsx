@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -124,7 +124,7 @@ export type Listing = {
   } | null;
   taxes: { annualAmount: number | null; assessmentYear: string | null } | null;
   nearby: { amenities: string[] } | null;
-  openHouse: { startTime: string; endTime: string; type: string }[];
+  openHouse: { date?: string | null; startTime: string; endTime: string; type: string }[];
   agents: {
     name: string;
     phones: string[];
@@ -199,6 +199,69 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 }
 
+const LISTING_TZ = "America/Los_Angeles";
+
+// Offset (ms) of America/Los_Angeles from UTC at a given instant.
+function laOffsetMs(at: number) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: LISTING_TZ,
+    hourCycle: "h23",
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+  }).formatToParts(new Date(at));
+  const n = (t: string) => Number(parts.find((p) => p.type === t)?.value);
+  return Date.UTC(n("year"), n("month") - 1, n("day"), n("hour"), n("minute"), n("second")) - at;
+}
+
+// Parses an open house timestamp. Repliers sends UTC ISO strings
+// ("2026-10-03T21:00:00.000-00:00"); zone-less values are treated as
+// Pacific wall-clock time. Returns epoch ms or NaN.
+function parseOpenHouseTime(value: string | null | undefined) {
+  if (!value) return NaN;
+  const v = value.trim().replace(" ", "T");
+  if (/(Z|[+-]\d{2}:?\d{2})$/i.test(v)) return Date.parse(v);
+  const m = v.match(/^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2})(?::(\d{2}))?)?/);
+  if (!m) return NaN;
+  const wall = Date.UTC(+m[1], +m[2] - 1, +m[3], +(m[4] ?? 0), +(m[5] ?? 0), +(m[6] ?? 0));
+  return wall - laOffsetMs(wall);
+}
+
+// Open houses that have not ended yet as of `now`, soonest first, de-duplicated.
+// If an end time is missing, the open house counts until the end of its day (Pacific).
+function getUpcomingOpenHouses(openHouses: Listing["openHouse"] | null | undefined, now: number) {
+  const seen = new Set<string>();
+  return (openHouses ?? [])
+    .map((oh) => {
+      const start = parseOpenHouseTime(oh.startTime);
+      let end = parseOpenHouseTime(oh.endTime);
+      const hasEnd = !Number.isNaN(end);
+      if (!hasEnd) {
+        const day = (oh.date || oh.startTime || "").slice(0, 10);
+        end = parseOpenHouseTime(day ? `${day}T23:59:59` : null);
+      }
+      return { ...oh, start, end, hasEnd };
+    })
+    .filter((oh) => {
+      if (Number.isNaN(oh.end) || oh.end <= now) return false;
+      const key = `${oh.start}|${oh.end}|${oh.type}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort((a, b) => (Number.isNaN(a.start) ? a.end : a.start) - (Number.isNaN(b.start) ? b.end : b.start));
+}
+
+// Current time, re-checked every minute so a finished open house drops off
+// without a reload. The server render (and hydration) uses the page's fetch
+// time; the browser then switches to the visitor's real clock.
+function subscribeMinute(cb: () => void) {
+  const id = window.setInterval(cb, 60_000);
+  return () => window.clearInterval(id);
+}
+function currentMinute() {
+  return Math.floor(Date.now() / 60_000) * 60_000;
+}
+
 export default function ListingDetailView({
   listing,
   fetchedAtIso,
@@ -209,6 +272,7 @@ export default function ListingDetailView({
   const [activeImg, setActiveImg] = useState(0);
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [dataRefreshedAt] = useState(() => new Date(fetchedAtIso));
+  const now = useSyncExternalStore(subscribeMinute, currentMinute, () => Date.parse(fetchedAtIso));
 
   const [cityStats, setCityStats] = useState<CityStats | null>(null);
   const [statsEnabled, setStatsEnabled] = useState(false);
@@ -322,6 +386,7 @@ export default function ListingDetailView({
   }
 
   const displayImages = showAllPhotos ? images : images.slice(0, 9);
+  const upcomingOpenHouses = getUpcomingOpenHouses(listing.openHouse, now);
   const bathDisplay = formatBathroomCount(det, listing.raw);
 
   return (
@@ -571,6 +636,58 @@ export default function ListingDetailView({
           </section>
         )}
 
+        {/* Upcoming open houses — shown right under the hero/gallery so
+            they are visible almost immediately on mobile. Past open houses
+            are filtered out against the visitor's current time (Pacific). */}
+        {upcomingOpenHouses.length > 0 && (
+          <section className="bg-white pb-6 pt-2 sm:pb-8 sm:pt-4">
+            <div className="mx-auto w-full min-w-0 max-w-[1440px] px-4 sm:px-6 lg:px-12">
+              <p className="mb-4 text-[11px] uppercase tracking-[0.35em] text-mid-gray">
+                {upcomingOpenHouses.length === 1 ? "Upcoming Open House" : "Upcoming Open Houses"}
+              </p>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {upcomingOpenHouses.map((oh, i) => {
+                  const hasStart = !Number.isNaN(oh.start);
+                  const start = new Date(hasStart ? oh.start : oh.end);
+                  const end = new Date(oh.end);
+                  const tz = { timeZone: LISTING_TZ } as const;
+                  const dateStr = start.toLocaleDateString("en-US", { ...tz, weekday: "long", month: "long", day: "numeric" });
+                  const timeOpts = { ...tz, hour: "numeric", minute: "2-digit" } as const;
+                  const isNow = hasStart && oh.start <= now;
+                  return (
+                    <div key={i} className="flex items-center gap-4 rounded-2xl border border-charcoal/10 bg-[#f9f7f4] p-4">
+                      <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl bg-charcoal text-white">
+                        <span className="text-[10px] font-medium uppercase tracking-[0.15em]">
+                          {start.toLocaleDateString("en-US", { ...tz, month: "short" })}
+                        </span>
+                        <span className="font-serif text-[22px] leading-none">
+                          {start.toLocaleDateString("en-US", { ...tz, day: "numeric" })}
+                        </span>
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-[15px] font-medium text-charcoal">{dateStr}</p>
+                        {hasStart && (
+                          <p className="text-[14px] text-charcoal">
+                            {start.toLocaleTimeString("en-US", timeOpts)}
+                            {oh.hasEnd ? ` – ${end.toLocaleTimeString("en-US", timeOpts)}` : null}
+                          </p>
+                        )}
+                        {(isNow || oh.type) && (
+                          <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-charcoal/90">
+                            {isNow ? "Open now" : null}
+                            {isNow && oh.type ? " · " : null}
+                            {oh.type}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Listed By + Bought With attribution. Rendered as its own section
             (outside the photo gallery) so the brokerage line is always
             visible — including on listings that have zero photos in the
@@ -735,35 +852,6 @@ export default function ListingDetailView({
                           {a}
                         </span>
                       ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Open Houses */}
-                {listing.openHouse?.length > 0 && (
-                  <div className="mt-12">
-                    <p className="mb-5 text-[11px] uppercase tracking-[0.35em] text-mid-gray">Open House</p>
-                    <div className="space-y-3">
-                      {listing.openHouse.map((oh, i) => {
-                        const start = new Date(oh.startTime);
-                        const end = new Date(oh.endTime);
-                        const dateStr = start.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" });
-                        const startTime = start.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-                        const endTime = end.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-                        return (
-                          <div key={i} className="flex items-start gap-4 rounded-2xl border border-charcoal/10 bg-[#f9f7f4] p-4">
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-charcoal text-white text-[12px] font-medium">
-                              {start.toLocaleDateString("en-US", { month: "short" }).toUpperCase()}
-                              <br className="hidden" />
-                            </div>
-                            <div>
-                              <p className="text-[14px] font-medium text-charcoal">{dateStr}</p>
-                              <p className="text-[13px] text-charcoal">{startTime} – {endTime}</p>
-                              {oh.type && <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-charcoal/90">{oh.type}</p>}
-                            </div>
-                          </div>
-                        );
-                      })}
                     </div>
                   </div>
                 )}
