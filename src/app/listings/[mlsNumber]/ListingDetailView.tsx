@@ -455,6 +455,94 @@ export default function ListingDetailView({
   const displayImages = showAllPhotos ? images : images.slice(0, 9);
   const upcomingOpenHouses = getUpcomingOpenHouses(listing.openHouse, now);
   const bathDisplay = formatBathroomCount(det, listing.raw);
+  const hasOpenHouse = upcomingOpenHouses.length > 0;
+  const hasQuickStats = Boolean(det.numBedrooms || bathDisplay || det.sqft || listing.lot?.acres);
+  // Price + MLS# block. Rendered in the right column normally, or in the left
+  // column (under the address) when the open house card takes the right side.
+  const priceBlock = (
+    <>
+      {listing.soldPrice ? (
+        <>
+          <p className="text-[12px] uppercase tracking-[0.2em] text-white/80 mb-1">Sold</p>
+          <p className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-none text-white">
+            {formatPrice(listing.soldPrice)}
+          </p>
+          <p className="mt-2 text-[14px] text-white/70">
+            Listed: {formatPrice(listing.listPrice)}
+          </p>
+          {(() => {
+            const diff = listing.soldPrice! - listing.listPrice;
+            const absDiff = Math.abs(diff);
+            if (absDiff < 100) return null;
+            return (
+              <p className={`mt-1 text-[13px] font-medium ${diff > 0 ? "text-green-400" : "text-red-400"}`}>
+                {diff > 0 ? "▲" : "▼"} {formatPrice(absDiff)} {diff > 0 ? "above" : "below"} asking
+              </p>
+            );
+          })()}
+          {listing.soldDate && (
+            <p className="mt-2 text-[13px] text-white/60">
+              Sale date: {new Date(listing.soldDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+            </p>
+          )}
+        </>
+      ) : (
+        <p className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-none text-white">
+          {formatPrice(listing.listPrice)}
+        </p>
+      )}
+      <p className="mt-2 text-[11px] uppercase tracking-[0.25em] text-white/75">
+        MLS# {listing.mlsNumber}
+      </p>
+    </>
+  );
+  // Quick stat items, shared by the full-width stats bar (no open house) and
+  // the compact left-column grid shown under the address when an open house
+  // card fills the right side of the header.
+  const quickStatItems = (
+    <>
+      {det.numBedrooms && (
+        <div>
+          <p className="font-serif text-[1.8rem] font-light text-white">{det.numBedrooms}</p>
+          <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Bedrooms</p>
+        </div>
+      )}
+      {bathDisplay && (
+        <div>
+          <p className="font-serif text-[1.8rem] font-light text-white">{bathDisplay}</p>
+          <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Bathrooms</p>
+        </div>
+      )}
+      {det.sqft && (
+        <div>
+          <p className="font-serif text-[1.8rem] font-light text-white">{Number(det.sqft).toLocaleString()}</p>
+          <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Sq Ft</p>
+        </div>
+      )}
+      {listing.lot?.acres && (
+        <div>
+          <p className="font-serif text-[1.8rem] font-light text-white">{listing.lot.acres}</p>
+          <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Acres</p>
+        </div>
+      )}
+      {listing.estimate?.value && (
+        <div>
+          <p className="font-serif text-[1.8rem] font-light text-white">{formatPrice(Math.round(listing.estimate.value))}</p>
+          <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Est. Value</p>
+        </div>
+      )}
+      {(listing.simpleDaysOnMarket ?? listing.daysOnMarket) > 0 && (
+        <div>
+          <p className="font-serif text-[1.8rem] font-light text-white">
+            {listing.simpleDaysOnMarket ?? listing.daysOnMarket}
+          </p>
+          <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">
+            {listing.soldPrice ? "Days on Market" : "Days Listed"}
+          </p>
+        </div>
+      )}
+    </>
+  );
 
   return (
     <>
@@ -482,7 +570,7 @@ export default function ListingDetailView({
             </div>
 
             <div className="flex flex-col gap-5 sm:gap-6 lg:flex-row lg:items-start lg:justify-between">
-              <div className="min-w-0">
+              <div className={hasOpenHouse ? "min-w-0 lg:flex-1 lg:pr-4" : "min-w-0"}>
                 <div className="mb-4 flex flex-wrap items-center gap-3">
                   {(() => {
                     const badge = getListingStatusBadge(listing);
@@ -515,48 +603,26 @@ export default function ListingDetailView({
                     <span className="ml-2 text-white/75">· {listing.address.neighborhood}</span>
                   )}
                 </p>
+
+                {/* With an open house card on the right, pull the price/MLS# and
+                    quick stats up under the address so the header is balanced. */}
+                {hasOpenHouse && <div className="mt-6 sm:mt-8">{priceBlock}</div>}
+                {hasOpenHouse && hasQuickStats && (
+                  <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-6 sm:mt-8 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-6 sm:pt-8 lg:max-w-[640px] lg:grid-cols-2 xl:grid-cols-3">
+                    {quickStatItems}
+                  </div>
+                )}
               </div>
 
-              <div className="w-full shrink-0 text-left lg:w-auto lg:text-right">
-                {listing.soldPrice ? (
-                  <>
-                    <p className="text-[12px] uppercase tracking-[0.2em] text-white/80 mb-1">Sold</p>
-                    <p className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-none text-white">
-                      {formatPrice(listing.soldPrice)}
-                    </p>
-                    <p className="mt-2 text-[14px] text-white/70">
-                      Listed: {formatPrice(listing.listPrice)}
-                    </p>
-                    {(() => {
-                      const diff = listing.soldPrice! - listing.listPrice;
-                      const absDiff = Math.abs(diff);
-                      if (absDiff < 100) return null;
-                      return (
-                        <p className={`mt-1 text-[13px] font-medium ${diff > 0 ? "text-green-400" : "text-red-400"}`}>
-                          {diff > 0 ? "▲" : "▼"} {formatPrice(absDiff)} {diff > 0 ? "above" : "below"} asking
-                        </p>
-                      );
-                    })()}
-                    {listing.soldDate && (
-                      <p className="mt-2 text-[13px] text-white/60">
-                        Sale date: {new Date(listing.soldDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                      </p>
-                    )}
-                  </>
-                ) : (
-                  <p className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-none text-white">
-                    {formatPrice(listing.listPrice)}
-                  </p>
-                )}
-                <p className="mt-2 text-[11px] uppercase tracking-[0.25em] text-white/75">
-                  MLS# {listing.mlsNumber}
-                </p>
+              <div className={hasOpenHouse ? "w-full shrink-0 lg:mt-11 lg:w-[500px]" : "w-full shrink-0 text-left lg:w-auto lg:text-right"}>
+                {!hasOpenHouse && priceBlock}
 
-                {/* Upcoming open house hero — directly under the price in the
-                    dark header so it is the first thing visitors see on mobile.
+                {/* Upcoming open house hero — sole content of the right column
+                    (price moves to the left column), top-aligned with the address
+                    on desktop and directly after the price/stats on mobile.
                     Past open houses are filtered out against the visitor's
                     current time (Pacific). */}
-                {upcomingOpenHouses.length > 0 && (() => {
+                {hasOpenHouse && (() => {
                   const next = upcomingOpenHouses[0];
                   const later = upcomingOpenHouses.slice(1);
                   const isNow = !Number.isNaN(next.start) && next.start <= now;
@@ -565,7 +631,7 @@ export default function ListingDetailView({
                     ? `${street}, ${listing.address.city}, ${listing.address.state} ${listing.address.zip}`
                     : `${listing.address.city}, ${listing.address.state}`;
                   return (
-                    <div className="mt-6 w-full overflow-hidden rounded-3xl border border-[#3daf3d] bg-[#1f2a1f] text-left shadow-[0_0_0_1px_rgba(61,175,61,0.25),0_18px_60px_-10px_rgba(61,175,61,0.45)] lg:ml-auto lg:w-[500px]">
+                    <div className="w-full overflow-hidden rounded-3xl border border-[#3daf3d] bg-[#1f2a1f] text-left shadow-[0_0_0_1px_rgba(61,175,61,0.25),0_18px_60px_-10px_rgba(61,175,61,0.45)] lg:ml-auto lg:w-[500px]">
                       {/* Green headline band */}
                       <div className="flex items-center justify-between gap-2 bg-[#3daf3d] px-4 py-3.5 sm:gap-3 sm:px-6">
                         <div className="flex min-w-0 items-center gap-2 text-white sm:gap-2.5">
@@ -674,49 +740,12 @@ export default function ListingDetailView({
               </div>
             </div>
 
-            {/* Quick stats bar */}
-            {(det.numBedrooms || bathDisplay || det.sqft || listing.lot?.acres) && (
+            {/* Quick stats bar — full width below the header when there is no
+                open house. With an open house the stats render in the left
+                column under the address instead (see above). */}
+            {!hasOpenHouse && hasQuickStats && (
               <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-6 sm:mt-10 sm:flex sm:flex-wrap sm:gap-8 sm:pt-8">
-                {det.numBedrooms && (
-                  <div>
-                    <p className="font-serif text-[1.8rem] font-light text-white">{det.numBedrooms}</p>
-                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Bedrooms</p>
-                  </div>
-                )}
-                {bathDisplay && (
-                  <div>
-                    <p className="font-serif text-[1.8rem] font-light text-white">{bathDisplay}</p>
-                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Bathrooms</p>
-                  </div>
-                )}
-                {det.sqft && (
-                  <div>
-                    <p className="font-serif text-[1.8rem] font-light text-white">{Number(det.sqft).toLocaleString()}</p>
-                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Sq Ft</p>
-                  </div>
-                )}
-                {listing.lot?.acres && (
-                  <div>
-                    <p className="font-serif text-[1.8rem] font-light text-white">{listing.lot.acres}</p>
-                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Acres</p>
-                  </div>
-                )}
-                {listing.estimate?.value && (
-                  <div>
-                    <p className="font-serif text-[1.8rem] font-light text-white">{formatPrice(Math.round(listing.estimate.value))}</p>
-                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Est. Value</p>
-                  </div>
-                )}
-                {(listing.simpleDaysOnMarket ?? listing.daysOnMarket) > 0 && (
-                  <div>
-                    <p className="font-serif text-[1.8rem] font-light text-white">
-                      {listing.simpleDaysOnMarket ?? listing.daysOnMarket}
-                    </p>
-                    <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">
-                      {listing.soldPrice ? "Days on Market" : "Days Listed"}
-                    </p>
-                  </div>
-                )}
+                {quickStatItems}
               </div>
             )}
           </div>
