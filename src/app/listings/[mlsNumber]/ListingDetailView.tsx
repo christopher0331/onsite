@@ -262,6 +262,73 @@ function currentMinute() {
   return Math.floor(Date.now() / 60_000) * 60_000;
 }
 
+type UpcomingOpenHouse = ReturnType<typeof getUpcomingOpenHouses>[number];
+
+function laParts(ms: number, opts: Intl.DateTimeFormatOptions) {
+  // Normalize the narrow no-break space some ICU builds put before AM/PM.
+  return new Date(ms).toLocaleString("en-US", { timeZone: LISTING_TZ, ...opts }).replace(/\u202f/g, " ");
+}
+
+// "Sunday, Oct 4" / "Sun, Oct 4"
+function formatOpenHouseDay(oh: UpcomingOpenHouse, weekday: "long" | "short" = "long") {
+  const at = Number.isNaN(oh.start) ? oh.end : oh.start;
+  return laParts(at, { weekday, month: "short", day: "numeric" });
+}
+
+// "2:00 – 4:00 PM", "11:00 AM – 1:00 PM", or just the start time if no end is known.
+function formatOpenHouseTimeRange(oh: UpcomingOpenHouse) {
+  if (Number.isNaN(oh.start)) return "";
+  const opts = { hour: "numeric", minute: "2-digit" } as const;
+  const start = laParts(oh.start, opts);
+  if (!oh.hasEnd) return start;
+  const end = laParts(oh.end, opts);
+  const sameMeridiem = start.slice(-2) === end.slice(-2);
+  return `${sameMeridiem ? start.replace(/\s*[AP]M$/, "") : start} – ${end}`;
+}
+
+// Builds and downloads an .ics file for one open house, entirely client-side.
+function downloadOpenHouseIcs(oh: UpcomingOpenHouse, opts: { title: string; location: string; url: string; mlsNumber: string }) {
+  const esc = (v: string) => v.replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/([,;])/g, "\\$1");
+  const utc = (ms: number) => new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const hasStart = !Number.isNaN(oh.start);
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//OnSite Real Estate Group//Open House//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    `UID:open-house-${opts.mlsNumber}-${hasStart ? oh.start : oh.end}@onsiteregroup.com`,
+    `DTSTAMP:${utc(Date.now())}`,
+  ];
+  if (hasStart) {
+    lines.push(`DTSTART:${utc(oh.start)}`, `DTEND:${utc(oh.hasEnd ? oh.end : oh.start + 2 * 60 * 60 * 1000)}`);
+  } else {
+    // No start time: all-day event on the open house's Pacific date.
+    const day = new Date(oh.end).toLocaleDateString("en-CA", { timeZone: LISTING_TZ }).replace(/-/g, "");
+    lines.push(`DTSTART;VALUE=DATE:${day}`);
+  }
+  lines.push(
+    `SUMMARY:${esc(opts.title)}`,
+    `LOCATION:${esc(opts.location)}`,
+    `DESCRIPTION:${esc(`${oh.type ? `${oh.type} open house` : "Open house"} — MLS# ${opts.mlsNumber}\n${opts.url}`)}`,
+    `URL:${opts.url}`,
+    "END:VEVENT",
+    "END:VCALENDAR",
+  );
+  // Fold long lines (RFC 5545 recommends <= 75 octets per line).
+  const fold = (line: string) => line.match(/.{1,60}/g)?.join("\r\n ") ?? line;
+  const blob = new Blob([lines.map(fold).join("\r\n") + "\r\n"], { type: "text/calendar;charset=utf-8" });
+  const href = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = href;
+  a.download = `open-house-${opts.mlsNumber}.ics`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(href), 1000);
+}
+
 export default function ListingDetailView({
   listing,
   fetchedAtIso,
@@ -414,7 +481,7 @@ export default function ListingDetailView({
               )}
             </div>
 
-            <div className="flex flex-col gap-5 sm:gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="flex flex-col gap-5 sm:gap-6 lg:flex-row lg:items-start lg:justify-between">
               <div className="min-w-0">
                 <div className="mb-4 flex flex-wrap items-center gap-3">
                   {(() => {
@@ -485,64 +552,125 @@ export default function ListingDetailView({
                   MLS# {listing.mlsNumber}
                 </p>
 
-                {/* Upcoming open houses — directly under the price in the dark
-                    header so they are visible immediately on mobile. Past open
-                    houses are filtered out against the visitor's current time
-                    (Pacific). */}
-                {upcomingOpenHouses.length > 0 && (
-                  <div className="mt-5 w-full text-left lg:ml-auto lg:w-[340px]">
-                    <p className="mb-2.5 text-[11px] uppercase tracking-[0.25em] text-[#3daf3d] lg:text-right">
-                      {upcomingOpenHouses.length === 1 ? "Upcoming Open House" : "Upcoming Open Houses"}
-                    </p>
-                    <div className="flex flex-col gap-2">
-                      {upcomingOpenHouses.map((oh, i) => {
-                        const hasStart = !Number.isNaN(oh.start);
-                        const start = new Date(hasStart ? oh.start : oh.end);
-                        const end = new Date(oh.end);
-                        const tz = { timeZone: LISTING_TZ } as const;
-                        const dateStr = start.toLocaleDateString("en-US", { ...tz, weekday: "long", month: "long", day: "numeric" });
-                        const timeOpts = { ...tz, hour: "numeric", minute: "2-digit" } as const;
-                        const isNow = hasStart && oh.start <= now;
-                        return (
-                          <div
-                            key={i}
-                            className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 ${
-                              isNow ? "border-[#3daf3d]/60 bg-[#3daf3d]/10" : "border-white/15 bg-white/[0.04]"
-                            }`}
+                {/* Upcoming open house hero — directly under the price in the
+                    dark header so it is the first thing visitors see on mobile.
+                    Past open houses are filtered out against the visitor's
+                    current time (Pacific). */}
+                {upcomingOpenHouses.length > 0 && (() => {
+                  const next = upcomingOpenHouses[0];
+                  const later = upcomingOpenHouses.slice(1);
+                  const isNow = !Number.isNaN(next.start) && next.start <= now;
+                  const timeRange = formatOpenHouseTimeRange(next);
+                  const location = showAddress
+                    ? `${street}, ${listing.address.city}, ${listing.address.state} ${listing.address.zip}`
+                    : `${listing.address.city}, ${listing.address.state}`;
+                  return (
+                    <div className="mt-6 w-full overflow-hidden rounded-3xl border border-[#3daf3d] bg-[#1f2a1f] text-left shadow-[0_0_0_1px_rgba(61,175,61,0.25),0_18px_60px_-10px_rgba(61,175,61,0.45)] lg:ml-auto lg:w-[500px]">
+                      {/* Green headline band */}
+                      <div className="flex items-center justify-between gap-2 bg-[#3daf3d] px-4 py-3.5 sm:gap-3 sm:px-6">
+                        <div className="flex min-w-0 items-center gap-2 text-white sm:gap-2.5">
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <path d="M3 10.5 12 3l9 7.5" />
+                            <path d="M5 9.5V21h14V9.5" />
+                            <path d="M10 21v-6h4v6" />
+                          </svg>
+                          <span className="whitespace-nowrap text-[19px] font-extrabold uppercase leading-none tracking-[0.08em] sm:text-[22px] sm:tracking-[0.14em]">
+                            Open House
+                          </span>
+                        </div>
+                        {isNow ? (
+                          <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-white px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#1f6f1f] sm:gap-2 sm:px-3 sm:tracking-[0.16em]">
+                            <span className="relative flex h-2 w-2">
+                              <span className="absolute inline-flex h-full w-full rounded-full bg-[#3daf3d] opacity-75 motion-safe:animate-ping" />
+                              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#3daf3d]" />
+                            </span>
+                            Happening now
+                          </span>
+                        ) : next.type ? (
+                          <span className="shrink-0 whitespace-nowrap rounded-full border border-white/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">
+                            {next.type}
+                          </span>
+                        ) : null}
+                      </div>
+
+                      <div className="px-5 pb-5 pt-5 sm:px-6 sm:pb-6">
+                        <p className="text-[clamp(1.9rem,8.5vw,2.6rem)] font-bold leading-[1.05] tracking-tight text-white">
+                          {formatOpenHouseDay(next)}
+                        </p>
+                        {timeRange && (
+                          <p className="mt-1.5 text-[clamp(1.35rem,6vw,1.75rem)] font-medium leading-tight text-[#7fd67f]">
+                            {timeRange}
+                          </p>
+                        )}
+                        {isNow && next.type ? (
+                          <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-white/70">{next.type} open house</p>
+                        ) : null}
+
+                        <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                          <button
+                            type="button"
+                            onClick={() =>
+                              downloadOpenHouseIcs(next, {
+                                title: `Open House: ${street}`,
+                                location,
+                                url: `${window.location.origin}/listings/${listing.mlsNumber}`,
+                                mlsNumber: listing.mlsNumber,
+                              })
+                            }
+                            className="flex items-center justify-center gap-2 rounded-full bg-[#3daf3d] whitespace-nowrap px-5 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#3daf3d]/90"
                           >
-                            <div className="flex h-11 w-11 shrink-0 flex-col items-center justify-center rounded-lg bg-[#3daf3d] text-white">
-                              <span className="text-[9px] font-semibold uppercase leading-none tracking-[0.12em]">
-                                {start.toLocaleDateString("en-US", { ...tz, month: "short" })}
-                              </span>
-                              <span className="mt-0.5 text-[17px] font-semibold leading-none">
-                                {start.toLocaleDateString("en-US", { ...tz, day: "numeric" })}
-                              </span>
-                            </div>
-                            <div className="min-w-0">
-                              <p className="text-[14px] font-medium leading-snug text-white">{dateStr}</p>
-                              {(hasStart || isNow || oh.type) && (
-                                <p className="text-[13px] leading-snug text-white/75">
-                                  {hasStart ? start.toLocaleTimeString("en-US", timeOpts) : null}
-                                  {hasStart && oh.hasEnd ? ` – ${end.toLocaleTimeString("en-US", timeOpts)}` : null}
-                                  {isNow ? (
-                                    <span className="ml-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#3daf3d]">
-                                      Open now
-                                    </span>
-                                  ) : null}
-                                  {oh.type ? (
-                                    <span className="ml-2 text-[10px] uppercase tracking-[0.18em] text-white/60">
-                                      {oh.type}
-                                    </span>
-                                  ) : null}
-                                </p>
-                              )}
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                              <rect x="3" y="5" width="18" height="16" rx="2" />
+                              <path d="M16 3v4M8 3v4M3 10h18M12 13v5M9.5 15.5h5" />
+                            </svg>
+                            Add to Calendar
+                          </button>
+                          <a
+                            href={mapsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 rounded-full border border-white/40 whitespace-nowrap px-5 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-white/10"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                              <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            Get Directions
+                          </a>
+                        </div>
+                        <Link
+                          href="/contact-us"
+                          className="mt-3 block text-center text-[11px] uppercase tracking-[0.22em] text-white/70 underline-offset-4 transition hover:text-white hover:underline"
+                        >
+                          Ask a Question
+                        </Link>
+
+                        {later.length > 0 && (
+                          <div className="mt-5 border-t border-white/10 pt-4">
+                            <p className="mb-2.5 text-[10px] uppercase tracking-[0.25em] text-white/60">Also open</p>
+                            <div className="flex flex-wrap gap-2">
+                              {later.map((oh, i) => {
+                                const range = formatOpenHouseTimeRange(oh);
+                                return (
+                                  <span
+                                    key={i}
+                                    className="rounded-full border border-[#3daf3d]/50 bg-[#3daf3d]/10 px-3 py-1.5 text-[12px] font-medium text-white"
+                                  >
+                                    {formatOpenHouseDay(oh, "short")}
+                                    {range ? <span className="text-white/70"> · {range}</span> : null}
+                                    {oh.type && oh.type !== "Public" ? (
+                                      <span className="ml-1.5 text-[10px] uppercase tracking-[0.15em] text-white/60">{oh.type}</span>
+                                    ) : null}
+                                  </span>
+                                );
+                              })}
                             </div>
                           </div>
-                        );
-                      })}
+                        )}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  );
+                })()}
               </div>
             </div>
 
