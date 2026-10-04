@@ -18,7 +18,7 @@ const HUB_META: Record<string, string> = {
   puyallup:
     "Puyallup homes for sale from historic downtown to South Hill. Street-by-street pricing, Puyallup School District, and live NWMLS listings across 98371–98375.",
   "bonney-lake":
-    "Bonney Lake plateau homes — Tehaleh, Sky Island, Panorama West, Quiet Water, and Lake Tapps. Local comps, Sumner-Bonney Lake schools, live NWMLS listings.",
+    "Bonney Lake plateau homes — Tehaleh, Sky Island, Panorama West, Panorama Heights, Quiet Water, and Lake Tapps. Local comps, live NWMLS listings.",
   sumner:
     "Sumner homes near Sounder, historic Main Street, and Bridge Hill. Floodplain diligence on the White and Stuck Rivers in 98390, live NWMLS listings.",
   edgewood:
@@ -60,6 +60,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Sky Island Bonney Lake homes with Rainier and valley views in 98391. HOA design review and street-level comps, live NWMLS listings.",
   "bonney-lake/panorama-west":
     "Panorama West Bonney Lake homes off Sky Island Drive in 98391. Orting Valley views, HOA diligence, and street-level comps, live NWMLS listings.",
+  "bonney-lake/panorama-heights":
+    "Panorama Heights Bonney Lake homes on 176th–181st and 109th–111th in 98391. Early-2000s PUD courts, HOA diligence, live NWMLS listings.",
   "bonney-lake/quiet-water":
     "Quiet Water Bonney Lake / Lake Tapps homes east of 214th Ave E in 98391. Dieringer schools, HOA diligence, and street-level comps, live NWMLS listings.",
   "sumner/bridge-hill":

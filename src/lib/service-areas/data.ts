@@ -1904,6 +1904,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Neighboring view HOA pocket off Sky Island Drive — Orting Valley outlooks when Sky Island street comps are not the fit.",
       },
       {
+        name: "Panorama Heights",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "panorama-heights",
+        blurb: "Neighboring early-2000s PUD on 176th–181st — cul-de-sac courts when Sky Island view living is not the fit.",
+      },
+      {
         name: "Lake Tapps",
         citySlug: "lake-tapps",
         blurb: "Reservoir waterfront and island sibling — dock lifestyle when inland plateau views are not the product.",
@@ -2004,6 +2010,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "bonney-lake",
         neighborhoodSlug: "sky-island",
         blurb: "Neighboring established plateau view pocket — HOA design review when Panorama West DR Horton stock is not the fit.",
+      },
+      {
+        name: "Panorama Heights",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "panorama-heights",
+        blurb: "Neighboring early-2000s PUD immediately east on 176th–181st — cul-de-sac courts when Panorama West view living is not the fit.",
       },
       {
         name: "Tehaleh",
@@ -2127,6 +2139,90 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "Dieringer schools and the no-through-traffic layout were sold as real daily life, not fluff. HOA docs and wetland-edge notes were confirmed early, and buyers understood the tradeoffs.",
+      },
+    ],
+  },
+  {
+    slug: "panorama-heights",
+    citySlug: "bonney-lake",
+    name: "Panorama Heights",
+    zipCodes: ["98391"],
+    geo: { lat: 47.157, lng: -122.1916 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Bonney Lake · Panorama Heights",
+    introCopy:
+      "Bonney Lake's Panorama Heights is the early-2000s PUD pocket off Veterans Memorial and Angeline in ZIP 98391 — cul-de-sac plats, neighborhood parks, and micro-neighborhood comps that a citywide Bonney Lake average misses.",
+    characteristics: {
+      medianHomeYear: "2000 – 2004",
+      architecturalStyles: ["Rambler", "Two-story Traditional", "Northwest Craftsman", "Contemporary update"],
+      typicalLotSize: "0.15 – 0.30 acres",
+      notes:
+        "Panorama Heights is a multi-phase PUD with an active HOA managed through J&M Property Management, common-area park amenities, and cul-de-sac court patterns. Pull CC&Rs, ACC guidelines, dues, and any special assessments early — confirm the correct phase association packet for the parcel. Corner lots, interior courts, and view-oriented streets are related but not identical micro-comp sets. Housing stock is predominantly early-2000s construction, including Riverside Homes product in some phases.",
+    },
+    communityOrgs: [
+      {
+        name: "Panorama Heights PUD HOA (J&M Management)",
+        url: "https://jandmmanagement.com/",
+        context: "Governing association management for design review, common areas, resale certificates, and community standards.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Panorama Heights attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: [
+      "176th Avenue E",
+      "181st Avenue Place E",
+      "109th Street Court E",
+      "110th Street Court E",
+      "111th Street Court E",
+      "Angeline Road E",
+      "SR-410",
+    ],
+    landmarks: [
+      "Panorama Heights neighborhood parks / play areas",
+      "109th–111th Street Court E grid",
+      "Allan Yorke Park (lake access)",
+      "Bonney Lake Pierce County Library",
+      "SR-410 retail corridor",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Bonney Lake's Panorama Heights via SR-410 into the 176th–181st Avenue E and 109th–111th Street Court E grid, typically inside a 10–20 minute window for inspections and twilight photography. School pickup and weekend lake traffic toward Allan Yorke can change showing curb availability — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Bonney Lake (City)",
+        citySlug: "bonney-lake",
+        blurb: "Parent hub — SR-410 retail and the plateau desk for this early-2000s PUD.",
+      },
+      {
+        name: "Sky Island",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "sky-island",
+        blurb: "Neighboring established plateau view pocket immediately north — HOA design review when Panorama Heights courts are not the fit.",
+      },
+      {
+        name: "Panorama West",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "panorama-west",
+        blurb: "Neighboring view HOA pocket immediately west on 174th — Orting Valley outlooks when Panorama Heights cul-de-sacs are not the fit.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Rachel & Drew P.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "They priced us against Panorama Heights courts — not a Bonney Lake average — and had the J&M HOA packet requested before photos. Escrow stayed clean.",
+      },
+      {
+        author: "Nate L.",
+        zip: "98391",
+        rating: 5,
+        quote:
+          "The cul-de-sac parks and the 109th–111th street grid were sold as real daily life, not fluff. School boundaries and phase HOA docs were confirmed early.",
       },
     ],
   },
