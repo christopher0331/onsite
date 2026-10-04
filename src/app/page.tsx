@@ -1,7 +1,9 @@
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import UpcomingOpenHouses from "@/components/UpcomingOpenHouses";
 import { SITE_BRAND } from "@/lib/nap";
 import { pageMetadata } from "@/lib/page-meta";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
@@ -35,6 +37,10 @@ export default async function Home() {
       <Header />
       <main>
         <Hero />
+        {/* Streams in after the hero; renders nothing when no open houses are upcoming. */}
+        <Suspense fallback={null}>
+          <UpcomingOpenHouses />
+        </Suspense>
         <Stats />
         <TestimonialsScroll />
         <About />
