@@ -11,6 +11,15 @@ import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount, formatBathroomDetail } from "@/lib/format-bathrooms";
 import { repliersImageUrl } from "@/lib/repliers-images";
 import ShareListingCard from "@/components/listings/ShareListingCard";
+import {
+  currentMinute,
+  formatOpenHouseDay,
+  formatOpenHouseTimeRange,
+  getUpcomingOpenHouses,
+  LISTING_TZ,
+  subscribeMinute,
+  type UpcomingOpenHouse as UpcomingOpenHouseBase,
+} from "@/lib/open-house";
 
 const Footer = dynamic(() => import("@/components/Footer"));
 const Marquee = dynamic(() => import("@/components/Marquee"), { ssr: false });
@@ -199,92 +208,7 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 }
 
-const LISTING_TZ = "America/Los_Angeles";
-
-// Offset (ms) of America/Los_Angeles from UTC at a given instant.
-function laOffsetMs(at: number) {
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: LISTING_TZ,
-    hourCycle: "h23",
-    year: "numeric", month: "2-digit", day: "2-digit",
-    hour: "2-digit", minute: "2-digit", second: "2-digit",
-  }).formatToParts(new Date(at));
-  const n = (t: string) => Number(parts.find((p) => p.type === t)?.value);
-  return Date.UTC(n("year"), n("month") - 1, n("day"), n("hour"), n("minute"), n("second")) - at;
-}
-
-// Parses an open house timestamp. Repliers sends UTC ISO strings
-// ("2026-10-03T21:00:00.000-00:00"); zone-less values are treated as
-// Pacific wall-clock time. Returns epoch ms or NaN.
-function parseOpenHouseTime(value: string | null | undefined) {
-  if (!value) return NaN;
-  const v = value.trim().replace(" ", "T");
-  if (/(Z|[+-]\d{2}:?\d{2})$/i.test(v)) return Date.parse(v);
-  const m = v.match(/^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2})(?::(\d{2}))?)?/);
-  if (!m) return NaN;
-  const wall = Date.UTC(+m[1], +m[2] - 1, +m[3], +(m[4] ?? 0), +(m[5] ?? 0), +(m[6] ?? 0));
-  return wall - laOffsetMs(wall);
-}
-
-// Open houses that have not ended yet as of `now`, soonest first, de-duplicated.
-// If an end time is missing, the open house counts until the end of its day (Pacific).
-function getUpcomingOpenHouses(openHouses: Listing["openHouse"] | null | undefined, now: number) {
-  const seen = new Set<string>();
-  return (openHouses ?? [])
-    .map((oh) => {
-      const start = parseOpenHouseTime(oh.startTime);
-      let end = parseOpenHouseTime(oh.endTime);
-      const hasEnd = !Number.isNaN(end);
-      if (!hasEnd) {
-        const day = (oh.date || oh.startTime || "").slice(0, 10);
-        end = parseOpenHouseTime(day ? `${day}T23:59:59` : null);
-      }
-      return { ...oh, start, end, hasEnd };
-    })
-    .filter((oh) => {
-      if (Number.isNaN(oh.end) || oh.end <= now) return false;
-      const key = `${oh.start}|${oh.end}|${oh.type}`;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    })
-    .sort((a, b) => (Number.isNaN(a.start) ? a.end : a.start) - (Number.isNaN(b.start) ? b.end : b.start));
-}
-
-// Current time, re-checked every minute so a finished open house drops off
-// without a reload. The server render (and hydration) uses the page's fetch
-// time; the browser then switches to the visitor's real clock.
-function subscribeMinute(cb: () => void) {
-  const id = window.setInterval(cb, 60_000);
-  return () => window.clearInterval(id);
-}
-function currentMinute() {
-  return Math.floor(Date.now() / 60_000) * 60_000;
-}
-
-type UpcomingOpenHouse = ReturnType<typeof getUpcomingOpenHouses>[number];
-
-function laParts(ms: number, opts: Intl.DateTimeFormatOptions) {
-  // Normalize the narrow no-break space some ICU builds put before AM/PM.
-  return new Date(ms).toLocaleString("en-US", { timeZone: LISTING_TZ, ...opts }).replace(/\u202f/g, " ");
-}
-
-// "Sunday, Oct 4" / "Sun, Oct 4"
-function formatOpenHouseDay(oh: UpcomingOpenHouse, weekday: "long" | "short" = "long") {
-  const at = Number.isNaN(oh.start) ? oh.end : oh.start;
-  return laParts(at, { weekday, month: "short", day: "numeric" });
-}
-
-// "2:00 – 4:00 PM", "11:00 AM – 1:00 PM", or just the start time if no end is known.
-function formatOpenHouseTimeRange(oh: UpcomingOpenHouse) {
-  if (Number.isNaN(oh.start)) return "";
-  const opts = { hour: "numeric", minute: "2-digit" } as const;
-  const start = laParts(oh.start, opts);
-  if (!oh.hasEnd) return start;
-  const end = laParts(oh.end, opts);
-  const sameMeridiem = start.slice(-2) === end.slice(-2);
-  return `${sameMeridiem ? start.replace(/\s*[AP]M$/, "") : start} – ${end}`;
-}
+type UpcomingOpenHouse = UpcomingOpenHouseBase<Listing["openHouse"][number]>;
 
 // Builds and downloads an .ics file for one open house, entirely client-side.
 function downloadOpenHouseIcs(oh: UpcomingOpenHouse, opts: { title: string; location: string; url: string; mlsNumber: string }) {
