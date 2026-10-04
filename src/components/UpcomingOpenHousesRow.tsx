@@ -83,29 +83,30 @@ export default function UpcomingOpenHousesRow({
                   is_live: anyLive,
                 })
               }
-              className="inline-flex w-fit items-center justify-center bg-[#1f2a1f] px-7 py-3 text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#2e8f2e]"
+              className="inline-flex min-h-11 w-full items-center justify-center bg-[#1f2a1f] px-7 py-3 text-center text-[12px] uppercase tracking-[0.18em] text-white transition hover:bg-[#2e8f2e] sm:w-fit"
             >
               Request a private tour
             </Link>
             <Link
               href="/open-houses"
-              className="inline-flex w-fit items-center justify-center border border-charcoal/20 px-7 py-3 text-[12px] uppercase tracking-[0.18em] text-charcoal transition hover:bg-charcoal hover:text-white"
+              className="inline-flex min-h-11 w-full items-center justify-center border border-charcoal/20 px-7 py-3 text-center text-[12px] uppercase tracking-[0.18em] text-charcoal transition hover:bg-charcoal hover:text-white sm:w-fit"
             >
               This week&apos;s list
             </Link>
             <Link
               href="/listings"
-              className="group inline-flex w-fit items-center gap-3 border border-charcoal/20 px-7 py-3 text-[12px] uppercase tracking-[0.18em] text-charcoal transition-all duration-500 hover:bg-charcoal hover:text-white"
+              className="group inline-flex min-h-11 w-full items-center justify-center gap-3 border border-charcoal/20 px-7 py-3 text-[12px] uppercase tracking-[0.18em] text-charcoal transition-all duration-500 hover:bg-charcoal hover:text-white sm:w-fit"
             >
               Search All Homes
-              <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+              <svg className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
               </svg>
             </Link>
           </div>
         </motion.div>
 
-        <div className="-mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 [scrollbar-width:none] sm:gap-5 lg:mx-0 lg:grid lg:grid-cols-3 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
+        {/* Phones: one full-width card. Tablet: two columns. Desktop: 3-column grid. */}
+        <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
           {cards.map(({ listing, upcoming }, i) => (
             <motion.div
               key={listing.mlsNumber}
@@ -113,7 +114,7 @@ export default function UpcomingOpenHousesRow({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.7, delay: Math.min(i, 5) * 0.08 }}
-              className="w-[82%] max-w-[380px] shrink-0 snap-start sm:w-[46%] lg:w-auto lg:max-w-none"
+              className="h-full min-w-0"
             >
               <OpenHouseListingCard
                 listing={listing}
