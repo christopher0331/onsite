@@ -67,6 +67,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/free-home-evaluation`, priority: 0.8, changeFrequency: "monthly", lastModified: now },
     { url: `${BASE_URL}/home-evaluation-tool`, priority: 0.8, changeFrequency: "monthly", lastModified: now },
     { url: `${BASE_URL}/listings`, priority: 0.9, changeFrequency: "daily", lastModified: now },
+    { url: `${BASE_URL}/open-houses`, priority: 0.85, changeFrequency: "daily", lastModified: now },
     { url: `${BASE_URL}/our-listings`, priority: 0.85, changeFrequency: "daily", lastModified: now },
     { url: `${BASE_URL}/sold-homes`, priority: 0.7, changeFrequency: "weekly", lastModified: now },
     { url: `${BASE_URL}/frequently-asked-questions`, priority: 0.6, changeFrequency: "monthly", lastModified: now },

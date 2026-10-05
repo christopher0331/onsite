@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { listingShareUrl } from "@/lib/listing-share";
+import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 type ShareListingCardProps = {
   mlsNumber: string;
@@ -12,10 +14,7 @@ type ShareListingCardProps = {
 export default function ShareListingCard({ mlsNumber, street, cityLine, priceLabel }: ShareListingCardProps) {
   const [copied, setCopied] = useState(false);
 
-  const listingUrl =
-    typeof window !== "undefined"
-      ? `${window.location.origin}/listings/${mlsNumber}`
-      : `/listings/${mlsNumber}`;
+  const listingUrl = listingShareUrl(getCanonicalBaseUrl(), mlsNumber);
   const qrSrc = `/api/listings/${encodeURIComponent(mlsNumber)}/qr?size=480`;
   const qrDownloadHref = `/api/listings/${encodeURIComponent(mlsNumber)}/qr?size=1200`;
 

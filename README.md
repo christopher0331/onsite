@@ -34,4 +34,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Open house leads
+
+Visitor open-house forms (`/api/open-house-lead`, and listing context on `/api/contact`) email André via Resend. This repo does not have OnSite CRM API credentials, so leads are not written to the CRM automatically. The email subject is `Open house lead — {address} — {mls}` so it can be pasted as a Warm buy-side lead with the MLS in the note. CRM API wiring is a follow-up once credentials exist. Do not send an automated follow-up email to the visitor.
+
+The OnSite phone number on open-house calls to action comes from `src/lib/nap.ts` (`(253) 441-9764`). There is no Calendly or other booking widget.
 # onsite

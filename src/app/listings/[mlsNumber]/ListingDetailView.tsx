@@ -11,14 +11,18 @@ import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount, formatBathroomDetail } from "@/lib/format-bathrooms";
 import { repliersImageUrl } from "@/lib/repliers-images";
 import ShareListingCard from "@/components/listings/ShareListingCard";
+import ListingOpenHouseCard from "@/components/open-house/ListingOpenHouseCard";
+import OpenHouseStickyBar from "@/components/open-house/OpenHouseStickyBar";
+import { trackLeadIntent, trackPhoneCall } from "@/lib/analytics";
+import { contactHref } from "@/lib/contact-link";
+import { PHONE_DISPLAY, PHONE_HREF, PHONE_TEL } from "@/lib/nap";
 import {
   currentMinute,
   formatOpenHouseDay,
   formatOpenHouseTimeRange,
   getUpcomingOpenHouses,
-  LISTING_TZ,
+  isOpenHouseLive,
   subscribeMinute,
-  type UpcomingOpenHouse as UpcomingOpenHouseBase,
 } from "@/lib/open-house";
 
 const Footer = dynamic(() => import("@/components/Footer"));
@@ -208,51 +212,6 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 }
 
-type UpcomingOpenHouse = UpcomingOpenHouseBase<Listing["openHouse"][number]>;
-
-// Builds and downloads an .ics file for one open house, entirely client-side.
-function downloadOpenHouseIcs(oh: UpcomingOpenHouse, opts: { title: string; location: string; url: string; mlsNumber: string }) {
-  const esc = (v: string) => v.replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/([,;])/g, "\\$1");
-  const utc = (ms: number) => new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-  const hasStart = !Number.isNaN(oh.start);
-  const lines = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//OnSite Real Estate Group//Open House//EN",
-    "CALSCALE:GREGORIAN",
-    "METHOD:PUBLISH",
-    "BEGIN:VEVENT",
-    `UID:open-house-${opts.mlsNumber}-${hasStart ? oh.start : oh.end}@onsiteregroup.com`,
-    `DTSTAMP:${utc(Date.now())}`,
-  ];
-  if (hasStart) {
-    lines.push(`DTSTART:${utc(oh.start)}`, `DTEND:${utc(oh.hasEnd ? oh.end : oh.start + 2 * 60 * 60 * 1000)}`);
-  } else {
-    // No start time: all-day event on the open house's Pacific date.
-    const day = new Date(oh.end).toLocaleDateString("en-CA", { timeZone: LISTING_TZ }).replace(/-/g, "");
-    lines.push(`DTSTART;VALUE=DATE:${day}`);
-  }
-  lines.push(
-    `SUMMARY:${esc(opts.title)}`,
-    `LOCATION:${esc(opts.location)}`,
-    `DESCRIPTION:${esc(`${oh.type ? `${oh.type} open house` : "Open house"} — MLS# ${opts.mlsNumber}\n${opts.url}`)}`,
-    `URL:${opts.url}`,
-    "END:VEVENT",
-    "END:VCALENDAR",
-  );
-  // Fold long lines (RFC 5545 recommends <= 75 octets per line).
-  const fold = (line: string) => line.match(/.{1,60}/g)?.join("\r\n ") ?? line;
-  const blob = new Blob([lines.map(fold).join("\r\n") + "\r\n"], { type: "text/calendar;charset=utf-8" });
-  const href = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = href;
-  a.download = `open-house-${opts.mlsNumber}.ics`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(href), 1000);
-}
-
 export default function ListingDetailView({
   listing,
   fetchedAtIso,
@@ -380,6 +339,29 @@ export default function ListingDetailView({
   const upcomingOpenHouses = getUpcomingOpenHouses(listing.openHouse, now);
   const bathDisplay = formatBathroomCount(det, listing.raw);
   const hasOpenHouse = upcomingOpenHouses.length > 0;
+  const nextOpenHouse = upcomingOpenHouses[0];
+  const openHouseIsLive = nextOpenHouse ? isOpenHouseLive(nextOpenHouse, now) : false;
+  const contactAddress = showAddress
+    ? `${street}, ${listing.address.city}, ${listing.address.state} ${listing.address.zip}`
+    : `${listing.address.city}, ${listing.address.state}`;
+  const showingHref = contactHref({
+    mls: listing.mlsNumber,
+    address: contactAddress,
+    src: "request_showing",
+    topic: "buying",
+  });
+  const tourHref = hasOpenHouse
+    ? "#open-house-lead"
+    : contactHref({
+        mls: listing.mlsNumber,
+        address: contactAddress,
+        src: "listing_tour",
+        topic: "buying",
+      });
+  const phoneTrack = {
+    mls: listing.mlsNumber,
+    is_live: openHouseIsLive,
+  };
   const hasQuickStats = Boolean(det.numBedrooms || bathDisplay || det.sqft || listing.lot?.acres);
   // Price + MLS# block. Rendered in the right column normally, or in the left
   // column (under the address) when the open house card takes the right side.
@@ -546,121 +528,19 @@ export default function ListingDetailView({
                     on desktop and directly after the price/stats on mobile.
                     Past open houses are filtered out against the visitor's
                     current time (Pacific). */}
-                {hasOpenHouse && (() => {
-                  const next = upcomingOpenHouses[0];
-                  const later = upcomingOpenHouses.slice(1);
-                  const isNow = !Number.isNaN(next.start) && next.start <= now;
-                  const timeRange = formatOpenHouseTimeRange(next);
-                  const location = showAddress
-                    ? `${street}, ${listing.address.city}, ${listing.address.state} ${listing.address.zip}`
-                    : `${listing.address.city}, ${listing.address.state}`;
-                  return (
-                    <div className="w-full overflow-hidden rounded-3xl border border-[#3daf3d] bg-[#1f2a1f] text-left shadow-[0_0_0_1px_rgba(61,175,61,0.25),0_18px_60px_-10px_rgba(61,175,61,0.45)] lg:ml-auto lg:w-[500px]">
-                      {/* Green headline band */}
-                      <div className="flex items-center justify-between gap-2 bg-[#3daf3d] px-4 py-3.5 sm:gap-3 sm:px-6">
-                        <div className="flex min-w-0 items-center gap-2 text-white sm:gap-2.5">
-                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                            <path d="M3 10.5 12 3l9 7.5" />
-                            <path d="M5 9.5V21h14V9.5" />
-                            <path d="M10 21v-6h4v6" />
-                          </svg>
-                          <span className="whitespace-nowrap text-[19px] font-extrabold uppercase leading-none tracking-[0.08em] sm:text-[22px] sm:tracking-[0.14em]">
-                            Open House
-                          </span>
-                        </div>
-                        {isNow ? (
-                          <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-white px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#1f6f1f] sm:gap-2 sm:px-3 sm:tracking-[0.16em]">
-                            <span className="relative flex h-2 w-2">
-                              <span className="absolute inline-flex h-full w-full rounded-full bg-[#3daf3d] opacity-75 motion-safe:animate-ping" />
-                              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#3daf3d]" />
-                            </span>
-                            Happening now
-                          </span>
-                        ) : next.type ? (
-                          <span className="shrink-0 whitespace-nowrap rounded-full border border-white/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">
-                            {next.type}
-                          </span>
-                        ) : null}
-                      </div>
-
-                      <div className="px-5 pb-5 pt-5 sm:px-6 sm:pb-6">
-                        <p className="text-[clamp(1.9rem,8.5vw,2.6rem)] font-bold leading-[1.05] tracking-tight text-white">
-                          {formatOpenHouseDay(next)}
-                        </p>
-                        {timeRange && (
-                          <p className="mt-1.5 text-[clamp(1.35rem,6vw,1.75rem)] font-medium leading-tight text-[#7fd67f]">
-                            {timeRange}
-                          </p>
-                        )}
-                        {isNow && next.type ? (
-                          <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-white/70">{next.type} open house</p>
-                        ) : null}
-
-                        <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                          <button
-                            type="button"
-                            onClick={() =>
-                              downloadOpenHouseIcs(next, {
-                                title: `Open House: ${street}`,
-                                location,
-                                url: `${window.location.origin}/listings/${listing.mlsNumber}`,
-                                mlsNumber: listing.mlsNumber,
-                              })
-                            }
-                            className="flex items-center justify-center gap-2 rounded-full bg-[#3daf3d] whitespace-nowrap px-5 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#3daf3d]/90"
-                          >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                              <rect x="3" y="5" width="18" height="16" rx="2" />
-                              <path d="M16 3v4M8 3v4M3 10h18M12 13v5M9.5 15.5h5" />
-                            </svg>
-                            Add to Calendar
-                          </button>
-                          <a
-                            href={mapsUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-2 rounded-full border border-white/40 whitespace-nowrap px-5 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-white/10"
-                          >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                              <circle cx="12" cy="10" r="3" />
-                            </svg>
-                            Get Directions
-                          </a>
-                        </div>
-                        <Link
-                          href="/contact-us"
-                          className="mt-3 block text-center text-[11px] uppercase tracking-[0.22em] text-white/70 underline-offset-4 transition hover:text-white hover:underline"
-                        >
-                          Ask a Question
-                        </Link>
-
-                        {later.length > 0 && (
-                          <div className="mt-5 border-t border-white/10 pt-4">
-                            <p className="mb-2.5 text-[10px] uppercase tracking-[0.25em] text-white/60">Also open</p>
-                            <div className="flex flex-wrap gap-2">
-                              {later.map((oh, i) => {
-                                const range = formatOpenHouseTimeRange(oh);
-                                return (
-                                  <span
-                                    key={i}
-                                    className="rounded-full border border-[#3daf3d]/50 bg-[#3daf3d]/10 px-3 py-1.5 text-[12px] font-medium text-white"
-                                  >
-                                    {formatOpenHouseDay(oh, "short")}
-                                    {range ? <span className="text-white/70"> · {range}</span> : null}
-                                    {oh.type && oh.type !== "Public" ? (
-                                      <span className="ml-1.5 text-[10px] uppercase tracking-[0.15em] text-white/60">{oh.type}</span>
-                                    ) : null}
-                                  </span>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })()}
+                {hasOpenHouse && (
+                  <ListingOpenHouseCard
+                    mlsNumber={listing.mlsNumber}
+                    street={street}
+                    location={contactAddress}
+                    contactAddress={contactAddress}
+                    mapsUrl={mapsUrl}
+                    listPrice={formatPrice(listing.soldPrice || listing.listPrice)}
+                    brokerageName={listing.office?.brokerageName ?? ""}
+                    upcoming={upcomingOpenHouses}
+                    now={now}
+                  />
+                )}
               </div>
             </div>
 
@@ -1030,16 +910,23 @@ export default function ListingDetailView({
                     </p>
                     <div className="space-y-4">
                       <Link
-                        href="/contact-us"
+                        href={showingHref}
+                        onClick={() =>
+                          trackLeadIntent("request_showing", {
+                            ...phoneTrack,
+                            surface: "listing_price_card",
+                          })
+                        }
                         className="flex w-full items-center justify-center rounded-full bg-white px-6 py-4 text-[12px] uppercase tracking-[0.25em] text-charcoal transition hover:bg-white/90"
                       >
                         Request a Showing
                       </Link>
                       <a
-                        href="tel:2534419764"
+                        href={PHONE_HREF}
+                        onClick={() => trackPhoneCall(PHONE_TEL, { ...phoneTrack, surface: "listing_price_card" })}
                         className="flex w-full items-center justify-center rounded-full border border-white/30 px-6 py-4 text-[12px] uppercase tracking-[0.25em] text-white transition hover:bg-white/10"
                       >
-                        (253) 441-9764
+                        {PHONE_DISPLAY}
                       </a>
                       <Link
                         href={mapsUrl}
@@ -1095,7 +982,16 @@ export default function ListingDetailView({
                                         <p className="text-[12px] text-charcoal/80">{brokerage}</p>
                                       )}
                                       {agent.phones?.[0] && (
-                                        <a href={`tel:${agent.phones[0].replace(/\D/g, "")}`} className="text-[12px] text-charcoal/80 hover:text-charcoal transition-colors">
+                                        <a
+                                          href={`tel:${agent.phones[0].replace(/\D/g, "")}`}
+                                          onClick={() =>
+                                            trackPhoneCall(agent.phones[0], {
+                                              ...phoneTrack,
+                                              surface: "listing_agent",
+                                            })
+                                          }
+                                          className="text-[12px] text-charcoal/80 hover:text-charcoal transition-colors"
+                                        >
                                           {agent.phones[0]}
                                         </a>
                                       )}
@@ -1156,9 +1052,13 @@ export default function ListingDetailView({
                       </div>
                     </div>
                     <div className="mt-5 space-y-2 text-[13px] text-charcoal">
-                      <a href="tel:2534419764" className="flex items-center gap-2 hover:text-charcoal transition-colors">
+                      <a
+                        href={PHONE_HREF}
+                        onClick={() => trackPhoneCall(PHONE_TEL, { ...phoneTrack, surface: "listing_onsite_card" })}
+                        className="flex items-center gap-2 hover:text-charcoal transition-colors"
+                      >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-                        (253) 441-9764
+                        {PHONE_DISPLAY}
                       </a>
                       <a href="mailto:andre@onsiteregroup.com" className="flex items-center gap-2 hover:text-charcoal transition-colors">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -1414,10 +1314,16 @@ export default function ListingDetailView({
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link
-                    href="/contact-us"
+                    href={tourHref}
+                    onClick={() =>
+                      trackLeadIntent("oh_tour_request", {
+                        ...phoneTrack,
+                        surface: "listing_footer_cta",
+                      })
+                    }
                     className="inline-flex items-center rounded-full bg-white px-8 py-4 text-[12px] uppercase tracking-[0.25em] text-charcoal transition-all duration-500 hover:bg-white/90"
                   >
-                    Schedule a Tour
+                    Request a private tour
                   </Link>
                   <Link
                     href="/listings"
@@ -1434,6 +1340,17 @@ export default function ListingDetailView({
         <Marquee />
       </main>
       <Footer />
+      {hasOpenHouse && nextOpenHouse && (
+        <>
+          <div className="h-20 lg:hidden" aria-hidden />
+          <OpenHouseStickyBar
+            mlsNumber={listing.mlsNumber}
+            dayLabel={formatOpenHouseDay(nextOpenHouse)}
+            timeLabel={formatOpenHouseTimeRange(nextOpenHouse)}
+            isLive={openHouseIsLive}
+          />
+        </>
+      )}
     </>
   );
 }

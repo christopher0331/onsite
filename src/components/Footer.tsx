@@ -90,6 +90,7 @@ export default function Footer() {
     { label: "Marketing Strategy", href: "/real-estate-marketing" },
     { label: "Negotiation & Closing", href: "/negotiation-closing" },
     { label: "Buy Home", href: "/buy-home" },
+    { label: "Open Houses", href: "/open-houses" },
     { label: "Search Homes", href: "/listings" },
   ];
 
