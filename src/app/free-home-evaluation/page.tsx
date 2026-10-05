@@ -7,8 +7,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
-import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
-import { trackLeadSubmitted } from "@/lib/analytics";
+import { PHONE_DISPLAY, PHONE_HREF, PHONE_TEL } from "@/lib/nap";
+import { trackLeadSubmitted, trackPhoneCall } from "@/lib/analytics";
 import { useFormBotGate } from "@/hooks/useFormBotGate";
 
 const valuationBenefits = [
@@ -57,20 +57,56 @@ const pricingSteps = [
   },
 ];
 
-type FormState = "idle" | "success" | "error";
+type FormState = "idle" | "loading" | "success" | "error";
 
 export default function FreeHomeEvaluationPage() {
   const [formState, setFormState] = useState<FormState>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
   const botGate = useFormBotGate("home-eval-");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // This form has no server destination. A filled honeypot or instant submit
-    // still shows the same thank-you and is not counted as a lead.
-    if (!botGate.shouldFakeSuccess()) {
-      trackLeadSubmitted("home_evaluation");
+    setErrorMsg("");
+
+    if (botGate.shouldFakeSuccess()) {
+      setFormState("success");
+      return;
     }
-    setFormState("success");
+
+    setFormState("loading");
+    const form = e.currentTarget;
+    const address = (form.elements.namedItem("address") as HTMLInputElement).value;
+    const notes = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
+    const data = {
+      firstName: (form.elements.namedItem("firstName") as HTMLInputElement).value,
+      lastName: (form.elements.namedItem("lastName") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+      topic: "evaluation",
+      address,
+      message: notes,
+      source: "home_evaluation",
+      ...botGate.getFields(),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        trackLeadSubmitted("home_evaluation", { topic: "evaluation", source: "home_evaluation" });
+        setFormState("success");
+        return;
+      }
+      const json = await res.json().catch(() => ({}));
+      setErrorMsg(json.error ?? "Something went wrong. Please try again.");
+      setFormState("error");
+    } catch {
+      setErrorMsg("Network error. Please check your connection and try again.");
+      setFormState("error");
+    }
   }
 
   return (
@@ -221,7 +257,11 @@ export default function FreeHomeEvaluationPage() {
               </p>
               <div className="rounded-3xl border border-charcoal/[0.07] bg-warm-gray/40 p-6 space-y-3 shadow-[0_14px_40px_rgba(0,0,0,0.05)]">
                 <p className="text-[11px] uppercase tracking-[0.3em] text-mid-gray">Prefer to talk?</p>
-                <a href={PHONE_HREF} className="flex items-center gap-3 text-[15px] text-charcoal hover:text-charcoal/80 transition-colors">
+                <a
+                  href={PHONE_HREF}
+                  onClick={() => trackPhoneCall(PHONE_TEL, { surface: "home_evaluation" })}
+                  className="flex items-center gap-3 text-[15px] text-charcoal hover:text-charcoal/80 transition-colors"
+                >
                   <svg className="w-4 h-4 opacity-40 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
                   </svg>
@@ -259,6 +299,7 @@ export default function FreeHomeEvaluationPage() {
                       <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Property Address</label>
                       <input
                         type="text"
+                        name="address"
                         required
                         className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                         placeholder="123 Main St, Puyallup, WA"
@@ -270,6 +311,7 @@ export default function FreeHomeEvaluationPage() {
                         <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">First Name</label>
                         <input
                           type="text"
+                          name="firstName"
                           required
                           className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                           placeholder="First"
@@ -279,6 +321,7 @@ export default function FreeHomeEvaluationPage() {
                         <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Last Name</label>
                         <input
                           type="text"
+                          name="lastName"
                           required
                           className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                           placeholder="Last"
@@ -290,6 +333,7 @@ export default function FreeHomeEvaluationPage() {
                       <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Email</label>
                       <input
                         type="email"
+                        name="email"
                         required
                         className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                         placeholder="you@email.com"
@@ -300,25 +344,30 @@ export default function FreeHomeEvaluationPage() {
                       <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Phone</label>
                       <input
                         type="tel"
+                        name="phone"
                         className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
-                        placeholder="(253) 000-0000"
+                        placeholder="Phone number"
                       />
                     </div>
 
                     <div className="flex flex-col gap-2">
                       <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Additional Notes</label>
                       <textarea
+                        name="message"
                         rows={3}
                         className="bg-white border border-charcoal/[0.12] rounded-2xl px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors resize-none"
                         placeholder="Bedrooms, bathrooms, recent updates, reason for selling..."
                       />
                     </div>
 
+                    {formState === "error" && <p className="text-[13px] text-red-600">{errorMsg}</p>}
+
                     <button
                       type="submit"
-                      className="w-full bg-charcoal text-white py-4 rounded-full text-[12px] uppercase tracking-[0.25em] hover:bg-charcoal/80 transition-all duration-500"
+                      disabled={formState === "loading"}
+                      className="w-full bg-charcoal text-white py-4 rounded-full text-[12px] uppercase tracking-[0.25em] hover:bg-charcoal/80 transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Submit
+                      {formState === "loading" ? "Sending..." : "Submit"}
                     </button>
                   </form>
                 )}

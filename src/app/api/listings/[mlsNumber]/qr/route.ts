@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import QRCode from "qrcode";
+import { listingShareUrl } from "@/lib/listing-share";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 export const runtime = "nodejs";
@@ -17,7 +18,7 @@ export async function GET(
   const sizeParam = Number(searchParams.get("size"));
   const size = Number.isFinite(sizeParam) ? Math.min(Math.max(sizeParam, 128), 2000) : 1024;
 
-  const listingUrl = `${getCanonicalBaseUrl()}/listings/${encodeURIComponent(mlsNumber)}`;
+  const listingUrl = listingShareUrl(getCanonicalBaseUrl(), mlsNumber);
 
   try {
     const png = await QRCode.toBuffer(listingUrl, {

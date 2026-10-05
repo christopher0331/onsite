@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { SITE_BRAND } from "@/lib/nap";
 import { pageMetadata } from "@/lib/page-meta";
@@ -13,5 +14,5 @@ export default function ContactUsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <Suspense fallback={null}>{children}</Suspense>;
 }

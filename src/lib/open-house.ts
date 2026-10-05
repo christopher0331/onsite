@@ -110,6 +110,50 @@ export function pacificDateString(ms: number) {
   return new Date(ms).toLocaleDateString("en-CA", { timeZone: LISTING_TZ });
 }
 
+const WEEKDAY_INDEX: Record<string, number> = {
+  Sun: 0,
+  Mon: 1,
+  Tue: 2,
+  Wed: 3,
+  Thu: 4,
+  Fri: 5,
+  Sat: 6,
+};
+
+/** 0 = Sunday … 6 = Saturday in Pacific time. */
+export function pacificWeekdayIndex(ms: number) {
+  const label = new Intl.DateTimeFormat("en-US", {
+    timeZone: LISTING_TZ,
+    weekday: "short",
+  }).format(new Date(ms));
+  return WEEKDAY_INDEX[label] ?? 0;
+}
+
+function shiftCalendarDate(yyyyMmDd: string, days: number) {
+  const [y, m, d] = yyyyMmDd.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  dt.setUTCDate(dt.getUTCDate() + days);
+  return dt.toISOString().slice(0, 10);
+}
+
+/** Saturday and Sunday of the weekend that contains `now`, or the next one if it is a weekday. */
+export function thisWeekendDateStrings(now: number) {
+  const today = pacificDateString(now);
+  const wd = pacificWeekdayIndex(now);
+  if (wd === 0) return { saturday: shiftCalendarDate(today, -1), sunday: today };
+  if (wd === 6) return { saturday: today, sunday: shiftCalendarDate(today, 1) };
+  const saturday = shiftCalendarDate(today, 6 - wd);
+  return { saturday, sunday: shiftCalendarDate(saturday, 1) };
+}
+
+export function isThisWeekendOpen(oh: { start: number; end: number }, now: number) {
+  const key = openHouseSortKey(oh);
+  if (Number.isNaN(key)) return false;
+  const day = pacificDateString(key);
+  const { saturday, sunday } = thisWeekendDateStrings(now);
+  return day === saturday || day === sunday;
+}
+
 // "Sunday, Oct 4" / "Sun, Oct 4"
 export function formatOpenHouseDay(oh: { start: number; end: number }, weekday: "long" | "short" = "long") {
   return laParts(openHouseSortKey(oh), { weekday, month: "short", day: "numeric" });

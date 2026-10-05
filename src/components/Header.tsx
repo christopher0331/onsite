@@ -104,6 +104,14 @@ export default function Header() {
                 </Link>
               ))}
               <Link
+                href="/open-houses"
+                className={`shrink-0 whitespace-nowrap text-[15px] font-medium uppercase tracking-[0.1em] transition-colors duration-300 hover:opacity-60 ${
+                  pathname?.startsWith("/open-houses") ? "opacity-100" : ""
+                } ${solid ? "text-charcoal" : "text-white"}`}
+              >
+                Open Houses
+              </Link>
+              <Link
                 href={ourListingsHref}
                 className={`shrink-0 whitespace-nowrap rounded-full px-5 py-2 text-[13px] font-medium uppercase tracking-[0.15em] transition-all duration-300 ${
                   pathname?.startsWith(ourListingsHref)
@@ -212,6 +220,13 @@ export default function Header() {
               className="rounded-full border border-white/50 bg-white px-8 py-3 font-serif text-2xl text-charcoal transition-colors hover:bg-white/90"
             >
               Our Listings
+            </Link>
+            <Link
+              href="/open-houses"
+              onClick={() => setMobileOpen(false)}
+              className="font-serif text-3xl text-white/90 hover:text-white transition-colors"
+            >
+              Open Houses
             </Link>
             <NavDropdown
               label="Valuation"

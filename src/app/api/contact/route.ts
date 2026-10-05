@@ -1,93 +1,69 @@
 import { fakeLeadSuccess, guardLeadRequest } from "../_lib/guardLeadRequest";
-
-type ContactPayload = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone?: string;
-  topic: string;
-  message?: string;
-};
-
-function escapeHtml(value: string) {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
-}
+import {
+  clipText,
+  contactEmailSubject,
+  isPlausibleEmail,
+  sendLeadEmail,
+} from "../_lib/sendLeadEmail";
 
 export async function POST(request: Request) {
-  let payload: ContactPayload;
+  let payload: Record<string, unknown>;
   try {
-    payload = (await request.json()) as ContactPayload;
+    payload = (await request.json()) as Record<string, unknown>;
   } catch {
     return Response.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const gate = guardLeadRequest(request, payload as unknown as Record<string, unknown>);
+  const gate = guardLeadRequest(request, payload);
   if (gate.blocked) {
     return fakeLeadSuccess();
   }
 
-  const apiKey = process.env.ONSITE_REGROUP_RESEND_KEY;
-
-  if (!apiKey) {
-    return Response.json({ error: "Missing Resend API key." }, { status: 500 });
-  }
-
-  const { firstName, lastName, email, phone, topic, message } = payload;
+  const firstName = clipText(payload.firstName, 80);
+  const lastName = clipText(payload.lastName, 80);
+  const email = clipText(payload.email, 160);
+  const phone = clipText(payload.phone, 40);
+  const topic = clipText(payload.topic, 40);
+  const message = clipText(payload.message, 4000);
+  const mls = clipText(payload.mls, 32);
+  const address = clipText(payload.address, 240);
+  const source = clipText(payload.source, 80);
 
   if (!firstName || !lastName || !email || !topic) {
     return Response.json({ error: "Missing required fields." }, { status: 400 });
   }
-
-  const html = `
-    <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-      <h2 style="color:#1a1a18">New Contact Form Submission</h2>
-      <table style="width:100%;border-collapse:collapse">
-        <tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#666;width:120px">Name</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(firstName)} ${escapeHtml(lastName)}</td></tr>
-        <tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#666">Email</td><td style="padding:8px 0;border-bottom:1px solid #eee"><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
-        <tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#666">Phone</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(phone ?? "Not provided")}</td></tr>
-        <tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#666">Topic</td><td style="padding:8px 0;border-bottom:1px solid #eee">${escapeHtml(topic)}</td></tr>
-        <tr><td style="padding:8px 0;color:#666;vertical-align:top">Message</td><td style="padding:8px 0;white-space:pre-wrap">${escapeHtml(message ?? "No message provided")}</td></tr>
-      </table>
-    </div>
-  `;
-
-  const text = [
-    "New Contact Form Submission",
-    `Name: ${firstName} ${lastName}`,
-    `Email: ${email}`,
-    `Phone: ${phone ?? "Not provided"}`,
-    `Topic: ${topic}`,
-    `Message: ${message ?? "No message provided"}`,
-  ].join("\n");
-
-  const fromEmail = process.env.CONTACT_FORM_FROM_EMAIL ?? "contact@onsiteregroup.com";
-
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: fromEmail,
-      to: ["andre@onsiteregroup.com"],
-      reply_to: email,
-      subject: `New website contact: ${firstName} ${lastName}`,
-      html,
-      text,
-    }),
-  });
-
-  if (!res.ok) {
-    const detail = await res.text();
-    console.error("Resend error:", detail);
-    return Response.json({ error: "Failed to send email.", detail }, { status: 502 });
+  if (!isPlausibleEmail(email)) {
+    return Response.json({ error: "Enter a valid email address." }, { status: 400 });
   }
 
-  return Response.json({ ok: true });
+  const topicLabel: Record<string, string> = {
+    buying: "Buying a Home",
+    selling: "Selling a Home",
+    evaluation: "Home Evaluation",
+    general: "General Questions",
+  };
+
+  return sendLeadEmail({
+    subject: contactEmailSubject({ firstName, lastName, topic, source, address, mls }),
+    replyTo: email,
+    heading: topic === "evaluation" ? "Home evaluation request" : "New website contact",
+    rows: [
+      { label: "Name", value: `${firstName} ${lastName}` },
+      { label: "Email", value: email },
+      { label: "Phone", value: phone || "Not provided" },
+      { label: "Topic", value: topicLabel[topic] ?? topic },
+      { label: "Source", value: source || "contact" },
+      { label: "Address", value: address },
+      { label: "MLS", value: mls },
+      { label: "CRM stage", value: source || mls || address ? "Warm" : "" },
+      { label: "CRM side", value: topic === "selling" || topic === "evaluation" ? "Sellers" : "Buyers" },
+      {
+        label: "CRM note",
+        value: [address && `About ${address}`, mls && `MLS# ${mls}`, source && `source=${source}`]
+          .filter(Boolean)
+          .join(" — "),
+      },
+      { label: "Message", value: message || "No message provided" },
+    ],
+  });
 }

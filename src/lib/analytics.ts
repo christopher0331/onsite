@@ -26,10 +26,10 @@ export function trackLeadSubmitted(formType: string, extra?: Record<string, unkn
   });
 }
 
-export function trackPhoneCall(phoneNumber: string): void {
+export function trackPhoneCall(phoneNumber: string, extra?: Record<string, unknown>): void {
   const path = pagePath();
-  capturePosthog("phone_call", { phone_number: phoneNumber, page_path: path });
-  capturePosthog("lead_intent", { intent_type: "cta_phone", page_path: path });
+  capturePosthog("phone_call", { phone_number: phoneNumber, page_path: path, ...extra });
+  capturePosthog("lead_intent", { intent_type: "cta_phone", page_path: path, ...extra });
 }
 
 export function trackLeadIntent(intentType: string, extra?: Record<string, unknown>): void {

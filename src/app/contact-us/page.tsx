@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
@@ -15,7 +16,8 @@ import {
   PHONE_DISPLAY,
   PHONE_HREF,
 } from "@/lib/nap";
-import { trackLeadSubmitted, trackPhoneCall } from "@/lib/analytics";
+import { trackLeadIntent, trackLeadSubmitted, trackPhoneCall } from "@/lib/analytics";
+import { CONTACT_BUYING_SOURCES, topicFromContactParams } from "@/lib/contact-link";
 import { useFormBotGate } from "@/hooks/useFormBotGate";
 
 const contactMethods = [
@@ -46,8 +48,19 @@ const contactMethods = [
 type FormState = "idle" | "loading" | "success" | "error";
 
 export default function ContactUsPage() {
+  const searchParams = useSearchParams();
+  const mls = (searchParams.get("mls") ?? "").trim();
+  const aboutAddress = (searchParams.get("address") ?? "").trim();
+  const source = (searchParams.get("src") ?? "").trim();
   const [formState, setFormState] = useState<FormState>("idle");
-  const [topic, setTopic] = useState("");
+  const paramKey = searchParams.toString();
+  const [topic, setTopic] = useState(() => topicFromContactParams(searchParams));
+  const [topicKey, setTopicKey] = useState(paramKey);
+  if (topicKey !== paramKey) {
+    setTopicKey(paramKey);
+    const next = topicFromContactParams(new URLSearchParams(paramKey));
+    if (next) setTopic(next);
+  }
   const [errorMsg, setErrorMsg] = useState("");
   const botGate = useFormBotGate("contact-");
 
@@ -70,6 +83,9 @@ export default function ContactUsPage() {
       phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
       topic,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      mls,
+      address: aboutAddress,
+      source,
       ...botGate.getFields(),
     };
 
@@ -80,7 +96,19 @@ export default function ContactUsPage() {
         body: JSON.stringify(data),
       });
       if (res.ok) {
-        trackLeadSubmitted("contact", { topic: topic || "unspecified" });
+        trackLeadSubmitted("contact", {
+          topic: topic || "unspecified",
+          mls: mls || undefined,
+          source: source || undefined,
+          surface: "contact",
+        });
+        if (source && (CONTACT_BUYING_SOURCES.has(source) || source === "home_evaluation")) {
+          trackLeadIntent("oh_form_submit", {
+            mls: mls || undefined,
+            surface: "contact",
+            source,
+          });
+        }
         setFormState("success");
       } else {
         const json = await res.json().catch(() => ({}));
@@ -235,6 +263,22 @@ export default function ContactUsPage() {
                   <form onSubmit={handleSubmit} className="relative space-y-6">
                     {botGate.trap}
                     <p className="text-[11px] uppercase tracking-[0.3em] text-mid-gray mb-2">Let us know how we can help</p>
+                    {(aboutAddress || mls) && (
+                      <p className="rounded-2xl border border-[#3daf3d]/30 bg-[#3daf3d]/10 px-5 py-3 text-[14px] leading-relaxed text-charcoal">
+                        About: {aboutAddress || "this home"}
+                        {mls ? ` (MLS# ${mls})` : ""}
+                      </p>
+                    )}
+                    {source === "homepage_open_houses" && !aboutAddress && !mls && (
+                      <p className="rounded-2xl border border-charcoal/10 bg-white px-5 py-3 text-[14px] leading-relaxed text-charcoal/80">
+                        You&apos;re requesting a private tour. An OnSite agent will follow up — this is not an online booking.
+                      </p>
+                    )}
+                    {CONTACT_BUYING_SOURCES.has(source) && (
+                      <p className="text-[13px] leading-relaxed text-charcoal/70">
+                        We&apos;ll reach out by phone or email. Open house times are subject to change.
+                      </p>
+                    )}
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div className="flex flex-col gap-2">

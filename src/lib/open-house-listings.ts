@@ -7,9 +7,11 @@ import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount } from "@/lib/format-bathrooms";
 import {
   getUpcomingOpenHouses,
+  isThisWeekendOpen,
   openHouseSortKey,
   pacificDateString,
   type OpenHouseEntry,
+  type UpcomingOpenHouse,
 } from "@/lib/open-house";
 
 // Same cache window as the rest of the Repliers listing data (listing-fetch.ts).
@@ -31,6 +33,14 @@ export type OpenHouseListing = {
   sqft: number | null;
   image: string | null;
   brokerageName: string | null;
+  city: string;
+  /** Timber brokerage or an OnSite lead-agent listing. */
+  isOnsite: boolean;
+  /**
+   * Perpetual builder model home (see the homepage sort in
+   * getUpcomingOpenHouseListings). OnSite listings are never flagged.
+   */
+  isModelHome: boolean;
   openHouses: OpenHouseEntry[];
 };
 
@@ -127,6 +137,9 @@ function toCard(row: RepliersOpenHouseRow): OpenHouseListing | null {
     sqft: num(det.sqft),
     image: repliersImageUrl(row.images?.[0], "medium"),
     brokerageName: row.office?.brokerageName?.trim() || null,
+    city: (a.city ?? "").trim(),
+    isOnsite: false,
+    isModelHome: false,
     openHouses: (row.openHouse ?? []).map((oh) => ({
       date: oh.date ?? null,
       startTime: oh.startTime ?? null,
@@ -137,17 +150,58 @@ function toCard(row: RepliersOpenHouseRow): OpenHouseListing | null {
   };
 }
 
+function brokerageIsOnsite(name: string | null) {
+  const n = (name ?? "").toLowerCase();
+  if (!n) return false;
+  return n.includes(ONSITE_BROKERAGE_NAME.toLowerCase()) || n.includes("onsite");
+}
+
 /**
- * Active listings with an open house that is upcoming or happening now,
- * soonest first. Scope matches the site's listing index policy: East Pierce
- * cities plus OnSite's own listings (Timber Real Estate brokerage and lead
- * agents) wherever they are. Data comes from Repliers (NWMLS via MLS Grid)
- * using the existing REPLIERS_API_KEY — returns [] when the key is missing
- * or the API fails, so callers can simply hide the section. `asOfMs` is the
- * instant the upcoming/past cut was made (pass it on as the render time).
+ * Homepage row quality:
+ * Prefer OnSite/Timber listings and nearer weekend opens.
+ * Perpetual builder model-home opens are deprioritized and capped at 1 so
+ * the row reads as real open houses. A listing is treated as a model home
+ * when it is not OnSite and either the open-house type mentions model/builder
+ * or it has opens on 4+ distinct Pacific days in the lookahead (the daily
+ * model-center pattern). The /open-houses directory uses the same flag but
+ * does not apply the cap — it only sorts model homes last.
+ */
+const MODEL_DAY_THRESHOLD = 4;
+const HOMEPAGE_MODEL_CAP = 1;
+
+function isPerpetualModelHome(
+  card: OpenHouseListing,
+  upcoming: UpcomingOpenHouse<OpenHouseEntry>[]
+) {
+  if (card.isOnsite) return false;
+  if (upcoming.some((oh) => /model|builder/i.test(oh.type ?? ""))) return true;
+  const days = new Set(
+    upcoming
+      .map((oh) => pacificDateString(openHouseSortKey(oh)))
+      .filter((day) => day.length > 0)
+  );
+  return days.size >= MODEL_DAY_THRESHOLD;
+}
+
+export type OpenHouseListMode = "homepage" | "directory";
+
+/**
+ * Active listings with an open house that is upcoming or happening now.
+ * Scope matches the site's listing index policy: East Pierce cities plus
+ * OnSite's own listings (Timber Real Estate brokerage and lead agents)
+ * wherever they are. Data comes from Repliers (NWMLS via MLS Grid) using
+ * the existing REPLIERS_API_KEY — returns [] when the key is missing or the
+ * API fails, so callers can simply hide the section. `asOfMs` is the instant
+ * the upcoming/past cut was made (pass it on as the render time).
+ *
+ * `homepage` applies the quality sort and model-home cap. `directory` sorts
+ * model homes last, then soonest, with no cap other than `limit`.
  */
 export const getUpcomingOpenHouseListings = cache(
-  async (limit = 8): Promise<{ listings: OpenHouseListing[]; asOfMs: number }> => {
+  async (
+    limit = 8,
+    mode: OpenHouseListMode = "homepage"
+  ): Promise<{ listings: OpenHouseListing[]; asOfMs: number }> => {
     const nowMs = Date.now();
     if (!process.env.REPLIERS_API_KEY) return { listings: [], asOfMs: nowMs };
 
@@ -180,20 +234,59 @@ export const getUpcomingOpenHouseListings = cache(
       agentIds.length ? fetchRows(agents) : Promise.resolve([]),
     ]);
 
-    const byMls = new Map<string, { card: OpenHouseListing; next: number }>();
-    for (const row of results.flat()) {
-      if (!row?.mlsNumber || byMls.has(row.mlsNumber)) continue;
-      const card = toCard(row);
-      if (!card) continue;
-      const upcoming = getUpcomingOpenHouses(card.openHouses, nowMs);
-      if (upcoming.length === 0) continue;
-      byMls.set(card.mlsNumber, { card, next: openHouseSortKey(upcoming[0]) });
+    const buckets: { rows: RepliersOpenHouseRow[]; onsite: boolean }[] = [
+      { rows: results[0] ?? [], onsite: false },
+      { rows: results[1] ?? [], onsite: true },
+      { rows: results[2] ?? [], onsite: true },
+    ];
+
+    const byMls = new Map<string, { card: OpenHouseListing; next: number; weekend: boolean }>();
+    for (const bucket of buckets) {
+      for (const row of bucket.rows) {
+        if (!row?.mlsNumber) continue;
+        const existing = byMls.get(row.mlsNumber);
+        if (existing) {
+          if (bucket.onsite || brokerageIsOnsite(existing.card.brokerageName)) {
+            existing.card.isOnsite = true;
+            existing.card.isModelHome = false;
+          }
+          continue;
+        }
+        const card = toCard(row);
+        if (!card) continue;
+        const upcoming = getUpcomingOpenHouses(card.openHouses, nowMs);
+        if (upcoming.length === 0) continue;
+        card.isOnsite = bucket.onsite || brokerageIsOnsite(card.brokerageName);
+        card.isModelHome = isPerpetualModelHome(card, upcoming);
+        byMls.set(card.mlsNumber, {
+          card,
+          next: openHouseSortKey(upcoming[0]),
+          weekend: isThisWeekendOpen(upcoming[0], nowMs),
+        });
+      }
     }
 
-    const listings = Array.from(byMls.values())
-      .sort((a, b) => a.next - b.next)
-      .slice(0, limit)
-      .map((entry) => entry.card);
-    return { listings, asOfMs: nowMs };
+    const ranked = Array.from(byMls.values()).sort((a, b) => {
+      if (mode === "homepage") {
+        const rank = (entry: typeof a) =>
+          (entry.card.isModelHome ? 1 : 0) * 1e15 +
+          (entry.card.isOnsite ? 0 : 1) * 1e13 +
+          (entry.weekend ? 0 : 1) * 1e12 +
+          entry.next;
+        return rank(a) - rank(b);
+      }
+      const rank = (entry: typeof a) => (entry.card.isModelHome ? 1 : 0) * 1e15 + entry.next;
+      return rank(a) - rank(b);
+    });
+
+    const picked =
+      mode === "homepage"
+        ? [
+            ...ranked.filter((entry) => !entry.card.isModelHome),
+            ...ranked.filter((entry) => entry.card.isModelHome).slice(0, HOMEPAGE_MODEL_CAP),
+          ].slice(0, limit)
+        : ranked.slice(0, limit);
+
+    return { listings: picked.map((entry) => entry.card), asOfMs: nowMs };
   }
 );
