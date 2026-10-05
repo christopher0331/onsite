@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-10-01";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-10-05";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -20,7 +20,7 @@ const HUB_META: Record<string, string> = {
   "bonney-lake":
     "Bonney Lake plateau homes — Tehaleh, Sky Island, Panorama West, Panorama Heights, Quiet Water, and Lake Tapps. Local comps, live NWMLS listings.",
   sumner:
-    "Sumner homes near Sounder, historic Main Street, and Bridge Hill. Floodplain diligence on the White and Stuck Rivers in 98390, live NWMLS listings.",
+    "Sumner homes near Sounder, Downtown Sumner Main Street, and Bridge Hill. Floodplain diligence on the White and Stuck Rivers in 98390, live NWMLS listings.",
   edgewood:
     "Edgewood large-lot and equestrian homes minutes from the valley. Lot utility, wells and septic where they apply, Puyallup and Fife schools, live listings.",
   milton:
@@ -66,6 +66,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Quiet Water Bonney Lake / Lake Tapps homes east of 214th Ave E in 98391. Dieringer schools, HOA diligence, and street-level comps, live NWMLS listings.",
   "sumner/bridge-hill":
     "Bridge Hill homes on the bluff above downtown Sumner. View lots, established trees, and Sounder access with tight inventory in 98390, live NWMLS listings.",
+  "sumner/downtown-sumner":
+    "Downtown Sumner homes near Main Street and Sounder in 98390. Historic design review, Craftsman streets, and floodplain diligence, live NWMLS listings.",
   "tacoma/north-end":
     "Tacoma North End homes near Point Defiance, Ruston Way, and Proctor. Historic and mid-century stock in 98403, 98406, and 98407, live NWMLS listings.",
   "tacoma/stadium-district":

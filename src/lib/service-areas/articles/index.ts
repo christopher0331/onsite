@@ -21,6 +21,7 @@ import { summitArticle } from "./summit";
 import { southHillArticle } from "./south-hill";
 import { tehalehArticle } from "./tehaleh";
 import { bridgeHillArticle } from "./bridge-hill";
+import { downtownSumnerArticle } from "./downtown-sumner";
 import { northEndArticle } from "./north-end";
 import { stadiumDistrictArticle } from "./stadium-district";
 import { southTacomaArticle } from "./south-tacoma";
@@ -71,6 +72,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [southHillArticle.slug]: southHillArticle,
   [tehalehArticle.slug]: tehalehArticle,
   [bridgeHillArticle.slug]: bridgeHillArticle,
+  [downtownSumnerArticle.slug]: downtownSumnerArticle,
   [northEndArticle.slug]: northEndArticle,
   [stadiumDistrictArticle.slug]: stadiumDistrictArticle,
   [southTacomaArticle.slug]: southTacomaArticle,
