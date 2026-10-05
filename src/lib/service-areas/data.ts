@@ -2264,6 +2264,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       {
         name: "Downtown Sumner",
         citySlug: "sumner",
+        neighborhoodSlug: "downtown-sumner",
         blurb: "Historic Main Street core — older inventory, walkable.",
       },
       {
@@ -2291,6 +2292,94 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "The Sounder-station proximity was sold to buyers as a real numbers story, not a buzzword. Three offers in five days.",
+      },
+    ],
+  },
+  {
+    slug: "downtown-sumner",
+    citySlug: "sumner",
+    name: "Downtown Sumner",
+    zipCodes: ["98390"],
+    geo: { lat: 47.2032, lng: -122.2407 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e5f1f692b6e8f42f5bf2a0_1.jpg",
+    heroEyebrow: "Sumner · Downtown",
+    introCopy:
+      "Downtown Sumner is the historic Main Street core in ZIP 98390 — Craftsman and early-1900s streets, Sounder walkability, and a design-review overlay that changes how you prep, price, and disclose a listing.",
+    characteristics: {
+      medianHomeYear: "1900 – 1955",
+      architecturalStyles: ["Craftsman bungalow", "Early 20th-century", "Small-lot infill"],
+      typicalLotSize: "0.08 – 0.25 acres",
+      notes:
+        "Main Street and several cross-streets fall inside Sumner's historic district — exterior changes visible from the right-of-way can require design review. Valley-floor parcels may also raise FEMA flood questions; pull elevation-certificate status early. Treat Main Street–adjacent blocks, quieter courts, and river-trail edges as related but not identical micro-comp sets.",
+    },
+    communityOrgs: [
+      {
+        name: "Sumner Main Street Association",
+        url: "https://www.sumnermainstreet.com/",
+        context: "Downtown advocacy organization for historic Main Street shops, events, and walkable blocks.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Downtown Sumner attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: [
+      "Main Street",
+      "Traffic Avenue",
+      "Wood Avenue",
+      "Mason Street",
+      "Sumner Avenue",
+      "Lewis Avenue",
+      "SR-410",
+    ],
+    landmarks: [
+      "Historic Main Street",
+      "Sumner Sounder Station",
+      "Heritage Park / Hops Alley",
+      "Loyalty Park",
+      "Ryan House",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Downtown Sumner via SR-410 into Traffic Avenue and Main Street, typically inside a 10–15 minute window for inspections and twilight photography. Sounder parking, Main Street events, and school pickup can change curb availability — we pad showing schedules accordingly.",
+    adjacent: [
+      {
+        name: "Bridge Hill",
+        citySlug: "sumner",
+        neighborhoodSlug: "bridge-hill",
+        blurb: "Bluff above downtown — larger yards and view-oriented mid-century stock.",
+      },
+      {
+        name: "Sumner (City)",
+        citySlug: "sumner",
+        blurb: "Parent hub — North Sumner, Valley Corridor, and East Valley Edge on the same valley desk.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Western valley neighbor — Downtown Puyallup and larger cross-shop comps.",
+      },
+      {
+        name: "Bonney Lake",
+        citySlug: "bonney-lake",
+        blurb: "Plateau neighbor to the east via SR-410 — Tehaleh and lake-adjacent comparison set.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Maya & Chris R.",
+        zip: "98390",
+        rating: 5,
+        quote:
+          "They priced our Craftsman against Downtown Sumner streets — not a city average — and had historic-design review and flood notes flagged before photos. Escrow stayed clean.",
+      },
+      {
+        author: "Owen K.",
+        zip: "98390",
+        rating: 5,
+        quote:
+          "Sounder walkability and Main Street were sold as real daily life, not fluff. School boundaries and permit history were confirmed early.",
       },
     ],
   },
