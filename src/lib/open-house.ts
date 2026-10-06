@@ -66,6 +66,8 @@ export function getUpcomingOpenHouses<T extends OpenHouseEntry>(
       if (!hasEnd) {
         const day = (oh.date || oh.startTime || "").slice(0, 10);
         end = parseOpenHouseTime(day ? `${day}T23:59:59` : null);
+      } else if (!Number.isNaN(start)) {
+        end = correctOpenHouseEnd(start, end, date);
       }
       return { ...oh, start, end, hasEnd };
     })
@@ -159,14 +161,53 @@ export function formatOpenHouseDay(oh: { start: number; end: number }, weekday: 
   return laParts(openHouseSortKey(oh), { weekday, month: "short", day: "numeric" });
 }
 
+const TWELVE_HOURS_MS = 12 * 60 * 60 * 1000;
+
+/**
+ * Some NWMLS ends are stored 12 hours late, so a same-day 1:00 PM close
+ * arrives as 1:00 AM the next morning (MLS# NWM2586592: 11:00–1:00).
+ * When shifting the end back 12 hours lands on the open house's Pacific day
+ * and still after the start, use that. A real overnight range such as
+ * 11:00 PM – 1:00 AM is left alone — shifting it would put the end before
+ * the start.
+ */
+export function correctOpenHouseEnd(start: number, end: number, date?: string | null) {
+  if (Number.isNaN(start) || Number.isNaN(end)) return end;
+  const day = date && /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : pacificDateString(start);
+  if (pacificDateString(end) === day) return end;
+  const adjusted = end - TWELVE_HOURS_MS;
+  if (pacificDateString(adjusted) !== day || adjusted <= start) return end;
+  return adjusted;
+}
+
+type WallTime = { clock: string; meridiem: "AM" | "PM" | "" };
+
+function wallTime(ms: number): WallTime {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: LISTING_TZ,
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).formatToParts(new Date(ms));
+  const value = (type: Intl.DateTimeFormatPartTypes) => parts.find((p) => p.type === type)?.value ?? "";
+  const dayPeriod = value("dayPeriod").replace(/\./g, "").toUpperCase();
+  const meridiem = dayPeriod === "AM" || dayPeriod === "PM" ? dayPeriod : "";
+  return { clock: `${value("hour")}:${value("minute")}`, meridiem };
+}
+
+function formatWallTime(time: WallTime) {
+  return time.meridiem ? `${time.clock} ${time.meridiem}` : time.clock;
+}
+
 // "2:00 – 4:00 PM", "11:00 AM – 1:00 PM", just the start time if no end is
-// known, or "Until 12:30 PM" if only the end is known.
+// known, or "Until 12:30 PM" if only the end is known. Start and end each
+// keep their own AM/PM when the range crosses noon or midnight.
 export function formatOpenHouseTimeRange(oh: { start: number; end: number; hasEnd: boolean }) {
-  const opts = { hour: "numeric", minute: "2-digit" } as const;
-  if (Number.isNaN(oh.start)) return oh.hasEnd ? `Until ${laParts(oh.end, opts)}` : "";
-  const start = laParts(oh.start, opts);
-  if (!oh.hasEnd) return start;
-  const end = laParts(oh.end, opts);
-  const sameMeridiem = start.slice(-2) === end.slice(-2);
-  return `${sameMeridiem ? start.replace(/\s*[AP]M$/, "") : start} – ${end}`;
+  const endMs = oh.hasEnd ? correctOpenHouseEnd(oh.start, oh.end) : oh.end;
+  if (Number.isNaN(oh.start)) return oh.hasEnd ? `Until ${formatWallTime(wallTime(endMs))}` : "";
+  const start = wallTime(oh.start);
+  if (!oh.hasEnd) return formatWallTime(start);
+  const end = wallTime(endMs);
+  if (start.meridiem && start.meridiem === end.meridiem) return `${start.clock} – ${end.clock} ${end.meridiem}`;
+  return `${formatWallTime(start)} – ${formatWallTime(end)}`;
 }

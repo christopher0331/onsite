@@ -170,7 +170,7 @@ export default function OpenHousesBrowser({
               subcopy="Name the home if you have one. Choose a posted open house or ask for a private tour. An OnSite agent will reach out."
             />
           </div>
-          <div id="open-house-alerts" className="scroll-mt-28 rounded-3xl border border-charcoal/[0.08] bg-white p-7 sm:p-9">
+          <div id="open-house-alerts" className="h-fit scroll-mt-28 self-start rounded-3xl border border-charcoal/[0.08] bg-white p-7 sm:p-9">
             <OpenHouseLeadForm mode="alerts" source="oh_alerts" surface="open_houses_directory" />
           </div>
         </div>

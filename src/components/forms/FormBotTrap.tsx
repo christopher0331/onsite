@@ -1,12 +1,29 @@
 "use client";
 
-import type { RefObject } from "react";
+import type { CSSProperties, RefObject } from "react";
 
 type FormBotTrapProps = {
   idPrefix?: string;
   websiteRef: RefObject<HTMLInputElement | null>;
   faxRef: RefObject<HTMLInputElement | null>;
   loadedAt: number;
+};
+
+// Clip hides the controls. visibility:hidden on the labels is what keeps
+// "Website" + "Fax number" out of innerText (a 1px clip still leaks that
+// string). Inputs stay type=text and visibility:visible so autofill bots
+// can fill them; the bot gate reads those values.
+const trapClip: CSSProperties = {
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  padding: 0,
+  margin: "-1px",
+  overflow: "hidden",
+  clip: "rect(0, 0, 0, 0)",
+  clipPath: "inset(50%)",
+  whiteSpace: "nowrap",
+  border: 0,
 };
 
 /**
@@ -18,18 +35,10 @@ export function FormBotTrap({ idPrefix = "", websiteRef, faxRef, loadedAt }: For
   const faxId = `${idPrefix}fax_number`;
 
   return (
-    <div
-      aria-hidden="true"
-      style={{
-        position: "absolute",
-        left: "-10000px",
-        top: "auto",
-        width: "1px",
-        height: "1px",
-        overflow: "hidden",
-      }}
-    >
-      <label htmlFor={websiteId}>Website</label>
+    <div aria-hidden="true" style={trapClip}>
+      <label htmlFor={websiteId} aria-hidden="true" style={{ ...trapClip, visibility: "hidden" }}>
+        Website
+      </label>
       <input
         ref={websiteRef}
         id={websiteId}
@@ -38,8 +47,11 @@ export function FormBotTrap({ idPrefix = "", websiteRef, faxRef, loadedAt }: For
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
+        style={{ ...trapClip, visibility: "visible" }}
       />
-      <label htmlFor={faxId}>Fax number</label>
+      <label htmlFor={faxId} aria-hidden="true" style={{ ...trapClip, visibility: "hidden" }}>
+        Fax number
+      </label>
       <input
         ref={faxRef}
         id={faxId}
@@ -48,6 +60,7 @@ export function FormBotTrap({ idPrefix = "", websiteRef, faxRef, loadedAt }: For
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
+        style={{ ...trapClip, visibility: "visible" }}
       />
       <input
         type="hidden"
