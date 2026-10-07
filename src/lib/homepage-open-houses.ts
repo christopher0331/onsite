@@ -9,16 +9,15 @@
 /**
  * List-price floor for the homepage row.
  *
- * Set from the live East Pierce + OnSite open-house set on 2026-10-07
- * (80 upcoming listings, one per MLS number). Prices split with nothing in
- * the gap: 40 homes at or below $659,950 and 40 at or above $694,950. The
- * median is $677,450, the midpoint of that gap. $675,000 sits in the gap, so
- * a listing at or above it is the entire top half (the cheapest home that
- * qualifies today is $694,950) and the bottom half stays off the homepage.
- * That bottom half is the manufactured homes at $118,750–$209,999 and the
- * smaller houses from about $415,000 through $659,950.
+ * Lowered from $675,000 to $650,000 at the owner's request. The original
+ * floor sat in the 2026-10-07 gap between homes at or below $659,950 and
+ * homes at or above $694,950 (median $677,450). $650,000 still leaves out
+ * the manufactured homes around $119k–$210k and the smaller houses under
+ * $650,000. It adds the two single-family homes that were just under the
+ * old floor: $650,000 in Enumclaw (29 photos) and $659,950 in Puyallup
+ * (24 photos).
  */
-export const HOMEPAGE_OPEN_HOUSE_MIN_PRICE = 675_000;
+export const HOMEPAGE_OPEN_HOUSE_MIN_PRICE = 650_000;
 
 /**
  * A gallery under this many photos is treated as no photo or a very thin
@@ -79,6 +78,122 @@ function byNicenessDesc(a: HomepageOpenHouseCandidate, b: HomepageOpenHouseCandi
   return niceness(b) - niceness(a);
 }
 
+const STREET_SUFFIXES: Record<string, string> = {
+  street: "st",
+  st: "st",
+  avenue: "ave",
+  ave: "ave",
+  court: "ct",
+  ct: "ct",
+  drive: "dr",
+  dr: "dr",
+  lane: "ln",
+  ln: "ln",
+  boulevard: "blvd",
+  blvd: "blvd",
+  place: "pl",
+  pl: "pl",
+  road: "rd",
+  rd: "rd",
+  circle: "cir",
+  cir: "cir",
+  terrace: "ter",
+  ter: "ter",
+  trail: "trl",
+  trl: "trl",
+  parkway: "pkwy",
+  pkwy: "pkwy",
+  highway: "hwy",
+  hwy: "hwy",
+};
+
+function collapseWhitespace(value: string) {
+  return value.toLowerCase().replace(/\s+/g, " ").trim();
+}
+
+/**
+ * Address key for one physical property: street + city + zip.
+ * Lowercase, trimmed, whitespace collapsed, and common street suffixes
+ * folded (Street/St, Avenue/Ave, Court/Ct, and the other usual abbreviations).
+ * Unit numbers stay in the street, so two units in one building do not merge.
+ */
+export function normalizeOpenHouseAddress(street: string, city: string, zip: string) {
+  const streetNorm = collapseWhitespace(street)
+    .replace(/[.,]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => STREET_SUFFIXES[word] ?? word)
+    .join(" ");
+  return `${streetNorm}|${collapseWhitespace(city)}|${collapseWhitespace(zip)}`;
+}
+
+export type OpenHouseIdentity = {
+  mlsNumber: string;
+  street: string;
+  city: string;
+  zip: string;
+  /** Epoch ms from the listing's list date, when the feed included one. */
+  listDateMs: number | null;
+  /** Epoch ms of this row's soonest upcoming open-house session. */
+  nextOpenMs: number;
+};
+
+/** Numeric MLS id, so NWM2590852 outranks the older NWM2466887. */
+export function mlsNumberRank(mlsNumber: string) {
+  const digits = mlsNumber.replace(/\D/g, "");
+  if (!digits) return 0;
+  const n = Number(digits);
+  return Number.isFinite(n) ? n : 0;
+}
+
+/**
+ * Which of two rows for the same property to keep.
+ * A later list date wins. When the dates match or are missing, the higher
+ * MLS number wins (a relist gets a new number). When that is also a tie,
+ * the sooner open-house session wins, so one listing with two sessions
+ * becomes one card.
+ */
+function preferSameProperty<T extends OpenHouseIdentity>(a: T, b: T): T {
+  const aDate = a.listDateMs;
+  const bDate = b.listDateMs;
+  if (aDate != null && bDate != null && aDate !== bDate) return aDate > bDate ? a : b;
+  const aMls = mlsNumberRank(a.mlsNumber);
+  const bMls = mlsNumberRank(b.mlsNumber);
+  if (aMls !== bMls) return aMls > bMls ? a : b;
+  return a.nextOpenMs <= b.nextOpenMs ? a : b;
+}
+
+/**
+ * One card per property. Rows that share a normalized street + city + zip
+ * collapse to the newer listing. A blank street is not merged with anything
+ * else. Callers already store every session for one MLS on a single row;
+ * if two rows are still the same listing, the sooner session is the one kept.
+ */
+function addressGroupKey(entry: OpenHouseIdentity) {
+  const streetNorm = normalizeOpenHouseAddress(entry.street, "", "").replace(/\|/g, "");
+  if (!streetNorm) return `mls:${entry.mlsNumber}`;
+  return normalizeOpenHouseAddress(entry.street, entry.city, entry.zip);
+}
+
+export function dedupeOpenHouseListings<T extends OpenHouseIdentity>(entries: readonly T[]): T[] {
+  const groups = new Map<string, T[]>();
+  const order: string[] = [];
+  for (const entry of entries) {
+    const key = addressGroupKey(entry);
+    const group = groups.get(key);
+    if (!group) {
+      groups.set(key, [entry]);
+      order.push(key);
+    } else {
+      group.push(entry);
+    }
+  }
+  return order.map((key) => {
+    const group = groups.get(key)!;
+    return group.reduce((kept, entry) => preferSameProperty(kept, entry));
+  });
+}
+
 /**
  * Listings for the homepage row.
  *
@@ -86,7 +201,8 @@ function byNicenessDesc(a: HomepageOpenHouseCandidate, b: HomepageOpenHouseCandi
  * (`modelCap`, default 1) so a builder's daily opens cannot fill the row.
  * When fewer than `limit` qualify, the rest of the slots are filled from the
  * other listings in the same niceness order (still under the model cap) so
- * the section does not render short or empty.
+ * the section does not render short or empty. Address dedupe happens before
+ * this runs, so a relist cannot take two of these slots.
  */
 export function selectHomepageOpenHouses<T extends HomepageOpenHouseCandidate>(
   entries: readonly T[],
