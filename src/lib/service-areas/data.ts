@@ -2274,6 +2274,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Northern valley pocket — SR-167 commute access and mid-century streets.",
       },
       {
+        name: "Valley Corridor",
+        citySlug: "sumner",
+        neighborhoodSlug: "valley-corridor",
+        blurb: "Valley Avenue spine — employment-adjacent mid-century streets and SR-167 access.",
+      },
+      {
         name: "Puyallup",
         citySlug: "puyallup",
         blurb: "Western neighbor — larger comp set for cross-shopping buyers.",
@@ -2363,9 +2369,15 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Northern valley pocket — SR-167 commute access and mid-century streets.",
       },
       {
+        name: "Valley Corridor",
+        citySlug: "sumner",
+        neighborhoodSlug: "valley-corridor",
+        blurb: "Valley Avenue spine — employment-adjacent mid-century streets and SR-167 access.",
+      },
+      {
         name: "Sumner (City)",
         citySlug: "sumner",
-        blurb: "Parent hub — Valley Corridor and East Valley Edge on the same valley desk.",
+        blurb: "Parent hub — East Valley Edge on the same valley desk.",
       },
       {
         name: "Puyallup",
@@ -2484,6 +2496,98 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "SR-167 access and school boundaries were sold as real daily life, not fluff. Sounder was framed as a short drive, which matched how we actually commute.",
+      },
+    ],
+  },
+  {
+    slug: "valley-corridor",
+    citySlug: "sumner",
+    name: "Valley Corridor",
+    zipCodes: ["98390"],
+    geo: { lat: 47.2068, lng: -122.2285 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e5f1f692b6e8f42f5bf2a0_1.jpg",
+    heroEyebrow: "Sumner · Valley Corridor",
+    introCopy:
+      "Sumner's Valley Corridor is the employment-adjacent valley spine in ZIP 98390 — mid-century streets along Valley Avenue and the SR-167 / SR-410 connectors, with floodplain diligence and school pathways that downtown averages miss.",
+    characteristics: {
+      medianHomeYear: "1950 – 1990",
+      architecturalStyles: ["Mid-Century Ranch", "Rambler", "Northwest Contemporary"],
+      typicalLotSize: "0.15 – 0.40 acres",
+      notes:
+        "Treat quieter courts just off the corridor, Valley Avenue frontage streets, and industrial-edge blocks as related but not identical micro-comp sets. Freight adjacency, truck routing, and FEMA flood questions on White and Stuck river parcels can shift block by block — pull elevation-certificate status early.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Sumner",
+        url: "https://sumnerwa.gov/",
+        context: "Municipal permitting, parks, and water/sewer for Valley Corridor parcels.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "Valley Corridor attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: [
+      "Valley Avenue E",
+      "Traffic Avenue",
+      "East Valley Highway E",
+      "Meade McCumber Road",
+      "SR-167",
+      "SR-410",
+    ],
+    landmarks: [
+      "Sumner Link Trail",
+      "Loyalty Park",
+      "Sumner Sounder Station",
+      "Valley Avenue employment corridor",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach the Valley Corridor via SR-410 into Valley Avenue E and Traffic Avenue, typically inside a 10–16 minute window for inspections and twilight photography. Freight traffic, shift-change windows, and school pickup can change curb availability — we pad showing schedules accordingly.",
+    adjacent: [
+      {
+        name: "Downtown Sumner",
+        citySlug: "sumner",
+        neighborhoodSlug: "downtown-sumner",
+        blurb: "Historic Main Street core — walkable Craftsman streets and Sounder walk-shed.",
+      },
+      {
+        name: "Bridge Hill",
+        citySlug: "sumner",
+        neighborhoodSlug: "bridge-hill",
+        blurb: "Bluff above downtown — larger yards and view-oriented mid-century stock.",
+      },
+      {
+        name: "Sumner (City)",
+        citySlug: "sumner",
+        blurb: "Parent hub — North Sumner and East Valley Edge on the same valley desk.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Western valley neighbor — Downtown Puyallup and larger cross-shop comps.",
+      },
+      {
+        name: "Bonney Lake",
+        citySlug: "bonney-lake",
+        blurb: "Plateau neighbor to the east via SR-410 — Tehaleh and lake-adjacent comparison set.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Jordan & Avery T.",
+        zip: "98390",
+        rating: 5,
+        quote:
+          "They priced our rambler against Valley Corridor streets — not a downtown average — and had flood notes and freight-adjacency flagged before photos. Escrow stayed clean.",
+      },
+      {
+        author: "Marcus W.",
+        zip: "98390",
+        rating: 5,
+        quote:
+          "Valley Avenue and SR-167 access were sold as real daily life, not fluff. School boundaries and elevation-certificate status were confirmed early.",
       },
     ],
   },

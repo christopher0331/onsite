@@ -2,7 +2,7 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const sumnerDiscover: ServiceAreaDiscover = {
   slug: "sumner",
-  updatedAt: "2026-10-06",
+  updatedAt: "2026-10-07",
   attractions: [
   {
     "name": "City of Sumner",
@@ -36,7 +36,7 @@ export const sumnerDiscover: ServiceAreaDiscover = {
   }
 ],
   localLivingMarkdown: [
-  "Sumner appeals to buyers who want a smaller-city feel with a mix of older streets near Main Street and newer homes closer to the edges of town. In pockets like [Bridge Hill](/service-areas/sumner/bridge-hill), [Downtown Sumner](/service-areas/sumner/downtown-sumner), [North Sumner](/service-areas/sumner/north-sumner), and the East Valley Edge, buyers often compare commute access, lot size, and neighborhood character before choosing where to land. The city also works well for households that want everyday convenience near [Sumner homes for sale](/listings?city=Sumner&state=WA), plus easy access to rail, parks, and local services.",
-  "For sellers, Sumner's appeal usually comes from its balance of historic charm, commuter convenience, and a grounded neighborhood feel that is easy to explain to out-of-area buyers. Areas near downtown, the Valley Corridor, and nearby [Puyallup](/service-areas/puyallup) and [Bonney Lake](/service-areas/bonney-lake) give shoppers a useful frame of reference when comparing price, lifestyle, and location. OnSite Real Estate Group serves Sumner clients who want a local approach to buying or selling in a market shaped by schools, commuter routes, and everyday livability."
+  "Sumner appeals to buyers who want a smaller-city feel with a mix of older streets near Main Street and newer homes closer to the edges of town. In pockets like [Bridge Hill](/service-areas/sumner/bridge-hill), [Downtown Sumner](/service-areas/sumner/downtown-sumner), [North Sumner](/service-areas/sumner/north-sumner), the [Valley Corridor](/service-areas/sumner/valley-corridor), and the East Valley Edge, buyers often compare commute access, lot size, and neighborhood character before choosing where to land. The city also works well for households that want everyday convenience near [Sumner homes for sale](/listings?city=Sumner&state=WA), plus easy access to rail, parks, and local services.",
+  "For sellers, Sumner's appeal usually comes from its balance of historic charm, commuter convenience, and a grounded neighborhood feel that is easy to explain to out-of-area buyers. Areas near downtown, the [Valley Corridor](/service-areas/sumner/valley-corridor), and nearby [Puyallup](/service-areas/puyallup) and [Bonney Lake](/service-areas/bonney-lake) give shoppers a useful frame of reference when comparing price, lifestyle, and location. OnSite Real Estate Group serves Sumner clients who want a local approach to buying or selling in a market shaped by schools, commuter routes, and everyday livability."
 ],
 };
