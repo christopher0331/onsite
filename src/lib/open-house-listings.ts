@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { applyEastPierceCityFilters } from "@/lib/listing-index-policy";
+import { selectHomepageOpenHouses } from "@/lib/homepage-open-houses";
 import { ONSITE_BROKERAGE_NAME, ONSITE_LEAD_AGENTS } from "@/lib/onsite-listings";
 import { enrichListingsResponse, repliersListingsUrl, type RepliersRaw } from "@/lib/repliers-enrich";
 import { repliersImageUrl } from "@/lib/repliers-images";
@@ -7,7 +8,6 @@ import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount } from "@/lib/format-bathrooms";
 import {
   getUpcomingOpenHouses,
-  isThisWeekendOpen,
   openHouseSortKey,
   pacificDateString,
   type OpenHouseEntry,
@@ -63,6 +63,8 @@ type RepliersOpenHouseRow = {
     numBathrooms?: number | null;
     numBathroomsHalf?: number | null;
     sqft?: number | string | null;
+    propertyType?: string | null;
+    style?: string | null;
   } | null;
   images?: string[] | null;
   permissions?: { displayAddressOnInternet?: string } | null;
@@ -74,6 +76,20 @@ type RepliersOpenHouseRow = {
 function num(v: unknown): number | null {
   const n = typeof v === "string" ? Number(v) : v;
   return typeof n === "number" && Number.isFinite(n) && n > 0 ? n : null;
+}
+
+function detailText(v: unknown): string | null {
+  return typeof v === "string" && v.trim() ? v.trim() : null;
+}
+
+/** Photos already on the search row. Does not request another image payload. */
+function countPhotos(images: string[] | null | undefined) {
+  if (!Array.isArray(images)) return 0;
+  let n = 0;
+  for (const img of images) {
+    if (typeof img === "string" && img.trim()) n += 1;
+  }
+  return n;
 }
 
 /** Repliers search URL that also returns the `openHouse` array. */
@@ -157,14 +173,11 @@ function brokerageIsOnsite(name: string | null) {
 }
 
 /**
- * Homepage row quality:
- * Prefer OnSite/Timber listings and nearer weekend opens.
- * Perpetual builder model-home opens are deprioritized and capped at 1 so
- * the row reads as real open houses. A listing is treated as a model home
- * when it is not OnSite and either the open-house type mentions model/builder
- * or it has opens on 4+ distinct Pacific days in the lookahead (the daily
- * model-center pattern). The /open-houses directory uses the same flag but
- * does not apply the cap — it only sorts model homes last.
+ * A listing is a perpetual builder model home when it is not OnSite and either
+ * the open-house type mentions model/builder or it has opens on 4+ distinct
+ * Pacific days in the lookahead (the daily model-center pattern). The homepage
+ * caps these at one. The /open-houses directory uses the same flag but does
+ * not apply the cap — it only sorts model homes last.
  */
 const MODEL_DAY_THRESHOLD = 4;
 const HOMEPAGE_MODEL_CAP = 1;
@@ -194,8 +207,10 @@ export type OpenHouseListMode = "homepage" | "directory";
  * API fails, so callers can simply hide the section. `asOfMs` is the instant
  * the upcoming/past cut was made (pass it on as the render time).
  *
- * `homepage` applies the quality sort and model-home cap. `directory` sorts
- * model homes last, then soonest, with no cap other than `limit`.
+ * `homepage` curates that already-fetched set (price floor, photo count, house
+ * type, nicest first, model-home cap, then fallback). It does not add a
+ * Repliers request. `directory` sorts model homes last, then soonest, with no
+ * cap other than `limit` and no price or photo filter.
  */
 export const getUpcomingOpenHouseListings = cache(
   async (
@@ -240,7 +255,16 @@ export const getUpcomingOpenHouseListings = cache(
       { rows: results[2] ?? [], onsite: true },
     ];
 
-    const byMls = new Map<string, { card: OpenHouseListing; next: number; weekend: boolean }>();
+    const byMls = new Map<
+      string,
+      {
+        card: OpenHouseListing;
+        next: number;
+        photoCount: number;
+        propertyType: string | null;
+        style: string | null;
+      }
+    >();
     for (const bucket of buckets) {
       for (const row of bucket.rows) {
         if (!row?.mlsNumber) continue;
@@ -261,31 +285,35 @@ export const getUpcomingOpenHouseListings = cache(
         byMls.set(card.mlsNumber, {
           card,
           next: openHouseSortKey(upcoming[0]),
-          weekend: isThisWeekendOpen(upcoming[0], nowMs),
+          photoCount: countPhotos(row.images),
+          propertyType: detailText(row.details?.propertyType),
+          style: detailText(row.details?.style),
         });
       }
     }
 
-    const ranked = Array.from(byMls.values()).sort((a, b) => {
-      if (mode === "homepage") {
-        const rank = (entry: typeof a) =>
-          (entry.card.isModelHome ? 1 : 0) * 1e15 +
-          (entry.card.isOnsite ? 0 : 1) * 1e13 +
-          (entry.weekend ? 0 : 1) * 1e12 +
-          entry.next;
-        return rank(a) - rank(b);
-      }
-      const rank = (entry: typeof a) => (entry.card.isModelHome ? 1 : 0) * 1e15 + entry.next;
-      return rank(a) - rank(b);
-    });
-
+    const ranked = Array.from(byMls.values());
     const picked =
       mode === "homepage"
-        ? [
-            ...ranked.filter((entry) => !entry.card.isModelHome),
-            ...ranked.filter((entry) => entry.card.isModelHome).slice(0, HOMEPAGE_MODEL_CAP),
-          ].slice(0, limit)
-        : ranked.slice(0, limit);
+        ? selectHomepageOpenHouses(
+            ranked.map((entry) => ({
+              listPrice: entry.card.listPrice,
+              sqft: entry.card.sqft,
+              photoCount: entry.photoCount,
+              propertyType: entry.propertyType,
+              style: entry.style,
+              isModelHome: entry.card.isModelHome,
+              entry,
+            })),
+            limit,
+            HOMEPAGE_MODEL_CAP
+          ).map((row) => row.entry)
+        : ranked
+            .sort((a, b) => {
+              const rank = (entry: typeof a) => (entry.card.isModelHome ? 1 : 0) * 1e15 + entry.next;
+              return rank(a) - rank(b);
+            })
+            .slice(0, limit);
 
     return { listings: picked.map((entry) => entry.card), asOfMs: nowMs };
   }
