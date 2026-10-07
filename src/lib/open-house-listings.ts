@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { applyEastPierceCityFilters } from "@/lib/listing-index-policy";
-import { selectHomepageOpenHouses } from "@/lib/homepage-open-houses";
+import { dedupeOpenHouseListings, selectHomepageOpenHouses } from "@/lib/homepage-open-houses";
 import { ONSITE_BROKERAGE_NAME, ONSITE_LEAD_AGENTS } from "@/lib/onsite-listings";
 import { enrichListingsResponse, repliersListingsUrl, type RepliersRaw } from "@/lib/repliers-enrich";
 import { repliersImageUrl } from "@/lib/repliers-images";
@@ -69,6 +69,8 @@ type RepliersOpenHouseRow = {
   images?: string[] | null;
   permissions?: { displayAddressOnInternet?: string } | null;
   office?: { brokerageName?: string | null } | null;
+  /** Already requested on the shared Repliers search fields. */
+  listDate?: string | null;
   raw?: RepliersRaw;
   openHouse?: OpenHouseEntry[] | null;
 };
@@ -80,6 +82,12 @@ function num(v: unknown): number | null {
 
 function detailText(v: unknown): string | null {
   return typeof v === "string" && v.trim() ? v.trim() : null;
+}
+
+function parseListDate(value: unknown): number | null {
+  if (typeof value !== "string" || !value.trim()) return null;
+  const ms = Date.parse(value);
+  return Number.isFinite(ms) ? ms : null;
 }
 
 /** Photos already on the search row. Does not request another image payload. */
@@ -207,10 +215,14 @@ export type OpenHouseListMode = "homepage" | "directory";
  * API fails, so callers can simply hide the section. `asOfMs` is the instant
  * the upcoming/past cut was made (pass it on as the render time).
  *
- * `homepage` curates that already-fetched set (price floor, photo count, house
- * type, nicest first, model-home cap, then fallback). It does not add a
- * Repliers request. `directory` sorts model homes last, then soonest, with no
- * cap other than `limit` and no price or photo filter.
+ * Both modes collapse relists that share a normalized street, city, and zip
+ * (one card, newer list date, then higher MLS number) and keep a single card
+ * per listing, using that listing's soonest upcoming session. That dedupe
+ * uses fields already on the search rows. It does not add a Repliers request.
+ *
+ * `homepage` then curates the set (price floor, photo count, house type,
+ * nicest first, model-home cap, then fallback). `directory` sorts model homes
+ * last, then soonest, with no cap other than `limit` and no price or photo filter.
  */
 export const getUpcomingOpenHouseListings = cache(
   async (
@@ -263,6 +275,8 @@ export const getUpcomingOpenHouseListings = cache(
         photoCount: number;
         propertyType: string | null;
         style: string | null;
+        zip: string;
+        listDateMs: number | null;
       }
     >();
     for (const bucket of buckets) {
@@ -284,15 +298,27 @@ export const getUpcomingOpenHouseListings = cache(
         card.isModelHome = isPerpetualModelHome(card, upcoming);
         byMls.set(card.mlsNumber, {
           card,
+          // Soonest session. Later sessions stay on the card for "+N more"
+          // but do not become a second homepage or directory card.
           next: openHouseSortKey(upcoming[0]),
           photoCount: countPhotos(row.images),
           propertyType: detailText(row.details?.propertyType),
           style: detailText(row.details?.style),
+          zip: (row.address?.zip ?? "").trim(),
+          listDateMs: parseListDate(row.listDate),
         });
       }
     }
 
-    const ranked = Array.from(byMls.values());
+    const ranked = dedupeOpenHouseListings(
+      Array.from(byMls.values()).map((entry) => ({
+        ...entry,
+        mlsNumber: entry.card.mlsNumber,
+        street: entry.card.street,
+        city: entry.card.city,
+        nextOpenMs: entry.next,
+      }))
+    );
     const picked =
       mode === "homepage"
         ? selectHomepageOpenHouses(
