@@ -2280,6 +2280,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Valley Avenue spine — employment-adjacent mid-century streets and SR-167 access.",
       },
       {
+        name: "East Valley Edge",
+        citySlug: "sumner",
+        neighborhoodSlug: "east-valley-edge",
+        blurb: "Eastern flats-to-foothills pocket — larger lots and Sumner-Tapps Highway access.",
+      },
+      {
         name: "Puyallup",
         citySlug: "puyallup",
         blurb: "Western neighbor — larger comp set for cross-shopping buyers.",
@@ -2375,9 +2381,15 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Valley Avenue spine — employment-adjacent mid-century streets and SR-167 access.",
       },
       {
+        name: "East Valley Edge",
+        citySlug: "sumner",
+        neighborhoodSlug: "east-valley-edge",
+        blurb: "Eastern flats-to-foothills pocket — larger lots and Sumner-Tapps Highway access.",
+      },
+      {
         name: "Sumner (City)",
         citySlug: "sumner",
-        blurb: "Parent hub — East Valley Edge on the same valley desk.",
+        blurb: "Parent hub — Valley Corridor and East Valley Edge on the same valley desk.",
       },
       {
         name: "Puyallup",
@@ -2465,6 +2477,18 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "sumner",
         neighborhoodSlug: "bridge-hill",
         blurb: "Bluff above downtown — larger yards and view-oriented mid-century stock.",
+      },
+      {
+        name: "Valley Corridor",
+        citySlug: "sumner",
+        neighborhoodSlug: "valley-corridor",
+        blurb: "Valley Avenue spine — employment-adjacent mid-century streets and SR-167 access.",
+      },
+      {
+        name: "East Valley Edge",
+        citySlug: "sumner",
+        neighborhoodSlug: "east-valley-edge",
+        blurb: "Eastern flats-to-foothills pocket — larger lots and Sumner-Tapps Highway access.",
       },
       {
         name: "Sumner (City)",
@@ -2588,6 +2612,105 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "Valley Avenue and SR-167 access were sold as real daily life, not fluff. School boundaries and elevation-certificate status were confirmed early.",
+      },
+    ],
+  },
+  {
+    slug: "east-valley-edge",
+    citySlug: "sumner",
+    name: "East Valley Edge",
+    zipCodes: ["98390"],
+    geo: { lat: 47.2015, lng: -122.2085 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e5f1f692b6e8f42f5bf2a0_1.jpg",
+    heroEyebrow: "Sumner · East Valley Edge",
+    introCopy:
+      "Sumner's East Valley Edge is the eastern flats-to-foothills pocket in ZIP 98390 — Sumner-Tapps Highway and SR-410 access, wetland and farmland edges, larger-lot options, and school pathways that downtown averages miss.",
+    characteristics: {
+      medianHomeYear: "1960 – 2005",
+      architecturalStyles: ["Mid-Century Ranch", "Rambler", "Northwest Contemporary"],
+      typicalLotSize: "0.20 – 0.75 acres",
+      notes:
+        "Treat quieter courts west of Sumner-Tapps Highway, street-front strips along 60th / 64th, and wetland-adjacent or quarry-edge blocks as related but not identical micro-comp sets. Salmon Creek buffers, critical-area notes, and FEMA flood questions can shift parcel by parcel — pull elevation-certificate and wetland status early.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Sumner",
+        url: "https://sumnerwa.gov/",
+        context: "Municipal permitting, East Sumner Neighborhood Plan context, and water/sewer for East Valley Edge parcels.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "East Valley Edge attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: [
+      "Sumner-Tapps Highway E",
+      "160th Avenue E",
+      "64th Street E",
+      "Main Street E / 60th Street E",
+      "SR-410",
+      "East Valley Highway E",
+    ],
+    landmarks: [
+      "Salmon Creek corridor",
+      "East Sumner wetlands",
+      "Mount Rainier view corridors",
+      "Sumner Sounder Station",
+      "Sumner-Tapps Highway approach",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach the East Valley Edge via Sumner-Tapps Highway E and SR-410, typically inside a 10–15 minute window for inspections and twilight photography. Wetland-buffer access, quarry-edge approaches, and school pickup can change curb availability — we pad showing schedules accordingly.",
+    adjacent: [
+      {
+        name: "Downtown Sumner",
+        citySlug: "sumner",
+        neighborhoodSlug: "downtown-sumner",
+        blurb: "Historic Main Street core — walkable Craftsman streets and Sounder walk-shed.",
+      },
+      {
+        name: "Bridge Hill",
+        citySlug: "sumner",
+        neighborhoodSlug: "bridge-hill",
+        blurb: "Bluff above downtown — larger yards and view-oriented mid-century stock.",
+      },
+      {
+        name: "North Sumner",
+        citySlug: "sumner",
+        neighborhoodSlug: "north-sumner",
+        blurb: "Northern valley pocket — SR-167 commute access and mid-century streets.",
+      },
+      {
+        name: "Sumner (City)",
+        citySlug: "sumner",
+        blurb: "Parent hub — Valley Corridor and remaining valley stubs on the same desk.",
+      },
+      {
+        name: "Bonney Lake",
+        citySlug: "bonney-lake",
+        blurb: "Plateau neighbor to the east via SR-410 — Tehaleh and lake-adjacent comparison set.",
+      },
+      {
+        name: "Lake Tapps",
+        citySlug: "lake-tapps",
+        blurb: "Reservoir neighbor via Sumner-Tapps Highway — dock and upland comps when valley-edge living is not the fit.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Hannah & Cole R.",
+        zip: "98390",
+        rating: 5,
+        quote:
+          "They priced our rambler against East Valley Edge streets — not a downtown average — and had wetland buffers and flood notes flagged before photos. Escrow stayed clean.",
+      },
+      {
+        author: "Theo N.",
+        zip: "98390",
+        rating: 5,
+        quote:
+          "Sumner-Tapps Highway and Rainier views were sold as real daily life, not fluff. School boundaries and critical-area status were confirmed early.",
       },
     ],
   },
