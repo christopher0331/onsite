@@ -34,8 +34,6 @@ const AI_CRAWLERS = [
  * Prefixes that serve NWMLS / MLS Grid listing records.
  * `/listings` also covers detail pages at `/listings/[mlsNumber]`.
  * `/api/listings` covers search, suggest, map, ours, detail, and QR.
- * `/service-areas/` covers city and neighborhood pages that render live
- * listing cards. The service-area index itself does not.
  */
 const LISTING_DATA_PATHS = [
   "/listings",
@@ -43,7 +41,6 @@ const LISTING_DATA_PATHS = [
   "/open-houses",
   "/api/listings",
   "/api/statistics",
-  "/service-areas/",
 ];
 
 export default function robots(): MetadataRoute.Robots {
