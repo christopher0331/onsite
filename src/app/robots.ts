@@ -2,22 +2,19 @@ import type { MetadataRoute } from "next";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 /**
- * AI training and AI-search crawlers. A bot that matches one of these
- * user-agents ignores the `*` group, so these rules must not be looser
- * than `*`. The `*` group has no Disallow lines (only Allow: /), so there
- * is nothing to copy. Googlebot, Bingbot, and `*` are left unchanged.
+ * A bot that matches a specific group ignores the `*` group. The `*` group
+ * has no Disallow lines (only Allow: /), so there is nothing to copy.
+ * Googlebot, Bingbot, and `*` are left unchanged.
  */
-const AI_CRAWLERS = [
+
+/** Training and other AI crawlers. Also blocked from service-area pages. */
+const AI_TRAINING_CRAWLERS = [
   "GPTBot",
-  "ChatGPT-User",
-  "OAI-SearchBot",
   "ClaudeBot",
   "Claude-Web",
   "anthropic-ai",
   "CCBot",
   "Google-Extended",
-  "PerplexityBot",
-  "Perplexity-User",
   "Bytespider",
   "Applebot-Extended",
   "meta-externalagent",
@@ -28,6 +25,14 @@ const AI_CRAWLERS = [
   "ImagesiftBot",
   "Omgilibot",
   "Timpibot",
+];
+
+/** AI search and citation agents. Service-area pages stay allowed. */
+const AI_SEARCH_CRAWLERS = [
+  "OAI-SearchBot",
+  "ChatGPT-User",
+  "Perplexity-User",
+  "PerplexityBot",
 ];
 
 /**
@@ -52,7 +57,11 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
       {
-        userAgent: AI_CRAWLERS,
+        userAgent: AI_TRAINING_CRAWLERS,
+        disallow: [...LISTING_DATA_PATHS, "/service-areas/"],
+      },
+      {
+        userAgent: AI_SEARCH_CRAWLERS,
         disallow: LISTING_DATA_PATHS,
       },
     ],
