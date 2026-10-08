@@ -65,6 +65,36 @@ const platforms = [
   },
 ];
 
+// youtubeId must be a public @OnSiteRealEstateGroup upload. Private or deleted
+// IDs return oEmbed 401/403/404 and the player shows "Video unavailable".
+// Confirm with `npm run check:videos` before shipping.
+const latestYoutubeVideos = [
+  {
+    youtubeId: "TlUu9QNOdSY",
+    title: "Roy WA Home on 10 Acres · Shop & ADU · 8703 342nd St S · $1.295M",
+  },
+  {
+    youtubeId: "oPqrFiSw8-U",
+    title: "Ocean Shores Home Tour · 632 Duck Lake Dr SE · 3 Bed Single-Level · $375K",
+  },
+  {
+    youtubeId: "koGJf1L2K0Q",
+    title: "Tour 2902 162nd St E Tacoma | 5 Bed Split-Entry · $600k · MLS NWM2579855",
+  },
+  {
+    youtubeId: "szeGB8v0oCo",
+    title: "Spanaway Hobby Farm on 2.52 Acres | Pool, Orchard, RV Parking & More",
+  },
+  {
+    youtubeId: "mxPAAMPpoCg",
+    title: "Tapps Island Living, Fully Remodeled & Move-In Ready",
+  },
+  {
+    youtubeId: "tdPBWJ-xlXY",
+    title: "Spacious Daylight Rambler in Puyallup | Cul-de-Sac Lot, 3-Car Garage, 6 Bedrooms",
+  },
+];
+
 const posts = [
   {
     id: "1341820774078248",
@@ -148,18 +178,11 @@ export default function SocialHubPage() {
               </Link>
             </div>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {[
-                { id: "aFH1aV6tJSI", title: "Peaceful Acreage Retreat in Bonney Lake | Country Living Minutes from Town" },
-                { id: "q691_kYumVo", title: "Snohomish WA Home for Sale | Private Greenbelt Lot + Covered Outdoor Living" },
-                { id: "oUZDZyG2b1s", title: "Two Side-By-Side Hood Canal Acreage Parcels – Tidelands Included" },
-                { id: "MqCCkiu9W3k", title: "A Private Gated Retreat in a Beach-Access Community" },
-                { id: "d8_NFkStLeI", title: "Riverview Area in Kent WA Condo for Sale | Private, Updated, Near Shopping & Transit" },
-                { id: "XYrhiwkwxUc", title: "Avoid Business Burnout With Intentional Systems — Tapps Business Connect" },
-              ].map((vid) => (
-                <div key={vid.id} className="overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.04]">
+              {latestYoutubeVideos.map((vid) => (
+                <div key={vid.youtubeId} className="overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.04]">
                   <div className="relative aspect-video w-full">
                     <iframe
-                      src={`https://www.youtube.com/embed/${vid.id}?rel=0&modestbranding=1`}
+                      src={`https://www.youtube.com/embed/${vid.youtubeId}?rel=0&modestbranding=1`}
                       title={vid.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
