@@ -242,7 +242,13 @@ export default async function CityPage({
           <AboutTheArea cityName={city.name} discover={discover} />
         ) : null}
 
-        {article ? <ServiceAreaArticle article={article} /> : null}
+        {article ? (
+          <ServiceAreaArticle
+            article={article}
+            areaName={city.name}
+            areaQuery={city.name}
+          />
+        ) : null}
 
         <Marquee />
       </main>
