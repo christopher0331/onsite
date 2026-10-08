@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CITIES } from "@/lib/service-areas/data";
+import { useNavDisclosure } from "@/components/useNavDisclosure";
 
 type Props = {
   solid: boolean;
@@ -18,53 +18,52 @@ export default function ServiceAreasNav({
   onNavigate,
   variant = "desktop",
 }: Props) {
-  const [open, setOpen] = useState(false);
-  const panelId = useId();
-  const rootRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const isActive = pathname?.startsWith("/service-areas");
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    if (!open || variant === "mobile") return;
-    const onPointerDown = (e: MouseEvent) => {
-      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
-    };
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("mousedown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open, variant]);
+  const {
+    open,
+    panelId,
+    rootRef,
+    triggerRef,
+    toggle,
+    close,
+    onTriggerKeyDown,
+    onPanelKeyDown,
+    onBlur,
+  } = useNavDisclosure(variant);
 
   const linkTone = solid ? "text-charcoal" : "text-white";
   const mutedTone = solid ? "text-charcoal/70" : "text-white/80";
+  const focusRing = solid
+    ? "focus-visible:outline-charcoal"
+    : "focus-visible:outline-white";
   const panelBg = solid
     ? "bg-white border-charcoal/10 shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
     : "bg-charcoal/95 border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-md";
 
+  const choose = () => {
+    close();
+    onNavigate?.();
+  };
+
   if (variant === "mobile") {
     return (
-      <div className="w-full max-w-sm text-center">
+      <div ref={rootRef} className="w-full max-w-sm text-center" onBlur={onBlur}>
         <button
+          ref={triggerRef}
           type="button"
-          onClick={() => setOpen((v) => !v)}
-          className={`inline-flex items-center gap-2 font-serif text-3xl transition-colors ${
+          onClick={toggle}
+          onKeyDown={onTriggerKeyDown}
+          className={`inline-flex items-center gap-2 font-serif text-3xl transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${
             isActive ? "text-white" : "text-white/90 hover:text-white"
           }`}
           aria-expanded={open}
+          aria-haspopup="menu"
           aria-controls={panelId}
         >
           Service Areas
           <svg
-            className={`w-4 h-4 transition-transform ${open ? "rotate-180" : ""}`}
+            className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -75,21 +74,28 @@ export default function ServiceAreasNav({
           </svg>
         </button>
         {open && (
-          <div id={panelId} className="mt-5 space-y-4 text-left w-full">
+          <div
+            id={panelId}
+            role="menu"
+            onKeyDown={onPanelKeyDown}
+            className="mt-5 w-full space-y-4 text-left"
+          >
             {CITIES.map((city) => (
               <Link
                 key={city.slug}
                 href={`/service-areas/${city.slug}`}
-                onClick={onNavigate}
-                className="block text-[13px] uppercase tracking-[0.2em] text-white hover:text-white/80"
+                role="menuitem"
+                onClick={choose}
+                className="block text-[13px] uppercase tracking-[0.2em] text-white hover:text-white/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 {city.name}
               </Link>
             ))}
             <Link
               href="/service-areas"
-              onClick={onNavigate}
-              className="block pt-2 text-[11px] uppercase tracking-[0.25em] text-white/55 hover:text-white"
+              role="menuitem"
+              onClick={choose}
+              className="block pt-2 text-[11px] uppercase tracking-[0.25em] text-white/55 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               All service areas →
             </Link>
@@ -100,20 +106,24 @@ export default function ServiceAreasNav({
   }
 
   return (
-    <div ref={rootRef} className={`relative shrink-0 ${open ? "z-[110]" : ""}`}>
+    <div
+      ref={rootRef}
+      className={`relative shrink-0 ${open ? "z-[110]" : ""}`}
+      onBlur={onBlur}
+    >
       <button
+        ref={triggerRef}
         type="button"
-        onClick={() => setOpen((v) => !v)}
-        className={`inline-flex items-center gap-1.5 whitespace-nowrap text-[15px] font-medium uppercase tracking-[0.1em] transition-colors duration-300 hover:opacity-60 ${linkTone} ${
-          isActive ? "opacity-100" : ""
-        }`}
+        onClick={toggle}
+        onKeyDown={onTriggerKeyDown}
+        className={`inline-flex items-center gap-1.5 whitespace-nowrap py-2 text-[13px] font-medium uppercase tracking-[0.08em] transition-colors duration-300 hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 xl:text-[14px] xl:tracking-[0.09em] 2xl:text-[15px] 2xl:tracking-[0.1em] ${linkTone} ${focusRing}`}
         aria-expanded={open}
-        aria-haspopup="true"
+        aria-haspopup="menu"
         aria-controls={panelId}
       >
         Areas
         <svg
-          className={`w-3.5 h-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -128,7 +138,8 @@ export default function ServiceAreasNav({
         <div
           id={panelId}
           role="menu"
-          className={`absolute left-1/2 top-full z-[110] mt-4 w-[min(92vw,64rem)] -translate-x-1/2 rounded-3xl border p-6 sm:p-7 ${panelBg}`}
+          onKeyDown={onPanelKeyDown}
+          className={`fixed left-1/2 top-24 z-[120] mt-3 max-h-[min(70vh,40rem)] w-[min(92vw,64rem)] -translate-x-1/2 overflow-y-auto rounded-3xl border p-6 sm:p-7 ${panelBg}`}
         >
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>
@@ -146,15 +157,12 @@ export default function ServiceAreasNav({
             <Link
               href="/service-areas"
               role="menuitem"
-              onClick={() => {
-                setOpen(false);
-                onNavigate?.();
-              }}
-              className={`hidden rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.16em] transition-colors hover:opacity-80 sm:inline-flex ${
+              onClick={choose}
+              className={`hidden rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.16em] transition-colors hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:inline-flex ${
                 solid
                   ? "border-charcoal/20 text-charcoal hover:bg-charcoal/5"
                   : "border-white/25 text-white hover:bg-white/10"
-              }`}
+              } ${focusRing}`}
             >
               View all areas
             </Link>
@@ -166,15 +174,10 @@ export default function ServiceAreasNav({
                 <Link
                   href={`/service-areas/${city.slug}`}
                   role="menuitem"
-                  onClick={() => {
-                    setOpen(false);
-                    onNavigate?.();
-                  }}
-                  className={`group flex items-center justify-between rounded-lg px-2 py-2.5 transition-colors ${
-                    solid
-                      ? "hover:bg-charcoal/[0.04]"
-                      : "hover:bg-white/[0.06]"
-                  }`}
+                  onClick={choose}
+                  className={`group flex items-center justify-between rounded-lg px-2 py-2.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${
+                    solid ? "hover:bg-charcoal/[0.04]" : "hover:bg-white/[0.06]"
+                  } ${focusRing}`}
                 >
                   <div>
                     <p className={`text-[14px] font-medium tracking-[0.02em] ${linkTone}`}>
@@ -200,11 +203,8 @@ export default function ServiceAreasNav({
             <Link
               href="/service-areas"
               role="menuitem"
-              onClick={() => {
-                setOpen(false);
-                onNavigate?.();
-              }}
-              className={`block rounded-lg px-2 py-1 text-[11px] uppercase tracking-[0.2em] transition-colors hover:opacity-80 ${mutedTone}`}
+              onClick={choose}
+              className={`block rounded-lg px-2 py-1 text-[11px] uppercase tracking-[0.2em] transition-colors hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${mutedTone} ${focusRing}`}
             >
               View all areas
             </Link>
