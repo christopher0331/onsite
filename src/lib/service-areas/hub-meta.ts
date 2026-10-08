@@ -20,7 +20,7 @@ const HUB_META: Record<string, string> = {
   "bonney-lake":
     "Bonney Lake plateau homes — Tehaleh, Sky Island, Panorama West, Panorama Heights, Quiet Water, and Lake Tapps. Local comps, live NWMLS listings.",
   sumner:
-    "Sumner homes near Sounder, Downtown Sumner Main Street, Bridge Hill, and the Valley Corridor. Floodplain diligence on the White and Stuck Rivers in 98390, live NWMLS listings.",
+    "Sumner homes near Sounder, Downtown Sumner Main Street, Bridge Hill, East Valley Edge, and the Valley Corridor. Floodplain diligence on the White and Stuck Rivers in 98390, live NWMLS listings.",
   edgewood:
     "Edgewood large-lot and equestrian homes minutes from the valley. Lot utility, wells and septic where they apply, Puyallup and Fife schools, live listings.",
   milton:
@@ -72,6 +72,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "North Sumner homes near Valley Avenue and SR-167 in 98390. Commute-oriented mid-century streets and floodplain diligence, live NWMLS listings.",
   "sumner/valley-corridor":
     "Valley Corridor Sumner homes along Valley Avenue and SR-167 in 98390. Mid-century streets, floodplain diligence, and commute comps, live NWMLS listings.",
+  "sumner/east-valley-edge":
+    "East Valley Edge Sumner homes near Sumner-Tapps Highway and SR-410 in 98390. Larger-lot edges, wetland diligence, and Rainier-view comps, live NWMLS listings.",
   "tacoma/north-end":
     "Tacoma North End homes near Point Defiance, Ruston Way, and Proctor. Historic and mid-century stock in 98403, 98406, and 98407, live NWMLS listings.",
   "tacoma/stadium-district":
