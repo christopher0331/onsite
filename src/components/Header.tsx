@@ -19,8 +19,8 @@ const SOLID_HEADER_ROUTES = [
 ];
 
 const ourListingsHref = "/our-listings";
+const openHousesHref = "/open-houses";
 const evaluationHref = "/free-home-evaluation";
-const TBC_URL = "https://tappsbusinessconnect.com";
 
 const buySellNav = [
   { label: "Buy Home", href: "/buy-home" },
@@ -31,13 +31,12 @@ const buySellNav = [
 
 const listingsNav = [
   { label: "Our Listings", href: ourListingsHref },
-  { label: "Open Houses", href: "/open-houses" },
+  { label: "Open Houses", href: openHousesHref },
 ];
 
 const moreNav = [
   { label: "About", href: "/about-us" },
   { label: "Contact", href: "/contact-us" },
-  { label: "Tapps Business Connect", href: TBC_URL, external: true },
 ];
 
 const sellingProcessLinks = [
@@ -54,7 +53,7 @@ const buySellActive = (path: string) =>
   path.startsWith("/home-evaluation-tool");
 
 const listingsActive = (path: string) =>
-  path.startsWith(ourListingsHref) || path.startsWith("/open-houses");
+  path.startsWith(ourListingsHref) || path.startsWith(openHousesHref);
 
 const moreActive = (path: string) =>
   path.startsWith("/about-us") || path.startsWith("/contact-us");
@@ -124,7 +123,7 @@ export default function Header() {
             </Link>
 
             <nav
-              className="ml-auto hidden shrink-0 flex-nowrap items-center justify-end gap-x-3 overflow-visible lg:flex xl:gap-x-5 2xl:gap-x-7"
+              className="ml-auto hidden shrink-0 flex-nowrap items-center justify-end gap-x-2 overflow-visible lg:flex xl:gap-x-4 2xl:gap-x-6"
               aria-label="Primary"
             >
               <NavDropdown
@@ -148,11 +147,21 @@ export default function Header() {
                 isActive={moreActive}
               />
               <Link
-                href={evaluationHref}
+                href={openHousesHref}
                 className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-[11px] font-medium uppercase tracking-[0.12em] transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 xl:px-4 xl:text-[12px] xl:tracking-[0.14em] 2xl:px-5 2xl:text-[13px] ${
                   solid
                     ? "bg-charcoal text-white hover:bg-charcoal/90 focus-visible:outline-charcoal"
                     : "bg-white text-charcoal hover:bg-white/90 focus-visible:outline-white"
+                }`}
+              >
+                Open Houses
+              </Link>
+              <Link
+                href={evaluationHref}
+                className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-2 text-[11px] font-medium uppercase tracking-[0.1em] transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 xl:px-3.5 xl:text-[12px] xl:tracking-[0.12em] 2xl:px-4 2xl:text-[13px] ${
+                  solid
+                    ? "border-charcoal/35 text-charcoal hover:bg-charcoal hover:text-white focus-visible:outline-charcoal"
+                    : "border-white/55 text-white hover:bg-white/10 focus-visible:outline-white"
                 }`}
               >
                 Free Home Evaluation
@@ -210,6 +219,13 @@ export default function Header() {
             aria-label="Mobile"
             className="flex h-full flex-col items-center justify-start gap-6 overflow-y-auto px-6 pb-10 pt-8 animate-[slide-up_0.35s_ease-out]"
           >
+            <Link
+              href={openHousesHref}
+              onClick={closeMobile}
+              className="rounded-full bg-white px-8 py-3 font-serif text-2xl text-charcoal transition-colors hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              Open Houses
+            </Link>
             <NavDropdown
               label="Buy & Sell"
               items={buySellNav}
@@ -249,7 +265,7 @@ export default function Header() {
             <Link
               href={evaluationHref}
               onClick={closeMobile}
-              className="mt-2 rounded-full bg-white px-8 py-3 font-serif text-2xl text-charcoal transition-colors hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="mt-2 rounded-full border border-white/50 px-8 py-3 text-sm uppercase tracking-[0.16em] text-white transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
               Free Home Evaluation
             </Link>
