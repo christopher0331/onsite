@@ -14,7 +14,12 @@ export const metadata: Metadata = pageMetadata({
   path: "/terms-of-service",
 });
 
-const sections = [
+const sections: {
+  title: string;
+  id?: string;
+  body?: string;
+  points?: string[];
+}[] = [
   {
     title: "Acceptance of Terms",
     body: "By accessing or using the OnSite Real Estate Group website (the \"Site\"), you agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you may not use the Site.",
@@ -22,6 +27,16 @@ const sections = [
   {
     title: "IDX Listing Data",
     body: "Listing data displayed on this Site is provided by the Northwest Multiple Listing Service (NWMLS) as distributed by MLS Grid. IDX information is provided exclusively for consumers' personal, noncommercial use. It may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. The data is deemed reliable but is not guaranteed by MLS GRID, and the use of the MLS GRID Data may be subject to an end user license agreement prescribed by the Member Participant's applicable MLS, if any, and as amended from time to time.",
+  },
+  {
+    title: "Listing Data, Scraping & AI Use",
+    id: "listing-data-scraping-ai-use",
+    points: [
+      "Listing data on this site is provided under license from the Northwest Multiple Listing Service (NWMLS) via MLS Grid, and remains the property of NWMLS / the listing brokers; it is provided for consumers' personal, non-commercial use to identify properties they may be interested in purchasing.",
+      "Automated scraping, crawling, harvesting, or bulk downloading of listing data (by bots, spiders, scripts or any other automated means) is prohibited.",
+      "Using MLS/IDX listing data from this site to train, fine-tune, ground, or otherwise feed artificial intelligence models, large language models, or AI tools, or any use of MLS Grid listing data by AI tools that does not comply with the NWMLS/MLS Grid AI Addendum, is prohibited.",
+      "Violations may result in blocked access and other remedies.",
+    ],
   },
   {
     title: "No Unlawful or Prohibited Use",
@@ -95,7 +110,7 @@ export default async function TermsOfServicePage() {
 
             <div className="space-y-12">
               {visibleSections.map((section, i) => (
-                <div key={section.title} className="border-b border-charcoal/8 pb-12 last:border-0">
+                <div key={section.title} id={section.id} className="border-b border-charcoal/8 pb-12 last:border-0">
                   <div className="flex items-start gap-6">
                     <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1a1a18] font-serif text-[0.75rem] font-light text-white">
                       {i + 1}
@@ -104,9 +119,18 @@ export default async function TermsOfServicePage() {
                       <h2 className="mb-4 font-serif text-[1.3rem] font-light text-charcoal">
                         {section.title}
                       </h2>
-                      <p className="text-[15px] leading-[1.9] text-charcoal/85">
-                        {section.body}
-                      </p>
+                      {section.body ? (
+                        <p className="text-[15px] leading-[1.9] text-charcoal/85">
+                          {section.body}
+                        </p>
+                      ) : null}
+                      {section.points ? (
+                        <ul className="list-disc space-y-4 pl-5 text-[15px] leading-[1.9] text-charcoal/85">
+                          {section.points.map((point) => (
+                            <li key={point}>{point}</li>
+                          ))}
+                        </ul>
+                      ) : null}
                     </div>
                   </div>
                 </div>
