@@ -4,6 +4,9 @@
 // their parent city when they do not have a dedicated clip.
 
 export type ServiceAreaVideo = {
+  // Must be a public @OnSiteRealEstateGroup upload. Private or deleted IDs
+  // return oEmbed 401/403/404 and the player shows "Video unavailable".
+  // Confirm with `npm run check:videos` before shipping.
   youtubeId: string;
   title: string;
   /** Optional ISO date from the channel RSS / upload metadata. */
@@ -38,14 +41,14 @@ const VIDEOS: Record<string, ServiceAreaVideo> = {
       "Charming Single-Story Home in Gem Heights, Puyallup | Prime Location & Community Amenities!",
   },
   sumner: {
-    youtubeId: "cGBw4_qIg6A",
-    title: "Gorgeous 2-Story Home in Sumner | New Roof, No HOA, Walk to the Park",
-    uploadDate: "2026-08-06",
+    youtubeId: "ml3docdYzaQ",
+    title:
+      "Modern 2021-Built Home in Vibrant Sumner Neighborhood | 15615 Washington St, WA 98390",
   },
   "bonney-lake": {
-    youtubeId: "aFH1aV6tJSI",
+    youtubeId: "6CSLkMPJn6c",
     title:
-      "Peaceful Acreage Retreat in Bonney Lake | Country Living Minutes from Town",
+      "Stunning Bonney Lake Home with Mt. Rainier Views | 19807 106th St Ct E | No HOA!",
   },
   tehaleh: {
     youtubeId: "yXg1L4ol6FA",
