@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-10-07";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-10-09";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -74,6 +74,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Valley Corridor Sumner homes along Valley Avenue and SR-167 in 98390. Mid-century streets, floodplain diligence, and commute comps, live NWMLS listings.",
   "sumner/east-valley-edge":
     "East Valley Edge Sumner homes near Sumner-Tapps Highway and SR-410 in 98390. Larger-lot edges, wetland diligence, and Rainier-view comps, live NWMLS listings.",
+  "buckley/elk-run":
+    "Elk Run Buckley homes at Chinook Meadows along 229th Ave E in 98321. Soundbuilt construction, HOA diligence, and White River schools, live NWMLS listings.",
   "tacoma/north-end":
     "Tacoma North End homes near Point Defiance, Ruston Way, and Proctor. Historic and mid-century stock in 98403, 98406, and 98407, live NWMLS listings.",
   "tacoma/stadium-district":

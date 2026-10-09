@@ -2715,6 +2715,101 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
   },
   {
+    slug: "elk-run",
+    citySlug: "buckley",
+    name: "Elk Run",
+    zipCodes: ["98321"],
+    geo: { lat: 47.1585, lng: -122.1685 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/680fe409428a57e5320586a0_1.jpg",
+    heroEyebrow: "Buckley · Elk Run",
+    introCopy:
+      "Buckley's Elk Run at Chinook Meadows is the Soundbuilt foothills pocket along 229th Avenue E in ZIP 98321 — newer construction, HOA diligence, and White River school pathways that a downtown Buckley average misses.",
+    characteristics: {
+      medianHomeYear: "2020 – 2026",
+      architecturalStyles: ["Contemporary", "Northwest Craftsman", "Two-story Traditional"],
+      typicalLotSize: "0.15 – 0.35 acres",
+      notes:
+        "Elk Run at Chinook Meadows is a multi-phase Soundbuilt Homes community with HOA design review, greenbelt edges, and larger planned lots than downtown Buckley grid parcels. Pull CC&Rs, ACC guidelines, dues, and any special assessments early — confirm the correct phase packet for the parcel. Model-adjacent streets, interior courts, and view-oriented homesites are related but not identical micro-comp sets.",
+    },
+    communityOrgs: [
+      {
+        name: "Soundbuilt Homes — Elk Run",
+        url: "https://soundbuilthomes.com/elk-run-at-chinook-meadows/",
+        context: "Builder community hub for floor plans, sales-center hours, and phase inventory at 6320 229th Ave E.",
+      },
+      {
+        name: "White River School District",
+        url: "https://www.whiteriver.wednet.edu/",
+        context: "Elk Run attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: [
+      "229th Avenue E",
+      "232nd Avenue E",
+      "SR-410",
+      "SR-167 connector approaches",
+      "Mundy Loss Road E",
+    ],
+    landmarks: [
+      "Chinook Meadows greenbelt",
+      "Elk Run / Soundbuilt sales center",
+      "Lake Tapps / Allan Yorke Park (west)",
+      "Tapps Island Golf Course approach",
+      "Foothills Trail corridor",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Elk Run via SR-410 and the 229th Avenue E / Chinook Meadows approaches, typically inside a 12–20 minute window for inspections and twilight photography. Model-home traffic, construction staging on active phases, and school pickup can change curb availability — we pad showing schedules accordingly.",
+    adjacent: [
+      {
+        name: "Buckley (City)",
+        citySlug: "buckley",
+        blurb: "Parent hub — downtown Main Street blocks and edge acreage on the same foothills desk.",
+      },
+      {
+        name: "Elk Heights",
+        citySlug: "buckley",
+        blurb: "Sibling Buckley HOA plat — established foothills courts when newer Elk Run builder-spec living is not the fit.",
+      },
+      {
+        name: "Lake Tapps",
+        citySlug: "lake-tapps",
+        blurb: "Reservoir neighbor to the west — dock and upland comps when foothills new construction is not the product.",
+      },
+      {
+        name: "Bonney Lake",
+        citySlug: "bonney-lake",
+        blurb: "Plateau neighbor via SR-410 — Tehaleh and lake-adjacent comparison set.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Valley neighbor to the west — Sounder commute and East Valley Edge cross-shop.",
+      },
+      {
+        name: "Graham",
+        citySlug: "graham",
+        blurb: "Southern foothills neighbor — acreage and well/septic logic when HOA plats are not the fit.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Brett & Kayla M.",
+        zip: "98321",
+        rating: 5,
+        quote:
+          "They priced our Soundbuilt home against Elk Run streets — not a Buckley average — and had HOA docs and phase notes flagged before photos. Escrow stayed clean.",
+      },
+      {
+        author: "Nina P.",
+        zip: "98321",
+        rating: 5,
+        quote:
+          "229th Avenue access and White River schools were sold as real daily life, not fluff. Rainier views and Lake Tapps proximity were framed honestly against Bonney Lake comps.",
+      },
+    ],
+  },
+  {
     slug: "north-end",
     citySlug: "tacoma",
     name: "North End",
