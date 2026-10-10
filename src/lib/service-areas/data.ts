@@ -151,6 +151,7 @@ export const CITIES: City[] = [
       "Rodesco",
       "Shawnee Ridge",
       "Gem Heights",
+      "Sunrise",
       "Summit",
     ],
     permittingOffice: {
@@ -1313,6 +1314,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "South Hill pocket near 176th — HOA amenities and Emerald Ridge attendance.",
       },
       {
+        name: "Sunrise",
+        citySlug: "puyallup",
+        neighborhoodSlug: "sunrise",
+        blurb: "Pierce County master-planned community east of Meridian, between 152nd and 198th.",
+      },
+      {
         name: "Clark's Creek",
         citySlug: "puyallup",
         neighborhoodSlug: "clarks-creek",
@@ -1660,6 +1667,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Parent bench — mall, Meridian, and the wider 98373–98374 comp set.",
       },
       {
+        name: "Sunrise",
+        citySlug: "puyallup",
+        neighborhoodSlug: "sunrise",
+        blurb: "Master-planned community along Sunrise Boulevard and 122nd, east of Meridian.",
+      },
+      {
         name: "Summit",
         citySlug: "puyallup",
         neighborhoodSlug: "summit",
@@ -1688,6 +1701,80 @@ export const NEIGHBORHOODS: Neighborhood[] = [
           "Single-story buyers found us because the listing was honest about layout and the HOA amenities. We were under contract in the first stretch.",
       },
     ],
+  },
+  {
+    slug: "sunrise",
+    citySlug: "puyallup",
+    name: "Sunrise",
+    zipCodes: ["98374"],
+    geo: { lat: 47.0944, lng: -122.2767 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e6a96b499447cc30f637df_1.jpg",
+    heroEyebrow: "Puyallup · Sunrise",
+    introCopy:
+      "Sunrise is Pierce County's master-planned community on Puyallup's South Hill — plats between 152nd and 198th, east of Meridian, where school assignment and master-plan rules matter more than a citywide median.",
+    characteristics: {
+      medianHomeYear: "1990s – 2020s",
+      architecturalStyles: ["Single-family", "Townhome", "Multi-family"],
+      typicalLotSize: "Varies by plat — confirm dimensions on the parcel",
+      notes:
+        "Pierce County's Sunrise master plan covers the tract between 152nd and 198th east of Meridian. Single-family courts, boulevard frontage, and multi-family parcels are related but not identical comps. Pull the county development agreement, critical-area notes, and any association resale packet for the specific division.",
+    },
+    communityOrgs: [
+      {
+        name: "Pierce County — Sunrise Master Planned Community",
+        url: "https://www.piercecountywa.gov/5716/Sunrise",
+        context:
+          "Development agreement, critical-area and sewer maps, and phase status for the South Hill master plan.",
+      },
+      {
+        name: "Puyallup School District",
+        url: "https://www.puyallupsd.org/",
+        context:
+          "Emerald Ridge and Glacier View sit on the district's Sunrise campus — verify elementary and secondary assignment by address. Some edge plats are in Orting schools.",
+      },
+    ],
+    thoroughfares: [
+      "Sunrise Boulevard / Sunrise Parkway E",
+      "122nd Avenue E",
+      "152nd Street E",
+      "184th Street E",
+      "Meridian Ave E (SR-161)",
+    ],
+    landmarks: [
+      "Emerald Ridge High School",
+      "Glacier View Junior High",
+      "Sunrise Boulevard parks",
+      "122nd Avenue E corridor",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Sunrise via SR-410 into Meridian (SR-161), then Sunrise Boulevard and 122nd Avenue East. School pickup on 184th and arterial work on 122nd can change curb space — we pad showing times accordingly.",
+    adjacent: [
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "Parent bench — Meridian retail, Bradley Lake, and the wider 98373–98375 comp set.",
+      },
+      {
+        name: "Gem Heights",
+        citySlug: "puyallup",
+        neighborhoodSlug: "gem-heights",
+        blurb: "Established South Hill pocket near 176th and Sunrise Boulevard.",
+      },
+      {
+        name: "Shawnee Ridge",
+        citySlug: "puyallup",
+        neighborhoodSlug: "shawnee-ridge",
+        blurb: "View lots above the Orting Valley along Shawnee Road E.",
+      },
+      {
+        name: "Puyallup (City)",
+        citySlug: "puyallup",
+        blurb: "Parent hub — downtown, South Hill, and the rest of the Puyallup desk.",
+      },
+    ],
+    reviews: [],
   },
   {
     slug: "summit",
@@ -4995,7 +5082,7 @@ export const PLANNED_SERVICE_AREAS: PlannedServiceArea[] = [
     stateCode: "WA",
     county: "Pierce County",
     zipCodes: ["98371", "98372", "98373", "98374", "98375"],
-    neighborhoods: ["South Hill", "Downtown Puyallup", "Sunrise"],
+    neighborhoods: ["South Hill", "Downtown Puyallup"],
   },
   {
     city: "Tacoma",
