@@ -52,6 +52,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Shawnee Ridge custom homes and Rainier-view lots above the Orting Valley. HOA timing and view orientation drive value in 98374, live NWMLS listings.",
   "puyallup/gem-heights":
     "Gem Heights homes near 176th and Sunrise on South Hill. HOA plats, Gem Heights Elementary, and Emerald Ridge in 98375, live NWMLS listings.",
+  "puyallup/sunrise":
+    "Sunrise master-planned community on Puyallup's South Hill. Pierce County plats east of Meridian, parks, and school checks in 98374, live NWMLS listings.",
   "puyallup/summit":
     "Summit homes between Puyallup and Tacoma. Puyallup vs Franklin Pierce schools, sewer vs septic by street in 98373 and 98371, live NWMLS listings.",
   "bonney-lake/tehaleh":

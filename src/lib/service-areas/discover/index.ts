@@ -17,6 +17,7 @@ import { clarksCreekDiscover } from "./clarks-creek";
 import { rodescoDiscover } from "./rodesco";
 import { shawneeRidgeDiscover } from "./shawnee-ridge";
 import { gemHeightsDiscover } from "./gem-heights";
+import { sunriseDiscover } from "./sunrise";
 import { summitDiscover } from "./summit";
 import { southHillDiscover } from "./south-hill";
 import { tehalehDiscover } from "./tehaleh";
@@ -71,6 +72,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [rodescoDiscover.slug]: rodescoDiscover,
   [shawneeRidgeDiscover.slug]: shawneeRidgeDiscover,
   [gemHeightsDiscover.slug]: gemHeightsDiscover,
+  [sunriseDiscover.slug]: sunriseDiscover,
   [summitDiscover.slug]: summitDiscover,
   [southHillDiscover.slug]: southHillDiscover,
   [tehalehDiscover.slug]: tehalehDiscover,
