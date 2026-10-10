@@ -2856,6 +2856,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       {
         name: "Elk Heights",
         citySlug: "buckley",
+        neighborhoodSlug: "elk-heights",
         blurb: "Sibling Buckley HOA plat — established foothills courts when newer Elk Run builder-spec living is not the fit.",
       },
       {
@@ -2893,6 +2894,104 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         rating: 5,
         quote:
           "229th Avenue access and White River schools were sold as real daily life, not fluff. Rainier views and Lake Tapps proximity were framed honestly against Bonney Lake comps.",
+      },
+    ],
+  },
+  {
+    slug: "elk-heights",
+    citySlug: "buckley",
+    name: "Elk Heights",
+    zipCodes: ["98321"],
+    geo: { lat: 47.1678, lng: -122.0195 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/680fe409428a57e5320586a0_1.jpg",
+    heroEyebrow: "Buckley · Elk Heights",
+    introCopy:
+      "Buckley's Elk Heights is the hilltop HOA pocket northeast of Pioneer Way E in ZIP 98321 — established foothills courts, ACC diligence, and White River school pathways that a downtown Buckley average misses.",
+    characteristics: {
+      medianHomeYear: "2015 – 2022",
+      architecturalStyles: ["Contemporary", "Northwest Craftsman", "Two-story Traditional"],
+      typicalLotSize: "0.20 – 0.55 acres",
+      notes:
+        "Elk Heights is an established hillside HOA with ACC design review, larger planned lots than downtown Buckley grid parcels, and selected Rainier or treetop outlooks. Pull CC&Rs, ACC guidelines, dues, and any special assessments early — exterior paint, fencing, sheds, and major landscape changes typically need ACC approval. Lund Street, Spaulding Circle, and Garnero Street are related but not identical micro-comp sets.",
+    },
+    communityOrgs: [
+      {
+        name: "Elk Heights Homeowners Association",
+        url: "https://jc-higgins.com/association-services/elkheights/",
+        context: "HOA / ACC hub for governing documents, exterior-work applications, and resale timing (JC Higgins & Associates).",
+      },
+      {
+        name: "White River School District",
+        url: "https://www.whiteriver.wednet.edu/",
+        context: "Elk Heights attendance pathways — verify elementary and secondary assignment by parcel.",
+      },
+    ],
+    thoroughfares: [
+      "Lund Street",
+      "Spaulding Circle",
+      "Garnero Street",
+      "Pioneer Way E",
+      "Ryan Road / Highway 165",
+      "SR-410",
+      "Mud Mountain Road",
+    ],
+    landmarks: [
+      "Elk Heights hilltop courts",
+      "Mud Mountain Road approach",
+      "Mount Rainier view corridors",
+      "Downtown Buckley / Main Street",
+      "Foothills Trail corridor",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Elk Heights via SR-410, Highway 165 / Ryan Road, and the Pioneer Way E hilltop approaches, typically inside a 15–25 minute window for inspections and twilight photography. School pickup and ACC exterior-work staging can change curb availability — we pad showing schedules accordingly.",
+    adjacent: [
+      {
+        name: "Buckley (City)",
+        citySlug: "buckley",
+        blurb: "Parent hub — downtown Main Street blocks and edge acreage on the same foothills desk.",
+      },
+      {
+        name: "Elk Run",
+        citySlug: "buckley",
+        neighborhoodSlug: "elk-run",
+        blurb: "Sibling Buckley HOA plat at Chinook Meadows — newer Soundbuilt product when established Elk Heights courts are not the fit.",
+      },
+      {
+        name: "Lake Tapps",
+        citySlug: "lake-tapps",
+        blurb: "Reservoir neighbor to the west — dock and upland comps when foothills hilltop living is not the product.",
+      },
+      {
+        name: "Bonney Lake",
+        citySlug: "bonney-lake",
+        blurb: "Plateau neighbor via SR-410 — Tehaleh and lake-adjacent comparison set.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Valley neighbor to the west — Sounder commute and East Valley Edge cross-shop.",
+      },
+      {
+        name: "Graham",
+        citySlug: "graham",
+        blurb: "Southern foothills neighbor — acreage and well/septic logic when HOA plats are not the fit.",
+      },
+    ],
+    reviews: [
+      {
+        author: "Derek & Allison H.",
+        zip: "98321",
+        rating: 5,
+        quote:
+          "They priced our hilltop home against Elk Heights streets — not a Buckley average — and had ACC docs and dues flagged before photos. Escrow stayed clean.",
+      },
+      {
+        author: "Marissa T.",
+        zip: "98321",
+        rating: 5,
+        quote:
+          "Pioneer Way access and White River schools were sold as real daily life, not fluff. Rainier views and HOA timing were framed honestly against Elk Run and Bonney Lake comps.",
       },
     ],
   },

@@ -2,7 +2,7 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const buckleyDiscover: ServiceAreaDiscover = {
   slug: "buckley",
-  updatedAt: "2026-08-23",
+  updatedAt: "2026-10-10",
   attractions: [
     {
       name: "Downtown Buckley",
@@ -52,9 +52,15 @@ export const buckleyDiscover: ServiceAreaDiscover = {
       description:
         "Elk Run is Buckley's Soundbuilt foothills pocket along 229th Avenue E — contemporary homes, HOA standards, and Rainier-corridor siting that buyers weigh against downtown blocks and the sibling Elk Heights plat.",
     },
+    {
+      name: "Elk Heights",
+      url: "https://jc-higgins.com/association-services/elkheights/",
+      description:
+        "Elk Heights is Buckley's hilltop HOA pocket northeast of Pioneer Way E — established courts, ACC standards, and Rainier-corridor siting that buyers weigh against downtown blocks and newer Elk Run product at Chinook Meadows.",
+    },
   ],
   localLivingMarkdown: [
-    "Buckley offers a quieter foothills lifestyle than the denser valley cities to the west, with housing that ranges from established downtown streets to newer plats like [Elk Run](/service-areas/buckley/elk-run) and Elk Heights and acreage at the edges. Buyers often compare [Buckley](/service-areas/buckley) with [Bonney Lake](/service-areas/bonney-lake), [Sumner](/service-areas/sumner), [Lake Tapps](/service-areas/lake-tapps), and [Graham](/service-areas/graham) while weighing SR-410 commute times, [White River School District](https://www.whiteriver.wednet.edu/) boundaries, and whether they want city water/sewer or a well-and-septic parcel. Everyday life stays close to Main Street services, the [Pierce County Library System](https://mypcls.org/) Buckley branch, and outdoor access along the Foothills Trail, [Federation Forest State Park](https://www.parks.wa.gov/find-parks/state-parks/federation-forest-state-park), and weekend trips into [Mount Rainier National Park](https://www.nps.gov/mora/index.htm).",
-    "Buyers comparing [Buckley homes for sale](/listings?city=Buckley&state=WA) usually sort by pocket: walkable in-town living, HOA plats with newer construction in [Elk Run](/service-areas/buckley/elk-run), or edge acreage with wells, septic, and shop space. That split also shapes how sellers should prepare — utility documentation and permit history matter as much as staging in the foothills. OnSite Real Estate Group helps households weigh those tradeoffs against nearby options in [Lake Tapps](/service-areas/lake-tapps) and the broader SR-410 corridor so the next move fits daily life, not just a listing photo.",
+    "Buckley offers a quieter foothills lifestyle than the denser valley cities to the west, with housing that ranges from established downtown streets to newer plats like [Elk Run](/service-areas/buckley/elk-run) and [Elk Heights](/service-areas/buckley/elk-heights) and acreage at the edges. Buyers often compare [Buckley](/service-areas/buckley) with [Bonney Lake](/service-areas/bonney-lake), [Sumner](/service-areas/sumner), [Lake Tapps](/service-areas/lake-tapps), and [Graham](/service-areas/graham) while weighing SR-410 commute times, [White River School District](https://www.whiteriver.wednet.edu/) boundaries, and whether they want city water/sewer or a well-and-septic parcel. Everyday life stays close to Main Street services, the [Pierce County Library System](https://mypcls.org/) Buckley branch, and outdoor access along the Foothills Trail, [Federation Forest State Park](https://www.parks.wa.gov/find-parks/state-parks/federation-forest-state-park), and weekend trips into [Mount Rainier National Park](https://www.nps.gov/mora/index.htm).",
+    "Buyers comparing [Buckley homes for sale](/listings?city=Buckley&state=WA) usually sort by pocket: walkable in-town living, HOA plats with newer construction in [Elk Run](/service-areas/buckley/elk-run) and established courts in [Elk Heights](/service-areas/buckley/elk-heights), or edge acreage with wells, septic, and shop space. That split also shapes how sellers should prepare — utility documentation and permit history matter as much as staging in the foothills. OnSite Real Estate Group helps households weigh those tradeoffs against nearby options in [Lake Tapps](/service-areas/lake-tapps) and the broader SR-410 corridor so the next move fits daily life, not just a listing photo.",
   ],
 };
