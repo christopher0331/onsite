@@ -27,6 +27,7 @@ import { northSumnerArticle } from "./north-sumner";
 import { valleyCorridorArticle } from "./valley-corridor";
 import { eastValleyEdgeArticle } from "./east-valley-edge";
 import { elkRunArticle } from "./elk-run";
+import { elkHeightsArticle } from "./elk-heights";
 import { northEndArticle } from "./north-end";
 import { stadiumDistrictArticle } from "./stadium-district";
 import { southTacomaArticle } from "./south-tacoma";
@@ -83,6 +84,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [valleyCorridorArticle.slug]: valleyCorridorArticle,
   [eastValleyEdgeArticle.slug]: eastValleyEdgeArticle,
   [elkRunArticle.slug]: elkRunArticle,
+  [elkHeightsArticle.slug]: elkHeightsArticle,
   [northEndArticle.slug]: northEndArticle,
   [stadiumDistrictArticle.slug]: stadiumDistrictArticle,
   [southTacomaArticle.slug]: southTacomaArticle,
