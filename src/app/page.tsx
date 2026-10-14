@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -39,10 +38,10 @@ export default async function Home() {
       <Header />
       <main>
         <Hero />
-        {/* Streams in after the hero; renders nothing when no open houses are upcoming. */}
-        <Suspense fallback={null}>
-          <UpcomingOpenHouses />
-        </Suspense>
+        {/* Rendered inline (not streamed) so it is in the first HTML and does not
+            push the sections below it down after paint (CLS). Data is cached 5 min.
+            Renders nothing when no open houses are upcoming. */}
+        <UpcomingOpenHouses />
         <Stats />
         <TestimonialsScroll />
         <About />
