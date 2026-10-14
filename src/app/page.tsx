@@ -11,8 +11,10 @@ import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 export const metadata: Metadata = pageMetadata({
   title: `${SITE_BRAND} | Pierce County Real Estate Agents`,
   description:
-    "Top rated real estate agents in Pierce County. Sell your home with confidence. Trusted agents serving Lake Tapps, Bonney Lake, Sumner, Buckley, Graham, Puyallup & Beyond.",
+    "Top rated real estate agents in Pierce County. Sell your home with confidence. Serving Lake Tapps, Bonney Lake, Sumner, Buckley, Graham, Puyallup & beyond.",
   path: "/",
+  image:
+    "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67b64a09871910cd858654e8_Onsite%20Regroup%20Video-poster-00001.jpg",
 });
 
 const Stats = dynamic(() => import("@/components/Stats"));
