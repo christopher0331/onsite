@@ -60,7 +60,7 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={POSTER}
-            alt=""
+            alt="Modern Pierce County home with wood siding and lit eaves at dusk"
             fetchPriority="high"
             decoding="async"
             className="absolute inset-0 h-full w-full object-cover"
