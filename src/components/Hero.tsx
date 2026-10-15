@@ -43,28 +43,30 @@ export default function Hero({ showIdxLink = true }: { showIdxLink?: boolean }) 
       className="relative w-full max-w-full overflow-x-hidden lg:h-[72vh] lg:min-h-[560px] lg:max-h-[860px]"
     >
       <div className="absolute inset-0">
-        {videoReady ? (
+        {/* Poster stays mounted as the LCP element; the video fades in over it on idle.
+            No poster attribute on <video>, so the browser doesn't paint a second,
+            later "largest" image and push LCP back. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={POSTER}
+          alt="Modern Pierce County home with wood siding and lit eaves at dusk"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        {videoReady && (
           <video
             autoPlay
             loop
             muted
             playsInline
             preload="metadata"
-            poster={POSTER}
+            aria-hidden
             className="absolute inset-0 h-full w-full object-cover"
           >
             <source src={VIDEO_MP4} type="video/mp4" />
             <source src={VIDEO_WEBM} type="video/webm" />
           </video>
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={POSTER}
-            alt="Modern Pierce County home with wood siding and lit eaves at dusk"
-            fetchPriority="high"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
         )}
         <div className="hero-overlay-video" aria-hidden />
       </div>
