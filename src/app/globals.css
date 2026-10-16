@@ -18,7 +18,7 @@ html {
   scroll-behavior: smooth;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -29,7 +29,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   overscroll-behavior-x: none;
 }
 
@@ -38,7 +38,9 @@ main,
 footer {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  /* clip (not hidden) keeps horizontal overflow contained without
+     turning the page into a scroll container that breaks sticky. */
+  overflow-x: clip;
 }
 
 header {
