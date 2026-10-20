@@ -16,6 +16,7 @@ const SOLID_HEADER_ROUTES = [
   "/our-listings",
   "/featured-homes",
   "/sold-homes",
+  "/pending",
 ];
 
 const ourListingsHref = "/our-listings";
