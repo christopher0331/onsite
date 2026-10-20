@@ -1,3 +1,4 @@
+import { getListingStatusBadge } from "@/lib/listing-status";
 import type { Metadata } from "next";
 import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount } from "@/lib/format-bathrooms";
@@ -162,8 +163,11 @@ export function listingJsonLd(mlsNumber: string, listing: SeoListing) {
   const price = listing.soldPrice ?? listing.listPrice;
   const url = `${SITE_URL}/listings/${encodeURIComponent(mlsNumber)}`;
   const sqft = det.sqft != null ? Number(det.sqft) : NaN;
-  const isSold =
-    listing.standardStatus === "Closed" || listing.status === "U";
+  // Pending / contingent listings are under contract, not sold: Repliers
+  // reports them as status "U", so use the shared status tone instead.
+  const statusTone = getListingStatusBadge(listing).tone;
+  const isSold = listing.standardStatus === "Closed" || statusTone === "sold";
+  const isPending = !isSold && statusTone === "pending";
 
   return {
     "@context": "https://schema.org",
@@ -216,7 +220,9 @@ export function listingJsonLd(mlsNumber: string, listing: SeoListing) {
             priceCurrency: "USD",
             availability: isSold
               ? "https://schema.org/SoldOut"
-              : "https://schema.org/InStock",
+              : isPending
+                ? "https://schema.org/LimitedAvailability"
+                : "https://schema.org/InStock",
             url,
             seller: {
               "@type": "RealEstateAgent",
