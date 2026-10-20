@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import HashAnchorFix from "@/components/HashAnchorFix";
 import PendingActivity from "@/components/PendingActivity";
 import UpcomingOpenHouses from "@/components/UpcomingOpenHouses";
 import { SITE_BRAND } from "@/lib/nap";
@@ -31,6 +32,8 @@ const Insights = dynamic(() => import("@/components/Insights"));
 const Marquee = dynamic(() => import("@/components/Marquee"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
+const PENDING_IDS = ["pending"];
+
 export default async function Home() {
   const showIdxContent = await getShowIdxContentForRequest();
 
@@ -50,6 +53,7 @@ export default async function Home() {
         <Process />
         <FeaturedListings />
         <PendingActivity />
+        <HashAnchorFix ids={PENDING_IDS} />
         {showIdxContent && (
           <>
             <SoldProperties />
