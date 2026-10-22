@@ -10,6 +10,9 @@ export type BlogPost = {
   image: string;
   excerpt: string;
   body: string;
+  format?: "rich";
+  heroAlt?: string;
+  heroCredit?: string;
 };
 
 export type BlogCard = {

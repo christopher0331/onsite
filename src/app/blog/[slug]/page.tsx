@@ -10,6 +10,7 @@ import { SITE_BRAND } from "@/lib/nap";
 import { BlogLinkedText } from "@/lib/service-areas/linkify";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 import blogData from "@/lib/blog-data.json";
+import RichBlogBody from "@/components/blog/RichBlogBody";
 
 type BlogPost = {
   slug: string;
@@ -21,6 +22,10 @@ type BlogPost = {
   image: string;
   excerpt: string;
   body: string;
+  /** "rich" opts into the block renderer; omitted for legacy posts. */
+  format?: "rich";
+  heroAlt?: string;
+  heroCredit?: string;
 };
 
 const posts = blogData as Record<string, BlogPost>;
@@ -175,7 +180,7 @@ export default async function BlogPostPage({
             <>
               <Image
                 src={post.image}
-                alt={post.title}
+                alt={post.heroAlt || post.title}
                 fill
                 className="object-cover opacity-40"
                 sizes="100vw"
@@ -202,13 +207,21 @@ export default async function BlogPostPage({
               {post.author && post.date && <span className="h-px w-4 bg-white/20" />}
               {post.date && <span>{post.date}</span>}
             </div>
+            {post.heroCredit && (
+              <p className="mt-5 text-[11px] text-white/55">
+                <BlogLinkedText
+                  text={post.heroCredit}
+                  className="underline decoration-white/30 underline-offset-[0.22em] hover:decoration-white"
+                />
+              </p>
+            )}
           </div>
         </section>
 
         {/* Article body */}
         <section className="bg-white py-16 sm:py-24">
           <div className="mx-auto max-w-[860px] px-6 lg:px-12">
-            {renderBody(post.body)}
+            {post.format === "rich" ? <RichBlogBody body={post.body} /> : renderBody(post.body)}
           </div>
         </section>
 
