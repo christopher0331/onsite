@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
+import { getBlogPostsNewestFirst, isNewPost } from "@/lib/blog";
 import Hero from "@/components/Hero";
 import HashAnchorFix from "@/components/HashAnchorFix";
 import PendingActivity from "@/components/PendingActivity";
@@ -29,6 +30,18 @@ const PropertyVideos = dynamic(() => import("@/components/PropertyVideos"));
 const Testimonials = dynamic(() => import("@/components/Testimonials"));
 const CTA = dynamic(() => import("@/components/CTA"));
 const Insights = dynamic(() => import("@/components/Insights"));
+
+// Homepage insights: the five newest posts that have an image.
+const latestInsights = getBlogPostsNewestFirst()
+  .filter((post) => post.image)
+  .slice(0, 5)
+  .map((post) => ({
+    category: post.category,
+    title: post.title,
+    href: `/blog/${post.slug}`,
+    isNew: isNewPost(post),
+    image: post.image,
+  }));
 const Marquee = dynamic(() => import("@/components/Marquee"));
 const Footer = dynamic(() => import("@/components/Footer"));
 
@@ -62,7 +75,7 @@ export default async function Home() {
         )}
         <Testimonials />
         <CTA />
-        <Insights />
+        <Insights articles={latestInsights} />
         <Marquee />
       </main>
       <Footer />

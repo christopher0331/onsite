@@ -5,7 +5,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
-import blogData from "@/lib/blog-data.json";
+import { getBlogPostsNewestFirst } from "@/lib/blog";
 
 export const metadata: Metadata = pageMetadata({
   title: "Blog | Real Estate Tips, Market Trends & Insights | OnSite Real Estate Group",
@@ -26,7 +26,7 @@ type BlogPost = {
   body: string;
 };
 
-const allPosts = Object.values(blogData as Record<string, BlogPost>);
+const allPosts: BlogPost[] = getBlogPostsNewestFirst();
 const featured = allPosts[0];
 const rest = allPosts.slice(1);
 
