@@ -40,6 +40,14 @@ export function getAllBlogPosts(): BlogPost[] {
   return Object.values(posts);
 }
 
+/** All posts, newest first by date. Undated posts keep their original order at the end. */
+export function getBlogPostsNewestFirst(): BlogPost[] {
+  return getAllBlogPosts()
+    .map((post, index) => ({ post, index }))
+    .sort((a, b) => dateValue(b.post.date) - dateValue(a.post.date) || a.index - b.index)
+    .map(({ post }) => post);
+}
+
 export function getPostsByCategory(catSlug: string): BlogPost[] {
   return getAllBlogPosts()
     .filter((post) => post.catSlug === catSlug)
