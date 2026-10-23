@@ -44,8 +44,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="overflow-x-hidden">
-      <body className={`${inter.variable} ${dmSans.variable} antialiased overflow-x-hidden`}>
+    <html lang="en" className="overflow-x-clip">
+      <body className={`${inter.variable} ${dmSans.variable} antialiased overflow-x-clip`}>
         <OrganizationSchema />
         {children}
         <AiAssistantLazy />
