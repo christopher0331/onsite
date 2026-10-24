@@ -11,6 +11,7 @@ import { BlogLinkedText } from "@/lib/service-areas/linkify";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 import blogData from "@/lib/blog-data.json";
 import RichBlogBody from "@/components/blog/RichBlogBody";
+import { getBlogPostsNewestFirst } from "@/lib/blog";
 
 type BlogPost = {
   slug: string;
@@ -135,7 +136,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   // Related posts — same category, different slug
-  const related = Object.values(posts)
+  const related = getBlogPostsNewestFirst()
     .filter((p) => p.catSlug === post.catSlug && p.slug !== post.slug)
     .slice(0, 3);
 

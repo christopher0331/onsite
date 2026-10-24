@@ -4,7 +4,15 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
-const articles = [
+export type InsightArticle = {
+  category: string;
+  title: string;
+  href: string;
+  isNew: boolean;
+  image: string;
+};
+
+const fallbackArticles: InsightArticle[] = [
   {
     category: "Insights",
     title:
@@ -51,7 +59,7 @@ const articles = [
   },
 ];
 
-export default function Insights() {
+export default function Insights({ articles = fallbackArticles }: { articles?: InsightArticle[] }) {
   return (
     <section className="relative py-20 sm:py-32 bg-white overflow-hidden">
       <div className="mx-auto max-w-[1440px] px-6 lg:px-12">

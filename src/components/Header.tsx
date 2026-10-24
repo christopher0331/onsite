@@ -140,6 +140,15 @@ export default function Header() {
                 isActive={listingsActive}
               />
               <ServiceAreasNav solid={solid} />
+              <Link
+                href="/blog"
+                aria-current={pathname?.startsWith("/blog") ? "page" : undefined}
+                className={`shrink-0 whitespace-nowrap py-2 text-[13px] font-medium uppercase tracking-[0.08em] transition-colors duration-300 hover:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 xl:text-[14px] xl:tracking-[0.09em] 2xl:text-[15px] 2xl:tracking-[0.1em] ${tone} ${
+                  solid ? "focus-visible:outline-charcoal" : "focus-visible:outline-white"
+                }`}
+              >
+                Blog
+              </Link>
               <NavDropdown
                 label="More"
                 items={moreNav}
@@ -244,6 +253,14 @@ export default function Header() {
               onNavigate={closeMobile}
             />
             <ServiceAreasNav solid={solid} variant="mobile" onNavigate={closeMobile} />
+            <Link
+              href="/blog"
+              onClick={closeMobile}
+              aria-current={pathname?.startsWith("/blog") ? "page" : undefined}
+              className="font-serif text-3xl text-white/90 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              Blog
+            </Link>
             <NavDropdown
               label="More"
               items={moreNav}
