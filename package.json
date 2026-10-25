@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test:bot-gate": "node --experimental-strip-types --import ./scripts/register-ts-ext.mjs scripts/test-form-bot-gate.mjs",
+    "test:listing-days": "node --experimental-strip-types --import ./scripts/register-ts-ext.mjs scripts/test-listing-days.mjs",
     "check:videos": "node scripts/check-youtube-embeds.mjs"
   },
   "dependencies": {

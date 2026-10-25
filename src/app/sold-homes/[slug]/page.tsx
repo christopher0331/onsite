@@ -269,7 +269,7 @@ export async function generateMetadata({
   if (!prop) return {};
   return pageMetadata({
     title: `${prop.title} — Sold for ${prop.price} | OnSite Real Estate Group`,
-    description: `${prop.title} at ${prop.address}, ${prop.city}. Sold for ${prop.price} in ${prop.daysListed} days. MLS #${prop.mls}.`,
+    description: `${prop.title} at ${prop.address}, ${prop.city}. Sold for ${prop.price}. MLS #${prop.mls}.`,
     path: `/sold-homes/${slug}`,
   });
 }
@@ -333,7 +333,7 @@ export default async function SoldHomeDetailPage({
               <div className="h-10 w-px bg-white/20 hidden sm:block self-center" />
               <div>
                 <p className="font-serif text-[2.2rem] font-light leading-none text-white">{prop.daysListed}</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/80">Days Listed</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/80">Days Active</p>
               </div>
               <div className="h-10 w-px bg-white/20 hidden sm:block self-center" />
               <div>
@@ -393,7 +393,7 @@ export default async function SoldHomeDetailPage({
                       { label: "Bedrooms", value: String(prop.beds) },
                       { label: "Bathrooms", value: String(prop.baths) },
                       { label: "Square Feet", value: prop.sqft },
-                      { label: "Days Listed", value: String(prop.daysListed) },
+                      { label: "Days Active", value: String(prop.daysListed) },
                       { label: "Closed On", value: prop.closedOn },
                     ].map(({ label, value }) => (
                       <div key={label} className="flex items-baseline justify-between border-b border-charcoal/8 pb-4 last:border-0 last:pb-0">
@@ -494,7 +494,7 @@ export default async function SoldHomeDetailPage({
                     </div>
                     <div className="mt-4 flex items-center justify-between border-t border-charcoal/8 pt-4">
                       <p className="font-serif text-[1.3rem] font-light text-charcoal">{p.price}</p>
-                      <p className="text-[11px] text-charcoal/65">{p.daysListed} days</p>
+                      <p className="text-[11px] text-charcoal/65">{p.daysListed} days active</p>
                     </div>
                     <MLSCardAttribution />
                   </div>

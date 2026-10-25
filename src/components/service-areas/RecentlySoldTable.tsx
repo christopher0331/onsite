@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { SoldListingRow } from "@/lib/service-area-market";
 import { formatStreetAddressOrUnavailable } from "@/lib/format-address";
+import { computeDaysActive } from "@/lib/listing-days";
 
 type Props = {
   cityName: string;
@@ -65,7 +66,7 @@ export default function RecentlySoldTable({
                 <th className="px-5 py-4 font-medium">Address</th>
                 <th className="px-5 py-4 font-medium">Sold price</th>
                 <th className="px-5 py-4 font-medium">$/sqft</th>
-                <th className="px-5 py-4 font-medium">DOM</th>
+                <th className="px-5 py-4 font-medium">Days Active</th>
                 <th className="px-5 py-4 font-medium">Sold date</th>
               </tr>
             </thead>
@@ -100,9 +101,7 @@ export default function RecentlySoldTable({
                       {pricePerSqft(listing)}
                     </td>
                     <td className="px-5 py-3.5 text-charcoal/85">
-                      {listing.daysOnMarket ??
-                        listing.simpleDaysOnMarket ??
-                        "—"}
+                      {computeDaysActive(listing) ?? "—"}
                     </td>
                     <td className="px-5 py-3.5 text-charcoal/85">
                       {formatDate(listing.soldDate)}

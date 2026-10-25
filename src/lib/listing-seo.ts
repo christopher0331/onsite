@@ -1,4 +1,5 @@
 import { getListingStatusBadge } from "@/lib/listing-status";
+import { isFirstLookListing } from "@/lib/listing-days";
 import type { Metadata } from "next";
 import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount } from "@/lib/format-bathrooms";
@@ -18,6 +19,7 @@ export type SeoListing = {
   soldPrice?: number | null;
   listDate?: string | null;
   status?: string | null;
+  lastStatus?: string | null;
   standardStatus?: string | null;
   images?: string[] | null;
   permissions?: { displayAddressOnInternet?: string } | null;
@@ -175,7 +177,8 @@ export function listingJsonLd(mlsNumber: string, listing: SeoListing) {
     name,
     url,
     description,
-    datePosted: listing.listDate || undefined,
+    // First Look: the listing date is withheld from public display.
+    datePosted: isFirstLookListing(listing) ? undefined : listing.listDate || undefined,
     image: img || undefined,
     address: {
       "@type": "PostalAddress",

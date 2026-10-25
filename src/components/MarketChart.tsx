@@ -58,7 +58,7 @@ export default function MarketChart({
   return (
     <div className="min-w-0 overflow-hidden rounded-2xl border border-charcoal/10 bg-[#faf9f7] p-4 sm:p-8">
       <h3 className="mb-1 text-[1.1rem] font-bold tracking-tight text-charcoal sm:text-[1.4rem]">
-        Sold Price &amp; Days On Market in {city}
+        Sold Price &amp; Days Active in {city}
       </h3>
 
       {/* Legend */}
@@ -69,7 +69,7 @@ export default function MarketChart({
         </div>
         <div className="flex items-center gap-2">
           <span className="w-4 h-[3px] rounded-full bg-[#0d9488]" />
-          <span className="text-[12px] font-medium text-charcoal/80">Median Days on Market</span>
+          <span className="text-[12px] font-medium text-charcoal/80">Median Days Active</span>
         </div>
       </div>
 
@@ -138,7 +138,7 @@ export default function MarketChart({
               yAxisId="dom"
               type="monotone"
               dataKey="dom"
-              name="Median Days on Market"
+              name="Median Days Active"
               stroke="#0d9488"
               strokeWidth={2.5}
               dot={false}

@@ -7,7 +7,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
     faqs: [
       {
         q: "How Long Does It Take to Sell My Home?",
-        a: "The time it takes to sell your home varies, but on average, you can expect the process to take about two months. This includes 14–21 days on the market before receiving an offer and an additional 30 days for the buyer's financing to finalize.",
+        a: "The time it takes to sell your home varies, but on average, you can expect the process to take about two months. This includes 14–21 days active before receiving an offer and an additional 30 days for the buyer's financing to finalize.",
       },
       {
         q: "How Did My Friend's Home Sell in 2 Weeks?",

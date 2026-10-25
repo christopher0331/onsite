@@ -6,6 +6,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import dynamic from "next/dynamic";
 import { getListingStatusBadge } from "@/lib/listing-status";
+import { computeDaysActive, isFirstLookListing } from "@/lib/listing-days";
 import { getCitySlugByName } from "@/lib/service-areas/data";
 import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount, formatBathroomDetail } from "@/lib/format-bathrooms";
@@ -329,9 +330,12 @@ export default function ListingDetailView({
   if (listing.lot?.source) detailRows.push({ label: "Lot Source", value: listing.lot.source });
   if (det.landscapeFeatures) detailRows.push({ label: "Landscaping", value: det.landscapeFeatures });
   if (det.extras) detailRows.push({ label: "Extras", value: det.extras });
-  detailRows.push({ label: "Days on Market", value: listing.simpleDaysOnMarket ?? listing.daysOnMarket });
-  if (listing.listDate) detailRows.push({ label: "Listed", value: formatDate(listing.listDate) });
-  if (listing.originalPrice && listing.originalPrice !== listing.listPrice) {
+  // NWMLS: "Days Active" via the CDOM formula; First Look hides days + list date.
+  const firstLook = isFirstLookListing(listing);
+  const daysActive = computeDaysActive(listing, now);
+  if (daysActive !== null) detailRows.push({ label: "Days Active", value: daysActive });
+  if (listing.listDate && !firstLook) detailRows.push({ label: "Listed", value: formatDate(listing.listDate) });
+  if (!firstLook && listing.originalPrice && listing.originalPrice !== listing.listPrice) {
     detailRows.push({ label: "Original Price", value: formatPrice(listing.originalPrice) });
   }
 
@@ -437,14 +441,10 @@ export default function ListingDetailView({
           <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Est. Value</p>
         </div>
       )}
-      {(listing.simpleDaysOnMarket ?? listing.daysOnMarket) > 0 && (
+      {daysActive !== null && (
         <div>
-          <p className="font-serif text-[1.8rem] font-light text-white">
-            {listing.simpleDaysOnMarket ?? listing.daysOnMarket}
-          </p>
-          <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">
-            {listing.soldPrice ? "Days on Market" : "Days Listed"}
-          </p>
+          <p className="font-serif text-[1.8rem] font-light text-white">{daysActive}</p>
+          <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Days Active</p>
         </div>
       )}
     </>
@@ -1237,7 +1237,7 @@ export default function ListingDetailView({
                     </div>
 
                     <div className="rounded-2xl border border-charcoal/10 p-6">
-                      <p className="text-[12px] text-charcoal/80 mb-3">Days on Market</p>
+                      <p className="text-[12px] text-charcoal/80 mb-3">Days Active</p>
                       <div className="grid grid-cols-3 gap-2 sm:flex sm:gap-6">
                         {domMths.map((m) => (
                           <div key={m}>
