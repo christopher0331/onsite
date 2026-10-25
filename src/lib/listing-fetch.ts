@@ -15,6 +15,7 @@ import {
   type OnsiteListing,
   type OnsiteListingScope,
 } from "@/lib/onsite-listings";
+import { isListingBlockedFromDisplay } from "@/lib/listing-feed-flags";
 import { enrichListing, enrichListingsResponse, repliersListingsUrl } from "@/lib/repliers-enrich";
 
 const REPLIERS_REVALIDATE = 300;
@@ -35,8 +36,31 @@ function fetchOpts() {
   };
 }
 
-export async function fetchListingByMlsNumber(mlsNumber: string) {
-  if (!mlsNumber || !process.env.REPLIERS_API_KEY) return null;
+type LookupListing = { mlsNumber?: string; raw?: Record<string, unknown> } & Record<string, unknown>;
+
+export type ListingLookup = {
+  /** Displayable listing, or null. */
+  listing: LookupListing | null;
+  /**
+   * True only when the feed positively reports no such listing (HTTP 404 on every
+   * lookup path) or the record is not displayable (MlgCanView=false, Expired /
+   * Canceled / Temporarily Off Market / Sale-Fail). False for transient failures
+   * (missing API key, 5xx, 429, network) so those never turn into a 404.
+   */
+  gone: boolean;
+};
+
+async function lookupInner(mlsNumber: string): Promise<ListingLookup> {
+  const none: ListingLookup = { listing: null, gone: false };
+  if (!mlsNumber || !process.env.REPLIERS_API_KEY) return none;
+
+  const accept = (raw: unknown) => {
+    const data = enrichListing(raw as LookupListing);
+    if (!data?.mlsNumber) return null;
+    return data;
+  };
+  const blocked = (data: unknown) =>
+    isListingBlockedFromDisplay(data as Parameters<typeof isListingBlockedFromDisplay>[0]);
 
   try {
     const direct = await fetch(
@@ -44,12 +68,14 @@ export async function fetchListingByMlsNumber(mlsNumber: string) {
       fetchOpts()
     );
     if (direct.ok) {
-      const data = enrichListing(await direct.json());
-      return data?.mlsNumber ? data : null;
+      const data = accept(await direct.json());
+      if (!data) return none;
+      return blocked(data) ? { listing: null, gone: true } : { listing: data, gone: false };
     }
 
-    if (direct.status !== 404) return null;
+    if (direct.status !== 404) return none;
 
+    let sawError = false;
     const isNwmls = /^(NWM)?\d+$/.test(mlsNumber);
     const bare = mlsNumber.replace(/^[A-Z]+/, "");
     const prefixed = `NWM${bare}`;
@@ -60,8 +86,12 @@ export async function fetchListingByMlsNumber(mlsNumber: string) {
     for (const variant of directVariants) {
       const r = await fetch(repliersListingsUrl(`/${encodeURIComponent(variant)}`), fetchOpts());
       if (r.ok) {
-        const data = enrichListing(await r.json());
-        if (data?.mlsNumber) return data;
+        const data = accept(await r.json());
+        if (data) {
+          return blocked(data) ? { listing: null, gone: true } : { listing: data, gone: false };
+        }
+      } else if (r.status !== 404) {
+        sawError = true;
       }
     }
 
@@ -86,20 +116,33 @@ export async function fetchListingByMlsNumber(mlsNumber: string) {
         const payload = await fallback.json();
         const hit = Array.isArray(payload?.listings) ? payload.listings[0] : null;
         if (hit) {
-          const data = enrichListing(hit);
-          if (data?.mlsNumber) return data;
+          const data = accept(hit);
+          if (data) {
+            return blocked(data) ? { listing: null, gone: true } : { listing: data, gone: false };
+          }
         }
+      } else {
+        sawError = true;
       }
     }
+    // Every lookup path answered and none knows this listing: it is no longer in the feed.
+    return { listing: null, gone: !sawError };
   } catch {
-    return null;
+    return none;
   }
+}
 
-  return null;
+export async function fetchListingLookup(mlsNumber: string): Promise<ListingLookup> {
+  return lookupInner(mlsNumber);
+}
+
+export async function fetchListingByMlsNumber(mlsNumber: string) {
+  return (await lookupInner(mlsNumber)).listing;
 }
 
 /** Request-deduped listing fetch for generateMetadata + the App Router page. */
-export const getListingByMlsNumber = cache(fetchListingByMlsNumber);
+export const getListingLookup = cache(fetchListingLookup);
+export const getListingByMlsNumber = cache(async (mlsNumber: string) => (await getListingLookup(mlsNumber)).listing);
 
 type ListingRow = CardListing & {
   agents?: Array<{ name?: string; boardAgentId?: string }>;

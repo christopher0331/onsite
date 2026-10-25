@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount } from "@/lib/format-bathrooms";
-import { repliersListingsUrl } from "@/lib/repliers-enrich";
+import { enrichListingsResponse, repliersListingsUrl } from "@/lib/repliers-enrich";
 
 type Listing = {
   mlsNumber: string;
@@ -92,7 +92,7 @@ async function fetchVideoListings(): Promise<Listing[]> {
     );
 
     if (!res.ok) return [];
-    const data = await res.json();
+    const data = enrichListingsResponse(await res.json()) as { listings?: Listing[] };
     const listings: Listing[] = data.listings || [];
 
     return listings

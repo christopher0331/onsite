@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { getListingByMlsNumber } from "@/lib/listing-fetch";
+import { getListingLookup } from "@/lib/listing-fetch";
 import { isListingIndexable } from "@/lib/listing-index-policy";
 import { listingJsonLd } from "@/lib/listing-seo";
 import ListingDetailView, { type Listing } from "./ListingDetailView";
@@ -14,7 +15,12 @@ export default async function ListingDetailPage({
   params: Promise<{ mlsNumber: string }>;
 }) {
   const { mlsNumber } = await params;
-  const listing = (await getListingByMlsNumber(mlsNumber)) as Listing | null;
+  const lookup = await getListingLookup(mlsNumber);
+  const listing = lookup.listing as Listing | null;
+  // Gone from the feed, or Expired / Canceled / Temporarily Off Market / Sale-Fail /
+  // MlgCanView=false: respond 404 (not a soft 200). Transient lookup errors keep the
+  // soft "not found" page below so a feed hiccup never 404s a live listing.
+  if (!listing && lookup.gone) notFound();
   const indexable = isListingIndexable(listing);
   const jsonLd = listing && indexable ? listingJsonLd(mlsNumber, listing) : null;
 

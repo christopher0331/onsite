@@ -279,7 +279,12 @@ export default function ListingDetailView({
   const images = listing.images || [];
   const isActive = listing.status === "A";
   const det = listing.details;
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${street}, ${listing.address.city}, ${listing.address.state} ${listing.address.zip}`)}`;
+  // Never send a hidden street address (InternetAddressDisplayYN=false) to the map link.
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    showAddress
+      ? `${street}, ${listing.address.city}, ${listing.address.state} ${listing.address.zip}`
+      : `${listing.address.city}, ${listing.address.state}`
+  )}`;
   const serviceAreaSlug = getCitySlugByName(listing.address.city);
 
   // Build details rows
