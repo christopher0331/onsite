@@ -241,7 +241,7 @@ export default function OurListingsClient({
                 href="/listings?status=A&state=WA"
                 className="mt-8 inline-flex border border-charcoal/20 px-6 py-3 text-[11px] uppercase tracking-[0.2em] text-charcoal hover:bg-charcoal hover:text-white"
               >
-                Search All MLS Listings
+                Search All Listings
               </Link>
             </div>
           ) : (
@@ -261,7 +261,7 @@ export default function OurListingsClient({
                   href="/listings?status=A&state=WA"
                   className="text-[11px] uppercase tracking-[0.2em] text-charcoal/70 underline-offset-4 hover:text-charcoal hover:underline"
                 >
-                  Search all MLS homes →
+                  Search all homes →
                 </Link>
               </div>
 

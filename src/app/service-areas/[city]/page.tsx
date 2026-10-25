@@ -168,7 +168,7 @@ export default async function CityPage({
             initialPrompt="homes for sale in Puyallup WA"
             examples={PUYALLUP_AI_EXAMPLES}
             heading={`Search ${city.name} with AI`}
-            subheading="Describe the Puyallup home you want — South Hill, downtown, yard, budget — and we'll match live MLS inventory."
+            subheading="Describe the Puyallup home you want — South Hill, downtown, yard, budget — and we'll match current listings."
           />
         ) : null}
 
