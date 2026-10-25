@@ -16,6 +16,7 @@ import {
   type OnsiteListingScope,
 } from "@/lib/onsite-listings";
 import { enrichListing, enrichListingsResponse, repliersListingsUrl } from "@/lib/repliers-enrich";
+import { isSoldDisplayAuthorized } from "@/lib/sold-display";
 
 const REPLIERS_REVALIDATE = 300;
 const SITEMAP_MAX_LISTINGS = 5000;
@@ -152,6 +153,7 @@ async function fetchScope(params: URLSearchParams) {
   const byMls = new Map<string, ListingRow>();
   const ingest = (payload: { listings?: unknown }) => {
     for (const row of (payload.listings ?? []) as ListingRow[]) {
+      if (!isSoldDisplayAuthorized(row)) continue;
       if (row?.mlsNumber && !byMls.has(row.mlsNumber)) byMls.set(row.mlsNumber, row);
     }
   };
@@ -333,7 +335,7 @@ export async function queryPublicListingsPage(opts: {
   const data = enrichListingsResponse(await res.json()) as PublicListingsPage & {
     listings?: CardListing[];
   };
-  let listings = Array.isArray(data.listings) ? data.listings : [];
+  let listings = (Array.isArray(data.listings) ? data.listings : []).filter(isSoldDisplayAuthorized);
   const count = typeof data.count === "number" ? data.count : listings.length;
   const numPages =
     typeof data.numPages === "number" ? data.numPages : Math.max(1, Math.ceil(count / pageSize));

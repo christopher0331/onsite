@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
+import SoldBrokerageLine from "@/components/SoldBrokerageLine";
 
 const properties = [
   {
@@ -96,6 +97,7 @@ export default function SoldProperties() {
                       </span>
                     </div>
                   </div>
+                  <SoldBrokerageLine slug={property.href.split("/").pop()} className="rounded-b-xl" />
                   <div className="mt-5 px-1">
                     <h3 className="font-serif text-xl lg:text-[1.35rem] text-charcoal font-normal leading-snug group-hover:translate-x-1 transition-transform duration-300">
                       {property.title}

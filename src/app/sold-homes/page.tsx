@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
+import SoldBrokerageLine from "@/components/SoldBrokerageLine";
 
 export const metadata: Metadata = pageMetadata({
   title: "Recently Sold Homes | OnSite Real Estate Group",
@@ -173,8 +174,9 @@ export default function SoldHomesPage() {
               className="group mb-5 block overflow-hidden rounded-3xl shadow-[0_22px_80px_rgba(0,0,0,0.18)] transition-all duration-500 hover:shadow-[0_40px_120px_rgba(0,0,0,0.28)] hover:-translate-y-1"
             >
               <div className="grid grid-cols-1 lg:grid-cols-2">
-                {/* Image */}
-                <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[520px]">
+                {/* Image + brokerage attribution directly under the photo */}
+                <div className="flex flex-col">
+                <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[520px] lg:flex-1">
                   <Image
                     src={featured.image}
                     alt={featured.title}
@@ -187,6 +189,8 @@ export default function SoldHomesPage() {
                   <span className="absolute left-5 top-5 rounded-full bg-white px-4 py-1.5 text-[11px] uppercase tracking-[0.25em] text-charcoal shadow-lg">
                     Sold
                   </span>
+                </div>
+                <SoldBrokerageLine slug={featured.slug} className="bg-white" />
                 </div>
                 {/* Info */}
                 <div className="flex flex-col justify-center bg-[#1a1a18] p-10 lg:p-14">
@@ -248,6 +252,7 @@ export default function SoldHomesPage() {
                       Sold
                     </span>
                   </div>
+                  <SoldBrokerageLine slug={prop.slug} />
 
                   {/* Info */}
                   <div className="flex flex-1 flex-col justify-between bg-white p-6">

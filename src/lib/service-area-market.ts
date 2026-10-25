@@ -1,5 +1,6 @@
 import type { CardListing } from "@/components/ListingCard";
 import { enrichListingsResponse, repliersListingsUrl } from "@/lib/repliers-enrich";
+import { isSoldDisplayAuthorized } from "@/lib/sold-display";
 
 const API = "https://api.repliers.io/listings";
 
@@ -194,7 +195,8 @@ export async function getServiceAreaSoldListings(
   limit = 8
 ): Promise<SoldListingRow[]> {
   const params = new URLSearchParams({
-    resultsPerPage: String(Math.min(Math.max(limit, 1), 40)),
+    // A few extra rows so excluding unauthorized sold listings still fills the table.
+    resultsPerPage: String(Math.min(Math.max(limit, 1) + 4, 40)),
     pageNum: "1",
     state: "WA",
     city: cityName,
@@ -215,7 +217,10 @@ export async function getServiceAreaSoldListings(
     const data = enrichListingsResponse(await res.json()) as {
       listings?: SoldListingRow[];
     };
-    const rows = Array.isArray(data.listings) ? data.listings : [];
+    const rows = (Array.isArray(data.listings) ? data.listings : []).filter(
+      // Sold comps need seller internet-display authorization (InternetEntireListingDisplayYN).
+      isSoldDisplayAuthorized
+    );
     return rows.slice(0, limit);
   } catch {
     return [];
