@@ -2,7 +2,7 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const grahamDiscover: ServiceAreaDiscover = {
   slug: "graham",
-  updatedAt: "2026-08-30",
+  updatedAt: "2026-10-26",
   attractions: [
     {
       name: "Bethel School District",
@@ -44,7 +44,7 @@ export const grahamDiscover: ServiceAreaDiscover = {
       name: "The Country",
       url: "https://www.google.com/maps/place/Graham,+WA+98338",
       description:
-        "The Country is among Graham's better-known platted communities, with HOA standards and smaller lots than open acreage. Buyers often compare it against true 1–5+ acre parcels when deciding how much land and outbuilding freedom they need.",
+        "The Country is among Graham's better-known platted communities, with HOA standards and mostly 1+ acre lots. Buyers often compare it against open 1–5+ acre parcels when deciding how much land and outbuilding freedom they need — see our [The Country neighborhood guide](/service-areas/graham/the-country).",
     },
     {
       name: "Mount Rainier Corridor Access",
@@ -54,7 +54,7 @@ export const grahamDiscover: ServiceAreaDiscover = {
     },
   ],
   localLivingMarkdown: [
-    "Graham is unincorporated Pierce County acreage country in ZIP 98338 — larger lots, shops, pasture, and well-and-septic parcels where land and outbuildings drive value as much as finished square footage. Buyers comparing [Graham](/service-areas/graham) with [Buckley](/service-areas/buckley), [Puyallup](/service-areas/puyallup), and the Spanaway area usually weigh [Bethel School District](https://bethelsd.org/) boundaries, rural zoning through [Pierce County Planning & Public Works](https://www.piercecountywa.gov/91/Planning-Public-Works), and whether they want open acreage or a platted community like The Country. Everyday utility diligence runs through [Puget Sound Energy](https://www.pse.com/), the [Tacoma–Pierce County Health Department](https://www.tpchd.org/) for wells and septic, and the [Pierce County Assessor-Treasurer](https://www.piercecountywa.gov/91/Assessor---Treasurer) for parcel standing.",
+    "Graham is unincorporated Pierce County acreage country in ZIP 98338 — larger lots, shops, pasture, and well-and-septic parcels where land and outbuildings drive value as much as finished square footage. Buyers comparing [Graham](/service-areas/graham) with [Buckley](/service-areas/buckley), [Puyallup](/service-areas/puyallup), and the Spanaway area usually weigh [Bethel School District](https://bethelsd.org/) boundaries, rural zoning through [Pierce County Planning & Public Works](https://www.piercecountywa.gov/91/Planning-Public-Works), and whether they want open acreage or a platted community like [The Country](/service-areas/graham/the-country). Everyday utility diligence runs through [Puget Sound Energy](https://www.pse.com/), the [Tacoma–Pierce County Health Department](https://www.tpchd.org/) for wells and septic, and the [Pierce County Assessor-Treasurer](https://www.piercecountywa.gov/91/Assessor---Treasurer) for parcel standing.",
     "Shoppers browsing [Graham homes for sale](/listings?city=Graham&state=WA) typically sort by usable land, shop space, and documentation readiness rather than a single neighborhood average. That parcel-first mindset is how OnSite Real Estate Group underwrites Graham — matching buyers and sellers to the right acreage, utility package, and foothills lifestyle before the listing photo does the talking.",
   ],
 };
