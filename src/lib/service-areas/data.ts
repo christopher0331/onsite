@@ -904,7 +904,7 @@ export const CITIES: City[] = [
         "Graham sits higher and wetter than the valley floor — gravel drives, pasture, and roof moss all read differently in photos by November, so exterior prep and photography are front-loaded into late summer.",
     },
     suburban: {
-      typicalLotSize: "1 – 5+ acres on most parcels; smaller lots in platted communities like The Country.",
+      typicalLotSize: "1 – 5+ acres on most parcels; HOA platted communities like The Country run mostly 1+ acre.",
       septicNotes:
         "Private wells and septic systems are the norm; documentation drives both pricing confidence and escrow speed.",
       hoaNotes: "The Country and similar platted communities carry HOAs; open acreage typically does not.",
@@ -2994,6 +2994,94 @@ export const NEIGHBORHOODS: Neighborhood[] = [
           "Pioneer Way access and White River schools were sold as real daily life, not fluff. Rainier views and HOA timing were framed honestly against Elk Run and Bonney Lake comps.",
       },
     ],
+  },
+  {
+    slug: "the-country",
+    citySlug: "graham",
+    name: "The Country",
+    zipCodes: ["98338"],
+    geo: { lat: 47.0455, lng: -122.222 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/680fe8304415e6b356d95497_1.jpg",
+    heroEyebrow: "Graham · The Country",
+    introCopy:
+      "The Country is a covenant community of mostly 1+ acre lots east of Meridian in Graham, ZIP 98338 — HOA and CC&R diligence, septic and county permitting, Mount Rainier outlooks, and Bethel School District pathways that a Graham-wide acreage average misses.",
+    characteristics: {
+      medianHomeYear: "1980s – 1990s, with newer custom homes",
+      architecturalStyles: ["Rambler", "Two-story with basement", "Custom Northwest"],
+      typicalLotSize: "Mostly 1+ acre",
+      notes:
+        "The Country is an HOA community platted in phases, so dues, CC&Rs, and amenities can differ by division. Listings in the community have advertised a clubhouse or community center, a park and playground, a basketball court, non-motorized walking and riding trails, and private river access. Pull the CC&Rs, current dues, and the association's resale packet early. Graham is unincorporated, so permits run through Pierce County, and septic records sit with the Tacoma–Pierce County Health Department.",
+    },
+    communityOrgs: [
+      {
+        name: "The Country HOA",
+        url: "https://thecountryhoa.com/",
+        context: "Association website with meeting information and committees, including Design / Architectural Review; governing documents are members-only.",
+      },
+      {
+        name: "Bethel School District",
+        url: "https://bethelsd.org/",
+        context: "The Country attendance pathways — verify elementary, middle, and high school assignment by address.",
+      },
+      {
+        name: "Pierce County Planning & Public Works",
+        url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
+        context: "Permits, site development, and zoning for unincorporated Graham parcels.",
+      },
+      {
+        name: "Tacoma–Pierce County Health Department",
+        url: "https://www.tpchd.org/",
+        context: "Septic permitting and private-well program records.",
+      },
+    ],
+    thoroughfares: [
+      "Country Drive E",
+      "224th Street E",
+      "229th Street E",
+      "165th Avenue E",
+      "Meridian Avenue E (SR-161)",
+    ],
+    landmarks: [
+      "The Country community center",
+      "Community trail network",
+      "Mount Rainier view corridors",
+      "Puyallup River valley outlooks",
+      "Meridian Avenue E shopping corridor",
+    ],
+    dispatchCopy:
+      "We reach The Country via Meridian Avenue E (SR-161) and 224th Street E, which becomes Country Drive E. Sloped sites, long approaches, and limited street parking can change showing and photography logistics, so we plan schedules and twilight shoots around each parcel.",
+    adjacent: [
+      {
+        name: "Graham (City)",
+        citySlug: "graham",
+        blurb: "Parent hub — acreage, wells and septic, and unincorporated Pierce County permitting on the same desk.",
+      },
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "Plateau neighbor to the north-west — city services and denser plats when acreage upkeep is not the fit.",
+      },
+      {
+        name: "Elk Run",
+        citySlug: "buckley",
+        neighborhoodSlug: "elk-run",
+        blurb: "Foothills HOA plat in Buckley — newer construction and smaller lots when an acre is more land than you need.",
+      },
+      {
+        name: "Elk Heights",
+        citySlug: "buckley",
+        neighborhoodSlug: "elk-heights",
+        blurb: "Established Buckley hilltop HOA — ACC diligence and White River schools as an alternative foothills HOA.",
+      },
+      {
+        name: "Bonney Lake",
+        citySlug: "bonney-lake",
+        blurb: "Plateau neighbor via SR-410 — Tehaleh and lake-adjacent comparison set.",
+      },
+    ],
+    reviews: [],
   },
   {
     slug: "north-end",
