@@ -85,7 +85,7 @@ export default function MarketPulse({ cityName, pulse }: Props) {
               hint="Recent closed sales"
             />
             <StatCard
-              label="Avg days on market"
+              label="Avg days active"
               value={formatNum(c.avgDaysOnMarket, 0)}
               hint="Recent closed sales"
             />
@@ -109,7 +109,7 @@ export default function MarketPulse({ cityName, pulse }: Props) {
                   <th className="px-5 py-4 font-medium">ZIP</th>
                   <th className="px-5 py-4 font-medium">Active</th>
                   <th className="px-5 py-4 font-medium">Median sold</th>
-                  <th className="px-5 py-4 font-medium">Avg DOM</th>
+                  <th className="px-5 py-4 font-medium">Avg Days Active</th>
                   <th className="px-5 py-4 font-medium">Mo. supply</th>
                 </tr>
               </thead>

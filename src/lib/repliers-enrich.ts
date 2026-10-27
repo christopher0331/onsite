@@ -34,6 +34,8 @@ const REPLIERS_SEARCH_FIELDS = [
   "soldDate",
   "daysOnMarket",
   "simpleDaysOnMarket",
+  "raw.CumulativeDaysOnMarket",
+  "raw.OriginatingSystemModificationTimestamp",
   "raw.MlsStatus",
   "raw.BuyerOfficeName",
   "raw.BuyerAgentFullName",

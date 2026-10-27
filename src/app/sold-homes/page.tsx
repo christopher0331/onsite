@@ -203,7 +203,7 @@ export default function SoldHomesPage() {
                     </div>
                     <div>
                       <p className="font-serif text-[2rem] font-light leading-none text-white">{featured.daysListed}</p>
-                      <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/85">Days Listed</p>
+                      <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/85">Days Active</p>
                     </div>
                   </div>
 
@@ -268,7 +268,7 @@ export default function SoldHomesPage() {
                     <div className="flex items-center justify-between border-t border-charcoal/8 pt-4">
                       <div>
                         <p className="font-serif text-[1.4rem] font-light leading-none text-charcoal">{prop.price}</p>
-                        <p className="mt-0.5 text-[11px] text-charcoal/65">{prop.daysListed} days listed · Closed {prop.closedOn}</p>
+                        <p className="mt-0.5 text-[11px] text-charcoal/65">{prop.daysListed} days active · Closed {prop.closedOn}</p>
                       </div>
                       <div className="flex h-9 w-9 items-center justify-center rounded-full border border-charcoal/15 text-charcoal/65 transition-all duration-300 group-hover:border-charcoal group-hover:text-charcoal">
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5">
