@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test:bot-gate": "node --experimental-strip-types --import ./scripts/register-ts-ext.mjs scripts/test-form-bot-gate.mjs",
-    "check:videos": "node scripts/check-youtube-embeds.mjs"
+    "check:videos": "node scripts/check-youtube-embeds.mjs",
+    "test:videos": "node --experimental-strip-types --import ./scripts/register-ts-ext.mjs scripts/test-video-uploaddate.mjs"
   },
   "dependencies": {
     "@googlemaps/markerclusterer": "^2.6.2",

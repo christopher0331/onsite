@@ -8,6 +8,7 @@
 import type { CardListing } from "@/components/ListingCard";
 import type { City, EntityLink, Neighborhood } from "@/lib/service-areas/types";
 import { localBusinessNode, localBusinessRef, LOGO_URL, SITE_BRAND } from "@/lib/nap";
+import { isValidVideoUploadDate } from "@/lib/service-areas/videos";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
 
 const ORG_URL = getCanonicalBaseUrl();
@@ -153,14 +154,22 @@ export function VideoObjectSchema({
   name: string;
   description: string;
   youtubeId: string;
-  uploadDate?: string;
+  uploadDate: string;
   pageUrl: string;
 }) {
+  // Google rejects VideoObject without uploadDate. Fail the build rather than
+  // ship an invalid rich result.
+  if (!isValidVideoUploadDate(uploadDate)) {
+    throw new Error(
+      `VideoObject "${name}" (${youtubeId}) is missing a valid ISO 8601 uploadDate`
+    );
+  }
   const data = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
     name,
     description,
+    uploadDate,
     thumbnailUrl: `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`,
     embedUrl: `https://www.youtube.com/embed/${youtubeId}`,
     contentUrl: `https://www.youtube.com/watch?v=${youtubeId}`,
@@ -176,7 +185,6 @@ export function VideoObjectSchema({
     },
     isPartOf: { "@id": pageUrl },
     about: ORG_REF,
-    ...(uploadDate ? { uploadDate } : {}),
   };
   return (
     <script
