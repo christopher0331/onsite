@@ -3084,6 +3084,99 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     reviews: [],
   },
   {
+    slug: "ballard",
+    citySlug: "seattle",
+    name: "Ballard",
+    zipCodes: ["98107", "98117"],
+    geo: { lat: 47.6763, lng: -122.386 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e16372192203004a84a865_We%20Help%20You%20Sell%20Your%20Home%20-%20Pierce%20County.jpg",
+    heroEyebrow: "Seattle · Ballard",
+    introCopy:
+      "Ballard is northwestern Seattle around NW Market Street and Ballard Avenue NW in ZIPs 98107 and 98117 — village walkability, the Ballard Locks, Golden Gardens, and Seattle Public Schools pathways that a citywide Seattle average misses.",
+    characteristics: {
+      medianHomeYear: "Early 20th century through recent new construction",
+      architecturalStyles: ["Craftsman bungalow", "Cottage / period home", "Townhome / multifamily"],
+      typicalLotSize: "Compact urban lots; denser product near the commercial core",
+      notes:
+        "Ballard mixes older single-family streets with newer townhomes and multifamily near NW Market Street and Ballard Avenue NW. Remodels, ADUs, tree protection, and lot-coverage rules run through Seattle Department of Construction & Inspections — close out permits before list date. Street parking and permit zones vary block by block, especially near the retail core, Locks approach, and Golden Gardens on summer weekends.",
+    },
+    communityOrgs: [
+      {
+        name: "Hiram M. Chittenden Locks",
+        url: "https://www.nws.usace.army.mil/Missions/Civil-Works/Locks-and-Dams/Chittenden-Locks/",
+        context: "U.S. Army Corps of Engineers Ballard Locks — fish ladder, visitor center, and botanical gardens on Salmon Bay.",
+      },
+      {
+        name: "Golden Gardens Park",
+        url: "https://www.seattle.gov/parks/find/parks/golden-gardens-park",
+        context: "Puget Sound beach park with trails, wetlands, fishing pier, and boat launch in ZIP 98117.",
+      },
+      {
+        name: "National Nordic Museum",
+        url: "https://nordicmuseum.org/",
+        context: "Cultural anchor on NW Market Street sharing Nordic history and contemporary exhibitions.",
+      },
+      {
+        name: "Seattle Public Schools",
+        url: "https://www.seattleschools.org/",
+        context: "Ballard attendance pathways — verify elementary, middle, and high school assignment by address.",
+      },
+      {
+        name: "Seattle Department of Construction & Inspections",
+        url: "https://www.seattle.gov/sdci",
+        context: "Permits, inspections, zoning, tree protection, and design-review interpretation for Seattle parcels.",
+      },
+    ],
+    thoroughfares: [
+      "NW Market Street",
+      "Ballard Avenue NW",
+      "15th Avenue NW",
+      "24th Avenue NW",
+      "NW 65th Street",
+      "Seaview Avenue NW",
+    ],
+    landmarks: [
+      "Hiram M. Chittenden Locks",
+      "Golden Gardens Park",
+      "National Nordic Museum",
+      "Ballard Branch — Seattle Public Library",
+      "Ballard High School",
+      "Shilshole Bay Marina",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Seattle's Ballard neighborhood via SR-167 / I-405 or I-5 northbound toward the Ship Canal and 15th Avenue NW / NW Market Street corridors. Locks visitor traffic, Market Street retail hours, and Golden Gardens summer weekends tighten curb space — we pad showing and twilight photography schedules accordingly.",
+    adjacent: [
+      {
+        name: "Seattle (City)",
+        citySlug: "seattle",
+        blurb: "Parent hub — Green Lake, West Seattle, Capitol Hill, and Queen Anne corridor context on the same desk.",
+      },
+      {
+        name: "Tacoma",
+        citySlug: "tacoma",
+        blurb: "South Sound urban comparison — North End and Proctor village living when Seattle pricing is not the fit.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor — Twin Lakes, West Campus, and Lakota as a common cross-shop for corridor movers.",
+      },
+      {
+        name: "Kent",
+        citySlug: "kent",
+        blurb: "Green River valley and East Hill comparison set for households weighing Seattle vs. South King product.",
+      },
+      {
+        name: "Proctor District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "proctor-district",
+        blurb: "Tacoma village-core alternative — Craftsman streets and walkable retail when Ballard density is more than you want.",
+      },
+    ],
+    reviews: [],
+  },
+  {
     slug: "north-end",
     citySlug: "tacoma",
     name: "North End",
@@ -5297,7 +5390,7 @@ export const PLANNED_SERVICE_AREAS: PlannedServiceArea[] = [
     stateCode: "WA",
     county: "King County",
     zipCodes: ["98101", "98103", "98105", "98107", "98109", "98115", "98117", "98125"],
-    neighborhoods: ["Ballard", "Green Lake", "West Seattle"],
+    neighborhoods: ["Green Lake", "West Seattle"],
   },
 ];
 
