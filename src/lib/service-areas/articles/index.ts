@@ -30,6 +30,7 @@ import { elkRunArticle } from "./elk-run";
 import { elkHeightsArticle } from "./elk-heights";
 import { theCountryArticle } from "./the-country";
 import { northEndArticle } from "./north-end";
+import { hilltopArticle } from "./hilltop";
 import { stadiumDistrictArticle } from "./stadium-district";
 import { southTacomaArticle } from "./south-tacoma";
 import { westSlopeArticle } from "./west-slope";
@@ -88,6 +89,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [elkHeightsArticle.slug]: elkHeightsArticle,
   [theCountryArticle.slug]: theCountryArticle,
   [northEndArticle.slug]: northEndArticle,
+  [hilltopArticle.slug]: hilltopArticle,
   [stadiumDistrictArticle.slug]: stadiumDistrictArticle,
   [southTacomaArticle.slug]: southTacomaArticle,
   [westSlopeArticle.slug]: westSlopeArticle,

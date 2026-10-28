@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-10-26";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-10-28";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -84,6 +84,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "The Country Graham homes on 1+ acre lots near Country Drive E in 98338. HOA and CC&R diligence, septic records, and Bethel schools, live NWMLS listings.",
   "tacoma/north-end":
     "Tacoma North End homes near Point Defiance, Ruston Way, and Proctor. Historic and mid-century stock in 98403, 98406, and 98407, live NWMLS listings.",
+  "tacoma/hilltop":
+    "Hilltop Tacoma homes along M.L.K. Jr. Way in 98405. T Line streetcar access, Victorian and Craftsman stock, and landmark diligence, live NWMLS listings.",
   "tacoma/stadium-district":
     "Stadium District Tacoma homes around Stadium High and Wright Park. Period houses, downtown-edge density, and school-pathway demand in 98403, live listings.",
   "lake-tapps/tapps-island":

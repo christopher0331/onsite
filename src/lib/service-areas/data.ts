@@ -932,6 +932,7 @@ export const CITIES: City[] = [
       "Stadium District",
       "West Slope",
       "South Tacoma",
+      "Hilltop",
     ],
     permittingOffice: {
       name: "City of Tacoma Planning & Development Services",
@@ -3229,6 +3230,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Northern residential corridor — Point Defiance, Proctor village, and broader 98406 / 98407 fabric.",
       },
       {
+        name: "Hilltop",
+        citySlug: "tacoma",
+        neighborhoodSlug: "hilltop",
+        blurb: "Historic bluff-top neighbor just south — Victorian and Craftsman stock along the T Line on M.L.K. Way.",
+      },
+      {
         name: "South Tacoma",
         citySlug: "tacoma",
         neighborhoodSlug: "south-tacoma",
@@ -3273,6 +3280,102 @@ export const NEIGHBORHOODS: Neighborhood[] = [
           "Wright Park and Stadium High were sold as real daily life, not fluff. Overlay and school details were confirmed before we listed, and escrow stayed clean.",
       },
     ],
+  },
+  {
+    slug: "hilltop",
+    citySlug: "tacoma",
+    name: "Hilltop",
+    zipCodes: ["98405"],
+    geo: { lat: 47.2519, lng: -122.4518 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Tacoma · Hilltop",
+    introCopy:
+      "Hilltop is Tacoma's historic bluff-top neighborhood along Martin Luther King Jr. Way, just south of the Stadium District — Victorian and Craftsman-era housing, the T Line streetcar, a hospital cluster known as the Medical Mile, and landmark rules where block-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1880s – 1950, with newer infill and townhomes",
+      architecturalStyles: ["Victorian / Queen Anne", "Craftsman bungalow", "American foursquare", "Duplex / apartment"],
+      typicalLotSize: "Historic 25' x 130' platting, often combined; varies by block",
+      notes:
+        "Hilltop's historic housing was platted on narrow lots, so house sizes and lot configurations can differ sharply on the same block. South J Street's Victorian Row is on the National Register of Historic Places, and individually designated City Landmarks need Landmarks Preservation Commission approval for exterior changes — confirm any parcel's status and zoning before pricing a renovation, addition, or ADU story into list price.",
+    },
+    communityOrgs: [
+      {
+        name: "Hilltop Business Association",
+        url: "https://www.hilltopba.org/",
+        context: "Business-district association supporting and promoting businesses along Martin Luther King Jr. Way.",
+      },
+      {
+        name: "Sound Transit — T Line",
+        url: "https://www.soundtransit.org/ride-with-us/routes-schedules/t-line",
+        context: "Streetcar service through Hilltop on M.L.K. Way since the extension opened September 16, 2023, including the Hilltop District station.",
+      },
+      {
+        name: "Tacoma Historic Districts & Landmarks",
+        url: "https://tacoma.gov/government/departments/planning-and-development-services/historic-preservation/tacomas-historic-districts-landmarks/",
+        context: "City guidance on landmarks, historic districts, and design review for exterior changes.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Hilltop addresses need parcel-level elementary, middle, and high school confirmation — ZIP alone is not enough.",
+      },
+    ],
+    thoroughfares: [
+      "Martin Luther King Jr. Way",
+      "S 11th St",
+      "S 6th Ave",
+      "Division Ave",
+      "Tacoma Ave S",
+      "S J St",
+    ],
+    landmarks: [
+      "Hilltop District T Line station",
+      "MultiCare Tacoma General Hospital",
+      "St. Joseph Medical Center",
+      "The Evergreen State College Tacoma",
+      "South J Street Victorian Row",
+      "Hilltop business district",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Hilltop via SR-410 → I-5 and the downtown Tacoma exits, typically inside a 30–40 minute window for inspections and twilight photography. T Line operations, hospital-area traffic, and narrow street parking change curb availability on showing days — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic pocket just north around Stadium High and Wright Park — period homes and downtown-edge density on the same T Line corridor.",
+      },
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Northern residential corridor — Point Defiance, Proctor village, and broader 98406 / 98407 fabric.",
+      },
+      {
+        name: "Proctor District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "proctor-district",
+        blurb: "Walkable village core around N Proctor and N 26th — a common cross-shop for walkability and Craftsman streets.",
+      },
+      {
+        name: "South Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "south-tacoma",
+        blurb: "South-central corridor around South Tacoma Way and Wapato Park — practical mid-century stock and I-5 commute logic.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — North End, Proctor, Stadium, West Slope, and South Tacoma micro-markets on the same urban desk.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley and South Hill inventory when Tacoma pricing stretches the budget.",
+      },
+    ],
+    reviews: [],
   },
   {
     slug: "south-tacoma",
