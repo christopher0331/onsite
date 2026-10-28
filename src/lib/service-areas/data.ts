@@ -3084,6 +3084,99 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     reviews: [],
   },
   {
+    slug: "green-lake",
+    citySlug: "seattle",
+    name: "Green Lake",
+    zipCodes: ["98103", "98115"],
+    geo: { lat: 47.6801, lng: -122.3285 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e16372192203004a84a865_We%20Help%20You%20Sell%20Your%20Home%20-%20Pierce%20County.jpg",
+    heroEyebrow: "Seattle · Green Lake",
+    introCopy:
+      "Green Lake is north-central Seattle around the park and lake in ZIPs 98103 and 98115 — the 2.8-mile loop, East Green Lake Drive shops, the Green Lake library branch, and Seattle Public Schools pathways that a citywide Seattle average misses.",
+    characteristics: {
+      medianHomeYear: "Early 20th century through mid-century, with denser newer product near the urban village",
+      architecturalStyles: ["Craftsman bungalow", "Cottage / period home", "Townhome / multifamily"],
+      typicalLotSize: "Compact urban lots; denser product near East Green Lake Drive",
+      notes:
+        "Green Lake mixes older single-family streets with denser product in the Green Lake Residential Urban Village on the east side of the lake. Remodels, ADUs, tree protection, and lot-coverage rules run through Seattle Department of Construction & Inspections — close out permits before list date. Street parking and curb space tighten near the park loop and East Green Lake Drive on busy weekends.",
+    },
+    communityOrgs: [
+      {
+        name: "Green Lake Park",
+        url: "https://www.seattle.gov/parks/find/parks/green-lake-park",
+        context: "Seattle Parks — 2.8-mile path, athletic fields, swimming, and small-craft access around the lake.",
+      },
+      {
+        name: "Green Lake Small Craft Center",
+        url: "https://www.seattle.gov/parks/sports/green-lake-small-craft-center",
+        context: "Rowing, canoe, kayak, and sailing programs at 5900 W Green Lake Way N.",
+      },
+      {
+        name: "Green Lake Branch — Seattle Public Library",
+        url: "https://www.spl.org/hours-and-locations/green-lake-branch",
+        context: "Landmarked Carnegie branch at 7364 E. Green Lake Dr. N., near the park playground.",
+      },
+      {
+        name: "Seattle Public Schools",
+        url: "https://www.seattleschools.org/",
+        context: "Green Lake attendance pathways — verify elementary, middle, and high school assignment by address.",
+      },
+      {
+        name: "Seattle Department of Construction & Inspections",
+        url: "https://www.seattle.gov/sdci",
+        context: "Permits, inspections, zoning, tree protection, and design-review interpretation for Seattle parcels.",
+      },
+    ],
+    thoroughfares: [
+      "East Green Lake Drive N",
+      "West Green Lake Way N",
+      "Aurora Avenue N (SR-99)",
+      "N 65th Street",
+      "N 80th Street",
+      "Latona Avenue NE",
+    ],
+    landmarks: [
+      "Green Lake Park",
+      "Green Lake Small Craft Center",
+      "Green Lake Branch — Seattle Public Library",
+      "Green Lake Elementary",
+      "Daniel Bagley Elementary",
+      "Woodland Park",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Seattle's Green Lake neighborhood via SR-167 / I-405 or I-5 northbound toward the N 65th / East Green Lake Drive corridor. Weekend park-loop traffic and East Green Lake Drive retail hours tighten curb space — we pad showing and twilight photography schedules accordingly.",
+    adjacent: [
+      {
+        name: "Seattle (City)",
+        citySlug: "seattle",
+        blurb: "Parent hub — Ballard, West Seattle, Capitol Hill, and Queen Anne corridor context on the same desk.",
+      },
+      {
+        name: "Tacoma",
+        citySlug: "tacoma",
+        blurb: "South Sound urban comparison — North End and Proctor village living when Seattle pricing is not the fit.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor — Twin Lakes, West Campus, and Lakota as a common cross-shop for corridor movers.",
+      },
+      {
+        name: "Kent",
+        citySlug: "kent",
+        blurb: "Green River valley and East Hill comparison set for households weighing Seattle vs. South King product.",
+      },
+      {
+        name: "Proctor District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "proctor-district",
+        blurb: "Tacoma village-core alternative — Craftsman streets and walkable retail when Green Lake density is more than you want.",
+      },
+    ],
+    reviews: [],
+  },
+  {
     slug: "north-end",
     citySlug: "tacoma",
     name: "North End",
@@ -3094,6 +3187,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     heroEyebrow: "Tacoma · North End",
     introCopy:
       "Tacoma's North End is established urban-residential living near Point Defiance, Ruston Way, and the Proctor village core — historic and mid-century stock where micro-location, parking, and school lines matter more than a citywide median.",
+
     characteristics: {
       medianHomeYear: "1920 – 1965",
       architecturalStyles: ["Craftsman bungalow", "Tudor / period revival", "Mid-century ranch"],
@@ -5297,7 +5391,7 @@ export const PLANNED_SERVICE_AREAS: PlannedServiceArea[] = [
     stateCode: "WA",
     county: "King County",
     zipCodes: ["98101", "98103", "98105", "98107", "98109", "98115", "98117", "98125"],
-    neighborhoods: ["Ballard", "Green Lake", "West Seattle"],
+    neighborhoods: ["Ballard", "West Seattle"],
   },
 ];
 
