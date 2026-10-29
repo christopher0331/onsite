@@ -24,6 +24,9 @@ OnSite is a local brokerage, not a national portal. Prefer service-area hubs and
 - [Trends & insights](https://onsiteregroup.com/trends-insights): Market and selling articles hub
 - [Blog](https://onsiteregroup.com/blog): Pierce County real estate articles
 - [FAQ](https://onsiteregroup.com/frequently-asked-questions): Common buyer and seller questions
+- [Home evaluation tool](https://onsiteregroup.com/home-evaluation-tool): Online tool to start a home valuation request
+- [Selling tips](https://onsiteregroup.com/selling-tips): Practical advice for Pierce County home sellers
+- [Recently sold homes](https://onsiteregroup.com/sold-homes): Homes sold by OnSite across Pierce County, Federal Way, Sumner, Graham, Buckley, and Puyallup
 - [Sitemap](https://onsiteregroup.com/sitemap.xml): Machine-readable URL list
 
 ## Service area hubs
@@ -53,6 +56,41 @@ OnSite is a local brokerage, not a national portal. Prefer service-area hubs and
 - [Summit](https://onsiteregroup.com/service-areas/puyallup/summit): Puyallup–Tacoma access pocket
 - [Tehaleh](https://onsiteregroup.com/service-areas/bonney-lake/tehaleh): Master-planned community; HOA resale timing
 - [Bridge Hill](https://onsiteregroup.com/service-areas/sumner/bridge-hill): Sumner bluff; Sounder proximity
+- [Lea Hill, Auburn](https://onsiteregroup.com/service-areas/auburn/lea-hill): Lea Hill Auburn homes near Green River College in 98092
+- [Panorama Heights, Bonney Lake](https://onsiteregroup.com/service-areas/bonney-lake/panorama-heights): Panorama Heights Bonney Lake homes on 176th–181st and 109th–111th in 98391
+- [Panorama West, Bonney Lake](https://onsiteregroup.com/service-areas/bonney-lake/panorama-west): Panorama West Bonney Lake homes off Sky Island Drive in 98391
+- [Quiet Water, Bonney Lake](https://onsiteregroup.com/service-areas/bonney-lake/quiet-water): Quiet Water Bonney Lake / Lake Tapps homes east of 214th Ave E in 98391
+- [Sky Island, Bonney Lake](https://onsiteregroup.com/service-areas/bonney-lake/sky-island): Sky Island Bonney Lake homes with Rainier and valley views in 98391
+- [Elk Heights, Buckley](https://onsiteregroup.com/service-areas/buckley/elk-heights): Elk Heights Buckley homes on the hilltop near Pioneer Way and Lund St in 98321
+- [Elk Run, Buckley](https://onsiteregroup.com/service-areas/buckley/elk-run): Elk Run Buckley homes at Chinook Meadows along 229th Ave E in 98321
+- [Dash Point, Federal Way](https://onsiteregroup.com/service-areas/federal-way/dash-point): Dash Point Federal Way homes on the Sound edge in 98023
+- [Lakota, Federal Way](https://onsiteregroup.com/service-areas/federal-way/lakota): Lakota Federal Way homes in 98023 near Lakota Park, Adelaide, and Dash Point
+- [Redondo, Federal Way](https://onsiteregroup.com/service-areas/federal-way/redondo): Redondo Federal Way homes on the Sound edge in 98003
+- [Twin Lakes, Federal Way](https://onsiteregroup.com/service-areas/federal-way/twin-lakes): Twin Lakes Federal Way homes in 98023 near Lake Lorene, Lake Jeane, and the golf club
+- [West Campus, Federal Way](https://onsiteregroup.com/service-areas/federal-way/west-campus): West Campus Federal Way homes near Celebration Park and the trail system
+- [The Country, Graham](https://onsiteregroup.com/service-areas/graham/the-country): The Country Graham homes on 1+ acre lots near Country Drive E in 98338
+- [Downtown Kent, Kent](https://onsiteregroup.com/service-areas/kent/downtown-kent): Downtown Kent homes near Kent Station and Sounder in 98032
+- [East Hill, Kent](https://onsiteregroup.com/service-areas/kent/east-hill): East Hill Kent homes above the valley in 98030–98031
+- [Lake Meridian, Kent](https://onsiteregroup.com/service-areas/kent/lake-meridian): Lake Meridian Kent homes near Lake Meridian Park on the East Hill bench
+- [Panther Lake, Kent](https://onsiteregroup.com/service-areas/kent/panther-lake): Panther Lake Kent homes on the west corridor near I-5 and Federal Way
+- [West Hill, Kent](https://onsiteregroup.com/service-areas/kent/west-hill): West Hill Kent homes west of the Green River valley near I-5 and Federal Way
+- [Church Lake Waterfront, Lake Tapps](https://onsiteregroup.com/service-areas/lake-tapps/church-lake-waterfront): Church Lake waterfront homes on Lake Tapps
+- [Driftwood Point, Lake Tapps](https://onsiteregroup.com/service-areas/lake-tapps/driftwood-point): Driftwood Point Lake Tapps homes
+- [Inlet Island, Lake Tapps](https://onsiteregroup.com/service-areas/lake-tapps/inlet-island): Inlet Island homes on Lake Tapps where waterfront lifestyle and shoreline planning set the price
+- [Snag Island, Lake Tapps](https://onsiteregroup.com/service-areas/lake-tapps/snag-island): Snag Island Lake Tapps homes on quieter coves near Church Lake
+- [Tacoma Point, Lake Tapps](https://onsiteregroup.com/service-areas/lake-tapps/tacoma-point): Tacoma Point Lake Tapps homes with dock-friendly waterfront and plateau access
+- [Tapps Island, Lake Tapps](https://onsiteregroup.com/service-areas/lake-tapps/tapps-island): Tapps Island homes on Lake Tapps
+- [Sunrise, Puyallup](https://onsiteregroup.com/service-areas/puyallup/sunrise): Sunrise master-planned community on Puyallup's South Hill
+- [Downtown Sumner, Sumner](https://onsiteregroup.com/service-areas/sumner/downtown-sumner): Downtown Sumner homes near Main Street and Sounder in 98390
+- [East Valley Edge, Sumner](https://onsiteregroup.com/service-areas/sumner/east-valley-edge): East Valley Edge Sumner homes near Sumner-Tapps Highway and SR-410 in 98390
+- [North Sumner, Sumner](https://onsiteregroup.com/service-areas/sumner/north-sumner): North Sumner homes near Valley Avenue and SR-167 in 98390
+- [Valley Corridor, Sumner](https://onsiteregroup.com/service-areas/sumner/valley-corridor): Valley Corridor Sumner homes along Valley Avenue and SR-167 in 98390
+- [Hilltop, Tacoma](https://onsiteregroup.com/service-areas/tacoma/hilltop): Hilltop Tacoma homes along M.L.K. Jr. Way in 98405; T Line streetcar access, Victorian and Craftsman stock
+- [North End, Tacoma](https://onsiteregroup.com/service-areas/tacoma/north-end): Tacoma North End homes near Point Defiance, Ruston Way, and Proctor
+- [Proctor District, Tacoma](https://onsiteregroup.com/service-areas/tacoma/proctor-district): Proctor District Tacoma homes around N Proctor and N 26th in 98406–98407
+- [South Tacoma, Tacoma](https://onsiteregroup.com/service-areas/tacoma/south-tacoma): South Tacoma homes around South Tacoma Way and Wapato Park in 98409
+- [Stadium District, Tacoma](https://onsiteregroup.com/service-areas/tacoma/stadium-district): Stadium District Tacoma homes around Stadium High and Wright Park
+- [West Slope, Tacoma](https://onsiteregroup.com/service-areas/tacoma/west-slope): West Slope Tacoma homes near Narrowmoor and Titlow in 98465–98466
 
 ## Optional
 
@@ -67,3 +105,63 @@ OnSite is a local brokerage, not a national portal. Prefer service-area hubs and
 - [Tapps Business Connect](https://tappsbusinessconnect.com/): Separate local networking site (redirected from legacy /business-connect paths)
 - [Terms of service](https://onsiteregroup.com/terms-of-service): Legal terms
 - [DMCA](https://onsiteregroup.com/dmca-notice): Copyright agent notice
+- [Featured: Charming Downtown Puyallup Home](https://onsiteregroup.com/featured-homes/charming-downtown-puyallup-home): OnSite featured-home showcase
+- [Featured: Entertainer's Dream Home with Pickleball Court](https://onsiteregroup.com/featured-homes/entertainers-dream-home-with-pickleball-court-on-1-2-acre): OnSite featured-home showcase
+- [Featured: Luxury Rambler on 15 Acres with Rainier Views](https://onsiteregroup.com/featured-homes/luxury-rambler-on-15-acres-with-rainier-views): OnSite featured-home showcase
+- [Sold: Luxury Mid-Century Modern in Marine Hills](https://onsiteregroup.com/sold-homes/luxury-mid-century-modern-in-marine-hills): OnSite sold-home case study
+- [Sold: Modern Home in Sumner Valley](https://onsiteregroup.com/sold-homes/modern-home-in-sumner-valley): OnSite sold-home case study
+- [Sold: Modern Home in Thriving Sumner Valley](https://onsiteregroup.com/sold-homes/modern-home-in-thriving-sumner-valley): OnSite sold-home case study
+- [Sold: Secluded 5-Acre Dual Residence in Graham](https://onsiteregroup.com/sold-homes/secluded-5-acre-dual-residence-in-graham): OnSite sold-home case study
+- [Sold: Secluded Rambler on 1.7 Acres in Buckley](https://onsiteregroup.com/sold-homes/secluded-rambler-on-1-7-acres-in-buckley): OnSite sold-home case study
+- [Sold: Single-Story Home in Gem Heights, Puyallup](https://onsiteregroup.com/sold-homes/single-story-home-in-gem-heights-puyallup): OnSite sold-home case study
+- [5.99% Mortgage Rate in Pierce County: Why Your Monthly Payment Might Not Drop (Taxes + Insurance Math)](https://onsiteregroup.com/blog/5-99-mortgage-rate-in-pierce-county-why-your-monthly-payment-might-not-drop-taxes-insurance-math): A lot of buyers in Bonney Lake, Lake Tapps, Sumner, Buckley, Auburn, Milton, and Edgewood hear “rates are down” and assume…
+- [5 Simple Improvements That Can Help Your Home Sell Faster](https://onsiteregroup.com/blog/5-simple-improvements-that-can-help-your-home-sell-faster): Selling your home doesn’t always mean spending big on renovations
+- [6 Essential Things Every First-Time Homebuyer Should Know](https://onsiteregroup.com/blog/6-essential-things-every-first-time-homebuyer-should-know): Buying your first home is a big deal—and it can feel like a lot
+- [6-Month Housing Market Deep Dive for East Bonney Lake, Lake Tapps, and Pierce County](https://onsiteregroup.com/blog/6-month-housing-market-deep-dive-for-east-bonney-lake-lake-tapps-and-pierce-county): The last six months of MLS data tell a very clear story for Pierce County, East Bonney Lake, and the Lake Tapps…
+- [Are Home Prices Rising or Falling in Pierce County in 2025?](https://onsiteregroup.com/blog/are-home-prices-rising-or-falling-in-pierce-county-in-2025): If you're planning to sell or buy in 2025, one of your biggest questions is likely: "What’s happening with home prices?" The…
+- [First-Time Home Buyer Guide for Pierce County: Costs, Steps, and Washington Help](https://onsiteregroup.com/blog/first-time-home-buyer-guide-pierce-county-costs-steps-and-washington-help): What should a first-time home buyer know in Pierce County?
+- [Home Inspections in Bonney Lake and Lake Tapps: A Buyer’s Guide for Pierce County](https://onsiteregroup.com/blog/home-inspections-in-bonney-lake-and-lake-tapps-a-buyers-guide): A step-by-step Pierce County buyer guide: Washington inspection law, contract and disclosure deadlines, septic Report of…
+- [How Buyer Expectations Have Changed Since 2020](https://onsiteregroup.com/blog/how-buyer-expectations-have-changed-since-2020): The way people buy homes has changed—a lot—since 2020
+- [How Long Does It Take to Sell a Home in Pierce County?](https://onsiteregroup.com/blog/how-long-does-it-take-to-sell-a-home-in-pierce-county): One of the first questions sellers ask is, “How long will it take to sell my house?” While timelines vary, understanding the…
+- [How Much Is My Home Worth in Pierce County? 5 Factors That Actually Move the Number](https://onsiteregroup.com/blog/how-much-is-my-home-worth-5-factors-that-affect-your-homes-value): Online estimates skip school lines, shoreline, and the last three solds on your street
+- [How Remote Work Continues to Shape Buyer Patterns in Pierce County](https://onsiteregroup.com/blog/how-remote-work-continues-to-shape-buyer-patterns-in-pierce-county): Remote and hybrid work are no longer temporary trends—they’ve redefined what buyers look for in a home
+- [How Seasonal Trends Affect Home Sales in Pierce County (and When to Ignore the Calendar)](https://onsiteregroup.com/blog/how-seasonal-trends-affect-home-sales-in-pierce-county): Spring still does the heavy lifting in East Pierce, but a Lake Tapps waterfront listing in July and a Sumner starter in…
+- [How to Choose the Right Listing Price Without Leaving Money on the Table](https://onsiteregroup.com/blog/how-to-choose-the-right-listing-price-without-leaving-money-on-the-table): Pricing your home correctly is one of the most important decisions you’ll make as a seller
+- [How to Compare Buyer’s Agents in Lake Tapps, Bonney Lake, and Auburn](https://onsiteregroup.com/blog/how-to-compare-buyers-agents-in-lake-tapps-bonney-lake-and-auburn): A step-by-step guide to comparing buyer’s agents in Lake Tapps, Bonney Lake, and Auburn: what Washington law requires in a…
+- [How to Handle a Low Appraisal When You’re the Seller](https://onsiteregroup.com/blog/how-to-handle-a-low-appraisal-when-youre-the-seller): You’ve accepted an offer on your home—only to find out the buyer’s appraisal came in lower than expected
+- [How to Price Your Home to Sell in Today’s Pierce County Market](https://onsiteregroup.com/blog/how-to-price-your-home-to-sell-in-todays-market): In East Pierce, list price is a search filter first
+- [How to Time Your Sale When You’re Also Buying](https://onsiteregroup.com/blog/how-to-time-your-sale-when-youre-also-buying): Buying and selling a home at the same time can feel like a high-stakes balancing act—but with the right strategy, it’s…
+- [How You Get The Most Money When Selling Your Home](https://onsiteregroup.com/blog/how-you-get-the-most-money-when-selling-your-home): Selling your home isn’t just about putting up a sign and waiting for offers—it’s a strategy
+- [Is It a Buyer’s or Seller’s Market in Pierce County Right Now?](https://onsiteregroup.com/blog/is-it-a-buyers-or-sellers-market-in-pierce-county-right-now): If you’re wondering who holds the advantage in Pierce County’s real estate market—buyers or sellers—you’re not alone
+- [Lake Tapps Property Management: How to Hire a Rental Manager in Pierce County](https://onsiteregroup.com/blog/lake-tapps-property-management-how-to-hire-a-rental-manager-in-pierce-county): A Pierce County guide to hiring a rental manager in Lake Tapps, Bonney Lake, and Sumner: Washington licensing, the 2026 rent…
+- [Pierce County Homeowners: Don’t Get Stuck by Incomplete Real Estate Info](https://onsiteregroup.com/blog/pierce-county-homeowners-dont-get-stuck): In a market flooded with national headlines about high interest rates, hesitant buyers, and tight inventory, many Pierce…
+- [Pierce County Housing Market: What Sellers Should Know in 2025](https://onsiteregroup.com/blog/pierce-county-housing-market-what-sellers-should-know-in-2025): Thinking about selling your home in 2025?
+- [Pierce County Housing Market: What Stability Really Looks Like After the Frenzy](https://onsiteregroup.com/blog/pierce-county-housing-market-what-stability-really-looks-like-after-the-frenzy): The Pierce County housing market has shifted out of the high-pressure frenzy of recent years and into a more balanced,…
+- [Pierce County Mortgage Rates: The Fed, the 10-Year Treasury, and What It Means for Bonney Lake, Lake Tapps, and Sumner](https://onsiteregroup.com/blog/pierce-county-mortgage-rates-2025-the-fed-the-10-year-treasury-and-what-it-means-for-bonney-lake-lake-tapps-sumner-beyond): The Fed does not set your 30-year quote
+- [Pierce County Real Estate Forecast 2026: Trends, Predictions & Tips for Sellers](https://onsiteregroup.com/blog/pierce-county-real-estate-forecast-2026-trends-predictions-tips-for-sellers): In 2025, Pierce County's median listing price hit $558,807 with homes selling in about 33 days
+- [Pierce County Septic Systems: What Homebuyers and Sellers Must Know in Today’s Market](https://onsiteregroup.com/blog/pierce-county-septic-systems-what-homebuyers-and-sellers-must-know-in-todays-market): In Pierce County—and across Bonney Lake, Lake Tapps, Sumner, Buckley, Puyallup, and the surrounding areas—septic systems are…
+- [Prep Your Pierce County Home for a Successful Sale: Local Insights and Actionable Tips](https://onsiteregroup.com/blog/prep-your-pierce-county-home-for-a-successful-sale): As interest rates begin to stabilize and buyers return to the market, homeowners from Bonney Lake to Sumner are asking how…
+- [September 2025 Market Snapshot: Pierce County Holds Steady While King and Thurston Shift Toward Balance](https://onsiteregroup.com/blog/september-2025-market-snapshot-pierce-county-holds-steady-while-king-and-thurston-shift-toward-balance): As the fall market sets in, the September 2025 housing data across King, Pierce, and Thurston Counties paints a picture of…
+- [Septic Pumping and County Inspection: What Sellers Need to Know](https://onsiteregroup.com/blog/septic-pumping-and-county-inspection-what-sellers-need-to-know): If your property has a septic system, there’s one important requirement you can’t overlook before closing: septic pumping…
+- [Should I Sell My House As-Is or Make Repairs?](https://onsiteregroup.com/blog/should-i-sell-my-house-as-is-or-make-repairs): One of the most common questions we hear from homeowners is, “Should I fix things up—or just sell my house as-is?” The…
+- [Should You Sell Your Home Before You Buy a New One?](https://onsiteregroup.com/blog/should-you-sell-your-home-before-you-buy-a-new-one): If you're planning to move, one of the biggest decisions you’ll face is whether to sell your current home before buying the…
+- [The Best Time to Sell a Home in Washington: 2025 Outlook](https://onsiteregroup.com/blog/the-best-time-to-sell-a-home-in-washington-2025-outlook): Timing can make a huge difference when selling your home
+- [The Most Overlooked Feature That Helps Homes Sell: Natural Light](https://onsiteregroup.com/blog/the-most-overlooked-feature-that-helps-homes-sell-natural-light): Buyers often can’t explain exactly why they love a home—but one of the most powerful emotional drivers is something you…
+- [The Power of First Impressions in Real Estate](https://onsiteregroup.com/blog/the-power-of-first-impressions-in-real-estate): When selling a home in East Pierce County, first impressions are everything
+- [The Powerful Tool Every Landlord Should Know About](https://onsiteregroup.com/blog/the-powerful-tool-every-landlord-should-know-about): A 1031 Exchange refers to a section of the Internal Revenue Code that allows real estate investors to defer paying capital…
+- [The Psychology Behind Why Homes Sell Fast](https://onsiteregroup.com/blog/the-psychology-behind-why-homes-sell-fast): Have you ever wondered why some homes attract offers within days, while others sit on the market for weeks?
+- [The Real Cost of Buying in 2026: Why Property Taxes and Insurance Can Cancel Out a Lower Mortgage Rate in Pierce County](https://onsiteregroup.com/blog/the-real-cost-of-buying-in-2026-why-property-taxes-and-insurance-can-cancel-out-a-lower-mortgage-rate-in-pierce-county-2): Everyone cheers when mortgage rates dip—but your monthly payment doesn’t care about headlines
+- [The Role of Pre-Inspections: Should You Inspect Before You List?](https://onsiteregroup.com/blog/the-role-of-pre-inspections-should-you-inspect-before-you-list): When selling your Washington home, one of the biggest uncertainties comes during the inspection process
+- [The Ultimate Pre-Sale Home Prep Checklist](https://onsiteregroup.com/blog/the-ultimate-pre-sale-home-prep-checklist): Before your home hits the market, taking the time to properly prepare can have a massive impact on your final sale price and…
+- [Top Mistakes Sellers Make That Delay Closings](https://onsiteregroup.com/blog/top-mistakes-sellers-make-that-delay-closings): Closing on your Washington home should be the final, exciting step of the selling process
+- [Understanding Your Home’s Market Value: What Affects It and Why It Matters](https://onsiteregroup.com/blog/understanding-your-homes-market-value-what-affects-it-and-why-it-matters): Whether you're preparing to list your property or simply keeping tabs on your investment, understanding your home’s current…
+- [What Buyers Are Really Looking For in 2025](https://onsiteregroup.com/blog/what-buyers-are-really-looking-for-in-2025): Today’s buyers are more informed—and more selective—than ever before
+- [What Happens After You Accept an Offer?](https://onsiteregroup.com/blog/what-happens-after-you-accept-an-offer): Getting an offer on your home is exciting—but it’s just the beginning of the process
+- [What Happens If My Home Doesn’t Sell?](https://onsiteregroup.com/blog/what-happens-if-my-home-doesnt-sell): In a shifting market, not every home sells right away
+- [What Home Inspectors Really Look For in Western Washington (Before You List)](https://onsiteregroup.com/blog/what-home-inspectors-really-look-for-in-western-washington-before-you-list): If you’re thinking about selling your home in Pierce County, Bonney Lake, Lake Tapps, or surrounding areas in the next 3–12…
+- [What all is Included in a Free Home Evaluation?](https://onsiteregroup.com/blog/whats-included-in-a-home-evaluation): Before you sell your home, it’s important to understand what it’s really worth
+- [What’s the Best Time of Year to Sell a Home in Pierce County?](https://onsiteregroup.com/blog/whats-the-best-time-of-year-to-sell-a-home-in-pierce-county): Timing matters in real estate
+- [When to Walk Away from a Buyer Offer](https://onsiteregroup.com/blog/when-to-walk-away-from-a-buyer-offer): It’s exciting to receive an offer on your home—but not every offer is a good one
+- [Why Pre-Listing Inspections Give Sellers the Upper Hand](https://onsiteregroup.com/blog/why-pre-listing-inspections-give-sellers-the-upper-hand): While most home inspections happen after a buyer makes an offer, savvy sellers are starting to flip the script
+- [Why Suburban Living Is Growing in Washington](https://onsiteregroup.com/blog/why-suburban-living-is-growing-in-washington-onsite-real-estate): Suburban communities across Washington are experiencing a surge in popularity
+- [Will Interest Rates Impact Home Sales in Pierce County This Year?](https://onsiteregroup.com/blog/will-interest-rates-impact-home-sales-in-pierce-county-this-year): Interest rates continue to play a major role in the 2025 housing market—and sellers and buyers alike are watching closely
