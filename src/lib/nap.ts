@@ -51,7 +51,7 @@ export const SAME_AS = [
   "https://x.com/OnSiteREGroup",
 ] as const;
 
-/** Google Business Profile aggregate as of 2026-08-18. */
+/** Google Business Profile aggregate as of 2026-08-18. Visible UI only — not emitted in JSON-LD. */
 export const GOOGLE_RATING = {
   ratingValue: 5,
   reviewCount: 121,
@@ -62,7 +62,7 @@ export function localBusinessId(baseUrl = getCanonicalBaseUrl()) {
   return `${baseUrl}/#localbusiness`;
 }
 
-/** JSON-LD pointer to the sitewide LocalBusiness node. Never embed a second aggregateRating. */
+/** JSON-LD pointer to the sitewide LocalBusiness node. Do not add aggregateRating or Review JSON-LD. */
 export function localBusinessRef(baseUrl = getCanonicalBaseUrl()) {
   return { "@id": localBusinessId(baseUrl) };
 }
@@ -100,12 +100,6 @@ export function localBusinessNode(baseUrl = getCanonicalBaseUrl()) {
     },
     hasMap: GOOGLE_MAPS_PLACE_URL,
     sameAs: [...SAME_AS],
-    aggregateRating: {
-      "@type": "AggregateRating" as const,
-      ratingValue: GOOGLE_RATING.ratingValue,
-      reviewCount: GOOGLE_RATING.reviewCount,
-      bestRating: GOOGLE_RATING.bestRating,
-    },
     // Text, not Place nodes — Place/AdminArea without streetAddress gets
     // flagged as "Local Business / address required" in Semrush.
     areaServed: [
