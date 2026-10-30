@@ -29,6 +29,7 @@ import { eastValleyEdgeDiscover } from "./east-valley-edge";
 import { elkRunDiscover } from "./elk-run";
 import { elkHeightsDiscover } from "./elk-heights";
 import { theCountryDiscover } from "./the-country";
+import { greenLakeDiscover } from "./green-lake";
 import { northEndDiscover } from "./north-end";
 import { hilltopDiscover } from "./hilltop";
 import { stadiumDistrictDiscover } from "./stadium-district";
@@ -88,6 +89,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [elkRunDiscover.slug]: elkRunDiscover,
   [elkHeightsDiscover.slug]: elkHeightsDiscover,
   [theCountryDiscover.slug]: theCountryDiscover,
+  [greenLakeDiscover.slug]: greenLakeDiscover,
   [northEndDiscover.slug]: northEndDiscover,
   [hilltopDiscover.slug]: hilltopDiscover,
   [stadiumDistrictDiscover.slug]: stadiumDistrictDiscover,
