@@ -3378,6 +3378,94 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     reviews: [],
   },
   {
+    slug: "lincoln-district",
+    citySlug: "tacoma",
+    name: "Lincoln District",
+    zipCodes: ["98418", "98408"],
+    geo: { lat: 47.2245, lng: -122.4462 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+    heroEyebrow: "Tacoma · Lincoln District",
+    introCopy:
+      "The Lincoln District is Tacoma's south-end neighborhood around the South 38th Street business corridor, Lincoln High School (opened 1914), and Lincoln Park — streetcar-era housing, a streetscape rebuilt by the City in 2018, and mixed-use zoning where block-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1900s – 1950s, with mid-century and newer infill",
+      architecturalStyles: ["Craftsman bungalow", "Early 20th-century cottage", "Mid-century rambler", "Infill / townhome"],
+      typicalLotSize: "Grid platting, commonly ~5,000 – 6,500 sq ft; varies by block",
+      notes:
+        "Tacoma's south end developed in the late 1800s and early 1900s along the streetcar line, and many business-district buildings pre-date the 1940s. The South 38th Street core is a designated mixed-use center, so zoning can change block to block — confirm any parcel's zoning and infill or ADU potential before pricing it into list price.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Tacoma — Lincoln Neighborhood Revitalization",
+        url: "https://cityoftacoma.org/cms/one.aspx?pageId=85641",
+        context: "City project that rebuilt the South 38th Street streetscape, upgraded utilities, and added public art; improvements unveiled November 17, 2018.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Lincoln District addresses need parcel-level elementary, middle, and high school confirmation — ZIP alone is not enough.",
+      },
+      {
+        name: "Metro Parks Tacoma",
+        url: "https://www.metroparkstacoma.org/",
+        context: "Park district for Lincoln Park and other open space near the neighborhood.",
+      },
+      {
+        name: "Tacoma Planning & Development Services",
+        url: "https://www.cityoftacoma.org/government/city_departments/planning_and_development_services",
+        context: "Permits, zoning, and infill / ADU questions for mixed-use-center parcels.",
+      },
+    ],
+    thoroughfares: [
+      "S 38th St",
+      "S Yakima Ave",
+      "S G St",
+      "S Park Ave",
+      "Tacoma Ave S",
+      "I-5",
+    ],
+    landmarks: [
+      "Lincoln High School",
+      "Lincoln Park",
+      "Lincoln International Business District",
+      "South 38th Street gateway public art",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach the Lincoln District via SR-410 → SR-167 → I-5 and the South 38th Street exit, typically inside a 30–40 minute window for inspections and twilight photography. School-day traffic around Lincoln High and business-district parking change curb availability on showing days — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "South Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "south-tacoma",
+        blurb: "South-central corridor around South Tacoma Way and Wapato Park — practical mid-century stock and the same I-5 commute logic.",
+      },
+      {
+        name: "Hilltop",
+        citySlug: "tacoma",
+        neighborhoodSlug: "hilltop",
+        blurb: "Historic bluff-top neighborhood to the north along M.L.K. Jr. Way — Victorian and Craftsman stock on the T Line.",
+      },
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic pocket around Stadium High and Wright Park — period homes and downtown-edge density.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — North End, Proctor, Stadium, Hilltop, West Slope, South Tacoma, and Lincoln micro-markets on the same urban desk.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley and South Hill inventory when Tacoma pricing stretches the budget.",
+      },
+    ],
+    reviews: [],
+  },
+  {
     slug: "south-tacoma",
     citySlug: "tacoma",
     name: "South Tacoma",
