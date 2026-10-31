@@ -20,7 +20,7 @@ const HUB_META: Record<string, string> = {
   "bonney-lake":
     "Bonney Lake plateau homes — Tehaleh, Sky Island, Panorama West, Panorama Heights, Quiet Water, and Lake Tapps. Local comps, live NWMLS listings.",
   sumner:
-    "Sumner homes near Sounder, Downtown Sumner Main Street, Bridge Hill, East Valley Edge, and the Valley Corridor. Floodplain diligence on the White and Stuck Rivers in 98390, live NWMLS listings.",
+    "Sumner homes near Sounder, Main Street, Bridge Hill and East Valley Edge. Floodplain diligence on the White and Stuck Rivers in 98390, live NWMLS listings.",
   edgewood:
     "Edgewood large-lot and equestrian homes minutes from the valley. Lot utility, wells and septic where they apply, Puyallup and Fife schools, live listings.",
   milton:
@@ -79,7 +79,7 @@ const NEIGHBORHOOD_META: Record<string, string> = {
   "buckley/elk-run":
     "Elk Run Buckley homes at Chinook Meadows along 229th Ave E in 98321. Soundbuilt construction, HOA diligence, and White River schools, live NWMLS listings.",
   "buckley/elk-heights":
-    "Elk Heights Buckley homes on the hilltop near Pioneer Way and Lund St in 98321. HOA / ACC diligence, Rainier views, and White River schools, live NWMLS listings.",
+    "Elk Heights Buckley homes on the hilltop near Pioneer Way and Lund St in 98321. HOA/ACC diligence, Rainier views, White River schools, live NWMLS listings.",
   "graham/the-country":
     "The Country Graham homes on 1+ acre lots near Country Drive E in 98338. HOA and CC&R diligence, septic records, and Bethel schools, live NWMLS listings.",
   "tacoma/north-end":

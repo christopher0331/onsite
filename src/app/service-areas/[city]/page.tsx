@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { titleWithBrand } from "@/lib/page-meta";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -71,7 +72,7 @@ export async function generateMetadata({
   const city = getCityBySlug(citySlug);
   if (!city) return {};
   const url = `${SITE_URL}/service-areas/${city.slug}`;
-  const title = `${city.name}, ${city.stateCode} Real Estate Agents | ${SITE_BRAND}`;
+  const title = titleWithBrand(`${city.name}, ${city.stateCode} Real Estate Agents`);
   const description = hubMetaDescription(city);
   return {
     title,

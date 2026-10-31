@@ -9,9 +9,9 @@ import TestimonialsScroll from "@/components/TestimonialsScroll";
 import NegotiationReliabilityPath from "@/components/NegotiationReliabilityPath";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Expert Real Estate Negotiation & Closing | OnSite Real Estate Group",
+  title: "Real Estate Negotiation & Closing | OnSite Real Estate Group",
   description:
-    "We leverage negotiation to maximize your profit & ensure a seamless closing process. Our agents secure the best terms, protect your interests, and close without delays.",
+    "We negotiate to maximize your profit and keep closing seamless: securing the best terms, protecting your interests, and getting you to the table on time.",
   path: "/negotiation-closing",
 });
 

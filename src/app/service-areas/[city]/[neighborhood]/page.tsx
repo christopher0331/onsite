@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { titleWithBrand } from "@/lib/page-meta";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
@@ -52,7 +53,7 @@ export async function generateMetadata({
   if (!city || !neighborhood) return {};
 
   const url = `${SITE_URL}/service-areas/${city.slug}/${neighborhood.slug}`;
-  const title = `${neighborhood.name}, ${city.name} ${city.stateCode} Real Estate | ${SITE_BRAND}`;
+  const title = titleWithBrand(`${neighborhood.name}, ${city.name} ${city.stateCode} Real Estate`);
   const description = neighborhoodMetaDescription(city, neighborhood);
   return {
     title,

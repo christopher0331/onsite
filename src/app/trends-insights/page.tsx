@@ -8,7 +8,7 @@ import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Pierce County Real Estate Blog | Tips, Market Trends & Local Insights",
+  title: "Pierce County Real Estate Blog: Tips & Market Trends",
   description:
     "Expert real estate insights, market trends, and selling tips for Pierce County homeowners — written by the OnSite Real Estate Group team.",
   path: "/trends-insights",

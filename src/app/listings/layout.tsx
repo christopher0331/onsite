@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { SITE_BRAND } from "@/lib/nap";
 import { pageMetadata } from "@/lib/page-meta";
 
 export const metadata: Metadata = pageMetadata({
-  title: `Homes for Sale | East Pierce County Listings | ${SITE_BRAND}`,
-  description: `Browse East Pierce County homes for sale with ${SITE_BRAND}. Filter Lake Tapps, Bonney Lake, Sumner, Puyallup, and nearby MLS listings — plus OnSite agent inventory.`,
+  title: "East Pierce County Homes for Sale | MLS Listings",
+  description: "Browse East Pierce County homes for sale. Filter MLS listings in Lake Tapps, Bonney Lake, Sumner, Puyallup and nearby, plus OnSite agent inventory.",
   path: "/listings",
 });
 

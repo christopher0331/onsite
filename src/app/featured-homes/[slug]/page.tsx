@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MLSGridTimestamp from "@/components/MLSGridTimestamp";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
-import { pageMetadata } from "@/lib/page-meta";
+import { fitTitle, pageMetadata } from "@/lib/page-meta";
 import { FEATURED_HOME_FALLBACK_PATH, getFeaturedHomeLive } from "@/lib/featured-homes";
 import { getCitySlugByName, getNeighborhoodsByCity } from "@/lib/service-areas/data";
 import { ServiceAreaLinkedText } from "@/lib/service-areas/linkify";
@@ -155,7 +155,7 @@ export async function generateMetadata({
   const prop = { ...base, price: live.price ?? base.price };
   const sold = live.status === "Sold";
   return pageMetadata({
-    title: `${prop.title} — ${sold ? "Sold " : ""}${prop.price} | OnSite Real Estate Group`,
+    title: fitTitle(`${prop.title} — ${sold ? "Sold " : ""}${prop.price}`, `${prop.title}${sold ? " — Sold" : ""}`, prop.title),
     description: `${prop.title} at ${prop.address}, ${prop.city}. ${sold ? "Sold for" : "Listed at"} ${prop.price}${sold && live.closedOn ? ` on ${live.closedOn}` : ""}. ${prop.beds} bed, ${prop.baths} bath, ${prop.sqft} sqft.`,
     path: `/featured-homes/${slug}`,
   });

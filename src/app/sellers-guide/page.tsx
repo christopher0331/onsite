@@ -10,7 +10,7 @@ import SellHomeInfoGraphic from "@/components/SellHomeInfoGraphic";
 import SellerProofPath from "@/components/SellerProofPath";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Home Seller's Guide | Step-by-Step Process to Sell with Confidence",
+  title: "Home Seller's Guide: Steps to Sell With Confidence",
   description:
     "Your guide to a profitable sale. From pricing to closing, we provide expert insights, market strategies, and practical steps to get you the best results.",
   path: "/sellers-guide",
