@@ -14,6 +14,8 @@ import {
   ADDRESS_STREET,
   GBP_DESCRIPTION,
   GBP_NAME,
+  OPENING_HOURS,
+  SUNDAY_HOURS_NOTE,
   SITE_BRAND,
   GOOGLE_MAPS_PLACE_URL,
   GOOGLE_RATING,
@@ -131,6 +133,14 @@ export default function Footer() {
               >
                 {PHONE_DISPLAY}
               </a>
+              <div className="text-[14px] text-white/60 leading-relaxed">
+                {OPENING_HOURS.map((h) => (
+                  <p key={h.label}>
+                    {h.label}: {h.display}
+                  </p>
+                ))}
+                <p>Sun: {SUNDAY_HOURS_NOTE}</p>
+              </div>
               <a
                 href={MAPS_DIRECTIONS_URL}
                 target="_blank"
