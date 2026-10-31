@@ -1816,7 +1816,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Clark's Creek",
         citySlug: "puyallup",
         neighborhoodSlug: "clarks-creek",
-        blurb: "Creek parks and established Puyallup city lots just east.",
+        blurb: "Parks and established Puyallup city lots just east.",
       },
       {
         name: "South Hill",
