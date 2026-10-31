@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { SoldListingRow } from "@/lib/service-area-market";
 import { formatStreetAddressOrUnavailable } from "@/lib/format-address";
+import { getSoldBrokerage } from "@/lib/sold-display";
 
 type Props = {
   cityName: string;
@@ -75,6 +76,7 @@ export default function RecentlySoldTable({
                   listing.address
                 );
                 const zip = listing.address?.zip;
+                const { listingFirm, buyerFirm } = getSoldBrokerage(listing);
                 return (
                   <tr
                     key={listing.mlsNumber}
@@ -87,11 +89,19 @@ export default function RecentlySoldTable({
                       >
                         {street}
                       </Link>
+                      <span className="ml-2 inline-block rounded-full bg-charcoal/80 px-2 py-0.5 align-middle text-[10px] font-medium uppercase tracking-[0.15em] text-white">
+                        Sold
+                      </span>
                       {zip ? (
                         <span className="block text-[12px] text-charcoal/55 mt-0.5">
                           {zip}
                         </span>
                       ) : null}
+                      <span className="mt-1 block text-[12px] leading-snug text-charcoal/80">
+                        <span className="font-semibold">Listing Brokerage:</span> {listingFirm || "Not provided"}
+                        <br />
+                        <span className="font-semibold">Buyer Brokerage:</span> {buyerFirm || "Not provided"}
+                      </span>
                     </td>
                     <td className="px-5 py-3.5 text-charcoal/85">
                       {formatPrice(listing.soldPrice || listing.listPrice)}

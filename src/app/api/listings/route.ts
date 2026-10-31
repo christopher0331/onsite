@@ -4,6 +4,7 @@ import {
   enrichListingsResponse,
   repliersListingsUrl,
 } from "@/lib/repliers-enrich";
+import { filterSoldDisplayAuthorized } from "@/lib/sold-display";
 import { FEATURE_GROUPS, matchFeaturesInText } from "@/lib/listing-search-terms";
 import {
   applyEastPierceCityFilters,
@@ -181,7 +182,7 @@ export async function GET(req: NextRequest) {
         next: { revalidate: 300 },
       });
       if (!res.ok) return { res, data: null as ReturnType<typeof enrichListingsResponse> | null };
-      const data = enrichListingsResponse(await res.json());
+      const data = filterSoldDisplayAuthorized(enrichListingsResponse(await res.json()));
       return { res, data };
     };
 

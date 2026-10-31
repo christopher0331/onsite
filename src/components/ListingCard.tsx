@@ -6,6 +6,7 @@ import { getCitySlugByName } from "@/lib/service-areas/data";
 import { repliersImageUrl } from "@/lib/repliers-images";
 import { formatStreetAddressOrUnavailable } from "@/lib/format-address";
 import { formatBathroomCount } from "@/lib/format-bathrooms";
+import { getSoldBrokerage } from "@/lib/sold-display";
 
 export type CardListing = {
   mlsNumber: string;
@@ -36,6 +37,7 @@ export type CardListing = {
   images?: string[] | null;
   permissions?: { displayAddressOnInternet?: string };
   office?: { brokerageName?: string } | null;
+  buyerAgents?: Array<{ brokerage?: { name?: string | null } | null }> | null;
   listDate?: string | null;
 };
 
@@ -80,6 +82,7 @@ export default function ListingCard({
         : "bg-charcoal/80 text-white";
 
   const baths = formatBathroomCount(det, listing.raw);
+  const soldBrokerage = badge.tone === "sold" && listing.soldPrice ? getSoldBrokerage(listing) : null;
 
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-3xl bg-white shadow-[0_8px_32px_rgba(0,0,0,0.10)] transition-all duration-500 hover:shadow-[0_22px_70px_rgba(0,0,0,0.18)] hover:-translate-y-1">
@@ -163,6 +166,13 @@ export default function ListingCard({
             </p>
           )
         )}
+        {soldBrokerage ? (
+          <p className="mb-3 text-[12px] font-medium leading-snug text-charcoal/90">
+            <span className="font-bold">Listing Brokerage:</span> {soldBrokerage.listingFirm || "Not provided"}
+            <br />
+            <span className="font-bold">Buyer Brokerage:</span> {soldBrokerage.buyerFirm || "Not provided"}
+          </p>
+        ) : null}
         <div className="mt-auto flex items-center justify-between border-t border-charcoal/10 pt-4">
           <span className="text-[11px] text-charcoal/80">MLS# {listing.mlsNumber}</span>
           <span className="text-[11px] uppercase tracking-[0.2em] text-charcoal/80 transition-colors duration-300 group-hover:text-charcoal">View →</span>

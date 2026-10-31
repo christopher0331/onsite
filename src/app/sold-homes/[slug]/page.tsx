@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MLSGridTimestamp from "@/components/MLSGridTimestamp";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
+import SoldBrokerageLine from "@/components/SoldBrokerageLine";
 import { pageMetadata } from "@/lib/page-meta";
 import { getCitySlugByName } from "@/lib/service-areas/data";
 import { ServiceAreaLinkedText } from "@/lib/service-areas/linkify";
@@ -346,6 +347,7 @@ export default async function SoldHomeDetailPage({
                 <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/80">Bed / Bath</p>
               </div>
             </div>
+            <SoldBrokerageLine slug={slug} theme="dark" className="mt-6 w-fit max-w-full rounded-xl" />
           </div>
         </section>
 
@@ -487,6 +489,7 @@ export default async function SoldHomeDetailPage({
                       Sold
                     </span>
                   </div>
+                  <SoldBrokerageLine slug={s} />
                   <div className="flex flex-1 flex-col justify-between bg-white p-6">
                     <div>
                       <p className="mb-1 text-[11px] uppercase tracking-[0.2em] text-charcoal/65">{p.city}</p>

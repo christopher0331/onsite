@@ -42,6 +42,8 @@ const REPLIERS_SEARCH_FIELDS = [
   "raw.BuyerAgentOfficePhone",
   "raw.BuyerOfficePhone",
   "raw.CoBuyerOfficeName",
+  "raw.ListOfficeName",
+  "raw.InternetEntireListingDisplayYN",
   "raw.NWM_Bathrooms",
   "raw.BathroomsFull",
   "raw.BathroomsHalf",
