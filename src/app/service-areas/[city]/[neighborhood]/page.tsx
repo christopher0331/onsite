@@ -175,7 +175,13 @@ export default async function NeighborhoodPage({
           />
         ) : null}
 
-        {article ? <ServiceAreaArticle article={article} /> : null}
+        {article ? (
+          <ServiceAreaArticle
+            article={article}
+            areaName={neighborhood.name}
+            areaQuery={`${neighborhood.name}, ${city.name}`}
+          />
+        ) : null}
 
         <Marquee />
       </main>
