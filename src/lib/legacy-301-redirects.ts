@@ -112,4 +112,6 @@ export const legacy301Redirects: Permanent301[] = [
     "/blog/where-are-buyers-coming-from-in-pierce-county-in-2025",
     "/blog/how-remote-work-continues-to-shape-buyer-patterns-in-pierce-county"
   ),
+  // ── Featured homes with no MLS# (see src/lib/featured-homes.ts) ───────
+  to301("/featured-homes/luxury-rambler-on-15-acres-with-rainier-views", "/our-listings"),
 ];
