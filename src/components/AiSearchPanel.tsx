@@ -20,7 +20,7 @@ export default function AiSearchPanel({
   examples = AI_SEARCH_EXAMPLES,
   compact = false,
   heading = "Describe your dream home",
-  subheading = "Skip the filters — just tell us what you want in plain words and we'll find matching homes across the MLS.",
+  subheading = "Skip the filters — just tell us what you want in plain words and we'll find matching homes from current listings.",
 }: Props) {
   const [prompt, setPrompt] = useState(initialPrompt);
   const [loading, setLoading] = useState(false);
