@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Link from "next/link";
 import OpenHouseLeadForm from "@/components/open-house/OpenHouseLeadForm";
 import { trackLeadIntent, trackPhoneCall } from "@/lib/analytics";
@@ -32,6 +33,7 @@ export default function ListingOpenHouseCard({
   street,
   location,
   contactAddress,
+  listingBroker,
   mapsUrl,
   listPrice,
   brokerageName,
@@ -42,6 +44,8 @@ export default function ListingOpenHouseCard({
   street: string;
   location: string;
   contactAddress: string;
+  /** Rule 22 Listing Broker line, rendered directly under the contact buttons. */
+  listingBroker?: ReactNode;
   mapsUrl: string;
   listPrice: string;
   brokerageName: string;
@@ -166,6 +170,8 @@ export default function ListingOpenHouseCard({
         >
           Ask a Question
         </Link>
+
+        {listingBroker ? <div className="mt-4">{listingBroker}</div> : null}
 
         {later.length > 0 && (
           <div className="mt-5 border-t border-white/10 pt-4">

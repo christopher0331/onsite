@@ -11,6 +11,7 @@ import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount, formatBathroomDetail } from "@/lib/format-bathrooms";
 import { repliersImageUrl } from "@/lib/repliers-images";
 import ShareListingCard from "@/components/listings/ShareListingCard";
+import ListingBrokerAttribution from "@/components/listings/ListingBrokerAttribution";
 import ListingOpenHouseCard from "@/components/open-house/ListingOpenHouseCard";
 import OpenHouseStickyBar from "@/components/open-house/OpenHouseStickyBar";
 import { trackLeadIntent, trackPhoneCall } from "@/lib/analytics";
@@ -362,6 +363,7 @@ export default function ListingDetailView({
     mls: listing.mlsNumber,
     is_live: openHouseIsLive,
   };
+  const isSoldListing = listing.lastStatus === "Sld" || listing.status === "U";
   const hasQuickStats = Boolean(det.numBedrooms || bathDisplay || det.sqft || listing.lot?.acres);
   // Price + MLS# block. Rendered in the right column normally, or in the left
   // column (under the address) when the open house card takes the right side.
@@ -534,6 +536,7 @@ export default function ListingDetailView({
                     street={street}
                     location={contactAddress}
                     contactAddress={contactAddress}
+                    listingBroker={<ListingBrokerAttribution listing={listing} isSold={isSoldListing} />}
                     mapsUrl={mapsUrl}
                     listPrice={formatPrice(listing.soldPrice || listing.listPrice)}
                     brokerageName={listing.office?.brokerageName ?? ""}
@@ -938,6 +941,7 @@ export default function ListingDetailView({
                         View on Map
                       </Link>
                     </div>
+                    <ListingBrokerAttribution listing={listing} isSold={isSoldListing} className="mt-4" />
                   </div>
 
                   <ShareListingCard
@@ -1342,12 +1346,15 @@ export default function ListingDetailView({
       <Footer />
       {hasOpenHouse && nextOpenHouse && (
         <>
-          <div className="h-20 lg:hidden" aria-hidden />
+          <div className="h-36 lg:hidden" aria-hidden />
           <OpenHouseStickyBar
             mlsNumber={listing.mlsNumber}
             dayLabel={formatOpenHouseDay(nextOpenHouse)}
             timeLabel={formatOpenHouseTimeRange(nextOpenHouse)}
             isLive={openHouseIsLive}
+            listingBroker={
+              <ListingBrokerAttribution listing={listing} isSold={isSoldListing} compact />
+            }
           />
         </>
       )}
