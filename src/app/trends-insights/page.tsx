@@ -47,7 +47,7 @@ const marketTrendsPosts = [
     excerpt:
       "The frenzied market of 2021–2022 is behind us — but what does a stable Pierce County market actually look like for sellers today? We break down what the data is really saying.",
     slug: "pierce-county-housing-market-what-stability-really-looks-like-after-the-frenzy",
-    image: "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/698b9a6e51771cf4ac693163_ChatGPT%20Image%20Feb%2010%2C%202026%2C%2012_51_46%20PM.png",
+    image: "/blog/aerial-pierce-county-suburb-mount-rainier.webp",
     isNew: true,
   },
   {
@@ -74,7 +74,7 @@ const sellingTipsPosts = [
     excerpt:
       "Before you put your home on the market, knowing what a home inspector will flag can save you thousands. Here's what they actually focus on in Western Washington.",
     slug: "what-home-inspectors-really-look-for-in-western-washington-before-you-list",
-    image: "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/698b81074c1a8db00bf0ef53_ChatGPT%20Image%20Feb%2010%2C%202026%2C%2010_58_56%20AM.png",
+    image: "/blog/craftsman-home-in-evergreen-trees.webp",
     isNew: true,
   },
   {
