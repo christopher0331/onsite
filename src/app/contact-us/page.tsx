@@ -10,6 +10,8 @@ import {
   ADDRESS_LINE,
   GBP_DESCRIPTION,
   GBP_NAME,
+  OPENING_HOURS,
+  SUNDAY_HOURS_NOTE,
   GOOGLE_MAPS_PLACE_URL,
   GOOGLE_RATING,
   MAPS_DIRECTIONS_URL,
@@ -229,6 +231,14 @@ export default function ContactUsPage() {
                   </svg>
                   {PHONE_DISPLAY}
                 </a>
+                <div className="text-[14px] text-charcoal/80 leading-relaxed mb-3">
+                  {OPENING_HOURS.map((h) => (
+                    <p key={h.label}>
+                      {h.label}: {h.display}
+                    </p>
+                  ))}
+                  <p>Sun: {SUNDAY_HOURS_NOTE}</p>
+                </div>
                 <a
                   href={MAPS_DIRECTIONS_URL}
                   target="_blank"

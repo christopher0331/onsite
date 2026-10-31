@@ -11,7 +11,15 @@ import { getCanonicalBaseUrl } from "@/lib/site-url";
 export const GBP_NAME = "OnSite Real Estate Group";
 /** Primary brand for titles, Open Graph site name, and chrome. */
 export const SITE_BRAND = GBP_NAME;
-export const GBP_ALTERNATE_NAMES = ["OnSite ReGroup"] as const;
+export const GBP_ALTERNATE_NAMES = ["OnSite Real Estate Group"] as const;
+
+/** Office hours (shown on /contact-us + footer and emitted in JSON-LD). Sunday: by appointment only, no hours entry. */
+export const OPENING_HOURS = [
+  { days: ["Monday", "Tuesday", "Wednesday", "Thursday"], label: "Mon – Thu", opens: "08:00", closes: "18:00", display: "8:00 AM – 6:00 PM" },
+  { days: ["Friday"], label: "Fri", opens: "08:00", closes: "17:30", display: "8:00 AM – 5:30 PM" },
+  { days: ["Saturday"], label: "Sat", opens: "10:00", closes: "16:00", display: "10:00 AM – 4:00 PM" },
+] as const;
+export const SUNDAY_HOURS_NOTE = "By appointment";
 export const GBP_DESCRIPTION =
   "Real estate agency specializing in buying and selling residential properties.";
 export const GBP_CATEGORY = "Real estate agent";
@@ -100,6 +108,12 @@ export function localBusinessNode(baseUrl = getCanonicalBaseUrl()) {
     },
     hasMap: GOOGLE_MAPS_PLACE_URL,
     sameAs: [...SAME_AS],
+    openingHoursSpecification: OPENING_HOURS.map((h) => ({
+      "@type": "OpeningHoursSpecification" as const,
+      dayOfWeek: [...h.days],
+      opens: h.opens,
+      closes: h.closes,
+    })),
     // Text, not Place nodes — Place/AdminArea without streetAddress gets
     // flagged as "Local Business / address required" in Semrush.
     areaServed: [
