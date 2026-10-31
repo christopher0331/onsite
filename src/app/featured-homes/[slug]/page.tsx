@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MLSGridTimestamp from "@/components/MLSGridTimestamp";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
 import { pageMetadata } from "@/lib/page-meta";
+import { FEATURED_HOME_FALLBACK_PATH, getFeaturedHomeLive } from "@/lib/featured-homes";
 import { getCitySlugByName, getNeighborhoodsByCity } from "@/lib/service-areas/data";
 import { ServiceAreaLinkedText } from "@/lib/service-areas/linkify";
 
@@ -134,6 +135,9 @@ const properties = {
 
 type Slug = keyof typeof properties;
 
+// Same window as /listings/[mlsNumber] — status/price come from the cached MLS fetch.
+export const revalidate = 300;
+
 export async function generateStaticParams() {
   return Object.keys(properties).map((slug) => ({ slug }));
 }
@@ -144,11 +148,15 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const prop = properties[slug as Slug];
-  if (!prop) return {};
+  const base = properties[slug as Slug];
+  if (!base) return {};
+  const live = await getFeaturedHomeLive(slug);
+  if (!live) return {};
+  const prop = { ...base, price: live.price ?? base.price };
+  const sold = live.status === "Sold";
   return pageMetadata({
-    title: `${prop.title} — ${prop.price} | OnSite Real Estate Group`,
-    description: `${prop.title} at ${prop.address}, ${prop.city}. Listed at ${prop.price}. ${prop.beds} bed, ${prop.baths} bath, ${prop.sqft} sqft.`,
+    title: `${prop.title} — ${sold ? "Sold " : ""}${prop.price} | OnSite Real Estate Group`,
+    description: `${prop.title} at ${prop.address}, ${prop.city}. ${sold ? "Sold for" : "Listed at"} ${prop.price}${sold && live.closedOn ? ` on ${live.closedOn}` : ""}. ${prop.beds} bed, ${prop.baths} bath, ${prop.sqft} sqft.`,
     path: `/featured-homes/${slug}`,
   });
 }
@@ -159,11 +167,21 @@ export default async function FeaturedHomeDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const prop = properties[slug as Slug];
-  if (!prop) notFound();
+  const base = properties[slug as Slug];
+  if (!base) notFound();
+  const live = await getFeaturedHomeLive(slug);
+  if (!live) permanentRedirect(FEATURED_HOME_FALLBACK_PATH);
+  const prop = { ...base, price: live.price ?? base.price, status: live.status };
+  const sold = live.status === "Sold";
+  const priceLabel = sold ? "Sold Price" : "List Price";
 
   const [hero, ...gallery] = prop.images;
-  const otherProps = Object.entries(properties).filter(([s]) => s !== slug);
+  const otherLive = await Promise.all(
+    Object.keys(properties).filter((s) => s !== slug).map(async (s) => [s, await getFeaturedHomeLive(s)] as const)
+  );
+  const otherProps = otherLive.flatMap(([s, l]) =>
+    l ? [[s, { ...properties[s as Slug], price: l.price ?? properties[s as Slug].price, status: l.status }] as const] : []
+  );
   const cityName = prop.city.split(",")[0]?.trim() ?? "";
   const citySlug = getCitySlugByName(cityName);
   const cityHref = citySlug ? `/service-areas/${citySlug}` : null;
@@ -219,7 +237,7 @@ export default async function FeaturedHomeDetailPage({
             <div className="flex flex-wrap gap-8">
               <div>
                 <p className="font-serif text-[2.2rem] font-light leading-none text-white">{prop.price}</p>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/80">List Price</p>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.25em] text-white/80">{priceLabel}</p>
               </div>
               <div className="h-10 w-px bg-white/20 hidden sm:block self-center" />
               <div>
@@ -276,8 +294,9 @@ export default async function FeaturedHomeDetailPage({
                   <p className="mb-6 text-[11px] uppercase tracking-[0.3em] text-charcoal/75">Property Details</p>
                   <dl className="space-y-4">
                     {[
-                      { label: "List Price", value: prop.price },
+                      { label: priceLabel, value: prop.price },
                       { label: "Status", value: prop.status },
+                      ...(sold && live.closedOn ? [{ label: "Closed On", value: live.closedOn }] : []),
                       { label: "County", value: prop.county },
                       {
                         label: "Neighborhood",
@@ -378,8 +397,8 @@ export default async function FeaturedHomeDetailPage({
                         sizes="(max-width: 640px) 100vw, 50vw"
                       />
                       <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-charcoal shadow">
-                        <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-                        Active
+                        <span className={`h-1.5 w-1.5 rounded-full ${p.status === "Active" ? "bg-green-500" : p.status === "Pending" ? "bg-amber-500" : "bg-charcoal"}`} />
+                        {p.status}
                       </span>
                     </div>
                     <div className="flex flex-1 flex-col justify-between bg-white p-6">

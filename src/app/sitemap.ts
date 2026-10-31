@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import blogData from "@/lib/blog-data.json";
+import { getVisibleFeaturedSlugs } from "@/lib/featured-homes";
 import { getIndexableListingSitemapEntries } from "@/lib/listing-fetch";
 import { getServiceAreaArticle } from "@/lib/service-areas/articles";
 import { CITIES, NEIGHBORHOODS } from "@/lib/service-areas/data";
@@ -111,7 +112,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // ─── FEATURED HOME DETAIL PAGES ──────────────────────────────────────────
-  const featuredHomes: MetadataRoute.Sitemap = featuredHomeSlugs.map((slug) => ({
+  // Hidden when the home has no MLS# or the feed no longer returns it.
+  const featuredHomes: MetadataRoute.Sitemap = (await getVisibleFeaturedSlugs(featuredHomeSlugs)).map((slug) => ({
     url: `${BASE_URL}/featured-homes/${slug}`,
     priority: 0.8,
     changeFrequency: "monthly" as const,
