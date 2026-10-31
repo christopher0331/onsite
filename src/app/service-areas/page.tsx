@@ -18,13 +18,13 @@ import { getCanonicalBaseUrl } from "@/lib/site-url";
 const SITE_URL = getCanonicalBaseUrl();
 
 export const metadata: Metadata = {
-  title: `Service Areas | Pierce County Real Estate | ${SITE_BRAND}`,
+  title: `Pierce County Service Areas | ${SITE_BRAND}`,
   description: `${SITE_BRAND} serves Pierce County, WA from Lake Tapps. Explore our city hubs and neighborhood pages for Puyallup, Bonney Lake, Sumner and beyond.`,
   alternates: {
     canonical: `${SITE_URL}/service-areas`,
   },
   openGraph: {
-    title: `Service Areas | Pierce County Real Estate | ${SITE_BRAND}`,
+    title: `Pierce County Service Areas | ${SITE_BRAND}`,
     description: `${SITE_BRAND} serves Pierce County, WA from Lake Tapps. Explore our city hubs and neighborhood pages for Puyallup, Bonney Lake, Sumner and beyond.`,
     url: `${SITE_URL}/service-areas`,
     siteName: SITE_BRAND,

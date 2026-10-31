@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
-import { pageMetadata } from "@/lib/page-meta";
+import { pageMetadata, titleWithBrand } from "@/lib/page-meta";
+import { BLOG_META } from "@/lib/blog-meta";
 import { SITE_BRAND } from "@/lib/nap";
 import { BlogLinkedText } from "@/lib/service-areas/linkify";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
@@ -50,8 +51,8 @@ export async function generateMetadata({
   const post = posts[slug];
   if (!post) return {};
   return pageMetadata({
-    title: `${post.title} | OnSite Real Estate Group`,
-    description: post.excerpt,
+    title: titleWithBrand(BLOG_META[slug]?.title ?? post.title),
+    description: BLOG_META[slug]?.description ?? post.excerpt,
     path: `/blog/${post.slug}`,
     image: post.image || undefined,
     type: "article",

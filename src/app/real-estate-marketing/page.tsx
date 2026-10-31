@@ -11,7 +11,7 @@ import MarketingOutcomesPath from "@/components/MarketingOutcomesPath";
 export const metadata: Metadata = pageMetadata({
   title: "Real Estate Marketing & Strategy | OnSite Real Estate Group",
   description:
-    "Smart marketing puts your home in front of serious buyers, driving stronger offers. We use high-impact photography, digital advertising, and exclusive buyer networks.",
+    "Smart marketing puts your home in front of serious buyers for stronger offers, with high-impact photography, digital ads, and exclusive buyer networks.",
   path: "/real-estate-marketing",
 });
 

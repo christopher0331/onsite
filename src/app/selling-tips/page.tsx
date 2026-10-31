@@ -9,9 +9,9 @@ import TestimonialsScroll from "@/components/TestimonialsScroll";
 import { getCategoryCards, type BlogCard as Post } from "@/lib/blog";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Home Selling Tips & Advice | Pierce County Real Estate Guidance",
+  title: "Home Selling Tips & Advice for Pierce County Sellers",
   description:
-    "Practical, expert-backed advice for Pierce County home sellers. From pricing and prep to inspections and closing — get the guidance you need to sell with confidence.",
+    "Practical, expert-backed advice for Pierce County home sellers, from pricing and prep to inspections and closing, so you can sell with confidence.",
   path: "/selling-tips",
 });
 

@@ -8,7 +8,7 @@ import Marquee from "@/components/Marquee";
 import { getBlogPostsNewestFirst } from "@/lib/blog";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Blog | Real Estate Tips, Market Trends & Insights | OnSite Real Estate Group",
+  title: "Real Estate Tips & Market Trends | OnSite Real Estate Group",
   description:
     "Expert real estate articles for Pierce County homeowners — market trends, selling tips, and local insights from OnSite Real Estate Group.",
   path: "/blog",
