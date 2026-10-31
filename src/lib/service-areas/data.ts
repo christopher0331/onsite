@@ -656,7 +656,7 @@ export const CITIES: City[] = [
     zipCodes: ["98001", "98002", "98092"],
     geo: { lat: 47.3073, lng: -122.2285 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Service Area · Auburn Valley to Lea Hill",
     heroIntro:
       "Auburn prices in distinct bands — valley-floor neighborhoods near the Sounder station, established West Hill pockets, and the newer Lea Hill bench above Green River College. We underwrite each band against its own comp pool.",
@@ -921,7 +921,7 @@ export const CITIES: City[] = [
     zipCodes: ["98402", "98403", "98405", "98406", "98407", "98409", "98422", "98465", "98466"],
     geo: { lat: 47.2529, lng: -122.4443 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Service Area · Tacoma Core",
     heroIntro:
       "Tacoma is a block-by-block market with unique pricing behavior between the North End, Proctor, Stadium, and West Slope corridors. We underwrite by micro-location, not city average.",
@@ -1940,7 +1940,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98391"],
     geo: { lat: 47.1775, lng: -122.1665 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Bonney Lake · Sky Island",
     introCopy:
       "Bonney Lake's Sky Island is the established plateau view pocket in ZIP 98391 — Rainier and valley outlooks, HOA design review, and micro-neighborhood comps that a citywide Bonney Lake average misses.",
@@ -2054,7 +2054,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98391"],
     geo: { lat: 47.1715, lng: -122.1685 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Bonney Lake · Panorama West",
     introCopy:
       "Bonney Lake's Panorama West is the view-centric HOA pocket off Sky Island Drive in ZIP 98391 — Orting Valley outlooks, mid-2010s DR Horton stock, and micro-neighborhood comps that a citywide Bonney Lake average misses.",
@@ -2168,7 +2168,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98391"],
     geo: { lat: 47.2323, lng: -122.139 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Bonney Lake · Quiet Water",
     introCopy:
       "Quiet Water is the 159-home HOA pocket east of 214th Avenue E near Lake Tapps — pasture, woods, wetlands, Dieringer schools, and micro-comps that a citywide Bonney Lake average misses.",
@@ -2237,7 +2237,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98391"],
     geo: { lat: 47.157, lng: -122.1916 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Bonney Lake · Panorama Heights",
     introCopy:
       "Bonney Lake's Panorama Heights is the early-2000s PUD pocket off Veterans Memorial and Angeline in ZIP 98391 — cul-de-sac plats, neighborhood parks, and micro-neighborhood comps that a citywide Bonney Lake average misses.",
@@ -3091,7 +3091,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98403", "98406", "98407"],
     geo: { lat: 47.2735, lng: -122.4889 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · North End",
     introCopy:
       "Tacoma's North End is established urban-residential living near Point Defiance, Ruston Way, and the Proctor village core — historic and mid-century stock where micro-location, parking, and school lines matter more than a citywide median.",
@@ -3189,7 +3189,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98403"],
     geo: { lat: 47.2638, lng: -122.4506 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · Stadium District",
     introCopy:
       "Tacoma's Stadium District is the historic pocket around Stadium High School and Wright Park — period homes, downtown-edge density, and school-pathway demand where micro-location comps beat any citywide average.",
@@ -3288,7 +3288,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98405"],
     geo: { lat: 47.2519, lng: -122.4518 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · Hilltop",
     introCopy:
       "Hilltop is Tacoma's historic bluff-top neighborhood along Martin Luther King Jr. Way, just south of the Stadium District — Victorian and Craftsman-era housing, the T Line streetcar, a hospital cluster known as the Medical Mile, and landmark rules where block-level comps beat any citywide average.",
@@ -3384,7 +3384,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98418", "98408"],
     geo: { lat: 47.2245, lng: -122.4462 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · Lincoln District",
     introCopy:
       "The Lincoln District is Tacoma's south-end neighborhood around the South 38th Street business corridor, Lincoln High School (opened 1914), and Lincoln Park — streetcar-era housing, a streetscape rebuilt by the City in 2018, and mixed-use zoning where block-level comps beat any citywide average.",
@@ -3472,7 +3472,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98409"],
     geo: { lat: 47.2097, lng: -122.4826 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · South Tacoma",
     introCopy:
       "Tacoma's South Tacoma corridor is the south-central pocket around South Tacoma Way and Wapato Park — mid-century stock, mall-adjacent convenience, and I-5 commute logic where micro-location comps beat any citywide average.",
@@ -3559,7 +3559,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98465", "98466"],
     geo: { lat: 47.2554, lng: -122.5218 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · West Slope",
     introCopy:
       "Tacoma's West Slope is the Narrows-facing hillside around Narrowmoor and Titlow — mid-century view lots, terrace plats, and SR-16 commute logic where micro-location comps beat any citywide average.",
@@ -5063,7 +5063,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98092"],
     geo: { lat: 47.3128, lng: -122.1695 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Auburn · Lea Hill",
     introCopy:
       "Auburn's Lea Hill is the residential bench above Green River College in ZIP 98092 — move-up plats and campus-adjacent streets where micro-neighborhood comps beat any citywide average.",
@@ -5376,7 +5376,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98406", "98407"],
     geo: { lat: 47.2597, lng: -122.4865 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · Proctor District",
     introCopy:
       "Tacoma's Proctor District is the walkable North End village around N Proctor and N 26th — Craftsman streets, historic retail, Blue Mouse evenings, and school pathways where micro-location comps beat any citywide average.",

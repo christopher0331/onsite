@@ -83,7 +83,7 @@ export default async function BuyHomePage() {
         {/* Hero */}
         <section className="relative h-[72vh] min-h-[560px] max-h-[860px] overflow-hidden">
           <Image
-            src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg"
+            src="/blog/modern-home-driveway-at-sunset.webp"
             alt="Buy a Home with OnSite Real Estate"
             fill
             className="object-cover object-center"
