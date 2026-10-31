@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/page-meta";
 
 export const metadata: Metadata = pageMetadata({
   title: `Contact ${SITE_BRAND} | Pierce County Real Estate Agents`,
-  description: `Call or email André, Cindie, or Deisy at ${SITE_BRAND}. Pierce County real estate questions, selling, buying, and home evaluations.`,
+  description: `Call or email André or Cindie at ${SITE_BRAND}. Pierce County real estate questions, selling, buying, and home evaluations.`,
   path: "/contact-us",
 });
 
