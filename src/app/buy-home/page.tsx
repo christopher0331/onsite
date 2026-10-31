@@ -210,7 +210,6 @@ export default async function BuyHomePage() {
                   <span className="mt-2 text-[9px] uppercase tracking-[0.3em] text-white/25">Avg Savings</span>
                 </div>
                 <div className="pt-2">
-                  <p className="font-serif text-[1.4rem] font-light text-white/85 leading-snug mb-2">Savings</p>
                   <p className="text-[14px] leading-7 text-white/85">Buyers save an average of 1–5% through skilled agent negotiations — that&apos;s tens of thousands on a typical purchase.</p>
                 </div>
               </div>
