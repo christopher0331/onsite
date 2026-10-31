@@ -20,7 +20,14 @@ import { trackLeadIntent, trackLeadSubmitted, trackPhoneCall } from "@/lib/analy
 import { CONTACT_BUYING_SOURCES, topicFromContactParams } from "@/lib/contact-link";
 import { useFormBotGate } from "@/hooks/useFormBotGate";
 
-const contactMethods = [
+const contactMethods: {
+  label: string;
+  phone: string;
+  phoneHref: string;
+  email: string;
+  emailHref: string;
+  badge?: string;
+}[] = [
   {
     label: "André Bohall",
     phone: PHONE_DISPLAY,
@@ -34,14 +41,6 @@ const contactMethods = [
     phoneHref: "tel:253-799-0609",
     email: "cindie@onsiteregroup.com",
     emailHref: "mailto:cindie@onsiteregroup.com",
-  },
-  {
-    label: "Deisy Duran Ruiz",
-    phone: "253-987-1289",
-    phoneHref: "tel:253-987-1289",
-    email: "deisy@onsiteregroup.com",
-    emailHref: "mailto:deisy@onsiteregroup.com",
-    badge: "Spanish Speaking",
   },
 ];
 
