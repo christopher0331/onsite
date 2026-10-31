@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { repliersListingsUrl } from "@/lib/repliers-enrich";
+import { enrichListingsResponse, repliersListingsUrl } from "@/lib/repliers-enrich";
 import { formatStreetAddress } from "@/lib/format-address";
 import { getBathroomCount } from "@/lib/format-bathrooms";
 
@@ -109,7 +109,9 @@ export async function GET(req: NextRequest) {
       next: { revalidate: 120 },
     });
     if (res.ok) {
-      const data = (await res.json()) as { listings?: RepliersListing[] };
+      // enrichListingsResponse drops MlgCanView=false / off-market rows and blanks
+      // addresses the feed forbids displaying (InternetAddressDisplayYN=false).
+      const data = enrichListingsResponse(await res.json()) as { listings?: RepliersListing[] };
       listings = Array.isArray(data.listings) ? data.listings : [];
     }
   } catch {

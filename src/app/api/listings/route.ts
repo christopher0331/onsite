@@ -4,6 +4,7 @@ import {
   enrichListingsResponse,
   repliersListingsUrl,
 } from "@/lib/repliers-enrich";
+import { isListingBlockedFromDisplay } from "@/lib/listing-feed-flags";
 import { FEATURE_GROUPS, matchFeaturesInText } from "@/lib/listing-search-terms";
 import {
   applyEastPierceCityFilters,
@@ -80,7 +81,7 @@ export async function GET(req: NextRequest) {
       });
       if (res.ok) {
         const listing = enrichListing(await res.json());
-        if (listing?.mlsNumber) {
+        if (listing?.mlsNumber && !isListingBlockedFromDisplay(listing)) {
           return NextResponse.json({ count: 1, numPages: 1, page: 1, listings: [listing] });
         }
       }

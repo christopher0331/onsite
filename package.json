@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:listing-feed-flags": "node --experimental-strip-types --import ./scripts/register-ts-ext.mjs scripts/test-listing-feed-flags.mjs",
     "test:bot-gate": "node --experimental-strip-types --import ./scripts/register-ts-ext.mjs scripts/test-form-bot-gate.mjs",
     "check:videos": "node scripts/check-youtube-embeds.mjs",
     "test:videos": "node --experimental-strip-types --import ./scripts/register-ts-ext.mjs scripts/test-video-uploaddate.mjs"

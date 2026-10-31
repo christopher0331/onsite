@@ -1,6 +1,7 @@
 // Repliers hides NWMLS-specific fields unless `fields=raw` is on the request.
 // See https://help.repliers.com/en/article/raw-mls-data-access-with-repliers-nhlg5o/
 
+import { applyFeedDisplayFlags, isListingBlockedFromDisplay } from "@/lib/listing-feed-flags";
 import { getLeadAgentDirectPhone } from "@/lib/onsite-listings";
 
 export type RepliersRaw = Record<string, unknown>;
@@ -46,6 +47,14 @@ const REPLIERS_SEARCH_FIELDS = [
   "raw.BathroomsFull",
   "raw.BathroomsHalf",
   "raw.BathroomsThreeQuarter",
+  // NWMLS display flags (listing-feed-flags.ts); same request, no extra API calls.
+  "raw.StandardStatus",
+  "raw.MlgCanView",
+  "raw.InternetAddressDisplayYN",
+  "raw.NWM_IDXMustRemovePhotosYN",
+  "raw.NWM_IDXMustRemovePrimaryPhotoYN",
+  "raw.NWM_IDXMustRemoveVirtualTourYN",
+  "raw.NWM_ShowMapLink",
 ].join(",");
 
 /** Build a Repliers listings URL with the correct `fields` for search vs detail. */
@@ -141,7 +150,10 @@ export function enrichListing<
     };
   }
 
-  return result;
+  // NWMLS per-listing display flags: address / photos / virtual tour / map pin.
+  return applyFeedDisplayFlags(
+    result as unknown as Parameters<typeof applyFeedDisplayFlags>[0]
+  ) as unknown as T;
 }
 
 export function enrichListingsResponse(data: {
@@ -157,6 +169,9 @@ export function enrichListingsResponse(data: {
     ...data,
     listings: data.listings
       .filter((l) => Boolean(l?.mlsNumber))
+      // MlgCanView=false and Expired/Canceled/Temp Off Market/Sale-Fail rows are
+      // prohibited from display (MLS Grid IDX Rule 27, NWMLS IDX Guidance #6).
+      .filter((l) => !isListingBlockedFromDisplay(l as Parameters<typeof isListingBlockedFromDisplay>[0]))
       .map((l) => enrichListing(l)),
   };
 }
