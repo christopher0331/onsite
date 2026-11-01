@@ -3378,6 +3378,82 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     reviews: [],
   },
   {
+    slug: "old-town",
+    citySlug: "tacoma",
+    name: "Old Town",
+    zipCodes: ["98403", "98407"],
+    geo: { lat: 47.2737, lng: -122.4848 },
+    heroImage:
+      "/blog/modern-home-driveway-at-sunset.webp",
+    heroEyebrow: "Tacoma · Old Town",
+    introCopy:
+      "Old Town is where Tacoma began — Job Carr built his cabin here in 1865, and it became the town's first post office by 1869. Today it's a hillside of historic homes above the Ruston Way waterfront, with landmark rules that make block-level comps and preservation diligence essential.",
+    characteristics: {
+      medianHomeYear: "1880s – 1920s, with mid-century and newer infill",
+      architecturalStyles: ["Victorian", "Craftsman", "Early 20th-century vernacular", "Mid-century / view infill"],
+      typicalLotSize: "Varies with the hillside street grid; many view lots are small or sloped",
+      notes:
+        "The Old Town Historic District is on the Tacoma Register of Historic Places, and St. Peter's Episcopal Church (1873) and Slavonian Hall (1901–02) are individually listed landmarks. Exterior changes inside the district can require Landmarks Preservation Commission review — confirm before pricing remodel or addition potential.",
+    },
+    communityOrgs: [
+      {
+        name: "Metro Parks Tacoma — Old Town Park",
+        url: "https://www.parkstacoma.gov/place/old-town-park/",
+        context: "Park at the foot of North 30th Street with the Job Carr Cabin Museum, a 2000 replica of Carr's 1865 cabin.",
+      },
+      {
+        name: "City of Tacoma Historic Preservation",
+        url: "https://www.cityoftacoma.org/government/city_departments/planning_and_development_services/historic_preservation",
+        context: "Landmarks Preservation Commission review for exterior work inside the Old Town Historic District.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "School assignment is set by address — confirm parcel-level elementary, middle, and high school before marketing a pathway.",
+      },
+      {
+        name: "Tacoma Planning & Development Services",
+        url: "https://www.cityoftacoma.org/government/city_departments/planning_and_development_services",
+        context: "Permits, zoning, and ADU questions for hillside and historic-district parcels.",
+      },
+    ],
+    thoroughfares: ["N 30th St", "Ruston Way", "Schuster Pkwy", "N Starr St", "N McCarver St", "SR-16 / I-705"],
+    landmarks: [
+      "Job Carr Cabin Museum (Old Town Park)",
+      "St. Peter's Episcopal Church (1873)",
+      "Slavonian Hall (1901–02)",
+      "Ruston Way waterfront",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Old Town via SR-410 → SR-167 → I-5 → I-705 and Schuster Parkway, typically inside a 35–45 minute window. Steep streets and limited curb parking near North 30th and the waterfront shape showing and photo schedules — we plan access and parking before every visit.",
+    adjacent: [
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Established single-family streets toward Point Defiance and Proctor — the most common cross-shop for Old Town buyers.",
+      },
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic pocket around Stadium High and Wright Park — period homes and downtown-edge density to the south.",
+      },
+      {
+        name: "Proctor District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "proctor-district",
+        blurb: "Walkable North End business district with Craftsman streets and its own Saturday-market rhythm.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — North End, Old Town, Proctor, Stadium, Hilltop, Lincoln, West Slope, and South Tacoma on the same urban desk.",
+      },
+    ],
+    reviews: [],
+  },
+  {
     slug: "lincoln-district",
     citySlug: "tacoma",
     name: "Lincoln District",
