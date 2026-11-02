@@ -11,7 +11,7 @@ import StagePriceListPath from "@/components/StagePriceListPath";
 export const metadata: Metadata = pageMetadata({
   title: "Home Preparation & Staging | OnSite Real Estate Group",
   description:
-    "Smart preparation and staging help attract buyers and maximize your sale price. We guide you through every step to make your home market-ready in East Pierce County.",
+    "Smart preparation and staging attract buyers and maximize your sale price. We guide every step to make your East Pierce County home market-ready.",
   path: "/preparation-and-staging",
 });
 

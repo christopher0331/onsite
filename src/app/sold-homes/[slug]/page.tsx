@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import Marquee from "@/components/Marquee";
 import MLSGridTimestamp from "@/components/MLSGridTimestamp";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
-import { pageMetadata } from "@/lib/page-meta";
+import { pageMetadata, fitTitle } from "@/lib/page-meta";
 import { getCitySlugByName } from "@/lib/service-areas/data";
 import { ServiceAreaLinkedText } from "@/lib/service-areas/linkify";
 
@@ -268,7 +268,7 @@ export async function generateMetadata({
   const prop = properties[slug as Slug];
   if (!prop) return {};
   return pageMetadata({
-    title: `${prop.title} — Sold for ${prop.price} | OnSite Real Estate Group`,
+    title: fitTitle(`${prop.title} — Sold ${prop.price}`, `${prop.title} — Sold`, prop.title),
     description: `${prop.title} at ${prop.address}, ${prop.city}. Sold for ${prop.price} in ${prop.daysListed} days. MLS #${prop.mls}.`,
     path: `/sold-homes/${slug}`,
   });

@@ -656,7 +656,7 @@ export const CITIES: City[] = [
     zipCodes: ["98001", "98002", "98092"],
     geo: { lat: 47.3073, lng: -122.2285 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Service Area · Auburn Valley to Lea Hill",
     heroIntro:
       "Auburn prices in distinct bands — valley-floor neighborhoods near the Sounder station, established West Hill pockets, and the newer Lea Hill bench above Green River College. We underwrite each band against its own comp pool.",
@@ -921,7 +921,7 @@ export const CITIES: City[] = [
     zipCodes: ["98402", "98403", "98405", "98406", "98407", "98409", "98422", "98465", "98466"],
     geo: { lat: 47.2529, lng: -122.4443 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Service Area · Tacoma Core",
     heroIntro:
       "Tacoma is a block-by-block market with unique pricing behavior between the North End, Proctor, Stadium, and West Slope corridors. We underwrite by micro-location, not city average.",
@@ -932,6 +932,7 @@ export const CITIES: City[] = [
       "Stadium District",
       "West Slope",
       "South Tacoma",
+      "Hilltop",
     ],
     permittingOffice: {
       name: "City of Tacoma Planning & Development Services",
@@ -1815,7 +1816,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Clark's Creek",
         citySlug: "puyallup",
         neighborhoodSlug: "clarks-creek",
-        blurb: "Creek parks and established Puyallup city lots just east.",
+        blurb: "Parks and established Puyallup city lots just east.",
       },
       {
         name: "South Hill",
@@ -1939,7 +1940,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98391"],
     geo: { lat: 47.1775, lng: -122.1665 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Bonney Lake · Sky Island",
     introCopy:
       "Bonney Lake's Sky Island is the established plateau view pocket in ZIP 98391 — Rainier and valley outlooks, HOA design review, and micro-neighborhood comps that a citywide Bonney Lake average misses.",
@@ -2053,7 +2054,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98391"],
     geo: { lat: 47.1715, lng: -122.1685 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Bonney Lake · Panorama West",
     introCopy:
       "Bonney Lake's Panorama West is the view-centric HOA pocket off Sky Island Drive in ZIP 98391 — Orting Valley outlooks, mid-2010s DR Horton stock, and micro-neighborhood comps that a citywide Bonney Lake average misses.",
@@ -2167,7 +2168,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98391"],
     geo: { lat: 47.2323, lng: -122.139 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Bonney Lake · Quiet Water",
     introCopy:
       "Quiet Water is the 159-home HOA pocket east of 214th Avenue E near Lake Tapps — pasture, woods, wetlands, Dieringer schools, and micro-comps that a citywide Bonney Lake average misses.",
@@ -2236,7 +2237,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98391"],
     geo: { lat: 47.157, lng: -122.1916 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Bonney Lake · Panorama Heights",
     introCopy:
       "Bonney Lake's Panorama Heights is the early-2000s PUD pocket off Veterans Memorial and Angeline in ZIP 98391 — cul-de-sac plats, neighborhood parks, and micro-neighborhood comps that a citywide Bonney Lake average misses.",
@@ -3183,7 +3184,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98403", "98406", "98407"],
     geo: { lat: 47.2735, lng: -122.4889 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · North End",
     introCopy:
       "Tacoma's North End is established urban-residential living near Point Defiance, Ruston Way, and the Proctor village core — historic and mid-century stock where micro-location, parking, and school lines matter more than a citywide median.",
@@ -3281,7 +3282,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98403"],
     geo: { lat: 47.2638, lng: -122.4506 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · Stadium District",
     introCopy:
       "Tacoma's Stadium District is the historic pocket around Stadium High School and Wright Park — period homes, downtown-edge density, and school-pathway demand where micro-location comps beat any citywide average.",
@@ -3320,6 +3321,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "tacoma",
         neighborhoodSlug: "north-end",
         blurb: "Northern residential corridor — Point Defiance, Proctor village, and broader 98406 / 98407 fabric.",
+      },
+      {
+        name: "Hilltop",
+        citySlug: "tacoma",
+        neighborhoodSlug: "hilltop",
+        blurb: "Historic bluff-top neighbor just south — Victorian and Craftsman stock along the T Line on M.L.K. Way.",
       },
       {
         name: "South Tacoma",
@@ -3368,13 +3375,197 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
   },
   {
+    slug: "hilltop",
+    citySlug: "tacoma",
+    name: "Hilltop",
+    zipCodes: ["98405"],
+    geo: { lat: 47.2519, lng: -122.4518 },
+    heroImage:
+      "/blog/modern-home-driveway-at-sunset.webp",
+    heroEyebrow: "Tacoma · Hilltop",
+    introCopy:
+      "Hilltop is Tacoma's historic bluff-top neighborhood along Martin Luther King Jr. Way, just south of the Stadium District — Victorian and Craftsman-era housing, the T Line streetcar, a hospital cluster known as the Medical Mile, and landmark rules where block-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1880s – 1950, with newer infill and townhomes",
+      architecturalStyles: ["Victorian / Queen Anne", "Craftsman bungalow", "American foursquare", "Duplex / apartment"],
+      typicalLotSize: "Historic 25' x 130' platting, often combined; varies by block",
+      notes:
+        "Hilltop's historic housing was platted on narrow lots, so house sizes and lot configurations can differ sharply on the same block. South J Street's Victorian Row is on the National Register of Historic Places, and individually designated City Landmarks need Landmarks Preservation Commission approval for exterior changes — confirm any parcel's status and zoning before pricing a renovation, addition, or ADU story into list price.",
+    },
+    communityOrgs: [
+      {
+        name: "Hilltop Business Association",
+        url: "https://www.hilltopba.org/",
+        context: "Business-district association supporting and promoting businesses along Martin Luther King Jr. Way.",
+      },
+      {
+        name: "Sound Transit — T Line",
+        url: "https://www.soundtransit.org/ride-with-us/routes-schedules/t-line",
+        context: "Streetcar service through Hilltop on M.L.K. Way since the extension opened September 16, 2023, including the Hilltop District station.",
+      },
+      {
+        name: "Tacoma Historic Districts & Landmarks",
+        url: "https://tacoma.gov/government/departments/planning-and-development-services/historic-preservation/tacomas-historic-districts-landmarks/",
+        context: "City guidance on landmarks, historic districts, and design review for exterior changes.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Hilltop addresses need parcel-level elementary, middle, and high school confirmation — ZIP alone is not enough.",
+      },
+    ],
+    thoroughfares: [
+      "Martin Luther King Jr. Way",
+      "S 11th St",
+      "S 6th Ave",
+      "Division Ave",
+      "Tacoma Ave S",
+      "S J St",
+    ],
+    landmarks: [
+      "Hilltop District T Line station",
+      "MultiCare Tacoma General Hospital",
+      "St. Joseph Medical Center",
+      "The Evergreen State College Tacoma",
+      "South J Street Victorian Row",
+      "Hilltop business district",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Hilltop via SR-410 → I-5 and the downtown Tacoma exits, typically inside a 30–40 minute window for inspections and twilight photography. T Line operations, hospital-area traffic, and narrow street parking change curb availability on showing days — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic pocket just north around Stadium High and Wright Park — period homes and downtown-edge density on the same T Line corridor.",
+      },
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Northern residential corridor — Point Defiance, Proctor village, and broader 98406 / 98407 fabric.",
+      },
+      {
+        name: "Proctor District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "proctor-district",
+        blurb: "Walkable village core around N Proctor and N 26th — a common cross-shop for walkability and Craftsman streets.",
+      },
+      {
+        name: "South Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "south-tacoma",
+        blurb: "South-central corridor around South Tacoma Way and Wapato Park — practical mid-century stock and I-5 commute logic.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — North End, Proctor, Stadium, West Slope, and South Tacoma micro-markets on the same urban desk.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley and South Hill inventory when Tacoma pricing stretches the budget.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "lincoln-district",
+    citySlug: "tacoma",
+    name: "Lincoln District",
+    zipCodes: ["98418", "98408"],
+    geo: { lat: 47.2245, lng: -122.4462 },
+    heroImage:
+      "/blog/modern-home-driveway-at-sunset.webp",
+    heroEyebrow: "Tacoma · Lincoln District",
+    introCopy:
+      "The Lincoln District is Tacoma's south-end neighborhood around the South 38th Street business corridor, Lincoln High School (opened 1914), and Lincoln Park — streetcar-era housing, a streetscape rebuilt by the City in 2018, and mixed-use zoning where block-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1900s – 1950s, with mid-century and newer infill",
+      architecturalStyles: ["Craftsman bungalow", "Early 20th-century cottage", "Mid-century rambler", "Infill / townhome"],
+      typicalLotSize: "Grid platting, commonly ~5,000 – 6,500 sq ft; varies by block",
+      notes:
+        "Tacoma's south end developed in the late 1800s and early 1900s along the streetcar line, and many business-district buildings pre-date the 1940s. The South 38th Street core is a designated mixed-use center, so zoning can change block to block — confirm any parcel's zoning and infill or ADU potential before pricing it into list price.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Tacoma — Lincoln Neighborhood Revitalization",
+        url: "https://cityoftacoma.org/cms/one.aspx?pageId=85641",
+        context: "City project that rebuilt the South 38th Street streetscape, upgraded utilities, and added public art; improvements unveiled November 17, 2018.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Lincoln District addresses need parcel-level elementary, middle, and high school confirmation — ZIP alone is not enough.",
+      },
+      {
+        name: "Metro Parks Tacoma",
+        url: "https://www.metroparkstacoma.org/",
+        context: "Park district for Lincoln Park and other open space near the neighborhood.",
+      },
+      {
+        name: "Tacoma Planning & Development Services",
+        url: "https://www.cityoftacoma.org/government/city_departments/planning_and_development_services",
+        context: "Permits, zoning, and infill / ADU questions for mixed-use-center parcels.",
+      },
+    ],
+    thoroughfares: [
+      "S 38th St",
+      "S Yakima Ave",
+      "S G St",
+      "S Park Ave",
+      "Tacoma Ave S",
+      "I-5",
+    ],
+    landmarks: [
+      "Lincoln High School",
+      "Lincoln Park",
+      "Lincoln International Business District",
+      "South 38th Street gateway public art",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach the Lincoln District via SR-410 → SR-167 → I-5 and the South 38th Street exit, typically inside a 30–40 minute window for inspections and twilight photography. School-day traffic around Lincoln High and business-district parking change curb availability on showing days — we pad schedules accordingly.",
+    adjacent: [
+      {
+        name: "South Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "south-tacoma",
+        blurb: "South-central corridor around South Tacoma Way and Wapato Park — practical mid-century stock and the same I-5 commute logic.",
+      },
+      {
+        name: "Hilltop",
+        citySlug: "tacoma",
+        neighborhoodSlug: "hilltop",
+        blurb: "Historic bluff-top neighborhood to the north along M.L.K. Jr. Way — Victorian and Craftsman stock on the T Line.",
+      },
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic pocket around Stadium High and Wright Park — period homes and downtown-edge density.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — North End, Proctor, Stadium, Hilltop, West Slope, South Tacoma, and Lincoln micro-markets on the same urban desk.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley and South Hill inventory when Tacoma pricing stretches the budget.",
+      },
+    ],
+    reviews: [],
+  },
+  {
     slug: "south-tacoma",
     citySlug: "tacoma",
     name: "South Tacoma",
     zipCodes: ["98409"],
     geo: { lat: 47.2097, lng: -122.4826 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · South Tacoma",
     introCopy:
       "Tacoma's South Tacoma corridor is the south-central pocket around South Tacoma Way and Wapato Park — mid-century stock, mall-adjacent convenience, and I-5 commute logic where micro-location comps beat any citywide average.",
@@ -3461,7 +3652,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98465", "98466"],
     geo: { lat: 47.2554, lng: -122.5218 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · West Slope",
     introCopy:
       "Tacoma's West Slope is the Narrows-facing hillside around Narrowmoor and Titlow — mid-century view lots, terrace plats, and SR-16 commute logic where micro-location comps beat any citywide average.",
@@ -4965,7 +5156,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98092"],
     geo: { lat: 47.3128, lng: -122.1695 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Auburn · Lea Hill",
     introCopy:
       "Auburn's Lea Hill is the residential bench above Green River College in ZIP 98092 — move-up plats and campus-adjacent streets where micro-neighborhood comps beat any citywide average.",
@@ -5278,7 +5469,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     zipCodes: ["98406", "98407"],
     geo: { lat: 47.2597, lng: -122.4865 },
     heroImage:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg",
+      "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Tacoma · Proctor District",
     introCopy:
       "Tacoma's Proctor District is the walkable North End village around N Proctor and N 26th — Craftsman streets, historic retail, Blue Mouse evenings, and school pathways where micro-location comps beat any citywide average.",

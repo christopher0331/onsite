@@ -10,9 +10,9 @@ import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/nap";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Sell Your Home in East Pierce County | Free Home Valuation & Expert Realtors",
+  title: "Sell Your Home in East Pierce County | Free Home Valuation",
   description:
-    "Knowledgeable realtors dedicated to helping homeowners sell with confidence. Expert guidance, proven marketing strategies, and local market knowledge across Pierce County.",
+    "Sell your East Pierce County home with confidence: local realtors, proven marketing and a free valuation for Lake Tapps, Bonney Lake, Sumner & Puyallup.",
   path: "/sell-your-home",
 });
 

@@ -14,12 +14,15 @@ function Counter({
   suffix?: string;
   duration?: number;
 }) {
-  const [count, setCount] = useState(0);
+  // Start at the real value so server HTML (crawlers, no-JS) shows the final
+  // number; the count-up below is a client-only visual effect.
+  const [count, setCount] = useState(target);
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true });
 
   useEffect(() => {
     if (!inView) return;
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
     const startTime = Date.now();
     const end = target;
 
@@ -75,8 +78,9 @@ export default function Stats() {
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              // No opacity:0 here — it would be inlined in SSR and hide the stats without JS.
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: i * 0.12 }}
               className="text-center"

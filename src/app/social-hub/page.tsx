@@ -8,7 +8,7 @@ import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 
 export const metadata: Metadata = pageMetadata({
-  title: `Follow ${SITE_BRAND} on Social Media | Facebook, Instagram & YouTube`,
+  title: `${SITE_BRAND} on Social Media`,
   description:
     "Follow OnSite Real Estate Group on social for real-time updates, property highlights, and marketing tips — Facebook, Instagram, YouTube & TikTok.",
   path: "/social-hub",
@@ -29,8 +29,8 @@ const platforms = [
   },
   {
     name: "Instagram",
-    handle: "@watchmeasirealestate",
-    href: "https://www.instagram.com/watchmeasirealestate",
+    handle: "@onsiterealestategroup",
+    href: "https://www.instagram.com/onsiterealestategroup/",
     description: "Behind-the-scenes, listing showcases, client wins, and local East Pierce County content.",
     color: "#E1306C",
     icon: (

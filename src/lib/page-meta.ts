@@ -37,3 +37,21 @@ export function pageMetadata({
     },
   };
 }
+
+/** Max title length we aim for in SERPs. */
+export const MAX_TITLE_LENGTH = 60;
+
+/** Appends " | OnSite Real Estate Group" only when the result stays ≤ 60 chars. */
+export function titleWithBrand(base: string): string {
+  const full = `${base} | ${SITE_BRAND}`;
+  return full.length <= MAX_TITLE_LENGTH ? full : base;
+}
+
+/** First candidate (each tried with, then without, the brand suffix) that fits in 60 chars. */
+export function fitTitle(...candidates: string[]): string {
+  for (const c of candidates) {
+    const t = titleWithBrand(c);
+    if (t.length <= MAX_TITLE_LENGTH) return t;
+  }
+  return candidates[candidates.length - 1];
+}

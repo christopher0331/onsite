@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-10-27";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-10-30";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -20,7 +20,7 @@ const HUB_META: Record<string, string> = {
   "bonney-lake":
     "Bonney Lake plateau homes — Tehaleh, Sky Island, Panorama West, Panorama Heights, Quiet Water, and Lake Tapps. Local comps, live NWMLS listings.",
   sumner:
-    "Sumner homes near Sounder, Downtown Sumner Main Street, Bridge Hill, East Valley Edge, and the Valley Corridor. Floodplain diligence on the White and Stuck Rivers in 98390, live NWMLS listings.",
+    "Sumner homes near Sounder, Main Street, Bridge Hill and East Valley Edge. Floodplain diligence on the White and Stuck Rivers in 98390, live NWMLS listings.",
   edgewood:
     "Edgewood large-lot and equestrian homes minutes from the valley. Lot utility, wells and septic where they apply, Puyallup and Fife schools, live listings.",
   milton:
@@ -79,13 +79,17 @@ const NEIGHBORHOOD_META: Record<string, string> = {
   "buckley/elk-run":
     "Elk Run Buckley homes at Chinook Meadows along 229th Ave E in 98321. Soundbuilt construction, HOA diligence, and White River schools, live NWMLS listings.",
   "buckley/elk-heights":
-    "Elk Heights Buckley homes on the hilltop near Pioneer Way and Lund St in 98321. HOA / ACC diligence, Rainier views, and White River schools, live NWMLS listings.",
+    "Elk Heights Buckley homes on the hilltop near Pioneer Way and Lund St in 98321. HOA/ACC diligence, Rainier views, White River schools, live NWMLS listings.",
   "graham/the-country":
     "The Country Graham homes on 1+ acre lots near Country Drive E in 98338. HOA and CC&R diligence, septic records, and Bethel schools, live NWMLS listings.",
   "seattle/ballard":
     "Ballard Seattle homes near Market Street, the Locks, and Golden Gardens in 98107–98117. Street-level comps, Seattle Public Schools, live NWMLS listings.",
   "tacoma/north-end":
     "Tacoma North End homes near Point Defiance, Ruston Way, and Proctor. Historic and mid-century stock in 98403, 98406, and 98407, live NWMLS listings.",
+  "tacoma/hilltop":
+    "Hilltop Tacoma homes along M.L.K. Jr. Way in 98405. T Line streetcar access, Victorian and Craftsman stock, and landmark diligence, live NWMLS listings.",
+  "tacoma/lincoln-district":
+    "Lincoln District Tacoma homes near S 38th St, Lincoln High, and Lincoln Park in 98418 and 98408. Streetcar-era stock and zoning diligence, live NWMLS listings.",
   "tacoma/stadium-district":
     "Stadium District Tacoma homes around Stadium High and Wright Park. Period houses, downtown-edge density, and school-pathway demand in 98403, live listings.",
   "lake-tapps/tapps-island":

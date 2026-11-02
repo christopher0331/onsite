@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { TEAM_PROFILES } from "@/lib/team";
 
 type SocialPlatform =
   | "facebook"
@@ -14,6 +16,8 @@ type SocialPlatform =
 type SocialLinks = Partial<Record<SocialPlatform, string>>;
 
 type TeamMember = {
+  slug: string;
+  bioParagraphs: readonly string[];
   name: string;
   role: string;
   photo: string;
@@ -123,207 +127,21 @@ function SocialIconsRow({
   );
 }
 
-const TEAM: TeamMember[] = [
-  {
-    name: "André Bohall",
-    role: "Founder",
-    photo:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67eff6b4b276a0e00c3a04ef_thumbnail_20241213_132625.jpg",
-    phone: "2534419764",
-    phoneDisplay: "(253) 441-9764",
-    email: "andre@onsiteregroup.com",
-    socials: {
-      facebook: "https://www.facebook.com/profile.php?id=61570807923008&sk=followers",
-      instagram: "https://www.instagram.com/watchmeasirealestate/",
-      youtube: "https://www.youtube.com/@OnSiteRealEstateGroup",
-      linkedin: "https://www.linkedin.com/in/onsiteregroup",
-      tiktok: "https://www.tiktok.com/@onsiteregroup",
-    },
-    bioShort:
-      "With over a decade of experience and hundreds of successful home sales, André brings deep expertise, tireless dedication, and a personal touch to every real estate journey.",
-    bioFull: (
-      <div className="space-y-4 text-[15.5px] leading-8 text-charcoal/80">
-        <p>
-          With over a decade of experience and hundreds of successful home sales,
-          André Bohall brings deep expertise, tireless dedication, and a personal
-          touch to every real estate journey. As the founder of OnSite Real Estate
-          Group, André leads with service and strategy — combining strong market
-          knowledge with sharp negotiating skills and genuine care for his
-          clients&apos; needs.
-        </p>
-        <p>
-          André is a natural when it comes to sales. His background includes years
-          of high-volume outbound prospecting, phone sales, and client conversion —
-          skills that now translate into powerful results for his buyers and sellers.
-          He understands how to create opportunities where others see roadblocks, and
-          his team is known for going above and beyond to generate business through
-          grit, consistency, and intentional action.
-        </p>
-        <p>
-          Whether guiding first-time sellers, upsizing families, or downsizing
-          retirees, André is known for his clear communication, no-pressure guidance,
-          and ability to simplify even the most complex transactions. His clients
-          trust him not just for his results — but for his integrity and straight
-          answers.
-        </p>
-      </div>
-    ),
-  },
-  {
-    name: "Cindie Bohall",
-    role: "Agent & Advisor",
-    photo:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67eff7c928cd6f5d561b2667_thumbnail_20241213_110755.jpg",
-    phone: "2537990609",
-    phoneDisplay: "(253) 799-0609",
-    email: "cindie@onsiteregroup.com",
-    objectPosition: "object-top",
-    socials: {
-      facebook: "https://www.facebook.com/profile.php?id=61570807923008&sk=followers",
-      instagram: "https://www.instagram.com/watchmeasirealestate/",
-      youtube: "https://www.youtube.com/@OnSiteRealEstateGroup",
-      tiktok: "https://www.tiktok.com/@onsiteregroup",
-    },
-    bioShort:
-      "For over 20 years, Cindie Bohall has been a trusted guide for families navigating complex decisions, bringing compassion and deep care to every transaction.",
-    bioFull: (
-      <div className="space-y-4 text-[15.5px] leading-8 text-charcoal/80">
-        <p>
-          For over 20 years, Cindie Bohall has been a trusted guide for families
-          navigating complex decisions. As the founder of a successful senior housing
-          referral company since 2013, she has helped hundreds of families find safe,
-          supportive environments for their loved ones.
-        </p>
-        <p>
-          Today, Cindie brings that same compassion, attention to detail, and
-          advocacy to her work at OnSite Real Estate Group. Whether helping a family
-          transition from their longtime home or supporting first-time buyers, she
-          understands the emotional weight behind every move. Her clients love her
-          calm, confident approach and her ability to make the complex feel
-          manageable.
-        </p>
-        <p>
-          Cindie&apos;s passion lies in building trust and helping people feel cared
-          for — especially during life&apos;s major transitions. Her background in
-          senior care gives her unique insight when working with older adults,
-          retirees, or families coordinating multi-generational moves.
-        </p>
-      </div>
-    ),
-  },
-  {
-    name: "Deisy Duran Ruiz",
-    role: "Agent",
-    photo: "/team/deisy-headshot.jpg",
-    phone: "2539871289",
-    phoneDisplay: "(253) 987-1289",
-    email: "deisy@onsiteregroup.com",
-    badge: "Spanish Speaking",
-    socials: {
-      facebook: "https://www.facebook.com/profile.php?id=61570958523132",
-      instagram: "https://www.instagram.com/deisyrealestateagent",
-      whatsapp:
-        "https://api.whatsapp.com/message/B26B5WOW7TPII1?autoload=1&app_absent=0",
-    },
-    bioShort:
-      "More than a real estate agent, Deisy genuinely cares about helping people build a better future through homeownership. As a proud Latina entrepreneur, she's passionate about serving her community.",
-    bioFull: <DeisyBio />,
-  },
-];
-
-function DeisyBio() {
-  const [lang, setLang] = useState<"en" | "es">("en");
-  return (
-    <div>
-      <div className="flex gap-2 mb-5">
-        <button
-          onClick={() => setLang("en")}
-          className={`rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 ${
-            lang === "en"
-              ? "bg-charcoal text-white"
-              : "border border-charcoal/20 text-charcoal/60 hover:border-charcoal/40"
-          }`}
-        >
-          English
-        </button>
-        <button
-          onClick={() => setLang("es")}
-          className={`rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.2em] transition-all duration-300 ${
-            lang === "es"
-              ? "bg-charcoal text-white"
-              : "border border-charcoal/20 text-charcoal/60 hover:border-charcoal/40"
-          }`}
-        >
-          Español
-        </button>
-      </div>
-
-      {lang === "en" ? (
-        <div className="space-y-4 text-[15.5px] leading-8 text-charcoal/80">
-          <p>
-            More than a real estate agent, I genuinely care about helping people
-            build a better future through homeownership and real estate
-            opportunities. As a proud Latina entrepreneur, I&apos;m passionate
-            about serving my community and helping families find a place they can
-            truly call home.
-          </p>
-          <p>
-            With a background in business and entrepreneurship, I value hard work,
-            clear communication, and building strong relationships with my clients.
-            I&apos;m committed to understanding each client&apos;s unique goals and
-            providing guidance throughout every step of the buying or selling
-            process.
-          </p>
-          <p>
-            I believe buying or selling a home is one of the most important
-            decisions a person can make, and my goal is to make the experience feel
-            exciting, smooth, and empowering. I focus on building trust, providing
-            honest support, and creating lasting relationships that go beyond the
-            transaction.
-          </p>
-          <p>
-            I&apos;m also passionate about supporting and connecting with the Latino
-            community through real estate, education, and opportunities that help
-            families grow and invest in their future. For me, real estate is more
-            than just properties — it&apos;s about helping people achieve their
-            dreams and create a place to call home.
-          </p>
-        </div>
-      ) : (
-        <div className="space-y-4 text-[15.5px] leading-8 text-charcoal/80">
-          <p>
-            Más que una agente de bienes raíces, realmente me importa ayudar a las
-            personas a construir un mejor futuro a través de la compra de vivienda y
-            las oportunidades en bienes raíces. Como orgullosa emprendedora Latina,
-            me apasiona servir a mi comunidad y ayudar a las familias a encontrar un
-            lugar que realmente puedan llamar hogar.
-          </p>
-          <p>
-            Con experiencia en negocios y emprendimiento, valoro el trabajo duro, la
-            comunicación clara y la construcción de relaciones sólidas con mis
-            clientes. Estoy comprometida en entender las metas únicas de cada
-            persona y brindar orientación durante cada paso del proceso de compra o
-            venta.
-          </p>
-          <p>
-            Creo que comprar o vender una casa es una de las decisiones más
-            importantes que una persona puede tomar, y mi meta es hacer que la
-            experiencia sea emocionante, sencilla y empoderadora. Me enfoco en
-            construir confianza, brindar apoyo honesto y crear relaciones duraderas
-            que van más allá de una transacción.
-          </p>
-          <p>
-            También me apasiona apoyar y conectar con la comunidad Latina a través
-            de bienes raíces, educación y oportunidades que ayuden a las familias a
-            crecer e invertir en su futuro. Para mí, bienes raíces es mucho más que
-            propiedades; se trata de ayudar a las personas a alcanzar sus sueños y
-            crear un lugar al que puedan llamar hogar.
-          </p>
-        </div>
-      )}
+const TEAM: TeamMember[] = TEAM_PROFILES.map((m) => ({
+  ...m,
+  bioFull: (
+    <div className="space-y-4 text-[15.5px] leading-8 text-charcoal/80">
+      {m.bioParagraphs.map((para) => (
+        <p key={para.slice(0, 24)}>{para}</p>
+      ))}
+      <p>
+        <Link href={`/about-us/${m.slug}`} className="underline underline-offset-4">
+          View {m.name.split(" ")[0]}&apos;s full bio
+        </Link>
+      </p>
     </div>
-  );
-}
+  ),
+}));
 
 function MemberCard({
   member,
@@ -407,6 +225,12 @@ function MemberCard({
         >
           Read More
         </button>
+        <Link
+          href={`/about-us/${member.slug}`}
+          className="mt-3 block text-center text-[11px] uppercase tracking-[0.25em] text-charcoal/60 hover:text-charcoal"
+        >
+          {member.name} bio page →
+        </Link>
       </div>
     </div>
   );

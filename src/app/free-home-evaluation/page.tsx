@@ -296,10 +296,12 @@ export default function FreeHomeEvaluationPage() {
                     <p className="text-[11px] uppercase tracking-[0.3em] text-mid-gray mb-2">Your property details</p>
 
                     <div className="flex flex-col gap-2">
-                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Property Address</label>
+                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75" htmlFor="fhe-address">Property Address</label>
                       <input
                         type="text"
                         name="address"
+                        id="fhe-address"
+                        autoComplete="street-address"
                         required
                         className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                         placeholder="123 Main St, Puyallup, WA"
@@ -308,20 +310,24 @@ export default function FreeHomeEvaluationPage() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div className="flex flex-col gap-2">
-                        <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">First Name</label>
+                        <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75" htmlFor="fhe-firstName">First Name</label>
                         <input
                           type="text"
                           name="firstName"
+                          id="fhe-firstName"
+                          autoComplete="given-name"
                           required
                           className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                           placeholder="First"
                         />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Last Name</label>
+                        <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75" htmlFor="fhe-lastName">Last Name</label>
                         <input
                           type="text"
                           name="lastName"
+                          id="fhe-lastName"
+                          autoComplete="family-name"
                           required
                           className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                           placeholder="Last"
@@ -330,10 +336,12 @@ export default function FreeHomeEvaluationPage() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Email</label>
+                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75" htmlFor="fhe-email">Email</label>
                       <input
                         type="email"
                         name="email"
+                        id="fhe-email"
+                        autoComplete="email"
                         required
                         className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                         placeholder="you@email.com"
@@ -341,19 +349,22 @@ export default function FreeHomeEvaluationPage() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Phone</label>
+                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75" htmlFor="fhe-phone">Phone</label>
                       <input
                         type="tel"
                         name="phone"
+                        id="fhe-phone"
+                        autoComplete="tel"
                         className="bg-white border border-charcoal/[0.12] rounded-full px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors"
                         placeholder="Phone number"
                       />
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75">Additional Notes</label>
+                      <label className="text-[12px] uppercase tracking-[0.2em] text-charcoal/75" htmlFor="fhe-message">Additional Notes</label>
                       <textarea
                         name="message"
+                        id="fhe-message"
                         rows={3}
                         className="bg-white border border-charcoal/[0.12] rounded-2xl px-5 py-3.5 text-[15px] text-charcoal placeholder:text-charcoal/30 focus:outline-none focus:border-charcoal/40 transition-colors resize-none"
                         placeholder="Bedrooms, bathrooms, recent updates, reason for selling..."

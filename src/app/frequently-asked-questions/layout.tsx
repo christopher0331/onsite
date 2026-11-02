@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { allFaqItems } from "@/lib/faq-data";
-import { SITE_BRAND } from "@/lib/nap";
 import { pageMetadata } from "@/lib/page-meta";
 
 export const metadata: Metadata = pageMetadata({
-  title: `Real Estate FAQ | Buying & Selling in Pierce County | ${SITE_BRAND}`,
-  description: `Answers to common questions about buying and selling a home in Pierce County — timelines, costs, escrow, inspections, appraisals, and how to get started with ${SITE_BRAND}.`,
+  title: "Real Estate FAQ: Buying & Selling in Pierce County",
+  description: "Answers to common questions about buying and selling a Pierce County home: timelines, costs, escrow, inspections, appraisals, and how to get started.",
   path: "/frequently-asked-questions",
 });
 

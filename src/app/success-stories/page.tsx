@@ -9,7 +9,7 @@ import TestimonialsScroll from "@/components/TestimonialsScroll";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Success Stories | Real Estate Client Experiences | OnSite Real Estate Group",
+  title: "Client Success Stories | OnSite Real Estate Group",
   description:
     "Real stories with real success. See how OnSite Real Estate Group has helped buyers and sellers across East Pierce County achieve their goals.",
   path: "/success-stories",

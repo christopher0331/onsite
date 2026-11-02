@@ -11,9 +11,38 @@ import { getCanonicalBaseUrl } from "@/lib/site-url";
 export const GBP_NAME = "OnSite Real Estate Group";
 /** Primary brand for titles, Open Graph site name, and chrome. */
 export const SITE_BRAND = GBP_NAME;
-export const GBP_ALTERNATE_NAMES = ["OnSite ReGroup"] as const;
+export const GBP_ALTERNATE_NAMES = ["OnSite Real Estate Group"] as const;
+
+/** Office hours (shown on /contact-us + footer and emitted in JSON-LD). Sunday: by appointment only, no hours entry. */
+export const OPENING_HOURS = [
+  { days: ["Monday", "Tuesday", "Wednesday", "Thursday"], label: "Mon – Thu", opens: "08:00", closes: "18:00", display: "8:00 AM – 6:00 PM" },
+  { days: ["Friday"], label: "Fri", opens: "08:00", closes: "17:30", display: "8:00 AM – 5:30 PM" },
+  { days: ["Saturday"], label: "Sat", opens: "10:00", closes: "16:00", display: "10:00 AM – 4:00 PM" },
+] as const;
+export const SUNDAY_HOURS_NOTE = "By appointment";
 export const GBP_DESCRIPTION =
   "Real estate agency specializing in buying and selling residential properties.";
+/** Declarative entity sentence (footer + JSON-LD description). */
+export const ENTITY_STATEMENT =
+  "OnSite Real Estate Group is a real estate team at Timber Real Estate serving Lake Tapps, Bonney Lake, and surrounding Pierce County communities.";
+export const BROKERAGE_DISCLAIMER =
+  "OnSite Real Estate Group is an independent real estate marketing group affiliated with Timber Real Estate.";
+export const PARENT_BROKERAGE_NAME = "Timber Real Estate";
+
+/** One-sentence definitive statement for service-area pages. */
+export function areaEntityStatement(area: string, county = "Pierce County") {
+  return `OnSite Real Estate Group is a real estate team at Timber Real Estate serving ${area} and nearby ${county} communities.`;
+}
+
+/** Served places with Wikidata entity IDs (verified via wbgetentities 2026-11-02). */
+export const AREA_SERVED_PLACES = [
+  { type: "City", name: "Lake Tapps, WA", wikidata: "Q111207060" },
+  { type: "City", name: "Bonney Lake, WA", wikidata: "Q657810" },
+  { type: "City", name: "Tehaleh, WA", wikidata: "Q5048209" },
+  { type: "City", name: "Puyallup, WA", wikidata: "Q179336" },
+  { type: "AdministrativeArea", name: "Pierce County, WA", wikidata: "Q156459" },
+] as const;
+
 export const GBP_CATEGORY = "Real estate agent";
 
 export const PHONE_DISPLAY = "(253) 441-9764";
@@ -45,13 +74,13 @@ export const LOGO_URL =
 export const SAME_AS = [
   GOOGLE_MAPS_PLACE_URL,
   "https://www.facebook.com/OnSiteREGroup",
-  "https://www.instagram.com/watchmeasirealestate",
+  "https://www.instagram.com/onsiterealestategroup/",
   "https://www.tiktok.com/@onsiteregroup",
   "https://www.youtube.com/@OnSiteRealEstateGroup",
   "https://x.com/OnSiteREGroup",
 ] as const;
 
-/** Google Business Profile aggregate as of 2026-08-18. */
+/** Google Business Profile aggregate as of 2026-08-18. Visible UI only — not emitted in JSON-LD. */
 export const GOOGLE_RATING = {
   ratingValue: 5,
   reviewCount: 121,
@@ -62,7 +91,7 @@ export function localBusinessId(baseUrl = getCanonicalBaseUrl()) {
   return `${baseUrl}/#localbusiness`;
 }
 
-/** JSON-LD pointer to the sitewide LocalBusiness node. Never embed a second aggregateRating. */
+/** JSON-LD pointer to the sitewide LocalBusiness node. Do not add aggregateRating or Review JSON-LD. */
 export function localBusinessRef(baseUrl = getCanonicalBaseUrl()) {
   return { "@id": localBusinessId(baseUrl) };
 }
@@ -87,7 +116,7 @@ export function localBusinessNode(baseUrl = getCanonicalBaseUrl()) {
     "@id": localBusinessId(baseUrl),
     name: GBP_NAME,
     alternateName: [...GBP_ALTERNATE_NAMES],
-    description: GBP_DESCRIPTION,
+    description: ENTITY_STATEMENT,
     url: baseUrl,
     telephone: PHONE_E164,
     image: LOGO_URL,
@@ -100,17 +129,24 @@ export function localBusinessNode(baseUrl = getCanonicalBaseUrl()) {
     },
     hasMap: GOOGLE_MAPS_PLACE_URL,
     sameAs: [...SAME_AS],
-    aggregateRating: {
-      "@type": "AggregateRating" as const,
-      ratingValue: GOOGLE_RATING.ratingValue,
-      reviewCount: GOOGLE_RATING.reviewCount,
-      bestRating: GOOGLE_RATING.bestRating,
+    openingHoursSpecification: OPENING_HOURS.map((h) => ({
+      "@type": "OpeningHoursSpecification" as const,
+      dayOfWeek: [...h.days],
+      opens: h.opens,
+      closes: h.closes,
+    })),
+    parentOrganization: {
+      "@type": "Organization" as const,
+      name: PARENT_BROKERAGE_NAME,
     },
-    // Text, not Place nodes — Place/AdminArea without streetAddress gets
-    // flagged as "Local Business / address required" in Semrush.
+    // City/AdministrativeArea (no address required, unlike Place-as-LocalBusiness) anchored to Wikidata so AI/knowledge-graph crawlers can
+    // resolve each area to a real entity. King County stays as text.
     areaServed: [
-      "Lake Tapps, WA",
-      "Pierce County, WA",
+      ...AREA_SERVED_PLACES.map((a) => ({
+        "@type": a.type,
+        name: a.name,
+        sameAs: `https://www.wikidata.org/wiki/${a.wikidata}`,
+      })),
       "King County, WA",
     ],
   };

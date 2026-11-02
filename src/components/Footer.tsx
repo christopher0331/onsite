@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -12,8 +12,11 @@ import {
   ADDRESS_POSTAL,
   ADDRESS_REGION,
   ADDRESS_STREET,
-  GBP_DESCRIPTION,
+  ENTITY_STATEMENT,
+  BROKERAGE_DISCLAIMER,
   GBP_NAME,
+  OPENING_HOURS,
+  SUNDAY_HOURS_NOTE,
   SITE_BRAND,
   GOOGLE_MAPS_PLACE_URL,
   GOOGLE_RATING,
@@ -45,7 +48,7 @@ const socialLinks = [
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/watchmeasirealestate",
+    href: "https://www.instagram.com/onsiterealestategroup/",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
@@ -72,15 +75,17 @@ const socialLinks = [
   },
 ];
 
+const subscribeNoop = () => () => {};
+
 export default function Footer() {
   // Start from the build-time default so the first client render matches the
   // server, then refine from the live hostname after mount. Reading
   // window.location during the initial render causes a hydration mismatch.
-  const [showIdxContent, setShowIdxContent] = useState(defaultShowIdxContent);
-
-  useEffect(() => {
-    setShowIdxContent(!isMainWebsiteHost(window.location.hostname));
-  }, []);
+  const showIdxContent = useSyncExternalStore(
+    subscribeNoop,
+    () => !isMainWebsiteHost(window.location.hostname),
+    () => defaultShowIdxContent
+  );
 
   const solutionLinks = [
     { label: "Sell Home", href: "/sell-your-home" },
@@ -112,7 +117,7 @@ export default function Footer() {
               {GBP_NAME}
             </p>
             <p className="text-[14px] text-white/80 leading-relaxed max-w-xs mb-8">
-              {GBP_DESCRIPTION}
+              {ENTITY_STATEMENT}
             </p>
 
             <div className="space-y-3">
@@ -131,6 +136,14 @@ export default function Footer() {
               >
                 {PHONE_DISPLAY}
               </a>
+              <div className="text-[14px] text-white/60 leading-relaxed">
+                {OPENING_HOURS.map((h) => (
+                  <p key={h.label}>
+                    {h.label}: {h.display}
+                  </p>
+                ))}
+                <p>Sun: {SUNDAY_HOURS_NOTE}</p>
+              </div>
               <a
                 href={MAPS_DIRECTIONS_URL}
                 target="_blank"
@@ -260,6 +273,9 @@ export default function Footer() {
             <p className="text-[12px] text-white/25">
               Copyright &copy; {new Date().getFullYear()} | {SITE_BRAND} | All
               Rights Reserved
+            </p>
+            <p className="text-[12px] text-white/40 text-center sm:text-left">
+              {BROKERAGE_DISCLAIMER}
             </p>
             <div className="flex items-center gap-6">
               <Link

@@ -31,6 +31,8 @@ import { elkHeightsDiscover } from "./elk-heights";
 import { theCountryDiscover } from "./the-country";
 import { ballardDiscover } from "./ballard";
 import { northEndDiscover } from "./north-end";
+import { hilltopDiscover } from "./hilltop";
+import { lincolnDistrictDiscover } from "./lincoln-district";
 import { stadiumDistrictDiscover } from "./stadium-district";
 import { southTacomaDiscover } from "./south-tacoma";
 import { westSlopeDiscover } from "./west-slope";
@@ -90,6 +92,8 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [theCountryDiscover.slug]: theCountryDiscover,
   [ballardDiscover.slug]: ballardDiscover,
   [northEndDiscover.slug]: northEndDiscover,
+  [hilltopDiscover.slug]: hilltopDiscover,
+  [lincolnDistrictDiscover.slug]: lincolnDistrictDiscover,
   [stadiumDistrictDiscover.slug]: stadiumDistrictDiscover,
   [southTacomaDiscover.slug]: southTacomaDiscover,
   [westSlopeDiscover.slug]: westSlopeDiscover,

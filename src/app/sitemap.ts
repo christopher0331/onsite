@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
 import blogData from "@/lib/blog-data.json";
+import { getVisibleFeaturedSlugs } from "@/lib/featured-homes";
 import { getIndexableListingSitemapEntries } from "@/lib/listing-fetch";
 import { getServiceAreaArticle } from "@/lib/service-areas/articles";
 import { CITIES, NEIGHBORHOODS } from "@/lib/service-areas/data";
 import { SERVICE_AREA_META_UPDATED_AT } from "@/lib/service-areas/hub-meta";
 import { getServiceAreaDiscover } from "@/lib/service-areas/discover";
 import { getCanonicalBaseUrl } from "@/lib/site-url";
+import { TEAM_PROFILES } from "@/lib/team";
 
 export const revalidate = 3600;
 
@@ -61,6 +63,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL, priority: 1.0, changeFrequency: "weekly", lastModified: now },
     { url: `${BASE_URL}/about-us`, priority: 0.8, changeFrequency: "monthly", lastModified: now },
+    ...TEAM_PROFILES.map((m) => ({ url: `${BASE_URL}/about-us/${m.slug}`, priority: 0.6, changeFrequency: "monthly" as const, lastModified: now })),
     { url: `${BASE_URL}/contact-us`, priority: 0.8, changeFrequency: "monthly", lastModified: now },
     { url: `${BASE_URL}/buy-home`, priority: 0.9, changeFrequency: "weekly", lastModified: now },
     { url: `${BASE_URL}/sell-your-home`, priority: 0.9, changeFrequency: "weekly", lastModified: now },
@@ -111,7 +114,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // ─── FEATURED HOME DETAIL PAGES ──────────────────────────────────────────
-  const featuredHomes: MetadataRoute.Sitemap = featuredHomeSlugs.map((slug) => ({
+  // Hidden when the home has no MLS# or the feed no longer returns it.
+  const featuredHomes: MetadataRoute.Sitemap = (await getVisibleFeaturedSlugs(featuredHomeSlugs)).map((slug) => ({
     url: `${BASE_URL}/featured-homes/${slug}`,
     priority: 0.8,
     changeFrequency: "monthly" as const,

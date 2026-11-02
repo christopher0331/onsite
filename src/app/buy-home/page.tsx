@@ -8,6 +8,7 @@ import Marquee from "@/components/Marquee";
 import TestimonialsScroll from "@/components/TestimonialsScroll";
 import MLSCardAttribution from "@/components/MLSCardAttribution";
 import { SITE_BRAND } from "@/lib/nap";
+import { getFeaturedHomeLive } from "@/lib/featured-homes";
 import { getShowIdxContentForRequest } from "@/lib/site-visibility-server";
 
 export const metadata: Metadata = pageMetadata({
@@ -64,6 +65,15 @@ const featuredListings = [
 
 export default async function BuyHomePage() {
   const showIdxContent = await getShowIdxContentForRequest();
+  // Featured cards follow the MLS feed: hidden homes drop out, sold ones show "Sold".
+  const liveFeatured = (
+    await Promise.all(
+      featuredListings.map(async (l) => {
+        const live = await getFeaturedHomeLive(l.href.replace("/featured-homes/", ""));
+        return live ? { ...l, price: live.status === "Sold" ? `Sold · ${live.price ?? l.price}` : live.price ?? l.price } : null;
+      })
+    )
+  ).filter((l): l is (typeof featuredListings)[number] => l !== null);
 
   return (
     <>
@@ -73,7 +83,7 @@ export default async function BuyHomePage() {
         {/* Hero */}
         <section className="relative h-[72vh] min-h-[560px] max-h-[860px] overflow-hidden">
           <Image
-            src="https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67bbb6534d332fe104fc09fb_modern-house-with-designed-driveway-at-sunset-2025-02-10-06-40-21-utc.jpg"
+            src="/blog/modern-home-driveway-at-sunset.webp"
             alt="Buy a Home with OnSite Real Estate"
             fill
             className="object-cover object-center"
@@ -200,7 +210,6 @@ export default async function BuyHomePage() {
                   <span className="mt-2 text-[9px] uppercase tracking-[0.3em] text-white/25">Avg Savings</span>
                 </div>
                 <div className="pt-2">
-                  <p className="font-serif text-[1.4rem] font-light text-white/85 leading-snug mb-2">Savings</p>
                   <p className="text-[14px] leading-7 text-white/85">Buyers save an average of 1–5% through skilled agent negotiations — that&apos;s tens of thousands on a typical purchase.</p>
                 </div>
               </div>
@@ -238,7 +247,7 @@ export default async function BuyHomePage() {
                 </Link>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {featuredListings.map((listing) => (
+                {liveFeatured.map((listing) => (
                   <div key={listing.title} className="group flex flex-col overflow-hidden rounded-3xl shadow-[0_22px_70px_rgba(0,0,0,0.14)]">
                     <Link href={listing.href} className="block">
                       <div className="relative aspect-[4/3] overflow-hidden">

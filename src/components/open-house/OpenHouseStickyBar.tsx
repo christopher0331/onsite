@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { trackLeadIntent, trackPhoneCall } from "@/lib/analytics";
 import { PHONE_DISPLAY, PHONE_HREF, PHONE_TEL } from "@/lib/nap";
 
@@ -8,11 +9,14 @@ export default function OpenHouseStickyBar({
   dayLabel,
   timeLabel,
   isLive,
+  listingBroker,
 }: {
   mlsNumber: string;
   dayLabel: string;
   timeLabel: string;
   isLive: boolean;
+  /** Rule 22 Listing Broker line, kept adjacent to the contact buttons. */
+  listingBroker?: ReactNode;
 }) {
   const track = { mls: mlsNumber, surface: "listing_open_house_sticky", is_live: isLive };
 
@@ -39,6 +43,7 @@ export default function OpenHouseStickyBar({
           <span className="sr-only"> OnSite at {PHONE_DISPLAY}</span>
         </a>
       </div>
+      {listingBroker ? <div className="mx-auto mt-2 max-w-lg">{listingBroker}</div> : null}
     </div>
   );
 }
