@@ -29,8 +29,8 @@ const platforms = [
   },
   {
     name: "Instagram",
-    handle: "@watchmeasirealestate",
-    href: "https://www.instagram.com/watchmeasirealestate",
+    handle: "@onsiterealestategroup",
+    href: "https://www.instagram.com/onsiterealestategroup/",
     description: "Behind-the-scenes, listing showcases, client wins, and local East Pierce County content.",
     color: "#E1306C",
     icon: (
