@@ -279,6 +279,13 @@ export default function ListingDetailView({
   const street = showAddress ? formatAddress(listing.address) : "Undisclosed";
   const images = listing.images || [];
   const isActive = listing.status === "A";
+  // Item 83: price label follows MLS status — "Sold Price" only for Sold/Closed.
+  const mlsStatusRaw = String(listing.raw?.MlsStatus ?? "").toLowerCase();
+  const stdStatus = String(listing.standardStatus ?? "").toLowerCase();
+  const isClosedSale =
+    ["sold", "closed"].includes(stdStatus) || ["sold", "closed"].includes(mlsStatusRaw);
+  const priceLabel = isClosedSale ? "Sold Price" : "List Price";
+  const priceValue = isClosedSale ? listing.soldPrice || listing.listPrice : listing.listPrice;
   const det = listing.details;
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${street}, ${listing.address.city}, ${listing.address.state} ${listing.address.zip}`)}`;
   const serviceAreaSlug = getCitySlugByName(listing.address.city);
@@ -293,9 +300,14 @@ export default function ListingDetailView({
   if (listing.lot?.acres) detailRows.push({ label: "Lot Acres", value: `${listing.lot.acres} ac` });
   if (listing.lot?.dimensions) detailRows.push({ label: "Lot Dimensions", value: listing.lot.dimensions });
   if (det.numBedrooms) {
-    const bedVal = det.numBedroomsPlus
-      ? `${det.numBedrooms} + ${det.numBedroomsPlus}`
-      : det.numBedrooms;
+    // Item 84: never subtract/add "possible" bedrooms. Show the MLS values as-is,
+    // and only mention the possible count when it exceeds Bedrooms.
+    const rawPossible = Number(listing.raw?.BedroomsPossible);
+    const possible = Number.isFinite(rawPossible) && rawPossible > 0 ? rawPossible : null;
+    const bedVal =
+      possible != null && possible > det.numBedrooms
+        ? `${det.numBedrooms} (${possible} possible)`
+        : det.numBedrooms;
     detailRows.push({ label: "Bedrooms", value: bedVal });
   }
   const bathDetail = formatBathroomDetail(det, listing.raw);
@@ -369,7 +381,7 @@ export default function ListingDetailView({
   // column (under the address) when the open house card takes the right side.
   const priceBlock = (
     <>
-      {listing.soldPrice ? (
+      {isClosedSale && listing.soldPrice ? (
         <>
           <p className="text-[12px] uppercase tracking-[0.2em] text-white/80 mb-1">Sold</p>
           <p className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-light leading-none text-white">
@@ -538,7 +550,7 @@ export default function ListingDetailView({
                     contactAddress={contactAddress}
                     listingBroker={<ListingBrokerAttribution listing={listing} isSold={isSoldListing} />}
                     mapsUrl={mapsUrl}
-                    listPrice={formatPrice(listing.soldPrice || listing.listPrice)}
+                    listPrice={formatPrice(priceValue)}
                     brokerageName={listing.office?.brokerageName ?? ""}
                     upcoming={upcomingOpenHouses}
                     now={now}
@@ -906,10 +918,10 @@ export default function ListingDetailView({
                   {/* Price card */}
                   <div className="rounded-3xl bg-[#1a1a18] p-6 text-white sm:p-8">
                     <p className="mb-1 text-[11px] uppercase tracking-[0.3em] text-white/80">
-                      {isActive ? "Asking Price" : "Sold Price"}
+                      {priceLabel}
                     </p>
                     <p className="mb-5 font-serif text-[2rem] font-light leading-none sm:mb-6 sm:text-[2.4rem]">
-                      {formatPrice(listing.soldPrice || listing.listPrice)}
+                      {formatPrice(priceValue)}
                     </p>
                     <div className="space-y-4">
                       <Link
@@ -948,7 +960,7 @@ export default function ListingDetailView({
                     mlsNumber={listing.mlsNumber}
                     street={street}
                     cityLine={[listing.address.city, listing.address.state, listing.address.zip].filter(Boolean).join(", ")}
-                    priceLabel={formatPrice(listing.soldPrice || listing.listPrice)}
+                    priceLabel={formatPrice(priceValue)}
                   />
 
                   {/* Agent card — listing agent(s) + buyer agent(s).
