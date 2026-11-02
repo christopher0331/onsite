@@ -29,6 +29,7 @@ import { eastValleyEdgeArticle } from "./east-valley-edge";
 import { elkRunArticle } from "./elk-run";
 import { elkHeightsArticle } from "./elk-heights";
 import { theCountryArticle } from "./the-country";
+import { ballardArticle } from "./ballard";
 import { northEndArticle } from "./north-end";
 import { hilltopArticle } from "./hilltop";
 import { lincolnDistrictArticle } from "./lincoln-district";
@@ -89,6 +90,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [elkRunArticle.slug]: elkRunArticle,
   [elkHeightsArticle.slug]: elkHeightsArticle,
   [theCountryArticle.slug]: theCountryArticle,
+  [ballardArticle.slug]: ballardArticle,
   [northEndArticle.slug]: northEndArticle,
   [hilltopArticle.slug]: hilltopArticle,
   [lincolnDistrictArticle.slug]: lincolnDistrictArticle,

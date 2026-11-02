@@ -2,13 +2,13 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const seattleDiscover: ServiceAreaDiscover = {
   slug: "seattle",
-  updatedAt: "2026-08-30",
+  updatedAt: "2026-10-27",
   attractions: [
     {
       name: "Ballard",
-      url: "https://www.seattle.gov/",
+      url: "https://www.google.com/maps/place/Ballard,+Seattle,+WA",
       description:
-        "Ballard mixes historic streets, newer multifamily, and a walkable commercial core. Buyers weighing a Seattle corridor move often start here when they want neighborhood character and transit options without treating the whole city as one market.",
+        "Ballard mixes historic streets, newer multifamily, and a walkable commercial core around NW Market Street, the Ballard Locks, and Golden Gardens. Buyers weighing a Seattle corridor move often start here when they want neighborhood character without treating the whole city as one market — see our Ballard neighborhood guide for street-level comps.",
     },
     {
       name: "Green Lake",
@@ -48,7 +48,7 @@ export const seattleDiscover: ServiceAreaDiscover = {
     },
   ],
   localLivingMarkdown: [
-    "OnSite Real Estate Group is Pierce and East Pierce based — we serve Seattle corridor moves with a neighborhood-comp strategy, not a claim of downtown Seattle market dominance. Households comparing [Seattle homes for sale](/listings?city=Seattle&state=WA) in Ballard, Green Lake, West Seattle, Capitol Hill, or Queen Anne often cross-shop [Tacoma](/service-areas/tacoma), [Federal Way](/service-areas/federal-way), and [Kent](/service-areas/kent) while weighing schools, transit, parking, and renovation quality on the specific block.",
-    "Practical diligence runs through [SDCI](https://www.seattle.gov/sdci), [Seattle City Light](https://www.seattle.gov/city-light), [Seattle Public Utilities](https://www.seattle.gov/utilities), [Seattle Public Schools](https://www.seattleschools.org/), and [Seattle Public Library](https://www.spl.org/) branches. We price and prepare listings against the right micro-comp set so a Ballard bungalow is never measured against a Queen Anne view home — or against a Pierce County average that does not apply.",
+    "OnSite Real Estate Group is Pierce and East Pierce based — we serve Seattle corridor moves with a neighborhood-comp strategy, not a claim of downtown Seattle market dominance. Households comparing [Seattle homes for sale](/listings?city=Seattle&state=WA) in [Ballard](/service-areas/seattle/ballard), Green Lake, West Seattle, Capitol Hill, or Queen Anne often cross-shop [Tacoma](/service-areas/tacoma), [Federal Way](/service-areas/federal-way), and [Kent](/service-areas/kent) while weighing schools, transit, parking, and renovation quality on the specific block.",
+    "Practical diligence runs through [SDCI](https://www.seattle.gov/sdci), [Seattle City Light](https://www.seattle.gov/city-light), [Seattle Public Utilities](https://www.seattle.gov/utilities), [Seattle Public Schools](https://www.seattleschools.org/), and [Seattle Public Library](https://www.spl.org/) branches. We price and prepare listings against the right micro-comp set so a [Ballard](/service-areas/seattle/ballard) bungalow is never measured against a Queen Anne view home — or against a Pierce County average that does not apply.",
   ],
 };
