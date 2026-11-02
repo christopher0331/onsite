@@ -1,3 +1,4 @@
+import { areaEntityStatement } from "@/lib/nap";
 import Image from "next/image";
 import Link from "next/link";
 import type { City } from "@/lib/service-areas/types";
@@ -28,6 +29,9 @@ export default function CityHero({ city }: Props) {
               {city.name}, {city.stateCode}.
             </span>
           </h1>
+          <p className="text-[17px] text-white/90 max-w-2xl leading-8 mb-4">
+            {areaEntityStatement(`${city.name}, ${city.stateCode}`, city.county)}
+          </p>
           <p className="text-[16px] text-white/75 max-w-2xl leading-8 mb-4">
             {city.heroIntro}
           </p>

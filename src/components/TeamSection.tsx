@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { TEAM_PROFILES } from "@/lib/team";
 
 type SocialPlatform =
   | "facebook"
@@ -14,6 +16,8 @@ type SocialPlatform =
 type SocialLinks = Partial<Record<SocialPlatform, string>>;
 
 type TeamMember = {
+  slug: string;
+  bioParagraphs: readonly string[];
   name: string;
   role: string;
   photo: string;
@@ -123,95 +127,21 @@ function SocialIconsRow({
   );
 }
 
-const TEAM: TeamMember[] = [
-  {
-    name: "André Bohall",
-    role: "Founder",
-    photo:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67eff6b4b276a0e00c3a04ef_thumbnail_20241213_132625.jpg",
-    phone: "2534419764",
-    phoneDisplay: "(253) 441-9764",
-    email: "andre@onsiteregroup.com",
-    socials: {
-      facebook: "https://www.facebook.com/profile.php?id=61570807923008&sk=followers",
-      instagram: "https://www.instagram.com/watchmeasirealestate/",
-      youtube: "https://www.youtube.com/@OnSiteRealEstateGroup",
-      linkedin: "https://www.linkedin.com/in/onsiteregroup",
-      tiktok: "https://www.tiktok.com/@onsiteregroup",
-    },
-    bioShort:
-      "With over a decade of experience and hundreds of successful home sales, André brings deep expertise, tireless dedication, and a personal touch to every real estate journey.",
-    bioFull: (
-      <div className="space-y-4 text-[15.5px] leading-8 text-charcoal/80">
-        <p>
-          With over a decade of experience and hundreds of successful home sales,
-          André Bohall brings deep expertise, tireless dedication, and a personal
-          touch to every real estate journey. As the founder of OnSite Real Estate
-          Group, André leads with service and strategy — combining strong market
-          knowledge with sharp negotiating skills and genuine care for his
-          clients&apos; needs.
-        </p>
-        <p>
-          André is a natural when it comes to sales. His background includes years
-          of high-volume outbound prospecting, phone sales, and client conversion —
-          skills that now translate into powerful results for his buyers and sellers.
-          He understands how to create opportunities where others see roadblocks, and
-          his team is known for going above and beyond to generate business through
-          grit, consistency, and intentional action.
-        </p>
-        <p>
-          Whether guiding first-time sellers, upsizing families, or downsizing
-          retirees, André is known for his clear communication, no-pressure guidance,
-          and ability to simplify even the most complex transactions. His clients
-          trust him not just for his results — but for his integrity and straight
-          answers.
-        </p>
-      </div>
-    ),
-  },
-  {
-    name: "Cindie Bohall",
-    role: "Agent & Advisor",
-    photo:
-      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67eff7c928cd6f5d561b2667_thumbnail_20241213_110755.jpg",
-    phone: "2537990609",
-    phoneDisplay: "(253) 799-0609",
-    email: "cindie@onsiteregroup.com",
-    objectPosition: "object-top",
-    socials: {
-      facebook: "https://www.facebook.com/profile.php?id=61570807923008&sk=followers",
-      instagram: "https://www.instagram.com/watchmeasirealestate/",
-      youtube: "https://www.youtube.com/@OnSiteRealEstateGroup",
-      tiktok: "https://www.tiktok.com/@onsiteregroup",
-    },
-    bioShort:
-      "For over 20 years, Cindie Bohall has been a trusted guide for families navigating complex decisions, bringing compassion and deep care to every transaction.",
-    bioFull: (
-      <div className="space-y-4 text-[15.5px] leading-8 text-charcoal/80">
-        <p>
-          For over 20 years, Cindie Bohall has been a trusted guide for families
-          navigating complex decisions. As the founder of a successful senior housing
-          referral company since 2013, she has helped hundreds of families find safe,
-          supportive environments for their loved ones.
-        </p>
-        <p>
-          Today, Cindie brings that same compassion, attention to detail, and
-          advocacy to her work at OnSite Real Estate Group. Whether helping a family
-          transition from their longtime home or supporting first-time buyers, she
-          understands the emotional weight behind every move. Her clients love her
-          calm, confident approach and her ability to make the complex feel
-          manageable.
-        </p>
-        <p>
-          Cindie&apos;s passion lies in building trust and helping people feel cared
-          for — especially during life&apos;s major transitions. Her background in
-          senior care gives her unique insight when working with older adults,
-          retirees, or families coordinating multi-generational moves.
-        </p>
-      </div>
-    ),
-  },
-];
+const TEAM: TeamMember[] = TEAM_PROFILES.map((m) => ({
+  ...m,
+  bioFull: (
+    <div className="space-y-4 text-[15.5px] leading-8 text-charcoal/80">
+      {m.bioParagraphs.map((para) => (
+        <p key={para.slice(0, 24)}>{para}</p>
+      ))}
+      <p>
+        <Link href={`/about-us/${m.slug}`} className="underline underline-offset-4">
+          View {m.name.split(" ")[0]}&apos;s full bio
+        </Link>
+      </p>
+    </div>
+  ),
+}));
 
 function MemberCard({
   member,
@@ -295,6 +225,12 @@ function MemberCard({
         >
           Read More
         </button>
+        <Link
+          href={`/about-us/${member.slug}`}
+          className="mt-3 block text-center text-[11px] uppercase tracking-[0.25em] text-charcoal/60 hover:text-charcoal"
+        >
+          {member.name} bio page →
+        </Link>
       </div>
     </div>
   );

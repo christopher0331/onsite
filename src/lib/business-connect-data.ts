@@ -104,7 +104,7 @@ export const allMembers: Member[] = [
     phone: "253-441-9764",
     website: "https://www.onsiteregroup.com",
     facebook: "https://www.facebook.com/OnSiteREGroup",
-    instagram: "https://www.instagram.com/watchmeasirealestate/",
+    instagram: "https://www.instagram.com/onsiterealestategroup/",
     linkedin: "https://www.linkedin.com/in/onsiteregroup",
     tiktok: "https://www.tiktok.com/@onsiteregroup",
     bio: "With over a decade of experience and hundreds of successful home sales, André Bohall brings deep expertise, tireless dedication, and a personal touch to every real estate journey. As the founder of OnSite Real Estate Group, André leads with service and strategy — combining strong market knowledge with sharp negotiating skills and genuine care for his clients' needs. André is a natural when it comes to sales. His background includes years of high-volume outbound prospecting, phone sales, and client conversion — skills that now translate into powerful results for his buyers and sellers. He understands how to create opportunities where others see roadblocks, and his team is known for delivering results even in competitive markets.",
