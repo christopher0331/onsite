@@ -30,15 +30,15 @@ export const BROKERAGE_DISCLAIMER =
 export const PARENT_BROKERAGE_NAME = "Timber Real Estate";
 
 /** One-sentence definitive statement for service-area pages. */
-export function areaEntityStatement(area: string) {
-  return `OnSite Real Estate Group is a real estate team at Timber Real Estate serving ${area} and nearby Pierce County communities.`;
+export function areaEntityStatement(area: string, county = "Pierce County") {
+  return `OnSite Real Estate Group is a real estate team at Timber Real Estate serving ${area} and nearby ${county} communities.`;
 }
 
 /** Served places with Wikidata entity IDs (verified via wbgetentities 2026-11-02). */
 export const AREA_SERVED_PLACES = [
-  { type: "Place", name: "Lake Tapps, WA", wikidata: "Q111207060" },
+  { type: "City", name: "Lake Tapps, WA", wikidata: "Q111207060" },
   { type: "City", name: "Bonney Lake, WA", wikidata: "Q657810" },
-  { type: "Place", name: "Tehaleh, WA", wikidata: "Q5048209" },
+  { type: "City", name: "Tehaleh, WA", wikidata: "Q5048209" },
   { type: "City", name: "Puyallup, WA", wikidata: "Q179336" },
   { type: "AdministrativeArea", name: "Pierce County, WA", wikidata: "Q156459" },
 ] as const;
@@ -139,7 +139,7 @@ export function localBusinessNode(baseUrl = getCanonicalBaseUrl()) {
       "@type": "Organization" as const,
       name: PARENT_BROKERAGE_NAME,
     },
-    // Place nodes anchored to Wikidata so AI/knowledge-graph crawlers can
+    // City/AdministrativeArea (no address required, unlike Place-as-LocalBusiness) anchored to Wikidata so AI/knowledge-graph crawlers can
     // resolve each area to a real entity. King County stays as text.
     areaServed: [
       ...AREA_SERVED_PLACES.map((a) => ({

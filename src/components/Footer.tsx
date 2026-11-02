@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -75,15 +75,17 @@ const socialLinks = [
   },
 ];
 
+const subscribeNoop = () => () => {};
+
 export default function Footer() {
   // Start from the build-time default so the first client render matches the
   // server, then refine from the live hostname after mount. Reading
   // window.location during the initial render causes a hydration mismatch.
-  const [showIdxContent, setShowIdxContent] = useState(defaultShowIdxContent);
-
-  useEffect(() => {
-    setShowIdxContent(!isMainWebsiteHost(window.location.hostname));
-  }, []);
+  const showIdxContent = useSyncExternalStore(
+    subscribeNoop,
+    () => !isMainWebsiteHost(window.location.hostname),
+    () => defaultShowIdxContent
+  );
 
   const solutionLinks = [
     { label: "Sell Home", href: "/sell-your-home" },

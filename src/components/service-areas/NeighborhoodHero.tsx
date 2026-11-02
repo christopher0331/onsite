@@ -29,7 +29,7 @@ export default function NeighborhoodHero({ city, neighborhood }: Props) {
             <span>{neighborhood.name} Residents.</span>
           </h1>
           <p className="text-[17px] text-white/90 max-w-2xl leading-8 mb-4">
-            {areaEntityStatement(`${neighborhood.name} in ${city.name}, ${city.stateCode}`)}
+            {areaEntityStatement(`${neighborhood.name} in ${city.name}, ${city.stateCode}`, city.county)}
           </p>
           <p className="text-[16px] text-white/75 max-w-2xl leading-8 mb-10">
             {neighborhood.introCopy}
