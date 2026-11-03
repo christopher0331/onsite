@@ -32,6 +32,7 @@ import { theCountryDiscover } from "./the-country";
 import { ballardDiscover } from "./ballard";
 import { northEndDiscover } from "./north-end";
 import { hilltopDiscover } from "./hilltop";
+import { oldTownDiscover } from "./old-town";
 import { lincolnDistrictDiscover } from "./lincoln-district";
 import { stadiumDistrictDiscover } from "./stadium-district";
 import { southTacomaDiscover } from "./south-tacoma";
@@ -93,6 +94,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [ballardDiscover.slug]: ballardDiscover,
   [northEndDiscover.slug]: northEndDiscover,
   [hilltopDiscover.slug]: hilltopDiscover,
+  [oldTownDiscover.slug]: oldTownDiscover,
   [lincolnDistrictDiscover.slug]: lincolnDistrictDiscover,
   [stadiumDistrictDiscover.slug]: stadiumDistrictDiscover,
   [southTacomaDiscover.slug]: southTacomaDiscover,
