@@ -12,7 +12,7 @@ type Props = {
 export default function NeighborhoodHero({ city, neighborhood }: Props) {
   return (
     <section className="bg-white">
-      <div className="relative h-[68vh] min-h-[520px] max-h-[820px] overflow-hidden">
+      <div className="relative min-h-[520px] lg:min-h-[68vh] overflow-hidden">
         <Image
           src={neighborhood.heroImage}
           alt={`Real estate in ${neighborhood.name}, ${city.name}, ${city.stateCode}`}
@@ -23,7 +23,7 @@ export default function NeighborhoodHero({ city, neighborhood }: Props) {
         />
         <div className="hero-overlay" aria-hidden />
 
-        <div className="relative z-10 mx-auto max-w-[1440px] h-full px-6 lg:px-12 flex flex-col justify-start pt-24 sm:pt-28 lg:pt-32 pb-20 sm:pb-28">
+        <div className="relative z-10 mx-auto max-w-[1440px] h-full px-6 lg:px-12 flex flex-col justify-start pt-24 sm:pt-28 lg:pt-32 pb-16 sm:pb-20 lg:pb-24">
           <h1 className="font-serif text-[clamp(2.2rem,6vw,5rem)] leading-[1.05] text-white font-light max-w-4xl mb-7">
             Dedicated Real Estate for{" "}
             <span>{neighborhood.name} Residents.</span>
@@ -52,7 +52,7 @@ export default function NeighborhoodHero({ city, neighborhood }: Props) {
       </div>
 
       <div className="bg-white">
-        <div className="mx-auto max-w-[1440px] px-6 lg:px-12 pt-8 pb-2">
+        <div className="mx-auto max-w-[1440px] px-6 lg:px-12 pt-6 pb-4">
           <Breadcrumbs
             variant="light"
             items={[
@@ -62,9 +62,6 @@ export default function NeighborhoodHero({ city, neighborhood }: Props) {
               { label: neighborhood.name },
             ]}
           />
-          <p className="text-[11px] uppercase tracking-[0.35em] text-charcoal/60">
-            {neighborhood.heroEyebrow}
-          </p>
         </div>
       </div>
     </section>

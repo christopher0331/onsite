@@ -13,15 +13,16 @@ type Props = {
 export default function Breadcrumbs({ items, variant = "dark" }: Props) {
   const linkClass =
     variant === "light"
-      ? "text-charcoal/70 hover:text-charcoal"
+      ? "text-charcoal/80 underline-offset-4 hover:text-charcoal hover:underline"
       : "text-white/85 hover:text-white";
-  const currentClass = variant === "light" ? "text-charcoal" : "text-white";
+  const currentClass =
+    variant === "light" ? "text-charcoal font-semibold" : "text-white font-semibold";
   const separatorClass =
-    variant === "light" ? "text-charcoal/50" : "text-white/70";
+    variant === "light" ? "text-charcoal/40" : "text-white/70";
 
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
-      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] uppercase tracking-[0.25em]">
+      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] leading-6">
         {items.map((item, idx) => {
           const isLast = idx === items.length - 1;
           return (
@@ -34,13 +35,16 @@ export default function Breadcrumbs({ items, variant = "dark" }: Props) {
                   {item.label}
                 </Link>
               ) : (
-                <span className={isLast ? currentClass : linkClass}>
+                <span
+                  className={isLast ? currentClass : linkClass}
+                  aria-current={isLast ? "page" : undefined}
+                >
                   {item.label}
                 </span>
               )}
               {!isLast && (
                 <span aria-hidden className={separatorClass}>
-                  /
+                  ›
                 </span>
               )}
             </li>
