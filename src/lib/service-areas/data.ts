@@ -5223,6 +5223,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Pierce County valley neighbor — Sounder Sumner and Bridge Hill comps when Lea Hill plateau living is not the fit.",
       },
       {
+        name: "Lakeland Hills",
+        citySlug: "auburn",
+        neighborhoodSlug: "lakeland-hills",
+        blurb: "Auburn's planned hillside community on the Pierce County side of 98092, near Lake Tapps.",
+      },
+      {
         name: "Lake Tapps",
         citySlug: "lake-tapps",
         blurb: "Reservoir waterfront and upland sibling — lake lifestyle when Lea Hill inland residential living is not the product.",
@@ -5266,6 +5272,79 @@ export const NEIGHBORHOODS: Neighborhood[] = [
           "Green River College proximity was sold as real daily life, not fluff. School boundaries were confirmed early, and buyers understood the hillside tradeoffs.",
       },
     ],
+  },
+  {
+    slug: "lakeland-hills",
+    citySlug: "auburn",
+    name: "Lakeland Hills",
+    zipCodes: ["98092"],
+    geo: { lat: 47.2705, lng: -122.2160 },
+    heroImage:
+      "/blog/aerial-pierce-county-suburb-mount-rainier.webp",
+    heroEyebrow: "Auburn · Lakeland Hills",
+    introCopy:
+      "Lakeland Hills is the planned hillside community in south Auburn, on the Pierce County side of the city in ZIP 98092 — reached by Lakeland Hills Way off A Street SE, anchored by Lakeland Hills Park (dedicated 1993) and Lakeland Hills Elementary, and a short drive from Lake Tapps.",
+    characteristics: {
+      medianHomeYear: "1990s – 2010s",
+      architecturalStyles: ["Two-story Northwest contemporary", "Craftsman-inspired", "Planned-community traditional", "Townhome"],
+      typicalLotSize: "Planned-community lots; size varies by plat — confirm with the Pierce County Assessor",
+      notes:
+        "Lakeland Hills was built out as a planned development, so many plats carry their own CC&Rs and HOA dues. Auburn spans King and Pierce counties; Lakeland Hills parcels are assessed and taxed through Pierce County. School district can differ by parcel, so confirm Auburn or Dieringer assignment by tax code area before marketing a school pathway.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Auburn — Lakeland Hills Park",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/lakeland_hills",
+        context: "Five-acre neighborhood park at 1401 Evergreen Way SE with a play structure, picnic shelter, informal field, and a 0.39-mile paved loop trail.",
+      },
+      {
+        name: "Auburn School District",
+        url: "https://www.auburn.wednet.edu/our-district/about-us/attendance-area-maps",
+        context: "Lakeland Hills Elementary (1020 Evergreen Way SE) serves PK–5; confirm attendance by address with the district's attendance maps.",
+      },
+      {
+        name: "Dieringer School District",
+        url: "https://www.dieringer.wednet.edu/our-district/district-boundary-map",
+        context: "Some nearby Pierce County parcels fall in Dieringer; the district explains how to verify by tax code area.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Assessed value, taxes, lot dimensions, and tax code area for Lakeland Hills parcels.",
+      },
+    ],
+    thoroughfares: ["Lakeland Hills Way SE", "Evergreen Way SE", "A St SE", "SR-18", "SR-167"],
+    landmarks: [
+      "Lakeland Hills Park (dedicated 1993)",
+      "Lakeland Hills Elementary School",
+      "Lake Tapps (to the south)",
+    ],
+    dispatchCopy:
+      "Lakeland Hills is one of the closest Auburn neighborhoods to our Lake Tapps base, so inspections, walkthroughs, and twilight photography fit easily into the same day. School pickup near Lakeland Hills Elementary on Evergreen Way SE changes curb availability on weekday afternoons — we schedule showings around it.",
+    adjacent: [
+      {
+        name: "Lake Tapps",
+        citySlug: "lake-tapps",
+        blurb: "Waterfront and lake-access homes just south — OnSite's home base and the most common cross-shop for Lakeland Hills buyers.",
+      },
+      {
+        name: "Lea Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "lea-hill",
+        blurb: "Residential bench above Green River College in the same 98092 ZIP, on the King County side of Auburn.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Valley town to the southwest with its own downtown and Sounder station.",
+      },
+      {
+        name: "Auburn (City)",
+        citySlug: "auburn",
+        blurb: "Parent hub — valley-floor, West Hill, Lea Hill, and Lakeland Hills pricing bands on one desk.",
+      },
+    ],
+    reviews: [],
   },
   {
     slug: "redondo",
