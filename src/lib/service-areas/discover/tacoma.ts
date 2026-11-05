@@ -2,7 +2,7 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const tacomaDiscover: ServiceAreaDiscover = {
   slug: "tacoma",
-  updatedAt: "2026-10-30",
+  updatedAt: "2026-11-05",
   attractions: [
     {
       name: "Proctor District",
@@ -32,7 +32,7 @@ export const tacomaDiscover: ServiceAreaDiscover = {
       name: "Tacoma Public Library",
       url: "https://www.tacomalibrary.org/",
       description:
-        "Branches across the North End, Proctor, and South Tacoma support everyday learning and community routines for urban households who want services close to home.",
+        "Branches across the North End, Proctor, South Tacoma, and Fern Hill support everyday learning and community routines for urban households who want services close to home.",
     },
     {
       name: "Tacoma-Pierce County Chamber",
@@ -70,9 +70,15 @@ export const tacomaDiscover: ServiceAreaDiscover = {
       description:
         "The Lincoln District centers on the South 38th Street business corridor, Lincoln High School, and Lincoln Park, with a streetscape the City rebuilt in 2018. Mixed-use zoning near the core makes block-level comps matter more than a citywide average.",
     },
+    {
+      name: "Fern Hill",
+      url: "/service-areas/tacoma/fern-hill",
+      description:
+        "Fern Hill centers on South 84th Street and Park Avenue in ZIP 98444, with Fern Hill Park, Fern Hill Elementary, and a Tacoma Public Library branch. Street-level comps matter more than a citywide average.",
+    },
   ],
   localLivingMarkdown: [
-    "Tacoma is a block-by-block urban market — [North End](/service-areas/tacoma/north-end), [Proctor District](/service-areas/tacoma/proctor-district), [Stadium District](/service-areas/tacoma/stadium-district), [Hilltop](/service-areas/tacoma/hilltop), [Lincoln District](/service-areas/tacoma/lincoln-district), [West Slope](/service-areas/tacoma/west-slope), and [South Tacoma](/service-areas/tacoma/south-tacoma) each behave differently across ZIPs 98402, 98403, 98405, 98406, 98407, 98408, 98409, 98418, 98422, 98465, and 98466. Buyers comparing [Tacoma homes for sale](/listings?city=Tacoma&state=WA) usually start with neighborhood character, parking and permit overlays, and [Tacoma Public Schools](https://www.tacomaschools.org/) boundaries rather than a single city headline. Everyday services run through [Tacoma Public Utilities](https://www.mytpu.org/), [Puget Sound Energy](https://www.pse.com/) for gas in many neighborhoods, [Tacoma Public Library](https://www.tacomalibrary.org/), and civic context from the [Tacoma-Pierce County Chamber](https://www.tacomachamber.org/).",
+    "Tacoma is a block-by-block urban market — [North End](/service-areas/tacoma/north-end), [Proctor District](/service-areas/tacoma/proctor-district), [Stadium District](/service-areas/tacoma/stadium-district), [Hilltop](/service-areas/tacoma/hilltop), [Lincoln District](/service-areas/tacoma/lincoln-district), [Fern Hill](/service-areas/tacoma/fern-hill), [West Slope](/service-areas/tacoma/west-slope), and [South Tacoma](/service-areas/tacoma/south-tacoma) each behave differently across ZIPs 98402, 98403, 98405, 98406, 98407, 98408, 98409, 98418, 98422, 98444, 98465, and 98466. Buyers comparing [Tacoma homes for sale](/listings?city=Tacoma&state=WA) usually start with neighborhood character, parking and permit overlays, and [Tacoma Public Schools](https://www.tacomaschools.org/) boundaries rather than a single city headline. Everyday services run through [Tacoma Public Utilities](https://www.mytpu.org/), [Puget Sound Energy](https://www.pse.com/) for gas in many neighborhoods, [Tacoma Public Library](https://www.tacomalibrary.org/), and civic context from the [Tacoma-Pierce County Chamber](https://www.tacomachamber.org/).",
     "From OnSite's Lake Tapps base, Tacoma sits on our Pierce County coverage corridor alongside peer hubs like [Puyallup](/service-areas/puyallup), [Federal Way](/service-areas/federal-way), and [Lake Tapps](/service-areas/lake-tapps). We underwrite by micro-neighborhood comps — historic conservation and ADU/infill potential included — so buying or selling decisions match the block you will actually live on.",
   ],
 };
