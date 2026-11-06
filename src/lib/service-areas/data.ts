@@ -918,7 +918,7 @@ export const CITIES: City[] = [
     county: "Pierce County",
     taxonomy: "urban",
     population: 223_536,
-    zipCodes: ["98402", "98403", "98405", "98406", "98407", "98409", "98422", "98465", "98466"],
+    zipCodes: ["98402", "98403", "98405", "98406", "98407", "98409", "98422", "98444", "98465", "98466"],
     geo: { lat: 47.2529, lng: -122.4443 },
     heroImage:
       "/blog/modern-home-driveway-at-sunset.webp",
@@ -933,6 +933,8 @@ export const CITIES: City[] = [
       "West Slope",
       "South Tacoma",
       "Hilltop",
+      "Lincoln District",
+      "Fern Hill",
     ],
     permittingOffice: {
       name: "City of Tacoma Planning & Development Services",
@@ -3546,6 +3548,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Historic pocket around Stadium High and Wright Park — period homes and downtown-edge density.",
       },
       {
+        name: "Fern Hill",
+        citySlug: "tacoma",
+        neighborhoodSlug: "fern-hill",
+        blurb: "South-end pocket around South 84th and Park Avenue in 98444 — the next major residential grid south of the Lincoln corridor.",
+      },
+      {
         name: "Tacoma (City)",
         citySlug: "tacoma",
         blurb: "Parent hub — North End, Proctor, Stadium, Hilltop, West Slope, South Tacoma, and Lincoln micro-markets on the same urban desk.",
@@ -3612,6 +3620,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Historic downtown-edge pocket around Stadium High and Wright Park — denser urban patterns and event logistics.",
       },
       {
+        name: "Fern Hill",
+        citySlug: "tacoma",
+        neighborhoodSlug: "fern-hill",
+        blurb: "South-end pocket around South 84th and Park Avenue in 98444 — park, elementary, and library branch south of the South Tacoma corridor.",
+      },
+      {
         name: "Tacoma (City)",
         citySlug: "tacoma",
         blurb: "Parent hub — Proctor, Stadium, West Slope, and South Tacoma micro-markets on the same urban desk.",
@@ -3644,6 +3658,90 @@ export const NEIGHBORHOODS: Neighborhood[] = [
           "Wapato Park and the I-5 commute were sold as real daily life, not fluff. School and zoning details were confirmed before we listed, and escrow stayed clean.",
       },
     ],
+  },
+
+  {
+    slug: "fern-hill",
+    citySlug: "tacoma",
+    name: "Fern Hill",
+    zipCodes: ["98444"],
+    geo: { lat: 47.1869, lng: -122.4435 },
+    heroImage:
+      "/blog/craftsman-home-in-evergreen-trees.webp",
+    heroEyebrow: "Tacoma · Fern Hill",
+    introCopy:
+      "Fern Hill is Tacoma's south-end neighborhood around South 84th Street and Park Avenue in ZIP 98444 — Fern Hill Park, Fern Hill Elementary, a Tacoma Public Library branch, and Pacific Avenue (SR-7) access where street-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "1900s – 1960s, with later infill",
+      architecturalStyles: ["Early 20th-century cottage", "Craftsman bungalow", "Mid-century ranch", "Modest multifamily"],
+      typicalLotSize: "Grid platting; size varies by block — confirm with the Pierce County Assessor",
+      notes:
+        "Fern Hill's business-district core sits near South 84th Street and Park Avenue, with Pacific Avenue (SR-7) as the east-side arterial. Housing quality, arterial noise, and renovation level change street by street — confirm zoning and any infill or ADU path before pricing those into list price.",
+    },
+    communityOrgs: [
+      {
+        name: "Metro Parks Tacoma — Fern Hill Park",
+        url: "https://www.parkstacoma.gov/place/fern-hill-park/",
+        context: "2.01-acre neighborhood park at 502 South 88th Street with inclusive play equipment.",
+      },
+      {
+        name: "Tacoma Public Schools — Fern Hill Elementary",
+        url: "https://fh.tacomaschools.org/",
+        context: "Campus at 8442 South Park Avenue; confirm elementary, middle, and high-school assignment by address.",
+      },
+      {
+        name: "Tacoma Public Library — Fern Hill Branch",
+        url: "https://www.tacomalibrary.org/locations/2/",
+        context: "Branch library at 765 South 84th Street near the neighborhood business district.",
+      },
+      {
+        name: "Tacoma Planning & Development Services",
+        url: "https://www.cityoftacoma.org/government/city_departments/planning_and_development_services",
+        context: "Permits, zoning, and infill / ADU questions for Fern Hill parcels.",
+      },
+    ],
+    thoroughfares: [
+      "S 84th St",
+      "S Park Ave",
+      "Pacific Ave S (SR-7)",
+      "S Yakima Ave",
+      "Tacoma Ave S",
+      "S 88th St",
+      "I-5",
+    ],
+    landmarks: [
+      "Fern Hill Park",
+      "Fern Hill Elementary School",
+      "Tacoma Public Library — Fern Hill Branch",
+      "South 84th & Park Avenue business district",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Fern Hill via SR-410 → SR-167 → I-5 and the South 84th / Pacific Avenue approaches, typically inside a 30–40 minute window for inspections and twilight photography. School pickup near Fern Hill Elementary and Pacific Avenue traffic change curb availability on weekday afternoons — we schedule showings around both.",
+    adjacent: [
+      {
+        name: "South Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "south-tacoma",
+        blurb: "South-central corridor around South Tacoma Way and Wapato Park — the closest Tacoma spoke to the north and west.",
+      },
+      {
+        name: "Lincoln District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "lincoln-district",
+        blurb: "South 38th Street business corridor, Lincoln High, and Lincoln Park — the next major south-end pocket north of Fern Hill.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — North End, Proctor, Stadium, Hilltop, Lincoln, South Tacoma, West Slope, and Fern Hill on the same urban desk.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley and South Hill inventory when Tacoma pricing stretches the budget.",
+      },
+    ],
+    reviews: [],
   },
   {
     slug: "west-slope",
