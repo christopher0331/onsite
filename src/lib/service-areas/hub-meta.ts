@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-11-03";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-11-05";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -88,6 +88,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Tacoma North End homes near Point Defiance, Ruston Way, and Proctor. Historic and mid-century stock in 98403, 98406, and 98407, live NWMLS listings.",
   "tacoma/hilltop":
     "Hilltop Tacoma homes along M.L.K. Jr. Way in 98405. T Line streetcar access, Victorian and Craftsman stock, and landmark diligence, live NWMLS listings.",
+  "tacoma/fern-hill":
+    "Fern Hill Tacoma homes near S 84th St, Fern Hill Park, and Park Ave in 98444. Street-level comps and school diligence, live NWMLS listings.",
   "tacoma/lincoln-district":
     "Lincoln District Tacoma homes near S 38th St, Lincoln High, and Lincoln Park in 98418 and 98408. Streetcar-era stock and zoning diligence, live NWMLS listings.",
   "tacoma/stadium-district":

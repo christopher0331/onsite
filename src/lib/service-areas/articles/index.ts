@@ -32,6 +32,7 @@ import { theCountryArticle } from "./the-country";
 import { ballardArticle } from "./ballard";
 import { northEndArticle } from "./north-end";
 import { hilltopArticle } from "./hilltop";
+import { fernHillArticle } from "./fern-hill";
 import { lincolnDistrictArticle } from "./lincoln-district";
 import { stadiumDistrictArticle } from "./stadium-district";
 import { southTacomaArticle } from "./south-tacoma";
@@ -94,6 +95,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [ballardArticle.slug]: ballardArticle,
   [northEndArticle.slug]: northEndArticle,
   [hilltopArticle.slug]: hilltopArticle,
+  [fernHillArticle.slug]: fernHillArticle,
   [lincolnDistrictArticle.slug]: lincolnDistrictArticle,
   [stadiumDistrictArticle.slug]: stadiumDistrictArticle,
   [southTacomaArticle.slug]: southTacomaArticle,
