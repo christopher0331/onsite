@@ -661,7 +661,7 @@ export const CITIES: City[] = [
     heroIntro:
       "Auburn prices in distinct bands — valley-floor neighborhoods near the Sounder station, established West Hill pockets, and the newer Lea Hill bench above Green River College. We underwrite each band against its own comp pool.",
     activeProjects: 8,
-    neighborhoodDirectory: ["Lea Hill"],
+    neighborhoodDirectory: ["Downtown Auburn", "Lea Hill", "Lakeland Hills"],
     permittingOffice: {
       name: "City of Auburn — Community Development",
       url: "https://www.auburnwa.gov/",
@@ -4783,6 +4783,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "From our Lake Tapps base we reach Downtown Kent via SR-410 → SR-167 into Central Avenue / Meeker corridors, typically inside a 25–40 minute window for inspections and twilight photography. Sounder parking, Kent Station events, and freight traffic on the valley floor can change showing curb availability — we pad schedules accordingly.",
     adjacent: [
       {
+        name: "Downtown Auburn",
+        citySlug: "auburn",
+        neighborhoodSlug: "downtown-auburn",
+        blurb: "The next Sounder stop south — Auburn's Main Street core, compared on its own comps.",
+      },
+      {
         name: "Kent (City)",
         citySlug: "kent",
         blurb: "Parent hub — East Hill, Panther Lake, West Hill, and Lake Meridian micro-markets on the same south King desk.",
@@ -5383,6 +5389,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "From our Lake Tapps base we reach Auburn's Lea Hill via SR-410 → SR-167 / SR-18 into Lea Hill Road and SE 320th corridors, typically inside a 20–35 minute window for inspections and twilight photography. Campus class-change traffic near Green River College and school pickup can change showing curb availability — we pad schedules accordingly.",
     adjacent: [
       {
+        name: "Downtown Auburn",
+        citySlug: "auburn",
+        neighborhoodSlug: "downtown-auburn",
+        blurb: "Auburn's historic Main Street core and Sounder stop — a common cross-shop when rail access matters more than lot size.",
+      },
+      {
         name: "Auburn (City)",
         citySlug: "auburn",
         blurb: "Parent hub — Sounder downtown, West Hill, and Lea Hill micro-markets on the same south King desk.",
@@ -5515,6 +5527,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "Lakeland Hills is one of the closest Auburn neighborhoods to our Lake Tapps base, so inspections, walkthroughs, and twilight photography fit easily into the same day. School pickup near Lakeland Hills Elementary on Evergreen Way SE changes curb availability on weekday afternoons — we schedule showings around it.",
     adjacent: [
       {
+        name: "Downtown Auburn",
+        citySlug: "auburn",
+        neighborhoodSlug: "downtown-auburn",
+        blurb: "Auburn's historic Main Street core and Sounder stop, on the King County side of the city.",
+      },
+      {
         name: "Lake Tapps",
         citySlug: "lake-tapps",
         blurb: "Waterfront and lake-access homes just south — OnSite's home base and the most common cross-shop for Lakeland Hills buyers.",
@@ -5534,6 +5552,104 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Auburn (City)",
         citySlug: "auburn",
         blurb: "Parent hub — valley-floor, West Hill, Lea Hill, and Lakeland Hills pricing bands on one desk.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "downtown-auburn",
+    citySlug: "auburn",
+    name: "Downtown Auburn",
+    // No ZIP-wide boundary is asserted: Downtown Auburn addresses span 98001
+    // (City Hall, Auburn Station) and 98002 (Auburn High School, Les Gove Park),
+    // and both ZIPs reach well beyond downtown. The existing listings fallback
+    // therefore shows Auburn-wide inventory, as on the McKinley page.
+    zipCodes: [],
+    // Auburn Station location anchor (Main St & B St SW), not a neighborhood boundary.
+    // https://en.wikipedia.org/wiki/Auburn_station_(Sound_Transit)
+    geo: { lat: 47.30667, lng: -122.23222 },
+    heroImage: "/blog/family-walking-past-hedge-lined-home.webp",
+    heroEyebrow: "Auburn · Downtown",
+    introCopy:
+      "Downtown Auburn is the city's historic Main Street core and its Sounder stop — Auburn Station, City Hall, the Postmark Center for the Arts, and Auburn High School all sit within a few blocks of Main Street. Compare each block and building on its own comps.",
+    characteristics: {
+      medianHomeYear: "Varies by block — verify the individual building in King County Assessor records",
+      architecturalStyles: [
+        "Older single-family homes on side streets",
+        "Mixed-use buildings with ground-floor retail",
+        "Apartments and condominiums",
+      ],
+      typicalLotSize: "Varies by parcel — confirm recorded lot dimensions with the King County Assessor",
+      notes:
+        "The City of Auburn describes the downtown core as primarily mixed-use and medical office development, alongside single-family residential and manufacturing and industrial uses. Properties in the heart of downtown carry the Downtown Urban Center (DUC) zoning designation, and the 2024 Downtown Subarea Plan replaced the 2001 plan. Confirm the parcel's zoning district, FEMA flood status, and any condo or HOA documents before pricing or budgeting a change.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Auburn — Downtown Urban Center",
+        url: "https://www.auburnwa.gov/city_hall/community_development/zoning_land_use/downtown_urban_center",
+        context: "DUC zoning, the 2024 Downtown Subarea Plan and Planned Action, downtown parking permits, and current city projects.",
+      },
+      {
+        name: "Sound Transit — Auburn Station",
+        url: "https://www.soundtransit.org/ride-with-us/stops-stations/auburn-station",
+        context: "Sounder S Line station at 110 2nd St SW with bus bays at the Auburn Transit Center and a commuter parking garage.",
+      },
+      {
+        name: "Auburn School District",
+        url: "https://www.auburn.wednet.edu/our-district/about-us/attendance-area-maps",
+        context: "Auburn High School is at 711 East Main Street; confirm every school assignment by address with the district's attendance maps.",
+      },
+      {
+        name: "City of Auburn — Les Gove Park",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/les_gove",
+        context: "20.86-acre park campus at 910 9th St SE with the Auburn Community & Event Center, Auburn Library, White River Valley Museum, and a half-mile looped trail.",
+      },
+      {
+        name: "King County Assessor",
+        url: "https://kingcounty.gov/en/dept/assessor",
+        context: "Assessed value, property taxes, and recorded lot details for Downtown Auburn parcels.",
+      },
+    ],
+    thoroughfares: ["Main St", "Auburn Way S", "Auburn Ave", "A St SW", "C St SW", "SR-18", "SR-167"],
+    landmarks: [
+      "Auburn Station (Sounder S Line)",
+      "Auburn City Hall (25 W Main St)",
+      "Postmark Center for the Arts",
+      "Auburn High School",
+      "Les Gove Park",
+      "Interurban Trail",
+    ],
+    dispatchCopy:
+      "Downtown Auburn is a short drive from our Lake Tapps base. Sounder commuter parking near Auburn Station, City permit parking downtown, and school traffic near Auburn High School on East Main Street can change curb availability, so we check parking for each showing and photo session.",
+    adjacent: [
+      {
+        name: "Auburn (City)",
+        citySlug: "auburn",
+        blurb: "Parent hub — compare downtown with West Hill, Lea Hill, and Lakeland Hills pricing bands.",
+      },
+      {
+        name: "Lea Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "lea-hill",
+        blurb: "Residential bench above Green River College in 98092 — a common cross-shop when buyers want more space than a downtown block.",
+      },
+      {
+        name: "Lakeland Hills",
+        citySlug: "auburn",
+        neighborhoodSlug: "lakeland-hills",
+        blurb: "South Auburn's planned hillside community on the Pierce County side, near Lake Tapps; HOA plats rather than a Main Street core.",
+      },
+      {
+        name: "Downtown Kent",
+        citySlug: "kent",
+        neighborhoodSlug: "downtown-kent",
+        blurb: "The next Sounder stop north — another valley-floor civic core to compare for rail commuters.",
+      },
+      {
+        name: "Downtown Sumner",
+        citySlug: "sumner",
+        neighborhoodSlug: "downtown-sumner",
+        blurb: "The next Sounder stop south, in Pierce County — a smaller historic downtown to compare against Auburn's.",
       },
     ],
     reviews: [],

@@ -126,6 +126,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "West Hill Kent homes west of the Green River valley near I-5 and Federal Way. Established plats and street-level comps, live NWMLS listings.",
   "kent/lake-meridian":
     "Lake Meridian Kent homes near Lake Meridian Park on the East Hill bench. Shoreline comps and street-level pricing, live NWMLS listings.",
+  "auburn/downtown-auburn":
+    "Downtown Auburn homes near Auburn Station, Main Street, and Les Gove Park. Sounder access plus zoning, flood, and school diligence, with Auburn listings.",
   "auburn/lakeland-hills":
     "Lakeland Hills Auburn homes near Lakeland Hills Park, Evergreen Way SE, and Lake Tapps in 98092. HOA and school-district diligence, live NWMLS listings.",
   "auburn/lea-hill":
