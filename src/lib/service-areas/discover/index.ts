@@ -62,6 +62,8 @@ import { redondoDiscover } from "./redondo";
 import { twinLakesDiscover } from "./twin-lakes";
 import { proctorDistrictDiscover } from "./proctor-district";
 
+import { mckinleyDiscover } from "./mckinley";
+
 const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [lakeTappsDiscover.slug]: lakeTappsDiscover,
   [bonneyLakeDiscover.slug]: bonneyLakeDiscover,
@@ -96,6 +98,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [ballardDiscover.slug]: ballardDiscover,
   [northEndDiscover.slug]: northEndDiscover,
   [hilltopDiscover.slug]: hilltopDiscover,
+  [mckinleyDiscover.slug]: mckinleyDiscover,
   [fernHillDiscover.slug]: fernHillDiscover,
   [lincolnDistrictDiscover.slug]: lincolnDistrictDiscover,
   [stadiumDistrictDiscover.slug]: stadiumDistrictDiscover,
