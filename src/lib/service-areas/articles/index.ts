@@ -60,6 +60,7 @@ import { quietWaterArticle } from "./quiet-water";
 import { redondoArticle } from "./redondo";
 import { twinLakesArticle } from "./twin-lakes";
 import { proctorDistrictArticle } from "./proctor-district";
+import { northeastTacomaArticle } from "./northeast-tacoma";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -123,6 +124,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [redondoArticle.slug]: redondoArticle,
   [twinLakesArticle.slug]: twinLakesArticle,
   [proctorDistrictArticle.slug]: proctorDistrictArticle,
+  [northeastTacomaArticle.slug]: northeastTacomaArticle,
 };
 
 export function getServiceAreaArticle(

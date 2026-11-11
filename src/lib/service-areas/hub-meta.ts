@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-11-05";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-11-11";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -136,6 +136,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "West Slope Tacoma homes near Narrowmoor and Titlow in 98465–98466. Narrows view lots and street-level comps, live NWMLS listings.",
   "tacoma/proctor-district":
     "Proctor District Tacoma homes around N Proctor and N 26th in 98406–98407. Craftsman streets and street-level comps, live NWMLS listings.",
+  "tacoma/northeast-tacoma":
+    "Northeast Tacoma homes in ZIP 98422 near Norpoint Park and Browns Point Lighthouse Park. Street-level comps and school diligence, live NWMLS listings.",
 };
 
 function neighborhoodKey(citySlug: string, neighborhoodSlug: string): string {

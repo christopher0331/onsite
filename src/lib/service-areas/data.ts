@@ -924,10 +924,11 @@ export const CITIES: City[] = [
       "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Service Area · Tacoma Core",
     heroIntro:
-      "Tacoma is a block-by-block market with unique pricing behavior between the North End, Proctor, Stadium, and West Slope corridors. We underwrite by micro-location, not city average.",
+      "Tacoma is a block-by-block market with unique pricing behavior between the North End, Northeast Tacoma, Proctor, Stadium, and West Slope corridors. We underwrite by micro-location, not city average.",
     activeProjects: 11,
     neighborhoodDirectory: [
       "North End",
+      "Northeast Tacoma",
       "Proctor District",
       "Stadium District",
       "West Slope",
@@ -968,7 +969,7 @@ export const CITIES: City[] = [
       {
         name: "Tacoma Public Library",
         url: "https://www.tacomalibrary.org/",
-        context: "City library system with branches in the North End, Proctor, and South Tacoma.",
+        context: "City library system with branches in the North End, Proctor, South Tacoma, Fern Hill, and Northeast Tacoma.",
       },
       {
         name: "Pierce County Assessor-Treasurer",
@@ -3239,6 +3240,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Narrows-facing terraces and Titlow / Narrowmoor living — view lots and SR-16 commute logic west of the North End grid.",
       },
       {
+        name: "Northeast Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "northeast-tacoma",
+        blurb: "East-of-Commencement-Bay district in ZIP 98422 — Norpoint Park and Marine View Drive (SR-509) living, a different micro-market than the North End grid.",
+      },
+      {
         name: "Tacoma (City)",
         citySlug: "tacoma",
         blurb: "Parent hub — Stadium, West Slope, and South Tacoma micro-markets on the same urban desk.",
@@ -4629,6 +4636,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         neighborhoodSlug: "redondo",
         blurb: "Pier-and-boardwalk Sound-edge sibling — Redondo waterfront character when Dash Point bluff living is not the product.",
       },
+      {
+        name: "Northeast Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "northeast-tacoma",
+        blurb: "Tacoma's east-of-Commencement-Bay district in ZIP 98422 — the closest Tacoma spoke to Dash Point, with Norpoint Park and Marine View Drive access.",
+      },
     ],
     reviews: [
       {
@@ -5719,6 +5732,107 @@ export const NEIGHBORHOODS: Neighborhood[] = [
           "Blue Mouse and Wheelock were sold as real daily life, not fluff. School boundaries were confirmed before we listed, and escrow stayed clean.",
       },
     ],
+  },
+
+  {
+    slug: "northeast-tacoma",
+    citySlug: "tacoma",
+    name: "Northeast Tacoma",
+    zipCodes: ["98422"],
+    // Geo anchor: Center at Norpoint / Norpoint Park, 4818 Nassau Ave NE
+    // (OpenStreetMap Nominatim). Not a boundary.
+    geo: { lat: 47.2997, lng: -122.4049 },
+    heroImage:
+      "/blog/modern-home-exterior-at-dusk.webp",
+    heroEyebrow: "Tacoma · Northeast Tacoma",
+    introCopy:
+      "Northeast Tacoma is the City of Tacoma Neighborhood Council district on the east side of Commencement Bay in ZIP 98422 — Norpoint Park, the Center at Norpoint, Alderwood Park, the Kobetich Library, and Marine View Drive (SR-509) access where street-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "Varies by plat — confirm with the Pierce County Assessor",
+      architecturalStyles: ["Single-family residential (era and style vary by street)"],
+      typicalLotSize: "Varies by plat — confirm with the Pierce County Assessor",
+      notes:
+        "ZIP 98422 is not the same as the City Neighborhood Council boundary — confirm city vs unincorporated jurisdiction before assuming Tacoma permits or utilities. View streets and inland plats are related but not identical micro-comp sets. Selected plats carry HOA rules — pull dues and CC&Rs early when they apply. Confirm school assignment by address; several Tacoma Public Schools campuses sit in 98422.",
+    },
+    communityOrgs: [
+      {
+        name: "Metro Parks Tacoma — Norpoint Park",
+        url: "https://www.parkstacoma.gov/place/norpoint-park/",
+        context: "19.72-acre park at 4818 Nassau Avenue NE with a playground, sprayground, skate park, and trails, next to the Center at Norpoint.",
+      },
+      {
+        name: "Metro Parks Tacoma — Center at Norpoint",
+        url: "https://www.parkstacoma.gov/place/center-at-norpoint/",
+        context: "Neighborhood community center at 4818 Nassau Avenue NE, with a swimming pool and fitness programs.",
+      },
+      {
+        name: "Tacoma Public Library — Kobetich Branch",
+        url: "https://www.tacomalibrary.org/locations/3/",
+        context: "Branch library at 212 Browns Point Boulevard NE, next to Alderwood Park.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Campuses in 98422 include Northeast Tacoma, Crescent Heights, and Browns Point elementary schools and Meeker Middle School — confirm assignment by address.",
+      },
+      {
+        name: "Northeast Tacoma Neighborhood Council",
+        url: "https://www.netnc.org/",
+        context: "One of Tacoma's eight Neighborhood Councils designated to advise the city on local issues.",
+      },
+      {
+        name: "Tacoma Planning & Development Services",
+        url: "https://www.cityoftacoma.org/government/city_departments/planning_and_development_services",
+        context: "Permits, zoning, and infill / ADU questions for parcels inside the city.",
+      },
+    ],
+    thoroughfares: [
+      "Marine View Drive NE (SR-509)",
+      "Norpoint Way NE",
+      "Nassau Ave NE",
+      "Browns Point Blvd",
+      "29th St NE",
+      "51st St NE",
+    ],
+    landmarks: [
+      "Norpoint Park",
+      "Center at Norpoint",
+      "Alderwood Park",
+      "Tacoma Public Library — Kobetich Branch",
+      "Browns Point Lighthouse Park",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Northeast Tacoma via SR-410 → I-5 and the SR-509 / Marine View Drive approach around the Port of Tacoma tideflats. School pickup near the Nassau Avenue campuses and Marine View Drive traffic change curb availability — we schedule showings around both.",
+    adjacent: [
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Tacoma's established urban-residential grid near Point Defiance and Proctor — the usual in-city comparison set across Commencement Bay.",
+      },
+      {
+        name: "Dash Point",
+        citySlug: "federal-way",
+        neighborhoodSlug: "dash-point",
+        blurb: "Federal Way's Sound-edge pocket to the north — Dash Point State Park and shoreline comps when Northeast Tacoma inland or view streets are not the fit.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — North End, Proctor, Stadium, Hilltop, Lincoln, South Tacoma, West Slope, Fern Hill, and Northeast Tacoma on the same urban desk.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor immediately north — Twin Lakes, West Campus, Lakota, and Redondo comparison set for commute shoppers.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley and South Hill inventory when Tacoma pricing stretches the budget.",
+      },
+    ],
+    reviews: [],
   },
 ];
 

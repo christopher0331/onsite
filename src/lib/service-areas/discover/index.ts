@@ -60,6 +60,7 @@ import { quietWaterDiscover } from "./quiet-water";
 import { redondoDiscover } from "./redondo";
 import { twinLakesDiscover } from "./twin-lakes";
 import { proctorDistrictDiscover } from "./proctor-district";
+import { northeastTacomaDiscover } from "./northeast-tacoma";
 
 const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [lakeTappsDiscover.slug]: lakeTappsDiscover,
@@ -123,6 +124,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [redondoDiscover.slug]: redondoDiscover,
   [twinLakesDiscover.slug]: twinLakesDiscover,
   [proctorDistrictDiscover.slug]: proctorDistrictDiscover,
+  [northeastTacomaDiscover.slug]: northeastTacomaDiscover,
 };
 
 export function getServiceAreaDiscover(
