@@ -935,6 +935,7 @@ export const CITIES: City[] = [
       "Hilltop",
       "Lincoln District",
       "Fern Hill",
+      "McKinley",
     ],
     permittingOffice: {
       name: "City of Tacoma Planning & Development Services",
@@ -1269,6 +1270,74 @@ export const CITIES: City[] = [
 ];
 
 export const NEIGHBORHOODS: Neighborhood[] = [
+  {
+    slug: "mckinley",
+    citySlug: "tacoma",
+    name: "McKinley",
+    // No ZIP-wide neighborhood boundary is asserted; existing listings fallback shows Tacoma inventory.
+    zipCodes: [],
+    // McKinley Park location anchor, not a neighborhood boundary (USGS/TopoZone).
+    // https://www.topozone.com/washington/pierce-wa/park/mckinley-park/
+    geo: {
+      lat: 47.2350993,
+      lng: -122.4198454
+    },
+    heroImage: "/blog/craftsman-home-in-evergreen-trees.webp",
+    heroEyebrow: "Tacoma · McKinley",
+    introCopy: "Explore McKinley with wooded paths at McKinley Park as a starting point. Compare individual streets, property condition, drainage, and permit history before buying or selling. Home imagery is illustrative, not a documented McKinley property.",
+    characteristics: {
+      medianHomeYear: "Verify the individual home in county records",
+      architecturalStyles: [
+        "Confirm the style and alterations during a property visit"
+      ],
+      typicalLotSize: "Confirm recorded lot dimensions with the Pierce County Assessor-Treasurer",
+      notes: "A nearby park does not establish buildability. Confirm parcel-specific drainage, critical-area constraints, title, and permit history before budgeting changes."
+    },
+    communityOrgs: [
+      {
+        name: "Parks Tacoma — McKinley Park",
+        url: "https://www.parkstacoma.gov/place/mckinley-park/",
+        context: "Wooded pathways and playground equipment at 907 Upper Park Drive; leashed dogs only."
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Recorded lot dimensions, assessed values, and property taxes."
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Verify current school assignment using the property address."
+      }
+    ],
+    thoroughfares: [
+      "Upper Park Drive"
+    ],
+    landmarks: [
+      "McKinley Park"
+    ],
+    dispatchCopy: "Plan a property-specific visit with OnSite. Check the actual route, street access, and parking at the times you expect to use them; do not assume a fixed commute from a neighborhood name.",
+    adjacent: [
+      {
+        name: "Lincoln District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "lincoln-district",
+        blurb: "Compare this Tacoma neighborhood separately; its homes are not interchangeable pricing comparables."
+      },
+      {
+        name: "Fern Hill",
+        citySlug: "tacoma",
+        neighborhoodSlug: "fern-hill",
+        blurb: "Explore another Tacoma option while keeping street-level pricing and property condition separate."
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Return to the city guide to compare Tacoma neighborhoods."
+      }
+    ],
+    reviews: []
+  },
   {
     slug: "south-hill",
     citySlug: "puyallup",
@@ -3530,6 +3599,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "From our Lake Tapps base we reach the Lincoln District via SR-410 → SR-167 → I-5 and the South 38th Street exit, typically inside a 30–40 minute window for inspections and twilight photography. School-day traffic around Lincoln High and business-district parking change curb availability on showing days — we pad schedules accordingly.",
     adjacent: [
       {
+        name: "McKinley",
+        citySlug: "tacoma",
+        neighborhoodSlug: "mckinley",
+        blurb: "Compare McKinley Park access and parcel-specific diligence in another Tacoma neighborhood; price each area separately.",
+      },
+      {
         name: "South Tacoma",
         citySlug: "tacoma",
         neighborhoodSlug: "south-tacoma",
@@ -3718,6 +3793,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     dispatchCopy:
       "From our Lake Tapps base we reach Fern Hill via SR-410 → SR-167 → I-5 and the South 84th / Pacific Avenue approaches, typically inside a 30–40 minute window for inspections and twilight photography. School pickup near Fern Hill Elementary and Pacific Avenue traffic change curb availability on weekday afternoons — we schedule showings around both.",
     adjacent: [
+      {
+        name: "McKinley",
+        citySlug: "tacoma",
+        neighborhoodSlug: "mckinley",
+        blurb: "Compare McKinley Park access and parcel-specific diligence in another Tacoma neighborhood; price each area separately.",
+      },
       {
         name: "South Tacoma",
         citySlug: "tacoma",

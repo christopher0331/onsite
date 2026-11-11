@@ -61,6 +61,8 @@ import { redondoArticle } from "./redondo";
 import { twinLakesArticle } from "./twin-lakes";
 import { proctorDistrictArticle } from "./proctor-district";
 
+import { mckinleyArticle } from "./mckinley";
+
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
   [bonneyLakeArticle.slug]: bonneyLakeArticle,
@@ -95,6 +97,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [ballardArticle.slug]: ballardArticle,
   [northEndArticle.slug]: northEndArticle,
   [hilltopArticle.slug]: hilltopArticle,
+  [mckinleyArticle.slug]: mckinleyArticle,
   [fernHillArticle.slug]: fernHillArticle,
   [lincolnDistrictArticle.slug]: lincolnDistrictArticle,
   [stadiumDistrictArticle.slug]: stadiumDistrictArticle,
