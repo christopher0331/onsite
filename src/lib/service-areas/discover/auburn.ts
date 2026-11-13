@@ -2,7 +2,7 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const auburnDiscover: ServiceAreaDiscover = {
   slug: "auburn",
-  updatedAt: "2026-09-26",
+  updatedAt: "2026-11-13",
   attractions: [
     {
       name: "Downtown Auburn",
@@ -32,7 +32,7 @@ export const auburnDiscover: ServiceAreaDiscover = {
       name: "Auburn School District",
       url: "https://www.auburn.wednet.edu/",
       description:
-        "Auburn School District serves much of the city and is a key factor for families comparing neighborhoods. Its schools help shape long-term housing decisions in places like West Hill, Lea Hill, and the residential pockets around downtown.",
+        "Auburn School District serves much of the city and is a key factor for families comparing neighborhoods. Its schools help shape long-term housing decisions in places like [West Hill](/service-areas/auburn/west-hill-auburn), [Lea Hill](/service-areas/auburn/lea-hill), and the residential pockets around downtown.",
     },
     {
       name: "KCLS Auburn Library",
@@ -42,7 +42,7 @@ export const auburnDiscover: ServiceAreaDiscover = {
     },
   ],
   localLivingMarkdown: [
-    "Auburn offers a mix of housing styles that work for buyers at different stages, from older homes near [Downtown Auburn](/service-areas/auburn/downtown-auburn) to established streets on West Hill and more spacious properties on [Lea Hill](/service-areas/auburn/lea-hill) and in the planned [Lakeland Hills](/service-areas/auburn/lakeland-hills) community. The city sits between [Kent](/service-areas/kent) and [Federal Way](/service-areas/federal-way), so commuters can compare several south King County options while staying close to SR-167, the Sounder corridor, and local retail. Families also look at school access through [Auburn School District](https://www.auburn.wednet.edu/) and daily routines around [KCLS Auburn Library](https://kcls.org/locations/auburn-library/).",
+    "Auburn offers a mix of housing styles that work for buyers at different stages, from older homes near [Downtown Auburn](/service-areas/auburn/downtown-auburn) to established streets on [West Hill](/service-areas/auburn/west-hill-auburn) and more spacious properties on [Lea Hill](/service-areas/auburn/lea-hill) and in the planned [Lakeland Hills](/service-areas/auburn/lakeland-hills) community. The city sits between [Kent](/service-areas/kent) and [Federal Way](/service-areas/federal-way), so commuters can compare several south King County options while staying close to SR-167, the Sounder corridor, and local retail. Families also look at school access through [Auburn School District](https://www.auburn.wednet.edu/) and daily routines around [KCLS Auburn Library](https://kcls.org/locations/auburn-library/).",
     "Outdoor access is part of Auburn's appeal, especially for buyers who want a neighborhood that feels connected to parks, trails, and campus life without leaving the city. Areas near [Game Farm Wilderness Park](https://www.auburnwa.gov/city_hall/parks_grounds___trails/parks___trails/game_farm_wilderness_park) and [Green River College](https://www.greenriver.edu/) on [Lea Hill](/service-areas/auburn/lea-hill) appeal to residents who value green space, education, and a quieter residential setting. If you are comparing [Auburn homes for sale](/listings?city=Auburn&state=WA) with nearby markets, OnSite Real Estate Group can help you weigh location, commute, and neighborhood fit across the city's ZIP codes and pockets.",
   ],
 };

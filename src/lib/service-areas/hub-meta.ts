@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-11-11";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-11-13";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -128,6 +128,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Lake Meridian Kent homes near Lake Meridian Park on the East Hill bench. Shoreline comps and street-level pricing, live NWMLS listings.",
   "auburn/downtown-auburn":
     "Downtown Auburn homes near Auburn Station, Main Street, and Les Gove Park. Sounder access plus zoning, flood, and school diligence, with Auburn listings.",
+  "auburn/west-hill-auburn":
+    "West Hill Auburn homes near Lewis Lake Nature Park, Jornada Park, and Centennial Viewpoint. Street-level comps and school diligence, live NWMLS listings.",
   "auburn/lakeland-hills":
     "Lakeland Hills Auburn homes near Lakeland Hills Park, Evergreen Way SE, and Lake Tapps in 98092. HOA and school-district diligence, live NWMLS listings.",
   "auburn/lea-hill":

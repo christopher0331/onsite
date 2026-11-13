@@ -661,7 +661,7 @@ export const CITIES: City[] = [
     heroIntro:
       "Auburn prices in distinct bands — valley-floor neighborhoods near the Sounder station, established West Hill pockets, and the newer Lea Hill bench above Green River College. We underwrite each band against its own comp pool.",
     activeProjects: 8,
-    neighborhoodDirectory: ["Downtown Auburn", "Lea Hill", "Lakeland Hills"],
+    neighborhoodDirectory: ["Downtown Auburn", "West Hill", "Lea Hill", "Lakeland Hills"],
     permittingOffice: {
       name: "City of Auburn — Community Development",
       url: "https://www.auburnwa.gov/",
@@ -5200,6 +5200,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Valley and Lea Hill inventory when West Hill pricing or Kent School District pathways stretch the search.",
       },
       {
+        name: "West Hill (Auburn)",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "A different West Hill, on the hillside west of Auburn's Green River valley — not the same neighborhood as Kent's West Hill.",
+      },
+      {
         name: "Tacoma",
         citySlug: "tacoma",
         blurb: "Pierce County urban-residential alternative — North End and Stadium District fabric for cross-county shoppers.",
@@ -5395,6 +5401,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Auburn's historic Main Street core and Sounder stop — a common cross-shop when rail access matters more than lot size.",
       },
       {
+        name: "West Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "Auburn's other hillside band, west of the Green River valley — a common in-city comparison set across from the Lea Hill bench.",
+      },
+      {
         name: "Auburn (City)",
         citySlug: "auburn",
         blurb: "Parent hub — Sounder downtown, West Hill, and Lea Hill micro-markets on the same south King desk.",
@@ -5544,6 +5556,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Residential bench above Green River College in the same 98092 ZIP, on the King County side of Auburn.",
       },
       {
+        name: "West Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "Auburn's hillside neighborhood west of the Green River valley, on the King County side of the city.",
+      },
+      {
         name: "Sumner",
         citySlug: "sumner",
         blurb: "Valley town to the southwest with its own downtown and Sounder station.",
@@ -5628,6 +5646,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Parent hub — compare downtown with West Hill, Lea Hill, and Lakeland Hills pricing bands.",
       },
       {
+        name: "West Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "Auburn's hillside neighborhood west of the valley — Lewis Lake Nature Park and Centennial Viewpoint comps when a downtown block is not the fit.",
+      },
+      {
         name: "Lea Hill",
         citySlug: "auburn",
         neighborhoodSlug: "lea-hill",
@@ -5650,6 +5674,120 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "sumner",
         neighborhoodSlug: "downtown-sumner",
         blurb: "The next Sounder stop south, in Pierce County — a smaller historic downtown to compare against Auburn's.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "west-hill-auburn",
+    citySlug: "auburn",
+    name: "West Hill",
+    // No ZIP-wide boundary is asserted: 98001 is the usual mail code on West Hill
+    // (Lewis Lake Nature Park, Evergreen Heights Elementary, Mountain View Cemetery)
+    // and also covers addresses outside the City's West Hill neighborhood area.
+    // The existing listings fallback therefore shows Auburn-wide inventory,
+    // as on the Downtown Auburn and McKinley pages.
+    zipCodes: [],
+    // Geo anchor: Lewis Lake Nature Park, 899 W Street NW (OpenStreetMap Nominatim).
+    // Not a boundary.
+    geo: { lat: 47.3149662, lng: -122.2618456 },
+    heroImage: "/blog/craftsman-home-in-evergreen-trees.webp",
+    heroEyebrow: "Auburn · West Hill",
+    introCopy:
+      "Auburn's West Hill is a City of Auburn neighborhood area west of the Green River valley — Lewis Lake Nature Park, Jornada Park, Gaines Park, Centennial Viewpoint, and Mountain View Cemetery, where street-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "Varies by plat — confirm with the King County Assessor",
+      architecturalStyles: ["Single-family residential (era and style vary by street)"],
+      typicalLotSize: "Varies by plat — confirm with the King County Assessor",
+      notes:
+        "ZIP 98001 is the usual mail code and is not the same as the City's West Hill neighborhood area — confirm city jurisdiction before assuming Auburn permits or utilities. Price West Hill against West Hill, not an Auburn average, and not against Kent's West Hill. Selected plats carry HOA rules — pull dues and CC&Rs early when they apply. Confirm school assignment by address; Evergreen Heights Elementary sits at 5602 South 316th Street.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Auburn — Lewis Lake Nature Park",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/lewis_lake_nature_park",
+        context: "9.25-acre park at 899 W Street NW, on the West Hill, completed in 2020, with an approximate 2-acre lake and a quarter-mile gravel loop trail.",
+      },
+      {
+        name: "City of Auburn — Jornada Park",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/jornada_park",
+        context: "1.89-acre neighborhood park at 1433 U Court NW, dedicated in 2004, with a play structure, climbing wall, and a quarter-mile paved trail.",
+      },
+      {
+        name: "City of Auburn — Centennial Viewpoint",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/centennial_viewpoint",
+        context: "0.7-acre scenic overlook at 402 Mountain View Drive, dedicated in 1991, across from Mountain View Cemetery.",
+      },
+      {
+        name: "Auburn School District",
+        url: "https://www.auburn.wednet.edu/our-district/about-us/attendance-area-maps",
+        context: "Evergreen Heights Elementary is at 5602 South 316th Street — confirm every school assignment by address with the district's attendance maps.",
+      },
+      {
+        name: "City of Auburn — Community Development",
+        url: "https://www.auburnwa.gov/city_hall/community_development",
+        context: "Permits, zoning, and ADU or remodel questions for parcels inside the city.",
+      },
+      {
+        name: "King County Assessor",
+        url: "https://kingcounty.gov/en/dept/assessor",
+        context: "Assessed value, property taxes, and recorded lot details for West Hill parcels.",
+      },
+    ],
+    thoroughfares: [
+      "15th St NW",
+      "West Valley Hwy",
+      "Terrace Dr",
+      "W St NW",
+      "Mountain View Dr",
+      "Pike St NW",
+      "S 316th St",
+      "U St NW",
+    ],
+    landmarks: [
+      "Lewis Lake Nature Park",
+      "Jornada Park",
+      "Gaines Park",
+      "Centennial Viewpoint",
+      "Mountain View Cemetery",
+      "Evergreen Heights Elementary",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Auburn's West Hill via SR-410 → SR-167 to the 15th Street NW exit, then West Valley Highway and Terrace Drive up the hill. School pickup near Evergreen Heights on South 316th Street can change curb availability — we schedule showings around it.",
+    adjacent: [
+      {
+        name: "Downtown Auburn",
+        citySlug: "auburn",
+        neighborhoodSlug: "downtown-auburn",
+        blurb: "Auburn's historic Main Street core and Sounder stop — the usual in-city comparison set down the hill.",
+      },
+      {
+        name: "Lea Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "lea-hill",
+        blurb: "Auburn's other hillside bench, above Green River College in 98092 — a common cross-shop when campus-adjacent living is the fit.",
+      },
+      {
+        name: "Auburn (City)",
+        citySlug: "auburn",
+        blurb: "Parent hub — Sounder downtown, West Hill, Lea Hill, and Lakeland Hills pricing bands on the same south King desk.",
+      },
+      {
+        name: "Lakeland Hills",
+        citySlug: "auburn",
+        neighborhoodSlug: "lakeland-hills",
+        blurb: "South Auburn's planned hillside community on the Pierce County side of 98092, near Lake Tapps.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor immediately west — Twin Lakes, West Campus, Lakota, and Dash Point comparison set for commute shoppers.",
+      },
+      {
+        name: "West Hill (Kent)",
+        citySlug: "kent",
+        neighborhoodSlug: "west-hill",
+        blurb: "A different West Hill, west of the Green River valley in Kent — not the same neighborhood as Auburn's West Hill.",
       },
     ],
     reviews: [],

@@ -6,7 +6,7 @@ export const downtownAuburnArticle: ServiceAreaArticle = {
   excerpt:
     "Downtown Auburn is the city's historic Main Street core and Sounder stop — Auburn Station, Downtown Urban Center zoning, Les Gove Park, and parcel-level flood, zoning, and school checks that a citywide Auburn average misses.",
   updatedAt: "2026-11-09",
-  bodyMarkdown: `Downtown Auburn is the historic Main Street core of [Auburn](/service-areas/auburn), on the King County side of the city. The City of Auburn describes the downtown area as sitting along the historic Main Street corridor next to the Interurban Trail and the BNSF railway. Buyers often cross-shop [Lea Hill](/service-areas/auburn/lea-hill), [Lakeland Hills](/service-areas/auburn/lakeland-hills), [Downtown Kent](/service-areas/kent/downtown-kent), and [Downtown Sumner](/service-areas/sumner/downtown-sumner). Active search usually starts with [Auburn homes for sale](/listings?city=Auburn&state=WA).
+  bodyMarkdown: `Downtown Auburn is the historic Main Street core of [Auburn](/service-areas/auburn), on the King County side of the city. The City of Auburn describes the downtown area as sitting along the historic Main Street corridor next to the Interurban Trail and the BNSF railway. Buyers often cross-shop [West Hill](/service-areas/auburn/west-hill-auburn), [Lea Hill](/service-areas/auburn/lea-hill), [Lakeland Hills](/service-areas/auburn/lakeland-hills), [Downtown Kent](/service-areas/kent/downtown-kent), and [Downtown Sumner](/service-areas/sumner/downtown-sumner). Active search usually starts with [Auburn homes for sale](/listings?city=Auburn&state=WA).
 
 ## Getting around
 
