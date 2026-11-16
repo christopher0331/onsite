@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-11-11";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-11-15";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -82,6 +82,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Elk Heights Buckley homes on the hilltop near Pioneer Way and Lund St in 98321. HOA/ACC diligence, Rainier views, White River schools, live NWMLS listings.",
   "graham/the-country":
     "The Country Graham homes on 1+ acre lots near Country Drive E in 98338. HOA and CC&R diligence, septic records, and Bethel schools, live NWMLS listings.",
+  "graham/kapowsin":
+    "Kapowsin homes near Lake Kapowsin and Kapowsin Elementary in unincorporated Graham. Well, septic, and shoreline diligence, live NWMLS listings.",
   "seattle/ballard":
     "Ballard Seattle homes near Market Street, the Locks, and Golden Gardens in 98107–98117. Street-level comps, Seattle Public Schools, live NWMLS listings.",
   "tacoma/north-end":
@@ -128,6 +130,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Lake Meridian Kent homes near Lake Meridian Park on the East Hill bench. Shoreline comps and street-level pricing, live NWMLS listings.",
   "auburn/downtown-auburn":
     "Downtown Auburn homes near Auburn Station, Main Street, and Les Gove Park. Sounder access plus zoning, flood, and school diligence, with Auburn listings.",
+  "auburn/west-hill-auburn":
+    "West Hill Auburn homes near Lewis Lake Nature Park, Jornada Park, and Centennial Viewpoint. Street-level comps and school diligence, live NWMLS listings.",
   "auburn/lakeland-hills":
     "Lakeland Hills Auburn homes near Lakeland Hills Park, Evergreen Way SE, and Lake Tapps in 98092. HOA and school-district diligence, live NWMLS listings.",
   "auburn/lea-hill":

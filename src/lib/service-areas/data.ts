@@ -661,7 +661,7 @@ export const CITIES: City[] = [
     heroIntro:
       "Auburn prices in distinct bands — valley-floor neighborhoods near the Sounder station, established West Hill pockets, and the newer Lea Hill bench above Green River College. We underwrite each band against its own comp pool.",
     activeProjects: 8,
-    neighborhoodDirectory: ["Downtown Auburn", "Lea Hill", "Lakeland Hills"],
+    neighborhoodDirectory: ["Downtown Auburn", "West Hill", "Lea Hill", "Lakeland Hills"],
     permittingOffice: {
       name: "City of Auburn — Community Development",
       url: "https://www.auburnwa.gov/",
@@ -834,7 +834,7 @@ export const CITIES: City[] = [
     heroIntro:
       "Graham is acreage country — unincorporated Pierce County where lot size, outbuildings, and well/septic standing drive value as much as finished square footage. Our comp models here are parcel-first, not house-first.",
     activeProjects: 6,
-    neighborhoodDirectory: ["The Country"],
+    neighborhoodDirectory: ["The Country", "Kapowsin"],
     permittingOffice: {
       name: "Pierce County Planning & Public Works",
       url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
@@ -3131,6 +3131,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Parent hub — acreage, wells and septic, and unincorporated Pierce County permitting on the same desk.",
       },
       {
+        name: "Kapowsin",
+        citySlug: "graham",
+        neighborhoodSlug: "kapowsin",
+        blurb: "Unincorporated lake community to the south beside Lake Kapowsin — open rural parcels without The Country's covenants.",
+      },
+      {
         name: "South Hill",
         citySlug: "puyallup",
         neighborhoodSlug: "south-hill",
@@ -3152,6 +3158,112 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Bonney Lake",
         citySlug: "bonney-lake",
         blurb: "Plateau neighbor via SR-410 — Tehaleh and lake-adjacent comparison set.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "kapowsin",
+    citySlug: "graham",
+    name: "Kapowsin",
+    // No ZIP filter: Kapowsin addresses commonly use Graham mail (Kapowsin
+    // Elementary is 10412 264th Street East, Graham, WA 98338), and the Graham
+    // ZIP also covers the rest of the Graham plan area. The listings block
+    // therefore shows Graham-wide inventory with the existing scope note.
+    zipCodes: [],
+    // Geo anchor: Kapowsin place node, OpenStreetMap Nominatim. Not a boundary.
+    geo: { lat: 46.9845951, lng: -122.2358616 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/680fe8304415e6b356d95497_1.jpg",
+    heroEyebrow: "Graham · Kapowsin",
+    introCopy:
+      "Kapowsin is an unincorporated community in Pierce County's Graham Community Plan area, beside Lake Kapowsin — the state's first freshwater aquatic reserve — where wells, septic, shoreline rules, and Bethel School District pathways shape every parcel.",
+    characteristics: {
+      medianHomeYear: "Varies by parcel — confirm with the Pierce County Assessor-Treasurer",
+      architecturalStyles: ["Rural single-family homes on acreage (era and style vary by parcel)"],
+      typicalLotSize: "Varies by parcel — confirm with the Pierce County Assessor-Treasurer",
+      notes:
+        "Kapowsin is unincorporated, so zoning, permits, and site development run through Pierce County Planning & Public Works. Rural parcels commonly rely on private wells and septic — pull well logs and septic records early. Land near Lake Kapowsin, Kapowsin Creek, and Ohop Creek can fall under shoreline and critical-area rules, and about half of the lake's shorelands are privately owned, so title and survey review come before marketing any water access. Confirm school assignment by address; Kapowsin Elementary sits at 10412 264th Street East.",
+    },
+    communityOrgs: [
+      {
+        name: "Washington DNR — Lake Kapowsin Aquatic Reserve",
+        url: "https://dnr.wa.gov/aquatic-reserves/lake-kapowsin-aquatic-reserve",
+        context: "512-acre lake designated in 2016 as DNR's first freshwater aquatic reserve, covering about 475 acres of state-owned aquatic land.",
+      },
+      {
+        name: "Washington Department of Fish & Wildlife — Lake Kapowsin",
+        url: "https://wdfw.wa.gov/places-to-go/water-access-sites/lake-kapowsin-437",
+        context: "Year-round public water access with one concrete boat ramp, a boarding float, parking, and a restroom; no camping.",
+      },
+      {
+        name: "Kapowsin Elementary — Bethel School District",
+        url: "https://kes.bethelsd.org/welcome/about-us",
+        context: "Bethel School District elementary at 10412 264th Street East — confirm every school assignment by address with the district's maps.",
+      },
+      {
+        name: "Pierce County — Graham Community Plan",
+        url: "https://www.piercecountywa.gov/939/Graham",
+        context: "County community plan, adopted in 2006, that covers Graham, Elk Plain, Kapowsin, Thrift, and Rocky Ridge.",
+      },
+      {
+        name: "Pierce County Planning & Public Works",
+        url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
+        context: "Permits, site development, zoning, and shoreline permits for unincorporated Kapowsin parcels.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records for Kapowsin parcels.",
+      },
+    ],
+    thoroughfares: [
+      "Orting-Kapowsin Hwy E",
+      "Kapowsin Hwy E",
+      "Orville Rd E",
+      "304th St E",
+      "264th St E",
+      "224th St E",
+      "Meridian Ave E (SR-161)",
+      "Mountain Hwy E (SR-7)",
+    ],
+    landmarks: [
+      "Lake Kapowsin",
+      "Lake Kapowsin Aquatic Reserve",
+      "WDFW Lake Kapowsin water access",
+      "Kapowsin Elementary",
+      "Kapowsin Rural Neighborhood Center",
+      "Kapowsin Creek",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Kapowsin through Orting on the Orting-Kapowsin Highway, or from Meridian (SR-161) and Mountain Highway (SR-7) via 304th Street E and Kapowsin Highway E. Long rural drives, gravel approaches, and limited curb space change showing and photography logistics, so we plan each parcel's schedule around access and daylight.",
+    adjacent: [
+      {
+        name: "Graham (City)",
+        citySlug: "graham",
+        blurb: "Parent hub — acreage, wells and septic, and unincorporated Pierce County permitting across the wider Graham plan area.",
+      },
+      {
+        name: "The Country",
+        citySlug: "graham",
+        neighborhoodSlug: "the-country",
+        blurb: "Graham's covenant community of mostly 1+ acre lots east of Meridian — HOA and CC&R rules instead of open rural parcels.",
+      },
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "Plateau shopping and service corridor up Meridian — city services and denser plats when rural upkeep is not the fit.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley city to the north — downtown, South Hill, and city-utility neighborhoods for buyers trading land for convenience.",
+      },
+      {
+        name: "Buckley",
+        citySlug: "buckley",
+        blurb: "Foothills city with Elk Run and Elk Heights HOA plats and White River schools — another Rainier-side comparison set.",
       },
     ],
     reviews: [],
@@ -5200,6 +5312,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Valley and Lea Hill inventory when West Hill pricing or Kent School District pathways stretch the search.",
       },
       {
+        name: "West Hill (Auburn)",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "A different West Hill, on the hillside west of Auburn's Green River valley — not the same neighborhood as Kent's West Hill.",
+      },
+      {
         name: "Tacoma",
         citySlug: "tacoma",
         blurb: "Pierce County urban-residential alternative — North End and Stadium District fabric for cross-county shoppers.",
@@ -5395,6 +5513,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Auburn's historic Main Street core and Sounder stop — a common cross-shop when rail access matters more than lot size.",
       },
       {
+        name: "West Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "Auburn's other hillside band, west of the Green River valley — a common in-city comparison set across from the Lea Hill bench.",
+      },
+      {
         name: "Auburn (City)",
         citySlug: "auburn",
         blurb: "Parent hub — Sounder downtown, West Hill, and Lea Hill micro-markets on the same south King desk.",
@@ -5544,6 +5668,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Residential bench above Green River College in the same 98092 ZIP, on the King County side of Auburn.",
       },
       {
+        name: "West Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "Auburn's hillside neighborhood west of the Green River valley, on the King County side of the city.",
+      },
+      {
         name: "Sumner",
         citySlug: "sumner",
         blurb: "Valley town to the southwest with its own downtown and Sounder station.",
@@ -5628,6 +5758,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Parent hub — compare downtown with West Hill, Lea Hill, and Lakeland Hills pricing bands.",
       },
       {
+        name: "West Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "Auburn's hillside neighborhood west of the valley — Lewis Lake Nature Park and Centennial Viewpoint comps when a downtown block is not the fit.",
+      },
+      {
         name: "Lea Hill",
         citySlug: "auburn",
         neighborhoodSlug: "lea-hill",
@@ -5650,6 +5786,120 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "sumner",
         neighborhoodSlug: "downtown-sumner",
         blurb: "The next Sounder stop south, in Pierce County — a smaller historic downtown to compare against Auburn's.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "west-hill-auburn",
+    citySlug: "auburn",
+    name: "West Hill",
+    // No ZIP-wide boundary is asserted: 98001 is the usual mail code on West Hill
+    // (Lewis Lake Nature Park, Evergreen Heights Elementary, Mountain View Cemetery)
+    // and also covers addresses outside the City's West Hill neighborhood area.
+    // The existing listings fallback therefore shows Auburn-wide inventory,
+    // as on the Downtown Auburn and McKinley pages.
+    zipCodes: [],
+    // Geo anchor: Lewis Lake Nature Park, 899 W Street NW (OpenStreetMap Nominatim).
+    // Not a boundary.
+    geo: { lat: 47.3149662, lng: -122.2618456 },
+    heroImage: "/blog/craftsman-home-in-evergreen-trees.webp",
+    heroEyebrow: "Auburn · West Hill",
+    introCopy:
+      "Auburn's West Hill is a City of Auburn neighborhood area west of the Green River valley — Lewis Lake Nature Park, Jornada Park, Gaines Park, Centennial Viewpoint, and Mountain View Cemetery, where street-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "Varies by plat — confirm with the King County Assessor",
+      architecturalStyles: ["Single-family residential (era and style vary by street)"],
+      typicalLotSize: "Varies by plat — confirm with the King County Assessor",
+      notes:
+        "ZIP 98001 is the usual mail code and is not the same as the City's West Hill neighborhood area — confirm city jurisdiction before assuming Auburn permits or utilities. Price West Hill against West Hill, not an Auburn average, and not against Kent's West Hill. Selected plats carry HOA rules — pull dues and CC&Rs early when they apply. Confirm school assignment by address; Evergreen Heights Elementary sits at 5602 South 316th Street.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Auburn — Lewis Lake Nature Park",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/lewis_lake_nature_park",
+        context: "9.25-acre park at 899 W Street NW, on the West Hill, completed in 2020, with an approximate 2-acre lake and a quarter-mile gravel loop trail.",
+      },
+      {
+        name: "City of Auburn — Jornada Park",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/jornada_park",
+        context: "1.89-acre neighborhood park at 1433 U Court NW, dedicated in 2004, with a play structure, climbing wall, and a quarter-mile paved trail.",
+      },
+      {
+        name: "City of Auburn — Centennial Viewpoint",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/centennial_viewpoint",
+        context: "0.7-acre scenic overlook at 402 Mountain View Drive, dedicated in 1991, across from Mountain View Cemetery.",
+      },
+      {
+        name: "Auburn School District",
+        url: "https://www.auburn.wednet.edu/our-district/about-us/attendance-area-maps",
+        context: "Evergreen Heights Elementary is at 5602 South 316th Street — confirm every school assignment by address with the district's attendance maps.",
+      },
+      {
+        name: "City of Auburn — Community Development",
+        url: "https://www.auburnwa.gov/city_hall/community_development",
+        context: "Permits, zoning, and ADU or remodel questions for parcels inside the city.",
+      },
+      {
+        name: "King County Assessor",
+        url: "https://kingcounty.gov/en/dept/assessor",
+        context: "Assessed value, property taxes, and recorded lot details for West Hill parcels.",
+      },
+    ],
+    thoroughfares: [
+      "15th St NW",
+      "West Valley Hwy",
+      "Terrace Dr",
+      "W St NW",
+      "Mountain View Dr",
+      "Pike St NW",
+      "S 316th St",
+      "U St NW",
+    ],
+    landmarks: [
+      "Lewis Lake Nature Park",
+      "Jornada Park",
+      "Gaines Park",
+      "Centennial Viewpoint",
+      "Mountain View Cemetery",
+      "Evergreen Heights Elementary",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Auburn's West Hill via SR-410 → SR-167 to the 15th Street NW exit, then West Valley Highway and Terrace Drive up the hill. School pickup near Evergreen Heights on South 316th Street can change curb availability — we schedule showings around it.",
+    adjacent: [
+      {
+        name: "Downtown Auburn",
+        citySlug: "auburn",
+        neighborhoodSlug: "downtown-auburn",
+        blurb: "Auburn's historic Main Street core and Sounder stop — the usual in-city comparison set down the hill.",
+      },
+      {
+        name: "Lea Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "lea-hill",
+        blurb: "Auburn's other hillside bench, above Green River College in 98092 — a common cross-shop when campus-adjacent living is the fit.",
+      },
+      {
+        name: "Auburn (City)",
+        citySlug: "auburn",
+        blurb: "Parent hub — Sounder downtown, West Hill, Lea Hill, and Lakeland Hills pricing bands on the same south King desk.",
+      },
+      {
+        name: "Lakeland Hills",
+        citySlug: "auburn",
+        neighborhoodSlug: "lakeland-hills",
+        blurb: "South Auburn's planned hillside community on the Pierce County side of 98092, near Lake Tapps.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor immediately west — Twin Lakes, West Campus, Lakota, and Dash Point comparison set for commute shoppers.",
+      },
+      {
+        name: "West Hill (Kent)",
+        citySlug: "kent",
+        neighborhoodSlug: "west-hill",
+        blurb: "A different West Hill, west of the Green River valley in Kent — not the same neighborhood as Auburn's West Hill.",
       },
     ],
     reviews: [],
