@@ -834,7 +834,7 @@ export const CITIES: City[] = [
     heroIntro:
       "Graham is acreage country — unincorporated Pierce County where lot size, outbuildings, and well/septic standing drive value as much as finished square footage. Our comp models here are parcel-first, not house-first.",
     activeProjects: 6,
-    neighborhoodDirectory: ["The Country"],
+    neighborhoodDirectory: ["The Country", "Kapowsin"],
     permittingOffice: {
       name: "Pierce County Planning & Public Works",
       url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
@@ -3131,6 +3131,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Parent hub — acreage, wells and septic, and unincorporated Pierce County permitting on the same desk.",
       },
       {
+        name: "Kapowsin",
+        citySlug: "graham",
+        neighborhoodSlug: "kapowsin",
+        blurb: "Unincorporated lake community to the south beside Lake Kapowsin — open rural parcels without The Country's covenants.",
+      },
+      {
         name: "South Hill",
         citySlug: "puyallup",
         neighborhoodSlug: "south-hill",
@@ -3152,6 +3158,112 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Bonney Lake",
         citySlug: "bonney-lake",
         blurb: "Plateau neighbor via SR-410 — Tehaleh and lake-adjacent comparison set.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "kapowsin",
+    citySlug: "graham",
+    name: "Kapowsin",
+    // No ZIP filter: Kapowsin addresses commonly use Graham mail (Kapowsin
+    // Elementary is 10412 264th Street East, Graham, WA 98338), and the Graham
+    // ZIP also covers the rest of the Graham plan area. The listings block
+    // therefore shows Graham-wide inventory with the existing scope note.
+    zipCodes: [],
+    // Geo anchor: Kapowsin place node, OpenStreetMap Nominatim. Not a boundary.
+    geo: { lat: 46.9845951, lng: -122.2358616 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/680fe8304415e6b356d95497_1.jpg",
+    heroEyebrow: "Graham · Kapowsin",
+    introCopy:
+      "Kapowsin is an unincorporated community in Pierce County's Graham Community Plan area, beside Lake Kapowsin — the state's first freshwater aquatic reserve — where wells, septic, shoreline rules, and Bethel School District pathways shape every parcel.",
+    characteristics: {
+      medianHomeYear: "Varies by parcel — confirm with the Pierce County Assessor-Treasurer",
+      architecturalStyles: ["Rural single-family homes on acreage (era and style vary by parcel)"],
+      typicalLotSize: "Varies by parcel — confirm with the Pierce County Assessor-Treasurer",
+      notes:
+        "Kapowsin is unincorporated, so zoning, permits, and site development run through Pierce County Planning & Public Works. Rural parcels commonly rely on private wells and septic — pull well logs and septic records early. Land near Lake Kapowsin, Kapowsin Creek, and Ohop Creek can fall under shoreline and critical-area rules, and about half of the lake's shorelands are privately owned, so title and survey review come before marketing any water access. Confirm school assignment by address; Kapowsin Elementary sits at 10412 264th Street East.",
+    },
+    communityOrgs: [
+      {
+        name: "Washington DNR — Lake Kapowsin Aquatic Reserve",
+        url: "https://dnr.wa.gov/aquatic-reserves/lake-kapowsin-aquatic-reserve",
+        context: "512-acre lake designated in 2016 as DNR's first freshwater aquatic reserve, covering about 475 acres of state-owned aquatic land.",
+      },
+      {
+        name: "Washington Department of Fish & Wildlife — Lake Kapowsin",
+        url: "https://wdfw.wa.gov/places-to-go/water-access-sites/lake-kapowsin-437",
+        context: "Year-round public water access with one concrete boat ramp, a boarding float, parking, and a restroom; no camping.",
+      },
+      {
+        name: "Kapowsin Elementary — Bethel School District",
+        url: "https://kes.bethelsd.org/welcome/about-us",
+        context: "Bethel School District elementary at 10412 264th Street East — confirm every school assignment by address with the district's maps.",
+      },
+      {
+        name: "Pierce County — Graham Community Plan",
+        url: "https://www.piercecountywa.gov/939/Graham",
+        context: "County community plan, adopted in 2006, that covers Graham, Elk Plain, Kapowsin, Thrift, and Rocky Ridge.",
+      },
+      {
+        name: "Pierce County Planning & Public Works",
+        url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
+        context: "Permits, site development, zoning, and shoreline permits for unincorporated Kapowsin parcels.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records for Kapowsin parcels.",
+      },
+    ],
+    thoroughfares: [
+      "Orting-Kapowsin Hwy E",
+      "Kapowsin Hwy E",
+      "Orville Rd E",
+      "304th St E",
+      "264th St E",
+      "224th St E",
+      "Meridian Ave E (SR-161)",
+      "Mountain Hwy E (SR-7)",
+    ],
+    landmarks: [
+      "Lake Kapowsin",
+      "Lake Kapowsin Aquatic Reserve",
+      "WDFW Lake Kapowsin water access",
+      "Kapowsin Elementary",
+      "Kapowsin Rural Neighborhood Center",
+      "Kapowsin Creek",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Kapowsin through Orting on the Orting-Kapowsin Highway, or from Meridian (SR-161) and Mountain Highway (SR-7) via 304th Street E and Kapowsin Highway E. Long rural drives, gravel approaches, and limited curb space change showing and photography logistics, so we plan each parcel's schedule around access and daylight.",
+    adjacent: [
+      {
+        name: "Graham (City)",
+        citySlug: "graham",
+        blurb: "Parent hub — acreage, wells and septic, and unincorporated Pierce County permitting across the wider Graham plan area.",
+      },
+      {
+        name: "The Country",
+        citySlug: "graham",
+        neighborhoodSlug: "the-country",
+        blurb: "Graham's covenant community of mostly 1+ acre lots east of Meridian — HOA and CC&R rules instead of open rural parcels.",
+      },
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "Plateau shopping and service corridor up Meridian — city services and denser plats when rural upkeep is not the fit.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley city to the north — downtown, South Hill, and city-utility neighborhoods for buyers trading land for convenience.",
+      },
+      {
+        name: "Buckley",
+        citySlug: "buckley",
+        blurb: "Foothills city with Elk Run and Elk Heights HOA plats and White River schools — another Rainier-side comparison set.",
       },
     ],
     reviews: [],
