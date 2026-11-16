@@ -53,6 +53,7 @@ import { pantherLakeDiscover } from "./panther-lake";
 import { westHillDiscover } from "./west-hill";
 import { lakeMeridianDiscover } from "./lake-meridian";
 import { downtownAuburnDiscover } from "./downtown-auburn";
+import { westHillAuburnDiscover } from "./west-hill-auburn";
 import { lakelandHillsDiscover } from "./lakeland-hills";
 import { leaHillDiscover } from "./lea-hill";
 import { skyIslandDiscover } from "./sky-island";
@@ -122,6 +123,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [westHillDiscover.slug]: westHillDiscover,
   [lakeMeridianDiscover.slug]: lakeMeridianDiscover,
   [downtownAuburnDiscover.slug]: downtownAuburnDiscover,
+  [westHillAuburnDiscover.slug]: westHillAuburnDiscover,
   [lakelandHillsDiscover.slug]: lakelandHillsDiscover,
   [leaHillDiscover.slug]: leaHillDiscover,
   [skyIslandDiscover.slug]: skyIslandDiscover,
