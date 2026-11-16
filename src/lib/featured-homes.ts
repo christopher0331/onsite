@@ -1,4 +1,5 @@
 import { getListingByMlsNumber } from "@/lib/listing-fetch";
+import { displaySaleDate, formatFeedDate } from "@/lib/listing-market";
 
 /**
  * MLS numbers for /featured-homes/[slug]. Status, price, and close date are
@@ -29,19 +30,13 @@ type FeedListing = {
   listPrice?: number | string | null;
   soldPrice?: number | string | null;
   soldDate?: string | null;
+  raw?: Record<string, unknown> | null;
 };
 
 function money(v: number | string | null | undefined): string | null {
   const n = typeof v === "string" ? Number(v) : v;
   if (!n || !Number.isFinite(n)) return null;
   return `$${Math.round(n).toLocaleString("en-US")}`;
-}
-
-function day(v: string | null | undefined): string | null {
-  if (!v) return null;
-  const d = new Date(v);
-  if (Number.isNaN(d.getTime())) return null;
-  return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 }
 
 /** Live feed state for a featured slug, or null when it should be hidden. */
@@ -56,7 +51,7 @@ export async function getFeaturedHomeLive(slug: string): Promise<FeaturedHomeLiv
       mlsNumber: l.mlsNumber,
       status: "Sold",
       price: money(l.soldPrice) ?? money(l.listPrice),
-      closedOn: day(l.soldDate),
+      closedOn: formatFeedDate(displaySaleDate(l)),
     };
   }
   if (s === "active" || s === "active under contract" || s === "pending") {
