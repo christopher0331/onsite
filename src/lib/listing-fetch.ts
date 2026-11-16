@@ -15,6 +15,11 @@ import {
   type OnsiteListing,
   type OnsiteListingScope,
 } from "@/lib/onsite-listings";
+import {
+  applyFreeTextLocation,
+  includeAddressHistoryStatuses,
+  isHouseNumberSearch,
+} from "@/lib/address-search";
 import { enrichListing, enrichListingsResponse, repliersListingsUrl } from "@/lib/repliers-enrich";
 
 const REPLIERS_REVALIDATE = 300;
@@ -321,9 +326,8 @@ export async function queryPublicListingsPage(opts: {
   });
   applyStatus(params, status);
   if (opts.city) {
-    const q = opts.city.trim();
-    if (/^\d{5}$/.test(q)) params.set("zip", q);
-    else params.set("city", q);
+    applyFreeTextLocation(params, opts.city);
+    if (isHouseNumberSearch(params)) includeAddressHistoryStatuses(params);
   } else {
     applyEastPierceCityFilters(params);
   }
