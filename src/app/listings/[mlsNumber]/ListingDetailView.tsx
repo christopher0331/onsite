@@ -6,6 +6,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import dynamic from "next/dynamic";
 import { getListingStatusBadge } from "@/lib/listing-status";
+import { displayDaysOnMarket, displaySaleDate, formatFeedDate } from "@/lib/listing-market";
 import { getCitySlugByName } from "@/lib/service-areas/data";
 import { formatStreetAddress } from "@/lib/format-address";
 import { formatBathroomCount, formatBathroomDetail } from "@/lib/format-bathrooms";
@@ -342,7 +343,9 @@ export default function ListingDetailView({
   if (listing.lot?.source) detailRows.push({ label: "Lot Source", value: listing.lot.source });
   if (det.landscapeFeatures) detailRows.push({ label: "Landscaping", value: det.landscapeFeatures });
   if (det.extras) detailRows.push({ label: "Extras", value: det.extras });
-  detailRows.push({ label: "Days on Market", value: listing.simpleDaysOnMarket ?? listing.daysOnMarket });
+  const marketDays = displayDaysOnMarket(listing, new Date(now));
+  const saleDateText = formatFeedDate(displaySaleDate(listing));
+  if (marketDays != null) detailRows.push({ label: "Days on Market", value: marketDays });
   if (listing.listDate) detailRows.push({ label: "Listed", value: formatDate(listing.listDate) });
   if (listing.originalPrice && listing.originalPrice !== listing.listPrice) {
     detailRows.push({ label: "Original Price", value: formatPrice(listing.originalPrice) });
@@ -400,9 +403,9 @@ export default function ListingDetailView({
               </p>
             );
           })()}
-          {listing.soldDate && (
+          {saleDateText && (
             <p className="mt-2 text-[13px] text-white/60">
-              Sale date: {new Date(listing.soldDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+              Sale date: {saleDateText}
             </p>
           )}
         </>
@@ -451,10 +454,10 @@ export default function ListingDetailView({
           <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">Est. Value</p>
         </div>
       )}
-      {(listing.simpleDaysOnMarket ?? listing.daysOnMarket) > 0 && (
+      {marketDays != null && marketDays > 0 && (
         <div>
           <p className="font-serif text-[1.8rem] font-light text-white">
-            {listing.simpleDaysOnMarket ?? listing.daysOnMarket}
+            {marketDays}
           </p>
           <p className="text-[11px] uppercase tracking-[0.25em] text-white/80">
             {listing.soldPrice ? "Days on Market" : "Days Listed"}

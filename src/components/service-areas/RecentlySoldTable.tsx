@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { SoldListingRow } from "@/lib/service-area-market";
 import { formatStreetAddressOrUnavailable } from "@/lib/format-address";
+import { displayDaysOnMarket, displaySaleDate, formatFeedDate } from "@/lib/listing-market";
 
 type Props = {
   cityName: string;
@@ -11,17 +12,6 @@ type Props = {
 function formatPrice(n: number | null | undefined) {
   if (!n || Number.isNaN(n)) return "—";
   return "$" + n.toLocaleString("en-US");
-}
-
-function formatDate(iso: string | null | undefined) {
-  if (!iso) return "—";
-  const d = new Date(iso);
-  if (Number.isNaN(d.getTime())) return "—";
-  return d.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
 }
 
 function pricePerSqft(listing: SoldListingRow) {
@@ -100,12 +90,10 @@ export default function RecentlySoldTable({
                       {pricePerSqft(listing)}
                     </td>
                     <td className="px-5 py-3.5 text-charcoal/85">
-                      {listing.daysOnMarket ??
-                        listing.simpleDaysOnMarket ??
-                        "—"}
+                      {displayDaysOnMarket(listing) ?? "—"}
                     </td>
                     <td className="px-5 py-3.5 text-charcoal/85">
-                      {formatDate(listing.soldDate)}
+                      {formatFeedDate(displaySaleDate(listing)) ?? "—"}
                     </td>
                   </tr>
                 );
