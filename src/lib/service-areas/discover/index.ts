@@ -29,6 +29,7 @@ import { eastValleyEdgeDiscover } from "./east-valley-edge";
 import { elkRunDiscover } from "./elk-run";
 import { elkHeightsDiscover } from "./elk-heights";
 import { theCountryDiscover } from "./the-country";
+import { kapowsinDiscover } from "./kapowsin";
 import { ballardDiscover } from "./ballard";
 import { northEndDiscover } from "./north-end";
 import { hilltopDiscover } from "./hilltop";
@@ -51,6 +52,8 @@ import { eastHillDiscover } from "./east-hill";
 import { pantherLakeDiscover } from "./panther-lake";
 import { westHillDiscover } from "./west-hill";
 import { lakeMeridianDiscover } from "./lake-meridian";
+import { downtownAuburnDiscover } from "./downtown-auburn";
+import { westHillAuburnDiscover } from "./west-hill-auburn";
 import { lakelandHillsDiscover } from "./lakeland-hills";
 import { leaHillDiscover } from "./lea-hill";
 import { skyIslandDiscover } from "./sky-island";
@@ -60,6 +63,9 @@ import { quietWaterDiscover } from "./quiet-water";
 import { redondoDiscover } from "./redondo";
 import { twinLakesDiscover } from "./twin-lakes";
 import { proctorDistrictDiscover } from "./proctor-district";
+import { northeastTacomaDiscover } from "./northeast-tacoma";
+
+import { mckinleyDiscover } from "./mckinley";
 
 const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [lakeTappsDiscover.slug]: lakeTappsDiscover,
@@ -92,9 +98,11 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [elkRunDiscover.slug]: elkRunDiscover,
   [elkHeightsDiscover.slug]: elkHeightsDiscover,
   [theCountryDiscover.slug]: theCountryDiscover,
+  [kapowsinDiscover.slug]: kapowsinDiscover,
   [ballardDiscover.slug]: ballardDiscover,
   [northEndDiscover.slug]: northEndDiscover,
   [hilltopDiscover.slug]: hilltopDiscover,
+  [mckinleyDiscover.slug]: mckinleyDiscover,
   [fernHillDiscover.slug]: fernHillDiscover,
   [lincolnDistrictDiscover.slug]: lincolnDistrictDiscover,
   [stadiumDistrictDiscover.slug]: stadiumDistrictDiscover,
@@ -114,6 +122,8 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [pantherLakeDiscover.slug]: pantherLakeDiscover,
   [westHillDiscover.slug]: westHillDiscover,
   [lakeMeridianDiscover.slug]: lakeMeridianDiscover,
+  [downtownAuburnDiscover.slug]: downtownAuburnDiscover,
+  [westHillAuburnDiscover.slug]: westHillAuburnDiscover,
   [lakelandHillsDiscover.slug]: lakelandHillsDiscover,
   [leaHillDiscover.slug]: leaHillDiscover,
   [skyIslandDiscover.slug]: skyIslandDiscover,
@@ -123,6 +133,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [redondoDiscover.slug]: redondoDiscover,
   [twinLakesDiscover.slug]: twinLakesDiscover,
   [proctorDistrictDiscover.slug]: proctorDistrictDiscover,
+  [northeastTacomaDiscover.slug]: northeastTacomaDiscover,
 };
 
 export function getServiceAreaDiscover(

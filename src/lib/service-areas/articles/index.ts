@@ -29,6 +29,7 @@ import { eastValleyEdgeArticle } from "./east-valley-edge";
 import { elkRunArticle } from "./elk-run";
 import { elkHeightsArticle } from "./elk-heights";
 import { theCountryArticle } from "./the-country";
+import { kapowsinArticle } from "./kapowsin";
 import { ballardArticle } from "./ballard";
 import { northEndArticle } from "./north-end";
 import { hilltopArticle } from "./hilltop";
@@ -51,6 +52,8 @@ import { eastHillArticle } from "./east-hill";
 import { pantherLakeArticle } from "./panther-lake";
 import { westHillArticle } from "./west-hill";
 import { lakeMeridianArticle } from "./lake-meridian";
+import { downtownAuburnArticle } from "./downtown-auburn";
+import { westHillAuburnArticle } from "./west-hill-auburn";
 import { lakelandHillsArticle } from "./lakeland-hills";
 import { leaHillArticle } from "./lea-hill";
 import { skyIslandArticle } from "./sky-island";
@@ -60,6 +63,9 @@ import { quietWaterArticle } from "./quiet-water";
 import { redondoArticle } from "./redondo";
 import { twinLakesArticle } from "./twin-lakes";
 import { proctorDistrictArticle } from "./proctor-district";
+import { northeastTacomaArticle } from "./northeast-tacoma";
+
+import { mckinleyArticle } from "./mckinley";
 
 const ARTICLES: Record<string, ServiceAreaArticle> = {
   [lakeTappsArticle.slug]: lakeTappsArticle,
@@ -92,9 +98,11 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [elkRunArticle.slug]: elkRunArticle,
   [elkHeightsArticle.slug]: elkHeightsArticle,
   [theCountryArticle.slug]: theCountryArticle,
+  [kapowsinArticle.slug]: kapowsinArticle,
   [ballardArticle.slug]: ballardArticle,
   [northEndArticle.slug]: northEndArticle,
   [hilltopArticle.slug]: hilltopArticle,
+  [mckinleyArticle.slug]: mckinleyArticle,
   [fernHillArticle.slug]: fernHillArticle,
   [lincolnDistrictArticle.slug]: lincolnDistrictArticle,
   [stadiumDistrictArticle.slug]: stadiumDistrictArticle,
@@ -114,6 +122,8 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [pantherLakeArticle.slug]: pantherLakeArticle,
   [westHillArticle.slug]: westHillArticle,
   [lakeMeridianArticle.slug]: lakeMeridianArticle,
+  [downtownAuburnArticle.slug]: downtownAuburnArticle,
+  [westHillAuburnArticle.slug]: westHillAuburnArticle,
   [lakelandHillsArticle.slug]: lakelandHillsArticle,
   [leaHillArticle.slug]: leaHillArticle,
   [skyIslandArticle.slug]: skyIslandArticle,
@@ -123,6 +133,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [redondoArticle.slug]: redondoArticle,
   [twinLakesArticle.slug]: twinLakesArticle,
   [proctorDistrictArticle.slug]: proctorDistrictArticle,
+  [northeastTacomaArticle.slug]: northeastTacomaArticle,
 };
 
 export function getServiceAreaArticle(

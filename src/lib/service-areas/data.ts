@@ -661,7 +661,7 @@ export const CITIES: City[] = [
     heroIntro:
       "Auburn prices in distinct bands — valley-floor neighborhoods near the Sounder station, established West Hill pockets, and the newer Lea Hill bench above Green River College. We underwrite each band against its own comp pool.",
     activeProjects: 8,
-    neighborhoodDirectory: ["Lea Hill"],
+    neighborhoodDirectory: ["Downtown Auburn", "West Hill", "Lea Hill", "Lakeland Hills"],
     permittingOffice: {
       name: "City of Auburn — Community Development",
       url: "https://www.auburnwa.gov/",
@@ -834,7 +834,7 @@ export const CITIES: City[] = [
     heroIntro:
       "Graham is acreage country — unincorporated Pierce County where lot size, outbuildings, and well/septic standing drive value as much as finished square footage. Our comp models here are parcel-first, not house-first.",
     activeProjects: 6,
-    neighborhoodDirectory: ["The Country"],
+    neighborhoodDirectory: ["The Country", "Kapowsin"],
     permittingOffice: {
       name: "Pierce County Planning & Public Works",
       url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
@@ -924,10 +924,11 @@ export const CITIES: City[] = [
       "/blog/modern-home-driveway-at-sunset.webp",
     heroEyebrow: "Service Area · Tacoma Core",
     heroIntro:
-      "Tacoma is a block-by-block market with unique pricing behavior between the North End, Proctor, Stadium, and West Slope corridors. We underwrite by micro-location, not city average.",
+      "Tacoma is a block-by-block market with unique pricing behavior between the North End, Northeast Tacoma, Proctor, Stadium, and West Slope corridors. We underwrite by micro-location, not city average.",
     activeProjects: 11,
     neighborhoodDirectory: [
       "North End",
+      "Northeast Tacoma",
       "Proctor District",
       "Stadium District",
       "West Slope",
@@ -935,6 +936,7 @@ export const CITIES: City[] = [
       "Hilltop",
       "Lincoln District",
       "Fern Hill",
+      "McKinley",
     ],
     permittingOffice: {
       name: "City of Tacoma Planning & Development Services",
@@ -968,7 +970,7 @@ export const CITIES: City[] = [
       {
         name: "Tacoma Public Library",
         url: "https://www.tacomalibrary.org/",
-        context: "City library system with branches in the North End, Proctor, and South Tacoma.",
+        context: "City library system with branches in the North End, Proctor, South Tacoma, Fern Hill, and Northeast Tacoma.",
       },
       {
         name: "Pierce County Assessor-Treasurer",
@@ -1269,6 +1271,74 @@ export const CITIES: City[] = [
 ];
 
 export const NEIGHBORHOODS: Neighborhood[] = [
+  {
+    slug: "mckinley",
+    citySlug: "tacoma",
+    name: "McKinley",
+    // No ZIP-wide neighborhood boundary is asserted; existing listings fallback shows Tacoma inventory.
+    zipCodes: [],
+    // McKinley Park location anchor, not a neighborhood boundary (USGS/TopoZone).
+    // https://www.topozone.com/washington/pierce-wa/park/mckinley-park/
+    geo: {
+      lat: 47.2350993,
+      lng: -122.4198454
+    },
+    heroImage: "/blog/craftsman-home-in-evergreen-trees.webp",
+    heroEyebrow: "Tacoma · McKinley",
+    introCopy: "Explore McKinley with wooded paths at McKinley Park as a starting point. Compare individual streets, property condition, drainage, and permit history before buying or selling. Home imagery is illustrative, not a documented McKinley property.",
+    characteristics: {
+      medianHomeYear: "Verify the individual home in county records",
+      architecturalStyles: [
+        "Confirm the style and alterations during a property visit"
+      ],
+      typicalLotSize: "Confirm recorded lot dimensions with the Pierce County Assessor-Treasurer",
+      notes: "A nearby park does not establish buildability. Confirm parcel-specific drainage, critical-area constraints, title, and permit history before budgeting changes."
+    },
+    communityOrgs: [
+      {
+        name: "Parks Tacoma — McKinley Park",
+        url: "https://www.parkstacoma.gov/place/mckinley-park/",
+        context: "Wooded pathways and playground equipment at 907 Upper Park Drive; leashed dogs only."
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Recorded lot dimensions, assessed values, and property taxes."
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Verify current school assignment using the property address."
+      }
+    ],
+    thoroughfares: [
+      "Upper Park Drive"
+    ],
+    landmarks: [
+      "McKinley Park"
+    ],
+    dispatchCopy: "Plan a property-specific visit with OnSite. Check the actual route, street access, and parking at the times you expect to use them; do not assume a fixed commute from a neighborhood name.",
+    adjacent: [
+      {
+        name: "Lincoln District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "lincoln-district",
+        blurb: "Compare this Tacoma neighborhood separately; its homes are not interchangeable pricing comparables."
+      },
+      {
+        name: "Fern Hill",
+        citySlug: "tacoma",
+        neighborhoodSlug: "fern-hill",
+        blurb: "Explore another Tacoma option while keeping street-level pricing and property condition separate."
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Return to the city guide to compare Tacoma neighborhoods."
+      }
+    ],
+    reviews: []
+  },
   {
     slug: "south-hill",
     citySlug: "puyallup",
@@ -3061,6 +3131,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Parent hub — acreage, wells and septic, and unincorporated Pierce County permitting on the same desk.",
       },
       {
+        name: "Kapowsin",
+        citySlug: "graham",
+        neighborhoodSlug: "kapowsin",
+        blurb: "Unincorporated lake community to the south beside Lake Kapowsin — open rural parcels without The Country's covenants.",
+      },
+      {
         name: "South Hill",
         citySlug: "puyallup",
         neighborhoodSlug: "south-hill",
@@ -3082,6 +3158,112 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Bonney Lake",
         citySlug: "bonney-lake",
         blurb: "Plateau neighbor via SR-410 — Tehaleh and lake-adjacent comparison set.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "kapowsin",
+    citySlug: "graham",
+    name: "Kapowsin",
+    // No ZIP filter: Kapowsin addresses commonly use Graham mail (Kapowsin
+    // Elementary is 10412 264th Street East, Graham, WA 98338), and the Graham
+    // ZIP also covers the rest of the Graham plan area. The listings block
+    // therefore shows Graham-wide inventory with the existing scope note.
+    zipCodes: [],
+    // Geo anchor: Kapowsin place node, OpenStreetMap Nominatim. Not a boundary.
+    geo: { lat: 46.9845951, lng: -122.2358616 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/680fe8304415e6b356d95497_1.jpg",
+    heroEyebrow: "Graham · Kapowsin",
+    introCopy:
+      "Kapowsin is an unincorporated community in Pierce County's Graham Community Plan area, beside Lake Kapowsin — the state's first freshwater aquatic reserve — where wells, septic, shoreline rules, and Bethel School District pathways shape every parcel.",
+    characteristics: {
+      medianHomeYear: "Varies by parcel — confirm with the Pierce County Assessor-Treasurer",
+      architecturalStyles: ["Rural single-family homes on acreage (era and style vary by parcel)"],
+      typicalLotSize: "Varies by parcel — confirm with the Pierce County Assessor-Treasurer",
+      notes:
+        "Kapowsin is unincorporated, so zoning, permits, and site development run through Pierce County Planning & Public Works. Rural parcels commonly rely on private wells and septic — pull well logs and septic records early. Land near Lake Kapowsin, Kapowsin Creek, and Ohop Creek can fall under shoreline and critical-area rules, and about half of the lake's shorelands are privately owned, so title and survey review come before marketing any water access. Confirm school assignment by address; Kapowsin Elementary sits at 10412 264th Street East.",
+    },
+    communityOrgs: [
+      {
+        name: "Washington DNR — Lake Kapowsin Aquatic Reserve",
+        url: "https://dnr.wa.gov/aquatic-reserves/lake-kapowsin-aquatic-reserve",
+        context: "512-acre lake designated in 2016 as DNR's first freshwater aquatic reserve, covering about 475 acres of state-owned aquatic land.",
+      },
+      {
+        name: "Washington Department of Fish & Wildlife — Lake Kapowsin",
+        url: "https://wdfw.wa.gov/places-to-go/water-access-sites/lake-kapowsin-437",
+        context: "Year-round public water access with one concrete boat ramp, a boarding float, parking, and a restroom; no camping.",
+      },
+      {
+        name: "Kapowsin Elementary — Bethel School District",
+        url: "https://kes.bethelsd.org/welcome/about-us",
+        context: "Bethel School District elementary at 10412 264th Street East — confirm every school assignment by address with the district's maps.",
+      },
+      {
+        name: "Pierce County — Graham Community Plan",
+        url: "https://www.piercecountywa.gov/939/Graham",
+        context: "County community plan, adopted in 2006, that covers Graham, Elk Plain, Kapowsin, Thrift, and Rocky Ridge.",
+      },
+      {
+        name: "Pierce County Planning & Public Works",
+        url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
+        context: "Permits, site development, zoning, and shoreline permits for unincorporated Kapowsin parcels.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records for Kapowsin parcels.",
+      },
+    ],
+    thoroughfares: [
+      "Orting-Kapowsin Hwy E",
+      "Kapowsin Hwy E",
+      "Orville Rd E",
+      "304th St E",
+      "264th St E",
+      "224th St E",
+      "Meridian Ave E (SR-161)",
+      "Mountain Hwy E (SR-7)",
+    ],
+    landmarks: [
+      "Lake Kapowsin",
+      "Lake Kapowsin Aquatic Reserve",
+      "WDFW Lake Kapowsin water access",
+      "Kapowsin Elementary",
+      "Kapowsin Rural Neighborhood Center",
+      "Kapowsin Creek",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Kapowsin through Orting on the Orting-Kapowsin Highway, or from Meridian (SR-161) and Mountain Highway (SR-7) via 304th Street E and Kapowsin Highway E. Long rural drives, gravel approaches, and limited curb space change showing and photography logistics, so we plan each parcel's schedule around access and daylight.",
+    adjacent: [
+      {
+        name: "Graham (City)",
+        citySlug: "graham",
+        blurb: "Parent hub — acreage, wells and septic, and unincorporated Pierce County permitting across the wider Graham plan area.",
+      },
+      {
+        name: "The Country",
+        citySlug: "graham",
+        neighborhoodSlug: "the-country",
+        blurb: "Graham's covenant community of mostly 1+ acre lots east of Meridian — HOA and CC&R rules instead of open rural parcels.",
+      },
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "Plateau shopping and service corridor up Meridian — city services and denser plats when rural upkeep is not the fit.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley city to the north — downtown, South Hill, and city-utility neighborhoods for buyers trading land for convenience.",
+      },
+      {
+        name: "Buckley",
+        citySlug: "buckley",
+        blurb: "Foothills city with Elk Run and Elk Heights HOA plats and White River schools — another Rainier-side comparison set.",
       },
     ],
     reviews: [],
@@ -3237,6 +3419,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "tacoma",
         neighborhoodSlug: "west-slope",
         blurb: "Narrows-facing terraces and Titlow / Narrowmoor living — view lots and SR-16 commute logic west of the North End grid.",
+      },
+      {
+        name: "Northeast Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "northeast-tacoma",
+        blurb: "East-of-Commencement-Bay district in ZIP 98422 — Norpoint Park and Marine View Drive (SR-509) living, a different micro-market than the North End grid.",
       },
       {
         name: "Tacoma (City)",
@@ -3530,6 +3718,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "From our Lake Tapps base we reach the Lincoln District via SR-410 → SR-167 → I-5 and the South 38th Street exit, typically inside a 30–40 minute window for inspections and twilight photography. School-day traffic around Lincoln High and business-district parking change curb availability on showing days — we pad schedules accordingly.",
     adjacent: [
       {
+        name: "McKinley",
+        citySlug: "tacoma",
+        neighborhoodSlug: "mckinley",
+        blurb: "Compare McKinley Park access and parcel-specific diligence in another Tacoma neighborhood; price each area separately.",
+      },
+      {
         name: "South Tacoma",
         citySlug: "tacoma",
         neighborhoodSlug: "south-tacoma",
@@ -3718,6 +3912,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     dispatchCopy:
       "From our Lake Tapps base we reach Fern Hill via SR-410 → SR-167 → I-5 and the South 84th / Pacific Avenue approaches, typically inside a 30–40 minute window for inspections and twilight photography. School pickup near Fern Hill Elementary and Pacific Avenue traffic change curb availability on weekday afternoons — we schedule showings around both.",
     adjacent: [
+      {
+        name: "McKinley",
+        citySlug: "tacoma",
+        neighborhoodSlug: "mckinley",
+        blurb: "Compare McKinley Park access and parcel-specific diligence in another Tacoma neighborhood; price each area separately.",
+      },
       {
         name: "South Tacoma",
         citySlug: "tacoma",
@@ -4629,6 +4829,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         neighborhoodSlug: "redondo",
         blurb: "Pier-and-boardwalk Sound-edge sibling — Redondo waterfront character when Dash Point bluff living is not the product.",
       },
+      {
+        name: "Northeast Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "northeast-tacoma",
+        blurb: "Tacoma's east-of-Commencement-Bay district in ZIP 98422 — the closest Tacoma spoke to Dash Point, with Norpoint Park and Marine View Drive access.",
+      },
     ],
     reviews: [
       {
@@ -4688,6 +4894,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     dispatchCopy:
       "From our Lake Tapps base we reach Downtown Kent via SR-410 → SR-167 into Central Avenue / Meeker corridors, typically inside a 25–40 minute window for inspections and twilight photography. Sounder parking, Kent Station events, and freight traffic on the valley floor can change showing curb availability — we pad schedules accordingly.",
     adjacent: [
+      {
+        name: "Downtown Auburn",
+        citySlug: "auburn",
+        neighborhoodSlug: "downtown-auburn",
+        blurb: "The next Sounder stop south — Auburn's Main Street core, compared on its own comps.",
+      },
       {
         name: "Kent (City)",
         citySlug: "kent",
@@ -5100,6 +5312,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Valley and Lea Hill inventory when West Hill pricing or Kent School District pathways stretch the search.",
       },
       {
+        name: "West Hill (Auburn)",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "A different West Hill, on the hillside west of Auburn's Green River valley — not the same neighborhood as Kent's West Hill.",
+      },
+      {
         name: "Tacoma",
         citySlug: "tacoma",
         blurb: "Pierce County urban-residential alternative — North End and Stadium District fabric for cross-county shoppers.",
@@ -5289,6 +5507,18 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "From our Lake Tapps base we reach Auburn's Lea Hill via SR-410 → SR-167 / SR-18 into Lea Hill Road and SE 320th corridors, typically inside a 20–35 minute window for inspections and twilight photography. Campus class-change traffic near Green River College and school pickup can change showing curb availability — we pad schedules accordingly.",
     adjacent: [
       {
+        name: "Downtown Auburn",
+        citySlug: "auburn",
+        neighborhoodSlug: "downtown-auburn",
+        blurb: "Auburn's historic Main Street core and Sounder stop — a common cross-shop when rail access matters more than lot size.",
+      },
+      {
+        name: "West Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "Auburn's other hillside band, west of the Green River valley — a common in-city comparison set across from the Lea Hill bench.",
+      },
+      {
         name: "Auburn (City)",
         citySlug: "auburn",
         blurb: "Parent hub — Sounder downtown, West Hill, and Lea Hill micro-markets on the same south King desk.",
@@ -5421,6 +5651,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       "Lakeland Hills is one of the closest Auburn neighborhoods to our Lake Tapps base, so inspections, walkthroughs, and twilight photography fit easily into the same day. School pickup near Lakeland Hills Elementary on Evergreen Way SE changes curb availability on weekday afternoons — we schedule showings around it.",
     adjacent: [
       {
+        name: "Downtown Auburn",
+        citySlug: "auburn",
+        neighborhoodSlug: "downtown-auburn",
+        blurb: "Auburn's historic Main Street core and Sounder stop, on the King County side of the city.",
+      },
+      {
         name: "Lake Tapps",
         citySlug: "lake-tapps",
         blurb: "Waterfront and lake-access homes just south — OnSite's home base and the most common cross-shop for Lakeland Hills buyers.",
@@ -5432,6 +5668,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Residential bench above Green River College in the same 98092 ZIP, on the King County side of Auburn.",
       },
       {
+        name: "West Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "Auburn's hillside neighborhood west of the Green River valley, on the King County side of the city.",
+      },
+      {
         name: "Sumner",
         citySlug: "sumner",
         blurb: "Valley town to the southwest with its own downtown and Sounder station.",
@@ -5440,6 +5682,224 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Auburn (City)",
         citySlug: "auburn",
         blurb: "Parent hub — valley-floor, West Hill, Lea Hill, and Lakeland Hills pricing bands on one desk.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "downtown-auburn",
+    citySlug: "auburn",
+    name: "Downtown Auburn",
+    // No ZIP-wide boundary is asserted: Downtown Auburn addresses span 98001
+    // (City Hall, Auburn Station) and 98002 (Auburn High School, Les Gove Park),
+    // and both ZIPs reach well beyond downtown. The existing listings fallback
+    // therefore shows Auburn-wide inventory, as on the McKinley page.
+    zipCodes: [],
+    // Auburn Station location anchor (Main St & B St SW), not a neighborhood boundary.
+    // https://en.wikipedia.org/wiki/Auburn_station_(Sound_Transit)
+    geo: { lat: 47.30667, lng: -122.23222 },
+    heroImage: "/blog/family-walking-past-hedge-lined-home.webp",
+    heroEyebrow: "Auburn · Downtown",
+    introCopy:
+      "Downtown Auburn is the city's historic Main Street core and its Sounder stop — Auburn Station, City Hall, the Postmark Center for the Arts, and Auburn High School all sit within a few blocks of Main Street. Compare each block and building on its own comps.",
+    characteristics: {
+      medianHomeYear: "Varies by block — verify the individual building in King County Assessor records",
+      architecturalStyles: [
+        "Older single-family homes on side streets",
+        "Mixed-use buildings with ground-floor retail",
+        "Apartments and condominiums",
+      ],
+      typicalLotSize: "Varies by parcel — confirm recorded lot dimensions with the King County Assessor",
+      notes:
+        "The City of Auburn describes the downtown core as primarily mixed-use and medical office development, alongside single-family residential and manufacturing and industrial uses. Properties in the heart of downtown carry the Downtown Urban Center (DUC) zoning designation, and the 2024 Downtown Subarea Plan replaced the 2001 plan. Confirm the parcel's zoning district, FEMA flood status, and any condo or HOA documents before pricing or budgeting a change.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Auburn — Downtown Urban Center",
+        url: "https://www.auburnwa.gov/city_hall/community_development/zoning_land_use/downtown_urban_center",
+        context: "DUC zoning, the 2024 Downtown Subarea Plan and Planned Action, downtown parking permits, and current city projects.",
+      },
+      {
+        name: "Sound Transit — Auburn Station",
+        url: "https://www.soundtransit.org/ride-with-us/stops-stations/auburn-station",
+        context: "Sounder S Line station at 110 2nd St SW with bus bays at the Auburn Transit Center and a commuter parking garage.",
+      },
+      {
+        name: "Auburn School District",
+        url: "https://www.auburn.wednet.edu/our-district/about-us/attendance-area-maps",
+        context: "Auburn High School is at 711 East Main Street; confirm every school assignment by address with the district's attendance maps.",
+      },
+      {
+        name: "City of Auburn — Les Gove Park",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/les_gove",
+        context: "20.86-acre park campus at 910 9th St SE with the Auburn Community & Event Center, Auburn Library, White River Valley Museum, and a half-mile looped trail.",
+      },
+      {
+        name: "King County Assessor",
+        url: "https://kingcounty.gov/en/dept/assessor",
+        context: "Assessed value, property taxes, and recorded lot details for Downtown Auburn parcels.",
+      },
+    ],
+    thoroughfares: ["Main St", "Auburn Way S", "Auburn Ave", "A St SW", "C St SW", "SR-18", "SR-167"],
+    landmarks: [
+      "Auburn Station (Sounder S Line)",
+      "Auburn City Hall (25 W Main St)",
+      "Postmark Center for the Arts",
+      "Auburn High School",
+      "Les Gove Park",
+      "Interurban Trail",
+    ],
+    dispatchCopy:
+      "Downtown Auburn is a short drive from our Lake Tapps base. Sounder commuter parking near Auburn Station, City permit parking downtown, and school traffic near Auburn High School on East Main Street can change curb availability, so we check parking for each showing and photo session.",
+    adjacent: [
+      {
+        name: "Auburn (City)",
+        citySlug: "auburn",
+        blurb: "Parent hub — compare downtown with West Hill, Lea Hill, and Lakeland Hills pricing bands.",
+      },
+      {
+        name: "West Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "west-hill-auburn",
+        blurb: "Auburn's hillside neighborhood west of the valley — Lewis Lake Nature Park and Centennial Viewpoint comps when a downtown block is not the fit.",
+      },
+      {
+        name: "Lea Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "lea-hill",
+        blurb: "Residential bench above Green River College in 98092 — a common cross-shop when buyers want more space than a downtown block.",
+      },
+      {
+        name: "Lakeland Hills",
+        citySlug: "auburn",
+        neighborhoodSlug: "lakeland-hills",
+        blurb: "South Auburn's planned hillside community on the Pierce County side, near Lake Tapps; HOA plats rather than a Main Street core.",
+      },
+      {
+        name: "Downtown Kent",
+        citySlug: "kent",
+        neighborhoodSlug: "downtown-kent",
+        blurb: "The next Sounder stop north — another valley-floor civic core to compare for rail commuters.",
+      },
+      {
+        name: "Downtown Sumner",
+        citySlug: "sumner",
+        neighborhoodSlug: "downtown-sumner",
+        blurb: "The next Sounder stop south, in Pierce County — a smaller historic downtown to compare against Auburn's.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "west-hill-auburn",
+    citySlug: "auburn",
+    name: "West Hill",
+    // No ZIP-wide boundary is asserted: 98001 is the usual mail code on West Hill
+    // (Lewis Lake Nature Park, Evergreen Heights Elementary, Mountain View Cemetery)
+    // and also covers addresses outside the City's West Hill neighborhood area.
+    // The existing listings fallback therefore shows Auburn-wide inventory,
+    // as on the Downtown Auburn and McKinley pages.
+    zipCodes: [],
+    // Geo anchor: Lewis Lake Nature Park, 899 W Street NW (OpenStreetMap Nominatim).
+    // Not a boundary.
+    geo: { lat: 47.3149662, lng: -122.2618456 },
+    heroImage: "/blog/craftsman-home-in-evergreen-trees.webp",
+    heroEyebrow: "Auburn · West Hill",
+    introCopy:
+      "Auburn's West Hill is a City of Auburn neighborhood area west of the Green River valley — Lewis Lake Nature Park, Jornada Park, Gaines Park, Centennial Viewpoint, and Mountain View Cemetery, where street-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "Varies by plat — confirm with the King County Assessor",
+      architecturalStyles: ["Single-family residential (era and style vary by street)"],
+      typicalLotSize: "Varies by plat — confirm with the King County Assessor",
+      notes:
+        "ZIP 98001 is the usual mail code and is not the same as the City's West Hill neighborhood area — confirm city jurisdiction before assuming Auburn permits or utilities. Price West Hill against West Hill, not an Auburn average, and not against Kent's West Hill. Selected plats carry HOA rules — pull dues and CC&Rs early when they apply. Confirm school assignment by address; Evergreen Heights Elementary sits at 5602 South 316th Street.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Auburn — Lewis Lake Nature Park",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/lewis_lake_nature_park",
+        context: "9.25-acre park at 899 W Street NW, on the West Hill, completed in 2020, with an approximate 2-acre lake and a quarter-mile gravel loop trail.",
+      },
+      {
+        name: "City of Auburn — Jornada Park",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/jornada_park",
+        context: "1.89-acre neighborhood park at 1433 U Court NW, dedicated in 2004, with a play structure, climbing wall, and a quarter-mile paved trail.",
+      },
+      {
+        name: "City of Auburn — Centennial Viewpoint",
+        url: "https://www.auburnwa.gov/city_hall/parks_arts_recreation/parks_trails/centennial_viewpoint",
+        context: "0.7-acre scenic overlook at 402 Mountain View Drive, dedicated in 1991, across from Mountain View Cemetery.",
+      },
+      {
+        name: "Auburn School District",
+        url: "https://www.auburn.wednet.edu/our-district/about-us/attendance-area-maps",
+        context: "Evergreen Heights Elementary is at 5602 South 316th Street — confirm every school assignment by address with the district's attendance maps.",
+      },
+      {
+        name: "City of Auburn — Community Development",
+        url: "https://www.auburnwa.gov/city_hall/community_development",
+        context: "Permits, zoning, and ADU or remodel questions for parcels inside the city.",
+      },
+      {
+        name: "King County Assessor",
+        url: "https://kingcounty.gov/en/dept/assessor",
+        context: "Assessed value, property taxes, and recorded lot details for West Hill parcels.",
+      },
+    ],
+    thoroughfares: [
+      "15th St NW",
+      "West Valley Hwy",
+      "Terrace Dr",
+      "W St NW",
+      "Mountain View Dr",
+      "Pike St NW",
+      "S 316th St",
+      "U St NW",
+    ],
+    landmarks: [
+      "Lewis Lake Nature Park",
+      "Jornada Park",
+      "Gaines Park",
+      "Centennial Viewpoint",
+      "Mountain View Cemetery",
+      "Evergreen Heights Elementary",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Auburn's West Hill via SR-410 → SR-167 to the 15th Street NW exit, then West Valley Highway and Terrace Drive up the hill. School pickup near Evergreen Heights on South 316th Street can change curb availability — we schedule showings around it.",
+    adjacent: [
+      {
+        name: "Downtown Auburn",
+        citySlug: "auburn",
+        neighborhoodSlug: "downtown-auburn",
+        blurb: "Auburn's historic Main Street core and Sounder stop — the usual in-city comparison set down the hill.",
+      },
+      {
+        name: "Lea Hill",
+        citySlug: "auburn",
+        neighborhoodSlug: "lea-hill",
+        blurb: "Auburn's other hillside bench, above Green River College in 98092 — a common cross-shop when campus-adjacent living is the fit.",
+      },
+      {
+        name: "Auburn (City)",
+        citySlug: "auburn",
+        blurb: "Parent hub — Sounder downtown, West Hill, Lea Hill, and Lakeland Hills pricing bands on the same south King desk.",
+      },
+      {
+        name: "Lakeland Hills",
+        citySlug: "auburn",
+        neighborhoodSlug: "lakeland-hills",
+        blurb: "South Auburn's planned hillside community on the Pierce County side of 98092, near Lake Tapps.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor immediately west — Twin Lakes, West Campus, Lakota, and Dash Point comparison set for commute shoppers.",
+      },
+      {
+        name: "West Hill (Kent)",
+        citySlug: "kent",
+        neighborhoodSlug: "west-hill",
+        blurb: "A different West Hill, west of the Green River valley in Kent — not the same neighborhood as Auburn's West Hill.",
       },
     ],
     reviews: [],
@@ -5719,6 +6179,107 @@ export const NEIGHBORHOODS: Neighborhood[] = [
           "Blue Mouse and Wheelock were sold as real daily life, not fluff. School boundaries were confirmed before we listed, and escrow stayed clean.",
       },
     ],
+  },
+
+  {
+    slug: "northeast-tacoma",
+    citySlug: "tacoma",
+    name: "Northeast Tacoma",
+    zipCodes: ["98422"],
+    // Geo anchor: Center at Norpoint / Norpoint Park, 4818 Nassau Ave NE
+    // (OpenStreetMap Nominatim). Not a boundary.
+    geo: { lat: 47.2997, lng: -122.4049 },
+    heroImage:
+      "/blog/modern-home-exterior-at-dusk.webp",
+    heroEyebrow: "Tacoma · Northeast Tacoma",
+    introCopy:
+      "Northeast Tacoma is the City of Tacoma Neighborhood Council district on the east side of Commencement Bay in ZIP 98422 — Norpoint Park, the Center at Norpoint, Alderwood Park, the Kobetich Library, and Marine View Drive (SR-509) access where street-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "Varies by plat — confirm with the Pierce County Assessor",
+      architecturalStyles: ["Single-family residential (era and style vary by street)"],
+      typicalLotSize: "Varies by plat — confirm with the Pierce County Assessor",
+      notes:
+        "ZIP 98422 is not the same as the City Neighborhood Council boundary — confirm city vs unincorporated jurisdiction before assuming Tacoma permits or utilities. View streets and inland plats are related but not identical micro-comp sets. Selected plats carry HOA rules — pull dues and CC&Rs early when they apply. Confirm school assignment by address; several Tacoma Public Schools campuses sit in 98422.",
+    },
+    communityOrgs: [
+      {
+        name: "Metro Parks Tacoma — Norpoint Park",
+        url: "https://www.parkstacoma.gov/place/norpoint-park/",
+        context: "19.72-acre park at 4818 Nassau Avenue NE with a playground, sprayground, skate park, and trails, next to the Center at Norpoint.",
+      },
+      {
+        name: "Metro Parks Tacoma — Center at Norpoint",
+        url: "https://www.parkstacoma.gov/place/center-at-norpoint/",
+        context: "Neighborhood community center at 4818 Nassau Avenue NE, with a swimming pool and fitness programs.",
+      },
+      {
+        name: "Tacoma Public Library — Kobetich Branch",
+        url: "https://www.tacomalibrary.org/locations/3/",
+        context: "Branch library at 212 Browns Point Boulevard NE, next to Alderwood Park.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Campuses in 98422 include Northeast Tacoma, Crescent Heights, and Browns Point elementary schools and Meeker Middle School — confirm assignment by address.",
+      },
+      {
+        name: "Northeast Tacoma Neighborhood Council",
+        url: "https://www.netnc.org/",
+        context: "One of Tacoma's eight Neighborhood Councils designated to advise the city on local issues.",
+      },
+      {
+        name: "Tacoma Planning & Development Services",
+        url: "https://www.cityoftacoma.org/government/city_departments/planning_and_development_services",
+        context: "Permits, zoning, and infill / ADU questions for parcels inside the city.",
+      },
+    ],
+    thoroughfares: [
+      "Marine View Drive NE (SR-509)",
+      "Norpoint Way NE",
+      "Nassau Ave NE",
+      "Browns Point Blvd",
+      "29th St NE",
+      "51st St NE",
+    ],
+    landmarks: [
+      "Norpoint Park",
+      "Center at Norpoint",
+      "Alderwood Park",
+      "Tacoma Public Library — Kobetich Branch",
+      "Browns Point Lighthouse Park",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Northeast Tacoma via SR-410 → I-5 and the SR-509 / Marine View Drive approach around the Port of Tacoma tideflats. School pickup near the Nassau Avenue campuses and Marine View Drive traffic change curb availability — we schedule showings around both.",
+    adjacent: [
+      {
+        name: "North End",
+        citySlug: "tacoma",
+        neighborhoodSlug: "north-end",
+        blurb: "Tacoma's established urban-residential grid near Point Defiance and Proctor — the usual in-city comparison set across Commencement Bay.",
+      },
+      {
+        name: "Dash Point",
+        citySlug: "federal-way",
+        neighborhoodSlug: "dash-point",
+        blurb: "Federal Way's Sound-edge pocket to the north — Dash Point State Park and shoreline comps when Northeast Tacoma inland or view streets are not the fit.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — North End, Proctor, Stadium, Hilltop, Lincoln, South Tacoma, West Slope, Fern Hill, and Northeast Tacoma on the same urban desk.",
+      },
+      {
+        name: "Federal Way",
+        citySlug: "federal-way",
+        blurb: "South King neighbor immediately north — Twin Lakes, West Campus, Lakota, and Redondo comparison set for commute shoppers.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley and South Hill inventory when Tacoma pricing stretches the budget.",
+      },
+    ],
+    reviews: [],
   },
 ];
 

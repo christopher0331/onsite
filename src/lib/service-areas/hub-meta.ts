@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-11-05";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-11-15";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -82,12 +82,16 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Elk Heights Buckley homes on the hilltop near Pioneer Way and Lund St in 98321. HOA/ACC diligence, Rainier views, White River schools, live NWMLS listings.",
   "graham/the-country":
     "The Country Graham homes on 1+ acre lots near Country Drive E in 98338. HOA and CC&R diligence, septic records, and Bethel schools, live NWMLS listings.",
+  "graham/kapowsin":
+    "Kapowsin homes near Lake Kapowsin and Kapowsin Elementary in unincorporated Graham. Well, septic, and shoreline diligence, live NWMLS listings.",
   "seattle/ballard":
     "Ballard Seattle homes near Market Street, the Locks, and Golden Gardens in 98107–98117. Street-level comps, Seattle Public Schools, live NWMLS listings.",
   "tacoma/north-end":
     "Tacoma North End homes near Point Defiance, Ruston Way, and Proctor. Historic and mid-century stock in 98403, 98406, and 98407, live NWMLS listings.",
   "tacoma/hilltop":
     "Hilltop Tacoma homes along M.L.K. Jr. Way in 98405. T Line streetcar access, Victorian and Craftsman stock, and landmark diligence, live NWMLS listings.",
+  "tacoma/mckinley":
+    "Explore McKinley in Tacoma: wooded park paths, property due diligence, and neighborhood-level home buying and selling guidance from OnSite.",
   "tacoma/fern-hill":
     "Fern Hill Tacoma homes near S 84th St, Fern Hill Park, and Park Ave in 98444. Street-level comps and school diligence, live NWMLS listings.",
   "tacoma/lincoln-district":
@@ -124,6 +128,10 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "West Hill Kent homes west of the Green River valley near I-5 and Federal Way. Established plats and street-level comps, live NWMLS listings.",
   "kent/lake-meridian":
     "Lake Meridian Kent homes near Lake Meridian Park on the East Hill bench. Shoreline comps and street-level pricing, live NWMLS listings.",
+  "auburn/downtown-auburn":
+    "Downtown Auburn homes near Auburn Station, Main Street, and Les Gove Park. Sounder access plus zoning, flood, and school diligence, with Auburn listings.",
+  "auburn/west-hill-auburn":
+    "West Hill Auburn homes near Lewis Lake Nature Park, Jornada Park, and Centennial Viewpoint. Street-level comps and school diligence, live NWMLS listings.",
   "auburn/lakeland-hills":
     "Lakeland Hills Auburn homes near Lakeland Hills Park, Evergreen Way SE, and Lake Tapps in 98092. HOA and school-district diligence, live NWMLS listings.",
   "auburn/lea-hill":
@@ -136,6 +144,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "West Slope Tacoma homes near Narrowmoor and Titlow in 98465–98466. Narrows view lots and street-level comps, live NWMLS listings.",
   "tacoma/proctor-district":
     "Proctor District Tacoma homes around N Proctor and N 26th in 98406–98407. Craftsman streets and street-level comps, live NWMLS listings.",
+  "tacoma/northeast-tacoma":
+    "Northeast Tacoma homes in ZIP 98422 near Norpoint Park and Browns Point Lighthouse Park. Street-level comps and school diligence, live NWMLS listings.",
 };
 
 function neighborhoodKey(citySlug: string, neighborhoodSlug: string): string {
