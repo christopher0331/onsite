@@ -148,6 +148,11 @@ assert.deepEqual(status.getAll("standardStatus"), [
   "Active Under Contract",
   "Pending",
   "Closed",
+  "Coming Soon",
+  "Hold",
+  "Withdrawn",
+  "Expired",
+  "Canceled",
 ]);
 
 const soldOnly = new URLSearchParams();

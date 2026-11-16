@@ -104,8 +104,8 @@ export async function GET(req: NextRequest) {
 
   const params = new URLSearchParams({ resultsPerPage: "12", pageNum: "1" });
   // For-sale inventory only (matches the site's default "Active" status tab),
-  // unless the user typed a house number — then pending and sold are included
-  // so the property page can still be found.
+  // unless the user typed a house number — then pending, sold, and the other
+  // statuses that still have a listing page are included.
   params.append("standardStatus", "Active");
   params.append("standardStatus", "Active Under Contract");
   if (state) params.set("state", state);
