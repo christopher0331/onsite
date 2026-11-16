@@ -53,6 +53,7 @@ import { pantherLakeArticle } from "./panther-lake";
 import { westHillArticle } from "./west-hill";
 import { lakeMeridianArticle } from "./lake-meridian";
 import { downtownAuburnArticle } from "./downtown-auburn";
+import { westHillAuburnArticle } from "./west-hill-auburn";
 import { lakelandHillsArticle } from "./lakeland-hills";
 import { leaHillArticle } from "./lea-hill";
 import { skyIslandArticle } from "./sky-island";
@@ -122,6 +123,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [westHillArticle.slug]: westHillArticle,
   [lakeMeridianArticle.slug]: lakeMeridianArticle,
   [downtownAuburnArticle.slug]: downtownAuburnArticle,
+  [westHillAuburnArticle.slug]: westHillAuburnArticle,
   [lakelandHillsArticle.slug]: lakelandHillsArticle,
   [leaHillArticle.slug]: leaHillArticle,
   [skyIslandArticle.slug]: skyIslandArticle,
