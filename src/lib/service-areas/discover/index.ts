@@ -29,6 +29,7 @@ import { eastValleyEdgeDiscover } from "./east-valley-edge";
 import { elkRunDiscover } from "./elk-run";
 import { elkHeightsDiscover } from "./elk-heights";
 import { theCountryDiscover } from "./the-country";
+import { kapowsinDiscover } from "./kapowsin";
 import { ballardDiscover } from "./ballard";
 import { northEndDiscover } from "./north-end";
 import { hilltopDiscover } from "./hilltop";
@@ -97,6 +98,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [elkRunDiscover.slug]: elkRunDiscover,
   [elkHeightsDiscover.slug]: elkHeightsDiscover,
   [theCountryDiscover.slug]: theCountryDiscover,
+  [kapowsinDiscover.slug]: kapowsinDiscover,
   [ballardDiscover.slug]: ballardDiscover,
   [northEndDiscover.slug]: northEndDiscover,
   [hilltopDiscover.slug]: hilltopDiscover,

@@ -2,13 +2,13 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const grahamDiscover: ServiceAreaDiscover = {
   slug: "graham",
-  updatedAt: "2026-10-26",
+  updatedAt: "2026-11-15",
   attractions: [
     {
       name: "Bethel School District",
       url: "https://bethelsd.org/",
       description:
-        "Bethel School District serves Graham, Kapowsin, and Spanaway-area households, with Graham Elementary and Graham-Kapowsin High School as familiar local campuses. School assignment is a frequent filter for families comparing acreage parcels to platted communities like The Country.",
+        "Bethel School District serves Graham, [Kapowsin](/service-areas/graham/kapowsin), and Spanaway-area households, with Graham Elementary and Graham-Kapowsin High School as familiar local campuses. School assignment is a frequent filter for families comparing acreage parcels to platted communities like The Country.",
     },
     {
       name: "Pierce County Planning & Public Works",
