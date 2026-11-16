@@ -16,6 +16,11 @@ import {
   FEATURE_LABEL_TO_GROUP,
   NATIVE_FEATURE_LABELS,
 } from "@/lib/listings-api-params";
+import {
+  applyFreeTextLocation,
+  includeAddressHistoryStatuses,
+  isHouseNumberSearch,
+} from "@/lib/address-search";
 
 const REPLIERS_API = "https://api.repliers.io/listings";
 // OnSite operates under the "Timber Real Estate" NWMLS brokerage. Repliers
@@ -133,9 +138,9 @@ export async function GET(req: NextRequest) {
   }
 
   if (city) {
-    const q = city.trim();
-    if (/^\d{5}$/.test(q)) params.set("zip", q);
-    else params.set("city", q);
+    // A typed street address is not a city name. applyFreeTextLocation sends
+    // street number + street name (and city/ZIP only when they were separate).
+    applyFreeTextLocation(params, city);
   } else if (shouldDefaultEastPierceScope(searchParams)) {
     applyEastPierceCityFilters(params);
   }
@@ -170,6 +175,11 @@ export async function GET(req: NextRequest) {
     params.set("searchFields", searchFields);
     params.set("search", search);
   }
+
+  // House-number lookups also match pending and sold, so a listing that has a
+  // page is returned even when it is no longer the default "for sale" set.
+  // Explicit MLS# / agent searches above replace searchFields and skip this.
+  if (isHouseNumberSearch(params)) includeAddressHistoryStatuses(params);
 
   try {
     const fetchListings = async (query: URLSearchParams) => {

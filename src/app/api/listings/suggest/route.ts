@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { repliersListingsUrl } from "@/lib/repliers-enrich";
 import { formatStreetAddress } from "@/lib/format-address";
 import { getBathroomCount } from "@/lib/format-bathrooms";
+import {
+  ADDRESS_SEARCH_FIELDS,
+  includeAddressHistoryStatuses,
+  rankAddressMatch,
+  resolveLocationQuery,
+  type AddressPlan,
+} from "@/lib/address-search";
 
 // Address/city autocomplete backed by the live Repliers/MLS feed. Powers the
 // homepage hero "search by address" box: as the user types we query the MLS for
@@ -26,6 +33,7 @@ type RepliersAddress = {
 type RepliersListing = {
   mlsNumber?: string;
   listPrice?: number | null;
+  standardStatus?: string | null;
   address?: RepliersAddress | null;
   details?: {
     numBedrooms?: number | null;
@@ -77,7 +85,10 @@ function firstImage(images: string[] | null | undefined): string | null {
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const q = (searchParams.get("q") || "").trim().slice(0, 60);
+  // Full spelled-out addresses ("Avenue Court East, … Washington 98391") run
+  // past 60 characters. Cap well above a normal street line; the request is
+  // still one debounced call, not a request per keystroke.
+  const q = (searchParams.get("q") || "").trim().slice(0, 180);
   const state = (searchParams.get("state") || "WA").trim();
 
   // Require at least 2 characters before hitting the MLS — single keystrokes
@@ -86,18 +97,47 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ suggestions: [] as Suggestion[] });
   }
 
+  const plan = resolveLocationQuery(q);
+  if (plan.kind === "empty") {
+    return NextResponse.json({ suggestions: [] as Suggestion[] });
+  }
+
   const params = new URLSearchParams({ resultsPerPage: "12", pageNum: "1" });
-  // For-sale inventory only (matches the site's default "Active" status tab).
+  // For-sale inventory only (matches the site's default "Active" status tab),
+  // unless the user typed a house number — then pending and sold are included
+  // so the property page can still be found.
   params.append("standardStatus", "Active");
   params.append("standardStatus", "Active Under Contract");
   if (state) params.set("state", state);
-  // Repliers keyword search across the address sub-fields. Sending the fields as
-  // a comma list lets a query like "1234 main" match streetNumber + streetName.
-  params.set(
-    "searchFields",
-    "address.streetNumber,address.streetName,address.streetSuffix,address.city,address.zip"
-  );
-  params.set("search", q);
+
+  let addressPlan: AddressPlan | null = null;
+  if (plan.kind === "address") {
+    addressPlan = plan;
+    params.set("resultsPerPage", "24");
+    params.set("search", plan.streetSearch);
+    params.set("searchFields", ADDRESS_SEARCH_FIELDS);
+    if (plan.city) params.set("city", plan.city);
+    if (plan.zip) params.set("zip", plan.zip);
+    if (plan.state) params.set("state", plan.state);
+    if (plan.streetNumber) includeAddressHistoryStatuses(params);
+  } else if (plan.kind === "zip") {
+    // Same keyword search as before for a bare ZIP.
+    params.set(
+      "searchFields",
+      "address.streetNumber,address.streetName,address.streetSuffix,address.city,address.zip"
+    );
+    params.set("search", plan.zip);
+  } else {
+    // City / neighborhood text. State and ZIP are not part of the keyword
+    // (a comma would make "WA" a required phrase and match nothing).
+    params.set(
+      "searchFields",
+      "address.streetNumber,address.streetName,address.streetSuffix,address.city,address.neighborhood,address.zip"
+    );
+    params.set("search", plan.text);
+    if (plan.zip) params.set("zip", plan.zip);
+    if (plan.state) params.set("state", plan.state);
+  }
 
   let listings: RepliersListing[] = [];
   try {
@@ -117,8 +157,17 @@ export async function GET(req: NextRequest) {
     // empty) so the dropdown simply shows no matches rather than erroring.
   }
 
-  const lower = q.toLowerCase();
-  const startsAlpha = /^[a-z]/i.test(q);
+  if (addressPlan) {
+    const planForRank = addressPlan;
+    listings = listings
+      .map((listing) => ({ listing, score: rankAddressMatch(listing, planForRank) }))
+      .filter((row) => row.score >= 0)
+      .sort((a, b) => b.score - a.score)
+      .map((row) => row.listing);
+  }
+
+  const lower = (addressPlan?.streetSearch || (plan.kind === "place" ? plan.text : q)).toLowerCase();
+  const startsAlpha = /^[a-z]/i.test(addressPlan ? addressPlan.streetSearch : q);
 
   // ── Address suggestions (deep-link to the property page) ──────────────────
   const seenMls = new Set<string>();

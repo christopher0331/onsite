@@ -1,4 +1,9 @@
 import {
+  applyFreeTextLocation,
+  includeAddressHistoryStatuses,
+  isHouseNumberSearch,
+} from "@/lib/address-search";
+import {
   applyEastPierceCityFilters,
   shouldDefaultEastPierceScope,
 } from "@/lib/listing-index-policy";
@@ -158,9 +163,7 @@ export function buildListingsQueryParams(searchParams: URLSearchParams, pageSize
   if (boardId) params.set("boardId", boardId);
   applyListingStatus(params, status);
   if (city) {
-    const q = city.trim();
-    if (/^\d{5}$/.test(q)) params.set("zip", q);
-    else params.set("city", q);
+    applyFreeTextLocation(params, city);
   } else if (shouldDefaultEastPierceScope(searchParams)) {
     applyEastPierceCityFilters(params);
   }
@@ -187,6 +190,7 @@ export function buildListingsQueryParams(searchParams: URLSearchParams, pageSize
     params.set("searchFields", searchFields);
     params.set("search", search);
   }
+  if (isHouseNumberSearch(params)) includeAddressHistoryStatuses(params);
 
   return params;
 }

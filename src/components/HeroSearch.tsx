@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
+import { resolveLocationQuery } from "@/lib/address-search";
 
 type AddressSuggestion = {
   type: "address";
@@ -155,8 +156,7 @@ export default function HeroSearch() {
     const q = query.trim();
     if (!q) return;
 
-    const isZip = /^\d{5}$/.test(q);
-    const looksLikeStreetAddress = /^\d+\s+\S/.test(q);
+    const plan = resolveLocationQuery(q);
 
     if (highlight >= 0 && suggestions[highlight]) {
       goToSuggestion(suggestions[highlight]);
@@ -165,28 +165,37 @@ export default function HeroSearch() {
 
     // ZIP codes always filter the listings page — don't deep-link to one address
     // just because it appeared first in autocomplete.
-    if (isZip) {
-      const params = new URLSearchParams({ city: q, state: "WA" });
+    if (plan.kind === "zip") {
+      const params = new URLSearchParams({ city: plan.zip, state: "WA" });
       router.push(`/listings?${params.toString()}`);
       return;
     }
 
     if (suggestions.length > 0) {
       const pick =
-        looksLikeStreetAddress
+        plan.kind === "address"
           ? suggestions.find((s) => s.type === "address") ?? suggestions[0]
           : suggestions[0];
       goToSuggestion(pick);
       return;
     }
 
-    // No suggestion matched. A place name filters the list directly; anything
-    // that reads like a street address goes to the map, which geocodes it and
-    // recenters so nearby for-sale homes still show.
-    const params =
-      !isZip && looksLikeStreetAddress
-        ? new URLSearchParams({ q, view: "map" })
-        : new URLSearchParams({ city: q, state: "WA" });
+    // No suggestion matched. Place names (city or neighborhood) filter the
+    // list. A street address is passed through as typed so the listings API
+    // can search street number + street name instead of treating the line as
+    // a city.
+    if (plan.kind === "address") {
+      const params = new URLSearchParams({ q });
+      params.set("state", plan.state || "WA");
+      router.push(`/listings?${params.toString()}`);
+      return;
+    }
+
+    const place = plan.kind === "place" ? plan.text : q;
+    const params = new URLSearchParams({
+      city: place,
+      state: plan.kind === "place" && plan.state ? plan.state : "WA",
+    });
     router.push(`/listings?${params.toString()}`);
   }
 
