@@ -29,6 +29,7 @@ import { eastValleyEdgeDiscover } from "./east-valley-edge";
 import { elkRunDiscover } from "./elk-run";
 import { elkHeightsDiscover } from "./elk-heights";
 import { theCountryDiscover } from "./the-country";
+import { kapowsinDiscover } from "./kapowsin";
 import { ballardDiscover } from "./ballard";
 import { northEndDiscover } from "./north-end";
 import { hilltopDiscover } from "./hilltop";
@@ -52,6 +53,7 @@ import { pantherLakeDiscover } from "./panther-lake";
 import { westHillDiscover } from "./west-hill";
 import { lakeMeridianDiscover } from "./lake-meridian";
 import { downtownAuburnDiscover } from "./downtown-auburn";
+import { westHillAuburnDiscover } from "./west-hill-auburn";
 import { lakelandHillsDiscover } from "./lakeland-hills";
 import { leaHillDiscover } from "./lea-hill";
 import { skyIslandDiscover } from "./sky-island";
@@ -96,6 +98,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [elkRunDiscover.slug]: elkRunDiscover,
   [elkHeightsDiscover.slug]: elkHeightsDiscover,
   [theCountryDiscover.slug]: theCountryDiscover,
+  [kapowsinDiscover.slug]: kapowsinDiscover,
   [ballardDiscover.slug]: ballardDiscover,
   [northEndDiscover.slug]: northEndDiscover,
   [hilltopDiscover.slug]: hilltopDiscover,
@@ -120,6 +123,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [westHillDiscover.slug]: westHillDiscover,
   [lakeMeridianDiscover.slug]: lakeMeridianDiscover,
   [downtownAuburnDiscover.slug]: downtownAuburnDiscover,
+  [westHillAuburnDiscover.slug]: westHillAuburnDiscover,
   [lakelandHillsDiscover.slug]: lakelandHillsDiscover,
   [leaHillDiscover.slug]: leaHillDiscover,
   [skyIslandDiscover.slug]: skyIslandDiscover,

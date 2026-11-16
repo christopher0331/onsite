@@ -29,6 +29,7 @@ import { eastValleyEdgeArticle } from "./east-valley-edge";
 import { elkRunArticle } from "./elk-run";
 import { elkHeightsArticle } from "./elk-heights";
 import { theCountryArticle } from "./the-country";
+import { kapowsinArticle } from "./kapowsin";
 import { ballardArticle } from "./ballard";
 import { northEndArticle } from "./north-end";
 import { hilltopArticle } from "./hilltop";
@@ -52,6 +53,7 @@ import { pantherLakeArticle } from "./panther-lake";
 import { westHillArticle } from "./west-hill";
 import { lakeMeridianArticle } from "./lake-meridian";
 import { downtownAuburnArticle } from "./downtown-auburn";
+import { westHillAuburnArticle } from "./west-hill-auburn";
 import { lakelandHillsArticle } from "./lakeland-hills";
 import { leaHillArticle } from "./lea-hill";
 import { skyIslandArticle } from "./sky-island";
@@ -96,6 +98,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [elkRunArticle.slug]: elkRunArticle,
   [elkHeightsArticle.slug]: elkHeightsArticle,
   [theCountryArticle.slug]: theCountryArticle,
+  [kapowsinArticle.slug]: kapowsinArticle,
   [ballardArticle.slug]: ballardArticle,
   [northEndArticle.slug]: northEndArticle,
   [hilltopArticle.slug]: hilltopArticle,
@@ -120,6 +123,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [westHillArticle.slug]: westHillArticle,
   [lakeMeridianArticle.slug]: lakeMeridianArticle,
   [downtownAuburnArticle.slug]: downtownAuburnArticle,
+  [westHillAuburnArticle.slug]: westHillAuburnArticle,
   [lakelandHillsArticle.slug]: lakelandHillsArticle,
   [leaHillArticle.slug]: leaHillArticle,
   [skyIslandArticle.slug]: skyIslandArticle,
