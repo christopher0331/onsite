@@ -40,4 +40,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 Visitor open-house forms (`/api/open-house-lead`, and listing context on `/api/contact`) email André via Resend. This repo does not have OnSite CRM API credentials, so leads are not written to the CRM automatically. The email subject is `Open house lead — {address} — {mls}` so it can be pasted as a Warm buy-side lead with the MLS in the note. CRM API wiring is a follow-up once credentials exist. Do not send an automated follow-up email to the visitor.
 
 The OnSite phone number on open-house calls to action comes from `src/lib/nap.ts` (`(253) 441-9764`). There is no Calendly or other booking widget.
+
+## Filtered / bot-gate submissions
+
+When the lead bot gate suppresses a form POST (honeypot, too-fast, gibberish name, rate limit, etc.), the API still returns a fake `{ ok: true }` and does **not** email the lead. Each suppressed body is fail-soft written to the Netlify Blobs store named exactly `filtered-submissions` (see `src/app/api/_lib/persistFilteredSubmission.ts`).
+
+**How to view (no public UI):** Netlify UI → site `onsite-regroup` → Blobs / Storage → store `filtered-submissions`. Each key is one suppressed submission JSON (`reason`, `timestamp`, `page`, `user_agent`, salted SHA-256 `ip_hash`, and `fields`). Optional env `FILTERED_SUBMISSIONS_IP_SALT` salts the IP hash (falls back to `NETLIFY_SITE_ID`).
+
 # onsite
