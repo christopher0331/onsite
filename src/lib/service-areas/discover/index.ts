@@ -64,6 +64,7 @@ import { redondoDiscover } from "./redondo";
 import { twinLakesDiscover } from "./twin-lakes";
 import { proctorDistrictDiscover } from "./proctor-district";
 import { northeastTacomaDiscover } from "./northeast-tacoma";
+import { eastsideDiscover } from "./eastside";
 
 import { mckinleyDiscover } from "./mckinley";
 
@@ -134,6 +135,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [twinLakesDiscover.slug]: twinLakesDiscover,
   [proctorDistrictDiscover.slug]: proctorDistrictDiscover,
   [northeastTacomaDiscover.slug]: northeastTacomaDiscover,
+  [eastsideDiscover.slug]: eastsideDiscover,
 };
 
 export function getServiceAreaDiscover(

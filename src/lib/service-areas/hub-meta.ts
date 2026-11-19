@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-11-15";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-11-19";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -92,6 +92,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Hilltop Tacoma homes along M.L.K. Jr. Way in 98405. T Line streetcar access, Victorian and Craftsman stock, and landmark diligence, live NWMLS listings.",
   "tacoma/mckinley":
     "Explore McKinley in Tacoma: wooded park paths, property due diligence, and neighborhood-level home buying and selling guidance from OnSite.",
+  "tacoma/eastside":
+    "Eastside Tacoma homes near Swan Creek Park, New Salishan, and Portland Ave in 98404. City permits, slope and HOA checks, live NWMLS listings.",
   "tacoma/fern-hill":
     "Fern Hill Tacoma homes near S 84th St, Fern Hill Park, and Park Ave in 98444. Street-level comps and school diligence, live NWMLS listings.",
   "tacoma/lincoln-district":
