@@ -2,7 +2,7 @@ import type { ServiceAreaDiscover } from "./types";
 
 export const tacomaDiscover: ServiceAreaDiscover = {
   slug: "tacoma",
-  updatedAt: "2026-11-11",
+  updatedAt: "2026-11-19",
   attractions: [
     {
       name: "McKinley",
@@ -87,9 +87,15 @@ export const tacomaDiscover: ServiceAreaDiscover = {
       description:
         "Northeast Tacoma is the City Neighborhood Council district in ZIP 98422, on the east side of Commencement Bay, with Norpoint Park, the Center at Norpoint, Alderwood Park, and the Kobetich Library. Street-level comps matter more than a citywide average.",
     },
+    {
+      name: "Eastside",
+      url: "/service-areas/tacoma/eastside",
+      description:
+        "Eastside is the City Neighborhood Council district south of I-5 and east of Pacific Avenue, mostly in ZIP 98404, with New Salishan, Swan Creek Park, the Eastside Community Center, and the McKinley pocket. Street-level comps matter more than a citywide average.",
+    },
   ],
   localLivingMarkdown: [
-    "Tacoma is a block-by-block urban market — [North End](/service-areas/tacoma/north-end), [Proctor District](/service-areas/tacoma/proctor-district), [Stadium District](/service-areas/tacoma/stadium-district), [Hilltop](/service-areas/tacoma/hilltop), [Lincoln District](/service-areas/tacoma/lincoln-district), [Fern Hill](/service-areas/tacoma/fern-hill), [McKinley](/service-areas/tacoma/mckinley), [West Slope](/service-areas/tacoma/west-slope), [South Tacoma](/service-areas/tacoma/south-tacoma), and [Northeast Tacoma](/service-areas/tacoma/northeast-tacoma) each behave differently across ZIPs 98402, 98403, 98405, 98406, 98407, 98408, 98409, 98418, 98422, 98444, 98465, and 98466. Buyers comparing [Tacoma homes for sale](/listings?city=Tacoma&state=WA) usually start with neighborhood character, parking and permit overlays, and [Tacoma Public Schools](https://www.tacomaschools.org/) boundaries rather than a single city headline. Everyday services run through [Tacoma Public Utilities](https://www.mytpu.org/), [Puget Sound Energy](https://www.pse.com/) for gas in many neighborhoods, [Tacoma Public Library](https://www.tacomalibrary.org/), and civic context from the [Tacoma-Pierce County Chamber](https://www.tacomachamber.org/).",
+    "Tacoma is a block-by-block urban market — [North End](/service-areas/tacoma/north-end), [Proctor District](/service-areas/tacoma/proctor-district), [Stadium District](/service-areas/tacoma/stadium-district), [Hilltop](/service-areas/tacoma/hilltop), [Lincoln District](/service-areas/tacoma/lincoln-district), [Fern Hill](/service-areas/tacoma/fern-hill), [McKinley](/service-areas/tacoma/mckinley), [Eastside](/service-areas/tacoma/eastside), [West Slope](/service-areas/tacoma/west-slope), [South Tacoma](/service-areas/tacoma/south-tacoma), and [Northeast Tacoma](/service-areas/tacoma/northeast-tacoma) each behave differently across ZIPs 98402, 98403, 98404, 98405, 98406, 98407, 98408, 98409, 98418, 98422, 98444, 98465, and 98466. Buyers comparing [Tacoma homes for sale](/listings?city=Tacoma&state=WA) usually start with neighborhood character, parking and permit overlays, and [Tacoma Public Schools](https://www.tacomaschools.org/) boundaries rather than a single city headline. Everyday services run through [Tacoma Public Utilities](https://www.mytpu.org/), [Puget Sound Energy](https://www.pse.com/) for gas in many neighborhoods, [Tacoma Public Library](https://www.tacomalibrary.org/), and civic context from the [Tacoma-Pierce County Chamber](https://www.tacomachamber.org/).",
     "From OnSite's Lake Tapps base, Tacoma sits on our Pierce County coverage corridor alongside peer hubs like [Puyallup](/service-areas/puyallup), [Federal Way](/service-areas/federal-way), and [Lake Tapps](/service-areas/lake-tapps). We underwrite by micro-neighborhood comps — historic conservation and ADU/infill potential included — so buying or selling decisions match the block you will actually live on.",
   ],
 };

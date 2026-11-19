@@ -937,6 +937,7 @@ export const CITIES: City[] = [
       "Lincoln District",
       "Fern Hill",
       "McKinley",
+      "Eastside",
     ],
     permittingOffice: {
       name: "City of Tacoma Planning & Development Services",
@@ -1330,6 +1331,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "tacoma",
         neighborhoodSlug: "fern-hill",
         blurb: "Explore another Tacoma option while keeping street-level pricing and property condition separate."
+      },
+      {
+        name: "Eastside",
+        citySlug: "tacoma",
+        neighborhoodSlug: "eastside",
+        blurb: "The wider Eastside Neighborhood Council district that includes McKinley — New Salishan, Swan Creek Park, and the Eastside Community Center."
       },
       {
         name: "Tacoma (City)",
@@ -3746,6 +3753,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "tacoma",
         neighborhoodSlug: "fern-hill",
         blurb: "South-end pocket around South 84th and Park Avenue in 98444 — the next major residential grid south of the Lincoln corridor.",
+      },
+      {
+        name: "Eastside",
+        citySlug: "tacoma",
+        neighborhoodSlug: "eastside",
+        blurb: "Council district across Pacific Avenue to the east — New Salishan, Swan Creek Park, and ZIP 98404 streets.",
       },
       {
         name: "Tacoma (City)",
@@ -6277,6 +6290,111 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Puyallup",
         citySlug: "puyallup",
         blurb: "Valley and South Hill inventory when Tacoma pricing stretches the budget.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "eastside",
+    citySlug: "tacoma",
+    name: "Eastside",
+    // Most Eastside addresses use ZIP 98404 (Eastside Community Center, First
+    // Creek, Lister, and Roosevelt are all Tacoma 98404). The ZIP is not the
+    // Neighborhood Council boundary and can include addresses outside the
+    // city limits.
+    zipCodes: ["98404"],
+    // Geo anchor: "Eastside" place node, OpenStreetMap Nominatim. Not a boundary.
+    geo: { lat: 47.2147289, lng: -122.4142391 },
+    heroImage: "/blog/family-walking-past-hedge-lined-home.webp",
+    heroEyebrow: "Tacoma · Eastside",
+    introCopy:
+      "Eastside is one of Tacoma's eight Neighborhood Council districts, south of I-5 and east of Pacific Avenue in ZIP 98404 — New Salishan, Swan Creek Park, the Eastside Community Center, and Tacoma Public Schools campuses, where nearby Eastside streets beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "Varies by street — confirm with the Pierce County Assessor-Treasurer",
+      architecturalStyles: ["Single-family homes, duplexes, and New Salishan townhomes and apartments (era and style vary by street)"],
+      typicalLotSize: "Varies by street — confirm with the Pierce County Assessor-Treasurer",
+      notes:
+        "Eastside is inside the City of Tacoma, so zoning, permits, and infill or ADU questions run through Planning & Development Services. Gulches, creeks, and slopes cross the district, so check critical-area and drainage constraints before budgeting work. New Salishan homes can carry HOA, resale, or income-restricted terms — ask before pricing. ZIP 98404 is not the council boundary and can include addresses outside the city; confirm city jurisdiction and school assignment by address.",
+    },
+    communityOrgs: [
+      {
+        name: "ENACT — Eastside Neighborhoods Advisory Council of Tacoma",
+        url: "https://www.easttacoma.org/about/",
+        context: "Eastside's Neighborhood Council, one of eight in the City of Tacoma's Neighborhood Council Program.",
+      },
+      {
+        name: "Parks Tacoma — Swan Creek Park Master Plan",
+        url: "https://www.parkstacoma.gov/wp-content/uploads/2019/05/SwanCreekMasterPlan_FINAL_opt.pdf",
+        context: "Plan for the 373-acre park on the city's eastern edge, owned by Parks Tacoma and Pierce County.",
+      },
+      {
+        name: "Tacoma Housing Authority — New Salishan",
+        url: "https://www.tacomahousing.org/about/programs-projects/real-estate-development/new-salishan/",
+        context: "Mixed-income HOPE VI rebuild of 1940s wartime housing east of Portland Avenue, with about 1,350 households.",
+      },
+      {
+        name: "First Creek Middle School — Tacoma Public Schools",
+        url: "https://fc.tacomaschools.org/contact",
+        context: "Middle school at 1801 East 56th Street — confirm every school assignment by address with the district.",
+      },
+      {
+        name: "Tacoma Planning & Development Services",
+        url: "https://www.cityoftacoma.org/government/city_departments/planning_and_development_services",
+        context: "Permits, zoning, and infill / ADU questions for Eastside parcels.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records for Eastside parcels.",
+      },
+    ],
+    thoroughfares: [
+      "Portland Ave E",
+      "McKinley Ave E",
+      "E 56th St",
+      "E 72nd St",
+      "E 38th St",
+      "Pacific Ave (SR-7)",
+      "I-5",
+    ],
+    landmarks: [
+      "Swan Creek Park",
+      "New Salishan",
+      "Eastside Community Center",
+      "First Creek Middle School",
+      "Portland Avenue Park",
+      "Lister Elementary",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach the Eastside on SR-167 and I-5 to the Portland Avenue exit, or through Puyallup on Pioneer Way E. Hills, gulches, and school-campus traffic on East 56th Street change curb and showing logistics, so we schedule each address around its approach.",
+    adjacent: [
+      {
+        name: "McKinley",
+        citySlug: "tacoma",
+        neighborhoodSlug: "mckinley",
+        blurb: "McKinley pocket inside the Eastside district, around McKinley Park — its own guide and its own comps.",
+      },
+      {
+        name: "Lincoln District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "lincoln-district",
+        blurb: "Neighbor across Pacific Avenue around South 38th Street — streetcar-era stock near Lincoln High School.",
+      },
+      {
+        name: "Fern Hill",
+        citySlug: "tacoma",
+        neighborhoodSlug: "fern-hill",
+        blurb: "South-end pocket around South 84th and Park Avenue in 98444 — another Tacoma comparison set south-west of the Eastside.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — North End, Proctor, Stadium, Hilltop, Lincoln, McKinley, and Northeast Tacoma on the same urban desk.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley city to the east via Pioneer Way E — downtown and South Hill inventory when buyers widen the search.",
       },
     ],
     reviews: [],
