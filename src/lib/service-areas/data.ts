@@ -153,6 +153,8 @@ export const CITIES: City[] = [
       "Gem Heights",
       "Sunrise",
       "Summit",
+      "North Puyallup",
+      "Alderton",
     ],
     permittingOffice: {
       name: "City of Puyallup Development & Permitting Services",
@@ -1181,6 +1183,307 @@ export const CITIES: City[] = [
     },
   },
   {
+    slug: "spanaway",
+    name: "Spanaway",
+    state: "Washington",
+    stateCode: "WA",
+    county: "Pierce County",
+    taxonomy: "suburban",
+    // 2020 census count for the Spanaway CDP (Pierce County community profile).
+    population: 35_476,
+    zipCodes: ["98387"],
+    // Geo anchor: Spanaway CDP centroid (GNIS / Wikipedia). Not a boundary.
+    geo: { lat: 47.1036, lng: -122.4353 },
+    heroImage: "/blog/aerial-pierce-county-suburb-mount-rainier.webp",
+    heroEyebrow: "Service Area · Spanaway & Spanaway Lake",
+    heroIntro:
+      "Spanaway is unincorporated Pierce County south of Parkland and east of Joint Base Lewis-McChord — Spanaway Lake, Bethel School District pathways, and a mix of platted subdivisions and larger parcels where county permitting, the water purveyor, and sewer-or-septic status get checked before pricing.",
+    // Hidden in CityHero when 0 — no invented project counts for new hubs.
+    activeProjects: 0,
+    neighborhoodDirectory: [],
+    permittingOffice: {
+      name: "Pierce County Development Center",
+      url: "https://www.piercecountywa.gov/applyforapermit",
+      context:
+        "Spanaway has no city government — building, land-use, and site-development permits run through Pierce County Planning & Public Works.",
+    },
+    utilities: [
+      {
+        name: "Spanaway Water Company",
+        url: "https://spanaway-water.org/",
+        context:
+          "Non-profit mutual water company based at 18413 B Street East in Spanaway — confirm the water purveyor by address.",
+      },
+      {
+        name: "Pierce County Sewer",
+        url: "https://www.piercecountywa.gov/1678/About-the-Sewer-Division",
+        context: "County sewer utility — confirm whether a parcel is connected to sewer or on septic.",
+      },
+      {
+        name: "Tacoma–Pierce County Health Department",
+        url: "https://www.tpchd.org/",
+        context: "Septic records and private-well programs for parcels that are not on sewer or a water system.",
+      },
+    ],
+    schoolDistricts: [
+      {
+        name: "Bethel School District",
+        url: "https://bethelsd.org/",
+        context:
+          "Headquartered at 516 176th Street East in Spanaway — confirm school assignment by address with the district's boundary maps.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Pierce County — Parkland-Spanaway-Midland Communities Plan",
+        url: "https://www.piercecountywa.gov/944/Parkland-Spanaway-Midland",
+        context:
+          "County community plan first adopted June 11, 2002, covering Spanaway Lake, Tule Lake, and the Clover Creek and Spanaway Creek watersheds.",
+      },
+      {
+        name: "Pierce County Parks — Spanaway Park",
+        url: "https://www.piercecountywa.gov/1336/Spanaway-Park",
+        context: "135-acre lakefront county park with two swim beaches, a boat launch, and the Fantasy Lights holiday drive-through.",
+      },
+      {
+        name: "Pierce County Library System — Parkland/Spanaway",
+        url: "https://mypcls.org/visit-the-library/locations-hours/",
+        context: "Branch library at 13718 Pacific Avenue South.",
+      },
+      {
+        name: "Bethel School District — Boundary Maps",
+        url: "https://www.bethelsd.org/about-our-district/maps",
+        context: "District and school boundary maps for checking an address's assigned schools.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records.",
+      },
+    ],
+    regulations: [
+      {
+        title: "Unincorporated County Permitting",
+        description:
+          "Spanaway is a census-designated place, not a city, so zoning, building permits, and site development run through Pierce County, with the Parkland-Spanaway-Midland Communities Plan adding local land-use and design policies. We check the parcel's zone before marketing ADU, shop, or lot-split potential.",
+      },
+      {
+        title: "Lake, Creek & Floodplain Checks",
+        description:
+          "Parcels near Spanaway Lake, Spanaway Creek, or Clover Creek can carry shoreline, critical-area, or flood-zone rules. We pull FEMA flood-map status and county critical-area mapping before list date instead of during inspection.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "Water Purveyor & Sewer Status",
+        description:
+          "Spanaway has no single city utility. The water purveyor, sewer connection, or septic and well records are confirmed parcel by parcel in the pre-list audit.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      suburbanRegulations: true,
+    },
+    suburban: {
+      typicalLotSize:
+        "Varies widely, from platted subdivision lots to larger parcels — confirm lot size with the Pierce County Assessor-Treasurer.",
+      septicNotes:
+        "Some parcels connect to Pierce County sewer and a water purveyor; others rely on septic and private wells. Confirm by address before pricing.",
+      hoaNotes: "Some platted subdivisions carry HOAs and CC&Rs; older and larger parcels often do not. Confirm per plat.",
+    },
+  },
+  {
+    slug: "orting",
+    name: "Orting",
+    state: "Washington",
+    stateCode: "WA",
+    county: "Pierce County",
+    taxonomy: "suburban",
+    // 2020 census count (U.S. Census QuickFacts / Pierce County community profile).
+    population: 9_041,
+    zipCodes: ["98360"],
+    // Geo anchor: City of Orting (GNIS / Wikipedia). Not a boundary.
+    geo: { lat: 47.0983, lng: -122.2042 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e5f1f692b6e8f42f5bf2a0_1.jpg",
+    heroEyebrow: "Service Area · Orting Valley",
+    heroIntro:
+      "Orting is the valley city between the Puyallup and Carbon rivers — the Foothills Trail through town, Orting School District campuses, city water and sewer, and Mount Rainier lahar planning that every buyer should understand before writing an offer.",
+    // Hidden in CityHero when 0 — no invented project counts for new hubs.
+    activeProjects: 0,
+    neighborhoodDirectory: [],
+    permittingOffice: {
+      name: "City of Orting",
+      url: "https://www.cityoforting.org/",
+      context: "City hall at 104 Bridge Street South — permits and planning for parcels inside city limits.",
+    },
+    utilities: [
+      {
+        name: "City of Orting Water Department",
+        url: "https://www.cityoforting.org/government/public-works/water-department",
+        context: "Municipal water inside city limits.",
+      },
+      {
+        name: "City of Orting Wastewater Department",
+        url: "https://www.cityoforting.org/government/public-works/wastewater-department",
+        context: "Municipal sewer, including STEP tank systems on some properties.",
+      },
+    ],
+    schoolDistricts: [
+      {
+        name: "Orting School District",
+        url: "https://www.ortingschools.org/district/about-our-district",
+        context:
+          "Two elementary schools, one middle school, and one high school across more than 45 square miles of Orting and parts of Graham, Puyallup, and Bonney Lake.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Pierce County — Mount Rainier Active Volcano",
+        url: "https://www.piercecountywa.gov/3730/Mount-Rainier-Active-Volcano",
+        context: "County emergency-management guidance on lahars, hazard maps, alerts, and evacuation planning.",
+      },
+      {
+        name: "Pierce County Parks — Foothills Trail (McMillin to Orting)",
+        url: "https://www.piercecountywa.gov/2340/McMillin-to-Orting",
+        context: "Paved regional trail section that runs beside SR-162 into Orting City Park.",
+      },
+      {
+        name: "Washington Soldiers Home — Orting",
+        url: "https://dva.wa.gov/veterans-service-members-and-their-families/veterans-homes/washington-soldiers-home-orting",
+        context: "State veterans home in Orting, dedicated in 1891 and now run by the Washington Department of Veterans Affairs.",
+      },
+      {
+        name: "Pierce County Library System — Orting",
+        url: "https://mypcls.org/visit-the-library/locations-hours/",
+        context: "Branch library at 202 Washington Avenue South.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records.",
+      },
+    ],
+    regulations: [
+      {
+        title: "Lahar Hazard & Evacuation Planning",
+        description:
+          "Orting sits on the valley floor below Mount Rainier, and Pierce County Emergency Management names lahars (volcanic mudflows) as the area's biggest volcanic hazard. We point buyers to the county's hazard maps, alerts, and evacuation routes early, so the risk is understood before an offer rather than discovered in escrow.",
+      },
+      {
+        title: "River & Floodplain Diligence",
+        description:
+          "The Puyallup and Carbon rivers frame the city. For parcels near either river we pull FEMA flood-map status and any elevation certificate before list date, because flood-insurance requirements change a buyer's monthly payment.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "City of Orting Public Works",
+        description:
+          "In-city water and sewer accounts — including any STEP tank on the property — are confirmed before list. Valley parcels outside city limits may use wells and septic instead.",
+      },
+    ],
+    caseStudies: [],
+    features: {},
+  },
+  {
+    slug: "roy",
+    name: "Roy",
+    state: "Washington",
+    stateCode: "WA",
+    county: "Pierce County",
+    taxonomy: "rural",
+    // 2020 census count (City of Roy comprehensive plan / Pierce County community profile).
+    population: 816,
+    zipCodes: ["98580"],
+    // Geo anchor: City of Roy (GNIS / Wikipedia). Not a boundary.
+    geo: { lat: 46.9903, lng: -122.5461 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/680fe409428a57e5320586a0_1.jpg",
+    heroEyebrow: "Service Area · South Pierce Prairie",
+    heroIntro:
+      "Roy is a small south Pierce County city, founded in 1884 and incorporated in 1908, on the prairie beside Joint Base Lewis-McChord. City water, on-site septic, SR-507 traffic, and Bethel School District pathways shape how a Roy home is priced and sold.",
+    // Hidden in CityHero when 0 — no invented project counts for new hubs.
+    activeProjects: 0,
+    neighborhoodDirectory: [],
+    permittingOffice: {
+      name: "City of Roy",
+      url: "https://cityofroywa.us/",
+      context: "City hall handles permits and planning inside city limits; parcels outside the city run through Pierce County.",
+    },
+    utilities: [
+      {
+        name: "City of Roy Water Utility",
+        url: "https://cityofroywa.us/",
+        context: "The city owns and operates the water utility within its limits.",
+      },
+      {
+        name: "Tacoma–Pierce County Health Department",
+        url: "https://www.tpchd.org/",
+        context: "Roy has no sanitary sewer — septic permits and records run through the health department.",
+      },
+    ],
+    schoolDistricts: [
+      {
+        name: "Bethel School District",
+        url: "https://bethelsd.org/",
+        context: "Serves the entire City of Roy; Roy Elementary is at 340 Peterson Street.",
+      },
+    ],
+    localResources: [
+      {
+        name: "Roy Pioneer Rodeo",
+        url: "https://www.roypioneerrodeo.com/",
+        context: "The Roy Pioneer Rodeo Association's 15.5-acre rodeo grounds at 8710 Higgins Greig Road, just outside city limits.",
+      },
+      {
+        name: "South Pierce Fire & Rescue",
+        url: "https://www.southpiercefire.org/",
+        context: "Fire District 17 serves Roy from its station at 302 McNaught Street.",
+      },
+      {
+        name: "Bethel School District — Boundary Maps",
+        url: "https://www.bethelsd.org/about-our-district/maps",
+        context: "District and school boundary maps for checking an address's assigned schools.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records.",
+      },
+    ],
+    regulations: [
+      {
+        title: "Septic on Every Parcel",
+        description:
+          "The City of Roy's comprehensive plan states that Roy, its urban growth area, and the surrounding area rely on on-site septic systems, and the city does not provide sanitary sewer. Septic records and inspection are a core pre-list item, not an escrow afterthought.",
+      },
+      {
+        title: "SR-507 & JBLM Access",
+        description:
+          "SR-507 runs through Roy, and the city's plan describes heavy traffic during Joint Base Lewis-McChord commute times and no signalized intersections in town. JBLM's Roy Gate, reopened in 2014, connects the base to the northwest corner of Roy via Warren Street. We plan showings around both.",
+      },
+    ],
+    utilityNotes: [
+      {
+        name: "City Water vs. Private Wells",
+        description:
+          "Homes inside city limits are typically on the city water system; parcels outside the city may be on private wells. We confirm the water source and septic records for every listing.",
+      },
+    ],
+    caseStudies: [],
+    features: {
+      suburbanRegulations: true,
+    },
+    suburban: {
+      typicalLotSize: "Varies by parcel — confirm lot size with the Pierce County Assessor-Treasurer.",
+      septicNotes:
+        "On-site septic systems are standard in Roy and its growth area; pull septic records from the health department before list date.",
+      hoaNotes:
+        "The city's plan notes private open-space tracts in the Oakview Heights and McKenna Meadows subdivisions, managed by their homeowners' associations. Older in-town lots generally have no HOA.",
+    },
+  },
+  {
     slug: "seattle",
     name: "Seattle",
     state: "Washington",
@@ -1468,6 +1771,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "sumner",
         blurb: "Next valley town east — Sounder twin and Main Street comparison set.",
       },
+      {
+        name: "North Puyallup",
+        citySlug: "puyallup",
+        neighborhoodSlug: "north-puyallup",
+        blurb: "Across the river on the north bank — city and unincorporated parcels side by side.",
+      },
     ],
     reviews: [
       {
@@ -1679,6 +1988,17 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Sumner",
         citySlug: "sumner",
         blurb: "Valley floor and Sounder access north of the ridge.",
+      },
+      {
+        name: "Alderton",
+        citySlug: "puyallup",
+        neighborhoodSlug: "alderton",
+        blurb: "Rural farm valley on SR-162 below the ridge — acreage, wells and septic, and county permitting.",
+      },
+      {
+        name: "Orting",
+        citySlug: "orting",
+        blurb: "Valley city to the south — Foothills Trail, Orting schools, and lahar planning.",
       },
     ],
     reviews: [
@@ -1924,6 +2244,203 @@ export const NEIGHBORHOODS: Neighborhood[] = [
           "We sit on the Puyallup–Tacoma line. They marketed the commute and the jurisdiction accurately. No surprises in escrow.",
       },
     ],
+  },
+  {
+    slug: "north-puyallup",
+    citySlug: "puyallup",
+    name: "North Puyallup",
+    // No ZIP filter: the North Puyallup CDP uses Puyallup mail, but its ZIP
+    // (98372) also covers other parts of Puyallup, so a ZIP filter would label
+    // non-North-Puyallup homes as local. The listings block shows Puyallup-wide
+    // inventory with the existing scope note.
+    zipCodes: [],
+    // Geo anchor: North Puyallup CDP (GNIS / Wikipedia). Not a boundary.
+    geo: { lat: 47.2014, lng: -122.2742 },
+    heroImage: "/blog/craftsman-home-in-evergreen-trees.webp",
+    heroEyebrow: "Puyallup · North Puyallup",
+    introCopy:
+      "North Puyallup is the north bank of the Puyallup River across the SR-167 / North Meridian bridges from downtown — a census-designated place of about two square miles where city and unincorporated parcels sit close together, so jurisdiction, flood-map status, and school assignment get checked parcel by parcel.",
+    characteristics: {
+      medianHomeYear: "Varies by street — confirm with the Pierce County Assessor-Treasurer",
+      architecturalStyles: ["Single-family homes of mixed eras (confirm era and style by parcel)"],
+      typicalLotSize: "Varies by parcel — confirm with the Pierce County Assessor-Treasurer",
+      notes:
+        "The North Puyallup census-designated place counted 1,837 residents in 2020 and is unincorporated, but nearby north-of-river streets can sit inside Puyallup city limits — confirm whether permits run through the City of Puyallup or Pierce County before marketing ADU or lot potential. Parcels near the river should get a FEMA flood-map check early. Confirm school assignment by address with the Puyallup School District.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Puyallup Development & Permitting Services",
+        url: "https://www.puyallupwa.gov/2438/Development-Permitting-Services",
+        context: "Permits and zoning for parcels inside Puyallup city limits.",
+      },
+      {
+        name: "Pierce County Development Center",
+        url: "https://www.piercecountywa.gov/applyforapermit",
+        context: "Permits and zoning for unincorporated parcels, including the North Puyallup CDP.",
+      },
+      {
+        name: "Puyallup School District",
+        url: "https://www.puyallupsd.org/",
+        context: "Confirm school assignment by address with the district.",
+      },
+      {
+        name: "FEMA Flood Map Service Center",
+        url: "https://msc.fema.gov/portal/home",
+        context: "Official flood-zone maps for parcels near the Puyallup River.",
+      },
+      {
+        name: "HistoryLink — Meridian Street Bridge (Puyallup)",
+        url: "https://www.historylink.org/File/20414",
+        context: "History of the 1925 Puyallup River bridge on Meridian, replaced by a new SR-167 northbound span in 2015.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records.",
+      },
+    ],
+    thoroughfares: [
+      "N Meridian / SR-167 (Puyallup River bridges)",
+      "Meridian Ave E (SR-161) north toward Edgewood",
+    ],
+    landmarks: [
+      "Puyallup River",
+      "SR-167 Puyallup River bridges at Meridian",
+      "Puyallup Riverwalk Trail (across the river)",
+      "Downtown Puyallup",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach North Puyallup via SR-410 and SR-167, crossing into the valley at Meridian. River-crossing traffic at Meridian builds at peak hours, so we plan showing windows and photo shoots around it.",
+    adjacent: [
+      {
+        name: "Downtown Puyallup",
+        citySlug: "puyallup",
+        neighborhoodSlug: "downtown-puyallup",
+        blurb: "Historic valley-floor core across the river — Craftsman streets, Pioneer Park, and Sounder access.",
+      },
+      {
+        name: "Puyallup (City)",
+        citySlug: "puyallup",
+        blurb: "Parent hub — downtown, South Hill, Alderton, and the rest of the Puyallup desk.",
+      },
+      {
+        name: "Edgewood",
+        citySlug: "edgewood",
+        blurb: "Plateau city to the north up Meridian — larger lots and its own city permitting.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Next valley town to the east — Main Street, Sounder, and floodplain diligence of its own.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "alderton",
+    citySlug: "puyallup",
+    name: "Alderton",
+    // No ZIP filter: Alderton addresses use Puyallup 98374 mail, but 98374
+    // also covers much of east Puyallup, so a ZIP filter would label
+    // non-Alderton homes as local. The listings block shows Puyallup-wide
+    // inventory with the existing scope note.
+    zipCodes: [],
+    // Geo anchor: Alderton CDP (GNIS / Wikipedia). Not a boundary.
+    geo: { lat: 47.1789, lng: -122.2367 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e6a96b499447cc30f637df_1.jpg",
+    heroEyebrow: "Puyallup · Alderton",
+    introCopy:
+      "Alderton is the Puyallup River Valley farm community on SR-162 between Puyallup, Sumner, and Orting. Pierce County's Alderton-McMillin Community Plan keeps it rural — farmland, larger parcels, floodplain and volcanic-hazard limits — around a crossroads at 96th Street East that dates to the early 1900s.",
+    characteristics: {
+      medianHomeYear: "Varies by parcel — confirm with the Pierce County Assessor-Treasurer",
+      architecturalStyles: [
+        "Farmhouses and rural homes on acreage",
+        "Manufactured homes, including in established mobile home parks",
+      ],
+      typicalLotSize:
+        "Mostly larger rural parcels — when the community plan was adopted, nearly 80% of the plan area was in parcels of five acres or more. Confirm by parcel.",
+      notes:
+        "Alderton is unincorporated, so zoning and permits run through Pierce County, and the Alderton-McMillin Community Plan caps residential density in its Agricultural Resource Land and Rural Farm zones at one home per 10 acres (with a clustering option on 20+ acre properties). Flooding, high water tables, wetlands, and volcanic hazards limit development on the valley floor — pull FEMA flood maps and county critical-area data early. Wells and septic are common; confirm both. The plan area is split among the Puyallup, Sumner-Bonney Lake, and Orting school districts, so confirm assignment by address.",
+    },
+    communityOrgs: [
+      {
+        name: "Pierce County — Alderton-McMillin Community Plan",
+        url: "https://www.piercecountywa.gov/929/Alderton-McMillin",
+        context: "County community plan first adopted December 11, 2007, focused on keeping the valley rural and farmable.",
+      },
+      {
+        name: "Pierce County Development Center",
+        url: "https://www.piercecountywa.gov/applyforapermit",
+        context: "Permits, zoning, and site development for unincorporated Alderton parcels.",
+      },
+      {
+        name: "Pierce County Parks — Foothills Trail (East Puyallup to McMillin)",
+        url: "https://www.piercecountywa.gov/2339/East-Puyallup-to-McMillin",
+        context: "Rail-with-trail section starting at the East Puyallup Trailhead, 13810 80th Street East.",
+      },
+      {
+        name: "Puyallup School District",
+        url: "https://www.puyallupsd.org/",
+        context: "One of three districts serving the plan area — confirm assignment by address.",
+      },
+      {
+        name: "Sumner-Bonney Lake School District",
+        url: "https://www.sumnersd.org/",
+        context: "One of three districts serving the plan area — confirm assignment by address.",
+      },
+      {
+        name: "Orting School District",
+        url: "https://www.ortingschools.org/district/about-our-district",
+        context: "One of three districts serving the plan area — confirm assignment by address.",
+      },
+      {
+        name: "Pierce County — Mount Rainier Active Volcano",
+        url: "https://www.piercecountywa.gov/3730/Mount-Rainier-Active-Volcano",
+        context: "Lahar hazard maps, alerts, and evacuation guidance for the Puyallup River Valley.",
+      },
+    ],
+    thoroughfares: [
+      "SR-162 (Pioneer Way E / Orting Hwy E)",
+      "96th St E",
+      "80th St E",
+      "Riverside Rd E",
+      "Military Rd E",
+      "128th St E",
+    ],
+    landmarks: [
+      "Alderton School (1915, National Register of Historic Places)",
+      "Alderton Store",
+      "Foothills Trail — East Puyallup Trailhead",
+      "Riverside Park",
+      "Puyallup River",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Alderton down through Sumner and onto SR-162 toward Orting. The county plan notes daily SR-162 congestion and farm machinery on valley roads, so we time showings and photography around peak traffic and plan for gravel drives and limited parking on rural parcels.",
+    adjacent: [
+      {
+        name: "Puyallup (City)",
+        citySlug: "puyallup",
+        blurb: "Parent hub — downtown, South Hill, North Puyallup, and city-utility neighborhoods up the valley.",
+      },
+      {
+        name: "Orting",
+        citySlug: "orting",
+        blurb: "Valley city to the south on SR-162 — city water and sewer, the Foothills Trail, and Orting schools.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Valley city to the north — Main Street, Sounder, and in-city utilities.",
+      },
+      {
+        name: "Shawnee Ridge",
+        citySlug: "puyallup",
+        neighborhoodSlug: "shawnee-ridge",
+        blurb: "Custom homes and Rainier-view lots on the ridge above the valley floor.",
+      },
+    ],
+    reviews: [],
   },
   {
     slug: "tehaleh",

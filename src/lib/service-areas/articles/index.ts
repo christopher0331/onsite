@@ -19,6 +19,11 @@ import { shawneeRidgeArticle } from "./shawnee-ridge";
 import { gemHeightsArticle } from "./gem-heights";
 import { sunriseArticle } from "./sunrise";
 import { summitArticle } from "./summit";
+import { spanawayArticle } from "./spanaway";
+import { ortingArticle } from "./orting";
+import { royArticle } from "./roy";
+import { northPuyallupArticle } from "./north-puyallup";
+import { aldertonArticle } from "./alderton";
 import { southHillArticle } from "./south-hill";
 import { tehalehArticle } from "./tehaleh";
 import { bridgeHillArticle } from "./bridge-hill";
@@ -88,6 +93,11 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [gemHeightsArticle.slug]: gemHeightsArticle,
   [sunriseArticle.slug]: sunriseArticle,
   [summitArticle.slug]: summitArticle,
+  [spanawayArticle.slug]: spanawayArticle,
+  [ortingArticle.slug]: ortingArticle,
+  [royArticle.slug]: royArticle,
+  [northPuyallupArticle.slug]: northPuyallupArticle,
+  [aldertonArticle.slug]: aldertonArticle,
   [southHillArticle.slug]: southHillArticle,
   [tehalehArticle.slug]: tehalehArticle,
   [bridgeHillArticle.slug]: bridgeHillArticle,
