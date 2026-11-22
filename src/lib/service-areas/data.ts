@@ -1197,7 +1197,7 @@ export const CITIES: City[] = [
     heroImage: "/blog/aerial-pierce-county-suburb-mount-rainier.webp",
     heroEyebrow: "Service Area · Spanaway & Spanaway Lake",
     heroIntro:
-      "Spanaway is unincorporated Pierce County south of Parkland and east of Joint Base Lewis-McChord — Spanaway Lake, Bethel School District pathways, and a mix of platted subdivisions and larger parcels where county permitting, the water purveyor, and sewer-or-septic status get checked before pricing.",
+      "Unincorporated Pierce County beside Spanaway Lake and Joint Base Lewis-McChord — county permits, water-purveyor and sewer-or-septic checks, and Bethel School District pathways come before pricing.",
     // Hidden in CityHero when 0 — no invented project counts for new hubs.
     activeProjects: 0,
     neighborhoodDirectory: [],
@@ -1308,7 +1308,7 @@ export const CITIES: City[] = [
       "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/67e5f1f692b6e8f42f5bf2a0_1.jpg",
     heroEyebrow: "Service Area · Orting Valley",
     heroIntro:
-      "Orting is the valley city between the Puyallup and Carbon rivers — the Foothills Trail through town, Orting School District campuses, city water and sewer, and Mount Rainier lahar planning that every buyer should understand before writing an offer.",
+      "The valley city between the Puyallup and Carbon rivers — the Foothills Trail, Orting schools, city water and sewer, and Mount Rainier lahar planning to understand before an offer.",
     // Hidden in CityHero when 0 — no invented project counts for new hubs.
     activeProjects: 0,
     neighborhoodDirectory: [],
@@ -1402,7 +1402,7 @@ export const CITIES: City[] = [
       "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/680fe409428a57e5320586a0_1.jpg",
     heroEyebrow: "Service Area · South Pierce Prairie",
     heroIntro:
-      "Roy is a small south Pierce County city, founded in 1884 and incorporated in 1908, on the prairie beside Joint Base Lewis-McChord. City water, on-site septic, SR-507 traffic, and Bethel School District pathways shape how a Roy home is priced and sold.",
+      "A small south Pierce County city beside Joint Base Lewis-McChord, incorporated in 1908 — city water, on-site septic, SR-507 traffic, and Bethel School District pathways shape every sale.",
     // Hidden in CityHero when 0 — no invented project counts for new hubs.
     activeProjects: 0,
     neighborhoodDirectory: [],
