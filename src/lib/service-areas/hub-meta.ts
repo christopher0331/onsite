@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-11-15";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-11-17";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -94,6 +94,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "The Country Graham homes on 1+ acre lots near Country Drive E in 98338. HOA and CC&R diligence, septic records, and Bethel schools, live NWMLS listings.",
   "graham/kapowsin":
     "Kapowsin homes near Lake Kapowsin and Kapowsin Elementary in unincorporated Graham. Well, septic, and shoreline diligence, live NWMLS listings.",
+  "graham/frederickson":
+    "Frederickson homes near Canyon Road E and Cross Park in unincorporated Pierce County. Bethel schools, sewer vs. septic checks, live NWMLS listings.",
   "seattle/ballard":
     "Ballard Seattle homes near Market Street, the Locks, and Golden Gardens in 98107–98117. Street-level comps, Seattle Public Schools, live NWMLS listings.",
   "tacoma/north-end":

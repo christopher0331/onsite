@@ -35,6 +35,7 @@ import { elkRunArticle } from "./elk-run";
 import { elkHeightsArticle } from "./elk-heights";
 import { theCountryArticle } from "./the-country";
 import { kapowsinArticle } from "./kapowsin";
+import { fredericksonArticle } from "./frederickson";
 import { ballardArticle } from "./ballard";
 import { northEndArticle } from "./north-end";
 import { hilltopArticle } from "./hilltop";
@@ -109,6 +110,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [elkHeightsArticle.slug]: elkHeightsArticle,
   [theCountryArticle.slug]: theCountryArticle,
   [kapowsinArticle.slug]: kapowsinArticle,
+  [fredericksonArticle.slug]: fredericksonArticle,
   [ballardArticle.slug]: ballardArticle,
   [northEndArticle.slug]: northEndArticle,
   [hilltopArticle.slug]: hilltopArticle,

@@ -836,7 +836,7 @@ export const CITIES: City[] = [
     heroIntro:
       "Graham is acreage country — unincorporated Pierce County where lot size, outbuildings, and well/septic standing drive value as much as finished square footage. Our comp models here are parcel-first, not house-first.",
     activeProjects: 6,
-    neighborhoodDirectory: ["The Country", "Kapowsin"],
+    neighborhoodDirectory: ["The Country", "Kapowsin", "Frederickson"],
     permittingOffice: {
       name: "Pierce County Planning & Public Works",
       url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
@@ -3654,6 +3654,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Unincorporated lake community to the south beside Lake Kapowsin — open rural parcels without The Country's covenants.",
       },
       {
+        name: "Frederickson",
+        citySlug: "graham",
+        neighborhoodSlug: "frederickson",
+        blurb: "Suburban urban-growth-area community on Graham's northern edge near Canyon Road E — subdivisions and county sewer areas instead of covenant acreage.",
+      },
+      {
         name: "South Hill",
         citySlug: "puyallup",
         neighborhoodSlug: "south-hill",
@@ -3781,6 +3787,113 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Buckley",
         citySlug: "buckley",
         blurb: "Foothills city with Elk Run and Elk Heights HOA plats and White River schools — another Rainier-side comparison set.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "frederickson",
+    citySlug: "graham",
+    name: "Frederickson",
+    // No ZIP filter: Frederickson addresses commonly use Puyallup 98375 or
+    // Tacoma 98446 mail (Frederickson Elementary is 17218 74th Avenue E,
+    // Puyallup 98375; Cross Park is 4420 Military Road E, Tacoma 98446), and
+    // those ZIPs also cover South Hill, Midland, and Tacoma streets. The
+    // listings block therefore shows Graham-wide inventory with the existing
+    // scope note.
+    zipCodes: [],
+    // Geo anchor: Frederickson place node, OpenStreetMap Nominatim. Not a boundary.
+    geo: { lat: 47.0962112, lng: -122.35873 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67d9e1a205bd4e3c72c4cae0/680fe8304415e6b356d95497_1.jpg",
+    heroEyebrow: "Graham · Frederickson",
+    introCopy:
+      "Frederickson is an unincorporated, urban-growth-area community on Graham's northern edge, centered near Canyon Road E and 176th Street E — its own Pierce County community plan, the Frederickson Employment Center, Clover Creek, and Bethel School District pathways shape every address.",
+    characteristics: {
+      medianHomeYear: "Varies by subdivision — confirm with the Pierce County Assessor-Treasurer",
+      architecturalStyles: ["Suburban single-family subdivisions and older rural lots (era and style vary by address)"],
+      typicalLotSize: "Varies by subdivision — confirm with the Pierce County Assessor-Treasurer",
+      notes:
+        "Frederickson is unincorporated, so zoning, permits, and site development run through Pierce County Planning & Public Works. Pierce County's Frederickson Community Plan identifies the Frederickson Employment Center as the largest designated industrial area in unincorporated Pierce County, so check zoning and planned uses near any parcel. Most homes get water from a Group A system, but providers differ by address, and many homes still use on-site septic while county sewer serves the commercial and industrial areas — confirm water, sewer or septic, and school assignment for each address.",
+    },
+    communityOrgs: [
+      {
+        name: "Pierce County — Frederickson Community Plan",
+        url: "https://www.piercecountywa.gov/935/Frederickson",
+        context: "County community plan, first adopted in 2003 and updated effective October 1, 2021, covering land use, the Employment Center, and Clover Creek.",
+      },
+      {
+        name: "Pierce County Parks — Stan and Joan Cross Park",
+        url: "https://www.piercecountywa.gov/6967/Cross-Park",
+        context: "64-acre county park at 4420 Military Road E with the Frederickson Community Center in restored historic barns.",
+      },
+      {
+        name: "Pierce County Parks — Naches Trail Preserve",
+        url: "https://www.piercecountywa.gov/1399/Naches-Trail-Preserve",
+        context: "50-acre preserve, established in 2003, protecting a Garry oak prairie along Clover Creek on part of the historic Naches Trail.",
+      },
+      {
+        name: "Frederickson Elementary — Bethel School District",
+        url: "https://fes.bethelsd.org/",
+        context: "Bethel School District elementary at 17218 74th Avenue E — confirm every school assignment by address with the district's maps.",
+      },
+      {
+        name: "Pierce County Planning & Public Works",
+        url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
+        context: "Permits, site development, and zoning for unincorporated Frederickson parcels.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records for Frederickson parcels.",
+      },
+    ],
+    thoroughfares: [
+      "Canyon Rd E",
+      "176th St E",
+      "Brookdale Rd E / 160th St E",
+      "Military Rd E",
+      "Pacific Ave (SR-7)",
+      "Meridian Ave E (SR-161)",
+      "SR-512",
+    ],
+    landmarks: [
+      "Stan and Joan Cross Park",
+      "Frederickson Community Center",
+      "Naches Trail Preserve",
+      "Clover Creek",
+      "Frederickson Elementary",
+      "Frederickson Employment Center",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Frederickson through Puyallup and South Hill on Meridian (SR-161) and 176th Street E, or by SR-512 and Canyon Road E. Canyon Road traffic, school-zone timing, and industrial truck routes near the Employment Center change showing logistics, so we schedule each address around its approach.",
+    adjacent: [
+      {
+        name: "Graham (City)",
+        citySlug: "graham",
+        blurb: "Parent hub to the south — rural acreage, wells and septic, and the Graham Community Plan area that borders Frederickson.",
+      },
+      {
+        name: "South Hill",
+        citySlug: "puyallup",
+        neighborhoodSlug: "south-hill",
+        blurb: "Neighboring community plan area along Meridian (SR-161) — the shopping corridor the county plan says Frederickson residents rely on.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley city to the north-east — downtown and city-utility neighborhoods; parts of Frederickson use Puyallup mailing addresses.",
+      },
+      {
+        name: "The Country",
+        citySlug: "graham",
+        neighborhoodSlug: "the-country",
+        blurb: "Graham's covenant community of mostly 1+ acre lots east of Meridian — HOA acreage instead of suburban subdivisions.",
+      },
+      {
+        name: "Tacoma",
+        citySlug: "tacoma",
+        blurb: "City reached via Canyon Road E and SR-512 — urban neighborhoods for buyers comparing city services with unincorporated Pierce County.",
       },
     ],
     reviews: [],
