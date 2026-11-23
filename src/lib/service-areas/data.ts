@@ -939,6 +939,7 @@ export const CITIES: City[] = [
       "Lincoln District",
       "Fern Hill",
       "McKinley",
+      "Downtown Tacoma",
     ],
     permittingOffice: {
       name: "City of Tacoma Planning & Development Services",
@@ -4149,6 +4150,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         blurb: "Historic bluff-top neighbor just south — Victorian and Craftsman stock along the T Line on M.L.K. Way.",
       },
       {
+        name: "Downtown Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "downtown-tacoma",
+        blurb: "Regional growth center just south along Pacific Ave — condos in new and converted historic buildings, the T Line, and the museum blocks.",
+      },
+      {
         name: "South Tacoma",
         citySlug: "tacoma",
         neighborhoodSlug: "south-tacoma",
@@ -4286,6 +4293,112 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Puyallup",
         citySlug: "puyallup",
         blurb: "Valley and South Hill inventory when Tacoma pricing stretches the budget.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "downtown-tacoma",
+    citySlug: "tacoma",
+    name: "Downtown Tacoma",
+    // Downtown Tacoma 98402: Tacoma Art Museum (1701 Pacific Ave), Museum of
+    // Glass (1801 Dock St), UW Tacoma (1900 Commerce St), and the Main Library
+    // (1102 Tacoma Ave S) all use 98402. The ZIP is not the regional growth
+    // center boundary.
+    zipCodes: ["98402"],
+    // Geo anchor: "Downtown Tacoma" place node (quarter), OpenStreetMap Nominatim. Not a boundary.
+    geo: { lat: 47.2497434, lng: -122.4390969 },
+    heroImage: "/blog/modern-home-exterior-at-dusk.webp",
+    heroEyebrow: "Tacoma · Downtown Tacoma",
+    introCopy:
+      "Downtown Tacoma is the city's regional growth center along Pacific Avenue and the Thea Foss Waterway — condos in new and converted historic buildings, the Union Depot/Warehouse and Old City Hall historic districts, the T Line, UW Tacoma, and the museum blocks, where building-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "Varies by building — historic conversions and newer construction; confirm with the Pierce County Assessor-Treasurer",
+      architecturalStyles: ["Condominium buildings", "Converted historic commercial and warehouse buildings", "Apartment buildings"],
+      typicalLotSize: "Mostly condominium units — confirm unit and parcel data with the Pierce County Assessor-Treasurer",
+      notes:
+        "Two of Tacoma's four locally designated historic districts are downtown: the Union Depot/Warehouse Historic District, surrounded by the Union Station Conservation District, and the Old City Hall Historic District. Exterior changes in those areas go through city design review. For condo resales, review the association's resale certificate, budget, reserves, and rules, and ask whether the building is inside the Downtown Tacoma Business Improvement Area, which levies annual assessments on buildings and real estate inside its boundaries.",
+    },
+    communityOrgs: [
+      {
+        name: "Tacoma Historic Districts & Landmarks",
+        url: "https://tacoma.gov/government/departments/planning-and-development-services/historic-preservation/tacomas-historic-districts-landmarks/",
+        context: "City guidance on the Union Depot/Warehouse and Old City Hall historic districts and design review for exterior changes.",
+      },
+      {
+        name: "Downtown Tacoma Partnership",
+        url: "https://www.tacomachamber.org/downtown-tacoma-partnership.html",
+        context: "Operating name of the Downtown Tacoma Business Improvement Area, created in 1988, which provides safe-and-clean, beautification, and retail-support services.",
+      },
+      {
+        name: "Sound Transit — T Line",
+        url: "https://www.soundtransit.org/ride-with-us/routes-schedules/t-line",
+        context: "Streetcar between Tacoma Dome and St. Joseph, with downtown stops including Union Station, Convention Center, Theater District, and Old City Hall.",
+      },
+      {
+        name: "City of Tacoma — South Downtown Subarea Plan",
+        url: "https://cms.cityoftacoma.org/planning/dome-brewery%20subarea/Final%20South%20Downtown%20Subarea%20Plan%20%2812-17-13%29%287-22-14%29.pdf",
+        context: "City plan for the southern half of downtown — the Dome, Brewery, and UW Tacoma/Museum districts and the southern Foss Waterway and Hillside.",
+      },
+      {
+        name: "Tacoma Public Schools",
+        url: "https://www.tacomaschools.org/",
+        context: "Downtown addresses need address-level elementary, middle, and high school confirmation — ZIP alone is not enough.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel and condo-unit data, assessed value, and property-tax records for downtown addresses.",
+      },
+    ],
+    thoroughfares: [
+      "Pacific Ave",
+      "Commerce St",
+      "Broadway",
+      "Market St",
+      "Tacoma Ave S",
+      "Dock St",
+      "I-705",
+    ],
+    landmarks: [
+      "Union Station",
+      "Old City Hall",
+      "Tacoma Art Museum",
+      "Museum of Glass and the Chihuly Bridge of Glass",
+      "Washington State History Museum",
+      "UW Tacoma",
+      "Thea Foss Waterway",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach downtown Tacoma via SR-410 and SR-167 to I-5 and I-705. Garage access, loading zones, building entry rules, and event traffic near the museums and theaters change showing logistics downtown, so we confirm parking and building access for each unit before a showing or photo shoot.",
+    adjacent: [
+      {
+        name: "Stadium District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "stadium-district",
+        blurb: "Historic pocket just north around Stadium High and Wright Park — period homes and downtown-edge density on the same T Line corridor.",
+      },
+      {
+        name: "Hilltop",
+        citySlug: "tacoma",
+        neighborhoodSlug: "hilltop",
+        blurb: "Bluff-top neighbor to the west along M.L.K. Jr. Way — Victorian and Craftsman stock and the T Line's Hilltop extension.",
+      },
+      {
+        name: "Northeast Tacoma",
+        citySlug: "tacoma",
+        neighborhoodSlug: "northeast-tacoma",
+        blurb: "Across Commencement Bay in 98422 — single-family streets on Marine View Drive for buyers trading downtown density for space.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — North End, Proctor, West Slope, and South Tacoma micro-markets on the same urban desk.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley city to the southeast — a common cross-shop for buyers weighing a downtown condo against a single-family home.",
       },
     ],
     reviews: [],
