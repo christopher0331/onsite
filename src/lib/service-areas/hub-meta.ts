@@ -35,6 +35,12 @@ const HUB_META: Record<string, string> = {
     "Federal Way homes in Twin Lakes, West Campus, and Lakota. Separate price bands and buyer pools across 98003 and 98023, live NWMLS listings.",
   kent:
     "Kent homes from East Hill and West Hill to Lake Meridian and Panther Lake. Submarket pricing, not a city average, live NWMLS listings.",
+  spanaway:
+    "Spanaway homes near Spanaway Lake and JBLM in 98387. Pierce County permits, water purveyor and sewer-or-septic checks, and Bethel School District pathways.",
+  orting:
+    "Orting homes between the Puyallup and Carbon rivers in 98360. Foothills Trail, lahar and flood planning, city utilities, Orting schools, live NWMLS listings.",
+  roy:
+    "Roy homes on the south Pierce County prairie in 98580. City water, on-site septic, SR-507 and the JBLM Roy Gate, and Bethel School District pathways.",
   seattle:
     "Seattle neighborhood homes — Ballard, Green Lake, West Seattle, and more. School catchments, transit, and lot quality first, never a city-wide average.",
 };
@@ -56,6 +62,10 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Sunrise master-planned community on Puyallup's South Hill. Pierce County plats east of Meridian, parks, and school checks in 98374, live NWMLS listings.",
   "puyallup/summit":
     "Summit homes between Puyallup and Tacoma. Puyallup vs Franklin Pierce schools, sewer vs septic by street in 98373 and 98371, live NWMLS listings.",
+  "puyallup/north-puyallup":
+    "North Puyallup homes on the Puyallup River's north bank across from downtown. City vs county permits and flood-map checks by parcel, live NWMLS listings.",
+  "puyallup/alderton":
+    "Alderton homes and acreage on SR-162 in the Puyallup River Valley. Farmland, wells and septic, flood and lahar checks, county permits, live NWMLS listings.",
   "bonney-lake/tehaleh":
     "Tehaleh homes in the 4,000-acre Bonney Lake planned community. Newer construction, trails, and HOA resale certificates in 98391, live NWMLS listings.",
   "bonney-lake/sky-island":

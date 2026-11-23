@@ -19,6 +19,11 @@ import { shawneeRidgeDiscover } from "./shawnee-ridge";
 import { gemHeightsDiscover } from "./gem-heights";
 import { sunriseDiscover } from "./sunrise";
 import { summitDiscover } from "./summit";
+import { spanawayDiscover } from "./spanaway";
+import { ortingDiscover } from "./orting";
+import { royDiscover } from "./roy";
+import { northPuyallupDiscover } from "./north-puyallup";
+import { aldertonDiscover } from "./alderton";
 import { southHillDiscover } from "./south-hill";
 import { tehalehDiscover } from "./tehaleh";
 import { bridgeHillDiscover } from "./bridge-hill";
@@ -88,6 +93,11 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [gemHeightsDiscover.slug]: gemHeightsDiscover,
   [sunriseDiscover.slug]: sunriseDiscover,
   [summitDiscover.slug]: summitDiscover,
+  [spanawayDiscover.slug]: spanawayDiscover,
+  [ortingDiscover.slug]: ortingDiscover,
+  [royDiscover.slug]: royDiscover,
+  [northPuyallupDiscover.slug]: northPuyallupDiscover,
+  [aldertonDiscover.slug]: aldertonDiscover,
   [southHillDiscover.slug]: southHillDiscover,
   [tehalehDiscover.slug]: tehalehDiscover,
   [bridgeHillDiscover.slug]: bridgeHillDiscover,

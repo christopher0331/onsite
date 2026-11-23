@@ -35,9 +35,13 @@ export default function CityHero({ city }: Props) {
           <p className="text-[16px] text-white/75 max-w-2xl leading-8 mb-4">
             {city.heroIntro}
           </p>
-          <p className="text-[12px] uppercase tracking-[0.25em] text-white/85 mb-10">
-            Currently serving {city.activeProjects} active projects in the {city.name} metro area.
-          </p>
+          {city.activeProjects > 0 ? (
+            <p className="text-[12px] uppercase tracking-[0.25em] text-white/85 mb-10">
+              Currently serving {city.activeProjects} active projects in the {city.name} metro area.
+            </p>
+          ) : (
+            <div className="mb-6" aria-hidden />
+          )}
           <div className="flex flex-wrap gap-4">
             <Link
               href="/contact-us"
