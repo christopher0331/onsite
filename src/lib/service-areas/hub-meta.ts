@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-11-17";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-11-23";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -108,6 +108,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Fern Hill Tacoma homes near S 84th St, Fern Hill Park, and Park Ave in 98444. Street-level comps and school diligence, live NWMLS listings.",
   "tacoma/lincoln-district":
     "Lincoln District Tacoma homes near S 38th St, Lincoln High, and Lincoln Park in 98418 and 98408. Streetcar-era stock and zoning diligence, live NWMLS listings.",
+  "tacoma/downtown-tacoma":
+    "Downtown Tacoma condos near Pacific Ave, Union Station, and the T Line in 98402. Historic-district, HOA resale, and BIA checks, live NWMLS listings.",
   "tacoma/stadium-district":
     "Stadium District Tacoma homes around Stadium High and Wright Park. Period houses, downtown-edge density, and school-pathway demand in 98403, live listings.",
   "lake-tapps/tapps-island":
