@@ -940,6 +940,7 @@ export const CITIES: City[] = [
       "Fern Hill",
       "McKinley",
       "Downtown Tacoma",
+      "Eastside",
     ],
     permittingOffice: {
       name: "City of Tacoma Planning & Development Services",
@@ -1575,7 +1576,7 @@ export const CITIES: City[] = [
 ];
 
 export const NEIGHBORHOODS: Neighborhood[] = [
-  {
+{
     slug: "mckinley",
     citySlug: "tacoma",
     name: "McKinley",
@@ -1643,7 +1644,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: []
   },
-  {
+{
     slug: "south-hill",
     citySlug: "puyallup",
     name: "South Hill",
@@ -1720,7 +1721,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "downtown-puyallup",
     citySlug: "puyallup",
     name: "Downtown Puyallup",
@@ -1796,7 +1797,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "clarks-creek",
     citySlug: "puyallup",
     name: "Clark's Creek",
@@ -1867,7 +1868,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "rodesco",
     citySlug: "puyallup",
     name: "Rodesco",
@@ -1938,7 +1939,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "shawnee-ridge",
     citySlug: "puyallup",
     name: "Shawnee Ridge",
@@ -2019,7 +2020,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "gem-heights",
     citySlug: "puyallup",
     name: "Gem Heights",
@@ -2096,7 +2097,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "sunrise",
     citySlug: "puyallup",
     name: "Sunrise",
@@ -2170,7 +2171,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "summit",
     citySlug: "puyallup",
     name: "Summit",
@@ -2246,7 +2247,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "north-puyallup",
     citySlug: "puyallup",
     name: "North Puyallup",
@@ -2337,7 +2338,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "alderton",
     citySlug: "puyallup",
     name: "Alderton",
@@ -2443,7 +2444,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "tehaleh",
     citySlug: "bonney-lake",
     name: "Tehaleh",
@@ -2523,7 +2524,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "sky-island",
     citySlug: "bonney-lake",
     name: "Sky Island",
@@ -2637,7 +2638,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "panorama-west",
     citySlug: "bonney-lake",
     name: "Panorama West",
@@ -2751,7 +2752,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "quiet-water",
     citySlug: "bonney-lake",
     name: "Quiet Water",
@@ -2820,7 +2821,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "panorama-heights",
     citySlug: "bonney-lake",
     name: "Panorama Heights",
@@ -2904,7 +2905,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "bridge-hill",
     citySlug: "sumner",
     name: "Bridge Hill",
@@ -2991,7 +2992,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "downtown-sumner",
     citySlug: "sumner",
     name: "Downtown Sumner",
@@ -3097,7 +3098,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "north-sumner",
     citySlug: "sumner",
     name: "North Sumner",
@@ -3201,7 +3202,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "valley-corridor",
     citySlug: "sumner",
     name: "Valley Corridor",
@@ -3293,7 +3294,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "east-valley-edge",
     citySlug: "sumner",
     name: "East Valley Edge",
@@ -3392,7 +3393,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "elk-run",
     citySlug: "buckley",
     name: "Elk Run",
@@ -3488,7 +3489,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "elk-heights",
     citySlug: "buckley",
     name: "Elk Heights",
@@ -3586,7 +3587,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "the-country",
     citySlug: "graham",
     name: "The Country",
@@ -3686,7 +3687,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "kapowsin",
     citySlug: "graham",
     name: "Kapowsin",
@@ -3792,7 +3793,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "frederickson",
     citySlug: "graham",
     name: "Frederickson",
@@ -3899,7 +3900,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "ballard",
     citySlug: "seattle",
     name: "Ballard",
@@ -3992,7 +3993,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "north-end",
     citySlug: "tacoma",
     name: "North End",
@@ -4096,7 +4097,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "stadium-district",
     citySlug: "tacoma",
     name: "Stadium District",
@@ -4201,7 +4202,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "hilltop",
     citySlug: "tacoma",
     name: "Hilltop",
@@ -4297,7 +4298,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "downtown-tacoma",
     citySlug: "tacoma",
     name: "Downtown Tacoma",
@@ -4403,7 +4404,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "lincoln-district",
     citySlug: "tacoma",
     name: "Lincoln District",
@@ -4503,7 +4504,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "south-tacoma",
     citySlug: "tacoma",
     name: "South Tacoma",
@@ -4596,8 +4597,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-
-  {
+{
     slug: "fern-hill",
     citySlug: "tacoma",
     name: "Fern Hill",
@@ -4686,7 +4686,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "west-slope",
     citySlug: "tacoma",
     name: "West Slope",
@@ -4773,7 +4773,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "tapps-island",
     citySlug: "lake-tapps",
     name: "Tapps Island",
@@ -4859,7 +4859,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "driftwood-point",
     citySlug: "lake-tapps",
     name: "Driftwood Point",
@@ -4939,7 +4939,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "tacoma-point",
     citySlug: "lake-tapps",
     name: "Tacoma Point",
@@ -5015,7 +5015,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "snag-island",
     citySlug: "lake-tapps",
     name: "Snag Island",
@@ -5091,7 +5091,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "inlet-island",
     citySlug: "lake-tapps",
     name: "Inlet Island",
@@ -5167,7 +5167,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "church-lake-waterfront",
     citySlug: "lake-tapps",
     name: "Church Lake Waterfront",
@@ -5243,7 +5243,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "west-campus",
     citySlug: "federal-way",
     name: "West Campus",
@@ -5382,7 +5382,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "lakota",
     citySlug: "federal-way",
     name: "Lakota",
@@ -5486,7 +5486,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "dash-point",
     citySlug: "federal-way",
     name: "Dash Point",
@@ -5596,7 +5596,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "downtown-kent",
     citySlug: "kent",
     name: "Downtown Kent",
@@ -5728,7 +5728,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "east-hill",
     citySlug: "kent",
     name: "East Hill",
@@ -5854,7 +5854,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "panther-lake",
     citySlug: "kent",
     name: "Panther Lake",
@@ -5968,7 +5968,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "west-hill",
     citySlug: "kent",
     name: "West Hill",
@@ -6088,7 +6088,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "lake-meridian",
     citySlug: "kent",
     name: "Lake Meridian",
@@ -6208,7 +6208,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "lea-hill",
     citySlug: "auburn",
     name: "Lea Hill",
@@ -6344,7 +6344,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "lakeland-hills",
     citySlug: "auburn",
     name: "Lakeland Hills",
@@ -6429,7 +6429,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "downtown-auburn",
     citySlug: "auburn",
     name: "Downtown Auburn",
@@ -6533,7 +6533,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "west-hill-auburn",
     citySlug: "auburn",
     name: "West Hill",
@@ -6647,7 +6647,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     ],
     reviews: [],
   },
-  {
+{
     slug: "redondo",
     citySlug: "federal-way",
     name: "Redondo",
@@ -6751,7 +6751,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "twin-lakes",
     citySlug: "federal-way",
     name: "Twin Lakes",
@@ -6842,7 +6842,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-  {
+{
     slug: "proctor-district",
     citySlug: "tacoma",
     name: "Proctor District",
@@ -6923,8 +6923,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
       },
     ],
   },
-
-  {
+{
     slug: "northeast-tacoma",
     citySlug: "tacoma",
     name: "Northeast Tacoma",
@@ -7020,6 +7019,111 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Puyallup",
         citySlug: "puyallup",
         blurb: "Valley and South Hill inventory when Tacoma pricing stretches the budget.",
+      },
+    ],
+    reviews: [],
+  },
+{
+    slug: "eastside",
+    citySlug: "tacoma",
+    name: "Eastside",
+    // Most Eastside addresses use ZIP 98404 (Eastside Community Center, First
+    // Creek, Lister, and Roosevelt are all Tacoma 98404). The ZIP is not the
+    // Neighborhood Council boundary and can include addresses outside the
+    // city limits.
+    zipCodes: ["98404"],
+    // Geo anchor: "Eastside" place node, OpenStreetMap Nominatim. Not a boundary.
+    geo: { lat: 47.2147289, lng: -122.4142391 },
+    heroImage: "/blog/family-walking-past-hedge-lined-home.webp",
+    heroEyebrow: "Tacoma · Eastside",
+    introCopy:
+      "Eastside is one of Tacoma's eight Neighborhood Council districts, south of I-5 and east of Pacific Avenue in ZIP 98404 — New Salishan, Swan Creek Park, the Eastside Community Center, and Tacoma Public Schools campuses, where nearby Eastside streets beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "Varies by street — confirm with the Pierce County Assessor-Treasurer",
+      architecturalStyles: ["Single-family homes, duplexes, and New Salishan townhomes and apartments (era and style vary by street)"],
+      typicalLotSize: "Varies by street — confirm with the Pierce County Assessor-Treasurer",
+      notes:
+        "Eastside is inside the City of Tacoma, so zoning, permits, and infill or ADU questions run through Planning & Development Services. Gulches, creeks, and slopes cross the district, so check critical-area and drainage constraints before budgeting work. New Salishan homes can carry HOA, resale, or income-restricted terms — ask before pricing. ZIP 98404 is not the council boundary and can include addresses outside the city; confirm city jurisdiction and school assignment by address.",
+    },
+    communityOrgs: [
+      {
+        name: "ENACT — Eastside Neighborhoods Advisory Council of Tacoma",
+        url: "https://www.easttacoma.org/about/",
+        context: "Eastside's Neighborhood Council, one of eight in the City of Tacoma's Neighborhood Council Program.",
+      },
+      {
+        name: "Parks Tacoma — Swan Creek Park Master Plan",
+        url: "https://www.parkstacoma.gov/wp-content/uploads/2019/05/SwanCreekMasterPlan_FINAL_opt.pdf",
+        context: "Plan for the 373-acre park on the city's eastern edge, owned by Parks Tacoma and Pierce County.",
+      },
+      {
+        name: "Tacoma Housing Authority — New Salishan",
+        url: "https://www.tacomahousing.org/about/programs-projects/real-estate-development/new-salishan/",
+        context: "Mixed-income HOPE VI rebuild of 1940s wartime housing east of Portland Avenue, with about 1,350 households.",
+      },
+      {
+        name: "First Creek Middle School — Tacoma Public Schools",
+        url: "https://fc.tacomaschools.org/contact",
+        context: "Middle school at 1801 East 56th Street — confirm every school assignment by address with the district.",
+      },
+      {
+        name: "Tacoma Planning & Development Services",
+        url: "https://www.cityoftacoma.org/government/city_departments/planning_and_development_services",
+        context: "Permits, zoning, and infill / ADU questions for Eastside parcels.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, assessed value, and property-tax records for Eastside parcels.",
+      },
+    ],
+    thoroughfares: [
+      "Portland Ave E",
+      "McKinley Ave E",
+      "E 56th St",
+      "E 72nd St",
+      "E 38th St",
+      "Pacific Ave (SR-7)",
+      "I-5",
+    ],
+    landmarks: [
+      "Swan Creek Park",
+      "New Salishan",
+      "Eastside Community Center",
+      "First Creek Middle School",
+      "Portland Avenue Park",
+      "Lister Elementary",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach the Eastside on SR-167 and I-5 to the Portland Avenue exit, or through Puyallup on Pioneer Way E. Hills, gulches, and school-campus traffic on East 56th Street change curb and showing logistics, so we schedule each address around its approach.",
+    adjacent: [
+      {
+        name: "McKinley",
+        citySlug: "tacoma",
+        neighborhoodSlug: "mckinley",
+        blurb: "McKinley pocket inside the Eastside district, around McKinley Park — its own guide and its own comps.",
+      },
+      {
+        name: "Lincoln District",
+        citySlug: "tacoma",
+        neighborhoodSlug: "lincoln-district",
+        blurb: "Neighbor across Pacific Avenue around South 38th Street — streetcar-era stock near Lincoln High School.",
+      },
+      {
+        name: "Fern Hill",
+        citySlug: "tacoma",
+        neighborhoodSlug: "fern-hill",
+        blurb: "South-end pocket around South 84th and Park Avenue in 98444 — another Tacoma comparison set south-west of the Eastside.",
+      },
+      {
+        name: "Tacoma (City)",
+        citySlug: "tacoma",
+        blurb: "Parent hub — North End, Proctor, Stadium, Hilltop, Lincoln, McKinley, and Northeast Tacoma on the same urban desk.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley city to the east via Pioneer Way E — downtown and South Hill inventory when buyers widen the search.",
       },
     ],
     reviews: [],

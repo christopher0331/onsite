@@ -71,6 +71,7 @@ import { redondoArticle } from "./redondo";
 import { twinLakesArticle } from "./twin-lakes";
 import { proctorDistrictArticle } from "./proctor-district";
 import { northeastTacomaArticle } from "./northeast-tacoma";
+import { eastsideArticle } from "./eastside";
 
 import { mckinleyArticle } from "./mckinley";
 
@@ -148,6 +149,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [twinLakesArticle.slug]: twinLakesArticle,
   [proctorDistrictArticle.slug]: proctorDistrictArticle,
   [northeastTacomaArticle.slug]: northeastTacomaArticle,
+  [eastsideArticle.slug]: eastsideArticle,
 };
 
 export function getServiceAreaArticle(
