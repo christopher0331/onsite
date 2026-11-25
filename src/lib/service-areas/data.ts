@@ -281,6 +281,7 @@ export const CITIES: City[] = [
       "Quiet Water",
       "Panorama West",
       "Panorama Heights",
+      "Prairie Ridge",
     ],
     permittingOffice: {
       name: "City of Bonney Lake — Community Development",
@@ -2506,6 +2507,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         citySlug: "lake-tapps",
         blurb: "Reservoir waterfront sibling — dock lifestyle when master-planned plateau living is not the product.",
       },
+      {
+        name: "Prairie Ridge",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "prairie-ridge",
+        blurb: "Unincorporated plateau community just north of Tehaleh — established association streets and county permits rather than a master-planned plat.",
+      },
     ],
     reviews: [
       {
@@ -2904,6 +2911,104 @@ export const NEIGHBORHOODS: Neighborhood[] = [
           "The cul-de-sac parks and the 109th–111th street grid were sold as real daily life, not fluff. School boundaries and phase HOA docs were confirmed early.",
       },
     ],
+  },
+{
+    slug: "prairie-ridge",
+    citySlug: "bonney-lake",
+    name: "Prairie Ridge",
+    // ZIP 98391 is the Bonney Lake mailing ZIP used by the association
+    // (14205 215th Ave E) and Liberty Ridge Elementary. The same ZIP also
+    // covers in-city Bonney Lake, Tehaleh, and other plateau streets, so the
+    // listings block shows 98391 inventory with the existing scope note.
+    zipCodes: ["98391"],
+    // Geo anchor: "Prairie Ridge" place node, OpenStreetMap Nominatim. Not a boundary.
+    geo: { lat: 47.1376017, lng: -122.1487261 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e16372192203004a84a865_We%20Help%20You%20Sell%20Your%20Home%20-%20Pierce%20County.jpg",
+    heroEyebrow: "Bonney Lake · Prairie Ridge",
+    introCopy:
+      "Prairie Ridge is an unincorporated census-designated place just south of Bonney Lake — Prairie Ridge Drive E and 215th Avenue E, the Prairie Ridge Maintenance Co association, Liberty Ridge Elementary, and county permit rules, where street-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "Varies by street — the association notes roads in the plat were deeded to Pierce County in the 1960s; confirm year built with the Pierce County Assessor-Treasurer",
+      architecturalStyles: ["Suburban single-family (era and style vary by address)"],
+      typicalLotSize: "Varies by street — confirm with the Pierce County Assessor-Treasurer",
+      notes:
+        "Prairie Ridge is unincorporated, so zoning, permits, and site development run through Pierce County, not the City of Bonney Lake. Many lots are in the Prairie Ridge Maintenance Co association, which manages common areas and collects an annual assessment — confirm whether a parcel is in the association and review current dues, covenants, and resale documents. Confirm water, sewer or septic, and school assignment for each address.",
+    },
+    communityOrgs: [
+      {
+        name: "Prairie Ridge Maintenance Co",
+        url: "https://www.prmchoa.com/",
+        context: "Homeowners association for lots in the Prairie Ridge plat, with a recreation hall and community service center at 14205 215th Avenue E.",
+      },
+      {
+        name: "Liberty Ridge Elementary — Sumner-Bonney Lake School District",
+        url: "https://lre.sumnersd.org/",
+        context: "District elementary at 12202 209th Avenue Court E — confirm every school assignment by address with the district's boundary maps.",
+      },
+      {
+        name: "Pierce County Parks — Foothills Trail",
+        url: "https://www.piercecountywa.gov/foothills",
+        context: "Regional trail toward South Prairie and Buckley, near the downhill edge of the ridge and South Prairie Creek.",
+      },
+      {
+        name: "Pierce County Planning & Public Works",
+        url: "https://www.piercecountywa.gov/91/Planning-Public-Works",
+        context: "Permits, site development, and zoning for unincorporated Prairie Ridge parcels.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, year built, assessed value, and property-tax records for Prairie Ridge parcels.",
+      },
+    ],
+    thoroughfares: [
+      "Prairie Ridge Dr E",
+      "215th Ave E",
+      "128th St E",
+      "214th Ave E",
+      "209th Ave Ct E",
+      "SR-410",
+    ],
+    landmarks: [
+      "Prairie Ridge Recreation Hall",
+      "Prairie Ridge Community Service Center",
+      "128th Street park",
+      "South Prairie Creek",
+      "Liberty Ridge Elementary",
+      "Foothills Trail",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Prairie Ridge via SR-410 and 214th Avenue E into Prairie Ridge Drive E and 215th Avenue E. County road maintenance, the community's 25-mile-per-hour limit, and school-zone timing around Liberty Ridge Elementary change showing logistics, so we schedule each address around its approach.",
+    adjacent: [
+      {
+        name: "Bonney Lake (City)",
+        citySlug: "bonney-lake",
+        blurb: "Parent hub to the north — in-city plateau neighborhoods, the SR-410 corridor, and city permits that do not apply in unincorporated Prairie Ridge.",
+      },
+      {
+        name: "Tehaleh",
+        citySlug: "bonney-lake",
+        neighborhoodSlug: "tehaleh",
+        blurb: "Master-planned community nearby — newer construction and a different HOA structure that buyers often weigh against Prairie Ridge streets.",
+      },
+      {
+        name: "Orting",
+        citySlug: "orting",
+        blurb: "Valley city to the south — a common cross-shop for buyers comparing the ridge with the Puyallup River valley.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Valley city to the northwest — downtown and Sounder access for buyers trading plateau lots for in-town living.",
+      },
+      {
+        name: "Lake Tapps",
+        citySlug: "lake-tapps",
+        blurb: "Reservoir communities to the north — dock and shoreline living when inland plateau streets are not the fit.",
+      },
+    ],
+    reviews: [],
   },
 {
     slug: "bridge-hill",

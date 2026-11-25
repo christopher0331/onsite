@@ -26,6 +26,7 @@ import { northPuyallupDiscover } from "./north-puyallup";
 import { aldertonDiscover } from "./alderton";
 import { southHillDiscover } from "./south-hill";
 import { tehalehDiscover } from "./tehaleh";
+import { prairieRidgeDiscover } from "./prairie-ridge";
 import { bridgeHillDiscover } from "./bridge-hill";
 import { downtownSumnerDiscover } from "./downtown-sumner";
 import { northSumnerDiscover } from "./north-sumner";
@@ -103,6 +104,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [aldertonDiscover.slug]: aldertonDiscover,
   [southHillDiscover.slug]: southHillDiscover,
   [tehalehDiscover.slug]: tehalehDiscover,
+  [prairieRidgeDiscover.slug]: prairieRidgeDiscover,
   [bridgeHillDiscover.slug]: bridgeHillDiscover,
   [downtownSumnerDiscover.slug]: downtownSumnerDiscover,
   [northSumnerDiscover.slug]: northSumnerDiscover,
