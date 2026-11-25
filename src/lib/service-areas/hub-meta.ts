@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-11-23";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-11-25";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -76,6 +76,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Panorama Heights Bonney Lake homes on 176th–181st and 109th–111th in 98391. Early-2000s PUD courts, HOA diligence, live NWMLS listings.",
   "bonney-lake/quiet-water":
     "Quiet Water Bonney Lake / Lake Tapps homes east of 214th Ave E in 98391. Dieringer schools, HOA diligence, and street-level comps, live NWMLS listings.",
+  "bonney-lake/prairie-ridge":
+    "Prairie Ridge homes near Prairie Ridge Dr E and 215th Ave E in unincorporated 98391. HOA, county permits, Sumner-Bonney Lake schools, live NWMLS listings.",
   "sumner/bridge-hill":
     "Bridge Hill homes on the bluff above downtown Sumner. View lots, established trees, and Sounder access with tight inventory in 98390, live NWMLS listings.",
   "sumner/downtown-sumner":

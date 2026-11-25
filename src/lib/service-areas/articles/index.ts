@@ -26,6 +26,7 @@ import { northPuyallupArticle } from "./north-puyallup";
 import { aldertonArticle } from "./alderton";
 import { southHillArticle } from "./south-hill";
 import { tehalehArticle } from "./tehaleh";
+import { prairieRidgeArticle } from "./prairie-ridge";
 import { bridgeHillArticle } from "./bridge-hill";
 import { downtownSumnerArticle } from "./downtown-sumner";
 import { northSumnerArticle } from "./north-sumner";
@@ -103,6 +104,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [aldertonArticle.slug]: aldertonArticle,
   [southHillArticle.slug]: southHillArticle,
   [tehalehArticle.slug]: tehalehArticle,
+  [prairieRidgeArticle.slug]: prairieRidgeArticle,
   [bridgeHillArticle.slug]: bridgeHillArticle,
   [downtownSumnerArticle.slug]: downtownSumnerArticle,
   [northSumnerArticle.slug]: northSumnerArticle,
