@@ -276,11 +276,26 @@ export function applyFreeTextLocation(
   return plan;
 }
 
-/** A house-number lookup should still find pending and sold listings that have a page. */
+/**
+ * Statuses a specific house can be in and still have a public listing page.
+ * City browse stays on the caller's for-sale set. Delete and Incomplete are
+ * omitted; those records are not public listing pages.
+ */
+const HOUSE_NUMBER_STATUSES = [
+  "Pending",
+  "Closed",
+  "Coming Soon",
+  "Hold",
+  "Withdrawn",
+  "Expired",
+  "Canceled",
+] as const;
+
+/** A house-number lookup should still find the listing when it is not Active. */
 export function includeAddressHistoryStatuses(params: URLSearchParams) {
   const have = new Set(params.getAll("standardStatus"));
   if (!have.has("Active") && !have.has("Active Under Contract")) return;
-  for (const status of ["Pending", "Closed"]) {
+  for (const status of HOUSE_NUMBER_STATUSES) {
     if (!have.has(status)) params.append("standardStatus", status);
   }
 }
