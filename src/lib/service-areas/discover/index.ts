@@ -4,6 +4,7 @@ import { bonneyLakeDiscover } from "./bonney-lake";
 import { sumnerDiscover } from "./sumner";
 import { puyallupDiscover } from "./puyallup";
 import { edgewoodDiscover } from "./edgewood";
+import { jovitaDiscover } from "./jovita";
 import { miltonDiscover } from "./milton";
 import { auburnDiscover } from "./auburn";
 import { buckleyDiscover } from "./buckley";
@@ -82,6 +83,7 @@ const DISCOVER: Record<string, ServiceAreaDiscover> = {
   [sumnerDiscover.slug]: sumnerDiscover,
   [puyallupDiscover.slug]: puyallupDiscover,
   [edgewoodDiscover.slug]: edgewoodDiscover,
+  [jovitaDiscover.slug]: jovitaDiscover,
   [miltonDiscover.slug]: miltonDiscover,
   [auburnDiscover.slug]: auburnDiscover,
   [buckleyDiscover.slug]: buckleyDiscover,

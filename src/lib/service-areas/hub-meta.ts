@@ -8,7 +8,7 @@ import type { City, Neighborhood } from "./types";
  *
  * Adding a city or neighborhood without an entry here fails the build.
  */
-export const SERVICE_AREA_META_UPDATED_AT = "2026-11-25";
+export const SERVICE_AREA_META_UPDATED_AT = "2026-11-27";
 
 const HUB_META: Record<string, string> = {
   auburn:
@@ -62,6 +62,8 @@ const NEIGHBORHOOD_META: Record<string, string> = {
     "Sunrise master-planned community on Puyallup's South Hill. Pierce County plats east of Meridian, parks, and school checks in 98374, live NWMLS listings.",
   "puyallup/summit":
     "Summit homes between Puyallup and Tacoma. Puyallup vs Franklin Pierce schools, sewer vs septic by street in 98373 and 98371, live NWMLS listings.",
+  "edgewood/jovita":
+    "Jovita, Edgewood homes near Jovita Blvd E and the Interurban Trail. City permits, Fife and Puyallup school checks, live NWMLS listings.",
   "puyallup/north-puyallup":
     "North Puyallup homes on the Puyallup River's north bank across from downtown. City vs county permits and flood-map checks by parcel, live NWMLS listings.",
   "puyallup/alderton":

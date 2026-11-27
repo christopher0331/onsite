@@ -495,7 +495,7 @@ export const CITIES: City[] = [
     heroIntro:
       "Edgewood is large-lot living minutes from the valley floor — acreage parcels, equestrian properties, and newer plats sharing the same hilltop. Comp selection here is about lot utility as much as the house itself.",
     activeProjects: 5,
-    neighborhoodDirectory: [],
+    neighborhoodDirectory: ["Jovita"],
     permittingOffice: {
       name: "City of Edgewood — Community Development",
       url: "https://www.cityofedgewood.org/",
@@ -2330,6 +2330,12 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Edgewood",
         citySlug: "edgewood",
         blurb: "Plateau city to the north up Meridian — larger lots and its own city permitting.",
+      },
+      {
+        name: "Jovita",
+        citySlug: "edgewood",
+        neighborhoodSlug: "jovita",
+        blurb: "Edgewood streets along Jovita Boulevard E and the Interurban Trail — a plateau pocket with city permits and trail access north of the valley.",
       },
       {
         name: "Sumner",
@@ -7229,6 +7235,103 @@ export const NEIGHBORHOODS: Neighborhood[] = [
         name: "Puyallup",
         citySlug: "puyallup",
         blurb: "Valley city to the east via Pioneer Way E — downtown and South Hill inventory when buyers widen the search.",
+      },
+    ],
+    reviews: [],
+  },
+  {
+    slug: "jovita",
+    citySlug: "edgewood",
+    name: "Jovita",
+    // Jovita addresses inside the City of Edgewood commonly use 98372
+    // (Interurban trailhead and Hedden Elementary are Edgewood, WA 98372).
+    // The same ZIP also covers other Edgewood and valley streets, and some
+    // Jovita Boulevard segments are mapped with other mailing ZIPs, so
+    // zipCodes is left empty and the listings block shows Edgewood-wide
+    // inventory with the existing scope note.
+    zipCodes: [],
+    // Geo anchor: "Jovita - Interurban Tail Park" place node, OpenStreetMap
+    // Nominatim (trailhead area). Not a boundary.
+    geo: { lat: 47.2564692, lng: -122.2775942 },
+    heroImage:
+      "https://cdn.prod.website-files.com/67ad0482477bce360af7c269/67e16372192203004a84a865_We%20Help%20You%20Sell%20Your%20Home%20-%20Pierce%20County.jpg",
+    heroEyebrow: "Edgewood · Jovita",
+    introCopy:
+      "Jovita is the Edgewood plateau pocket along Jovita Boulevard E and Jovita Canyon — the Interurban Trail trailhead at 114th Avenue E, city permits, and split Fife and Puyallup school pathways, where street-level comps beat any citywide average.",
+    characteristics: {
+      medianHomeYear: "Varies by street — confirm year built with the Pierce County Assessor-Treasurer",
+      architecturalStyles: ["Suburban single-family (era and style vary by address)"],
+      typicalLotSize: "Varies by street — confirm with the Pierce County Assessor-Treasurer",
+      notes:
+        "This page covers Jovita streets inside the City of Edgewood. A historic Jovita area also continues north of the King/Pierce county line, outside the city. Zoning, building permits, and critical-areas review for in-city parcels run through the City of Edgewood. Confirm city limits, the county line, water, sewer or septic, and school assignment (Fife Public Schools or Puyallup School District) for each address. Jovita Canyon has steep slopes, so confirm buffer and critical-area status before pricing a remodel story into list price.",
+    },
+    communityOrgs: [
+      {
+        name: "City of Edgewood — Interurban Trail",
+        url: "https://www.edgewoodwa.gov/Facilities/Facility/Details/Interurban-Trail-3",
+        context: "Trailhead at Jovita Boulevard and 114th Avenue E, Edgewood, WA 98372, on the former Puget Sound Electric Railway corridor.",
+      },
+      {
+        name: "City of Edgewood — Parks",
+        url: "https://www.edgewoodwa.gov/189/Edgewood-Parks",
+        context: "City parks list, including the Interurban Trail as a regional route being developed between Tacoma and Everett.",
+      },
+      {
+        name: "City of Edgewood — Building Permits",
+        url: "https://www.edgewoodwa.gov/160/Building-Permits",
+        context: "Building permits, zoning, and critical-areas review for Jovita parcels inside the city limits.",
+      },
+      {
+        name: "Alice V. Hedden Elementary — Fife Public Schools",
+        url: "https://hedden.fifeschools.com/school-information/our-location",
+        context: "Fife Public Schools elementary at 11313 8th Street E — confirm every school assignment by address; some Edgewood streets are in the Puyallup School District.",
+      },
+      {
+        name: "Pierce County Assessor-Treasurer",
+        url: "https://www.piercecountywa.gov/91/Assessor---Treasurer",
+        context: "Parcel data, year built, assessed value, and property-tax records for Edgewood parcels.",
+      },
+    ],
+    thoroughfares: [
+      "Jovita Blvd E",
+      "114th Ave E",
+      "8th St E",
+      "West Valley Hwy",
+      "SR-167",
+    ],
+    landmarks: [
+      "Interurban Trail trailhead",
+      "Jovita Canyon",
+      "Alice V. Hedden Elementary",
+    ],
+    dispatchCopy:
+      "From our Lake Tapps base we reach Jovita via SR-410 and SR-167 to West Valley Highway and Jovita Boulevard E, or over the plateau on Meridian (SR-161). Arterial traffic on Jovita Boulevard E, school-zone timing near Hedden Elementary, and the grade through Jovita Canyon change showing logistics, so we schedule each address around its approach.",
+    adjacent: [
+      {
+        name: "Edgewood (City)",
+        citySlug: "edgewood",
+        blurb: "Parent hub — large-lot plateau streets, Meridian corridor services, and the same city permitting desk.",
+      },
+      {
+        name: "Milton",
+        citySlug: "milton",
+        blurb: "Neighboring city to the west — compact streets and I-5 access that buyers often weigh against Edgewood's Jovita corridor.",
+      },
+      {
+        name: "Puyallup",
+        citySlug: "puyallup",
+        blurb: "Valley city to the south — downtown, Sounder access, and a common cross-shop off the plateau.",
+      },
+      {
+        name: "North Puyallup",
+        citySlug: "puyallup",
+        neighborhoodSlug: "north-puyallup",
+        blurb: "Valley pocket on the north bank of the Puyallup River — a lower-elevation comparison set just south of the Edgewood plateau.",
+      },
+      {
+        name: "Sumner",
+        citySlug: "sumner",
+        blurb: "Valley city to the east — Main Street and Sounder access for buyers trading plateau lots for in-town living.",
       },
     ],
     reviews: [],
