@@ -4,6 +4,7 @@ import { bonneyLakeArticle } from "./bonney-lake";
 import { sumnerArticle } from "./sumner";
 import { puyallupArticle } from "./puyallup";
 import { edgewoodArticle } from "./edgewood";
+import { jovitaArticle } from "./jovita";
 import { miltonArticle } from "./milton";
 import { auburnArticle } from "./auburn";
 import { buckleyArticle } from "./buckley";
@@ -82,6 +83,7 @@ const ARTICLES: Record<string, ServiceAreaArticle> = {
   [sumnerArticle.slug]: sumnerArticle,
   [puyallupArticle.slug]: puyallupArticle,
   [edgewoodArticle.slug]: edgewoodArticle,
+  [jovitaArticle.slug]: jovitaArticle,
   [miltonArticle.slug]: miltonArticle,
   [auburnArticle.slug]: auburnArticle,
   [buckleyArticle.slug]: buckleyArticle,
